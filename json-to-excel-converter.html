@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JSON to Excel Converter Online – Free JSON to XLSX</title>
+
+  <meta
+    name="description"
+    content="Convert JSON to Excel (.xlsx) online for free. Upload JSON files, flatten nested objects, preview data, and download Excel or CSV files in your browser."
+  >
+
+  <meta name="robots" content="index,follow">
+
+  <link
+    rel="canonical"
+    href="https://converttotoolsonline.com/json-to-excel.html"
+  >
+
+  <meta name="theme-color" content="#2563eb">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+  <meta
+    property="og:title"
+    content="JSON to Excel Converter Online - Free JSON to XLSX"
+  >
+  <meta
+    property="og:description"
+    content="Convert JSON data into real Excel workbooks. Preview records, flatten nested objects, and download XLSX or CSV files."
+  >
+  <meta
+    property="og:url"
+    content="https://converttotoolsonline.com/json-to-excel.html"
+  >
+
+  <meta name="twitter:card" content="summary">
+  <meta
+    name="twitter:title"
+    content="JSON to Excel Converter Online"
+  >
+  <meta
+    name="twitter:description"
+    content="Convert JSON files to Excel XLSX or CSV directly in your browser."
+  >
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON to Excel Converter",
+    "url": "https://converttotoolsonline.com/json-to-excel.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "description": "A free browser-based JSON to Excel converter that supports file upload, nested object flattening, preview, XLSX export, and CSV export.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "browserRequirements": "JavaScript enabled"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I convert JSON to Excel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paste your JSON data or upload a JSON file, choose how nested objects should be handled, and click Convert JSON. Review the preview and download the result as an XLSX workbook or CSV file."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this converter create a real XLSX file?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The XLSX export creates an Excel Open XML workbook rather than simply renaming a text file with an Excel extension."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert nested JSON to Excel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. When flattening is enabled, nested object properties become columns with dot-separated names. Nested arrays are kept as JSON text in their cells."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my JSON data uploaded to a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The conversion is performed in your browser. The JSON data you enter is not sent to a conversion server. The spreadsheet library is loaded from the SheetJS CDN."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert a JSON file to Excel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can upload a JSON file from your device, preview the records, and download the resulting Excel workbook."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert JSON Lines to Excel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The converter can recognize JSON Lines input when the content contains multiple valid JSON values, one per line."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --ink: #142238;
+      --muted: #627087;
+      --border: #e0e7f0;
+      --surface: #ffffff;
+      --background: #f5f8fd;
+      --green: #15803d;
+      --red: #b91c1c;
+      --amber: #92400e;
+      --radius: 15px;
+      --shadow: 0 12px 35px rgba(25, 48, 90, .06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--primary);
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1160px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -.45px;
+    }
+
+    .brand span {
+      color: var(--primary);
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .container {
+      width: min(100% - 32px, 1000px);
+      margin: auto;
+    }
+
+    .hero {
+      padding: 42px 0 25px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 11px;
+      background: #e8f0ff;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 800;
+      border-radius: 30px;
+      letter-spacing: .4px;
+    }
+
+    h1 {
+      margin: 14px 0 11px;
+      font-size: clamp(29px, 5vw, 43px);
+      line-height: 1.15;
+      letter-spacing: -1.1px;
+    }
+
+    .hero p {
+      max-width: 730px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .trust-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 9px 18px;
+      margin-top: 17px;
+      color: #40516a;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .trust-row span::before {
+      content: "✓";
+      color: var(--green);
+      margin-right: 6px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 7px;
+      font-size: 23px;
+      line-height: 1.3;
+      letter-spacing: -.4px;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    p {
+      overflow-wrap: anywhere;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .section-description {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 20px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field label,
+    .field-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid #d4deeb;
+      border-radius: 9px;
+      padding: 11px 12px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    input[type="text"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--primary);
+    }
+
+    textarea {
+      display: block;
+      resize: vertical;
+      min-height: 270px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      tab-size: 2;
+    }
+
+    .dropzone {
+      border: 1px dashed #b7c7df;
+      border-radius: 12px;
+      background: #fbfdff;
+      padding: 13px;
+      transition: background .15s, border-color .15s;
+    }
+
+    .dropzone.dragover {
+      background: #eff6ff;
+      border-color: var(--primary);
+    }
+
+    .drop-label {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .drop-label strong {
+      font-size: 14px;
+    }
+
+    .drop-label span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 9px;
+      padding: 10px 15px;
+      font-size: 14px;
+      font-weight: 800;
+      transition: background .15s, border-color .15s;
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      border-color: var(--border);
+      background: #fff;
+      color: #263951;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #f2f6fc;
+    }
+
+    .btn-small {
+      font-size: 12px;
+      padding: 7px 10px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 17px;
+    }
+
+    .option-box {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px;
+      min-width: 0;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .checkbox-row input {
+      margin-top: 5px;
+      accent-color: var(--primary);
+    }
+
+    .checkbox-help {
+      margin: 7px 0 0 24px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .toolbar-main {
+      margin-top: 17px;
+    }
+
+    .status {
+      min-height: 22px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .status.error {
+      color: var(--red);
+    }
+
+    .status.success {
+      color: var(--green);
+    }
+
+    .status.warning {
+      color: var(--amber);
+    }
+
+    .notice {
+      margin-top: 16px;
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+      border-radius: 10px;
+      padding: 13px 15px;
+      color: #24416c;
+      font-size: 13px;
+    }
+
+    .notice strong {
+      color: #173a70;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 17px;
+    }
+
+    .stat {
+      padding: 13px;
+      background: #f8faff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      min-width: 0;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .stat-value {
+      margin-top: 3px;
+      font-size: 21px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow: auto;
+      max-height: 490px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 500px;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid #edf1f7;
+      max-width: 300px;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #f2f6fc;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fbfcff;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .preview-note {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .result-tools {
+      margin: 14px 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .result-tools strong {
+      font-size: 15px;
+    }
+
+    .empty-preview {
+      padding: 25px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .content-section {
+      margin-top: 27px;
+    }
+
+    .content-section p,
+    .content-section li {
+      color: #536278;
+      font-size: 15px;
+    }
+
+    .content-section h2 {
+      margin-bottom: 12px;
+    }
+
+    .content-section h3 {
+      margin-top: 22px;
+    }
+
+    .content-section code,
+    td code {
+      background: #f0f4fa;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .92em;
+      overflow-wrap: anywhere;
+    }
+
+    .steps {
+      padding-left: 23px;
+    }
+
+    .steps li {
+      margin: 8px 0;
+      padding-left: 3px;
+    }
+
+    .example-box {
+      overflow: auto;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #f8faff;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      white-space: pre;
+    }
+
+    .faq {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .faq h3 {
+      margin: 0 0 6px;
+    }
+
+    .faq p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .related {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .related a {
+      display: inline-block;
+      text-decoration: none;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .related a:hover {
+      background: var(--primary-light);
+    }
+
+    .site-footer {
+      text-align: center;
+      padding: 27px 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .site-footer a {
+      text-decoration: none;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 650px) {
+      .hero {
+        padding-top: 31px;
+      }
+
+      .panel {
+        padding: 17px;
+        border-radius: 12px;
+      }
+
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        padding: 10px 12px;
+      }
+
+      .stat-value {
+        font-size: 19px;
+      }
+
+      .nav {
+        padding: 13px 16px;
+      }
+
+      textarea {
+        min-height: 220px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Main navigation">
+    <a class="brand" href="/">ConvertTo<span>ToolsOnline</span></a>
+    <a class="nav-link" href="/">← All tools</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <span class="badge">FREE ONLINE DEVELOPER TOOL</span>
+
+    <h1>JSON to Excel Converter</h1>
+
+    <p>
+      Convert JSON to Excel online for free. Turn JSON arrays, API responses,
+      and JSON files into real Excel workbooks. Preview your data, flatten
+      nested objects, and export to XLSX or CSV directly in your browser.
+    </p>
+
+    <div class="trust-row">
+      <span>Real XLSX files</span>
+      <span>No account required</span>
+      <span>Browser-based processing</span>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="converter-heading">
+
+    <h2 id="converter-heading">Convert JSON to Excel</h2>
+
+    <p class="section-description">
+      Paste your JSON below, or upload a JSON file from your device.
+      Convert your data to a downloadable spreadsheet when you're ready.
+    </p>
+
+    <div class="dropzone" id="dropZone">
+
+      <div class="drop-label">
+        <strong>Your JSON input</strong>
+        <span>JSON, TXT, or JSONL · Maximum 15 MB</span>
+      </div>
+
+      <textarea
+        id="jsonInput"
+        aria-label="JSON input"
+        spellcheck="false"
+        autocomplete="off"
+        autocapitalize="off"
+        placeholder='Paste a JSON array or object here, for example:
+[
+  {
+    "id": "001",
+    "name": "Asha",
+    "department": "Engineering"
+  },
+  {
+    "id": "002",
+    "name": "Ben",
+    "department": "Marketing"
+  }
+]'></textarea>
+
+      <input
+        type="file"
+        id="fileInput"
+        class="file-input"
+        accept=".json,.txt,.jsonl,application/json,text/plain"
+      >
+
+      <div class="toolbar" style="margin-top:12px">
+        <button type="button" class="btn btn-secondary" id="uploadBtn">
+          Upload JSON file
+        </button>
+
+        <button type="button" class="btn btn-secondary" id="sampleBtn">
+          Load example
+        </button>
+
+        <button type="button" class="btn btn-secondary" id="clearBtn">
+          Clear input
+        </button>
+      </div>
+
+      <p class="preview-note">
+        You can also drag and drop a JSON file into this area.
+      </p>
+    </div>
+
+    <div class="options-grid">
+
+      <div class="option-box">
+        <div class="field">
+          <label for="sourceKey">Data array to convert</label>
+
+          <select id="sourceKey">
+            <option value="auto">Automatic detection</option>
+          </select>
+        </div>
+
+        <p class="checkbox-help" id="sourceHelp">
+          Arrays of records are detected automatically.
+        </p>
+      </div>
+
+      <div class="option-box">
+        <label class="checkbox-row" for="flattenNested">
+          <input type="checkbox" id="flattenNested" checked>
+          <span>Flatten nested objects</span>
+        </label>
+
+        <p class="checkbox-help">
+          Example: <code>address.city</code> becomes an Excel column.
+          Nested arrays remain JSON text in their cells.
+        </p>
+      </div>
+
+      <div class="option-box">
+        <div class="field">
+          <label for="sheetName">Excel worksheet name</label>
+          <input
+            type="text"
+            id="sheetName"
+            maxlength="31"
+            value="JSON Data"
+            autocomplete="off"
+          >
+        </div>
+      </div>
+
+      <div class="option-box">
+        <div class="field">
+          <label for="fileName">Download filename</label>
+          <input
+            type="text"
+            id="fileName"
+            maxlength="100"
+            value="converted-data"
+            autocomplete="off"
+          >
+        </div>
+        <p class="checkbox-help">
+          The appropriate file extension is added automatically.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="toolbar toolbar-main">
+      <button type="button" class="btn btn-primary" id="convertBtn">
+        Convert JSON
+      </button>
+
+      <button type="button" class="btn btn-secondary" id="copyJsonBtn">
+        Copy input
+      </button>
+    </div>
+
+    <div id="inputStatus" class="status" role="status" aria-live="polite"></div>
+
+    <div class="notice">
+      <strong>Privacy:</strong> your JSON is processed in this browser.
+      The input data is not sent to a conversion server. The spreadsheet
+      library is loaded separately from the official SheetJS CDN.
+    </div>
+  </section>
+
+  <section class="panel" id="previewPanel" aria-labelledby="preview-heading">
+
+    <h2 id="preview-heading">Excel Data Preview</h2>
+
+    <p class="section-description">
+      Review the extracted rows and columns before downloading your spreadsheet.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Data rows</div>
+        <div class="stat-value" id="rowCount">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Columns</div>
+        <div class="stat-value" id="columnCount">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Input format</div>
+        <div class="stat-value" id="formatType">—</div>
+      </div>
+    </div>
+
+    <div class="result-tools">
+      <strong>Converted table</strong>
+
+      <div class="toolbar">
+        <button
+          type="button"
+          class="btn btn-secondary btn-small"
+          id="copyTsvBtn"
+          disabled
+        >
+          Copy table
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-secondary btn-small"
+          id="downloadCsvBtn"
+          disabled
+        >
+          Download CSV
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary btn-small"
+          id="downloadXlsxBtn"
+          disabled
+        >
+          Download Excel (.xlsx)
+        </button>
+      </div>
+    </div>
+
+    <div class="table-wrap" id="tableWrap">
+      <div class="empty-preview" id="emptyPreview">
+        Your converted data will appear here.
+      </div>
+
+      <table id="previewTable" hidden>
+        <thead id="previewHead"></thead>
+        <tbody id="previewBody"></tbody>
+      </table>
+    </div>
+
+    <p class="preview-note" id="previewNote">
+      Convert your JSON to display a data preview.
+    </p>
+
+    <div id="exportStatus" class="status" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="panel content-section" aria-labelledby="how-heading">
+
+    <h2 id="how-heading">How to Convert JSON to Excel</h2>
+
+    <ol class="steps">
+      <li>
+        <strong>Enter your JSON data.</strong>
+        Paste JSON into the editor or select a JSON file from your device.
+      </li>
+
+      <li>
+        <strong>Choose your conversion options.</strong>
+        Enable nested-object flattening if you want nested fields in separate
+        Excel columns. Choose the appropriate array if the input contains
+        multiple data arrays.
+      </li>
+
+      <li>
+        <strong>Convert and review.</strong>
+        Select Convert JSON to parse the input and display a table preview.
+        Check the detected number of rows and columns.
+      </li>
+
+      <li>
+        <strong>Download your spreadsheet.</strong>
+        Choose Download Excel (.xlsx) for a genuine Excel workbook, or
+        download CSV if you need a plain-text tabular file.
+      </li>
+    </ol>
+  </section>
+
+  <section class="panel content-section" aria-labelledby="formats-heading">
+
+    <h2 id="formats-heading">Supported JSON Formats</h2>
+
+    <h3>JSON arrays of objects</h3>
+
+    <p>
+      A common source for JSON to Excel conversion is an array of records.
+      Each object becomes a spreadsheet row, and its properties become
+      column headings. When different objects contain different properties,
+      the converter combines the available keys and leaves missing values
+      blank.
+    </p>
+
+    <div class="example-box">[
+  {
+    "product": "Laptop",
+    "price": 999,
+    "available": true
+  },
+  {
+    "product": "Mouse",
+    "price": 29,
+    "available": false
+  }
+]</div>
+
+    <h3>JSON objects containing arrays</h3>
+
+    <p>
+      API responses often wrap records inside a property such as
+      <code>data</code>, <code>results</code>, <code>items</code>, or
+      <code>records</code>. The converter looks for an array in the root
+      object and lets you choose which array to export when appropriate.
+    </p>
+
+    <h3>Nested JSON objects</h3>
+
+    <p>
+      Nested information can be difficult to analyze as a spreadsheet.
+      With flattening enabled, a nested property such as
+      <code>customer.address.city</code> becomes a single column.
+      This keeps related information together in a rectangular table.
+      Array values inside a record remain serialized JSON text in one cell.
+    </p>
+
+    <h3>JSON Lines</h3>
+
+    <p>
+      JSON Lines, sometimes called NDJSON, stores one complete JSON value
+      per line. The converter can recognize multiple valid JSON values
+      separated by newlines, making it useful for some logs and data exports.
+    </p>
+
+    <h3>Single JSON objects</h3>
+
+    <p>
+      A single JSON object can also be converted into a one-row spreadsheet.
+      This is useful when you have a single API response or an object
+      containing configuration or product information.
+    </p>
+  </section>
+
+  <section class="panel content-section" aria-labelledby="benefits-heading">
+
+    <h2 id="benefits-heading">Why Convert JSON to Excel?</h2>
+
+    <p>
+      JSON is widely used to exchange structured data between applications,
+      APIs, and services. However, JSON is not always the easiest format
+      for people who want to review records, sort values, filter lists,
+      prepare reports, or share tables with colleagues.
+    </p>
+
+    <p>
+      Converting JSON to Excel makes data easier to inspect and work with
+      using spreadsheet software such as Microsoft Excel, Google Sheets,
+      and LibreOffice Calc. A spreadsheet also makes it more convenient
+      to review collections of records without manually reading a large
+      JSON document.
+    </p>
+
+    <p>
+      This free JSON to XLSX converter creates a real Excel workbook rather
+      than merely saving text with an Excel file extension. You can also
+      download CSV for systems that specifically require comma-separated
+      data.
+    </p>
+
+    <h3>Important data accuracy note</h3>
+
+    <p>
+      If a long identifier, account number, phone number, or code must retain
+      every digit, represent it as a JSON string when possible. JavaScript
+      can lose precision when parsing very large, unquoted integer literals.
+      Excel also has numeric precision limits, so identifiers should
+      generally be stored as text rather than numbers.
+    </p>
+  </section>
+
+  <section class="panel content-section" aria-labelledby="faq-heading">
+
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+
+    <div class="faq">
+      <h3>How do I convert JSON to Excel?</h3>
+
+      <p>
+        Paste JSON into the editor or upload a JSON file. Click Convert JSON,
+        review the preview, and select Download Excel (.xlsx).
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Does the converter create a real XLSX file?</h3>
+
+      <p>
+        Yes. The Excel download is a genuine XLSX workbook, not a text file
+        renamed with an Excel extension.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Can I convert nested JSON to Excel?</h3>
+
+      <p>
+        Yes. Enable Flatten nested objects to turn nested object properties
+        into dot-separated columns. Array values within a record are kept
+        as JSON text in their cells.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Can I convert a JSON file to Excel?</h3>
+
+      <p>
+        Yes. Upload a JSON file from your device, convert its contents,
+        preview the results, and download the spreadsheet.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Is this JSON to Excel converter free?</h3>
+
+      <p>
+        Yes. The tool is free to use and does not require an account.
+        Your JSON data is processed in the browser.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Is my JSON data uploaded to your server?</h3>
+
+      <p>
+        No. The conversion code processes your input locally in the browser.
+        The page loads the spreadsheet library from the SheetJS CDN, but
+        your JSON input is not sent to that library provider for conversion.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Can I export JSON to CSV instead?</h3>
+
+      <p>
+        Yes. After converting the JSON, select Download CSV to save the
+        tabular data in comma-separated format.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Can I convert JSON Lines to Excel?</h3>
+
+      <p>
+        Yes. Supply multiple valid JSON values, one per line. The converter
+        will try to recognize this format when the entire input is not
+        a single valid JSON document.
+      </p>
+    </div>
+
+  </section>
+
+  <section class="panel" aria-labelledby="related-heading">
+
+    <h2 id="related-heading">Explore More Free Tools</h2>
+
+    <p class="section-description">
+      Continue working with JSON, CSV, and other developer utilities.
+    </p>
+
+    <div class="related">
+      <a href="/json-to-csv.html">JSON to CSV</a>
+      <a href="/csv-to-json.html">CSV to JSON</a>
+      <a href="/merge-json.html">Merge JSON</a>
+      <a href="/cron-expression-generator.html">Cron Expression Generator</a>
+      <a href="/unix-timestamp-converter.html">Unix Timestamp Converter</a>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>
+    © <span id="year"></span>
+    <a href="/">ConvertToToolsOnline</a>.
+    Free online tools.
+  </p>
+</footer>
+
+<!-- Official SheetJS browser build: required for genuine XLSX export. -->
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+<script>
+"use strict";
+
+(function () {
+  const $ = id => document.getElementById(id);
+
+  const MAX_INPUT_BYTES = 15 * 1024 * 1024;
+  const MAX_ROWS = 100000;
+  const MAX_COLUMNS = 16384;
+  const PREVIEW_ROWS = 50;
+  const PREVIEW_COLUMNS = 12;
+
+  let convertedHeaders = [];
+  let convertedRows = [];
+  let sourceFormat = "";
+  let detectedSourceKey = "";
+
+  const jsonInput = $("jsonInput");
+  const sourceKey = $("sourceKey");
+  const flattenNested = $("flattenNested");
+  const inputStatus = $("inputStatus");
+  const exportStatus = $("exportStatus");
+
+  function setStatus(element, message, type = "") {
+    element.textContent = message;
+    element.className = "status" + (type ? " " + type : "");
+  }
+
+  function isPlainObject(value) {
+    return value !== null &&
+      typeof value === "object" &&
+      !Array.isArray(value);
+  }
+
+  function byteLength(text) {
+    return new Blob([text]).size;
+  }
+
+  function parseSource(text) {
+    const trimmed = text.trim();
+
+    if (!trimmed) {
+      throw new Error("Enter JSON data or upload a JSON file first.");
+    }
+
+    if (byteLength(trimmed) > MAX_INPUT_BYTES) {
+      throw new Error(
+        "Input exceeds the 15 MB limit. Please use a smaller file."
+      );
+    }
+
+    try {
+      return {
+        value: JSON.parse(trimmed),
+        format: "JSON"
+      };
+    } catch (jsonError) {
+      const lines = trimmed
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .filter(Boolean);
+
+      if (lines.length > 1) {
+        try {
+          const values = lines.map(line => JSON.parse(line));
+
+          return {
+            value: values,
+            format: "JSON Lines"
+          };
+        } catch (lineError) {
+          // Continue below and report the normal JSON parsing failure.
+        }
+      }
+
+      throw new Error(
+        "Invalid JSON. Check quotation marks, commas, brackets, and braces. " +
+        "Details: " + jsonError.message
+      );
+    }
+  }
+
+  function preferredArrayKey(entries) {
+    const priorities = [
+      "data",
+      "results",
+      "items",
+      "records",
+      "rows",
+      "entries"
+    ];
+
+    for (const preferred of priorities) {
+      const entry = entries.find(item =>
+        item[0].toLowerCase() === preferred
+      );
+
+      if (entry) return entry[0];
+    }
+
+    // Choose the largest available array by default.
+    return entries.reduce((largest, entry) =>
+      entry[1].length > largest[1].length ? entry : largest
+    )[0];
+  }
+
+  function updateSourceOptions(entries) {
+    const previous = sourceKey.value;
+
+    sourceKey.replaceChildren();
+
+    sourceKey.add(
+      new Option("Automatic detection", "auto")
+    );
+
+    for (const [key, value] of entries) {
+      sourceKey.add(
+        new Option(
+          key + " (" + value.length + " records)",
+          key
+        )
+      );
+    }
+
+    if (previous !== "auto" &&
+        entries.some(entry => entry[0] === previous)) {
+      sourceKey.value = previous;
+    } else {
+      sourceKey.value = "auto";
+    }
+
+    $("sourceHelp").textContent = entries.length > 1
+      ? "Several root-level arrays were found. Choose the array you want to export."
+      : "The root array property is detected automatically.";
+  }
+
+  function flattenValue(value, prefix, output, flatten) {
+    if (
+      flatten &&
+      isPlainObject(value)
+    ) {
+      const keys = Object.keys(value);
+
+      if (keys.length === 0) {
+        output[prefix || "Value"] = "{}";
+        return;
+      }
+
+      for (const key of keys) {
+        const path = prefix ? prefix + "." + key : key;
+
+        flattenValue(value[key], path, output, flatten);
+      }
+
+      return;
+    }
+
+    if (value === null || value === undefined) {
+      output[prefix || "Value"] = "";
+      return;
+    }
+
+    if (Array.isArray(value) || isPlainObject(value)) {
+      output[prefix || "Value"] = JSON.stringify(value);
+      return;
+    }
+
+    output[prefix || "Value"] = value;
+  }
+
+  function normalizeRecord(record, flatten) {
+    const output = Object.create(null);
+
+    if (Array.isArray(record)) {
+      if (record.length === 0) {
+        output.Value = "";
+      } else {
+        record.forEach((value, index) => {
+          flattenValue(
+            value,
+            "Column " + (index + 1),
+            output,
+            flatten
+          );
+        });
+      }
+
+      return output;
+    }
+
+    if (isPlainObject(record)) {
+      const keys = Object.keys(record);
+
+      if (keys.length === 0) {
+        output.Value = "{}";
+        return output;
+      }
+
+      for (const key of keys) {
+        flattenValue(
+          record[key],
+          key,
+          output,
+          flatten
+        );
+      }
+
+      return output;
+    }
+
+    output.Value = record === null || record === undefined
+      ? ""
+      : record;
+
+    return output;
+  }
+
+  function getRecords(parsed, format) {
+    if (format === "JSON Lines") {
+      return {
+        records: parsed,
+        selectedKey: "",
+        message: "Detected JSON Lines input."
+      };
+    }
+
+    if (Array.isArray(parsed)) {
+      return {
+        records: parsed,
+        selectedKey: "",
+        message: "Using the top-level JSON array."
+      };
+    }
+
+    if (!isPlainObject(parsed)) {
+      throw new Error(
+        "The input must be a JSON object, array, or JSON Lines document."
+      );
+    }
+
+    const entries = Object.entries(parsed)
+      .filter(([, value]) => Array.isArray(value));
+
+    if (entries.length === 0) {
+      return {
+        records: [parsed],
+        selectedKey: "",
+        message: "Using the single JSON object as one spreadsheet row."
+      };
+    }
+
+    updateSourceOptions(entries);
+
+    let key = sourceKey.value;
+
+    if (key === "auto" ||
+        !entries.some(entry => entry[0] === key)) {
+      key = preferredArrayKey(entries);
+    }
+
+    const chosen = entries.find(entry => entry[0] === key);
+
+    if (!chosen) {
+      throw new Error("Please select a valid data array.");
+    }
+
+    return {
+      records: chosen[1],
+      selectedKey: key,
+      message: 'Extracted records from the "' + key + '" property.'
+    };
+  }
+
+  function renderPreview(headers, rows) {
+    const head = $("previewHead");
+    const body = $("previewBody");
+
+    head.replaceChildren();
+    body.replaceChildren();
+
+    const visibleHeaders = headers.slice(0, PREVIEW_COLUMNS);
+
+    const headerRow = document.createElement("tr");
+
+    for (const name of visibleHeaders) {
+      const th = document.createElement("th");
+      th.textContent = name;
+      headerRow.appendChild(th);
+    }
+
+    head.appendChild(headerRow);
+
+    const visibleRows = rows.slice(0, PREVIEW_ROWS);
+
+    for (const row of visibleRows) {
+      const tr = document.createElement("tr");
+
+      for (const name of visibleHeaders) {
+        const td = document.createElement("td");
+        const value = row[name];
+
+        td.textContent = value === undefined || value === null
+          ? ""
+          : String(value);
+
+        tr.appendChild(td);
+      }
+
+      body.appendChild(tr);
+    }
+
+    $("emptyPreview").hidden = rows.length > 0;
+    $("previewTable").hidden = rows.length === 0;
+
+    if (rows.length === 0) {
+      $("emptyPreview").textContent =
+        "No data rows were found. Try a different JSON input.";
+    }
+
+    const notes = [];
+
+    if (rows.length > PREVIEW_ROWS) {
+      notes.push(
+        "Showing the first " + PREVIEW_ROWS +
+        " of " + rows.length + " rows."
+      );
+    }
+
+    if (headers.length > PREVIEW_COLUMNS) {
+      notes.push(
+        "Showing the first " + PREVIEW_COLUMNS +
+        " of " + headers.length + " columns."
+      );
+    }
+
+    if (notes.length === 0) {
+      notes.push("Preview includes all converted rows and columns.");
+    }
+
+    $("previewNote").textContent = notes.join(" ");
+  }
+
+  function resetResults() {
+    convertedHeaders = [];
+    convertedRows = [];
+    sourceFormat = "";
+    detectedSourceKey = "";
+
+    $("rowCount").textContent = "0";
+    $("columnCount").textContent = "0";
+    $("formatType").textContent = "—";
+
+    $("previewHead").replaceChildren();
+    $("previewBody").replaceChildren();
+
+    $("previewTable").hidden = true;
+    $("emptyPreview").hidden = false;
+    $("emptyPreview").textContent =
+      "Your converted data will appear here.";
+
+    $("previewNote").textContent =
+      "Convert your JSON to display a data preview.";
+
+    $("downloadXlsxBtn").disabled = true;
+    $("downloadCsvBtn").disabled = true;
+    $("copyTsvBtn").disabled = true;
+
+    setStatus(exportStatus, "");
+  }
+
+  function runConversion() {
+    resetResults();
+
+    let parsed;
+    let format;
+
+    try {
+      const source = parseSource(jsonInput.value);
+
+      parsed = source.value;
+      format = source.format;
+
+      const extracted = getRecords(parsed, format);
+      const records = extracted.records;
+
+      if (records.length === 0) {
+        throw new Error("The selected JSON array contains no records.");
+      }
+
+      if (records.length > MAX_ROWS) {
+        throw new Error(
+          "This page supports up to " + MAX_ROWS.toLocaleString() +
+          " records per conversion. Please use a smaller input."
+        );
+      }
+
+      const normalized = records.map(record =>
+        normalizeRecord(record, flattenNested.checked)
+      );
+
+      const headerSet = new Set();
+
+      for (const record of normalized) {
+        for (const key of Object.keys(record)) {
+          headerSet.add(key);
+        }
+      }
+
+      const headers = Array.from(headerSet);
+
+      if (headers.length === 0) {
+        throw new Error(
+          "No spreadsheet columns could be created from this input."
+        );
+      }
+
+      if (headers.length > MAX_COLUMNS) {
+        throw new Error(
+          "The data exceeds Excel's supported column count."
+        );
+      }
+
+      convertedHeaders = headers;
+      convertedRows = normalized;
+      sourceFormat = format;
+      detectedSourceKey = extracted.selectedKey;
+
+      renderPreview(headers, normalized);
+
+      $("rowCount").textContent =
+        normalized.length.toLocaleString();
+
+      $("columnCount").textContent =
+        headers.length.toLocaleString();
+
+      $("formatType").textContent = format;
+
+      $("downloadXlsxBtn").disabled = false;
+      $("downloadCsvBtn").disabled = false;
+      $("copyTsvBtn").disabled = false;
+
+      const precisionNote =
+        " Note: represent long identifiers as JSON strings to preserve digits.";
+
+      setStatus(
+        inputStatus,
+        extracted.message +
+        " Conversion successful: " +
+        normalized.length.toLocaleString() +
+        " rows and " + headers.length.toLocaleString() +
+        " columns." + precisionNote,
+        "success"
+      );
+
+      setStatus(
+        exportStatus,
+        "Your data is ready. Choose an export format to download it.",
+        "success"
+      );
+
+    } catch (error) {
+      resetResults();
+
+      setStatus(
+        inputStatus,
+        error.message || "Conversion failed. Check your input and try again.",
+        "error"
+      );
+    }
+  }
+
+  function getBaseFilename() {
+    let name = $("fileName").value.trim();
+
+    name = name
+      .replace(/\.(xlsx|csv)$/i, "")
+      .replace(/[^a-zA-Z0-9._-]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 90);
+
+    return name || "converted-data";
+  }
+
+  function getSafeSheetName() {
+    let name = $("sheetName").value.trim();
+
+    name = name
+      .replace(/[\[\]:*?\/\\]/g, "_")
+      .replace(/^'+|'+$/g, "")
+      .slice(0, 31);
+
+    return name || "JSON Data";
+  }
+
+  function getSheetData() {
+    return [
+      convertedHeaders,
+      ...convertedRows.map(row =>
+        convertedHeaders.map(header =>
+          row[header] === undefined || row[header] === null
+            ? ""
+            : row[header]
+        )
+      )
+    ];
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function requireConvertedData() {
+    if (convertedRows.length === 0 || convertedHeaders.length === 0) {
+      setStatus(
+        exportStatus,
+        "Convert valid JSON before exporting.",
+        "error"
+      );
+
+      return false;
+    }
+
+    return true;
+  }
+
+  function exportXlsx() {
+    if (!requireConvertedData()) return;
+
+    if (!window.XLSX) {
+      setStatus(
+        exportStatus,
+        "The Excel library did not load. Check your internet connection and reload the page.",
+        "error"
+      );
+
+      return;
+    }
+
+    try {
+      const worksheet = XLSX.utils.aoa_to_sheet(getSheetData());
+
+      worksheet["!cols"] = convertedHeaders.map(name => ({
+        wch: Math.min(35, Math.max(12, String(name).length + 2))
+      }));
+
+      const workbook = XLSX.utils.book_new();
+
+      XLSX.utils.book_append_sheet(
+        workbook,
+        worksheet,
+        getSafeSheetName()
+      );
+
+      XLSX.writeFile(
+        workbook,
+        getBaseFilename() + ".xlsx",
+        { compression: true }
+      );
+
+      setStatus(
+        exportStatus,
+        "Excel workbook created successfully.",
+        "success"
+      );
+
+    } catch (error) {
+      setStatus(
+        exportStatus,
+        "Could not create the Excel workbook: " + error.message,
+        "error"
+      );
+    }
+  }
+
+  function escapeCsv(value) {
+    let text = value === undefined || value === null
+      ? ""
+      : String(value);
+
+    // Reduce formula injection risk for spreadsheet applications
+    // that interpret formula-like text when opening CSV files.
+    if (/^[\t\r\n ]*[=+\-@]/.test(text)) {
+      text = "'" + text;
+    }
+
+    return '"' + text.replace(/"/g, '""') + '"';
+  }
+
+  function exportCsv() {
+    if (!requireConvertedData()) return;
+
+    try {
+      const data = getSheetData();
+
+      const csv = data
+        .map(row => row.map(escapeCsv).join(","))
+        .join("\r\n");
+
+      const blob = new Blob(
+        ["\uFEFF", csv],
+        { type: "text/csv;charset=utf-8;" }
+      );
+
+      downloadBlob(blob, getBaseFilename() + ".csv");
+
+      setStatus(
+        exportStatus,
+        "CSV file created successfully.",
+        "success"
+      );
+
+    } catch (error) {
+      setStatus(
+        exportStatus,
+        "Could not create the CSV file: " + error.message,
+        "error"
+      );
+    }
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement("textarea");
+
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const success = document.execCommand("copy");
+    textarea.remove();
+
+    if (!success) {
+      throw new Error("Clipboard access was unavailable.");
+    }
+  }
+
+  async function copyInput() {
+    if (!jsonInput.value) {
+      setStatus(inputStatus, "There is no input to copy.", "error");
+      return;
+    }
+
+    try {
+      await copyText(jsonInput.value);
+
+      setStatus(inputStatus, "Input JSON copied.", "success");
+    } catch (error) {
+      setStatus(inputStatus, error.message, "error");
+    }
+  }
+
+  async function copyTable() {
+    if (!requireConvertedData()) return;
+
+    const tsv = getSheetData()
+      .map(row => row.map(value =>
+        String(value === undefined || value === null ? "" : value)
+          .replace(/\t/g, "\\t")
+          .replace(/\r?\n/g, "\\n")
+      ).join("\t"))
+      .join("\r\n");
+
+    try {
+      await copyText(tsv);
+
+      setStatus(
+        exportStatus,
+        "Table copied as tab-separated text.",
+        "success"
+      );
+
+    } catch (error) {
+      setStatus(exportStatus, error.message, "error");
+    }
+  }
+
+  function loadFile(file) {
+    if (!file) return;
+
+    if (file.size > MAX_INPUT_BYTES) {
+      setStatus(
+        inputStatus,
+        "This file exceeds the 15 MB limit.",
+        "error"
+      );
+
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      jsonInput.value = String(reader.result || "");
+
+      setStatus(
+        inputStatus,
+        "Loaded " + file.name + ". Select Convert JSON to continue.",
+        "success"
+      );
+
+      resetResults();
+    };
+
+    reader.onerror = () => {
+      setStatus(
+        inputStatus,
+        "Could not read this file. Please try another file.",
+        "error"
+      );
+    };
+
+    reader.readAsText(file);
+  }
+
+  function loadSample() {
+    jsonInput.value = JSON.stringify({
+      data: [
+        {
+          id: "00123",
+          name: "Asha",
+          department: "Engineering",
+          active: true,
+          profile: {
+            city: "Kathmandu",
+            level: 2
+          },
+          skills: ["JavaScript", "SQL"]
+        },
+        {
+          id: "00124",
+          name: "Ben",
+          department: "Marketing",
+          active: false,
+          profile: {
+            city: "Pokhara",
+            level: 3
+          },
+          skills: ["Analytics", "Excel"]
+        },
+        {
+          id: "00125",
+          name: "Maya",
+          department: "Design",
+          active: true,
+          profile: {
+            city: "Hetauda",
+            level: 1
+          },
+          skills: ["Figma", "CSS"]
+        }
+      ],
+      meta: {
+        total: 3,
+        page: 1
+      }
+    }, null, 2);
+
+    resetResults();
+    runConversion();
+  }
+
+  $("convertBtn").addEventListener("click", runConversion);
+
+  $("uploadBtn").addEventListener("click", () => {
+    $("fileInput").click();
+  });
+
+  $("fileInput").addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+
+    loadFile(file);
+
+    // Let the same file be chosen again later.
+    event.target.value = "";
+  });
+
+  $("sampleBtn").addEventListener("click", loadSample);
+
+  $("clearBtn").addEventListener("click", () => {
+    jsonInput.value = "";
+
+    resetResults();
+
+    sourceKey.replaceChildren(
+      new Option("Automatic detection", "auto")
+    );
+
+    setStatus(inputStatus, "");
+  });
+
+  $("copyJsonBtn").addEventListener("click", copyInput);
+  $("copyTsvBtn").addEventListener("click", copyTable);
+  $("downloadCsvBtn").addEventListener("click", exportCsv);
+  $("downloadXlsxBtn").addEventListener("click", exportXlsx);
+
+  sourceKey.addEventListener("change", () => {
+    if (jsonInput.value.trim()) {
+      runConversion();
+    }
+  });
+
+  flattenNested.addEventListener("change", () => {
+    if (jsonInput.value.trim()) {
+      runConversion();
+    }
+  });
+
+  jsonInput.addEventListener("input", () => {
+    resetResults();
+    setStatus(inputStatus, "");
+  });
+
+  const dropZone = $("dropZone");
+
+  dropZone.addEventListener("dragover", event => {
+    event.preventDefault();
+    dropZone.classList.add("dragover");
+  });
+
+  dropZone.addEventListener("dragleave", event => {
+    if (!dropZone.contains(event.relatedTarget)) {
+      dropZone.classList.remove("dragover");
+    }
+  });
+
+  dropZone.addEventListener("drop", event => {
+    event.preventDefault();
+    dropZone.classList.remove("dragover");
+
+    const file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+
+    if (file) {
+      loadFile(file);
+    }
+  });
+
+  $("year").textContent = new Date().getFullYear();
+
+  if (!window.XLSX) {
+    setStatus(
+      exportStatus,
+      "Excel export needs the spreadsheet library. If it did not load, check your internet connection and reload the page.",
+      "warning"
+    );
+  }
+
+})();
+</script>
+
+</body>
+</html>

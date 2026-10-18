@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Free Email Signature Generator for Gmail & Outlook</title>
+  <meta name="description" content="Create a professional email signature for free. Customize layouts, contact details, company logo, social links and colors. Copy formatted HTML for Gmail and Outlook or download your signature.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#f5f7fb">
+  <link rel="canonical" href="https://converttotoolsonline.com/email-signature-generator.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Email Signature Generator">
+  <meta property="og:description" content="Build a professional email signature with a live preview, clickable contact details and HTML export.">
+  <meta property="og:url" content="https://converttotoolsonline.com/email-signature-generator.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Email Signature Generator">
+  <meta name="twitter:description" content="Design and copy an email signature for Gmail, Outlook and other email clients.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Free Email Signature Generator",
+    "url": "https://converttotoolsonline.com/email-signature-generator.html",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "description": "Create a professional HTML email signature with customizable layouts, contact information, social links and a live preview."
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #dce3ed;
+      --accent: #2457d6;
+      --accent-dark: #1e40af;
+      --soft: #edf3ff;
+      --success: #067647;
+      --danger: #b42318;
+      --radius: 15px;
+      --shadow: 0 7px 28px rgba(25, 40, 70, .065);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 20px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(36, 87, 214, .3);
+      outline-offset: 3px;
+    }
+
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1350px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      color: var(--text);
+      font-size: 1.08rem;
+      font-weight: 850;
+      letter-spacing: -.5px;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .header-link {
+      font-size: .89rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1350px, 100%);
+      margin: auto;
+      padding: 27px 24px 55px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: .87rem;
+    }
+
+    .breadcrumb a {
+      text-decoration: none;
+    }
+
+    .hero {
+      max-width: 850px;
+      margin-bottom: 25px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4.3vw, 3.15rem);
+      line-height: 1.12;
+      letter-spacing: -1.5px;
+    }
+
+    .hero p {
+      max-width: 790px;
+      margin: 0;
+      color: #596579;
+      font-size: 1.03rem;
+    }
+
+    .benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .benefit {
+      padding: 6px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      color: #344054;
+      font-size: .81rem;
+      font-weight: 650;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(320px, .86fr) minmax(0, 1.14fr);
+      align-items: start;
+      gap: 22px;
+    }
+
+    .panel {
+      min-width: 0;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .panel-header {
+      padding: 19px 21px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      letter-spacing: -.3px;
+    }
+
+    .panel-header p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .panel-body {
+      padding: 20px;
+    }
+
+    .section {
+      margin-bottom: 25px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-heading {
+      margin: 0 0 13px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e8edf4;
+      font-size: .96rem;
+      font-weight: 800;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .field {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label,
+    .field > span {
+      color: #344054;
+      font-size: .84rem;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      min-height: 41px;
+      padding: 9px 11px;
+      border: 1px solid #cfd7e3;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .field input[type="color"] {
+      height: 43px;
+      padding: 4px;
+      cursor: pointer;
+    }
+
+    .field textarea {
+      min-height: 75px;
+      resize: vertical;
+    }
+
+    .hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: .78rem;
+      line-height: 1.5;
+    }
+
+    .required {
+      color: var(--danger);
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 40px;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 9px 13px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: #fff;
+      color: #344054;
+      font-size: .85rem;
+      font-weight: 750;
+      text-decoration: none;
+      transition: background .15s, transform .15s;
+    }
+
+    .button:hover {
+      background: #f4f7fc;
+    }
+
+    .button:active {
+      transform: translateY(1px);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .button.primary:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    .button.full {
+      width: 100%;
+    }
+
+    .button:disabled {
+      cursor: not-allowed;
+      opacity: .55;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .button.small {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: .79rem;
+    }
+
+    .preset-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #344054;
+      font-size: .83rem;
+      font-weight: 750;
+    }
+
+    .preset-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 17px;
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 14px;
+    }
+
+    .preview-header {
+      padding: 16px 19px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .preview-header h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .live-label {
+      color: var(--success);
+      font-size: .79rem;
+      font-weight: 750;
+    }
+
+    .preview-body {
+      padding: 19px;
+    }
+
+    .preview-notice {
+      padding: 11px 13px;
+      margin-bottom: 17px;
+      border: 1px solid #dbe7fc;
+      border-radius: 10px;
+      background: #f5f8ff;
+      color: #344d70;
+      font-size: .81rem;
+      line-height: 1.55;
+    }
+
+    .email-stage {
+      min-width: 0;
+      min-height: 235px;
+      overflow-x: auto;
+      padding: 25px 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .email-stage-inner {
+      min-width: 250px;
+      max-width: 100%;
+    }
+
+    .preview-note {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: .79rem;
+    }
+
+    .output-section {
+      margin-top: 21px;
+      padding-top: 19px;
+      border-top: 1px solid var(--border);
+    }
+
+    .output-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 10px;
+    }
+
+    .output-heading h3 {
+      margin: 0;
+      font-size: .96rem;
+    }
+
+    .code-output {
+      display: block;
+      width: 100%;
+      min-height: 190px;
+      padding: 12px;
+      border: 1px solid #cfd7e3;
+      border-radius: 10px;
+      background: #101828;
+      color: #e5edff;
+      font: .78rem/1.6 ui-monospace, SFMono-Regular, Consolas, monospace;
+      resize: vertical;
+      overflow-wrap: anywhere;
+    }
+
+    .status {
+      min-height: 21px;
+      margin-top: 11px;
+      color: var(--success);
+      font-size: .82rem;
+      overflow-wrap: anywhere;
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    .privacy-note {
+      margin-top: 17px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #f0f7ff;
+      color: #344d70;
+      font-size: .81rem;
+      line-height: 1.55;
+    }
+
+    .below-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      align-items: start;
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .content-card {
+      min-width: 0;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .content-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.27rem;
+      letter-spacing: -.5px;
+    }
+
+    .content-card h3 {
+      margin: 20px 0 7px;
+      font-size: .99rem;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #596579;
+      font-size: .93rem;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      padding-left: 21px;
+    }
+
+    .content-card li {
+      margin-bottom: 7px;
+    }
+
+    .faq-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #e8edf4;
+    }
+
+    .faq-item:first-of-type {
+      padding-top: 0;
+    }
+
+    .faq-item:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 6px;
+      font-size: .96rem;
+    }
+
+    .faq-item p {
+      margin: 0;
+      font-size: .89rem;
+    }
+
+    .site-footer {
+      padding: 24px;
+      border-top: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      text-align: center;
+      font-size: .84rem;
+    }
+
+    .site-footer a {
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 950px) {
+      .workspace {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .below-content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 550px) {
+      .header-inner {
+        padding: 14px;
+      }
+
+      .container {
+        padding: 20px 13px 38px;
+      }
+
+      .panel-body,
+      .preview-body {
+        padding: 14px;
+      }
+
+      .panel-header {
+        padding: 15px;
+      }
+
+      .field-grid,
+      .settings-grid,
+      .color-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .email-stage {
+        padding: 18px 12px;
+      }
+
+      .content-card {
+        padding: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="https://converttotoolsonline.com/">
+        ConvertTo<span>Tools</span>Online
+      </a>
+      <a class="header-link" href="https://converttotoolsonline.com/">
+        Explore all tools →
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://converttotoolsonline.com/">Home</a>
+      <span aria-hidden="true"> / </span>
+      <span>Email Signature Generator</span>
+    </nav>
+
+    <section class="hero">
+      <span class="eyebrow">Free business communication tool</span>
+      <h1>Free Email Signature Generator</h1>
+      <p>
+        Create a professional email signature for work, business, freelancing,
+        or personal branding. Customize your contact information, logo, colors,
+        and social links, then copy your formatted signature or download the
+        HTML. No account or paid export is required.
+      </p>
+
+      <div class="benefits">
+        <span class="benefit">✓ Free to use</span>
+        <span class="benefit">✓ Live preview</span>
+        <span class="benefit">✓ Clickable contact details</span>
+        <span class="benefit">✓ HTML and plain text</span>
+        <span class="benefit">✓ No signup</span>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="Email signature generator">
+      <section class="panel" aria-labelledby="editorTitle">
+        <div class="panel-header">
+          <h2 id="editorTitle">Customize your signature</h2>
+          <p>Your changes appear in the preview automatically.</p>
+        </div>
+
+        <div class="panel-body">
+          <div class="section">
+            <h3 class="section-heading">1. Personal information</h3>
+
+            <div class="field-grid">
+              <div class="field full">
+                <label for="fullName">Full name <span class="required">*</span></label>
+                <input id="fullName" type="text" maxlength="120"
+                  autocomplete="name" placeholder="e.g. Alex Morgan">
+              </div>
+
+              <div class="field full">
+                <label for="jobTitle">Job title</label>
+                <input id="jobTitle" type="text" maxlength="120"
+                  autocomplete="organization-title"
+                  placeholder="e.g. Marketing Manager">
+              </div>
+
+              <div class="field">
+                <label for="company">Company / Organization</label>
+                <input id="company" type="text" maxlength="120"
+                  autocomplete="organization" placeholder="Company name">
+              </div>
+
+              <div class="field">
+                <label for="department">Department</label>
+                <input id="department" type="text" maxlength="100"
+                  placeholder="e.g. Marketing">
+              </div>
+
+              <div class="field">
+                <label for="emailAddress">Email address</label>
+                <input id="emailAddress" type="email" maxlength="180"
+                  autocomplete="email" placeholder="alex@example.com">
+              </div>
+
+              <div class="field">
+                <label for="phone">Phone number</label>
+                <input id="phone" type="tel" maxlength="60"
+                  autocomplete="tel" placeholder="+977 9800000000">
+              </div>
+
+              <div class="field full">
+                <label for="website">Website / Portfolio</label>
+                <input id="website" type="text" maxlength="250"
+                  autocomplete="url" placeholder="https://example.com">
+              </div>
+
+              <div class="field full">
+                <label for="address">Location / Business address</label>
+                <input id="address" type="text" maxlength="200"
+                  autocomplete="street-address"
+                  placeholder="Kathmandu, Nepal">
+              </div>
+
+              <div class="field full">
+                <label for="tagline">Short tagline (optional)</label>
+                <input id="tagline" type="text" maxlength="180"
+                  placeholder="Helping businesses grow online">
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3 class="section-heading">2. Logo and social links</h3>
+
+            <div class="field-grid">
+              <div class="field full">
+                <label for="logoUrl">Public logo image URL</label>
+                <input id="logoUrl" type="text" maxlength="500"
+                  placeholder="https://example.com/logo.png">
+                <p class="hint">
+                  Use a public HTTPS image URL. The image must remain accessible
+                  for recipients to see it. This tool does not host your logo.
+                </p>
+              </div>
+
+              <div class="field full">
+                <label for="logoAlt">Logo alternative text</label>
+                <input id="logoAlt" type="text" maxlength="150"
+                  placeholder="Company logo">
+              </div>
+
+              <div class="field">
+                <label for="linkedin">LinkedIn profile URL</label>
+                <input id="linkedin" type="text" maxlength="250"
+                  placeholder="https://linkedin.com/in/username">
+              </div>
+
+              <div class="field">
+                <label for="instagram">Instagram profile URL</label>
+                <input id="instagram" type="text" maxlength="250"
+                  placeholder="https://instagram.com/username">
+              </div>
+
+              <div class="field full">
+                <label for="xProfile">X / Twitter profile URL</label>
+                <input id="xProfile" type="text" maxlength="250"
+                  placeholder="https://x.com/username">
+              </div>
+
+              <div class="field">
+                <label for="bookingUrl">Meeting / Booking URL</label>
+                <input id="bookingUrl" type="text" maxlength="300"
+                  placeholder="https://cal.example.com/you">
+              </div>
+
+              <div class="field">
+                <label for="ctaLabel">Call-to-action text</label>
+                <input id="ctaLabel" type="text" maxlength="60"
+                  value="Book a meeting" placeholder="e.g. View portfolio">
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3 class="section-heading">3. Choose your design</h3>
+
+            <span class="preset-label">Professional templates</span>
+            <div class="preset-grid">
+              <button type="button" class="button small" data-template="classic">Classic</button>
+              <button type="button" class="button small" data-template="modern">Modern</button>
+              <button type="button" class="button small" data-template="compact">Compact</button>
+              <button type="button" class="button small" data-template="corporate">Corporate</button>
+            </div>
+
+            <div class="settings-grid">
+              <div class="field">
+                <label for="templateSelect">Layout</label>
+                <select id="templateSelect">
+                  <option value="classic">Classic</option>
+                  <option value="modern" selected>Modern</option>
+                  <option value="compact">Compact</option>
+                  <option value="corporate">Corporate</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="fontSelect">Font</label>
+                <select id="fontSelect">
+                  <option value="Arial, Helvetica, sans-serif">Arial</option>
+                  <option value="Verdana, Geneva, sans-serif">Verdana</option>
+                  <option value="Tahoma, Geneva, sans-serif">Tahoma</option>
+                  <option value="Georgia, serif">Georgia</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="accentColor">Brand color</label>
+                <input id="accentColor" type="color" value="#2457d6">
+              </div>
+
+              <div class="field">
+                <label for="fontSize">Text size</label>
+                <select id="fontSize">
+                  <option value="12">Small — 12 px</option>
+                  <option value="13" selected>Medium — 13 px</option>
+                  <option value="14">Large — 14 px</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field" style="margin-top:14px">
+              <label for="disclaimer">Optional short disclaimer</label>
+              <textarea id="disclaimer" maxlength="350"
+                placeholder="Optional notice for business emails"></textarea>
+              <p class="hint">
+                Keep your signature concise. A long disclaimer is rarely helpful
+                in routine messages unless your organization requires one.
+              </p>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3 class="section-heading">4. Copy or download</h3>
+
+            <div class="button-row">
+              <button type="button" id="copyFormattedButton" class="button primary">
+                Copy formatted signature
+              </button>
+              <button type="button" id="copyHtmlButton" class="button">
+                Copy HTML code
+              </button>
+            </div>
+
+            <div class="button-row" style="margin-top:9px">
+              <button type="button" id="copyPlainButton" class="button">
+                Copy plain text
+              </button>
+              <button type="button" id="downloadButton" class="button">
+                Download HTML file
+              </button>
+              <button type="button" id="sampleButton" class="button">
+                Load example
+              </button>
+              <button type="button" id="clearButton" class="button">
+                Clear details
+              </button>
+            </div>
+
+            <div class="status" id="status" role="status" aria-live="polite"></div>
+
+            <div class="privacy-note">
+              <strong>Privacy note:</strong> the signature is generated in your
+              browser, and the code does not send the contact details you enter
+              to our server. If you provide a logo URL, your browser requests the
+              image from that URL for the preview; the image itself is hosted
+              elsewhere.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="previewTitle">
+        <div class="preview-header">
+          <h2 id="previewTitle">Live email signature preview</h2>
+          <span class="live-label">● Auto-updating</span>
+        </div>
+
+        <div class="preview-body">
+          <div class="preview-notice">
+            The preview shows the HTML design, not a guarantee of identical
+            rendering in every email client. Always send yourself a test email,
+            including on mobile, before using the signature professionally.
+          </div>
+
+          <div class="email-stage">
+            <div class="email-stage-inner" id="signaturePreview"
+              aria-label="Generated email signature preview">
+              <!-- Generated signature -->
+            </div>
+          </div>
+
+          <p class="preview-note">
+            For best results, use a concise signature, standard fonts, and a
+            publicly accessible HTTPS logo. Social links are displayed as
+            clickable text rather than externally hosted icon images.
+          </p>
+
+          <div class="output-section">
+            <div class="output-heading">
+              <h3>HTML signature code</h3>
+              <button type="button" class="button small" id="selectHtmlButton">
+                Select code
+              </button>
+            </div>
+
+            <textarea id="htmlOutput" class="code-output" readonly
+              spellcheck="false" aria-label="HTML email signature code"></textarea>
+
+            <p class="hint" style="margin-top:9px">
+              Use Copy formatted signature when you want to paste the design into
+              an email signature editor. Use Copy HTML code when you need the
+              underlying HTML source.
+            </p>
+          </div>
+
+          <div class="output-section">
+            <div class="output-heading">
+              <h3>Plain-text version</h3>
+              <button type="button" class="button small" id="selectPlainButton">
+                Select text
+              </button>
+            </div>
+
+            <textarea id="plainOutput" class="code-output"
+              style="min-height:125px;background:#f8faff;color:#344054"
+              readonly aria-label="Plain-text email signature"></textarea>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="below-content">
+      <article class="content-card">
+        <h2>How to create a professional email signature</h2>
+
+        <ol>
+          <li>Enter your full name, job title, company, and preferred contact details.</li>
+          <li>Add your website, professional profiles, or a meeting-booking link if relevant.</li>
+          <li>Enter a publicly accessible HTTPS URL if you want to display a company logo.</li>
+          <li>Choose a layout and brand color, then check the live preview.</li>
+          <li>Select <strong>Copy formatted signature</strong> to copy the rendered design.</li>
+          <li>Open your email provider's signature settings and paste the signature into its editor.</li>
+          <li>Send yourself a test email and check it on desktop and mobile before relying on it.</li>
+        </ol>
+
+        <h3>Why use an HTML email signature?</h3>
+        <p>
+          An HTML signature can include formatted text, clickable email and phone
+          details, website links, a company logo, and social profiles. This can
+          make it easier for recipients to contact you or visit your business.
+          Use a simple layout so the important details remain easy to scan.
+        </p>
+
+        <h3>What should a business email signature include?</h3>
+        <p>
+          Start with your name, professional role, company, and a reliable way
+          to contact you. Add a website or one or two relevant professional
+          profiles if they support your work. A logo or short meeting link can
+          be useful, but decorative elements are optional.
+        </p>
+
+        <h3>Why can email signatures look different between applications?</h3>
+        <p>
+          Email clients do not all render HTML in exactly the same way. Some
+          handle spacing, fonts, images, and copied formatting differently.
+          This generator uses a simple table-based layout and inline styling
+          to improve compatibility, but it cannot guarantee identical results
+          across all clients and versions.
+        </p>
+
+        <h3>Adding your signature in Gmail</h3>
+        <p>
+          Open Gmail on your computer, select Settings, then See all settings.
+          Under General, find Signature, create or select a signature, paste
+          your formatted content, and save changes. The exact interface can
+          change, so consult the
+          <a href="https://support.google.com/mail/answer/8395?hl=en"
+            target="_blank" rel="noopener noreferrer">official Gmail signature guide</a>
+          if necessary.
+        </p>
+
+        <h3>Adding your signature in Outlook</h3>
+        <p>
+          In Outlook, open the signature settings for your version, create a
+          signature, paste or format the content, and save it. New Outlook,
+          classic Outlook, and Outlook on the web have different settings paths.
+          See the
+          <a href="https://support.microsoft.com/en-us/outlook/mail/how-to-add-and-change-an-email-signature-in-outlook"
+            target="_blank" rel="noopener noreferrer">official Outlook signature guide</a>
+          for version-specific steps.
+        </p>
+      </article>
+
+      <article class="content-card">
+        <h2>Frequently asked questions</h2>
+
+        <div class="faq-item">
+          <h3>Is this email signature generator free?</h3>
+          <p>
+            Yes. You can create a signature, copy formatted content, copy its
+            HTML source, and download an HTML file without an account.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can I use this signature in Gmail and Outlook?</h3>
+          <p>
+            The generator produces standard HTML with inline styling intended
+            for email signatures. Copy and paste into your chosen email client's
+            signature editor, then send a test message. Compatibility can vary
+            by email client and version.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Why must my logo have a public image URL?</h3>
+          <p>
+            An email recipient's application needs to retrieve the image to
+            display it. A local file path on your computer will not work for
+            recipients. Host the logo at a reliable public HTTPS image URL and
+            check that its server permits access.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Does the tool store my contact information?</h3>
+          <p>
+            The page generates the signature in your browser and does not
+            transmit your entered contact details to its own server. Your
+            browser may request an external image URL if you add a logo.
+            Downloaded files and clipboard contents remain your responsibility.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can I add social media links?</h3>
+          <p>
+            Yes. Enter public profile URLs for LinkedIn, Instagram, or X.
+            Valid links appear as clickable text in the signature. Leave a field
+            blank to exclude that profile.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can I use my own company colors?</h3>
+          <p>
+            Yes. Select a color using the brand color control. Your chosen color
+            is applied to the signature's main accent and links.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>What is the difference between HTML and plain-text signatures?</h3>
+          <p>
+            HTML supports formatted text, colors, tables, images, and links.
+            Plain text contains only text and is more suitable for messages or
+            systems that remove HTML formatting.
+          </p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      © <span id="year"></span>
+      <a href="https://converttotoolsonline.com/">ConvertToToolsOnline</a>.
+      Free tools for everyday work.
+    </p>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+    const status = $("#status");
+    const preview = $("#signaturePreview");
+    const htmlOutput = $("#htmlOutput");
+    const plainOutput = $("#plainOutput");
+
+    const FIELD_IDS = [
+      "fullName",
+      "jobTitle",
+      "company",
+      "department",
+      "emailAddress",
+      "phone",
+      "website",
+      "address",
+      "tagline",
+      "logoUrl",
+      "logoAlt",
+      "linkedin",
+      "instagram",
+      "xProfile",
+      "bookingUrl",
+      "ctaLabel",
+      "disclaimer"
+    ];
+
+    const TEMPLATE_NAMES = {
+      classic: "Classic",
+      modern: "Modern",
+      compact: "Compact",
+      corporate: "Corporate"
+    };
+
+    const FONT_OPTIONS = [
+      "Arial, Helvetica, sans-serif",
+      "Verdana, Geneva, sans-serif",
+      "Tahoma, Geneva, sans-serif",
+      "Georgia, serif"
+    ];
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    function setStatus(message, isError = false) {
+      status.textContent = message;
+      status.classList.toggle("error", isError);
+    }
+
+    function getData() {
+      const data = {};
+
+      for (const id of FIELD_IDS) {
+        data[id] = document.getElementById(id).value.trim();
+      }
+
+      data.template = $("#templateSelect").value;
+      data.font = $("#fontSelect").value;
+      data.color = $("#accentColor").value;
+      data.fontSize = Number($("#fontSize").value);
+
+      return data;
+    }
+
+    function normalizeWebUrl(rawValue, httpsOnly = false) {
+      const raw = String(rawValue || "").trim();
+
+      if (!raw) return "";
+
+      // Reject other URL schemes rather than turning them into links.
+      if (/^[a-z][a-z\d+.-]*:/i.test(raw) &&
+          !/^https?:\/\//i.test(raw)) {
+        return null;
+      }
+
+      let candidate = raw;
+
+      if (!/^https?:\/\//i.test(candidate)) {
+        candidate = "https://" + candidate;
+      }
+
+      try {
+        const url = new URL(candidate);
+
+        if (!["http:", "https:"].includes(url.protocol)) {
+          return null;
+        }
+
+        if (httpsOnly && url.protocol !== "https:") {
+          return null;
+        }
+
+        if (!url.hostname || !url.hostname.includes(".")) {
+          return null;
+        }
+
+        if (url.username || url.password) {
+          return null;
+        }
+
+        return url.href;
+      } catch {
+        return null;
+      }
+    }
+
+    function displayUrl(raw) {
+      const normalized = normalizeWebUrl(raw);
+      if (!normalized) return String(raw || "");
+
+      try {
+        const url = new URL(normalized);
+        let displayed = url.hostname + url.pathname;
+        if (url.search) displayed += url.search;
+        if (url.hash) displayed += url.hash;
+        return displayed.replace(/\/$/, "");
+      } catch {
+        return String(raw || "");
+      }
+    }
+
+    function validEmail(raw) {
+      const value = String(raw || "").trim();
+      if (!value) return false;
+
+      return /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(value);
+    }
+
+    function safePhoneLink(raw) {
+      const cleaned = String(raw || "").replace(/[^\d+*#,;]/g, "");
+      return cleaned && /\d/.test(cleaned) ? "tel:" + cleaned : "";
+    }
+
+    function safeLink(url, label, color, extraStyles = "") {
+      if (!url) {
+        return escapeHTML(label);
+      }
+
+      return `<a href="${escapeHTML(url)}" style="color:${color};text-decoration:none;${extraStyles}">${escapeHTML(label)}</a>`;
+    }
+
+    function validateInputs(data) {
+      const warnings = [];
+
+      if (!data.fullName) {
+        warnings.push("Enter your name before copying or downloading the signature.");
+      }
+
+      if (data.emailAddress && !validEmail(data.emailAddress)) {
+        warnings.push("The email address looks invalid; it will be displayed as plain text.");
+      }
+
+      const urlFields = [
+        ["website", "Website"],
+        ["linkedin", "LinkedIn"],
+        ["instagram", "Instagram"],
+        ["xProfile", "X profile"],
+        ["bookingUrl", "Booking URL"]
+      ];
+
+      for (const [key, label] of urlFields) {
+        if (data[key] && !normalizeWebUrl(data[key])) {
+          warnings.push(label + " URL is invalid and will not be linked.");
+        }
+      }
+
+      if (data.logoUrl && !normalizeWebUrl(data.logoUrl, true)) {
+        warnings.push("The logo URL must be a valid public HTTPS URL; the logo will be omitted.");
+      }
+
+      return warnings;
+    }
+
+    function contactItems(data, color, fontSize) {
+      const parts = [];
+
+      if (data.emailAddress) {
+        if (validEmail(data.emailAddress)) {
+          parts.push(
+            safeLink(
+              "mailto:" + data.emailAddress,
+              data.emailAddress,
+              color
+            )
+          );
+        } else {
+          parts.push(escapeHTML(data.emailAddress));
+        }
+      }
+
+      if (data.phone) {
+        const phoneHref = safePhoneLink(data.phone);
+        parts.push(
+          phoneHref
+            ? safeLink(phoneHref, data.phone, color)
+            : escapeHTML(data.phone)
+        );
+      }
+
+      if (data.website) {
+        const url = normalizeWebUrl(data.website);
+        parts.push(
+          url
+            ? safeLink(url, displayUrl(data.website), color)
+            : escapeHTML(data.website)
+        );
+      }
+
+      if (data.address) {
+        parts.push(escapeHTML(data.address));
+      }
+
+      const separator = `<span style="color:#b8c1ce;padding:0 5px;">|</span>`;
+
+      return parts.map(part => part + "").join(separator);
+    }
+
+    function socialLinks(data, color) {
+      const profiles = [
+        ["LinkedIn", data.linkedin],
+        ["Instagram", data.instagram],
+        ["X", data.xProfile]
+      ];
+
+      const validProfiles = profiles
+        .map(([label, raw]) => ({
+          label,
+          url: raw ? normalizeWebUrl(raw) : ""
+        }))
+        .filter(item => item.url);
+
+      if (!validProfiles.length) return "";
+
+      const separator = `<span style="color:#b8c1ce;padding:0 5px;">|</span>`;
+      const markup = validProfiles.map(item =>
+        safeLink(item.url, item.label, color, "font-weight:600;")
+      ).join(separator);
+
+      return `
+        <tr>
+          <td style="padding:7px 0 0;font-size:12px;line-height:18px;">
+            ${markup}
+          </td>
+        </tr>
+      `;
+    }
+
+    function renderLogo(data, websiteUrl) {
+      const url = data.logoUrl
+        ? normalizeWebUrl(data.logoUrl, true)
+        : "";
+
+      if (!url) return "";
+
+      const alt = escapeHTML(data.logoAlt || (data.company + " logo") || "Company logo");
+
+      const image = `
+        <img src="${escapeHTML(url)}" alt="${alt}"
+          width="88" border="0"
+          style="display:block;width:88px;max-width:88px;height:auto;border:0;outline:none;text-decoration:none;">
+      `;
+
+      return websiteUrl
+        ? `<a href="${escapeHTML(websiteUrl)}" style="text-decoration:none;">${image}</a>`
+        : image;
+    }
+
+    function buildSignature(data) {
+      const color = /^#[0-9a-f]{6}$/i.test(data.color)
+        ? data.color
+        : "#2457d6";
+
+      const font = FONT_OPTIONS.includes(data.font)
+        ? data.font
+        : FONT_OPTIONS[0];
+
+      const size = [12, 13, 14].includes(data.fontSize)
+        ? data.fontSize
+        : 13;
+
+      const name = escapeHTML(data.fullName || "Your Name");
+      const job = escapeHTML(data.jobTitle);
+      const company = escapeHTML(data.company);
+      const department = escapeHTML(data.department);
+      const tagline = escapeHTML(data.tagline);
+      const disclaimer = escapeHTML(data.disclaimer);
+      const companyDetails = [department, company].filter(Boolean).join(" · ");
+
+      const titleLine = [job, companyDetails].filter(Boolean).join(" | ");
+
+      const websiteUrl = data.website
+        ? normalizeWebUrl(data.website)
+        : "";
+
+      const logoHTML = renderLogo(data, websiteUrl);
+
+      const nameMarkup = `
+        <tr>
+          <td style="padding:0 0 3px;font-family:${font};font-size:18px;line-height:23px;font-weight:700;color:#172033;">
+            ${name}
+          </td>
+        </tr>
+      `;
+
+      const titleMarkup = titleLine
+        ? `<tr><td style="padding:0 0 5px;font-family:${font};font-size:${size}px;line-height:19px;color:#4b5565;">${escapeHTML(titleLine)}</td></tr>`
+        : "";
+
+      const taglineMarkup = tagline
+        ? `<tr><td style="padding:0 0 7px;font-family:${font};font-size:${size}px;line-height:19px;color:#667085;font-style:italic;">${tagline}</td></tr>`
+        : "";
+
+      const contacts = contactItems(data, color, size);
+
+      const contactsMarkup = contacts
+        ? `<tr><td style="padding:7px 0 0;font-family:${font};font-size:${size}px;line-height:21px;color:#475467;overflow-wrap:anywhere;">${contacts}</td></tr>`
+        : "";
+
+      const socialMarkup = socialLinks(data, color);
+
+      const bookingUrl = data.bookingUrl
+        ? normalizeWebUrl(data.bookingUrl)
+        : "";
+
+      const ctaLabel = data.ctaLabel || "Book a meeting";
+
+      const ctaMarkup = bookingUrl
+        ? `<tr><td style="padding:10px 0 0;font-family:${font};font-size:${size}px;line-height:19px;">${safeLink(bookingUrl, ctaLabel, color, "font-weight:700;")}</td></tr>`
+        : "";
+
+      const disclaimerMarkup = disclaimer
+        ? `<tr><td style="padding:10px 0 0;font-family:${font};font-size:10px;line-height:15px;color:#7b8493;font-style:italic;">${disclaimer}</td></tr>`
+        : "";
+
+      const separatorMarkup = `
+        <tr>
+          <td style="height:1px;padding:0 0 7px;font-size:1px;line-height:1px;border-bottom:1px solid #dce3ed;">
+            &nbsp;
+          </td>
+        </tr>
+      `;
+
+      let innerRows;
+
+      if (data.template === "compact") {
+        const compactTitle = [job, companyDetails].filter(Boolean).join(" · ");
+
+        innerRows = `
+          <tr>
+            <td style="padding:0 0 4px;font-family:${font};font-size:15px;line-height:20px;color:#172033;">
+              <strong>${name}</strong>
+              ${compactTitle ? `<span style="color:#7b8493;"> · ${escapeHTML(compactTitle)}</span>` : ""}
+            </td>
+          </tr>
+          ${taglineMarkup}
+          ${contactsMarkup}
+          ${socialMarkup}
+          ${ctaMarkup}
+          ${disclaimerMarkup}
+        `;
+      } else {
+        innerRows = `
+          ${nameMarkup}
+          ${titleMarkup}
+          ${taglineMarkup}
+          ${separatorMarkup}
+          ${contactsMarkup}
+          ${socialMarkup}
+          ${ctaMarkup}
+          ${disclaimerMarkup}
+        `;
+      }
+
+      const baseTableStyles =
+        `border-collapse:collapse;border-spacing:0;font-family:${font};font-size:${size}px;color:#344054;`;
+
+      if (data.template === "corporate" && logoHTML) {
+        return `
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+            style="${baseTableStyles}max-width:560px;">
+            <tr>
+              <td valign="top" style="padding:2px 15px 0 0;vertical-align:top;width:105px;">
+                ${logoHTML}
+              </td>
+              <td valign="top" style="padding:0;vertical-align:top;">
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+                  style="${baseTableStyles}">
+                  ${innerRows}
+                </table>
+              </td>
+            </tr>
+          </table>
+        `;
+      }
+
+      if (data.template === "modern") {
+        return `
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+            style="${baseTableStyles}max-width:560px;">
+            <tr>
+              <td valign="top" style="padding:1px 0 1px 13px;border-left:3px solid ${color};vertical-align:top;">
+                ${logoHTML ? `<div style="padding:0 0 8px;">${logoHTML}</div>` : ""}
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+                  style="${baseTableStyles}">
+                  ${innerRows}
+                </table>
+              </td>
+            </tr>
+          </table>
+        `;
+      }
+
+      return `
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+          style="${baseTableStyles}max-width:560px;">
+          ${logoHTML ? `<tr><td style="padding:0 0 10px;">${logoHTML}</td></tr>` : ""}
+          ${innerRows}
+        </table>
+      `;
+    }
+
+    function toPlainText(html) {
+      const container = document.createElement("div");
+      container.innerHTML = html;
+
+      container.querySelectorAll("br").forEach(node => {
+        node.replaceWith("\n");
+      });
+
+      container.querySelectorAll("tr").forEach(node => {
+        node.append(document.createTextNode("\n"));
+      });
+
+      container.querySelectorAll("a").forEach(link => {
+        const href = link.getAttribute("href") || "";
+
+        if (/^https?:\/\//i.test(href) &&
+            !link.textContent.includes(href)) {
+          link.append(document.createTextNode(" (" + href + ")"));
+        }
+      });
+
+      return (container.innerText || container.textContent || "")
+        .replace(/\n[ \t]*\n[ \t]*\n/g, "\n\n")
+        .replace(/[ \t]+\n/g, "\n")
+        .trim();
+    }
+
+    function render() {
+      const data = getData();
+      const signatureHtml = buildSignature(data);
+      const warnings = validateInputs(data);
+
+      preview.innerHTML = signatureHtml;
+      htmlOutput.value = signatureHtml;
+      plainOutput.value = toPlainText(signatureHtml);
+
+      if (warnings.length) {
+        setStatus(warnings.join(" "), !data.fullName);
+      } else {
+        setStatus("Preview updated. Your signature is ready to review.");
+      }
+    }
+
+    function exportDocument(signatureHtml) {
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Email Signature</title>
+</head>
+<body style="margin:24px;background:#ffffff;">
+<!-- Copy the signature below into your email client's signature editor. -->
+${signatureHtml}
+</body>
+</html>`;
+    }
+
+    function fileNameFromName(name) {
+      const result = String(name || "email-signature")
+        .normalize("NFKD")
+        .replace(/[^\w-]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 50);
+
+      return result || "email-signature";
+    }
+
+    function downloadFile(filename, text, mimeType) {
+      const blob = new Blob([text], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = filename;
+      link.style.display = "none";
+
+      document.body.append(link);
+      link.click();
+      link.remove();
+
+      window.setTimeout(() => URL.revokeObjectURL(url), 1200);
+    }
+
+    function requireName() {
+      const name = $("#fullName").value.trim();
+
+      if (!name) {
+        setStatus("Enter your full name before copying or downloading.", true);
+        $("#fullName").focus();
+        return false;
+      }
+
+      return true;
+    }
+
+    function legacyCopyRichHtml(html) {
+      const temporary = document.createElement("div");
+      temporary.contentEditable = "true";
+      temporary.setAttribute("aria-hidden", "true");
+      temporary.style.position = "fixed";
+      temporary.style.left = "-99999px";
+      temporary.style.top = "0";
+      temporary.style.width = "600px";
+      temporary.style.background = "#ffffff";
+      temporary.innerHTML = html;
+
+      document.body.append(temporary);
+
+      const selection = window.getSelection();
+      const range = document.createRange();
+
+      range.selectNodeContents(temporary);
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      let success = false;
+
+      try {
+        success = document.execCommand("copy");
+      } catch {
+        success = false;
+      }
+
+      selection.removeAllRanges();
+      temporary.remove();
+
+      return success;
+    }
+
+    async function copyFormatted() {
+      if (!requireName()) return;
+
+      const data = getData();
+      const html = buildSignature(data);
+      const plain = toPlainText(html);
+
+      try {
+        if (navigator.clipboard &&
+            window.isSecureContext &&
+            typeof ClipboardItem !== "undefined") {
+          const htmlBlob = new Blob([html], { type: "text/html" });
+          const textBlob = new Blob([plain], { type: "text/plain" });
+
+          await navigator.clipboard.write([
+            new ClipboardItem({
+              "text/html": htmlBlob,
+              "text/plain": textBlob
+            })
+          ]);
+
+          setStatus("Formatted signature copied. Paste it into your email signature editor, then test it.");
+          return;
+        }
+      } catch {
+        // Continue with the browser's legacy rich-text copy method.
+      }
+
+      if (legacyCopyRichHtml(html)) {
+        setStatus("Formatted signature copied. Paste it into your email signature editor, then test it.");
+      } else {
+        setStatus(
+          "Automatic rich copying was unavailable. Select the preview with your mouse, copy it, and paste into your email editor.",
+          true
+        );
+      }
+    }
+
+    async function copyHtmlCode() {
+      if (!requireName()) return;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(htmlOutput.value);
+        } else {
+          htmlOutput.focus();
+          htmlOutput.select();
+
+          if (!document.execCommand("copy")) {
+            throw new Error("Select the code manually and copy it.");
+          }
+        }
+
+        setStatus("HTML code copied.");
+      } catch (error) {
+        setStatus(error.message || "Could not copy the HTML code.", true);
+      }
+    }
+
+    async function copyPlainText() {
+      if (!requireName()) return;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(plainOutput.value);
+        } else {
+          plainOutput.focus();
+          plainOutput.select();
+
+          if (!document.execCommand("copy")) {
+            throw new Error("Select the text manually and copy it.");
+          }
+        }
+
+        setStatus("Plain-text signature copied.");
+      } catch (error) {
+        setStatus(error.message || "Could not copy plain text.", true);
+      }
+    }
+
+    function loadExample() {
+      const values = {
+        fullName: "Alex Morgan",
+        jobTitle: "Digital Marketing Specialist",
+        company: "Example Studio",
+        department: "Marketing",
+        emailAddress: "alex@example.com",
+        phone: "+977 9800000000",
+        website: "https://example.com",
+        address: "Kathmandu, Nepal",
+        tagline: "Helping businesses build a stronger online presence",
+        logoUrl: "",
+        logoAlt: "Example Studio logo",
+        linkedin: "https://www.linkedin.com/",
+        instagram: "https://www.instagram.com/",
+        xProfile: "",
+        bookingUrl: "https://example.com/contact",
+        ctaLabel: "Get in touch",
+        disclaimer: ""
+      };
+
+      for (const [id, value] of Object.entries(values)) {
+        document.getElementById(id).value = value;
+      }
+
+      render();
+      setStatus("Example loaded. Replace all example details with your own.");
+    }
+
+    function clearAll() {
+      for (const id of FIELD_IDS) {
+        document.getElementById(id).value = "";
+      }
+
+      $("#ctaLabel").value = "Book a meeting";
+      $("#templateSelect").value = "modern";
+      $("#fontSelect").value = FONT_OPTIONS[0];
+      $("#accentColor").value = "#2457d6";
+      $("#fontSize").value = "13";
+
+      render();
+      setStatus("Signature details cleared.");
+    }
+
+    FIELD_IDS.forEach(id => {
+      const element = document.getElementById(id);
+      element.addEventListener("input", render);
+      element.addEventListener("change", render);
+    });
+
+    ["templateSelect", "fontSelect", "accentColor", "fontSize"].forEach(id => {
+      document.getElementById(id).addEventListener("change", render);
+      document.getElementById(id).addEventListener("input", render);
+    });
+
+    $$("[data-template]").forEach(button => {
+      button.addEventListener("click", () => {
+        $("#templateSelect").value = button.dataset.template;
+        render();
+      });
+    });
+
+    $("#copyFormattedButton").addEventListener("click", copyFormatted);
+    $("#copyHtmlButton").addEventListener("click", copyHtmlCode);
+    $("#copyPlainButton").addEventListener("click", copyPlainText);
+
+    $("#downloadButton").addEventListener("click", () => {
+      if (!requireName()) return;
+
+      const data = getData();
+      const html = buildSignature(data);
+      const documentHtml = exportDocument(html);
+
+      downloadFile(
+        fileNameFromName(data.fullName) + "-email-signature.html",
+        documentHtml,
+        "text/html;charset=utf-8"
+      );
+
+      setStatus("HTML file downloaded. Open it in a browser and copy the signature if needed.");
+    });
+
+    $("#sampleButton").addEventListener("click", loadExample);
+    $("#clearButton").addEventListener("click", clearAll);
+
+    $("#selectHtmlButton").addEventListener("click", () => {
+      htmlOutput.focus();
+      htmlOutput.select();
+      setStatus("HTML code selected. Use your device's copy command.");
+    });
+
+    $("#selectPlainButton").addEventListener("click", () => {
+      plainOutput.focus();
+      plainOutput.select();
+      setStatus("Plain-text content selected. Use your device's copy command.");
+    });
+
+    $("#year").textContent = new Date().getFullYear();
+
+    render();
+  </script>
+</body>
+</html>

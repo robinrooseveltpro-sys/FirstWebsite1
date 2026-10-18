@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Unix Timestamp Converter - Epoch to Date & Date to Epoch</title>
+
+  <meta name="description"
+        content="Free Unix timestamp converter. Convert epoch time to readable dates and dates to Unix timestamps. Supports milliseconds, microseconds, nanoseconds and timezones.">
+
+  <meta name="robots" content="index,follow,max-image-preview:large">
+
+  <link rel="canonical"
+        href="https://converttotoolsonline.com/unix-timestamp-converter.html">
+
+  <meta name="theme-color" content="#ffffff">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title"
+        content="Unix Timestamp Converter - Free Epoch Time Tool">
+  <meta property="og:description"
+        content="Convert Unix timestamps, epoch time, dates and timezones. Includes batch conversion and millisecond support.">
+  <meta property="og:url"
+        content="https://converttotoolsonline.com/unix-timestamp-converter.html">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title"
+        content="Unix Timestamp Converter">
+  <meta name="twitter:description"
+        content="Convert epoch time to dates and dates to timestamps in your browser.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Unix Timestamp Converter",
+        "url": "https://converttotoolsonline.com/unix-timestamp-converter.html",
+        "description": "Convert Unix timestamps and human-readable dates, with multiple timestamp units, timezone formatting and batch conversion.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://converttotoolsonline.com/index.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Unix Timestamp Converter",
+            "item": "https://converttotoolsonline.com/unix-timestamp-converter.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --purple: #7c3aed;
+      --ink: #172033;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --surface: #f8fafc;
+      --white: #ffffff;
+      --green: #15803d;
+      --red: #b91c1c;
+      --radius: 18px;
+      --shadow: 0 12px 40px rgba(15, 23, 42, .06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 24px;
+    }
+
+    body {
+      margin: 0;
+      background: #ffffff;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                   BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    select {
+      cursor: pointer;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .28);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 36px));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, .96);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--ink);
+      font-weight: 800;
+      letter-spacing: -.4px;
+    }
+
+    .brand:hover {
+      text-decoration: none;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: white;
+      font-size: 21px;
+      background: linear-gradient(135deg, var(--primary), var(--purple));
+      box-shadow: 0 6px 16px rgba(37, 99, 235, .2);
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 1.3;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .nav a {
+      color: #475569;
+    }
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(270px, .8fr);
+      align-items: center;
+      gap: 38px;
+      padding: 36px 0 32px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border: 1px solid #dbeafe;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 16px 0 12px;
+      font-size: clamp(31px, 5vw, 48px);
+      line-height: 1.12;
+      letter-spacing: -1.8px;
+    }
+
+    .hero-copy {
+      max-width: 690px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .benefit {
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: white;
+      color: #475569;
+      font-size: 12px;
+    }
+
+    .live-card {
+      padding: 23px;
+      border: 1px solid #dbeafe;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #eff6ff 0%, #faf5ff 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .live-label {
+      color: #475569;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .live-time {
+      overflow-wrap: anywhere;
+      margin: 9px 0 3px;
+      color: #1d4ed8;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: clamp(24px, 3vw, 31px);
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .live-subtitle {
+      margin-bottom: 13px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 42px;
+      padding: 10px 15px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: white;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 750;
+      transition: background .15s ease, transform .15s ease;
+    }
+
+    .btn:hover {
+      background: #f1f5f9;
+      text-decoration: none;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      border-color: var(--primary-dark);
+      background: var(--primary-dark);
+      color: white;
+    }
+
+    .btn-soft {
+      border-color: #dbeafe;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .btn-small {
+      min-height: 32px;
+      padding: 5px 9px;
+      border-radius: 8px;
+      font-size: 11px;
+    }
+
+    .section-heading {
+      margin-bottom: 18px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 6px;
+      font-size: clamp(22px, 3vw, 28px);
+      line-height: 1.25;
+      letter-spacing: -.7px;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .workspace {
+      padding: 27px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .workspace-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 23px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .workspace-toolbar strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .workspace-toolbar p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .timezone-control {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 250px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 12px;
+      font-weight: 750;
+      color: #334155;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid #cbd5e1;
+      border-radius: 11px;
+      background: white;
+      color: var(--ink);
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+
+    input,
+    select {
+      min-height: 44px;
+      padding: 9px 12px;
+    }
+
+    textarea {
+      display: block;
+      min-height: 150px;
+      padding: 13px;
+      line-height: 1.6;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, .1);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: start;
+    }
+
+    .tool-panel {
+      min-width: 0;
+      overflow: hidden;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: #ffffff;
+    }
+
+    .panel-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .panel-heading h3 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -.4px;
+    }
+
+    .panel-icon {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 18px;
+    }
+
+    .field-help {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(120px, .65fr);
+      gap: 10px;
+    }
+
+    .quick-label {
+      margin: 17px 0 8px;
+      color: #64748b;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 16px;
+    }
+
+    .quick-btn {
+      padding: 6px 9px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: #475569;
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .quick-btn:hover {
+      border-color: #bfdbfe;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .panel-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .status {
+      margin-top: 12px;
+      padding: 9px 11px;
+      border-radius: 9px;
+      font-size: 12px;
+    }
+
+    .status:empty {
+      display: none;
+    }
+
+    .status.error {
+      border: 1px solid #fecaca;
+      background: #fef2f2;
+      color: var(--red);
+    }
+
+    .status.success {
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: var(--green);
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .result-card {
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--surface);
+    }
+
+    .result-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .result-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .result-label {
+      color: #64748b;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .35px;
+      text-transform: uppercase;
+    }
+
+    .result-value {
+      margin: 8px 0 0;
+      overflow-wrap: anywhere;
+      color: #172033;
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.55;
+    }
+
+    .result-value.mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+    }
+
+    .empty-results {
+      grid-column: 1 / -1;
+      padding: 17px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 11px;
+      color: #64748b;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .section {
+      padding-top: 58px;
+    }
+
+    .batch-panel {
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .batch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      align-items: start;
+    }
+
+    .batch-results {
+      min-height: 215px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .feature-card {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: white;
+    }
+
+    .feature-card .symbol {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 19px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .content-card {
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: white;
+    }
+
+    .content-card h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      line-height: 1.3;
+      letter-spacing: -.6px;
+    }
+
+    .content-card h3 {
+      margin: 24px 0 8px;
+      font-size: 17px;
+    }
+
+    .content-card p {
+      color: #475569;
+    }
+
+    .content-card ul,
+    .content-card ol {
+      padding-left: 23px;
+      color: #475569;
+    }
+
+    .content-card li {
+      margin: 7px 0;
+    }
+
+    .definition-box {
+      margin: 18px 0;
+      padding: 16px;
+      border-left: 3px solid var(--primary);
+      border-radius: 0 11px 11px 0;
+      background: #eff6ff;
+      color: #334155;
+    }
+
+    .code-block {
+      position: relative;
+      margin: 12px 0 18px;
+      overflow: hidden;
+      border: 1px solid #293548;
+      border-radius: 11px;
+      background: #111827;
+    }
+
+    .code-block pre {
+      overflow-x: auto;
+      margin: 0;
+      padding: 17px;
+      color: #e2e8f0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      white-space: pre;
+    }
+
+    .code-caption {
+      padding: 8px 14px;
+      border-bottom: 1px solid #293548;
+      color: #cbd5e1;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .related-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 15px;
+    }
+
+    .related-links a {
+      padding: 8px 11px;
+      border: 1px solid #dbeafe;
+      border-radius: 9px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .faq-item {
+      padding: 17px 18px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: white;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 7px;
+      font-size: 15px;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: #475569;
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: 62px;
+      padding: 25px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner a {
+      color: #475569;
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 23px;
+      }
+
+      .live-card {
+        max-width: 100%;
+      }
+
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .workspace-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .timezone-control {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .header-inner {
+        min-height: 65px;
+      }
+
+      .nav {
+        gap: 10px;
+      }
+
+      .nav a:nth-child(n+2) {
+        display: none;
+      }
+
+      .brand {
+        gap: 8px;
+        font-size: 13px;
+      }
+
+      .brand-icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      .hero {
+        padding: 27px 0;
+      }
+
+      h1 {
+        letter-spacing: -1.1px;
+      }
+
+      .workspace {
+        padding: 13px;
+        border-radius: 17px;
+      }
+
+      .tool-panel {
+        padding: 15px;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+
+      .timezone-control {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .results {
+        grid-template-columns: 1fr;
+      }
+
+      .result-card.wide {
+        grid-column: auto;
+      }
+
+      .batch-panel,
+      .content-card {
+        padding: 17px;
+      }
+
+      .batch-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding-top: 43px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/index.html" aria-label="ConvertToToolsOnline homepage">
+        <span class="brand-icon" aria-hidden="true">↔</span>
+        <span>
+          ConvertToToolsOnline
+          <small>Simple tools. Useful results.</small>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/index.html">All tools</a>
+        <a href="/cron-expression-generator.html">Cron generator</a>
+        <a href="/json-formatter.html">JSON formatter</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Unix Timestamp Converter</span>
+    </nav>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <span class="eyebrow">Free online time utility</span>
+
+        <h1 id="page-title">Unix Timestamp Converter</h1>
+
+        <p class="hero-copy">
+          Convert Unix timestamps and epoch time into readable dates,
+          or convert a date and time back into a Unix timestamp.
+          Check milliseconds, microseconds, nanoseconds, UTC, and
+          other timezones in one place.
+        </p>
+
+        <div class="benefits" aria-label="Tool features">
+          <span class="benefit">✓ Instant conversion</span>
+          <span class="benefit">✓ No account required</span>
+          <span class="benefit">✓ Browser-based processing</span>
+          <span class="benefit">✓ Batch CSV export</span>
+        </div>
+      </div>
+
+      <aside class="live-card" aria-label="Current Unix timestamp">
+        <div class="live-label">CURRENT UNIX TIMESTAMP</div>
+
+        <div class="live-time" id="currentSeconds" aria-live="off">—</div>
+
+        <div class="live-subtitle">Seconds since January 1, 1970 UTC</div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" id="copyCurrentSeconds" type="button">
+            Copy seconds
+          </button>
+
+          <button class="btn" id="copyCurrentMilliseconds" type="button">
+            Copy milliseconds
+          </button>
+        </div>
+
+        <div class="field-help">
+          Live values update automatically. No server clock request is needed.
+        </div>
+      </aside>
+    </section>
+
+    <section class="workspace" id="converter" aria-labelledby="converter-heading">
+      <div class="workspace-toolbar">
+        <div>
+          <strong id="converter-heading">Timestamp conversion workspace</strong>
+          <p>Convert in either direction and copy individual results.</p>
+        </div>
+
+        <div class="timezone-control">
+          <label for="timezoneSelect" style="margin:0">Display timezone</label>
+
+          <select id="timezoneSelect">
+            <option value="local">My local time</option>
+            <option value="UTC">UTC</option>
+            <option value="Asia/Kathmandu">Asia/Kathmandu</option>
+            <option value="America/New_York">America/New_York</option>
+            <option value="America/Los_Angeles">America/Los_Angeles</option>
+            <option value="America/Chicago">America/Chicago</option>
+            <option value="Europe/London">Europe/London</option>
+            <option value="Europe/Paris">Europe/Paris</option>
+            <option value="Europe/Berlin">Europe/Berlin</option>
+            <option value="Asia/Dubai">Asia/Dubai</option>
+            <option value="Asia/Kolkata">Asia/Kolkata</option>
+            <option value="Asia/Singapore">Asia/Singapore</option>
+            <option value="Asia/Tokyo">Asia/Tokyo</option>
+            <option value="Asia/Shanghai">Asia/Shanghai</option>
+            <option value="Australia/Sydney">Australia/Sydney</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="two-column">
+        <!-- Timestamp to date -->
+        <section class="tool-panel" aria-labelledby="timestamp-heading">
+          <div class="panel-heading">
+            <h3 id="timestamp-heading">Timestamp to date</h3>
+            <span class="panel-icon" aria-hidden="true">◷</span>
+          </div>
+
+          <form id="timestampForm">
+            <label for="timestampInput">Unix timestamp or date</label>
+
+            <input
+              id="timestampInput"
+              name="timestamp"
+              type="text"
+              inputmode="decimal"
+              autocomplete="off"
+              placeholder="Example: 1735689600"
+              aria-describedby="timestampHelp"
+            >
+
+            <div class="field-help" id="timestampHelp">
+              Enter an epoch number, ISO date, or recognizable date string.
+              Numeric values can represent seconds or smaller units.
+            </div>
+
+            <div style="margin-top:15px">
+              <label for="unitSelect">Timestamp unit</label>
+
+              <select id="unitSelect">
+                <option value="auto">Auto-detect unit</option>
+                <option value="seconds">Seconds</option>
+                <option value="milliseconds">Milliseconds</option>
+                <option value="microseconds">Microseconds</option>
+                <option value="nanoseconds">Nanoseconds</option>
+              </select>
+
+              <div class="field-help">
+                Auto-detection uses the number's length as a guide.
+                Select a unit manually when the input is ambiguous.
+              </div>
+            </div>
+
+            <div class="quick-label">TRY A QUICK EXAMPLE</div>
+
+            <div class="quick-actions">
+              <button class="quick-btn" type="button" data-preset="now">Current time</button>
+              <button class="quick-btn" type="button" data-preset="epoch">Unix epoch</button>
+              <button class="quick-btn" type="button" data-preset="sample">Sample timestamp</button>
+              <button class="quick-btn" type="button" data-preset="milliseconds">Sample milliseconds</button>
+            </div>
+
+            <div class="panel-actions">
+              <button class="btn btn-primary" type="submit">
+                Convert timestamp
+              </button>
+              <button class="btn" id="clearTimestamp" type="button">
+                Clear
+              </button>
+            </div>
+
+            <div id="timestampStatus" class="status" role="status" aria-live="polite"></div>
+          </form>
+
+          <div id="timestampResults" class="results" aria-live="polite">
+            <div class="empty-results">
+              Enter a timestamp and select Convert to see the results.
+            </div>
+          </div>
+        </section>
+
+        <!-- Date to timestamp -->
+        <section class="tool-panel" aria-labelledby="date-heading">
+          <div class="panel-heading">
+            <h3 id="date-heading">Date to timestamp</h3>
+            <span class="panel-icon" aria-hidden="true">▦</span>
+          </div>
+
+          <form id="dateForm">
+            <label for="dateInput">Choose date and time</label>
+
+            <input
+              id="dateInput"
+              type="datetime-local"
+              step="1"
+              required
+              aria-describedby="dateHelp"
+            >
+
+            <div class="field-help" id="dateHelp">
+              The chosen date is interpreted using the selected display
+              timezone above. “My local time” uses your device's timezone.
+            </div>
+
+            <div class="panel-actions">
+              <button class="btn btn-primary" type="submit">
+                Convert date
+              </button>
+              <button class="btn" id="setDateNow" type="button">
+                Use current time
+              </button>
+              <button class="btn" id="clearDateResults" type="button">
+                Clear results
+              </button>
+            </div>
+
+            <div id="dateStatus" class="status" role="status" aria-live="polite"></div>
+          </form>
+
+          <div id="dateResults" class="results" aria-live="polite">
+            <div class="empty-results">
+              Choose a date and time to calculate Unix seconds, milliseconds
+              and other timestamp formats.
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Batch converter -->
+    <section class="section" id="batch-converter" aria-labelledby="batch-heading">
+      <div class="section-heading">
+        <h2 id="batch-heading">Batch Unix timestamp converter</h2>
+        <p>
+          Convert multiple timestamps or dates at once. Enter one value per
+          line, then copy the CSV output or download it for a spreadsheet.
+        </p>
+      </div>
+
+      <div class="batch-panel">
+        <div class="batch-grid">
+          <div>
+            <label for="batchInput">Timestamps or dates, one per line</label>
+
+            <textarea
+              id="batchInput"
+              spellcheck="false"
+              placeholder="1735689600&#10;1735689600000&#10;2025-01-01T00:00:00Z"
+            ></textarea>
+
+            <div class="field-help">
+              Numeric values use the same automatic unit detection as the main
+              converter. Invalid lines will be reported in the output.
+            </div>
+
+            <div class="panel-actions">
+              <button class="btn btn-primary" id="convertBatch" type="button">
+                Convert all
+              </button>
+              <button class="btn" id="loadBatchSample" type="button">
+                Load example
+              </button>
+              <button class="btn" id="clearBatch" type="button">
+                Clear
+              </button>
+            </div>
+
+            <div id="batchStatus" class="status" role="status" aria-live="polite"></div>
+          </div>
+
+          <div>
+            <label for="batchOutput">CSV results</label>
+
+            <textarea
+              id="batchOutput"
+              class="batch-results"
+              readonly
+              spellcheck="false"
+              placeholder="Your converted CSV results will appear here."
+            ></textarea>
+
+            <div class="panel-actions">
+              <button class="btn btn-primary" id="copyBatch" type="button">
+                Copy CSV
+              </button>
+              <button class="btn" id="downloadBatch" type="button">
+                Download CSV
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature details -->
+    <section class="section" aria-labelledby="features-heading">
+      <div class="section-heading">
+        <h2 id="features-heading">Useful features for date and time conversion</h2>
+        <p>More than a basic epoch time calculator.</p>
+      </div>
+
+      <div class="features">
+        <article class="feature-card">
+          <div class="symbol" aria-hidden="true">↔</div>
+          <h3>Convert in both directions</h3>
+          <p>
+            Convert a Unix timestamp to a readable date, or turn a date and
+            time into Unix seconds and milliseconds.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="symbol" aria-hidden="true">⌘</div>
+          <h3>Four timestamp units</h3>
+          <p>
+            Work with seconds, milliseconds, microseconds and nanoseconds.
+            Manually choose the unit when needed.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="symbol" aria-hidden="true">◉</div>
+          <h3>Timezone conversion</h3>
+          <p>
+            Compare UTC, local time and a selected timezone without changing
+            the underlying instant represented by the timestamp.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="symbol" aria-hidden="true">▤</div>
+          <h3>Batch conversion</h3>
+          <p>
+            Convert a list of timestamp values and export the results to CSV
+            for spreadsheets, logs or further analysis.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="symbol" aria-hidden="true">⎘</div>
+          <h3>Copy individual outputs</h3>
+          <p>
+            Copy Unix seconds, milliseconds, UTC dates, ISO 8601 values
+            or other displayed results with one click.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="symbol" aria-hidden="true">⌁</div>
+          <h3>Browser-based processing</h3>
+          <p>
+            Conversion runs in your browser. Values entered into this tool
+            are not sent to a conversion server by its JavaScript.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SEO and educational content -->
+    <section class="section" aria-labelledby="about-heading">
+      <article class="content-card">
+        <h2 id="about-heading">What is a Unix timestamp?</h2>
+
+        <p>
+          A Unix timestamp, also known as <strong>epoch time</strong>,
+          <strong>Unix time</strong> or <strong>POSIX time</strong>, represents
+          a point in time as the number of seconds elapsed since the Unix
+          epoch: January 1, 1970, at 00:00:00 UTC. This convention is widely
+          used by applications, APIs, databases, operating systems and
+          programming languages.
+        </p>
+
+        <div class="definition-box">
+          <strong>Example:</strong>
+          The Unix timestamp <code>0</code> represents
+          <strong>1970-01-01 00:00:00 UTC</strong>.
+          The number represents the same instant regardless of the timezone
+          used to display it.
+        </div>
+
+        <h3>How to convert Unix timestamp to date</h3>
+
+        <ol>
+          <li>Paste the Unix timestamp into the timestamp input field.</li>
+          <li>Choose Auto-detect or specify seconds, milliseconds, microseconds or nanoseconds.</li>
+          <li>Select the timezone you want to display.</li>
+          <li>Press Convert timestamp to view the readable date and related formats.</li>
+          <li>Use the Copy buttons to copy individual values.</li>
+        </ol>
+
+        <h3>How to convert date to Unix timestamp</h3>
+
+        <p>
+          Select a date and time in the date-to-timestamp section.
+          Choose the timezone in which that date should be interpreted, then
+          select Convert date. The tool calculates the corresponding Unix
+          timestamp and displays seconds, milliseconds, microseconds and
+          nanoseconds.
+        </p>
+
+        <h3>Unix timestamp seconds vs. milliseconds</h3>
+
+        <p>
+          Unix timestamps are commonly represented in seconds or milliseconds.
+          A current timestamp in seconds often has 10 digits, while a
+          millisecond timestamp often has 13 digits. Microsecond and nanosecond
+          timestamps are usually longer. These are patterns, not absolute rules:
+          old dates, far-future dates and custom systems can make the unit
+          ambiguous. When the unit matters, select it manually.
+        </p>
+
+        <h3>What is epoch time to date conversion used for?</h3>
+
+        <p>
+          An epoch converter is useful when reading API responses, checking
+          database records, comparing server logs, reviewing event timestamps,
+          debugging applications or converting dates for scheduled tasks.
+          The terms <em>timestamp to date</em>, <em>epoch time to date</em>,
+          <em>Unix time converter</em> and <em>Unix timestamp conversion</em>
+          often describe the same basic task.
+        </p>
+
+        <h3>Unix timestamp examples in programming</h3>
+
+        <p>
+          Different programming environments provide their own methods for
+          working with epoch values. The examples below show common ways
+          to obtain the current Unix timestamp.
+        </p>
+
+        <div class="code-block">
+          <div class="code-caption">JavaScript</div>
+          <pre><code>// Current Unix timestamp in seconds
+Math.floor(Date.now() / 1000)
+
+// Current timestamp in milliseconds
+Date.now()</code></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-caption">Python</div>
+          <pre><code>import time
+from datetime import datetime, timezone
+
+# Current Unix timestamp in seconds
+timestamp = int(time.time())
+
+# Convert a timestamp to a UTC date
+date = datetime.fromtimestamp(timestamp, tz=timezone.utc)</code></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-caption">PowerShell</div>
+          <pre><code># Current Unix timestamp in seconds
+[DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
+
+# Convert a Unix timestamp back to a UTC date
+[DateTimeOffset]::FromUnixTimeSeconds(1735689600).UtcDateTime</code></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-caption">Linux or macOS terminal</div>
+          <pre><code># Current Unix timestamp in seconds
+date +%s</code></pre>
+        </div>
+
+        <h3>Related time conversion searches</h3>
+
+        <p>
+          This Unix timestamp converter covers common tasks such as epoch
+          conversion, epoch time to date, Unix timestamp to readable date,
+          date to Unix timestamp, Unix timestamp milliseconds conversion,
+          Unix timestamp conversion and timestamp-to-date timezone formatting.
+          It also supports batches of timestamps when you need to convert
+          several values instead of processing them individually.
+        </p>
+
+        <p>
+          For numeric timestamps, seconds and milliseconds can look similar
+          when the unit is not known. Use the unit selector when automatic
+          detection may be wrong. For ordinary date strings, include a
+          timezone or a clear ISO 8601 offset whenever the original timezone
+          is important.
+        </p>
+
+        <h3>Related free tools</h3>
+
+        <p>
+          Continue with another utility on ConvertToToolsOnline:
+        </p>
+
+        <div class="related-links">
+          <a href="/cron-expression-generator.html">Cron Expression Generator</a>
+          <a href="/json-formatter.html">JSON Formatter</a>
+          <a href="/json-to-csv.html">JSON to CSV Converter</a>
+          <a href="/csv-to-json.html">CSV to JSON Converter</a>
+          <a href="/word-counter.html">Word Counter</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- FAQ must remain the last main content section -->
+    <section class="section" id="faq" aria-labelledby="faq-heading">
+      <div class="section-heading">
+        <h2 id="faq-heading">Frequently asked questions</h2>
+        <p>Quick answers about Unix timestamps and epoch conversion.</p>
+      </div>
+
+      <div class="faq-list">
+        <article class="faq-item">
+          <h3>What is the difference between Unix time and epoch time?</h3>
+          <p>
+            They commonly refer to the same convention: counting time from
+            January 1, 1970, at 00:00:00 UTC. “Unix timestamp” and “epoch
+            timestamp” are also frequently used interchangeably.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>How do I convert a Unix timestamp to a human-readable date?</h3>
+          <p>
+            Enter the timestamp, select its unit if necessary, and press
+            Convert timestamp. The results include readable dates, ISO 8601,
+            UTC and the selected timezone.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>How do I convert a date to a Unix timestamp?</h3>
+          <p>
+            Choose a date and time in the Date to timestamp section. Select
+            the timezone that applies to the date, then press Convert date.
+            The tool returns the corresponding epoch values.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>How can I tell whether a timestamp is in seconds or milliseconds?</h3>
+          <p>
+            Current timestamps commonly use 10 digits for seconds and 13
+            digits for milliseconds. This is only a useful clue, not a
+            guarantee. Select the intended unit manually if you know it or
+            if the conversion looks incorrect.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>What is the Unix timestamp for January 1, 1970?</h3>
+          <p>
+            The start of the Unix epoch is timestamp 0, corresponding to
+            January 1, 1970, at 00:00:00 UTC.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Can I convert timestamps from different timezones?</h3>
+          <p>
+            Yes. A Unix timestamp identifies an instant, and this tool can
+            display that instant in UTC, your browser's local timezone or
+            one of the available timezones. When creating a timestamp from
+            a date, the selected timezone determines how that wall-clock
+            date is interpreted.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Can I convert many Unix timestamps at once?</h3>
+          <p>
+            Yes. Use the batch converter to enter one timestamp or date per
+            line. Convert the list and copy the CSV result or download it
+            for use in a spreadsheet.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Are my timestamps uploaded to a server?</h3>
+          <p>
+            No. Conversion is performed in your browser by this page's
+            JavaScript. The conversion itself does not send the timestamp
+            values you enter to a conversion API.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="footerYear"></span> ConvertToToolsOnline</span>
+      <span>
+        <a href="/index.html">All tools</a>
+        &nbsp;·&nbsp;
+        Browser-based timestamp conversion
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const $ = (id) => document.getElementById(id);
+
+    const browserZone =
+      Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+
+    const unitFactors = {
+      seconds: 1000,
+      milliseconds: 1,
+      microseconds: 0.001,
+      nanoseconds: 0.000001
+    };
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, (character) => {
+        const entities = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        };
+
+        return entities[character];
+      });
+    }
+
+    function effectiveZone(zone) {
+      return zone === "local" ? browserZone : zone;
+    }
+
+    function selectedZone() {
+      return effectiveZone($("timezoneSelect").value);
+    }
+
+    function setStatus(id, message, type = "success") {
+      const element = $(id);
+
+      element.textContent = message;
+      element.className = message ? `status ${type}` : "status";
+    }
+
+    function detectUnit(rawValue) {
+      const value = rawValue.trim();
+
+      // Decimal timestamps are treated as seconds unless overridden.
+      if (value.includes(".")) {
+        return "seconds";
+      }
+
+      const digits = value.replace(/[^0-9]/g, "").length;
+
+      if (digits >= 18) return "nanoseconds";
+      if (digits >= 15) return "microseconds";
+      if (digits >= 12) return "milliseconds";
+
+      return "seconds";
+    }
+
+    function parseTimestamp(rawValue, selectedUnit = "auto") {
+      const raw = String(rawValue).trim();
+
+      if (!raw) {
+        throw new Error("Enter a timestamp or date first.");
+      }
+
+      if (/^(now|current time)$/i.test(raw)) {
+        return {
+          ms: Date.now(),
+          unit: "current time"
+        };
+      }
+
+      const numericPattern = /^[+-]?\d+(?:\.\d+)?$/;
+
+      if (numericPattern.test(raw)) {
+        const unit = selectedUnit === "auto"
+          ? detectUnit(raw)
+          : selectedUnit;
+
+        const factor = unitFactors[unit];
+
+        if (typeof factor !== "number") {
+          throw new Error("Choose a valid timestamp unit.");
+        }
+
+        const milliseconds = Number(raw) * factor;
+
+        if (!Number.isFinite(milliseconds)) {
+          throw new Error("The timestamp is too large or is not valid.");
+        }
+
+        const date = new Date(milliseconds);
+
+        if (Number.isNaN(date.getTime())) {
+          throw new Error(
+            "This value is outside the date range supported by this browser."
+          );
+        }
+
+        return {
+          ms: date.getTime(),
+          unit
+        };
+      }
+
+      // ISO timestamps with Z or an explicit offset are best for avoiding
+      // timezone ambiguity. Other recognizable strings use the browser parser.
+      const parsedDate = Date.parse(raw);
+
+      if (!Number.isFinite(parsedDate)) {
+        throw new Error(
+          "Date not recognized. Try a Unix timestamp or an ISO date such as 2025-01-01T12:00:00Z."
+        );
+      }
+
+      const date = new Date(parsedDate);
+
+      if (Number.isNaN(date.getTime())) {
+        throw new Error("This date is not supported by the browser.");
+      }
+
+      return {
+        ms: date.getTime(),
+        unit: "date string"
+      };
+    }
+
+    function formatInZone(date, zone) {
+      return new Intl.DateTimeFormat("en-US", {
+        timeZone: zone,
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+        timeZoneName: "short"
+      }).format(date);
+    }
+
+    function partsInZone(date, zone) {
+      const formatter = new Intl.DateTimeFormat("en-CA", {
+        timeZone: zone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hourCycle: "h23"
+      });
+
+      const parts = formatter.formatToParts(date);
+      const output = {};
+
+      for (const part of parts) {
+        if (part.type !== "literal") {
+          output[part.type] = Number(part.value);
+        }
+      }
+
+      return output;
+    }
+
+    function getDayAndWeek(date, zone) {
+      const parts = partsInZone(date, zone);
+
+      const calendarDate = new Date(Date.UTC(
+        parts.year,
+        parts.month - 1,
+        parts.day
+      ));
+
+      const yearStart = Date.UTC(parts.year, 0, 1);
+
+      const dayOfYear =
+        Math.floor((calendarDate.getTime() - yearStart) / 86400000) + 1;
+
+      const isoDate = new Date(calendarDate.getTime());
+
+      const dayOfWeek = isoDate.getUTCDay() || 7;
+
+      isoDate.setUTCDate(isoDate.getUTCDate() + 4 - dayOfWeek);
+
+      const isoYear = isoDate.getUTCFullYear();
+
+      const isoYearStart = Date.UTC(isoYear, 0, 1);
+
+      const isoWeek = Math.ceil(
+        ((isoDate.getTime() - isoYearStart) / 86400000 + 1) / 7
+      );
+
+      return {
+        dayOfYear,
+        isoWeek,
+        isoYear
+      };
+    }
+
+    function relativeTime(targetMs) {
+      const difference = (targetMs - Date.now()) / 1000;
+      const absoluteDifference = Math.abs(difference);
+
+      const units = [
+        ["year", 31557600],
+        ["month", 2629800],
+        ["week", 604800],
+        ["day", 86400],
+        ["hour", 3600],
+        ["minute", 60],
+        ["second", 1]
+      ];
+
+      const formatter = new Intl.RelativeTimeFormat("en", {
+        numeric: "auto"
+      });
+
+      for (const [unit, seconds] of units) {
+        if (absoluteDifference >= seconds || unit === "second") {
+          const value = Math.round(difference / seconds);
+          return formatter.format(value, unit);
+        }
+      }
+
+      return "now";
+    }
+
+    function outputCard(label, value, options = {}) {
+      const wide = options.wide ? " wide" : "";
+      const mono = options.mono ? " mono" : "";
+
+      const escapedValue = escapeHTML(value);
+
+      return `
+        <div class="result-card${wide}">
+          <div class="result-top">
+            <span class="result-label">${escapeHTML(label)}</span>
+            <button
+              type="button"
+              class="btn btn-small"
+              data-copy="${escapedValue}"
+              aria-label="Copy ${escapeHTML(label)}"
+            >Copy</button>
+          </div>
+          <div class="result-value${mono}">${escapedValue}</div>
+        </div>
+      `;
+    }
+
+    function makeResultCards(milliseconds, zone) {
+      const date = new Date(milliseconds);
+      const exactMilliseconds = BigInt(date.getTime());
+
+      const seconds = Math.floor(date.getTime() / 1000);
+      const microseconds = exactMilliseconds * 1000n;
+      const nanoseconds = exactMilliseconds * 1000000n;
+
+      const utc = formatInZone(date, "UTC");
+      const local = formatInZone(date, browserZone);
+      const selected = formatInZone(date, zone);
+      const dateInfo = getDayAndWeek(date, zone);
+
+      return [
+        outputCard("Unix seconds", String(seconds), { mono: true }),
+        outputCard("Unix milliseconds", String(date.getTime()), { mono: true }),
+        outputCard("Unix microseconds", microseconds.toString(), { mono: true }),
+        outputCard("Unix nanoseconds", nanoseconds.toString(), { mono: true }),
+
+        outputCard("ISO 8601 · UTC", date.toISOString(), {
+          wide: true,
+          mono: true
+        }),
+
+        outputCard("UTC date and time", utc, { wide: true }),
+        outputCard("Browser local time", local, { wide: true }),
+        outputCard(`Selected timezone · ${zone}`, selected, { wide: true }),
+
+        outputCard("Relative time", relativeTime(date.getTime())),
+        outputCard(
+          "Day of year · ISO week",
+          `${dateInfo.dayOfYear} · Week ${dateInfo.isoWeek}, ${dateInfo.isoYear}`
+        )
+      ].join("");
+    }
+
+    function showResults(resultsElement, milliseconds, zone) {
+      resultsElement.innerHTML = makeResultCards(milliseconds, zone);
+    }
+
+    function convertTimestamp(event) {
+      if (event) event.preventDefault();
+
+      setStatus("timestampStatus", "");
+
+      try {
+        const parsed = parseTimestamp(
+          $("timestampInput").value,
+          $("unitSelect").value
+        );
+
+        showResults(
+          $("timestampResults"),
+          parsed.ms,
+          selectedZone()
+        );
+
+        setStatus(
+          "timestampStatus",
+          `Converted successfully. Input interpreted as ${parsed.unit}.`
+        );
+      } catch (error) {
+        $("timestampResults").innerHTML =
+          '<div class="empty-results">Correct the input and try again.</div>';
+
+        setStatus(
+          "timestampStatus",
+          error.message || "Unable to convert this value.",
+          "error"
+        );
+      }
+    }
+
+    function currentLocalDateTimeValue() {
+      const date = new Date();
+
+      const pad = (value) => String(value).padStart(2, "0");
+
+      return (
+        `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` +
+        `T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`
+      );
+    }
+
+    function parseDateTimeFields(value) {
+      const match = String(value).match(
+        /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/
+      );
+
+      if (!match) {
+        throw new Error("Choose a valid date and time.");
+      }
+
+      const fields = {
+        year: Number(match[1]),
+        month: Number(match[2]),
+        day: Number(match[3]),
+        hour: Number(match[4]),
+        minute: Number(match[5]),
+        second: Number(match[6] || 0)
+      };
+
+      if (
+        fields.month < 1 || fields.month > 12 ||
+        fields.day < 1 || fields.day > 31 ||
+        fields.hour > 23 ||
+        fields.minute > 59 ||
+        fields.second > 59
+      ) {
+        throw new Error("The selected date or time is invalid.");
+      }
+
+      const test = new Date(Date.UTC(
+        fields.year,
+        fields.month - 1,
+        fields.day,
+        fields.hour,
+        fields.minute,
+        fields.second
+      ));
+
+      if (
+        test.getUTCFullYear() !== fields.year ||
+        test.getUTCMonth() + 1 !== fields.month ||
+        test.getUTCDate() !== fields.day ||
+        test.getUTCHours() !== fields.hour ||
+        test.getUTCMinutes() !== fields.minute ||
+        test.getUTCSeconds() !== fields.second
+      ) {
+        throw new Error("The selected calendar date does not exist.");
+      }
+
+      return fields;
+    }
+
+    function dateTimeToEpoch(value, zone) {
+      const fields = parseDateTimeFields(value);
+
+      if (zone === browserZone || zone === "local") {
+        const localDate = new Date(value).getTime();
+
+        if (!Number.isFinite(localDate)) {
+          throw new Error("This local date and time is invalid.");
+        }
+
+        return localDate;
+      }
+
+      const expected = Date.UTC(
+        fields.year,
+        fields.month - 1,
+        fields.day,
+        fields.hour,
+        fields.minute,
+        fields.second
+      );
+
+      if (zone === "UTC") {
+        return expected;
+      }
+
+      let guess = expected;
+
+      try {
+        // Repeatedly adjust the UTC guess until it formats to the requested
+        // wall-clock time in the chosen IANA timezone.
+        for (let attempt = 0; attempt < 5; attempt++) {
+          const representedParts = partsInZone(new Date(guess), zone);
+
+          const represented = Date.UTC(
+            representedParts.year,
+            representedParts.month - 1,
+            representedParts.day,
+            representedParts.hour,
+            representedParts.minute,
+            representedParts.second
+          );
+
+          const correction = expected - represented;
+
+          guess += correction;
+
+          if (correction === 0) {
+            break;
+          }
+        }
+
+        const check = partsInZone(new Date(guess), zone);
+
+        const matches =
+          check.year === fields.year &&
+          check.month === fields.month &&
+          check.day === fields.day &&
+          check.hour === fields.hour &&
+          check.minute === fields.minute &&
+          check.second === fields.second;
+
+        if (!matches) {
+          throw new Error(
+            "This wall-clock time may not exist because of a daylight-saving transition. Try another time."
+          );
+        }
+
+        return guess;
+      } catch (error) {
+        if (error instanceof Error &&
+            error.message.includes("daylight-saving")) {
+          throw error;
+        }
+
+        throw new Error("The selected timezone is not supported by this browser.");
+      }
+    }
+
+    function convertDate(event) {
+      if (event) event.preventDefault();
+
+      setStatus("dateStatus", "");
+
+      try {
+        const input = $("dateInput").value;
+
+        if (!input) {
+          throw new Error("Choose a date and time first.");
+        }
+
+        const zone = $("timezoneSelect").value;
+        const milliseconds = dateTimeToEpoch(input, zone);
+
+        if (!Number.isFinite(milliseconds)) {
+          throw new Error("Unable to convert this date and time.");
+        }
+
+        const date = new Date(milliseconds);
+
+        if (Number.isNaN(date.getTime())) {
+          throw new Error("The selected date is outside the supported range.");
+        }
+
+        showResults(
+          $("dateResults"),
+          date.getTime(),
+          selectedZone()
+        );
+
+        setStatus(
+          "dateStatus",
+          `Date converted using ${selectedZone()}.`
+        );
+      } catch (error) {
+        $("dateResults").innerHTML =
+          '<div class="empty-results">Correct the date or timezone and try again.</div>';
+
+        setStatus(
+          "dateStatus",
+          error.message || "Unable to convert this date.",
+          "error"
+        );
+      }
+    }
+
+    async function copyText(value) {
+      const text = String(value);
+
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      // Fallback for browsers where Clipboard API access is unavailable.
+      const textarea = document.createElement("textarea");
+
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      textarea.style.pointerEvents = "none";
+
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      const successful = document.execCommand("copy");
+      textarea.remove();
+
+      if (!successful) {
+        throw new Error("Copy failed. Select the text and copy it manually.");
+      }
+    }
+
+    async function handleCopyButton(button) {
+      const originalText = button.textContent;
+
+      try {
+        await copyText(button.dataset.copy || "");
+        button.textContent = "Copied";
+
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 1200);
+      } catch (error) {
+        button.textContent = "Copy failed";
+
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 1600);
+      }
+    }
+
+    function tickClock() {
+      const now = Date.now();
+
+      $("currentSeconds").textContent = String(Math.floor(now / 1000));
+    }
+
+    function setTimestampPreset(preset) {
+      const input = $("timestampInput");
+      const unit = $("unitSelect");
+
+      const now = Date.now();
+
+      switch (preset) {
+        case "now":
+          input.value = String(Math.floor(now / 1000));
+          unit.value = "seconds";
+          break;
+
+        case "epoch":
+          input.value = "0";
+          unit.value = "seconds";
+          break;
+
+        case "sample":
+          input.value = "1735689600";
+          unit.value = "seconds";
+          break;
+
+        case "milliseconds":
+          input.value = "1735689600000";
+          unit.value = "milliseconds";
+          break;
+
+        default:
+          return;
+      }
+
+      convertTimestamp();
+    }
+
+    function csvEscape(value) {
+      const stringValue = String(value ?? "");
+
+      if (/[",\r\n]/.test(stringValue)) {
+        return '"' + stringValue.replace(/"/g, '""') + '"';
+      }
+
+      return stringValue;
+    }
+
+    function convertBatch() {
+      const input = $("batchInput").value;
+      const lines = input.split(/\r?\n/).filter((line) => line.trim() !== "");
+
+      if (!lines.length) {
+        $("batchOutput").value = "";
+        setStatus("batchStatus", "Enter at least one timestamp or date.", "error");
+        return;
+      }
+
+      const zone = selectedZone();
+
+      const output = [[
+        "Input",
+        "Detected unit",
+        "Unix seconds",
+        "Unix milliseconds",
+        "ISO 8601 UTC",
+        "Selected timezone",
+        "Relative time",
+        "Error"
+      ]];
+
+      let successCount = 0;
+      let errorCount = 0;
+
+      for (const originalLine of lines) {
+        const raw = originalLine.trim();
+
+        try {
+          const parsed = parseTimestamp(raw, "auto");
+          const date = new Date(parsed.ms);
+          const exactMilliseconds = BigInt(date.getTime());
+
+          output.push([
+            raw,
+            parsed.unit,
+            String(Math.floor(date.getTime() / 1000)),
+            String(date.getTime()),
+            date.toISOString(),
+            formatInZone(date, zone),
+            relativeTime(date.getTime()),
+            ""
+          ]);
+
+          successCount++;
+        } catch (error) {
+          output.push([
+            raw,
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            error.message || "Invalid input"
+          ]);
+
+          errorCount++;
+        }
+      }
+
+      $("batchOutput").value = output
+        .map((row) => row.map(csvEscape).join(","))
+        .join("\r\n");
+
+      setStatus(
+        "batchStatus",
+        `Finished: ${successCount} converted, ${errorCount} with errors.`,
+        errorCount ? "error" : "success"
+      );
+    }
+
+    function downloadCSV() {
+      const contents = $("batchOutput").value;
+
+      if (!contents.trim()) {
+        setStatus("batchStatus", "Convert your input before downloading.", "error");
+        return;
+      }
+
+      const blob = new Blob(
+        ["\uFEFF", contents],
+        { type: "text/csv;charset=utf-8;" }
+      );
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = "unix-timestamp-conversion.csv";
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      URL.revokeObjectURL(url);
+    }
+
+    // Form handlers
+    $("timestampForm").addEventListener("submit", convertTimestamp);
+    $("dateForm").addEventListener("submit", convertDate);
+
+    // Copy buttons
+    $("copyCurrentSeconds").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
+      const original = button.textContent;
+
+      try {
+        await copyText(String(Math.floor(Date.now() / 1000)));
+        button.textContent = "Copied";
+
+        setTimeout(() => button.textContent = original, 1200);
+      } catch {
+        button.textContent = "Copy failed";
+
+        setTimeout(() => button.textContent = original, 1400);
+      }
+    });
+
+    $("copyCurrentMilliseconds").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
+      const original = button.textContent;
+
+      try {
+        await copyText(String(Date.now()));
+        button.textContent = "Copied";
+
+        setTimeout(() => button.textContent = original, 1200);
+      } catch {
+        button.textContent = "Copy failed";
+
+        setTimeout(() => button.textContent = original, 1400);
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-copy]");
+
+      if (button) {
+        handleCopyButton(button);
+      }
+    });
+
+    // Timestamp examples
+    document.querySelectorAll("[data-preset]").forEach((button) => {
+      button.addEventListener("click", () => {
+        setTimestampPreset(button.dataset.preset);
+      });
+    });
+
+    $("clearTimestamp").addEventListener("click", () => {
+      $("timestampInput").value = "";
+      $("timestampResults").innerHTML =
+        '<div class="empty-results">Enter a timestamp and select Convert to see the results.</div>';
+
+      setStatus("timestampStatus", "");
+      $("timestampInput").focus();
+    });
+
+    // Date panel
+    $("setDateNow").addEventListener("click", () => {
+      $("dateInput").value = currentLocalDateTimeValue();
+      convertDate();
+    });
+
+    $("clearDateResults").addEventListener("click", () => {
+      $("dateResults").innerHTML =
+        '<div class="empty-results">Choose a date and time to calculate Unix timestamp values.</div>';
+
+      setStatus("dateStatus", "");
+    });
+
+    // Changing the display timezone refreshes results that have already
+    // been generated. A timestamp itself still represents the same instant.
+    $("timezoneSelect").addEventListener("change", () => {
+      if ($("timestampInput").value.trim()) {
+        convertTimestamp();
+      }
+
+      if ($("dateInput").value) {
+        convertDate();
+      }
+    });
+
+    // Batch controls
+    $("convertBatch").addEventListener("click", convertBatch);
+
+    $("loadBatchSample").addEventListener("click", () => {
+      $("batchInput").value =
+        "0\n1735689600\n1735689600000\n2025-01-01T00:00:00Z\ninvalid-example";
+
+      convertBatch();
+    });
+
+    $("clearBatch").addEventListener("click", () => {
+      $("batchInput").value = "";
+      $("batchOutput").value = "";
+      setStatus("batchStatus", "");
+    });
+
+    $("copyBatch").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
+      const original = button.textContent;
+
+      if (!$("batchOutput").value.trim()) {
+        setStatus("batchStatus", "Convert your input before copying.", "error");
+        return;
+      }
+
+      try {
+        await copyText($("batchOutput").value);
+        button.textContent = "Copied";
+
+        setTimeout(() => button.textContent = original, 1200);
+      } catch {
+        setStatus("batchStatus", "Unable to copy the CSV. You can select the output manually.", "error");
+      }
+    });
+
+    $("downloadBatch").addEventListener("click", downloadCSV);
+
+    // Initialise the page
+    $("footerYear").textContent = new Date().getFullYear();
+    $("dateInput").value = currentLocalDateTimeValue();
+
+    tickClock();
+    setInterval(tickClock, 250);
+  </script>
+</body>
+</html>

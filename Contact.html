@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Us | ConvertToToolsOnline</title>
+<meta name="description" content="Contact ConvertToToolsOnline for questions, bug reports, or feedback about our free online tools. Reach us by email or phone — we read every message.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://converttotoolsonline.com/contact.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ConvertToToolsOnline">
+<meta property="og:title" content="Contact Us | ConvertToToolsOnline">
+<meta property="og:description" content="Reach the ConvertToToolsOnline team by email or phone for questions, bug reports, or feedback about our free online tools.">
+<meta property="og:url" content="https://converttotoolsonline.com/contact.html">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contact Us | ConvertToToolsOnline">
+<meta name="twitter:description" content="Reach the ConvertToToolsOnline team by email or phone for questions, bug reports, or feedback.">
+
+<style>
+:root{
+  --blue:#2563eb;
+  --blue-dark:#1d4ed8;
+  --purple:#7c3aed;
+  --purple-dark:#6d28d9;
+  --ink:#0f172a;
+  --body:#3f4d63;
+  --muted:#5b6b82;
+  --bg:#f6f8fd;
+  --card:#ffffff;
+  --border:#e3e9f4;
+  --radius:16px;
+  --shadow:0 1px 2px rgba(15,23,42,.04), 0 10px 28px rgba(15,23,42,.06);
+  --max:1080px;
+}
+
+*{box-sizing:border-box}
+
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  color:var(--body);
+  background:var(--bg);
+}
+
+img,svg{max-width:100%}
+
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+:focus-visible{
+  outline:3px solid rgba(124,58,237,.55);
+  outline-offset:2px;
+  border-radius:6px;
+}
+
+.wrap{
+  width:100%;
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 20px;
+}
+
+/* ---------- Header ---------- */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(10px);
+  -webkit-backdrop-filter:saturate(180%) blur(10px);
+  border-bottom:1px solid var(--border);
+}
+
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  min-height:66px;
+}
+
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  color:var(--ink);
+  font-size:1.05rem;
+  letter-spacing:-.01em;
+}
+.brand:hover{text-decoration:none}
+
+.brand-mark{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  color:#fff;
+  font-size:.82rem;
+  font-weight:800;
+  letter-spacing:.02em;
+  flex:0 0 auto;
+}
+
+.site-nav{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.site-nav a{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:10px;
+  font-size:.94rem;
+  font-weight:600;
+  color:var(--body);
+}
+.site-nav a:hover{
+  background:#eef2fb;
+  color:var(--blue-dark);
+  text-decoration:none;
+}
+.site-nav a[aria-current="page"]{
+  background:linear-gradient(135deg,rgba(37,99,235,.10),rgba(124,58,237,.12));
+  color:var(--blue-dark);
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  background:
+    radial-gradient(900px 320px at 12% -30%, rgba(37,99,235,.14), transparent 60%),
+    radial-gradient(800px 320px at 88% -40%, rgba(124,58,237,.16), transparent 60%),
+    #ffffff;
+  border-bottom:1px solid var(--border);
+  padding:52px 0 46px;
+}
+
+.eyebrow{
+  margin:0 0 10px;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  color:var(--purple);
+}
+
+.hero h1{
+  margin:0 0 14px;
+  font-size:clamp(1.9rem,4.6vw,2.7rem);
+  line-height:1.15;
+  letter-spacing:-.02em;
+  color:var(--ink);
+}
+
+.lede{
+  margin:0;
+  max-width:62ch;
+  font-size:1.05rem;
+  color:var(--muted);
+}
+
+/* ---------- Sections ---------- */
+.section{
+  padding:44px 0;
+}
+.section + .section{
+  padding-top:0;
+}
+
+.section h2{
+  margin:0 0 6px;
+  font-size:1.35rem;
+  letter-spacing:-.01em;
+  color:var(--ink);
+}
+
+.section-sub{
+  margin:0 0 22px;
+  color:var(--muted);
+  max-width:70ch;
+}
+
+/* ---------- Contact cards ---------- */
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:26px;
+}
+
+.contact-card{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:6px;
+  position:relative;
+  overflow:hidden;
+}
+.contact-card::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto 0;
+  height:4px;
+  background:linear-gradient(90deg,var(--blue),var(--purple));
+}
+
+.icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:46px;
+  height:46px;
+  border-radius:13px;
+  background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(124,58,237,.14));
+  color:var(--blue-dark);
+  margin-bottom:8px;
+}
+.icon svg{width:22px;height:22px}
+
+.contact-card h2{
+  margin:0;
+  font-size:1.1rem;
+  color:var(--ink);
+}
+
+.contact-card p{
+  margin:0 0 10px;
+  font-size:.95rem;
+  color:var(--muted);
+}
+
+.contact-link{
+  display:inline-block;
+  font-size:1.02rem;
+  font-weight:700;
+  color:var(--blue-dark);
+  word-break:break-word;
+  line-height:1.4;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:44px;
+  padding:10px 18px;
+  border-radius:11px;
+  border:1px solid transparent;
+  font:inherit;
+  font-size:.93rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:background .15s ease, border-color .15s ease, color .15s ease, transform .06s ease;
+}
+.btn:active{transform:translateY(1px)}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  color:#fff;
+}
+.btn-primary:hover{background:linear-gradient(135deg,var(--blue-dark),var(--purple-dark))}
+
+.btn-ghost{
+  margin-top:14px;
+  background:#fff;
+  border-color:var(--border);
+  color:var(--body);
+}
+.btn-ghost:hover{
+  border-color:rgba(37,99,235,.45);
+  color:var(--blue-dark);
+  background:#f5f8ff;
+}
+.btn-ghost.copied{
+  border-color:rgba(16,185,129,.5);
+  color:#047857;
+  background:#effaf5;
+}
+
+.btn-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:6px;
+}
+
+/* ---------- Help lists ---------- */
+.card h2{
+  margin:0 0 6px;
+  font-size:1.2rem;
+  color:var(--ink);
+}
+
+.card > p{
+  margin:0 0 16px;
+  color:var(--muted);
+  font-size:.96rem;
+}
+
+.list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:12px;
+}
+
+.list li{
+  position:relative;
+  padding-left:30px;
+  font-size:.96rem;
+  color:var(--body);
+}
+.list li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.5em;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  opacity:.9;
+}
+.list li::after{
+  content:"";
+  position:absolute;
+  left:5px;
+  top:calc(.5em + 5px);
+  width:5px;
+  height:9px;
+  border:solid #fff;
+  border-width:0 2px 2px 0;
+  transform:rotate(45deg);
+}
+
+.two-col{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+
+/* ---------- Notice ---------- */
+.notice{
+  margin-top:20px;
+  background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(124,58,237,.07));
+  border:1px solid rgba(37,99,235,.18);
+  border-radius:var(--radius);
+  padding:20px 22px;
+  font-size:.95rem;
+  color:#33415c;
+}
+.notice strong{color:var(--ink)}
+
+/* ---------- Footer ---------- */
+.site-footer{
+  margin-top:26px;
+  background:#ffffff;
+  border-top:1px solid var(--border);
+  padding:38px 0 26px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.6fr 1fr;
+  gap:28px;
+}
+
+.footer-about p{
+  margin:12px 0 0;
+  max-width:46ch;
+  font-size:.93rem;
+  color:var(--muted);
+}
+
+.footer-col h3{
+  margin:0 0 12px;
+  font-size:.82rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+
+.footer-col ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:9px;
+}
+.footer-col a{
+  font-size:.94rem;
+  color:var(--body);
+}
+.footer-col a:hover{color:var(--blue-dark)}
+
+.footer-bottom{
+  margin-top:28px;
+  padding-top:18px;
+  border-top:1px solid var(--border);
+  font-size:.86rem;
+  color:var(--muted);
+  text-align:center;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width:640px){
+  .hero{padding:38px 0 34px}
+  .section{padding:34px 0}
+  .card{padding:22px}
+  .footer-grid{grid-template-columns:1fr;gap:24px}
+  .site-nav a{padding:8px 11px;font-size:.9rem}
+  .brand-name{font-size:.98rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">CT</span>
+      <span class="brand-name">ConvertToToolsOnline</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Get in touch</p>
+    <h1>Contact ConvertToToolsOnline</h1>
+    <p class="lede">
+      Found a bug, spotted something confusing, or just want to suggest a tool we should build next?
+      We would genuinely like to hear about it. Use the email or phone details below and your message
+      will reach a real person — not an automated queue.
+    </p>
+  </div>
+</section>
+
+<main>
+
+  <section class="section wrap" aria-labelledby="reach-us">
+    <h2 id="reach-us">Ways to reach us</h2>
+    <p class="section-sub">Email is usually the fastest way to get a detailed reply. Phone is best for short, direct questions.</p>
+
+    <div class="contact-grid">
+
+      <article class="card contact-card">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="m3 7.5 9 6 9-6"></path>
+          </svg>
+        </span>
+        <h2>Email us</h2>
+        <p>Best for bug reports, detailed questions, feedback, and business enquiries.</p>
+        <a class="contact-link" href="mailto:rabinpandey878@gmail.com">rabinpandey878@gmail.com</a>
+        <button type="button" class="btn btn-ghost" data-copy="rabinpandey878@gmail.com">Copy email address</button>
+      </article>
+
+      <article class="card contact-card">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"></path>
+          </svg>
+        </span>
+        <h2>Call us</h2>
+        <p>For short questions. Please keep in mind we may not always be able to answer immediately.</p>
+        <a class="contact-link" href="tel:+9779714170081">+977 9714170081</a>
+        <button type="button" class="btn btn-ghost" data-copy="+9779714170081">Copy phone number</button>
+      </article>
+
+    </div>
+
+    <p class="visually-hidden" id="copy-status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="section wrap" aria-labelledby="help-with">
+    <h2 id="help-with">What you can contact us about</h2>
+    <p class="section-sub">Here are the kinds of messages that are most useful to us.</p>
+
+    <div class="two-col">
+
+      <article class="card">
+        <h2>Report a problem</h2>
+        <p>If a tool gives the wrong result, freezes, or fails on a specific file, tell us the details and we will look into it.</p>
+        <ul class="list">
+          <li>Which tool page you were using</li>
+          <li>What you expected to happen</li>
+          <li>What actually happened</li>
+          <li>Your browser and device (for example, Chrome on Android)</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Suggestions and feedback</h2>
+        <p>We are still growing the tool collection, so suggestions genuinely shape what gets built next.</p>
+        <ul class="list">
+          <li>Ideas for new tools you would find useful</li>
+          <li>Feedback on how an existing tool could be clearer</li>
+          <li>Accessibility or mobile usability problems</li>
+          <li>Corrections to instructions or explanations</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="before-you-write">
+    <h2 id="before-you-write">Before you get in touch</h2>
+    <p class="section-sub">A couple of quick checks can save you time and help us help you faster.</p>
+
+    <div class="card">
+      <ul class="list">
+        <li><strong>Check the tool's own instructions first.</strong> Most pages explain supported formats, size limits, and any known limitations near the tool itself.</li>
+        <li><strong>Try a different browser or refresh the page.</strong> Some issues come from an out-of-date cached version of a page.</li>
+        <li><strong>Do not email us your private files.</strong> Please never send personal documents, ID scans, or sensitive data. Describe the problem instead — that is enough for us to investigate.</li>
+        <li><strong>Be specific in the subject line.</strong> Something like "Image Compressor fails on large PNG" helps us route your message correctly.</li>
+      </ul>
+    </div>
+
+    <div class="notice">
+      <strong>About response times:</strong> ConvertToToolsOnline is run by a small team, so we cannot promise an instant reply.
+      We do read every message, and we aim to respond to genuine enquiries as quickly as we reasonably can.
+      Thank you for your patience.
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="privacy-note">
+    <h2 id="privacy-note">A quick privacy note</h2>
+    <p class="section-sub">
+      When you contact us by email or phone, you are sharing your details directly with us through those services.
+      We use the information only to reply to your message and to improve the tools on this website.
+      For full details about how this site handles data, please read our Privacy Policy.
+    </p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="index.html">Back to the homepage</a>
+      <a class="btn btn-ghost" href="mailto:rabinpandey878@gmail.com">Send us an email</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-about">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">CT</span>
+        <span class="brand-name">ConvertToToolsOnline</span>
+      </a>
+      <p>Free, browser-based online tools for everyday file, text, and data tasks. No sign-up required.</p>
+    </div>
+
+    <div class="footer-col">
+      <h3>Site</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <!--
+          ADD THESE ONLY AFTER THE FILES ACTUALLY EXIST ON THE SERVER:
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Use</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+        -->
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    &copy; <span id="year">2026</span> ConvertToToolsOnline. All rights reserved.
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---- Footer year ---- */
+  var yearEl = document.getElementById("year");
+  if (yearEl) {
+    yearEl.textContent = String(new Date().getFullYear());
+  }
+
+  /* ---- Copy-to-clipboard buttons ---- */
+  var statusEl = document.getElementById("copy-status");
+
+  function announce(message) {
+    if (!statusEl) return;
+    statusEl.textContent = "";
+    window.setTimeout(function () {
+      statusEl.textContent = message;
+    }, 60);
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    ta.style.left = "-1000px";
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, ta.value.length);
+    var ok = false;
+    try {
+      ok = document.execCommand("copy");
+    } catch (err) {
+      ok = false;
+    }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function handleCopy(button, text) {
+    var original = button.getAttribute("data-label") || button.textContent.trim();
+    button.setAttribute("data-label", original);
+
+    function showSuccess() {
+      button.textContent = "Copied!";
+      button.classList.add("copied");
+      announce("Copied to clipboard: " + text);
+      window.setTimeout(function () {
+        button.textContent = original;
+        button.classList.remove("copied");
+      }, 2000);
+    }
+
+    function showFailure() {
+      button.textContent = "Press and hold to copy";
+      announce("Copy failed. Please copy the details manually.");
+      window.setTimeout(function () {
+        button.textContent = original;
+      }, 2500);
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(showSuccess).catch(function () {
+        if (fallbackCopy(text)) {
+          showSuccess();
+        } else {
+          showFailure();
+        }
+      });
+    } else {
+      if (fallbackCopy(text)) {
+        showSuccess();
+      } else {
+        showFailure();
+      }
+    }
+  }
+
+  var copyButtons = document.querySelectorAll("[data-copy]");
+  for (var i = 0; i < copyButtons.length; i++) {
+    (function (btn) {
+      btn.addEventListener("click", function () {
+        var value = btn.getAttribute("data-copy");
+        if (value) handleCopy(btn, value);
+      });
+    })(copyButtons[i]);
+  }
+})();
+</script>
+
+</body>
+</html>

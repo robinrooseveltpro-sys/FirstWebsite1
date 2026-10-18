@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Free UTM Builder & Campaign URL Generator | ConvertToToolsOnline</title>
+  <meta name="description" content="Create Google Analytics campaign tracking URLs for free. Build UTM links for Google Ads, Meta, email, affiliates and social media. Generate hundreds of URLs from CSV, inspect existing UTMs, and export results.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#f5f7fb">
+  <link rel="canonical" href="https://converttotoolsonline.com/utm-builder.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free UTM Campaign URL Builder">
+  <meta property="og:description" content="Create and manage campaign tracking URLs. Build individual links, generate URLs in bulk from CSV, and inspect UTM parameters in your browser.">
+  <meta property="og:url" content="https://converttotoolsonline.com/utm-builder.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free UTM Builder">
+  <meta name="twitter:description" content="Build campaign links for analytics, advertising, email, affiliate and social campaigns.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Free UTM Campaign URL Builder",
+    "url": "https://converttotoolsonline.com/utm-builder.html",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "description": "Generate campaign tracking URLs, process CSV files in bulk, and inspect existing UTM parameters in the browser."
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #dce3ed;
+      --accent: #2457d6;
+      --accent-dark: #1e40af;
+      --soft: #edf3ff;
+      --success: #067647;
+      --danger: #b42318;
+      --radius: 15px;
+      --shadow: 0 7px 28px rgba(25, 40, 70, .065);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 20px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(36, 87, 214, .32);
+      outline-offset: 2px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      width: min(1240px, 100%);
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      color: var(--text);
+      font-size: 1.08rem;
+      font-weight: 850;
+      letter-spacing: -.5px;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .header-link {
+      font-size: .89rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1240px, 100%);
+      margin: auto;
+      padding: 27px 24px 55px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: .87rem;
+    }
+
+    .breadcrumb a {
+      text-decoration: none;
+    }
+
+    .hero {
+      max-width: 850px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4.4vw, 3.15rem);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+    }
+
+    .hero p {
+      max-width: 780px;
+      margin: 0;
+      color: #596579;
+      font-size: 1.03rem;
+    }
+
+    .benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 17px;
+    }
+
+    .benefit {
+      padding: 6px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: white;
+      color: #344054;
+      font-size: .81rem;
+      font-weight: 650;
+    }
+
+    .panel {
+      min-width: 0;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .panel-header {
+      padding: 19px 21px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      letter-spacing: -.3px;
+    }
+
+    .panel-header p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .panel-body {
+      padding: 21px;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #fbfcfe;
+    }
+
+    .tab-button {
+      min-height: 39px;
+      padding: 8px 13px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      background: transparent;
+      color: #475467;
+      font-size: .86rem;
+      font-weight: 750;
+    }
+
+    .tab-button:hover {
+      background: #f0f4fa;
+    }
+
+    .tab-button[aria-selected="true"] {
+      border-color: #d4e1ff;
+      background: var(--soft);
+      color: var(--accent);
+    }
+
+    .tab-panel {
+      padding: 21px;
+    }
+
+    .section-heading {
+      margin: 0 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e8edf4;
+      font-size: .96rem;
+      font-weight: 800;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label,
+    .field > span {
+      color: #344054;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid #cfd7e3;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .field textarea {
+      resize: vertical;
+    }
+
+    .hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: .79rem;
+      line-height: 1.5;
+    }
+
+    .required {
+      color: var(--danger);
+    }
+
+    .preset-area {
+      margin: 18px 0 22px;
+    }
+
+    .preset-label {
+      display: block;
+      margin-bottom: 9px;
+      color: #344054;
+      font-size: .85rem;
+      font-weight: 750;
+    }
+
+    .preset-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 40px;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 9px 13px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: #fff;
+      color: #344054;
+      font-size: .85rem;
+      font-weight: 750;
+      text-decoration: none;
+      transition: background .15s, transform .15s;
+    }
+
+    .button:hover {
+      background: #f4f7fc;
+    }
+
+    .button:active {
+      transform: translateY(1px);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .button.primary:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    .button.small {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: .8rem;
+    }
+
+    .button:disabled {
+      cursor: not-allowed;
+      opacity: .55;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      margin: 19px 0;
+    }
+
+    .check-row {
+      display: inline-flex;
+      gap: 8px;
+      align-items: flex-start;
+      color: #475467;
+      font-size: .84rem;
+      cursor: pointer;
+    }
+
+    .check-row input {
+      margin-top: 4px;
+      accent-color: var(--accent);
+    }
+
+    .output-section {
+      margin-top: 23px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .output-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 9px;
+      margin-bottom: 10px;
+    }
+
+    .output-heading h3 {
+      margin: 0;
+      font-size: .98rem;
+    }
+
+    .url-output {
+      display: block;
+      width: 100%;
+      min-height: 112px;
+      padding: 12px;
+      border: 1px solid #cfd7e3;
+      border-radius: 10px;
+      background: #f8faff;
+      color: #18366f;
+      font: .87rem/1.6 ui-monospace, SFMono-Regular, Consolas, monospace;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      resize: vertical;
+    }
+
+    .status {
+      min-height: 22px;
+      margin-top: 10px;
+      color: var(--success);
+      font-size: .83rem;
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    .privacy-note {
+      margin-top: 20px;
+      padding: 12px 13px;
+      border-radius: 10px;
+      background: #f0f7ff;
+      color: #344d70;
+      font-size: .82rem;
+      line-height: 1.55;
+    }
+
+    .bulk-help {
+      margin: 0 0 14px;
+      color: #596579;
+      font-size: .88rem;
+    }
+
+    .csv-input {
+      width: 100%;
+      min-height: 245px;
+      padding: 13px;
+      border: 1px solid #cfd7e3;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--text);
+      font: .85rem/1.6 ui-monospace, SFMono-Regular, Consolas, monospace;
+      resize: vertical;
+    }
+
+    .result-summary {
+      margin: 14px 0 10px;
+      color: #475467;
+      font-size: .87rem;
+    }
+
+    .table-wrap {
+      max-width: 100%;
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82rem;
+    }
+
+    .results-table th,
+    .results-table td {
+      padding: 10px;
+      border-bottom: 1px solid #e7ebf2;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .results-table th {
+      background: #f6f8fc;
+      color: #344054;
+      font-size: .78rem;
+      white-space: nowrap;
+    }
+
+    .results-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .url-cell {
+      min-width: 260px;
+      max-width: 410px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+
+    .result-ok {
+      color: var(--success);
+      font-weight: 750;
+    }
+
+    .result-error {
+      color: var(--danger);
+      font-weight: 750;
+    }
+
+    .parameter-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 19px;
+    }
+
+    .parameter-card {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fbfcfe;
+    }
+
+    .parameter-card strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: .84rem;
+    }
+
+    .parameter-card code {
+      display: block;
+      color: #315395;
+      overflow-wrap: anywhere;
+      font-size: .8rem;
+    }
+
+    .parameter-card p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: .79rem;
+    }
+
+    .below-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .content-card {
+      min-width: 0;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .content-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.28rem;
+      letter-spacing: -.5px;
+    }
+
+    .content-card h3 {
+      margin: 20px 0 7px;
+      font-size: 1rem;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #596579;
+      font-size: .93rem;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      padding-left: 21px;
+    }
+
+    .content-card li {
+      margin-bottom: 7px;
+    }
+
+    .faq-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #e8edf4;
+    }
+
+    .faq-item:first-of-type {
+      padding-top: 0;
+    }
+
+    .faq-item:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 6px;
+      font-size: .96rem;
+    }
+
+    .faq-item p {
+      margin: 0;
+      font-size: .89rem;
+    }
+
+    .site-footer {
+      padding: 24px;
+      border-top: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      text-align: center;
+      font-size: .84rem;
+    }
+
+    .site-footer a {
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .below-content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .header-inner {
+        padding: 14px;
+      }
+
+      .container {
+        padding: 20px 13px 38px;
+      }
+
+      .tab-panel,
+      .panel-header {
+        padding: 15px;
+      }
+
+      .form-grid,
+      .parameter-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .csv-input {
+        min-height: 215px;
+      }
+
+      .content-card {
+        padding: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="https://converttotoolsonline.com/">
+        ConvertTo<span>Tools</span>Online
+      </a>
+      <a class="header-link" href="https://converttotoolsonline.com/">
+        Explore all tools →
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://converttotoolsonline.com/">Home</a>
+      <span aria-hidden="true"> / </span>
+      <span>UTM Campaign URL Builder</span>
+    </nav>
+
+    <section class="hero">
+      <span class="eyebrow">Digital marketing tool</span>
+      <h1>Free UTM Builder & Campaign URL Generator</h1>
+      <p>
+        Create tracking links for Google Ads, Meta campaigns, newsletters,
+        affiliate promotions, social media, and other marketing channels.
+        Build one URL, generate many from a CSV, or inspect an existing
+        campaign link—all in your browser without creating an account.
+      </p>
+
+      <div class="benefits">
+        <span class="benefit">✓ Free campaign links</span>
+        <span class="benefit">✓ Bulk CSV generation</span>
+        <span class="benefit">✓ UTM inspection</span>
+        <span class="benefit">✓ No signup</span>
+        <span class="benefit">✓ Browser-only processing</span>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="UTM campaign URL tool">
+      <div class="panel-header">
+        <h2>Campaign URL workspace</h2>
+        <p>
+          Create consistent tracking parameters for your marketing campaigns.
+          Use lowercase naming consistently if that matches your reporting convention.
+        </p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="UTM tool mode">
+        <button type="button" class="tab-button" role="tab"
+          id="tabSingle" aria-selected="true" aria-controls="panelSingle">
+          Single URL builder
+        </button>
+        <button type="button" class="tab-button" role="tab"
+          id="tabBulk" aria-selected="false" aria-controls="panelBulk">
+          Bulk CSV builder
+        </button>
+        <button type="button" class="tab-button" role="tab"
+          id="tabInspect" aria-selected="false" aria-controls="panelInspect">
+          Inspect a URL
+        </button>
+      </div>
+
+      <!-- SINGLE URL BUILDER -->
+      <section class="tab-panel" id="panelSingle" role="tabpanel"
+        aria-labelledby="tabSingle">
+
+        <h3 class="section-heading">1. Enter your destination</h3>
+
+        <div class="form-grid">
+          <div class="field full">
+            <label for="destinationUrl">
+              Website or landing page URL <span class="required">*</span>
+            </label>
+            <input id="destinationUrl" type="text"
+              autocomplete="url" spellcheck="false"
+              placeholder="https://example.com/pricing">
+            <p class="hint">
+              Existing query parameters and URL fragments are preserved.
+              Existing UTM values are replaced by the values in this form.
+            </p>
+          </div>
+        </div>
+
+        <div class="preset-area">
+          <span class="preset-label">Quick campaign presets</span>
+          <div class="preset-grid">
+            <button type="button" class="button small" data-preset="google">Google Ads</button>
+            <button type="button" class="button small" data-preset="meta">Meta Ads</button>
+            <button type="button" class="button small" data-preset="linkedin">LinkedIn</button>
+            <button type="button" class="button small" data-preset="email">Email newsletter</button>
+            <button type="button" class="button small" data-preset="youtube">YouTube</button>
+            <button type="button" class="button small" data-preset="reddit">Reddit</button>
+            <button type="button" class="button small" data-preset="affiliate">Affiliate</button>
+            <button type="button" class="button small" data-preset="qr">QR code</button>
+          </div>
+        </div>
+
+        <h3 class="section-heading">2. Configure your campaign parameters</h3>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="utmSource">Campaign source <span class="required">*</span></label>
+            <input id="utmSource" type="text" maxlength="300"
+              placeholder="google, facebook, newsletter">
+            <p class="hint">Where the visitor comes from.</p>
+          </div>
+
+          <div class="field">
+            <label for="utmMedium">Campaign medium <span class="required">*</span></label>
+            <input id="utmMedium" type="text" maxlength="300"
+              placeholder="cpc, email, social">
+            <p class="hint">The marketing channel or medium.</p>
+          </div>
+
+          <div class="field full">
+            <label for="utmCampaign">Campaign name <span class="required">*</span></label>
+            <input id="utmCampaign" type="text" maxlength="300"
+              placeholder="october-product-launch">
+            <p class="hint">Use the same naming convention for every link in one campaign.</p>
+          </div>
+
+          <div class="field">
+            <label for="utmId">Campaign ID</label>
+            <input id="utmId" type="text" maxlength="300"
+              placeholder="campaign-2026-01">
+          </div>
+
+          <div class="field">
+            <label for="utmTerm">Campaign term</label>
+            <input id="utmTerm" type="text" maxlength="500"
+              placeholder="running-shoes">
+            <p class="hint">Often used to identify a paid keyword.</p>
+          </div>
+
+          <div class="field full">
+            <label for="utmContent">Campaign content</label>
+            <input id="utmContent" type="text" maxlength="500"
+              placeholder="hero-banner, footer-link, ad-variant-b">
+            <p class="hint">Differentiate ads, creatives, buttons, or links within a campaign.</p>
+          </div>
+
+          <div class="field">
+            <label for="utmSourcePlatform">Source platform</label>
+            <input id="utmSourcePlatform" type="text" maxlength="300"
+              placeholder="google-ads, meta">
+          </div>
+
+          <div class="field">
+            <label for="utmCreativeFormat">Creative format</label>
+            <select id="utmCreativeFormat">
+              <option value="">Not specified</option>
+              <option value="search">Search</option>
+              <option value="display">Display</option>
+              <option value="video">Video</option>
+              <option value="native">Native</option>
+              <option value="social-post">Social post</option>
+              <option value="email">Email</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="utmMarketingTactic">Marketing tactic</label>
+            <select id="utmMarketingTactic">
+              <option value="">Not specified</option>
+              <option value="prospecting">Prospecting</option>
+              <option value="remarketing">Remarketing</option>
+              <option value="retention">Retention</option>
+              <option value="brand-awareness">Brand awareness</option>
+              <option value="lead-generation">Lead generation</option>
+              <option value="conversion">Conversion</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="options">
+          <label class="check-row">
+            <input id="normalizeLowercase" type="checkbox" checked>
+            <span>Convert text values to lowercase</span>
+          </label>
+          <label class="check-row">
+            <input id="normalizeSpaces" type="checkbox" checked>
+            <span>Replace spaces with hyphens</span>
+          </label>
+        </div>
+
+        <p class="hint">
+          Parameter values can be case-sensitive in analytics reports.
+          Use a consistent convention across all campaigns. Existing unrelated URL
+          parameters are left intact.
+        </p>
+
+        <div class="output-section">
+          <div class="output-heading">
+            <h3>Your campaign URL</h3>
+            <span class="hint">Updates automatically</span>
+          </div>
+
+          <textarea class="url-output" id="generatedUrl" readonly
+            aria-label="Generated campaign URL"
+            placeholder="Enter the URL, source, medium, and campaign name above."></textarea>
+
+          <div class="button-row" style="margin-top:10px">
+            <button type="button" class="button primary" id="copyUrlButton">
+              Copy campaign URL
+            </button>
+            <button type="button" class="button" id="downloadSingleCsvButton">
+              Download CSV
+            </button>
+            <button type="button" class="button" id="clearSingleButton">
+              Clear form
+            </button>
+          </div>
+
+          <div class="status" id="singleStatus" role="status" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- BULK CSV BUILDER -->
+      <section class="tab-panel" id="panelBulk" role="tabpanel"
+        aria-labelledby="tabBulk" hidden>
+
+        <h3 class="section-heading">Generate campaign links in bulk</h3>
+
+        <p class="bulk-help">
+          Paste CSV data with a header row to create multiple tagged URLs at once.
+          Each row needs a destination URL, source, medium, and campaign.
+          Term, content, ID, and the other parameters are optional.
+        </p>
+
+        <div class="field">
+          <label for="bulkCsv">CSV input</label>
+          <textarea id="bulkCsv" class="csv-input" spellcheck="false"
+            aria-describedby="csvHelp"
+            placeholder="url,source,medium,campaign,id,term,content&#10;https://example.com/product,google,cpc,october-launch,,running-shoes,search-ad&#10;https://example.com/product,newsletter,email,october-launch,,,header-link"></textarea>
+          <p class="hint" id="csvHelp">
+            Required headers: <code>url</code>, <code>source</code>,
+            <code>medium</code>, and <code>campaign</code>.
+            Optional headers: <code>id</code>, <code>term</code>, <code>content</code>,
+            <code>source_platform</code>, <code>creative_format</code>, and
+            <code>marketing_tactic</code>. The tool also recognizes their
+            corresponding <code>utm_</code> header names.
+          </p>
+        </div>
+
+        <div class="options">
+          <label class="check-row">
+            <input id="bulkLowercase" type="checkbox" checked>
+            <span>Convert UTM values to lowercase</span>
+          </label>
+          <label class="check-row">
+            <input id="bulkSpaces" type="checkbox" checked>
+            <span>Replace spaces with hyphens</span>
+          </label>
+        </div>
+
+        <div class="button-row">
+          <button type="button" class="button primary" id="buildBulkButton">
+            Generate campaign URLs
+          </button>
+          <button type="button" class="button" id="sampleCsvButton">
+            Load example CSV
+          </button>
+          <button type="button" class="button" id="downloadSampleButton">
+            Download CSV template
+          </button>
+          <button type="button" class="button" id="clearBulkButton">
+            Clear
+          </button>
+        </div>
+
+        <div class="status" id="bulkStatus" role="status" aria-live="polite"></div>
+
+        <div id="bulkResultsArea" hidden>
+          <div class="result-summary" id="bulkSummary"></div>
+
+          <div class="button-row" style="margin-bottom:11px">
+            <button type="button" class="button primary" id="exportBulkButton">
+              Export results as CSV
+            </button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th scope="col">Row</th>
+                  <th scope="col">Destination</th>
+                  <th scope="col">Campaign</th>
+                  <th scope="col">Generated URL / Error</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody id="bulkResultsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- INSPECTOR -->
+      <section class="tab-panel" id="panelInspect" role="tabpanel"
+        aria-labelledby="tabInspect" hidden>
+
+        <h3 class="section-heading">Inspect an existing tracking URL</h3>
+
+        <p class="bulk-help">
+          Paste a URL containing UTM parameters to inspect its campaign values.
+          You can then load those values into the single URL builder to edit or
+          reuse the campaign link.
+        </p>
+
+        <div class="field">
+          <label for="inspectUrl">Existing campaign URL</label>
+          <textarea id="inspectUrl" class="url-output"
+            style="min-height:100px"
+            spellcheck="false"
+            placeholder="https://example.com/?utm_source=google&utm_medium=cpc&utm_campaign=launch"></textarea>
+        </div>
+
+        <div class="button-row" style="margin-top:11px">
+          <button type="button" class="button primary" id="inspectButton">
+            Inspect parameters
+          </button>
+          <button type="button" class="button" id="loadInspectedButton" disabled>
+            Load into URL builder
+          </button>
+          <button type="button" class="button" id="clearInspectButton">
+            Clear
+          </button>
+        </div>
+
+        <div class="status" id="inspectStatus" role="status" aria-live="polite"></div>
+
+        <div id="inspectResultsArea" hidden>
+          <h3 class="section-heading" style="margin-top:22px">Detected parameters</h3>
+
+          <div class="parameter-grid" id="parameterCards"></div>
+
+          <div class="field" style="margin-top:18px">
+            <label for="cleanUrl">Destination URL without UTM parameters</label>
+            <textarea id="cleanUrl" class="url-output" readonly
+              style="min-height:100px"></textarea>
+          </div>
+
+          <p class="hint">
+            The cleaned URL retains unrelated query parameters and its URL fragment.
+            Loading it into the builder lets you edit the campaign values.
+          </p>
+        </div>
+      </section>
+
+      <div class="panel-body" style="border-top:1px solid var(--border)">
+        <div class="privacy-note" style="margin-top:0">
+          <strong>Privacy:</strong> URL construction, CSV parsing, inspection, and
+          exports are performed in your browser by this page. The code does not send
+          the URLs you enter to a server. Do not place passwords, secret tokens, or
+          other confidential information in campaign URLs.
+        </div>
+      </div>
+    </section>
+
+    <section class="below-content">
+      <article class="content-card">
+        <h2>How to use a UTM campaign URL builder</h2>
+
+        <ol>
+          <li>Paste the final website or landing page URL where visitors should arrive.</li>
+          <li>Set the source, medium, and campaign name.</li>
+          <li>Add optional parameters to distinguish keywords, creative variations, and campaign IDs.</li>
+          <li>Copy the tagged link and use it in your ad, email, social post, or affiliate campaign.</li>
+          <li>For multiple links, prepare a CSV and use bulk generation to create and export the results.</li>
+          <li>Review your campaign naming conventions and analytics setup before launching.</li>
+        </ol>
+
+        <h3>What are UTM parameters?</h3>
+        <p>
+          UTM parameters are values appended to a destination URL. Analytics tools
+          can use them to identify the source, medium, and campaign associated with
+          incoming visits. Properly named campaign links help make reports easier to
+          organize and interpret.
+        </p>
+
+        <h3>What do source, medium, and campaign mean?</h3>
+        <ul>
+          <li><strong>Source:</strong> identifies where the traffic came from, such as Google or a newsletter.</li>
+          <li><strong>Medium:</strong> describes the channel, such as CPC advertising, email, or social.</li>
+          <li><strong>Campaign:</strong> identifies the particular promotion or marketing initiative.</li>
+          <li><strong>Content:</strong> can distinguish specific creative versions or links.</li>
+          <li><strong>Term:</strong> can identify a paid keyword or another agreed campaign label.</li>
+        </ul>
+
+        <h3>Why use bulk UTM generation?</h3>
+        <p>
+          Agencies, affiliate marketers, and teams running many ads may need to tag
+          multiple destinations or link variations. Generating links from a CSV can
+          reduce repetitive manual work and make campaign naming more consistent.
+          Always inspect the exported file before importing it into another platform.
+        </p>
+      </article>
+
+      <article class="content-card">
+        <h2>Frequently asked questions</h2>
+
+        <div class="faq-item">
+          <h3>Is this UTM builder free?</h3>
+          <p>
+            Yes. The tool generates and exports tracking links without a subscription
+            or account.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Does the UTM builder send my links to a server?</h3>
+          <p>
+            No. This page's URL processing and CSV functions operate locally in the
+            browser. It does not send the data you enter to a server.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can I generate hundreds of URLs at once?</h3>
+          <p>
+            The bulk builder accepts up to 1,000 data rows per run. Large CSV files
+            may take more time or memory depending on your device and browser.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Do UTM parameters guarantee accurate analytics tracking?</h3>
+          <p>
+            No. Correct parameters help label campaign traffic, but measurement
+            depends on your analytics configuration, consent choices, redirects,
+            browser behavior, and other implementation details.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Should I use lowercase values?</h3>
+          <p>
+            Use one consistent convention. Google Analytics campaign values may be
+            case-sensitive, so values such as Google and google can be treated
+            differently. This tool optionally converts UTM values to lowercase.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Will UTM tags work on every type of link?</h3>
+          <p>
+            This builder is designed for regular HTTP and HTTPS web URLs. Mobile
+            app campaigns may need the platform-specific campaign URL builder and
+            tracking configuration recommended by the platform.
+          </p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      © <span id="year"></span>
+      <a href="https://converttotoolsonline.com/">ConvertToToolsOnline</a>.
+      Free tools for everyday work.
+    </p>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+    const UTM_FIELDS = [
+      { key: "utm_source", id: "utmSource", label: "Campaign source", required: true },
+      { key: "utm_medium", id: "utmMedium", label: "Campaign medium", required: true },
+      { key: "utm_campaign", id: "utmCampaign", label: "Campaign name", required: true },
+      { key: "utm_id", id: "utmId", label: "Campaign ID" },
+      { key: "utm_term", id: "utmTerm", label: "Campaign term" },
+      { key: "utm_content", id: "utmContent", label: "Campaign content" },
+      { key: "utm_source_platform", id: "utmSourcePlatform", label: "Source platform" },
+      { key: "utm_creative_format", id: "utmCreativeFormat", label: "Creative format" },
+      { key: "utm_marketing_tactic", id: "utmMarketingTactic", label: "Marketing tactic" }
+    ];
+
+    const UTM_KEYS = UTM_FIELDS.map(field => field.key);
+
+    const PRESETS = {
+      google: {
+        source: "google",
+        medium: "cpc",
+        platform: "google-ads",
+        creative: "search"
+      },
+      meta: {
+        source: "facebook",
+        medium: "paid_social",
+        platform: "meta",
+        creative: "social-post"
+      },
+      linkedin: {
+        source: "linkedin",
+        medium: "paid_social",
+        platform: "linkedin",
+        creative: "social-post"
+      },
+      email: {
+        source: "newsletter",
+        medium: "email",
+        platform: "email",
+        creative: "email"
+      },
+      youtube: {
+        source: "youtube",
+        medium: "video",
+        platform: "youtube",
+        creative: "video"
+      },
+      reddit: {
+        source: "reddit",
+        medium: "social",
+        platform: "reddit",
+        creative: "social-post"
+      },
+      affiliate: {
+        source: "affiliate",
+        medium: "referral",
+        platform: "affiliate"
+      },
+      qr: {
+        source: "qr_code",
+        medium: "offline",
+        platform: "offline"
+      }
+    };
+
+    let lastBulkExport = [];
+    let latestInspected = null;
+
+    function setStatus(id, message, isError = false) {
+      const el = document.getElementById(id);
+      el.textContent = message;
+      el.classList.toggle("error", isError);
+    }
+
+    function readSingleValues() {
+      const values = {};
+      for (const field of UTM_FIELDS) {
+        values[field.key] = document.getElementById(field.id).value.trim();
+      }
+      return values;
+    }
+
+    function normalizationOptions(isBulk = false) {
+      return {
+        lowercase: document.getElementById(
+          isBulk ? "bulkLowercase" : "normalizeLowercase"
+        ).checked,
+        hyphenateSpaces: document.getElementById(
+          isBulk ? "bulkSpaces" : "normalizeSpaces"
+        ).checked
+      };
+    }
+
+    function normalizeValue(value, options) {
+      let result = String(value ?? "").trim();
+
+      if (options.lowercase) {
+        result = result.toLowerCase();
+      }
+
+      if (options.hyphenateSpaces) {
+        result = result.replace(/\s+/g, "-");
+      }
+
+      return result;
+    }
+
+    function normalizeDestination(raw) {
+      let value = String(raw ?? "").trim();
+
+      if (!value) {
+        throw new Error("Enter a destination URL.");
+      }
+
+      if (/\s/.test(value)) {
+        throw new Error("The destination URL must not contain unescaped spaces.");
+      }
+
+      if (!/^https?:\/\//i.test(value)) {
+        value = "https://" + value;
+      }
+
+      let url;
+      try {
+        url = new URL(value);
+      } catch {
+        throw new Error("Enter a valid web URL, such as https://example.com/page.");
+      }
+
+      if (!["http:", "https:"].includes(url.protocol)) {
+        throw new Error("Only HTTP and HTTPS destination URLs are supported.");
+      }
+
+      if (!url.hostname || !url.hostname.includes(".")) {
+        throw new Error("Enter a valid domain name in the destination URL.");
+      }
+
+      if (url.username || url.password) {
+        throw new Error("URLs containing embedded usernames or passwords are not allowed.");
+      }
+
+      return url;
+    }
+
+    function buildTrackedUrl(rawUrl, rawValues, options) {
+      const requiredKeys = ["utm_source", "utm_medium", "utm_campaign"];
+
+      for (const key of requiredKeys) {
+        if (!String(rawValues[key] ?? "").trim()) {
+          const field = UTM_FIELDS.find(item => item.key === key);
+          throw new Error("Enter the " + field.label.toLowerCase() + ".");
+        }
+      }
+
+      const url = normalizeDestination(rawUrl);
+
+      for (const field of UTM_FIELDS) {
+        const value = normalizeValue(rawValues[field.key], options);
+
+        // Replace any existing value, or remove the parameter if it is blank.
+        if (value) {
+          url.searchParams.set(field.key, value);
+        } else {
+          url.searchParams.delete(field.key);
+        }
+      }
+
+      return url.toString();
+    }
+
+    function clearSingleValues() {
+      for (const field of UTM_FIELDS) {
+        document.getElementById(field.id).value = "";
+      }
+    }
+
+    function updateSingleUrl() {
+      const destination = $("#destinationUrl").value.trim();
+      const output = $("#generatedUrl");
+      const values = readSingleValues();
+
+      if (!destination ||
+          !values.utm_source ||
+          !values.utm_medium ||
+          !values.utm_campaign) {
+        output.value = "";
+
+        setStatus(
+          "singleStatus",
+          "Enter the destination URL, source, medium, and campaign name to generate a link."
+        );
+        return;
+      }
+
+      try {
+        output.value = buildTrackedUrl(
+          destination,
+          values,
+          normalizationOptions(false)
+        );
+
+        setStatus("singleStatus", "Campaign URL generated successfully.");
+      } catch (error) {
+        output.value = "";
+        setStatus("singleStatus", error.message, true);
+      }
+    }
+
+    function applyPreset(presetName) {
+      const preset = PRESETS[presetName];
+      if (!preset) return;
+
+      $("#utmSource").value = preset.source;
+      $("#utmMedium").value = preset.medium;
+
+      if (preset.platform) {
+        $("#utmSourcePlatform").value = preset.platform;
+      }
+
+      $("#utmCreativeFormat").value = preset.creative || "";
+
+      updateSingleUrl();
+
+      setStatus(
+        "singleStatus",
+        "Preset applied. Enter a campaign name and destination URL if they are still missing."
+      );
+    }
+
+    async function copyText(text) {
+      if (!text) {
+        throw new Error("There is no generated URL to copy.");
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const temporary = document.createElement("textarea");
+      temporary.value = text;
+      temporary.setAttribute("readonly", "");
+      temporary.style.position = "fixed";
+      temporary.style.left = "-9999px";
+      document.body.append(temporary);
+      temporary.select();
+
+      const success = document.execCommand("copy");
+      temporary.remove();
+
+      if (!success) {
+        throw new Error("Clipboard access failed. Select the output and copy it manually.");
+      }
+    }
+
+    function downloadFile(filename, content, mimeType) {
+      const blob = content instanceof Blob
+        ? content
+        : new Blob([content], { type: mimeType || "text/plain;charset=utf-8" });
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = filename;
+      link.style.display = "none";
+
+      document.body.append(link);
+      link.click();
+      link.remove();
+
+      window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+    }
+
+    function csvEscape(value) {
+      const text = String(value ?? "");
+
+      if (/[",\r\n]/.test(text)) {
+        return '"' + text.replace(/"/g, '""') + '"';
+      }
+
+      return text;
+    }
+
+    function rowsToCsv(rows) {
+      return rows.map(row => row.map(csvEscape).join(",")).join("\r\n");
+    }
+
+    function parseCsv(text) {
+      const rows = [];
+      let row = [];
+      let value = "";
+      let quoted = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+
+        if (char === '"') {
+          if (quoted && text[i + 1] === '"') {
+            value += '"';
+            i++;
+          } else {
+            quoted = !quoted;
+          }
+        } else if (char === "," && !quoted) {
+          row.push(value);
+          value = "";
+        } else if (char === "\n" && !quoted) {
+          row.push(value);
+          if (row.some(cell => cell.trim() !== "")) {
+            rows.push(row);
+          }
+          row = [];
+          value = "";
+        } else if (char !== "\r" || quoted) {
+          value += char;
+        }
+      }
+
+      if (quoted) {
+        throw new Error("Your CSV contains an unmatched quotation mark.");
+      }
+
+      if (value.length || row.length) {
+        row.push(value);
+        if (row.some(cell => cell.trim() !== "")) {
+          rows.push(row);
+        }
+      }
+
+      return rows;
+    }
+
+    function canonicalHeader(value) {
+      return String(value ?? "")
+        .replace(/^\uFEFF/, "")
+        .trim()
+        .toLowerCase()
+        .replace(/[\s-]+/g, "_");
+    }
+
+    const HEADER_ALIASES = {
+      url: ["url", "destination", "destination_url", "website", "landing_page"],
+      utm_source: ["source", "utm_source"],
+      utm_medium: ["medium", "utm_medium"],
+      utm_campaign: ["campaign", "utm_campaign"],
+      utm_id: ["id", "campaign_id", "utm_id"],
+      utm_term: ["term", "keyword", "utm_term"],
+      utm_content: ["content", "creative", "utm_content"],
+      utm_source_platform: ["source_platform", "utm_source_platform"],
+      utm_creative_format: ["creative_format", "utm_creative_format"],
+      utm_marketing_tactic: ["marketing_tactic", "tactic", "utm_marketing_tactic"]
+    };
+
+    function resolveHeaderMap(headerCells) {
+      const headers = headerCells.map(canonicalHeader);
+      const mapping = {};
+
+      for (const [key, aliases] of Object.entries(HEADER_ALIASES)) {
+        const foundIndex = headers.findIndex(header => aliases.includes(header));
+
+        if (foundIndex !== -1) {
+          mapping[key] = foundIndex;
+        }
+      }
+
+      for (const key of ["url", "utm_source", "utm_medium", "utm_campaign"]) {
+        if (mapping[key] === undefined) {
+          throw new Error(
+            "Missing required CSV header for " + key +
+            ". Include url, source, medium, and campaign."
+          );
+        }
+      }
+
+      return { headers, mapping };
+    }
+
+    function cellAt(row, index) {
+      return index === undefined ? "" : String(row[index] ?? "").trim();
+    }
+
+    function recordFromCsvRow(row, mapping) {
+      const record = {};
+
+      for (const field of UTM_FIELDS) {
+        record[field.key] = cellAt(row, mapping[field.key]);
+      }
+
+      record.url = cellAt(row, mapping.url);
+      return record;
+    }
+
+    function renderBulkResults(results) {
+      const tbody = $("#bulkResultsBody");
+      tbody.replaceChildren();
+
+      for (const result of results) {
+        const tr = document.createElement("tr");
+
+        const cells = [
+          { text: String(result.rowNumber) },
+          { text: result.url || "—" },
+          { text: result.campaign || "—" },
+          { text: result.output || result.error || "—", className: "url-cell" },
+          { text: result.error ? "Error" : "Success",
+            className: result.error ? "result-error" : "result-ok" }
+        ];
+
+        for (const item of cells) {
+          const td = document.createElement("td");
+          td.textContent = item.text;
+          if (item.className) td.className = item.className;
+          tr.append(td);
+        }
+
+        tbody.append(tr);
+      }
+
+      const successes = results.filter(item => !item.error).length;
+      const errors = results.length - successes;
+
+      $("#bulkSummary").textContent =
+        `${results.length} row(s) processed · ${successes} successful · ${errors} error(s)`;
+
+      $("#bulkResultsArea").hidden = results.length === 0;
+    }
+
+    function buildBulk() {
+      let parsed;
+
+      try {
+        const text = $("#bulkCsv").value.trim();
+
+        if (!text) {
+          throw new Error("Paste CSV data or load the example CSV first.");
+        }
+
+        parsed = parseCsv(text);
+
+        if (parsed.length < 2) {
+          throw new Error("Include a header row and at least one data row.");
+        }
+
+        if (parsed.length > 1001) {
+          throw new Error("This tool supports up to 1,000 data rows per run.");
+        }
+
+        const resolved = resolveHeaderMap(parsed[0]);
+        const mapping = resolved.mapping;
+        const inputHeaders = resolved.headers;
+        const inputRows = parsed.slice(1);
+        const options = normalizationOptions(true);
+        const results = [];
+        const exportRows = [];
+
+        const outputHeaders = [
+          ...parsed[0].map(header => String(header ?? "")),
+          "generated_url",
+          "status"
+        ];
+
+        for (let index = 0; index < inputRows.length; index++) {
+          const row = inputRows[index];
+          const record = recordFromCsvRow(row, mapping);
+          const result = {
+            rowNumber: index + 1,
+            url: record.url,
+            campaign: record.utm_campaign,
+            output: "",
+            error: ""
+          };
+
+          try {
+            result.output = buildTrackedUrl(record.url, record, options);
+          } catch (error) {
+            result.error = error.message || "Could not generate URL.";
+          }
+
+          results.push(result);
+
+          exportRows.push([
+            ...row,
+            result.output,
+            result.error ? "ERROR: " + result.error : "OK"
+          ]);
+        }
+
+        lastBulkExport = [outputHeaders, ...exportRows];
+
+        renderBulkResults(results);
+        setStatus(
+          "bulkStatus",
+          "Bulk generation finished. Review errors before exporting."
+        );
+      } catch (error) {
+        lastBulkExport = [];
+        $("#bulkResultsArea").hidden = true;
+        $("#bulkResultsBody").replaceChildren();
+        setStatus("bulkStatus", error.message, true);
+      }
+    }
+
+    function normalizedUrlWithoutUtm(raw) {
+      const url = normalizeDestination(raw);
+      const found = {};
+
+      for (const key of UTM_KEYS) {
+        found[key] = url.searchParams.get(key) || "";
+        url.searchParams.delete(key);
+      }
+
+      return { cleanUrl: url.toString(), values: found };
+    }
+
+    function inspectUrl() {
+      const raw = $("#inspectUrl").value.trim();
+
+      $("#inspectResultsArea").hidden = true;
+      $("#loadInspectedButton").disabled = true;
+      latestInspected = null;
+
+      try {
+        if (!raw) {
+          throw new Error("Paste a campaign URL to inspect.");
+        }
+
+        const { cleanUrl, values } = normalizedUrlWithoutUtm(raw);
+        latestInspected = { cleanUrl, values };
+
+        $("#cleanUrl").value = cleanUrl;
+
+        const cards = $("#parameterCards");
+        cards.replaceChildren();
+
+        const descriptions = {
+          utm_source: "Where traffic originates.",
+          utm_medium: "Marketing channel or medium.",
+          utm_campaign: "Name of the promotion or campaign.",
+          utm_id: "Campaign identifier.",
+          utm_term: "Keyword or term associated with the visit.",
+          utm_content: "Creative or link variation.",
+          utm_source_platform: "Platform responsible for the traffic.",
+          utm_creative_format: "Format associated with the creative.",
+          utm_marketing_tactic: "Targeting or marketing tactic."
+        };
+
+        for (const field of UTM_FIELDS) {
+          const card = document.createElement("div");
+          card.className = "parameter-card";
+
+          const title = document.createElement("strong");
+          title.textContent = field.label;
+
+          const code = document.createElement("code");
+          code.textContent = field.key;
+
+          const value = document.createElement("p");
+          value.textContent = values[field.key] || "(not present)";
+
+          const description = document.createElement("p");
+          description.textContent = descriptions[field.key];
+
+          card.append(title, code, value, description);
+          cards.append(card);
+        }
+
+        $("#inspectResultsArea").hidden = false;
+        $("#loadInspectedButton").disabled = false;
+        setStatus("inspectStatus", "URL inspected successfully.");
+      } catch (error) {
+        setStatus("inspectStatus", error.message, true);
+      }
+    }
+
+    function loadInspectedIntoBuilder() {
+      if (!latestInspected) return;
+
+      $("#destinationUrl").value = latestInspected.cleanUrl;
+
+      for (const field of UTM_FIELDS) {
+        document.getElementById(field.id).value =
+          latestInspected.values[field.key] || "";
+      }
+
+      setTab("tabSingle");
+      updateSingleUrl();
+
+      setStatus(
+        "singleStatus",
+        "Inspected URL loaded. Review the fields, then edit or copy the generated link."
+      );
+    }
+
+    function setTab(tabId) {
+      const tabs = [
+        { button: "tabSingle", panel: "panelSingle" },
+        { button: "tabBulk", panel: "panelBulk" },
+        { button: "tabInspect", panel: "panelInspect" }
+      ];
+
+      for (const tab of tabs) {
+        const selected = tab.button === tabId;
+
+        $("#" + tab.button).setAttribute("aria-selected", String(selected));
+        $("#" + tab.button).tabIndex = selected ? 0 : -1;
+        $("#" + tab.panel).hidden = !selected;
+      }
+    }
+
+    // Single URL form updates.
+    $("#destinationUrl").addEventListener("input", updateSingleUrl);
+
+    for (const field of UTM_FIELDS) {
+      const input = document.getElementById(field.id);
+      input.addEventListener("input", updateSingleUrl);
+      input.addEventListener("change", updateSingleUrl);
+    }
+
+    $("#normalizeLowercase").addEventListener("change", updateSingleUrl);
+    $("#normalizeSpaces").addEventListener("change", updateSingleUrl);
+
+    $$("[data-preset]").forEach(button => {
+      button.addEventListener("click", () => applyPreset(button.dataset.preset));
+    });
+
+    $("#copyUrlButton").addEventListener("click", async () => {
+      try {
+        await copyText($("#generatedUrl").value);
+        setStatus("singleStatus", "Campaign URL copied.");
+      } catch (error) {
+        setStatus("singleStatus", error.message, true);
+      }
+    });
+
+    $("#downloadSingleCsvButton").addEventListener("click", () => {
+      const url = $("#generatedUrl").value.trim();
+
+      if (!url) {
+        setStatus("singleStatus", "Generate a valid campaign URL first.", true);
+        return;
+      }
+
+      const values = readSingleValues();
+      const headers = ["destination_url", ...UTM_KEYS, "generated_url"];
+      const row = [
+        $("#destinationUrl").value.trim(),
+        ...UTM_FIELDS.map(field => values[field.key]),
+        url
+      ];
+
+      downloadFile(
+        "utm-campaign-url.csv",
+        rowsToCsv([headers, row]),
+        "text/csv;charset=utf-8"
+      );
+
+      setStatus("singleStatus", "Campaign URL CSV downloaded.");
+    });
+
+    $("#clearSingleButton").addEventListener("click", () => {
+      $("#destinationUrl").value = "";
+      clearSingleValues();
+      $("#generatedUrl").value = "";
+      setStatus("singleStatus", "Form cleared.");
+    });
+
+    // Bulk CSV functions.
+    $("#buildBulkButton").addEventListener("click", buildBulk);
+
+    $("#sampleCsvButton").addEventListener("click", () => {
+      $("#bulkCsv").value = [
+        "url,source,medium,campaign,id,term,content,source_platform,creative_format,marketing_tactic",
+        "https://example.com/product,google,cpc,october-launch,launch-01,running-shoes,search-ad,google-ads,search,prospecting",
+        "https://example.com/product,facebook,paid_social,october-launch,launch-01,,carousel-ad,meta,social-post,prospecting",
+        "https://example.com/newsletter,email,email,october-launch,launch-01,,header-link,email,email,retention",
+        "https://example.com/pricing,linkedin,paid_social,b2b-launch,launch-02,,pricing-ad,linkedin,social-post,lead-generation"
+      ].join("\n");
+
+      setStatus("bulkStatus", "Example loaded. Replace the example domains and campaign names with your own.");
+    });
+
+    $("#downloadSampleButton").addEventListener("click", () => {
+      const sample = [
+        [
+          "url", "source", "medium", "campaign", "id", "term", "content",
+          "source_platform", "creative_format", "marketing_tactic"
+        ],
+        [
+          "https://example.com/page", "google", "cpc", "spring-launch", "",
+          "brand-keyword", "search-ad", "google-ads", "search", "prospecting"
+        ]
+      ];
+
+      downloadFile(
+        "utm-builder-template.csv",
+        rowsToCsv(sample),
+        "text/csv;charset=utf-8"
+      );
+
+      setStatus("bulkStatus", "CSV template downloaded.");
+    });
+
+    $("#clearBulkButton").addEventListener("click", () => {
+      $("#bulkCsv").value = "";
+      $("#bulkResultsBody").replaceChildren();
+      $("#bulkResultsArea").hidden = true;
+      lastBulkExport = [];
+      setStatus("bulkStatus", "Bulk CSV and previous results cleared.");
+    });
+
+    $("#exportBulkButton").addEventListener("click", () => {
+      if (!lastBulkExport.length) {
+        setStatus("bulkStatus", "Generate some URLs before exporting.", true);
+        return;
+      }
+
+      downloadFile(
+        "utm-campaign-bulk-results.csv",
+        "\uFEFF" + rowsToCsv(lastBulkExport),
+        "text/csv;charset=utf-8"
+      );
+
+      setStatus("bulkStatus", "Bulk CSV results exported.");
+    });
+
+    // URL inspector.
+    $("#inspectButton").addEventListener("click", inspectUrl);
+    $("#loadInspectedButton").addEventListener("click", loadInspectedIntoBuilder);
+
+    $("#clearInspectButton").addEventListener("click", () => {
+      $("#inspectUrl").value = "";
+      $("#cleanUrl").value = "";
+      $("#parameterCards").replaceChildren();
+      $("#inspectResultsArea").hidden = true;
+      $("#loadInspectedButton").disabled = true;
+      latestInspected = null;
+      setStatus("inspectStatus", "Inspector cleared.");
+    });
+
+    // Tabs and keyboard navigation.
+    const tabButtons = $$(".tab-button");
+
+    tabButtons.forEach((button, index) => {
+      button.addEventListener("click", () => setTab(button.id));
+
+      button.addEventListener("keydown", event => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+
+        event.preventDefault();
+
+        const direction = event.key === "ArrowRight" ? 1 : -1;
+        const next = (index + direction + tabButtons.length) % tabButtons.length;
+
+        setTab(tabButtons[next].id);
+        tabButtons[next].focus();
+      });
+    });
+
+    $("#year").textContent = new Date().getFullYear();
+
+    // Initialize the single-link tool.
+    setTab("tabSingle");
+    updateSingleUrl();
+  </script>
+</body>
+</html>

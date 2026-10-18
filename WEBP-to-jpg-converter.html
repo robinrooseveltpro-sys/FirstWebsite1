@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>WebP to JPG Converter Online Free | ConvertToToolsOnline</title>
+
+  <meta name="description"
+    content="Convert WebP to JPG online for free. Convert multiple WebP images to JPEG, adjust image quality, preview results, and download JPG files directly in your browser.">
+
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="ConvertToToolsOnline">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical"
+    href="https://converttotoolsonline.com/webp-to-jpg.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free WebP to JPG Converter">
+  <meta property="og:description"
+    content="Convert WebP images into JPG files online for free. Choose quality, preview images, and download your results.">
+  <meta property="og:url"
+    content="https://converttotoolsonline.com/webp-to-jpg.html">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="WebP to JPG Converter Online">
+  <meta name="twitter:description"
+    content="Convert WebP images to JPG online for free. No account required.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "WebP to JPG Converter",
+    "url": "https://converttotoolsonline.com/webp-to-jpg.html",
+    "description": "Convert WebP images into JPG images using browser-based conversion.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I convert WebP to JPG online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Select one or more WebP images, choose your preferred JPG quality and background, and click Convert to JPG. Download each converted image when processing finishes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this WebP to JPG converter free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This browser-based WebP to JPG converter is free to use and does not require an account."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert multiple WebP files at once?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can select multiple WebP images and convert them one by one. Each converted JPG can be downloaded individually."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens to transparent areas in WebP images?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JPG does not support transparency. This tool fills transparent areas with the selected white or black background before converting the image."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my images uploaded to a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The image conversion happens in your browser. Your selected image files are not uploaded to our server."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --text: #172033;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --background: #f5f8ff;
+      --white: #ffffff;
+      --green: #15803d;
+      --red: #dc2626;
+      --radius: 18px;
+      --shadow: 0 12px 35px rgba(15, 23, 42, .07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--background);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .container {
+      width: min(100% - 30px, 1020px);
+      margin-inline: auto;
+    }
+
+    .header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 67px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 850;
+      letter-spacing: -.5px;
+    }
+
+    .brand span {
+      color: var(--primary);
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .hero {
+      padding: 43px 0 24px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      color: #1d4ed8;
+      background: #dbeafe;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 15px 0 10px;
+      font-size: clamp(29px, 5vw, 43px);
+      line-height: 1.16;
+      letter-spacing: -1.4px;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .tool-card {
+      max-width: 850px;
+      margin: 14px auto 0;
+      padding: clamp(15px, 4vw, 29px);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .dropzone {
+      padding: 29px 15px;
+      text-align: center;
+      background: #f8fbff;
+      border: 2px dashed #bfdbfe;
+      border-radius: 15px;
+      transition: background .2s, border-color .2s;
+    }
+
+    .dropzone.dragover {
+      background: #dbeafe;
+      border-color: var(--primary);
+    }
+
+    .upload-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 12px;
+      color: var(--primary);
+      background: #dbeafe;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .dropzone h2 {
+      margin: 0 0 5px;
+      font-size: 19px;
+    }
+
+    .dropzone p {
+      margin: 0 0 17px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border: 0;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      transition: background .2s, transform .2s;
+    }
+
+    .button:active:not(:disabled) {
+      transform: scale(.98);
+    }
+
+    .button-primary {
+      color: #ffffff;
+      background: var(--primary);
+    }
+
+    .button-primary:hover:not(:disabled) {
+      background: var(--primary-dark);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+    }
+
+    .button-secondary:hover:not(:disabled) {
+      background: #e2e8f0;
+    }
+
+    .button-danger {
+      color: var(--red);
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    .settings {
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      flex-wrap: wrap;
+      margin-top: 21px;
+      padding: 15px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .setting {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .setting label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .quality-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .quality-row input {
+      flex: 1;
+      min-width: 0;
+      accent-color: var(--primary);
+    }
+
+    .quality-value {
+      min-width: 43px;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 850;
+      text-align: right;
+    }
+
+    .setting select {
+      width: 100%;
+      min-height: 39px;
+      padding: 7px 10px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 24px 0 12px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .file-count {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .file-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .file-item {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .thumb {
+      flex: 0 0 68px;
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: #1d4ed8;
+      background-color: #eff6ff;
+      background-image:
+        linear-gradient(45deg, #e2e8f0 25%, transparent 25%),
+        linear-gradient(-45deg, #e2e8f0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e2e8f0 75%),
+        linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
+      background-size: 14px 14px;
+      background-position: 0 0, 0 7px, 7px -7px, -7px 0;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .file-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .file-name {
+      display: block;
+      overflow-wrap: anywhere;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .file-meta {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .file-status {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .file-status.success {
+      color: var(--green);
+    }
+
+    .file-status.error {
+      color: var(--red);
+    }
+
+    .file-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .small-button {
+      min-height: 32px;
+      padding: 6px 9px;
+      color: var(--text);
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .small-button:hover:not(:disabled) {
+      background: #eff6ff;
+    }
+
+    .small-button.download {
+      color: #ffffff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .empty-state {
+      padding: 22px;
+      color: var(--muted);
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 19px;
+    }
+
+    .actions .button-primary {
+      flex: 1;
+    }
+
+    .status {
+      min-height: 26px;
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .status.success {
+      color: var(--green);
+    }
+
+    .status.error {
+      color: var(--red);
+    }
+
+    .privacy-note {
+      margin-top: 13px;
+      padding: 12px 14px;
+      color: #166534;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 11px;
+      font-size: 13px;
+    }
+
+    .content-section {
+      padding: 35px 0;
+    }
+
+    .info-card {
+      margin-bottom: 18px;
+      padding: 22px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .info-card h2 {
+      margin: 0 0 12px;
+      font-size: 23px;
+      letter-spacing: -.5px;
+    }
+
+    .info-card h3 {
+      margin: 20px 0 5px;
+      font-size: 17px;
+    }
+
+    .info-card p,
+    .info-card li {
+      color: #475569;
+    }
+
+    .steps {
+      padding-left: 22px;
+    }
+
+    .steps li {
+      padding: 5px 0;
+    }
+
+    .related-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .related-tools a {
+      padding: 8px 12px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .footer {
+      padding: 23px 0;
+      color: var(--muted);
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 22px, 1020px);
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      .hero {
+        padding-top: 32px;
+      }
+
+      .settings {
+        gap: 14px;
+      }
+
+      .setting {
+        flex-basis: 100%;
+      }
+
+      .file-item {
+        gap: 8px;
+        padding: 9px;
+      }
+
+      .thumb {
+        flex-basis: 51px;
+        width: 51px;
+        height: 51px;
+      }
+
+      .file-actions {
+        gap: 5px;
+      }
+
+      .small-button {
+        padding: 6px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .actions .button {
+        width: 100%;
+      }
+
+      .info-card {
+        padding: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="index.html">
+        ConvertTo<span>ToolsOnline</span>
+      </a>
+
+      <a class="nav-link" href="index.html">← All Tools</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <span class="badge">Free Image Converter</span>
+
+      <h1>WebP to JPG Converter</h1>
+
+      <p>
+        Convert WebP images to JPG online for free. Select your pictures,
+        choose the image quality and background, and download compatible
+        JPEG files directly to your device.
+      </p>
+    </section>
+
+    <section class="tool-card container" aria-label="WebP to JPG converter">
+      <div class="dropzone" id="dropzone">
+        <div class="upload-icon" aria-hidden="true">WEBP</div>
+
+        <h2>Convert your WebP images</h2>
+
+        <p>
+          Choose one or more WebP files, or drag and drop them here.
+        </p>
+
+        <button
+          type="button"
+          class="button button-primary"
+          id="chooseButton">
+          + Select WebP Images
+        </button>
+
+        <input
+          type="file"
+          id="fileInput"
+          accept=".webp,image/webp"
+          multiple
+          aria-label="Select WebP images">
+      </div>
+
+      <div class="settings">
+        <div class="setting">
+          <label for="quality">JPG Quality</label>
+
+          <div class="quality-row">
+            <input
+              type="range"
+              id="quality"
+              min="40"
+              max="100"
+              value="90"
+              step="5">
+
+            <output
+              class="quality-value"
+              id="qualityValue"
+              for="quality">90%</output>
+          </div>
+        </div>
+
+        <div class="setting">
+          <label for="background">Background for transparent areas</label>
+
+          <select id="background">
+            <option value="white">White background</option>
+            <option value="black">Black background</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-heading">
+        <h2>Your Images</h2>
+        <span class="file-count" id="fileCount">0 images · 0 B</span>
+      </div>
+
+      <div class="file-list" id="fileList" aria-live="polite">
+        <div class="empty-state">
+          Your selected WebP images will appear here.
+        </div>
+      </div>
+
+      <div class="actions">
+        <button
+          type="button"
+          class="button button-primary"
+          id="convertButton"
+          disabled>
+          Convert to JPG
+        </button>
+
+        <button
+          type="button"
+          class="button button-secondary"
+          id="clearButton"
+          disabled>
+          Clear All
+        </button>
+      </div>
+
+      <div class="status" id="status" role="status" aria-live="polite">
+        Select one or more WebP images to begin.
+      </div>
+
+      <div class="privacy-note">
+        🔒 <strong>Privacy:</strong> Images are processed in your browser.
+        This tool does not upload your selected images to our server.
+      </div>
+    </section>
+
+    <section class="content-section container">
+      <article class="info-card">
+        <h2>How to Convert WebP to JPG Online</h2>
+
+        <p>
+          WebP is a modern image format, but some apps, websites, and
+          upload forms work better with JPG images. This free converter
+          lets you turn supported WebP files into JPEG images directly
+          in your browser.
+        </p>
+
+        <ol class="steps">
+          <li>Click Select WebP Images and choose your files.</li>
+          <li>Adjust JPG quality and choose a background color.</li>
+          <li>Click Convert to JPG to process your images.</li>
+          <li>Preview and download each converted JPG file.</li>
+        </ol>
+      </article>
+
+      <article class="info-card">
+        <h2>Features of Our Free WebP to JPG Converter</h2>
+
+        <h3>Convert multiple WebP images</h3>
+        <p>
+          Select several WebP files and convert them one by one.
+          Download each completed JPG separately.
+        </p>
+
+        <h3>Control image quality</h3>
+        <p>
+          Choose a quality setting from 40% to 100%. Higher quality
+          generally preserves more visual detail, while lower quality
+          often produces smaller files. The actual size depends on
+          the image and its contents.
+        </p>
+
+        <h3>Choose a background color</h3>
+        <p>
+          JPG cannot retain transparency. If your WebP image has
+          transparent areas, choose a white or black background before
+          conversion.
+        </p>
+
+        <h3>Convert images inside your browser</h3>
+        <p>
+          Selected image files are processed on your device rather than
+          uploaded to our server. This requires a browser that can decode
+          WebP images. Very large images may exceed your device's memory.
+        </p>
+
+        <h3>Understand the limitations</h3>
+        <p>
+          JPG uses lossy compression. Converting an image does not
+          guarantee a smaller file, and some image metadata may not be
+          preserved. Keep your original WebP file if you need the
+          source image unchanged.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>1. Is this WebP to JPG converter free?</h3>
+        <p>
+          Yes. You can convert supported WebP images for free without
+          creating an account.
+        </p>
+
+        <h3>2. Can I convert multiple WebP files at once?</h3>
+        <p>
+          Yes. Select multiple images and the converter will process
+          them sequentially. Each converted JPG has its own download button.
+        </p>
+
+        <h3>3. Does JPG support transparency?</h3>
+        <p>
+          No. JPG does not support transparent pixels. This tool fills
+          transparent areas using the white or black background you select.
+        </p>
+
+        <h3>4. Will converting WebP to JPG reduce quality?</h3>
+        <p>
+          JPG uses lossy compression, so some image information may
+          be discarded. Choose a higher quality setting when visual
+          quality matters more than file size.
+        </p>
+
+        <h3>5. Why is my WebP image not converting?</h3>
+        <p>
+          The file may be damaged, invalid, or too large for your device.
+          Try opening the image in a browser first, then convert it again.
+        </p>
+
+        <h3>6. Are my images uploaded to a server?</h3>
+        <p>
+          No. The selected image files are processed locally in your
+          browser and are not sent to our server.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Explore More Free Tools</h2>
+
+        <div class="related-tools">
+          <a href="heic-to-jpg.html">HEIC to JPG</a>
+          <a href="image-compressor.html">Image Compressor</a>
+          <a href="image-resizer.html">Image Resizer</a>
+          <a href="jpg-to-pdf.html">JPG to PDF</a>
+          <a href="merge-pdf.html">Merge PDF</a>
+          <a href="qr-code-generator.html">QR Code Generator</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © <span id="year"></span> ConvertToToolsOnline.
+      Free online image tools.
+
+      <a href="index.html">Home</a>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const fileInput = document.getElementById("fileInput");
+    const chooseButton = document.getElementById("chooseButton");
+    const dropzone = document.getElementById("dropzone");
+    const fileList = document.getElementById("fileList");
+    const fileCount = document.getElementById("fileCount");
+
+    const convertButton = document.getElementById("convertButton");
+    const clearButton = document.getElementById("clearButton");
+
+    const qualityInput = document.getElementById("quality");
+    const qualityValue = document.getElementById("qualityValue");
+    const backgroundInput = document.getElementById("background");
+
+    const statusBox = document.getElementById("status");
+
+    let items = [];
+    let nextId = 1;
+    let isWorking = false;
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    function setStatus(message, type = "") {
+      statusBox.textContent = message;
+      statusBox.className = "status" + (type ? " " + type : "");
+    }
+
+    function formatSize(bytes) {
+      if (bytes < 1024) {
+        return bytes + " B";
+      }
+
+      if (bytes < 1024 * 1024) {
+        return (bytes / 1024).toFixed(1) + " KB";
+      }
+
+      return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+    }
+
+    function isWebPFile(file) {
+      return file.type.toLowerCase() === "image/webp" ||
+        /\.webp$/i.test(file.name);
+    }
+
+    function cleanResult(item) {
+      if (item.outputUrl) {
+        URL.revokeObjectURL(item.outputUrl);
+      }
+
+      item.outputUrl = "";
+      item.outputBlob = null;
+      item.convertedQuality = null;
+      item.convertedBackground = null;
+    }
+
+    function releaseItem(item) {
+      if (item.sourceUrl) {
+        URL.revokeObjectURL(item.sourceUrl);
+      }
+
+      cleanResult(item);
+    }
+
+    function downloadItem(item) {
+      if (!item.outputBlob || !item.outputUrl) {
+        return;
+      }
+
+      const link = document.createElement("a");
+
+      link.href = item.outputUrl;
+      link.download =
+        item.file.name.replace(/\.webp$/i, "") + ".jpg";
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }
+
+    function renderFiles() {
+      fileList.replaceChildren();
+
+      if (items.length === 0) {
+        const empty = document.createElement("div");
+
+        empty.className = "empty-state";
+        empty.textContent =
+          "Your selected WebP images will appear here.";
+
+        fileList.appendChild(empty);
+      }
+
+      for (const item of items) {
+        const row = document.createElement("div");
+        row.className = "file-item";
+
+        const thumb = document.createElement("div");
+        thumb.className = "thumb";
+        thumb.textContent = "WEBP";
+
+        const preview = document.createElement("img");
+        preview.alt = "WebP image preview";
+        preview.addEventListener("error", () => {
+          preview.remove();
+          thumb.textContent = "WEBP";
+        }, { once: true });
+
+        preview.src = item.sourceUrl;
+        thumb.replaceChildren(preview);
+
+        const info = document.createElement("div");
+        info.className = "file-info";
+
+        const name = document.createElement("span");
+        name.className = "file-name";
+        name.textContent = item.file.name;
+        name.title = item.file.name;
+
+        const meta = document.createElement("span");
+        meta.className = "file-meta";
+
+        meta.textContent = formatSize(item.file.size);
+
+        if (item.outputBlob) {
+          meta.textContent +=
+            " → " + formatSize(item.outputBlob.size);
+        }
+
+        const fileStatus = document.createElement("span");
+        fileStatus.className = "file-status";
+
+        if (item.status === "Converted") {
+          fileStatus.classList.add("success");
+          fileStatus.textContent =
+            "Converted at " + item.convertedQuality + "% quality";
+        } else if (item.status === "Failed") {
+          fileStatus.classList.add("error");
+          fileStatus.textContent = item.error;
+        } else {
+          fileStatus.textContent = item.status;
+        }
+
+        info.append(name, meta, fileStatus);
+
+        const actions = document.createElement("div");
+        actions.className = "file-actions";
+
+        if (item.outputBlob && item.outputUrl) {
+          const downloadButton = document.createElement("button");
+
+          downloadButton.type = "button";
+          downloadButton.className = "small-button download";
+          downloadButton.textContent = "Download JPG";
+          downloadButton.disabled = isWorking;
+
+          downloadButton.addEventListener("click", () => {
+            downloadItem(item);
+          });
+
+          actions.appendChild(downloadButton);
+        }
+
+        const removeButton = document.createElement("button");
+
+        removeButton.type = "button";
+        removeButton.className = "small-button";
+        removeButton.textContent = "Remove";
+        removeButton.disabled = isWorking;
+
+        removeButton.addEventListener("click", () => {
+          removeItem(item.id);
+        });
+
+        actions.appendChild(removeButton);
+
+        row.append(thumb, info, actions);
+        fileList.appendChild(row);
+      }
+
+      const totalSize = items.reduce(
+        (sum, item) => sum + item.file.size, 0
+      );
+
+      fileCount.textContent =
+        items.length + " image" +
+        (items.length === 1 ? "" : "s") +
+        " · " + formatSize(totalSize);
+
+      chooseButton.disabled = isWorking;
+      fileInput.disabled = isWorking;
+      qualityInput.disabled = isWorking;
+      backgroundInput.disabled = isWorking;
+
+      convertButton.disabled = items.length === 0 || isWorking;
+      clearButton.disabled = items.length === 0 || isWorking;
+    }
+
+    function addFiles(fileCollection) {
+      if (isWorking) {
+        return;
+      }
+
+      let added = 0;
+      let skipped = 0;
+
+      for (const file of Array.from(fileCollection)) {
+        if (!isWebPFile(file)) {
+          skipped++;
+          continue;
+        }
+
+        const duplicate = items.some(existing =>
+          existing.file.name === file.name &&
+          existing.file.size === file.size &&
+          existing.file.lastModified === file.lastModified
+        );
+
+        if (duplicate) {
+          continue;
+        }
+
+        items.push({
+          id: nextId++,
+          file,
+          sourceUrl: URL.createObjectURL(file),
+          outputUrl: "",
+          outputBlob: null,
+          convertedQuality: null,
+          convertedBackground: null,
+          status: "Ready",
+          error: ""
+        });
+
+        added++;
+      }
+
+      renderFiles();
+
+      if (skipped > 0) {
+        setStatus(
+          skipped + " unsupported file(s) skipped. Select WebP images.",
+          "error"
+        );
+      } else if (added > 0) {
+        setStatus(added + " WebP image(s) added.");
+      } else {
+        setStatus("No new WebP images were added.");
+      }
+    }
+
+    function removeItem(id) {
+      if (isWorking) {
+        return;
+      }
+
+      const item = items.find(entry => entry.id === id);
+
+      if (item) {
+        releaseItem(item);
+      }
+
+      items = items.filter(entry => entry.id !== id);
+
+      renderFiles();
+
+      setStatus(
+        items.length
+          ? "Image removed."
+          : "Select one or more WebP images to begin."
+      );
+    }
+
+    function clearAll() {
+      if (isWorking) {
+        return;
+      }
+
+      for (const item of items) {
+        releaseItem(item);
+      }
+
+      items = [];
+      fileInput.value = "";
+
+      renderFiles();
+
+      setStatus("All selected images have been cleared.");
+    }
+
+    function loadImage(url) {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+
+        image.onload = () => {
+          if (image.naturalWidth > 0 && image.naturalHeight > 0) {
+            resolve(image);
+          } else {
+            reject(new Error("The image has invalid dimensions."));
+          }
+        };
+
+        image.onerror = () => {
+          reject(new Error(
+            "This WebP image could not be decoded by your browser."
+          ));
+        };
+
+        image.src = url;
+      });
+    }
+
+    function canvasToJpeg(canvas, quality) {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob(blob => {
+          if (!blob || blob.size === 0) {
+            reject(new Error("The JPG image could not be created."));
+            return;
+          }
+
+          if (blob.type !== "image/jpeg") {
+            reject(new Error(
+              "This browser could not export the image as JPG."
+            ));
+            return;
+          }
+
+          resolve(blob);
+        }, "image/jpeg", quality);
+      });
+    }
+
+    async function convertOne(item, quality, background) {
+      const image = await loadImage(item.sourceUrl);
+
+      const width = image.naturalWidth;
+      const height = image.naturalHeight;
+
+      if (!width || !height) {
+        throw new Error("The image dimensions are invalid.");
+      }
+
+      const canvas = document.createElement("canvas");
+
+      try {
+        canvas.width = width;
+        canvas.height = height;
+
+        const context = canvas.getContext("2d", {
+          alpha: false
+        });
+
+        if (!context) {
+          throw new Error(
+            "Your browser could not create an image canvas."
+          );
+        }
+
+        context.fillStyle = background;
+        context.fillRect(0, 0, width, height);
+
+        context.drawImage(image, 0, 0, width, height);
+
+        const blob = await canvasToJpeg(canvas, quality);
+
+        cleanResult(item);
+
+        item.outputBlob = blob;
+        item.outputUrl = URL.createObjectURL(blob);
+        item.convertedQuality = Math.round(quality * 100);
+        item.convertedBackground = background;
+        item.status = "Converted";
+        item.error = "";
+      } finally {
+        canvas.width = 0;
+        canvas.height = 0;
+      }
+    }
+
+    qualityInput.addEventListener("input", () => {
+      qualityValue.textContent = qualityInput.value + "%";
+    });
+
+    chooseButton.addEventListener("click", () => {
+      if (!isWorking) {
+        fileInput.click();
+      }
+    });
+
+    fileInput.addEventListener("change", event => {
+      addFiles(event.target.files);
+      fileInput.value = "";
+    });
+
+    ["dragenter", "dragover"].forEach(eventName => {
+      dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+
+        if (!isWorking) {
+          dropzone.classList.add("dragover");
+        }
+      });
+    });
+
+    ["dragleave", "drop"].forEach(eventName => {
+      dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+        dropzone.classList.remove("dragover");
+      });
+    });
+
+    dropzone.addEventListener("drop", event => {
+      if (!isWorking && event.dataTransfer) {
+        addFiles(event.dataTransfer.files);
+      }
+    });
+
+    clearButton.addEventListener("click", clearAll);
+
+    convertButton.addEventListener("click", async () => {
+      if (isWorking || items.length === 0) {
+        return;
+      }
+
+      isWorking = true;
+
+      const batch = items.slice();
+      const quality = Number(qualityInput.value) / 100;
+
+      const background =
+        backgroundInput.value === "black" ? "#000000" : "#ffffff";
+
+      let succeeded = 0;
+      let failed = 0;
+
+      for (const item of batch) {
+        cleanResult(item);
+        item.status = "Waiting";
+        item.error = "";
+      }
+
+      convertButton.textContent = "Converting...";
+      renderFiles();
+
+      try {
+        for (let index = 0; index < batch.length; index++) {
+          const item = batch[index];
+
+          item.status = "Converting";
+
+          setStatus(
+            "Converting image " + (index + 1) +
+            " of " + batch.length + ": " + item.file.name
+          );
+
+          renderFiles();
+
+          try {
+            await convertOne(item, quality, background);
+            succeeded++;
+          } catch (error) {
+            console.error("WebP conversion failed:", error);
+
+            cleanResult(item);
+            item.status = "Failed";
+            item.error = error.message ||
+              "The image could not be converted.";
+
+            failed++;
+          }
+
+          renderFiles();
+        }
+
+        if (failed === 0) {
+          setStatus(
+            "Success! " + succeeded +
+            " image(s) converted. Download your JPG files below.",
+            "success"
+          );
+        } else if (succeeded > 0) {
+          setStatus(
+            succeeded + " image(s) converted, " + failed +
+            " failed. Try using a different WebP file for any failure.",
+            "error"
+          );
+        } else {
+          setStatus(
+            "No images were converted. Check that your files are valid WebP images.",
+            "error"
+          );
+        }
+      } finally {
+        isWorking = false;
+        convertButton.textContent = "Convert to JPG";
+        renderFiles();
+      }
+    });
+
+    renderFiles();
+  </script>
+</body>
+</html>

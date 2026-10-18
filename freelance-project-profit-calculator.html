@@ -1,0 +1,2195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Freelance Project Profit Calculator | Net Earnings After Fees</title>
+  <meta name="description" content="Calculate freelance project profit after platform fees, payment processing, expenses and a tax reserve. Find effective hourly earnings and the quote needed to meet your target rate.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="https://converttotoolsonline.com/freelance-project-profit-calculator.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+  <meta property="og:title" content="Freelance Project Profit Calculator">
+  <meta property="og:description" content="Calculate your net project earnings, effective hourly rate, fees and target project quote.">
+  <meta property="og:url" content="https://converttotoolsonline.com/freelance-project-profit-calculator.html">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Freelance Project Profit Calculator">
+  <meta name="twitter:description" content="Find out what your freelance project actually earns after fees, costs and time spent.">
+
+  <style>
+    :root {
+      color-scheme: light;
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --purple: #7c3aed;
+      --ink: #172033;
+      --muted: #64748b;
+      --line: #e5eaf2;
+      --bg: #f7f9fc;
+      --blue-soft: #eff6ff;
+      --purple-soft: #f5f0ff;
+      --green: #087f5b;
+      --red: #b42318;
+      --amber: #92400e;
+      --radius: 18px;
+      --shadow: 0 12px 35px rgba(31, 41, 55, .06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--blue-dark);
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    h1, h2, h3, p, a, output {
+      overflow-wrap: anywhere;
+    }
+
+    .container {
+      width: min(1080px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    /* Header */
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 72px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -.6px;
+    }
+
+    .brand:hover {
+      color: var(--ink);
+    }
+
+    .brand-icon {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: #fff;
+    }
+
+    .brand-name span {
+      color: var(--blue);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .nav a {
+      padding: 9px 12px;
+      border-radius: 10px;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      background: var(--blue-soft);
+      color: var(--blue-dark);
+    }
+
+    /* Intro */
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      padding-top: 24px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .breadcrumb a {
+      color: #52627a;
+    }
+
+    .hero {
+      padding: 43px 10px 32px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 6px 12px;
+      border: 1px solid #dbeafe;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue-dark);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--purple);
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 0 auto 14px;
+      font-size: clamp(32px, 5vw, 49px);
+      line-height: 1.15;
+      letter-spacing: -1.7px;
+    }
+
+    .gradient-text {
+      color: var(--blue);
+      background: linear-gradient(100deg, var(--blue), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* Calculator */
+
+    .tool-card {
+      padding: 29px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .tool-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .tool-heading h2 {
+      margin: 0 0 5px;
+      font-size: 24px;
+      line-height: 1.35;
+      letter-spacing: -.65px;
+    }
+
+    .tool-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .local-badge {
+      flex-shrink: 0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #ecfdf5;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .section-label {
+      margin: 27px 0 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .section-label:first-of-type {
+      margin-top: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 19px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .field input,
+    .field select {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      min-height: 47px;
+      padding: 10px 12px;
+      border: 1px solid #d6deea;
+      border-radius: 11px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--blue);
+    }
+
+    .help {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .field input[aria-invalid="true"],
+    .field select[aria-invalid="true"] {
+      border-color: var(--red);
+    }
+
+    .section-description {
+      margin: -7px 0 17px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 10px 16px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform .18s, background .18s, border-color .18s;
+    }
+
+    .button:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: linear-gradient(110deg, var(--blue), var(--purple));
+      color: #fff;
+      box-shadow: 0 5px 14px rgba(79, 70, 229, .16);
+    }
+
+    .button-primary:hover:not(:disabled) {
+      color: #fff;
+      opacity: .95;
+    }
+
+    .button-secondary {
+      border-color: #dbe2ec;
+      background: #fff;
+      color: #334155;
+    }
+
+    .button-secondary:hover:not(:disabled) {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .feedback:empty {
+      display: none;
+    }
+
+    .feedback.error {
+      border: 1px solid #fecaca;
+      background: #fef2f2;
+      color: var(--red);
+    }
+
+    .feedback.success {
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .feedback.info {
+      border: 1px solid #dbeafe;
+      background: var(--blue-soft);
+      color: var(--blue-dark);
+    }
+
+    /* Results */
+
+    .results {
+      margin-top: 28px;
+      padding-top: 27px;
+      border-top: 1px solid var(--line);
+    }
+
+    .results[hidden] {
+      display: none;
+    }
+
+    .results-header {
+      margin-bottom: 19px;
+    }
+
+    .results-header h2 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      line-height: 1.4;
+      letter-spacing: -.6px;
+    }
+
+    .results-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .profit-banner {
+      padding: 24px;
+      border: 1px solid #dbeafe;
+      border-radius: 17px;
+      background: linear-gradient(120deg, #eff6ff, #f5f3ff);
+    }
+
+    .profit-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .profit-number {
+      display: block;
+      font-size: clamp(32px, 6vw, 47px);
+      font-weight: 850;
+      line-height: 1.25;
+      letter-spacing: -1.3px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .profit-number.negative {
+      color: var(--red);
+    }
+
+    .profit-number.positive {
+      color: var(--green);
+    }
+
+    .profit-banner p {
+      margin: 8px 0 0;
+      color: #52627a;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .result-box {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .result-box-label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .result-value {
+      display: block;
+      color: var(--ink);
+      font-size: clamp(16px, 2.5vw, 22px);
+      font-weight: 800;
+      line-height: 1.5;
+      font-variant-numeric: tabular-nums;
+      overflow-wrap: anywhere;
+    }
+
+    .result-value.negative {
+      color: var(--red);
+    }
+
+    .result-value.positive {
+      color: var(--green);
+    }
+
+    .result-value.purple {
+      color: var(--purple);
+    }
+
+    .target-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 16px;
+      padding: 21px;
+      border: 1px solid #ddd6fe;
+      border-radius: 15px;
+      background: #faf8ff;
+    }
+
+    .target-panel h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+
+    .target-panel p {
+      margin: 0;
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .target-number {
+      display: block;
+      margin-top: 8px;
+      color: #6d28d9;
+      font-size: clamp(21px, 3vw, 28px);
+      font-weight: 850;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .analysis-note {
+      margin-top: 17px;
+      padding: 15px 17px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f8fafc;
+      font-size: 12px;
+      line-height: 1.85;
+    }
+
+    .analysis-note strong {
+      color: var(--ink);
+    }
+
+    .analysis-note p {
+      margin: 0 0 7px;
+      color: #475569;
+    }
+
+    .analysis-note p:last-child {
+      margin-bottom: 0;
+    }
+
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 17px;
+    }
+
+    /* Supporting content */
+
+    .content-section {
+      padding-top: 54px;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: clamp(24px, 4vw, 32px);
+      line-height: 1.3;
+      letter-spacing: -.8px;
+    }
+
+    .section-lead {
+      max-width: 770px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .info-card {
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .info-icon {
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 39px;
+      margin-bottom: 14px;
+      border-radius: 11px;
+      background: var(--blue-soft);
+      color: var(--blue-dark);
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .formula-panel {
+      margin-top: 20px;
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .formula-panel h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+
+    .formula-panel p {
+      margin: 0 0 12px;
+      color: #52627a;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .formula {
+      display: block;
+      margin: 12px 0;
+      padding: 13px;
+      border-radius: 10px;
+      background: #f1f5f9;
+      color: #334155;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    /* FAQs */
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 21px;
+    }
+
+    .faq-item {
+      padding: 20px 21px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* Footer */
+
+    .footer {
+      margin-top: 57px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 30px;
+      padding-top: 29px;
+      padding-bottom: 28px;
+    }
+
+    .footer-about {
+      max-width: 550px;
+    }
+
+    .footer-about p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      padding-top: 8px;
+    }
+
+    .footer-nav a {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .footer-nav a:hover {
+      color: var(--blue);
+    }
+
+    .footer-bottom {
+      padding: 15px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      margin: 0;
+    }
+
+    /* Print */
+
+    @media print {
+      .header,
+      .breadcrumb,
+      .hero,
+      .tool-card form,
+      .button-row,
+      .result-actions,
+      .feedback,
+      .content-section,
+      .footer {
+        display: none !important;
+      }
+
+      body {
+        background: #fff;
+        color: #111;
+      }
+
+      .container {
+        width: 100%;
+        max-width: none;
+      }
+
+      .tool-card {
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .results[hidden] {
+        display: none !important;
+      }
+
+      .results {
+        display: block !important;
+        border: 0;
+      }
+
+      .profit-banner,
+      .result-box,
+      .target-panel {
+        break-inside: avoid;
+      }
+    }
+
+    /* Responsive */
+
+    @media (max-width: 760px) {
+      .tool-card {
+        padding: 23px;
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: calc(100% - 26px);
+      }
+
+      .header-inner {
+        min-height: 65px;
+        gap: 8px;
+      }
+
+      .brand {
+        gap: 7px;
+        font-size: 13px;
+        letter-spacing: -.4px;
+      }
+
+      .brand-icon {
+        width: 33px;
+        height: 33px;
+      }
+
+      .nav {
+        gap: 0;
+      }
+
+      .nav a {
+        padding: 7px 8px;
+        font-size: 11px;
+      }
+
+      .breadcrumb {
+        padding-top: 19px;
+      }
+
+      .hero {
+        padding: 34px 5px 27px;
+      }
+
+      h1 {
+        font-size: 34px;
+        letter-spacing: -1.2px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .tool-card {
+        padding: 18px 14px;
+        border-radius: 17px;
+      }
+
+      .tool-heading {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .tool-heading h2 {
+        font-size: 21px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .button-row .button,
+      .result-actions .button {
+        flex: 1 1 auto;
+      }
+
+      .result-grid {
+        gap: 9px;
+      }
+
+      .result-box {
+        padding: 12px;
+      }
+
+      .profit-banner {
+        padding: 18px;
+      }
+
+      .target-panel {
+        grid-template-columns: 1fr;
+        padding: 17px;
+      }
+
+      .formula-panel,
+      .faq-item {
+        padding: 18px;
+      }
+
+      .content-section {
+        padding-top: 43px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="ConvertToToolsOnline homepage">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 7H14M11 4L14 7L11 10"
+              stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 17H10M13 14L10 17L13 20"
+              stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-name">ConvertTo<span>Tools</span>Online</span>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a class="active"
+           href="freelance-project-profit-calculator.html"
+           aria-current="page">Project Profit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Freelance Project Profit Calculator</span>
+    </nav>
+
+    <section class="hero">
+      <span class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        Freelance pricing and business planning
+      </span>
+
+      <h1>
+        Freelance Project
+        <span class="gradient-text">Profit Calculator</span>
+      </h1>
+
+      <p>
+        Find out what a project really earns after platform fees, payment
+        charges, expenses and time spent. Estimate your effective hourly
+        earnings and calculate a quote for your target rate.
+      </p>
+    </section>
+
+    <section class="tool-card" aria-labelledby="calculator-title">
+      <div class="tool-heading">
+        <div>
+          <h2 id="calculator-title">Calculate your project earnings</h2>
+          <p>Enter your project figures to create a clear profit breakdown.</p>
+        </div>
+        <span class="local-badge">Browser-based</span>
+      </div>
+
+      <form id="profitForm" novalidate>
+        <h3 class="section-label">1. Project and currency</h3>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="currency">Display currency</label>
+            <select id="currency" name="currency">
+              <option value="USD">USD — US Dollar</option>
+              <option value="NPR">NPR — Nepalese Rupee</option>
+              <option value="INR">INR — Indian Rupee</option>
+              <option value="EUR">EUR — Euro</option>
+              <option value="GBP">GBP — British Pound</option>
+              <option value="AUD">AUD — Australian Dollar</option>
+              <option value="CAD">CAD — Canadian Dollar</option>
+              <option value="NGN">NGN — Nigerian Naira</option>
+            </select>
+            <span class="help">
+              Currency changes the display only. No currency conversion takes place.
+            </span>
+          </div>
+
+          <div class="field">
+            <label for="projectFee">Total project payment</label>
+            <input
+              id="projectFee"
+              name="projectFee"
+              type="number"
+              min="0.01"
+              max="1000000000000"
+              step="any"
+              value="1200"
+              inputmode="decimal"
+              required
+            >
+            <span class="help">
+              The total amount the client pays before percentage-based fees.
+            </span>
+          </div>
+        </div>
+
+        <h3 class="section-label">2. Time invested</h3>
+
+        <p class="section-description">
+          Compare your original time estimate with the hours actually spent.
+        </p>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="estimatedHours">Estimated project hours</label>
+            <input
+              id="estimatedHours"
+              name="estimatedHours"
+              type="number"
+              min="0.01"
+              max="1000000000"
+              step="any"
+              value="20"
+              inputmode="decimal"
+              required
+            >
+            <span class="help">The hours you expected the project to take.</span>
+          </div>
+
+          <div class="field">
+            <label for="actualHours">Actual hours worked</label>
+            <input
+              id="actualHours"
+              name="actualHours"
+              type="number"
+              min="0.01"
+              max="1000000000"
+              step="any"
+              value="28"
+              inputmode="decimal"
+              required
+            >
+            <span class="help">All hours you spent completing the project.</span>
+          </div>
+        </div>
+
+        <h3 class="section-label">3. Fees and expenses</h3>
+
+        <p class="section-description">
+          Enter your actual applicable fees when known. Both percentage-based
+          fees are modeled against the total project payment.
+        </p>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="platformFee">Platform or marketplace fee (%)</label>
+            <input
+              id="platformFee"
+              name="platformFee"
+              type="number"
+              min="0"
+              max="100"
+              step="any"
+              value="10"
+              inputmode="decimal"
+              required
+            >
+            <span class="help">Example: a 10% platform fee is entered as 10.</span>
+          </div>
+
+          <div class="field">
+            <label for="processingFee">Payment processing fee (%)</label>
+            <input
+              id="processingFee"
+              name="processingFee"
+              type="number"
+              min="0"
+              max="100"
+              step="any"
+              value="3"
+              inputmode="decimal"
+              required
+            >
+            <span class="help">Use the relevant processor's actual percentage.</span>
+          </div>
+
+          <div class="field">
+            <label for="expenses">Additional project expenses</label>
+            <input
+              id="expenses"
+              name="expenses"
+              type="number"
+              min="0"
+              max="1000000000000"
+              step="any"
+              value="85"
+              inputmode="decimal"
+              required
+            >
+            <span class="help">
+              Software, assets, contractor costs, equipment or other project costs.
+            </span>
+          </div>
+
+          <div class="field">
+            <label for="taxRate">Optional tax reserve (%)</label>
+            <input
+              id="taxRate"
+              name="taxRate"
+              type="number"
+              min="0"
+              max="99.99"
+              step="any"
+              value="15"
+              inputmode="decimal"
+              required
+            >
+            <span class="help">
+              A planning percentage applied to positive profit after fees and expenses.
+            </span>
+          </div>
+        </div>
+
+        <h3 class="section-label">4. Your target hourly earnings</h3>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="targetRate">Target earnings per actual hour</label>
+            <input
+              id="targetRate"
+              name="targetRate"
+              type="number"
+              min="0"
+              max="1000000000"
+              step="any"
+              value="30"
+              inputmode="decimal"
+              required
+            >
+            <span class="help">
+              The amount you want to retain per hour after the estimated
+              project costs and tax reserve. Enter 0 to calculate a
+              break-even quote.
+            </span>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button type="submit" class="button button-primary">
+            Calculate Project Profit
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12H19M12 5L19 12L12 19"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <button type="button" id="exampleButton" class="button button-secondary">
+            Load Example
+          </button>
+
+          <button type="button" id="resetButton" class="button button-secondary">
+            Reset
+          </button>
+        </div>
+      </form>
+
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+
+      <section id="results" class="results" aria-labelledby="results-title" hidden>
+        <div class="results-header">
+          <h2 id="results-title">Your project profit report</h2>
+          <p id="reportPeriod"></p>
+        </div>
+
+        <div class="profit-banner">
+          <span class="profit-label">Estimated amount retained after your reserve</span>
+          <output id="netProfit" class="profit-number">—</output>
+          <p id="profitExplanation"></p>
+        </div>
+
+        <div class="result-grid">
+          <div class="result-box">
+            <span class="result-box-label">Gross project payment</span>
+            <output class="result-value" id="grossRevenue">—</output>
+          </div>
+
+          <div class="result-box">
+            <span class="result-box-label">Platform fee</span>
+            <output class="result-value" id="platformCost">—</output>
+          </div>
+
+          <div class="result-box">
+            <span class="result-box-label">Payment processing fee</span>
+            <output class="result-value" id="processingCost">—</output>
+          </div>
+
+          <div class="result-box">
+            <span class="result-box-label">Total percentage-based fees</span>
+            <output class="result-value" id="totalFees">—</output>
+          </div>
+
+          <div class="result-box">
+            <span class="result-box-label">Additional project expenses</span>
+            <output class="result-value" id="projectCosts">—</output>
+          </div>
+
+          <div class="result-box">
+            <span class="result-box-label">Profit before tax reserve</span>
+            <output class="result-value" id="preTaxProfit">—</output>
+          </div>
+
+          <div class="result-box">
+            <span class="result-box-label">Estimated tax reserve</span>
+            <output class="result-value" id="taxCost">—</output>
+          </div>
+
+          <div class="result-box">
+            <span class="result-box-label">Effective hourly earnings</span>
+            <output class="result-value purple" id="hourlyRate">—</output>
+          </div>
+
+          <div class="result-box">
+            <span class="result-box-label">Net profit margin</span>
+            <output class="result-value" id="profitMargin">—</output>
+          </div>
+        </div>
+
+        <div class="target-panel">
+          <div>
+            <h3>Quote needed for your target rate</h3>
+            <p id="quoteExplanation">
+              Based on your target hourly earnings, actual hours, expenses and fee assumptions.
+            </p>
+            <output class="target-number" id="recommendedQuote">—</output>
+          </div>
+
+          <div>
+            <h3>Difference from your current quote</h3>
+            <p>
+              A positive difference means the project price would need to
+              increase. A negative difference means your current quote
+              is above the calculated target price.
+            </p>
+            <output class="target-number" id="quoteDifference">—</output>
+          </div>
+        </div>
+
+        <div class="analysis-note">
+          <p><strong>Time and scope analysis</strong></p>
+          <p id="timeAnalysis"></p>
+          <p id="profitAnalysis"></p>
+          <p id="calculationAssumptions"></p>
+        </div>
+
+        <div class="result-actions">
+          <button type="button" id="copyButton" class="button button-secondary">
+            Copy Report
+          </button>
+
+          <button type="button" id="downloadButton" class="button button-secondary">
+            Download CSV
+          </button>
+
+          <button type="button" id="printButton" class="button button-secondary">
+            Print / Save as PDF
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <!-- Supporting content -->
+    <section class="content-section" aria-labelledby="how-title">
+      <h2 id="how-title" class="section-title">
+        How to calculate freelance project profit
+      </h2>
+
+      <p class="section-lead">
+        A project payment is not the same as the money you keep. Fees,
+        project costs and unpaid working hours can make a seemingly
+        profitable job earn less than expected. Use this calculator to
+        inspect those costs before setting your next price.
+      </p>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M4 6H20V18H4V6Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M8 10H16M8 14H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Account for fees</h3>
+          <p>
+            Include applicable marketplace and payment-processing fees.
+            Check your actual provider terms because fee structures can differ.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M12 7V12L15 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Measure your real hourly rate</h3>
+          <p>
+            Divide the estimated amount retained by your actual working
+            hours to see what the project earned per hour.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M4 19V5M4 19H21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M7 15L11 11L14 13L20 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3>Price future projects</h3>
+          <p>
+            Use the target-based quote to estimate the price required
+            to cover the same cost assumptions and meet your desired
+            hourly earnings.
+          </p>
+        </article>
+      </div>
+
+      <div class="formula-panel">
+        <h3>Calculation formulas and assumptions</h3>
+
+        <p>
+          The calculator treats both percentage-based fees as percentages
+          of the full project payment. Additional expenses are subtracted
+          afterward. This is a model; use actual provider fee rules if
+          your payment arrangement works differently.
+        </p>
+
+        <code class="formula">
+          Total fees = Project payment × (Platform fee % + Processing fee %) / 100
+        </code>
+
+        <code class="formula">
+          Profit before reserve = Project payment − Total fees − Project expenses
+        </code>
+
+        <code class="formula">
+          Tax reserve = max(0, Profit before reserve) × Tax reserve %
+        </code>
+
+        <code class="formula">
+          Estimated retained amount = Profit before reserve − Tax reserve
+        </code>
+
+        <code class="formula">
+          Effective hourly earnings = Estimated retained amount ÷ Actual hours worked
+        </code>
+
+        <p>
+          The target quote is calculated by increasing the project payment
+          enough to cover the entered expenses, modeled percentage fees,
+          and the desired earnings after the tax reserve. It assumes the
+          entered fee percentages remain constant at the higher quote.
+        </p>
+
+        <p>
+          The tax reserve is a planning assumption, not a calculation of
+          actual tax liability. This tool does not account for every possible
+          cost, tax rule, refund, currency conversion, or platform-specific
+          fee arrangement.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQs: final main-content section -->
+    <section class="content-section" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="section-title">Frequently asked questions</h2>
+
+      <div class="faq-list">
+        <article class="faq-item">
+          <h3>What is a freelance project profit calculator?</h3>
+          <p>
+            It estimates the earnings remaining from a freelance project
+            after the fees and costs you enter. It can also calculate an
+            effective hourly rate based on the hours you actually worked.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>How do I calculate my effective hourly earnings?</h3>
+          <p>
+            Subtract your modeled fees, project expenses and optional
+            tax reserve from the project payment. Divide the remaining
+            amount by the actual hours worked. A negative result indicates
+            that the modeled costs exceed the project payment.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>How does the recommended project quote work?</h3>
+          <p>
+            The calculator works backward from your target earnings per
+            actual hour. It estimates the gross project payment required
+            to cover your entered expenses and the modeled percentage
+            fees while leaving your target amount after the tax reserve.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Does this calculator use current marketplace fees?</h3>
+          <p>
+            No. You enter the fee percentages yourself. Marketplace charges,
+            withdrawal fees and payment-processing rates may change or differ
+            by account, service, payment method and contract. Check your
+            actual fee schedule before relying on an estimate.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Does the tax reserve equal my actual tax?</h3>
+          <p>
+            No. It is a user-selected planning percentage applied to
+            positive modeled profit after fees and expenses. Actual tax
+            treatment depends on your circumstances and applicable rules.
+            Consult an appropriately qualified tax professional when needed.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Can I use different currencies?</h3>
+          <p>
+            Yes. Select one of the available display currencies. This only
+            changes the currency formatting; it does not convert exchange
+            rates or turn amounts entered in one currency into another.
+            Use a single currency consistently for one calculation.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Is my project information uploaded?</h3>
+          <p>
+            The calculations, report copying and CSV creation run in your
+            browser. This page's tool code does not transmit the project
+            figures to a calculation server. Hosting, analytics or
+            advertising services configured separately may have their
+            own data practices.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-about">
+        <a class="brand" href="index.html">
+          <span class="brand-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M4 7H14M11 4L14 7L11 10"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 17H10M13 14L10 17L13 20"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="brand-name">ConvertTo<span>Tools</span>Online</span>
+        </a>
+
+        <p>
+          ConvertToToolsOnline offers practical online utilities for
+          everyday digital, productivity and business tasks.
+        </p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="freelance-project-profit-calculator.html">Project Profit Calculator</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>
+          &copy; <span id="copyrightYear">2026</span>
+          ConvertToToolsOnline. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const form = document.getElementById("profitForm");
+      const feedback = document.getElementById("feedback");
+      const results = document.getElementById("results");
+
+      const copyButton = document.getElementById("copyButton");
+      const downloadButton = document.getElementById("downloadButton");
+      const printButton = document.getElementById("printButton");
+
+      const inputIds = [
+        "currency",
+        "projectFee",
+        "estimatedHours",
+        "actualHours",
+        "platformFee",
+        "processingFee",
+        "expenses",
+        "taxRate",
+        "targetRate"
+      ];
+
+      const inputs = Object.fromEntries(
+        inputIds.map(id => [id, document.getElementById(id)])
+      );
+
+      let lastReport = null;
+      let hasSuccessfulCalculation = false;
+
+      function showFeedback(message, type) {
+        feedback.textContent = message;
+        feedback.className = "feedback " + type;
+      }
+
+      function clearFeedback() {
+        feedback.textContent = "";
+        feedback.className = "feedback";
+      }
+
+      function formatNumber(value, decimals = 2) {
+        return Number(value).toLocaleString(undefined, {
+          maximumFractionDigits: decimals
+        });
+      }
+
+      function formatMoney(value, currency) {
+        return new Intl.NumberFormat(undefined, {
+          style: "currency",
+          currency,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(value);
+      }
+
+      function setOutput(id, value, extraClass = "") {
+        const element = document.getElementById(id);
+        element.textContent = value;
+        element.classList.remove("positive", "negative", "purple");
+
+        if (extraClass) {
+          element.classList.add(extraClass);
+        }
+      }
+
+      function clearInvalidStates() {
+        Object.values(inputs).forEach(input => {
+          input.removeAttribute("aria-invalid");
+        });
+      }
+
+      function invalidate(id, message) {
+        inputs[id].setAttribute("aria-invalid", "true");
+        showFeedback(message, "error");
+        inputs[id].focus();
+      }
+
+      function readNumber(id, label, min, max, allowZero = true) {
+        const input = inputs[id];
+        const raw = input.value.trim();
+        const value = Number(raw);
+
+        if (
+          raw === "" ||
+          !Number.isFinite(value) ||
+          value < min ||
+          value > max ||
+          (!allowZero && value === 0)
+        ) {
+          throw {
+            id,
+            message:
+              label + " must be a valid number between " +
+              formatNumber(min, 4) + " and " + formatNumber(max, 4) +
+              (allowZero ? "." : ", greater than zero.")
+          };
+        }
+
+        return value;
+      }
+
+      function collectInputs() {
+        const currency = inputs.currency.value;
+
+        const allowedCurrencies = [
+          "USD", "NPR", "INR", "EUR",
+          "GBP", "AUD", "CAD", "NGN"
+        ];
+
+        if (!allowedCurrencies.includes(currency)) {
+          throw {
+            id: "currency",
+            message: "Please choose one of the supported display currencies."
+          };
+        }
+
+        const projectFee = readNumber(
+          "projectFee", "Project payment", 0, 1e12, false
+        );
+
+        const estimatedHours = readNumber(
+          "estimatedHours", "Estimated hours", 0, 1e9, false
+        );
+
+        const actualHours = readNumber(
+          "actualHours", "Actual hours worked", 0, 1e9, false
+        );
+
+        const platformFee = readNumber(
+          "platformFee", "Platform fee", 0, 100
+        );
+
+        const processingFee = readNumber(
+          "processingFee", "Processing fee", 0, 100
+        );
+
+        const expenses = readNumber(
+          "expenses", "Project expenses", 0, 1e12
+        );
+
+        const taxRate = readNumber(
+          "taxRate", "Tax reserve", 0, 99.99
+        );
+
+        const targetRate = readNumber(
+          "targetRate", "Target hourly earnings", 0, 1e9
+        );
+
+        if (platformFee + processingFee >= 100) {
+          throw {
+            id: "processingFee",
+            message:
+              "The platform fee and processing fee must total less than 100%. " +
+              "Check both entered rates."
+          };
+        }
+
+        return {
+          currency,
+          projectFee,
+          estimatedHours,
+          actualHours,
+          platformFee,
+          processingFee,
+          expenses,
+          taxRate,
+          targetRate
+        };
+      }
+
+      function calculateProject(data) {
+        const {
+          currency,
+          projectFee,
+          estimatedHours,
+          actualHours,
+          platformFee,
+          processingFee,
+          expenses,
+          taxRate,
+          targetRate
+        } = data;
+
+        // Both percentage fees are modeled against gross project revenue.
+        const platformCost = projectFee * platformFee / 100;
+        const processingCost = projectFee * processingFee / 100;
+        const totalFees = platformCost + processingCost;
+
+        const preTaxProfit =
+          projectFee - totalFees - expenses;
+
+        // An estimated tax reserve is applied only to positive modeled profit.
+        const taxCost =
+          Math.max(0, preTaxProfit) * taxRate / 100;
+
+        const netProfit =
+          preTaxProfit - taxCost;
+
+        const hourlyRate =
+          netProfit / actualHours;
+
+        const profitMargin =
+          netProfit / projectFee * 100;
+
+        const timeVariance =
+          actualHours - estimatedHours;
+
+        const timeVariancePercent =
+          timeVariance / estimatedHours * 100;
+
+        // Reverse the formula to estimate the quote needed for the
+        // entered target net earnings per actual working hour.
+        const feeFactor =
+          1 - (platformFee + processingFee) / 100;
+
+        const afterTaxFactor =
+          1 - taxRate / 100;
+
+        const desiredNetProfit =
+          targetRate * actualHours;
+
+        const desiredPreTaxProfit =
+          desiredNetProfit / afterTaxFactor;
+
+        const recommendedQuote =
+          (expenses + desiredPreTaxProfit) / feeFactor;
+
+        const quoteDifference =
+          recommendedQuote - projectFee;
+
+        return {
+          ...data,
+          platformCost,
+          processingCost,
+          totalFees,
+          preTaxProfit,
+          taxCost,
+          netProfit,
+          hourlyRate,
+          profitMargin,
+          timeVariance,
+          timeVariancePercent,
+          desiredNetProfit,
+          recommendedQuote,
+          quoteDifference,
+          feeFactor,
+          afterTaxFactor
+        };
+      }
+
+      function renderResults(r) {
+        setOutput(
+          "netProfit",
+          formatMoney(r.netProfit, r.currency),
+          r.netProfit < 0 ? "negative" : "positive"
+        );
+
+        document.getElementById("profitExplanation").textContent =
+          "This is the modeled project result after " +
+          formatMoney(r.totalFees, r.currency) +
+          " in percentage-based fees, " +
+          formatMoney(r.expenses, r.currency) +
+          " in expenses, and " +
+          formatMoney(r.taxCost, r.currency) +
+          " in estimated tax reserve.";
+
+        document.getElementById("reportPeriod").textContent =
+          "Project payment: " +
+          formatMoney(r.projectFee, r.currency) +
+          " · " + formatNumber(r.actualHours) +
+          " actual hours worked";
+
+        setOutput("grossRevenue",
+          formatMoney(r.projectFee, r.currency));
+
+        setOutput("platformCost",
+          formatMoney(r.platformCost, r.currency));
+
+        setOutput("processingCost",
+          formatMoney(r.processingCost, r.currency));
+
+        setOutput("totalFees",
+          formatMoney(r.totalFees, r.currency));
+
+        setOutput("projectCosts",
+          formatMoney(r.expenses, r.currency));
+
+        setOutput("preTaxProfit",
+          formatMoney(r.preTaxProfit, r.currency),
+          r.preTaxProfit < 0 ? "negative" : "positive");
+
+        setOutput("taxCost",
+          formatMoney(r.taxCost, r.currency));
+
+        setOutput("hourlyRate",
+          formatMoney(r.hourlyRate, r.currency) + " / hour",
+          r.hourlyRate < 0 ? "negative" : "purple");
+
+        setOutput("profitMargin",
+          formatNumber(r.profitMargin) + "%",
+          r.profitMargin < 0 ? "negative" : "");
+
+        setOutput("recommendedQuote",
+          formatMoney(r.recommendedQuote, r.currency));
+
+        const differencePrefix =
+          r.quoteDifference > 0.005 ? "+" :
+          r.quoteDifference < -0.005 ? "−" : "";
+
+        setOutput("quoteDifference",
+          differencePrefix +
+          formatMoney(Math.abs(r.quoteDifference), r.currency),
+          r.quoteDifference > 0.005 ? "negative" :
+          r.quoteDifference < -0.005 ? "positive" : "");
+
+        const timeElement = document.getElementById("timeAnalysis");
+
+        if (r.timeVariance > 0.000001) {
+          timeElement.textContent =
+            "Your project took " +
+            formatNumber(r.timeVariance) +
+            " more hours than estimated (" +
+            formatNumber(r.timeVariancePercent) +
+            "% over plan). Review the scope, revision policy and future estimates.";
+        } else if (r.timeVariance < -0.000001) {
+          timeElement.textContent =
+            "You spent " +
+            formatNumber(Math.abs(r.timeVariance)) +
+            " fewer hours than estimated (" +
+            formatNumber(Math.abs(r.timeVariancePercent)) +
+            "% under plan).";
+        } else {
+          timeElement.textContent =
+            "Actual hours matched your original time estimate.";
+        }
+
+        const profitElement = document.getElementById("profitAnalysis");
+
+        if (r.netProfit < 0) {
+          profitElement.textContent =
+            "The modeled project result is negative by " +
+            formatMoney(Math.abs(r.netProfit), r.currency) +
+            ". Your entered expenses and fees exceed the project payment.";
+        } else if (r.netProfit === 0) {
+          profitElement.textContent =
+            "Your entered project figures produce a break-even result after the modeled reserve.";
+        } else if (r.hourlyRate < r.targetRate) {
+          profitElement.textContent =
+            "Your current effective hourly earnings are below your target of " +
+            formatMoney(r.targetRate, r.currency) +
+            " per hour.";
+        } else {
+          profitElement.textContent =
+            "Your effective hourly earnings meet or exceed the target you entered.";
+        }
+
+        document.getElementById("calculationAssumptions").textContent =
+          "Model assumptions: " +
+          formatNumber(r.platformFee) + "% platform fee and " +
+          formatNumber(r.processingFee) +
+          "% processing fee are both based on the full project payment. " +
+          "The tax reserve of " + formatNumber(r.taxRate) +
+          "% is applied only to positive profit after those fees and entered expenses.";
+
+        const quoteExplanation =
+          "Target: " + formatMoney(r.targetRate, r.currency) +
+          " per actual hour × " + formatNumber(r.actualHours) +
+          " hours, with entered costs and modeled fees.";
+
+        document.getElementById("quoteExplanation").textContent =
+          quoteExplanation;
+
+        results.hidden = false;
+        copyButton.disabled = false;
+        downloadButton.disabled = false;
+        printButton.disabled = false;
+      }
+
+      function calculate() {
+        clearFeedback();
+        clearInvalidStates();
+        results.hidden = true;
+        copyButton.disabled = true;
+        downloadButton.disabled = true;
+        printButton.disabled = true;
+        lastReport = null;
+
+        try {
+          const data = collectInputs();
+          const report = calculateProject(data);
+
+          if (
+            !Number.isFinite(report.recommendedQuote) ||
+            !Number.isFinite(report.netProfit) ||
+            !Number.isFinite(report.hourlyRate) ||
+            !Number.isFinite(report.profitMargin)
+          ) {
+            showFeedback(
+              "The result exceeds the calculator's supported numeric range. Please review your inputs.",
+              "error"
+            );
+            return;
+          }
+
+          lastReport = report;
+          renderResults(report);
+          hasSuccessfulCalculation = true;
+
+          showFeedback(
+            "Calculation complete. Your project profit and target quote are ready.",
+            "success"
+          );
+        } catch (error) {
+          if (error && error.id && error.message) {
+            invalidate(error.id, error.message);
+          } else {
+            showFeedback(
+              "We could not calculate these figures. Review your inputs and try again.",
+              "error"
+            );
+          }
+        }
+      }
+
+      function createReportText() {
+        if (!lastReport) {
+          return "";
+        }
+
+        const r = lastReport;
+        const money = value => formatMoney(value, r.currency);
+
+        return [
+          "ConvertToToolsOnline — Freelance Project Profit Calculator",
+          "",
+          "PROJECT",
+          "Gross project payment: " + money(r.projectFee),
+          "Currency: " + r.currency,
+          "Estimated hours: " + formatNumber(r.estimatedHours),
+          "Actual hours: " + formatNumber(r.actualHours),
+          "Hours over/under estimate: " + formatNumber(r.timeVariance),
+          "",
+          "FEES AND COSTS",
+          "Platform fee rate: " + formatNumber(r.platformFee) + "%",
+          "Platform fee amount: " + money(r.platformCost),
+          "Processing fee rate: " + formatNumber(r.processingFee) + "%",
+          "Processing fee amount: " + money(r.processingCost),
+          "Total percentage-based fees: " + money(r.totalFees),
+          "Project expenses: " + money(r.expenses),
+          "",
+          "PROJECT RESULT",
+          "Profit before reserve: " + money(r.preTaxProfit),
+          "Tax reserve: " + money(r.taxCost),
+          "Estimated retained amount: " + money(r.netProfit),
+          "Effective hourly earnings: " + money(r.hourlyRate),
+          "Net profit margin: " + formatNumber(r.profitMargin) + "%",
+          "",
+          "TARGET QUOTE",
+          "Target earnings per hour: " + money(r.targetRate),
+          "Estimated quote required: " + money(r.recommendedQuote),
+          "Difference from current quote: " + money(r.quoteDifference),
+          "",
+          "ASSUMPTIONS",
+          "Both percentage fees are based on gross project payment.",
+          "The tax reserve is a user-selected estimate, not actual tax advice.",
+          "Currency selection changes display formatting only; no currency conversion occurs."
+        ].join("\n");
+      }
+
+      async function copyReport() {
+        if (!lastReport) {
+          return;
+        }
+
+        const text = createReportText();
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.setAttribute("readonly", "");
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            const copied = document.execCommand("copy");
+            textarea.remove();
+
+            if (!copied) {
+              throw new Error("Copy not available");
+            }
+          }
+
+          showFeedback("Your project report has been copied.", "success");
+        } catch (error) {
+          showFeedback(
+            "Automatic copying was blocked by your browser. Try downloading the CSV report instead.",
+            "error"
+          );
+        }
+      }
+
+      function csvCell(value) {
+        let text = String(value ?? "");
+
+        // Avoid exporting potentially executable spreadsheet formulas.
+        if (/^[\s]*[=+\-@]/.test(text)) {
+          text = "'" + text;
+        }
+
+        return '"' + text.replace(/"/g, '""') + '"';
+      }
+
+      function downloadCSV() {
+        if (!lastReport) {
+          return;
+        }
+
+        const r = lastReport;
+
+        const rows = [
+          ["Category", "Metric", "Value", "Currency"],
+          ["Project", "Gross project payment", r.projectFee, r.currency],
+          ["Time", "Estimated hours", r.estimatedHours, "hours"],
+          ["Time", "Actual hours worked", r.actualHours, "hours"],
+          ["Time", "Hours over/under estimate", r.timeVariance, "hours"],
+          ["Fees", "Platform fee percentage", r.platformFee, "%"],
+          ["Fees", "Platform fee amount", r.platformCost, r.currency],
+          ["Fees", "Processing fee percentage", r.processingFee, "%"],
+          ["Fees", "Processing fee amount", r.processingCost, r.currency],
+          ["Fees", "Total percentage-based fees", r.totalFees, r.currency],
+          ["Costs", "Project expenses", r.expenses, r.currency],
+          ["Profit", "Profit before tax reserve", r.preTaxProfit, r.currency],
+          ["Profit", "Estimated tax reserve", r.taxCost, r.currency],
+          ["Profit", "Estimated retained amount", r.netProfit, r.currency],
+          ["Profit", "Effective hourly earnings", r.hourlyRate, r.currency + "/hour"],
+          ["Profit", "Net profit margin", r.profitMargin, "%"],
+          ["Target", "Target hourly earnings", r.targetRate, r.currency + "/hour"],
+          ["Target", "Recommended project quote", r.recommendedQuote, r.currency],
+          ["Target", "Difference from current quote", r.quoteDifference, r.currency],
+          ["Assumption", "Fee basis", "Both percentage fees apply to gross project payment", ""],
+          ["Assumption", "Tax reserve", "Planning estimate only, not tax advice", ""],
+          ["Assumption", "Currency", "Display only; no conversion performed", ""]
+        ];
+
+        const csv = "\uFEFF" + rows
+          .map(row => row.map(csvCell).join(","))
+          .join("\r\n");
+
+        const blob = new Blob([csv], {
+          type: "text/csv;charset=utf-8;"
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "freelance-project-profit-report.csv";
+        link.style.display = "none";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+        showFeedback("Your CSV report has been prepared for download.", "success");
+      }
+
+      function resetForm() {
+        inputs.currency.value = "USD";
+        inputs.projectFee.value = "1200";
+        inputs.estimatedHours.value = "20";
+        inputs.actualHours.value = "28";
+        inputs.platformFee.value = "10";
+        inputs.processingFee.value = "3";
+        inputs.expenses.value = "85";
+        inputs.taxRate.value = "15";
+        inputs.targetRate.value = "30";
+
+        results.hidden = true;
+        lastReport = null;
+        hasSuccessfulCalculation = false;
+
+        copyButton.disabled = true;
+        downloadButton.disabled = true;
+        printButton.disabled = true;
+
+        clearInvalidStates();
+        clearFeedback();
+
+        document.getElementById("profitForm").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+      function loadExample() {
+        inputs.currency.value = "USD";
+        inputs.projectFee.value = "1200";
+        inputs.estimatedHours.value = "20";
+        inputs.actualHours.value = "28";
+        inputs.platformFee.value = "10";
+        inputs.processingFee.value = "3";
+        inputs.expenses.value = "85";
+        inputs.taxRate.value = "15";
+        inputs.targetRate.value = "30";
+
+        calculate();
+      }
+
+      // Keep displayed results from becoming stale after any input change.
+      form.addEventListener("input", event => {
+        if (event.target.matches("input, select") && !results.hidden) {
+          results.hidden = true;
+          lastReport = null;
+
+          copyButton.disabled = true;
+          downloadButton.disabled = true;
+          printButton.disabled = true;
+
+          if (hasSuccessfulCalculation) {
+            showFeedback(
+              "Your inputs changed. Calculate again to refresh the report.",
+              "info"
+            );
+          }
+        }
+      });
+
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        calculate();
+      });
+
+      document.getElementById("exampleButton")
+        .addEventListener("click", loadExample);
+
+      document.getElementById("resetButton")
+        .addEventListener("click", resetForm);
+
+      copyButton.addEventListener("click", copyReport);
+      downloadButton.addEventListener("click", downloadCSV);
+
+      printButton.addEventListener("click", () => {
+        if (lastReport) {
+          window.print();
+        }
+      });
+
+      document.getElementById("copyrightYear").textContent =
+        String(new Date().getFullYear());
+
+      // Show a usable default report when the page first loads.
+      calculate();
+    })();
+  </script>
+</body>
+</html>

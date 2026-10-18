@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Merge JSON Files Online Free | JSON Merger Tool</title>
+
+  <meta name="description"
+    content="Merge multiple JSON files online for free. Combine JSON arrays, merge objects, handle nested properties, and download one formatted JSON file directly in your browser.">
+
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="ConvertToToolsOnline">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical"
+    href="https://converttotoolsonline.com/merge-json.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Merge JSON Files Online Free">
+  <meta property="og:description"
+    content="Combine multiple JSON files into one. Merge arrays and objects using this free browser-based JSON merger.">
+  <meta property="og:url"
+    content="https://converttotoolsonline.com/merge-json.html">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Online JSON Merger">
+  <meta name="twitter:description"
+    content="Merge multiple JSON files into one formatted JSON document for free.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Merge JSON Files Online",
+    "url": "https://converttotoolsonline.com/merge-json.html",
+    "description": "A free browser-based utility for merging JSON files, arrays, and objects.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --text: #172033;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --background: #f5f8ff;
+      --white: #ffffff;
+      --green: #15803d;
+      --red: #dc2626;
+      --radius: 17px;
+      --shadow: 0 12px 35px rgba(15, 23, 42, .06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--background);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: .55;
+    }
+
+    .container {
+      width: min(100% - 30px, 920px);
+      margin-inline: auto;
+    }
+
+    .header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 850;
+      letter-spacing: -.5px;
+    }
+
+    .brand span {
+      color: var(--primary);
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .hero {
+      padding: 40px 0 23px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      color: #1d4ed8;
+      background: #dbeafe;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 15px 0 10px;
+      font-size: clamp(29px, 5vw, 42px);
+      line-height: 1.17;
+      letter-spacing: -1.3px;
+    }
+
+    .hero p {
+      max-width: 660px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .tool-card {
+      padding: clamp(15px, 3vw, 26px);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .dropzone {
+      padding: 27px 14px;
+      text-align: center;
+      background: #f8fbff;
+      border: 2px dashed #bfdbfe;
+      border-radius: 14px;
+      transition: background .2s, border-color .2s;
+    }
+
+    .dropzone.dragover {
+      background: #dbeafe;
+      border-color: var(--primary);
+    }
+
+    .upload-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 12px;
+      color: var(--primary);
+      background: #dbeafe;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .dropzone h2 {
+      margin: 0 0 5px;
+      font-size: 19px;
+    }
+
+    .dropzone p {
+      margin: 0 0 15px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .button {
+      min-height: 43px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 9px 15px;
+      border: 0;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      transition: background .2s;
+    }
+
+    .button-primary {
+      color: white;
+      background: var(--primary);
+    }
+
+    .button-primary:hover:not(:disabled) {
+      background: var(--primary-dark);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+    }
+
+    .button-secondary:hover:not(:disabled) {
+      background: #e2e8f0;
+    }
+
+    .button-danger {
+      color: var(--red);
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 24px 0 12px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .file-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+      padding: 12px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .file-icon {
+      flex: 0 0 43px;
+      width: 43px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      color: #15803d;
+      background: #dcfce7;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .file-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .file-name {
+      display: block;
+      overflow-wrap: anywhere;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .file-size {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .remove-button {
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      color: var(--red);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 18px;
+    }
+
+    .remove-button:hover:not(:disabled) {
+      background: #fef2f2;
+    }
+
+    .empty-state {
+      padding: 21px;
+      color: var(--muted);
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .settings {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 21px;
+      padding: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .setting label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .setting select {
+      width: 100%;
+      min-height: 41px;
+      padding: 8px 10px;
+      color: var(--text);
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+    }
+
+    .setting-help {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .actions .button-primary {
+      flex: 1;
+    }
+
+    .status {
+      min-height: 25px;
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .status.success {
+      color: var(--green);
+    }
+
+    .status.error {
+      color: var(--red);
+    }
+
+    .output-section {
+      margin-top: 25px;
+    }
+
+    .output-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .output-heading h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .output {
+      display: block;
+      width: 100%;
+      min-height: 260px;
+      padding: 14px;
+      color: #dbeafe;
+      background: #111827;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo,
+        Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.65;
+      tab-size: 2;
+    }
+
+    .output:focus {
+      outline: 2px solid #93c5fd;
+      outline-offset: 2px;
+    }
+
+    .output::placeholder {
+      color: #94a3b8;
+    }
+
+    .privacy-note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      color: #166534;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 11px;
+      font-size: 13px;
+    }
+
+    .content-section {
+      padding: 34px 0;
+    }
+
+    .info-card {
+      margin-bottom: 17px;
+      padding: 22px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .info-card h2 {
+      margin: 0 0 12px;
+      font-size: 23px;
+      letter-spacing: -.5px;
+    }
+
+    .info-card h3 {
+      margin: 19px 0 5px;
+      font-size: 17px;
+    }
+
+    .info-card p,
+    .info-card li {
+      color: #475569;
+    }
+
+    .info-card code {
+      padding: 2px 5px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      border-radius: 4px;
+    }
+
+    .steps {
+      padding-left: 22px;
+    }
+
+    .steps li {
+      padding: 4px 0;
+    }
+
+    .related-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .related-tools a {
+      padding: 8px 12px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .footer {
+      padding: 22px 0;
+      text-align: center;
+      color: var(--muted);
+      background: white;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 22px, 920px);
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      .hero {
+        padding-top: 32px;
+      }
+
+      .settings {
+        grid-template-columns: 1fr;
+      }
+
+      .file-item {
+        gap: 8px;
+        padding: 9px;
+      }
+
+      .file-icon {
+        flex-basis: 38px;
+        width: 38px;
+        height: 43px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .actions .button {
+        width: 100%;
+      }
+
+      .info-card {
+        padding: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="index.html">
+        ConvertTo<span>ToolsOnline</span>
+      </a>
+
+      <a class="nav-link" href="index.html">← All Tools</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <span class="badge">Free Developer Tool</span>
+
+      <h1>Merge JSON Files Online</h1>
+
+      <p>
+        Combine multiple JSON files into one. Merge arrays, combine
+        nested objects, and download a formatted JSON document
+        directly from your browser.
+      </p>
+    </section>
+
+    <section class="tool-card container" aria-label="JSON merger tool">
+      <div class="dropzone" id="dropzone">
+        <div class="upload-icon" aria-hidden="true">JSON</div>
+
+        <h2>Select your JSON files</h2>
+
+        <p>
+          Choose multiple .json files or drag and drop them here.
+        </p>
+
+        <button
+          type="button"
+          class="button button-primary"
+          id="chooseButton">
+          + Select JSON Files
+        </button>
+
+        <input
+          type="file"
+          id="fileInput"
+          accept=".json,application/json"
+          multiple
+          aria-label="Select JSON files">
+      </div>
+
+      <div class="section-heading">
+        <h2>Selected Files</h2>
+        <span class="muted" id="fileCount">0 files · 0 B</span>
+      </div>
+
+      <div class="file-list" id="fileList" aria-live="polite">
+        <div class="empty-state">
+          Your selected JSON files will appear here.
+        </div>
+      </div>
+
+      <div class="settings">
+        <div class="setting">
+          <label for="mergeMode">Merging Method</label>
+
+          <select id="mergeMode">
+            <option value="arrays">Combine JSON arrays</option>
+            <option value="objects">Merge JSON objects</option>
+            <option value="wrap">Combine everything into an array</option>
+          </select>
+
+          <p class="setting-help" id="modeHelp">
+            All files must contain JSON arrays. Their items are combined
+            into one array.
+          </p>
+        </div>
+
+        <div class="setting">
+          <label for="indent">Output Formatting</label>
+
+          <select id="indent">
+            <option value="2">Pretty JSON — 2 spaces</option>
+            <option value="4">Pretty JSON — 4 spaces</option>
+            <option value="0">Compact JSON</option>
+          </select>
+
+          <p class="setting-help">
+            Choose readable formatting or compact output.
+          </p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button
+          type="button"
+          class="button button-primary"
+          id="mergeButton"
+          disabled>
+          Merge JSON Files
+        </button>
+
+        <button
+          type="button"
+          class="button button-secondary"
+          id="exampleButton">
+          Load Example
+        </button>
+
+        <button
+          type="button"
+          class="button button-danger"
+          id="clearButton"
+          disabled>
+          Clear All
+        </button>
+      </div>
+
+      <div class="status" id="status" role="status" aria-live="polite">
+        Select at least two JSON files to begin.
+      </div>
+
+      <section class="output-section" aria-label="Merged JSON output">
+        <div class="output-heading">
+          <h2>Merged JSON Output</h2>
+          <span class="muted" id="outputInfo">No output yet</span>
+        </div>
+
+        <textarea
+          id="output"
+          class="output"
+          readonly
+          spellcheck="false"
+          aria-label="Merged JSON output"
+          placeholder="Your merged JSON will appear here."></textarea>
+
+        <div class="actions">
+          <button
+            type="button"
+            class="button button-secondary"
+            id="copyButton"
+            disabled>
+            Copy JSON
+          </button>
+
+          <button
+            type="button"
+            class="button button-primary"
+            id="downloadButton"
+            disabled>
+            Download JSON
+          </button>
+        </div>
+      </section>
+
+      <div class="privacy-note">
+        🔒 <strong>Privacy:</strong> Your selected files are processed
+        locally in your browser. This tool does not upload them to our server.
+      </div>
+    </section>
+
+    <section class="content-section container">
+      <article class="info-card">
+        <h2>How to Merge JSON Files</h2>
+
+        <p>
+          JSON is used to exchange structured data between applications,
+          APIs, and software systems. When information is split across
+          multiple JSON files, merging those files can make it easier
+          to work with the combined data.
+        </p>
+
+        <ol class="steps">
+          <li>Select two or more JSON files.</li>
+          <li>Choose the appropriate merging method.</li>
+          <li>Select your preferred output formatting.</li>
+          <li>Click Merge JSON Files and review the result.</li>
+          <li>Copy or download your merged JSON document.</li>
+        </ol>
+      </article>
+
+      <article class="info-card">
+        <h2>Choose the Right JSON Merging Method</h2>
+
+        <h3>Combine JSON arrays</h3>
+        <p>
+          Use this option when each file contains a JSON array.
+          The items from all arrays are appended to one output array.
+          Original item order is preserved according to the selected
+          file order.
+        </p>
+
+        <h3>Merge JSON objects</h3>
+        <p>
+          Use this option when every file contains a JSON object.
+          Properties from subsequent files are added to the result.
+          Nested objects are merged recursively. If a property has
+          conflicting non-object values, the value from the later file
+          replaces the earlier value. Arrays are replaced, not concatenated.
+        </p>
+
+        <h3>Combine everything into an array</h3>
+        <p>
+          Choose this option when your files contain different types
+          of JSON values, such as arrays, objects, numbers, strings,
+          or booleans. Each complete input value becomes an item in
+          the resulting array.
+        </p>
+
+        <h3>Format the result</h3>
+        <p>
+          Pretty JSON is easier to read and edit. Compact JSON removes
+          unnecessary formatting whitespace, which may be useful when
+          transferring data to another application.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>1. Is this JSON merger free?</h3>
+        <p>
+          Yes. You can merge supported JSON files for free without
+          creating an account.
+        </p>
+
+        <h3>2. Can I merge multiple JSON files at once?</h3>
+        <p>
+          Yes. Select multiple files and choose the merging method
+          that matches their contents.
+        </p>
+
+        <h3>3. Can I merge nested JSON objects?</h3>
+        <p>
+          Yes. The object merging method recursively merges nested
+          objects. When values conflict, the value in the later file
+          takes precedence, except where two nested objects can be merged.
+        </p>
+
+        <h3>4. What happens if two files contain the same property?</h3>
+        <p>
+          In object mode, the later file overrides conflicting values.
+          If both values are objects, their properties are merged
+          recursively. In array mode, items are appended instead.
+        </p>
+
+        <h3>5. Are my JSON files uploaded?</h3>
+        <p>
+          No. File reading, parsing, and merging take place in your
+          browser. Your selected files are not intentionally transmitted
+          to our server.
+        </p>
+
+        <h3>6. Why did merging fail?</h3>
+        <p>
+          A file may contain invalid JSON, or its root value may not
+          match the selected merging method. Check the error message
+          and choose the appropriate mode for your files.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Explore More Free Tools</h2>
+
+        <div class="related-tools">
+          <a href="json-to-csv.html">JSON to CSV</a>
+          <a href="word-counter.html">Word Counter</a>
+          <a href="qr-code-generator.html">QR Code Generator</a>
+          <a href="image-compressor.html">Image Compressor</a>
+          <a href="merge-pdf.html">Merge PDF</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © <span id="year"></span> ConvertToToolsOnline.
+      Free online tools.
+
+      <a href="index.html">Home</a>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const fileInput = document.getElementById("fileInput");
+    const chooseButton = document.getElementById("chooseButton");
+    const dropzone = document.getElementById("dropzone");
+
+    const fileList = document.getElementById("fileList");
+    const fileCount = document.getElementById("fileCount");
+
+    const mergeMode = document.getElementById("mergeMode");
+    const indentSelect = document.getElementById("indent");
+    const modeHelp = document.getElementById("modeHelp");
+
+    const mergeButton = document.getElementById("mergeButton");
+    const exampleButton = document.getElementById("exampleButton");
+    const clearButton = document.getElementById("clearButton");
+
+    const output = document.getElementById("output");
+    const outputInfo = document.getElementById("outputInfo");
+
+    const copyButton = document.getElementById("copyButton");
+    const downloadButton = document.getElementById("downloadButton");
+
+    const statusBox = document.getElementById("status");
+
+    let selectedFiles = [];
+    let nextId = 1;
+    let isProcessing = false;
+    let mergedText = "";
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    function setStatus(message, type = "") {
+      statusBox.textContent = message;
+      statusBox.className =
+        "status" + (type ? " " + type : "");
+    }
+
+    function formatSize(bytes) {
+      if (bytes < 1024) {
+        return bytes + " B";
+      }
+
+      if (bytes < 1024 * 1024) {
+        return (bytes / 1024).toFixed(1) + " KB";
+      }
+
+      return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+    }
+
+    function isJsonFile(file) {
+      return file.name.toLowerCase().endsWith(".json") ||
+        file.type === "application/json" ||
+        file.type === "text/json";
+    }
+
+    function clearOutput() {
+      mergedText = "";
+      output.value = "";
+      outputInfo.textContent = "No output yet";
+
+      copyButton.disabled = true;
+      downloadButton.disabled = true;
+    }
+
+    function invalidateOutput() {
+      clearOutput();
+    }
+
+    function updateModeHelp() {
+      const descriptions = {
+        arrays:
+          "Every file must contain a JSON array. All array items are appended to one array.",
+
+        objects:
+          "Every file must contain a JSON object. Nested objects merge recursively; later conflicting values take precedence.",
+
+        wrap:
+          "Any valid JSON value is accepted. Each complete input value becomes one item in the output array."
+      };
+
+      modeHelp.textContent = descriptions[mergeMode.value];
+    }
+
+    function renderFiles() {
+      fileList.replaceChildren();
+
+      if (selectedFiles.length === 0) {
+        const empty = document.createElement("div");
+
+        empty.className = "empty-state";
+        empty.textContent =
+          "Your selected JSON files will appear here.";
+
+        fileList.appendChild(empty);
+      }
+
+      for (const entry of selectedFiles) {
+        const row = document.createElement("div");
+        row.className = "file-item";
+
+        const icon = document.createElement("div");
+        icon.className = "file-icon";
+        icon.textContent = "JSON";
+
+        const info = document.createElement("div");
+        info.className = "file-info";
+
+        const name = document.createElement("span");
+        name.className = "file-name";
+        name.textContent = entry.file.name;
+        name.title = entry.file.name;
+
+        const size = document.createElement("span");
+        size.className = "file-size";
+        size.textContent = formatSize(entry.file.size);
+
+        info.append(name, size);
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "remove-button";
+        remove.textContent = "×";
+        remove.title = "Remove file";
+        remove.setAttribute(
+          "aria-label",
+          "Remove " + entry.file.name
+        );
+
+        remove.disabled = isProcessing;
+
+        remove.addEventListener("click", () => {
+          removeFile(entry.id);
+        });
+
+        row.append(icon, info, remove);
+        fileList.appendChild(row);
+      }
+
+      const totalSize = selectedFiles.reduce(
+        (sum, entry) => sum + entry.file.size,
+        0
+      );
+
+      fileCount.textContent =
+        selectedFiles.length + " file" +
+        (selectedFiles.length === 1 ? "" : "s") +
+        " · " + formatSize(totalSize);
+
+      chooseButton.disabled = isProcessing;
+      fileInput.disabled = isProcessing;
+
+      mergeMode.disabled = isProcessing;
+      indentSelect.disabled = isProcessing;
+
+      mergeButton.disabled =
+        selectedFiles.length < 2 || isProcessing;
+
+      exampleButton.disabled = isProcessing;
+
+      clearButton.disabled =
+        selectedFiles.length === 0 || isProcessing;
+    }
+
+    function addFiles(fileCollection) {
+      if (isProcessing) {
+        return;
+      }
+
+      let added = 0;
+      let rejected = 0;
+
+      for (const file of Array.from(fileCollection)) {
+        if (!isJsonFile(file)) {
+          rejected++;
+          continue;
+        }
+
+        const duplicate = selectedFiles.some(entry =>
+          entry.file.name === file.name &&
+          entry.file.size === file.size &&
+          entry.file.lastModified === file.lastModified
+        );
+
+        if (duplicate) {
+          continue;
+        }
+
+        selectedFiles.push({
+          id: nextId++,
+          file
+        });
+
+        added++;
+      }
+
+      renderFiles();
+      invalidateOutput();
+
+      if (rejected > 0) {
+        setStatus(
+          rejected + " unsupported file(s) skipped. Please select JSON files.",
+          "error"
+        );
+      } else if (added > 0) {
+        setStatus(added + " JSON file(s) added.");
+      } else {
+        setStatus("No new JSON files were added.");
+      }
+    }
+
+    function removeFile(id) {
+      if (isProcessing) {
+        return;
+      }
+
+      selectedFiles =
+        selectedFiles.filter(entry => entry.id !== id);
+
+      renderFiles();
+      invalidateOutput();
+
+      setStatus(
+        selectedFiles.length < 2
+          ? "Select at least two JSON files to begin."
+          : "File removed."
+      );
+    }
+
+    function isJsonObject(value) {
+      return value !== null &&
+        typeof value === "object" &&
+        !Array.isArray(value);
+    }
+
+    /*
+      Copy values into fresh objects.
+      Null-prototype objects avoid treating special property names,
+      such as "__proto__", as ordinary inherited properties.
+    */
+    function cloneJsonValue(value) {
+      if (Array.isArray(value)) {
+        return value.map(cloneJsonValue);
+      }
+
+      if (isJsonObject(value)) {
+        const result = Object.create(null);
+
+        for (const [key, child] of Object.entries(value)) {
+          result[key] = cloneJsonValue(child);
+        }
+
+        return result;
+      }
+
+      return value;
+    }
+
+    function mergeObjects(target, source) {
+      for (const [key, value] of Object.entries(source)) {
+        if (
+          Object.prototype.hasOwnProperty.call(target, key) &&
+          isJsonObject(target[key]) &&
+          isJsonObject(value)
+        ) {
+          mergeObjects(target[key], value);
+        } else {
+          target[key] = cloneJsonValue(value);
+        }
+      }
+
+      return target;
+    }
+
+    async function readJsonFiles() {
+      const parsedFiles = [];
+
+      for (let index = 0; index < selectedFiles.length; index++) {
+        const entry = selectedFiles[index];
+
+        setStatus(
+          "Reading file " + (index + 1) + " of " +
+          selectedFiles.length + ": " + entry.file.name
+        );
+
+        const text = await entry.file.text();
+
+        let parsed;
+
+        try {
+          parsed = JSON.parse(text);
+        } catch (error) {
+          throw new Error(
+            '"' + entry.file.name +
+            '" contains invalid JSON. Check the file syntax and try again.'
+          );
+        }
+
+        parsedFiles.push({
+          name: entry.file.name,
+          data: parsed
+        });
+      }
+
+      return parsedFiles;
+    }
+
+    function mergeParsedFiles(files) {
+      const mode = mergeMode.value;
+      const values = files.map(entry => entry.data);
+
+      if (mode === "arrays") {
+        const invalid = values.findIndex(
+          value => !Array.isArray(value)
+        );
+
+        if (invalid !== -1) {
+          throw new Error(
+            '"' + files[invalid].name +
+            '" does not contain a JSON array. Choose another mode or correct the file.'
+          );
+        }
+
+        const combined = [];
+
+        for (const value of values) {
+          combined.push(...value.map(cloneJsonValue));
+        }
+
+        return combined;
+      }
+
+      if (mode === "objects") {
+        const invalid = values.findIndex(
+          value => !isJsonObject(value)
+        );
+
+        if (invalid !== -1) {
+          throw new Error(
+            '"' + files[invalid].name +
+            '" does not contain a JSON object. Choose another mode or correct the file.'
+          );
+        }
+
+        const combined = Object.create(null);
+
+        for (const value of values) {
+          mergeObjects(combined, value);
+        }
+
+        return combined;
+      }
+
+      if (mode === "wrap") {
+        return values.map(cloneJsonValue);
+      }
+
+      throw new Error("The selected merging method is not supported.");
+    }
+
+    async function mergeJsonFiles() {
+      if (isProcessing) {
+        return;
+      }
+
+      if (selectedFiles.length < 2) {
+        setStatus(
+          "Please select at least two JSON files.",
+          "error"
+        );
+        return;
+      }
+
+      isProcessing = true;
+      clearOutput();
+      renderFiles();
+
+      mergeButton.textContent = "Merging...";
+
+      try {
+        const files = await readJsonFiles();
+
+        setStatus("Merging JSON data...");
+
+        const result = mergeParsedFiles(files);
+
+        const indent = Number(indentSelect.value);
+
+        mergedText = JSON.stringify(result, null, indent);
+
+        if (mergedText === undefined) {
+          throw new Error(
+            "The merged result could not be converted to JSON."
+          );
+        }
+
+        output.value = mergedText;
+
+        const bytes = new Blob([mergedText]).size;
+
+        outputInfo.textContent =
+          formatSize(bytes) + " · Valid JSON";
+
+        copyButton.disabled = false;
+        downloadButton.disabled = false;
+
+        setStatus(
+          "Success! " + files.length +
+          " JSON files were merged.",
+          "success"
+        );
+      } catch (error) {
+        console.error("JSON merge error:", error);
+
+        clearOutput();
+
+        setStatus(
+          error && error.message
+            ? error.message
+            : "Unable to merge these JSON files.",
+          "error"
+        );
+      } finally {
+        isProcessing = false;
+        mergeButton.textContent = "Merge JSON Files";
+        renderFiles();
+      }
+    }
+
+    async function copyOutput() {
+      if (!mergedText) {
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(mergedText);
+
+        setStatus(
+          "Merged JSON copied to your clipboard.",
+          "success"
+        );
+      } catch (error) {
+        output.focus();
+        output.select();
+
+        let copied = false;
+
+        try {
+          copied = document.execCommand("copy");
+        } catch (copyError) {
+          copied = false;
+        }
+
+        if (copied) {
+          setStatus(
+            "Merged JSON copied to your clipboard.",
+            "success"
+          );
+        } else {
+          setStatus(
+            "Automatic copying failed. Select the output and copy it manually.",
+            "error"
+          );
+        }
+      }
+    }
+
+    function downloadOutput() {
+      if (!mergedText) {
+        return;
+      }
+
+      const blob = new Blob(
+        [mergedText],
+        { type: "application/json;charset=utf-8" }
+      );
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = "merged-data.json";
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      setStatus(
+        "Your merged-data.json file is ready for download.",
+        "success"
+      );
+    }
+
+    function loadExample() {
+      if (isProcessing) {
+        return;
+      }
+
+      const first = [
+        {
+          id: 1,
+          name: "Alex",
+          profile: {
+            city: "Kathmandu"
+          }
+        },
+        {
+          id: 2,
+          name: "Sam",
+          profile: {
+            city: "Pokhara"
+          }
+        }
+      ];
+
+      const second = [
+        {
+          id: 3,
+          name: "Riley",
+          profile: {
+            city: "Hetauda"
+          }
+        }
+      ];
+
+      const examples = [
+        new File(
+          [JSON.stringify(first, null, 2)],
+          "users-part-1.json",
+          { type: "application/json" }
+        ),
+        new File(
+          [JSON.stringify(second, null, 2)],
+          "users-part-2.json",
+          { type: "application/json" }
+        )
+      ];
+
+      addFiles(examples);
+      mergeMode.value = "arrays";
+
+      updateModeHelp();
+
+      setStatus(
+        "Example files loaded. Click Merge JSON Files to test the tool."
+      );
+    }
+
+    function clearAll() {
+      if (isProcessing) {
+        return;
+      }
+
+      selectedFiles = [];
+      fileInput.value = "";
+
+      clearOutput();
+      renderFiles();
+
+      setStatus("Cleared. Select JSON files to start again.");
+    }
+
+    chooseButton.addEventListener("click", () => {
+      if (!isProcessing) {
+        fileInput.click();
+      }
+    });
+
+    fileInput.addEventListener("change", event => {
+      addFiles(event.target.files);
+      fileInput.value = "";
+    });
+
+    ["dragenter", "dragover"].forEach(eventName => {
+      dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+
+        if (!isProcessing) {
+          dropzone.classList.add("dragover");
+        }
+      });
+    });
+
+    ["dragleave", "drop"].forEach(eventName => {
+      dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+        dropzone.classList.remove("dragover");
+      });
+    });
+
+    dropzone.addEventListener("drop", event => {
+      if (!isProcessing && event.dataTransfer) {
+        addFiles(event.dataTransfer.files);
+      }
+    });
+
+    mergeButton.addEventListener("click", mergeJsonFiles);
+    exampleButton.addEventListener("click", loadExample);
+    clearButton.addEventListener("click", clearAll);
+    copyButton.addEventListener("click", copyOutput);
+    downloadButton.addEventListener("click", downloadOutput);
+
+    mergeMode.addEventListener("change", () => {
+      updateModeHelp();
+      invalidateOutput();
+      setStatus("Merging method changed. Run the merge again.");
+    });
+
+    indentSelect.addEventListener("change", () => {
+      invalidateOutput();
+      setStatus("Formatting changed. Run the merge again.");
+    });
+
+    updateModeHelp();
+    renderFiles();
+  </script>
+</body>
+</html>

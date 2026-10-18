@@ -1,0 +1,2352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Percentage Error Calculator | Formula and Step-by-Step Results</title>
+  <meta name="description" content="Calculate percentage error, absolute error, relative error and signed error. Compare multiple experimental trials, see each calculation step, and download your results.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="https://converttotoolsonline.com/percentage-error-calculator.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+  <meta property="og:title" content="Percentage Error Calculator">
+  <meta property="og:description" content="Calculate percentage error for individual measurements and multiple experimental trials, with formulas and downloadable results.">
+  <meta property="og:url" content="https://converttotoolsonline.com/percentage-error-calculator.html">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Percentage Error Calculator">
+  <meta name="twitter:description" content="Calculate percentage error, compare experimental values, and show each calculation step.">
+
+  <style>
+    :root {
+      color-scheme: light;
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --purple: #7c3aed;
+      --ink: #172033;
+      --muted: #64748b;
+      --line: #e5eaf2;
+      --bg: #f7f9fc;
+      --soft-blue: #eff6ff;
+      --soft-purple: #f5f0ff;
+      --green: #087f5b;
+      --red: #b42318;
+      --amber: #92400e;
+      --radius: 17px;
+      --shadow: 0 12px 35px rgba(31, 41, 55, .06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--blue-dark);
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      overflow-wrap: anywhere;
+    }
+
+    .container {
+      width: min(1080px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    /* Header */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 72px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .brand:hover {
+      color: var(--ink);
+    }
+
+    .brand-icon {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+    }
+
+    .brand-name span {
+      color: var(--blue);
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .main-nav a {
+      padding: 9px 12px;
+      border-radius: 10px;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+    }
+
+    /* Breadcrumb and hero */
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      padding-top: 24px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .breadcrumb a {
+      color: #52627a;
+    }
+
+    .hero {
+      padding: 42px 8px 32px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 6px 12px;
+      border: 1px solid #dbeafe;
+      border-radius: 999px;
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--purple);
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0 auto 14px;
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.16;
+      letter-spacing: -1.6px;
+    }
+
+    .gradient-text {
+      color: var(--blue);
+      background: linear-gradient(100deg, var(--blue), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* Main tool */
+
+    .tool-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 21px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .tool-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 23px;
+    }
+
+    .tool-heading h2 {
+      margin: 0 0 5px;
+      font-size: 23px;
+      line-height: 1.4;
+      letter-spacing: -.6px;
+    }
+
+    .tool-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .local-badge {
+      flex-shrink: 0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #ecfdf5;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .section-label {
+      margin: 25px 0 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .section-label:first-of-type {
+      margin-top: 0;
+    }
+
+    .section-description {
+      margin: -3px 0 16px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .trial-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .trial-toolbar p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 43px;
+      padding: 9px 14px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+      transition:
+        background .18s,
+        border-color .18s,
+        transform .18s;
+    }
+
+    .button:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: linear-gradient(110deg, var(--blue), var(--purple));
+      color: #fff;
+      box-shadow: 0 5px 14px rgba(79, 70, 229, .16);
+    }
+
+    .button-primary:hover:not(:disabled) {
+      color: #fff;
+      opacity: .94;
+    }
+
+    .button-secondary {
+      border-color: #dbe2ec;
+      background: #fff;
+      color: #334155;
+    }
+
+    .button-secondary:hover:not(:disabled) {
+      border-color: #94a3b8;
+      background: #f8fafc;
+    }
+
+    .button-small {
+      min-height: 35px;
+      padding: 6px 10px;
+      font-size: 11px;
+    }
+
+    /* Trial input table */
+
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .trial-table,
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .trial-table {
+      min-width: 610px;
+    }
+
+    .result-table {
+      min-width: 760px;
+    }
+
+    .trial-table th,
+    .result-table th {
+      padding: 12px 10px;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .trial-table td,
+    .result-table td {
+      padding: 10px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .trial-table input {
+      width: 100%;
+      min-width: 90px;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid #d7dfeb;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .trial-table input:focus {
+      border-color: var(--blue);
+    }
+
+    .trial-table input[aria-invalid="true"] {
+      border-color: var(--red);
+      background: #fff7f7;
+    }
+
+    .trial-table .label-input {
+      min-width: 110px;
+    }
+
+    .remove-button {
+      min-height: 34px;
+      padding: 6px 9px;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--red);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .remove-button:hover:not(:disabled) {
+      background: #fef2f2;
+    }
+
+    .table-help {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 23px;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .feedback:empty {
+      display: none;
+    }
+
+    .feedback.error {
+      border: 1px solid #fecaca;
+      background: #fef2f2;
+      color: var(--red);
+    }
+
+    .feedback.success {
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .feedback.info {
+      border: 1px solid #dbeafe;
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+    }
+
+    /* Results */
+
+    .results {
+      margin-top: 29px;
+      padding-top: 27px;
+      border-top: 1px solid var(--line);
+    }
+
+    .results[hidden] {
+      display: none;
+    }
+
+    .results-heading {
+      margin-bottom: 18px;
+    }
+
+    .results-heading h2 {
+      margin: 0 0 5px;
+      font-size: 23px;
+      line-height: 1.4;
+      letter-spacing: -.5px;
+    }
+
+    .results-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .summary-banner {
+      padding: 23px;
+      border: 1px solid #dbeafe;
+      border-radius: 16px;
+      background: linear-gradient(120deg, #eff6ff, #f5f3ff);
+    }
+
+    .summary-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .summary-number {
+      display: block;
+      color: var(--blue-dark);
+      font-size: clamp(34px, 6vw, 47px);
+      font-weight: 850;
+      line-height: 1.25;
+      letter-spacing: -1.3px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .summary-banner p {
+      margin: 8px 0 0;
+      color: #52627a;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .metric {
+      min-width: 0;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .metric-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .metric-value {
+      display: block;
+      font-size: clamp(17px, 2.5vw, 23px);
+      font-weight: 850;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-value.positive {
+      color: var(--green);
+    }
+
+    .metric-value.negative {
+      color: var(--red);
+    }
+
+    .metric-value.purple {
+      color: var(--purple);
+    }
+
+    .interpretation {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .interpretation p {
+      margin: 0 0 7px;
+    }
+
+    .interpretation p:last-child {
+      margin-bottom: 0;
+    }
+
+    .interpretation strong {
+      color: var(--ink);
+    }
+
+    .results-subheading {
+      margin: 27px 0 12px;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .result-table td {
+      white-space: nowrap;
+    }
+
+    .result-table td:first-child {
+      font-weight: 750;
+    }
+
+    .result-table .negative {
+      color: var(--red);
+    }
+
+    .result-table .positive {
+      color: var(--green);
+    }
+
+    .step-list {
+      display: grid;
+      gap: 13px;
+      margin-top: 15px;
+    }
+
+    .step-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .step-card h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+    }
+
+    .step-card p {
+      margin: 6px 0 0;
+      color: #52627a;
+      font-size: 12px;
+      line-height: 1.85;
+    }
+
+    .equation {
+      display: block;
+      padding: 11px 12px;
+      border-radius: 9px;
+      background: #f1f5f9;
+      color: #334155;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.85;
+      overflow-wrap: anywhere;
+    }
+
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 19px;
+    }
+
+    /* Learning content */
+
+    .content-section {
+      padding-top: 53px;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: clamp(24px, 4vw, 32px);
+      line-height: 1.3;
+      letter-spacing: -.8px;
+    }
+
+    .section-lead {
+      max-width: 780px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .info-card {
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .info-icon {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 14px;
+      border-radius: 11px;
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .formula-panel {
+      margin-top: 20px;
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .formula-panel h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+
+    .formula-panel p {
+      margin: 0 0 12px;
+      color: #52627a;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .formula-panel .equation {
+      margin: 12px 0;
+    }
+
+    .notice {
+      margin-top: 16px;
+      padding: 15px 17px;
+      border: 1px solid #fde68a;
+      border-radius: 12px;
+      background: #fffbeb;
+      color: #854d0e;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* FAQs: final section in main content */
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 21px;
+    }
+
+    .faq-item {
+      padding: 19px 21px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* Footer */
+
+    .site-footer {
+      margin-top: 57px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 30px;
+      padding-top: 29px;
+      padding-bottom: 27px;
+    }
+
+    .footer-about {
+      max-width: 550px;
+    }
+
+    .footer-about p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      padding-top: 8px;
+    }
+
+    .footer-nav a {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .footer-nav a:hover {
+      color: var(--blue);
+    }
+
+    .footer-bottom {
+      padding: 15px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      margin: 0;
+    }
+
+    @media print {
+      .site-header,
+      .breadcrumb,
+      .hero,
+      .tool-heading,
+      #trialForm,
+      .trial-toolbar,
+      .action-row,
+      .feedback,
+      .content-section,
+      .site-footer,
+      .result-actions {
+        display: none !important;
+      }
+
+      body {
+        background: #fff;
+        color: #111;
+      }
+
+      .container {
+        width: 100%;
+        max-width: none;
+      }
+
+      .tool-card {
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .results[hidden] {
+        display: none !important;
+      }
+
+      .results {
+        display: block !important;
+        padding: 0;
+        border: 0;
+      }
+
+      .step-card,
+      .metric,
+      .summary-banner {
+        break-inside: avoid;
+      }
+
+      .table-scroll {
+        overflow: visible;
+      }
+
+      .result-table {
+        min-width: 0;
+        font-size: 9px;
+      }
+
+      .result-table th,
+      .result-table td {
+        padding: 5px;
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .tool-card {
+        padding: 22px;
+      }
+
+      .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: calc(100% - 26px);
+      }
+
+      .header-inner {
+        min-height: 64px;
+        gap: 7px;
+      }
+
+      .brand {
+        gap: 7px;
+        font-size: 12px;
+        letter-spacing: -.3px;
+      }
+
+      .brand-icon {
+        width: 32px;
+        height: 32px;
+      }
+
+      .main-nav {
+        gap: 0;
+      }
+
+      .main-nav a {
+        padding: 7px 8px;
+        font-size: 11px;
+      }
+
+      .breadcrumb {
+        padding-top: 19px;
+      }
+
+      .hero {
+        padding: 33px 4px 26px;
+      }
+
+      h1 {
+        font-size: 34px;
+        letter-spacing: -1.2px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .tool-card {
+        padding: 17px 13px;
+        border-radius: 17px;
+      }
+
+      .tool-heading {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .tool-heading h2 {
+        font-size: 21px;
+      }
+
+      .trial-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .action-row .button,
+      .result-actions .button {
+        flex: 1 1 auto;
+      }
+
+      .summary-banner {
+        padding: 18px;
+      }
+
+      .metrics-grid {
+        gap: 9px;
+      }
+
+      .metric {
+        padding: 12px;
+      }
+
+      .metric-value {
+        font-size: 19px;
+      }
+
+      .step-card,
+      .formula-panel,
+      .faq-item {
+        padding: 17px;
+      }
+
+      .content-section {
+        padding-top: 43px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="ConvertToToolsOnline homepage">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+            <path d="M4 7H14M11 4L14 7L11 10"
+              stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 17H10M13 14L10 17L13 20"
+              stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-name">ConvertTo<span>Tools</span>Online</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a class="active"
+           href="percentage-error-calculator.html"
+           aria-current="page">Percentage Error</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Percentage Error Calculator</span>
+    </nav>
+
+    <section class="hero">
+      <span class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        Science · Physics · Chemistry
+      </span>
+
+      <h1>
+        Percentage Error
+        <span class="gradient-text">Calculator</span>
+      </h1>
+
+      <p>
+        Compare measured and accepted values, calculate absolute and relative
+        error, and inspect the working for every experimental trial.
+        Copy or download a report of your results.
+      </p>
+    </section>
+
+    <section class="tool-card" aria-labelledby="calculator-title">
+      <div class="tool-heading">
+        <div>
+          <h2 id="calculator-title">Compare your measurements</h2>
+          <p>Enter a measured result and its accepted reference value for each trial.</p>
+        </div>
+        <span class="local-badge">Runs in browser</span>
+      </div>
+
+      <form id="trialForm" novalidate>
+        <h3 class="section-label">Experimental trial data</h3>
+
+        <div class="trial-toolbar">
+          <p id="trialCount" aria-live="polite">1 of 20 trials</p>
+
+          <div class="action-row" style="margin-top:0">
+            <button type="button" id="addTrialButton" class="button button-secondary">
+              + Add Trial
+            </button>
+
+            <button type="button" id="exampleButton" class="button button-secondary">
+              Load Example
+            </button>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table class="trial-table">
+            <thead>
+              <tr>
+                <th scope="col">Trial label</th>
+                <th scope="col">Measured value</th>
+                <th scope="col">Accepted value</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="trialRows">
+              <!-- Rows are created safely with JavaScript. -->
+            </tbody>
+          </table>
+        </div>
+
+        <p class="table-help">
+          Enter real numbers, including decimals or negative values when
+          appropriate. Use consistent measurement units and, for meaningful
+          aggregate statistics, compare the same physical quantity across trials.
+          Accepted values of zero cannot be used to calculate percentage error.
+          Maximum: 20 trials.
+        </p>
+
+        <div class="action-row">
+          <button type="submit" class="button button-primary">
+            Calculate Percentage Error
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12H19M12 5L19 12L12 19"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <button type="button" id="resetButton" class="button button-secondary">
+            Reset
+          </button>
+        </div>
+      </form>
+
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+
+      <section id="results" class="results" aria-labelledby="results-title" hidden>
+        <div class="results-heading">
+          <h2 id="results-title">Your error analysis</h2>
+          <p id="resultsDescription"></p>
+        </div>
+
+        <div class="summary-banner">
+          <span class="summary-label">Mean absolute percentage error</span>
+          <output id="meanPercentError" class="summary-number">—</output>
+          <p id="meanErrorExplanation">
+            The average of the individual absolute percentage errors across the valid trials.
+          </p>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric">
+            <span class="metric-label">Valid trials</span>
+            <output class="metric-value" id="validTrials">—</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Mean absolute error</span>
+            <output class="metric-value" id="meanAbsoluteError">—</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Mean absolute relative error</span>
+            <output class="metric-value" id="meanRelativeError">—</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Mean signed percentage error</span>
+            <output class="metric-value" id="meanSignedError">—</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Smallest percentage error</span>
+            <output class="metric-value positive" id="bestError">—</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Largest percentage error</span>
+            <output class="metric-value negative" id="worstError">—</output>
+          </div>
+        </div>
+
+        <div class="interpretation">
+          <p><strong>How to interpret this summary</strong></p>
+          <p id="interpretationText"></p>
+          <p id="directionText"></p>
+        </div>
+
+        <h3 class="results-subheading">Individual trial results</h3>
+
+        <div class="table-scroll">
+          <table class="result-table">
+            <thead>
+              <tr>
+                <th scope="col">Trial</th>
+                <th scope="col">Measured</th>
+                <th scope="col">Accepted</th>
+                <th scope="col">Absolute error</th>
+                <th scope="col">Relative error</th>
+                <th scope="col">Percentage error</th>
+                <th scope="col">Signed error %</th>
+              </tr>
+            </thead>
+            <tbody id="resultRows"></tbody>
+          </table>
+        </div>
+
+        <h3 class="results-subheading">Step-by-step calculations</h3>
+        <p class="section-description">
+          Each step shows the values substituted into the formula.
+          The signed error is shown separately to indicate the direction of the difference.
+        </p>
+
+        <div class="step-list" id="stepList"></div>
+
+        <div class="result-actions">
+          <button type="button" id="copyButton" class="button button-secondary">
+            Copy Report
+          </button>
+
+          <button type="button" id="downloadButton" class="button button-secondary">
+            Download CSV
+          </button>
+
+          <button type="button" id="printButton" class="button button-secondary">
+            Print / Save as PDF
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <!-- Supporting education content -->
+    <section class="content-section" aria-labelledby="how-title">
+      <h2 class="section-title" id="how-title">
+        How to calculate percentage error
+      </h2>
+
+      <p class="section-lead">
+        Percentage error describes the absolute difference between a measured
+        result and a known accepted or reference value, relative to the
+        magnitude of that reference value. It is often used in laboratory
+        experiments and scientific measurements.
+      </p>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M4 5H20V19H4V5Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M8 9H16M8 13H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Absolute error</h3>
+          <p>
+            The absolute error is the magnitude of the difference between
+            the measured value and the accepted value. It is expressed in
+            the same units as the original measurements.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3>Relative error</h3>
+          <p>
+            Relative error is the absolute error divided by the magnitude
+            of the accepted value. It has no units and shows the error
+            relative to the reference.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M5 19L19 5M7 7H7.01M17 17H17.01"
+                stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.7"/>
+              <circle cx="17" cy="17" r="2" stroke="currentColor" stroke-width="1.7"/>
+            </svg>
+          </span>
+          <h3>Percentage error</h3>
+          <p>
+            Percentage error is the relative error multiplied by 100.
+            For a nonzero accepted value, it expresses the absolute
+            error as a percentage of the reference magnitude.
+          </p>
+        </article>
+      </div>
+
+      <div class="formula-panel">
+        <h3>Percentage error formula</h3>
+
+        <code class="equation">
+          Absolute error = |Measured value − Accepted value|
+        </code>
+
+        <code class="equation">
+          Relative error = Absolute error ÷ |Accepted value|
+        </code>
+
+        <code class="equation">
+          Percentage error = Relative error × 100%
+        </code>
+
+        <p>
+          The absolute value bars mean that ordinary percentage error
+          is nonnegative. This calculator uses the magnitude of the
+          accepted value in the denominator, which also permits negative
+          nonzero reference values.
+        </p>
+
+        <h3>Worked example</h3>
+
+        <p>
+          Suppose an experiment measures a value of 9.8 while the accepted
+          reference value is 9.81. The absolute difference is 0.01.
+        </p>
+
+        <code class="equation">
+          Absolute error = |9.8 − 9.81| = 0.01
+        </code>
+
+        <code class="equation">
+          Percentage error = (0.01 ÷ 9.81) × 100 ≈ 0.1019%
+        </code>
+
+        <p>
+          The measured result is below the accepted reference in this example.
+          The magnitude of the percentage error is approximately 0.1019%.
+          The signed percentage error is approximately −0.1019%.
+        </p>
+      </div>
+
+      <div class="notice">
+        <strong>Important:</strong> Percentage error requires a nonzero
+        accepted reference value. If no accepted value exists and you are
+        comparing two measurements of equal standing, percentage difference
+        may be more appropriate. The average percentage error across trials
+        is an arithmetic average of the individual errors; it is not the
+        same as calculating the percentage error of an average measurement.
+      </div>
+    </section>
+
+    <!-- FAQs are intentionally the final main-content section -->
+    <section class="content-section" aria-labelledby="faq-title">
+      <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
+
+      <div class="faq-list">
+        <article class="faq-item">
+          <h3>What is a percentage error calculator?</h3>
+          <p>
+            It calculates the absolute error, relative error, and percentage
+            error between a measured value and a nonzero accepted reference.
+            This version also compares multiple trials, gives step-by-step
+            calculations, and supports exporting the results.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>What is the formula for percentage error?</h3>
+          <p>
+            Percentage error equals the absolute difference between the
+            measured and accepted values divided by the magnitude of the
+            accepted value, multiplied by 100. Absolute value bars make
+            the result nonnegative.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Can percentage error be negative?</h3>
+          <p>
+            Standard absolute percentage error is not negative. However,
+            signed percentage error can be negative or positive and indicates
+            whether the measured value is below or above the accepted value
+            numerically.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Why can't the accepted value be zero?</h3>
+          <p>
+            Percentage error divides by the magnitude of the accepted
+            value. When that reference is zero, the calculation involves
+            division by zero and the percentage error is undefined.
+            Use a different suitable measure if the reference is zero.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>What is the difference between percentage error and percentage difference?</h3>
+          <p>
+            Percentage error normally compares a measurement with a
+            recognized reference value. Percentage difference is commonly
+            used to compare two measurements when neither is designated
+            as the accepted reference. Their formulas and interpretations
+            are not interchangeable.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Can I calculate percentage error for multiple trials?</h3>
+          <p>
+            Yes. Add a row for each trial and enter its measured value and
+            accepted reference value. The calculator reports each error,
+            the mean absolute percentage error, and additional aggregate
+            statistics. Use consistent units and the same kind of physical
+            quantity when interpreting the averages.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Does a lower percentage error always mean a better experiment?</h3>
+          <p>
+            A lower percentage error indicates a closer match to the
+            reference under this measure. It does not, by itself, establish
+            that the experiment was well designed, that the reference is
+            correct, or that uncertainty and systematic errors are absent.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Are my measurements sent to a server?</h3>
+          <p>
+            The calculator's calculations, copying, and CSV generation run
+            in your browser. This page's tool code does not send measurement
+            values to a calculation server. Separately configured hosting,
+            analytics, or advertising services may have their own data
+            practices.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-about">
+        <a class="brand" href="index.html">
+          <span class="brand-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M4 7H14M11 4L14 7L11 10"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 17H10M13 14L10 17L13 20"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="brand-name">ConvertTo<span>Tools</span>Online</span>
+        </a>
+
+        <p>
+          ConvertToToolsOnline provides practical browser-based utilities
+          for educational, productivity and everyday digital tasks.
+        </p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="percentage-error-calculator.html">Percentage Error Calculator</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>
+          &copy; <span id="copyrightYear">2026</span>
+          ConvertToToolsOnline. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const MAX_TRIALS = 20;
+      const MAX_MAGNITUDE = 1e100;
+
+      const form = document.getElementById("trialForm");
+      const trialRows = document.getElementById("trialRows");
+      const trialCount = document.getElementById("trialCount");
+      const feedback = document.getElementById("feedback");
+      const results = document.getElementById("results");
+
+      const addTrialButton = document.getElementById("addTrialButton");
+      const exampleButton = document.getElementById("exampleButton");
+      const resetButton = document.getElementById("resetButton");
+      const copyButton = document.getElementById("copyButton");
+      const downloadButton = document.getElementById("downloadButton");
+      const printButton = document.getElementById("printButton");
+
+      let latestReport = null;
+
+      function formatNumber(value, maximumDigits = 8) {
+        if (!Number.isFinite(value)) {
+          return "Not available";
+        }
+
+        if (Object.is(value, -0) || value === 0) {
+          return "0";
+        }
+
+        return value.toLocaleString(undefined, {
+          maximumSignificantDigits: maximumDigits,
+          useGrouping: true
+        });
+      }
+
+      function formatPercent(value) {
+        return formatNumber(value) + "%";
+      }
+
+      function showFeedback(message, type) {
+        feedback.textContent = message;
+        feedback.className = "feedback " + type;
+      }
+
+      function clearFeedback() {
+        feedback.textContent = "";
+        feedback.className = "feedback";
+      }
+
+      function clearResults() {
+        latestReport = null;
+        results.hidden = true;
+        copyButton.disabled = true;
+        downloadButton.disabled = true;
+        printButton.disabled = true;
+      }
+
+      function makeElement(tag, className, text) {
+        const element = document.createElement(tag);
+
+        if (className) {
+          element.className = className;
+        }
+
+        if (text !== undefined && text !== null) {
+          element.textContent = String(text);
+        }
+
+        return element;
+      }
+
+      function createInput(type, className, label, value = "") {
+        const input = document.createElement("input");
+
+        input.type = type;
+        input.className = className;
+        input.setAttribute("aria-label", label);
+
+        if (type === "number") {
+          input.step = "any";
+          input.inputMode = "decimal";
+          input.autocomplete = "off";
+        } else {
+          input.type = "text";
+          input.maxLength = 80;
+          input.autocomplete = "off";
+        }
+
+        input.value = value;
+        return input;
+      }
+
+      function rows() {
+        return Array.from(trialRows.querySelectorAll("tr"));
+      }
+
+      function updateTrialControls() {
+        const currentRows = rows();
+        const count = currentRows.length;
+
+        trialCount.textContent = count + " of " + MAX_TRIALS + " trials";
+        addTrialButton.disabled = count >= MAX_TRIALS;
+
+        currentRows.forEach(row => {
+          const button = row.querySelector(".remove-button");
+          button.disabled = count <= 1;
+          button.setAttribute(
+            "aria-label",
+            "Remove " + (row.querySelector(".label-input").value.trim() ||
+              ("Trial " + (currentRows.indexOf(row) + 1)))
+          );
+        });
+      }
+
+      function createTrialRow(label = "", measured = "", accepted = "") {
+        if (rows().length >= MAX_TRIALS) {
+          showFeedback("You can compare up to " + MAX_TRIALS + " trials at once.", "error");
+          return;
+        }
+
+        const row = document.createElement("tr");
+
+        const labelCell = document.createElement("td");
+        const measuredCell = document.createElement("td");
+        const acceptedCell = document.createElement("td");
+        const actionCell = document.createElement("td");
+
+        const labelInput = createInput(
+          "text",
+          "label-input",
+          "Trial label",
+          label
+        );
+
+        const measuredInput = createInput(
+          "number",
+          "measured-input",
+          "Measured value",
+          measured
+        );
+
+        const acceptedInput = createInput(
+          "number",
+          "accepted-input",
+          "Accepted reference value",
+          accepted
+        );
+
+        const removeButton = makeElement(
+          "button",
+          "remove-button",
+          "Remove"
+        );
+
+        removeButton.type = "button";
+        removeButton.className = "remove-button";
+        removeButton.addEventListener("click", () => {
+          if (rows().length <= 1) {
+            showFeedback(
+              "At least one trial row is required. Clear its values or use Reset.",
+              "info"
+            );
+            return;
+          }
+
+          row.remove();
+          updateTrialControls();
+          invalidateResults();
+        });
+
+        labelCell.appendChild(labelInput);
+        measuredCell.appendChild(measuredInput);
+        acceptedCell.appendChild(acceptedInput);
+        actionCell.appendChild(removeButton);
+
+        row.append(labelCell, measuredCell, acceptedCell, actionCell);
+        trialRows.appendChild(row);
+
+        updateTrialControls();
+      }
+
+      function invalidateResults() {
+        if (!results.hidden) {
+          clearResults();
+          showFeedback(
+            "Your trial data changed. Calculate again to update the results.",
+            "info"
+          );
+        }
+      }
+
+      function readTrialData() {
+        const currentRows = rows();
+
+        if (currentRows.length === 0) {
+          throw {
+            row: null,
+            field: null,
+            message: "Add at least one trial before calculating."
+          };
+        }
+
+        if (currentRows.length > MAX_TRIALS) {
+          throw {
+            row: null,
+            field: null,
+            message: "The maximum supported number of trials is " + MAX_TRIALS + "."
+          };
+        }
+
+        const data = [];
+
+        for (let index = 0; index < currentRows.length; index += 1) {
+          const row = currentRows[index];
+
+          const labelInput = row.querySelector(".label-input");
+          const measuredInput = row.querySelector(".measured-input");
+          const acceptedInput = row.querySelector(".accepted-input");
+
+          [labelInput, measuredInput, acceptedInput].forEach(input => {
+            input.removeAttribute("aria-invalid");
+          });
+
+          const label = labelInput.value.trim() || ("Trial " + (index + 1));
+          const measuredText = measuredInput.value.trim();
+          const acceptedText = acceptedInput.value.trim();
+
+          if (measuredText === "") {
+            throw {
+              row,
+              field: measuredInput,
+              message: label + ": enter a measured value."
+            };
+          }
+
+          if (acceptedText === "") {
+            throw {
+              row,
+              field: acceptedInput,
+              message: label + ": enter an accepted reference value."
+            };
+          }
+
+          const measured = Number(measuredText);
+          const accepted = Number(acceptedText);
+
+          if (
+            !Number.isFinite(measured) ||
+            Math.abs(measured) > MAX_MAGNITUDE
+          ) {
+            throw {
+              row,
+              field: measuredInput,
+              message: label + ": the measured value must be a finite number within the supported range."
+            };
+          }
+
+          if (
+            !Number.isFinite(accepted) ||
+            Math.abs(accepted) > MAX_MAGNITUDE
+          ) {
+            throw {
+              row,
+              field: acceptedInput,
+              message: label + ": the accepted value must be a finite number within the supported range."
+            };
+          }
+
+          if (accepted === 0) {
+            throw {
+              row,
+              field: acceptedInput,
+              message: label +
+                ": percentage error is undefined when the accepted reference value is zero. Enter a nonzero reference or remove this trial."
+            };
+          }
+
+          const difference = measured - accepted;
+
+          if (!Number.isFinite(difference)) {
+            throw {
+              row,
+              field: measuredInput,
+              message: label + ": the difference is outside the supported numeric range."
+            };
+          }
+
+          const absoluteError = Math.abs(difference);
+          const absoluteReference = Math.abs(accepted);
+          const relativeError = absoluteError / absoluteReference;
+          const percentageError = relativeError * 100;
+          const signedPercentageError =
+            (difference / absoluteReference) * 100;
+
+          if (
+            !Number.isFinite(relativeError) ||
+            !Number.isFinite(percentageError) ||
+            !Number.isFinite(signedPercentageError)
+          ) {
+            throw {
+              row,
+              field: measuredInput,
+              message: label + ": the calculated error is outside the supported numeric range."
+            };
+          }
+
+          data.push({
+            label,
+            measured,
+            accepted,
+            difference,
+            absoluteError,
+            relativeError,
+            percentageError,
+            signedPercentageError
+          });
+        }
+
+        return data;
+      }
+
+      function calculateSummary(trials) {
+        const count = trials.length;
+
+        const sum = trials.reduce((acc, trial) => {
+          acc.absoluteError += trial.absoluteError;
+          acc.relativeError += trial.relativeError;
+          acc.percentageError += trial.percentageError;
+          acc.signedPercentageError += trial.signedPercentageError;
+          return acc;
+        }, {
+          absoluteError: 0,
+          relativeError: 0,
+          percentageError: 0,
+          signedPercentageError: 0
+        });
+
+        const best = trials.reduce((current, trial) =>
+          trial.percentageError < current.percentageError ? trial : current
+        );
+
+        const worst = trials.reduce((current, trial) =>
+          trial.percentageError > current.percentageError ? trial : current
+        );
+
+        return {
+          count,
+          meanAbsoluteError: sum.absoluteError / count,
+          meanRelativeError: sum.relativeError / count,
+          meanPercentError: sum.percentageError / count,
+          meanSignedPercentError: sum.signedPercentageError / count,
+          best,
+          worst
+        };
+      }
+
+      function setMetric(id, value, className = "") {
+        const element = document.getElementById(id);
+
+        element.textContent = value;
+        element.classList.remove("positive", "negative", "purple");
+
+        if (className) {
+          element.classList.add(className);
+        }
+      }
+
+      function renderTable(trials) {
+        const tbody = document.getElementById("resultRows");
+        tbody.replaceChildren();
+
+        trials.forEach(trial => {
+          const row = document.createElement("tr");
+
+          const values = [
+            trial.label,
+            formatNumber(trial.measured),
+            formatNumber(trial.accepted),
+            formatNumber(trial.absoluteError),
+            formatNumber(trial.relativeError),
+            formatPercent(trial.percentageError),
+            formatPercent(trial.signedPercentageError)
+          ];
+
+          values.forEach((value, index) => {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+
+            if (index === 6) {
+              if (trial.signedPercentageError < 0) {
+                cell.className = "negative";
+              } else if (trial.signedPercentageError > 0) {
+                cell.className = "positive";
+              }
+            }
+
+            row.appendChild(cell);
+          });
+
+          tbody.appendChild(row);
+        });
+      }
+
+      function renderSteps(trials) {
+        const container = document.getElementById("stepList");
+        container.replaceChildren();
+
+        trials.forEach((trial, index) => {
+          const card = makeElement("article", "step-card");
+          const heading = makeElement(
+            "h4",
+            "",
+            (index + 1) + ". " + trial.label
+          );
+
+          const absoluteEquation = makeElement(
+            "code",
+            "equation",
+            "Absolute error = |Measured − Accepted| = |" +
+              formatNumber(trial.measured) + " − " +
+              formatNumber(trial.accepted) + "| = " +
+              formatNumber(trial.absoluteError)
+          );
+
+          const relativeEquation = makeElement(
+            "code",
+            "equation",
+            "Relative error = Absolute error ÷ |Accepted| = " +
+              formatNumber(trial.absoluteError) + " ÷ " +
+              formatNumber(Math.abs(trial.accepted)) + " = " +
+              formatNumber(trial.relativeError)
+          );
+
+          const percentEquation = makeElement(
+            "code",
+            "equation",
+            "Percentage error = Relative error × 100 = " +
+              formatNumber(trial.relativeError) + " × 100 = " +
+              formatPercent(trial.percentageError)
+          );
+
+          const signedEquation = makeElement(
+            "code",
+            "equation",
+            "Signed percentage error = (Measured − Accepted) ÷ |Accepted| × 100 = " +
+              formatPercent(trial.signedPercentageError)
+          );
+
+          let direction;
+
+          if (trial.difference < 0) {
+            direction = "The measured value is below the accepted value.";
+          } else if (trial.difference > 0) {
+            direction = "The measured value is above the accepted value.";
+          } else {
+            direction = "The measured value matches the accepted value exactly.";
+          }
+
+          const note = makeElement("p", "", direction);
+
+          card.append(
+            heading,
+            absoluteEquation,
+            relativeEquation,
+            percentEquation,
+            signedEquation,
+            note
+          );
+
+          container.appendChild(card);
+        });
+      }
+
+      function renderSummary(trials, summary) {
+        document.getElementById("resultsDescription").textContent =
+          "Analysis of " + summary.count + " valid trial" +
+          (summary.count === 1 ? "" : "s") +
+          ". Values are calculated using the reference value entered for each trial.";
+
+        setMetric(
+          "meanPercentError",
+          formatPercent(summary.meanPercentError)
+        );
+
+        document.getElementById("meanErrorExplanation").textContent =
+          "The arithmetic mean of the individual absolute percentage errors for " +
+          summary.count + " trial" + (summary.count === 1 ? "." : "s.");
+
+        setMetric("validTrials", String(summary.count));
+
+        setMetric(
+          "meanAbsoluteError",
+          formatNumber(summary.meanAbsoluteError)
+        );
+
+        setMetric(
+          "meanRelativeError",
+          formatNumber(summary.meanRelativeError)
+        );
+
+        setMetric(
+          "meanSignedError",
+          formatPercent(summary.meanSignedPercentError),
+          summary.meanSignedPercentError < 0
+            ? "negative"
+            : summary.meanSignedPercentError > 0
+              ? "positive"
+              : ""
+        );
+
+        setMetric(
+          "bestError",
+          formatPercent(summary.best.percentageError)
+        );
+
+        setMetric(
+          "worstError",
+          formatPercent(summary.worst.percentageError)
+        );
+
+        const first = trials[0];
+
+        document.getElementById("interpretationText").textContent =
+          "A mean absolute percentage error of " +
+          formatPercent(summary.meanPercentError) +
+          " is the average relative magnitude of the differences across the supplied trials. " +
+          "It is not a universal grade for experiment quality; appropriate interpretation depends on the measurement and its uncertainty.";
+
+        if (summary.meanSignedPercentError < 0) {
+          document.getElementById("directionText").textContent =
+            "The mean signed percentage error is negative, meaning measured values tend to fall below their accepted references numerically in this batch.";
+        } else if (summary.meanSignedPercentError > 0) {
+          document.getElementById("directionText").textContent =
+            "The mean signed percentage error is positive, meaning measured values tend to exceed their accepted references numerically in this batch.";
+        } else {
+          document.getElementById("directionText").textContent =
+            "The mean signed percentage error is zero. This may reflect exact matches or cancellation between positive and negative signed errors.";
+        }
+
+        renderTable(trials);
+        renderSteps(trials);
+      }
+
+      function calculate() {
+        clearFeedback();
+        clearResults();
+
+        try {
+          const trials = readTrialData();
+          const summary = calculateSummary(trials);
+
+          const finiteResults = [
+            summary.meanAbsoluteError,
+            summary.meanRelativeError,
+            summary.meanPercentError,
+            summary.meanSignedPercentError
+          ];
+
+          if (!finiteResults.every(Number.isFinite)) {
+            showFeedback(
+              "The aggregate result exceeds the supported numeric range. Review your values.",
+              "error"
+            );
+            return;
+          }
+
+          latestReport = { trials, summary };
+
+          renderSummary(trials, summary);
+
+          results.hidden = false;
+          copyButton.disabled = false;
+          downloadButton.disabled = false;
+          printButton.disabled = false;
+
+          showFeedback(
+            "Calculation complete. Your trial table, summary, and worked solutions are ready.",
+            "success"
+          );
+        } catch (error) {
+          if (error && error.message) {
+            if (error.field) {
+              error.field.setAttribute("aria-invalid", "true");
+              error.field.focus();
+              error.field.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+              });
+            }
+
+            showFeedback(error.message, "error");
+          } else {
+            showFeedback(
+              "We couldn't calculate these values. Please review your inputs and try again.",
+              "error"
+            );
+          }
+        }
+      }
+
+      function buildReportText() {
+        if (!latestReport) {
+          return "";
+        }
+
+        const { trials, summary } = latestReport;
+
+        const lines = [
+          "ConvertToToolsOnline — Percentage Error Calculator",
+          "",
+          "SUMMARY",
+          "Number of trials: " + summary.count,
+          "Mean absolute error: " + formatNumber(summary.meanAbsoluteError),
+          "Mean absolute relative error: " + formatNumber(summary.meanRelativeError),
+          "Mean absolute percentage error: " + formatPercent(summary.meanPercentError),
+          "Mean signed percentage error: " + formatPercent(summary.meanSignedPercentError),
+          "Smallest percentage error: " + formatPercent(summary.best.percentageError) +
+            " (" + summary.best.label + ")",
+          "Largest percentage error: " + formatPercent(summary.worst.percentageError) +
+            " (" + summary.worst.label + ")",
+          "",
+          "INDIVIDUAL TRIALS"
+        ];
+
+        trials.forEach((trial, index) => {
+          lines.push(
+            "",
+            (index + 1) + ". " + trial.label,
+            "Measured value: " + formatNumber(trial.measured),
+            "Accepted value: " + formatNumber(trial.accepted),
+            "Signed difference (measured - accepted): " + formatNumber(trial.difference),
+            "Absolute error: " + formatNumber(trial.absoluteError),
+            "Relative error: " + formatNumber(trial.relativeError),
+            "Percentage error: " + formatPercent(trial.percentageError),
+            "Signed percentage error: " + formatPercent(trial.signedPercentageError)
+          );
+        });
+
+        lines.push(
+          "",
+          "FORMULAS",
+          "Absolute error = |Measured - Accepted|",
+          "Relative error = Absolute error / |Accepted|",
+          "Percentage error = Relative error * 100",
+          "Signed percentage error = (Measured - Accepted) / |Accepted| * 100",
+          "",
+          "Note: Accepted reference values must be nonzero. Ensure units are consistent."
+        );
+
+        return lines.join("\n");
+      }
+
+      async function copyReport() {
+        if (!latestReport) {
+          return;
+        }
+
+        const text = buildReportText();
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.setAttribute("readonly", "");
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            const copied = document.execCommand("copy");
+            textarea.remove();
+
+            if (!copied) {
+              throw new Error("Clipboard unavailable");
+            }
+          }
+
+          showFeedback("Your error analysis report has been copied.", "success");
+        } catch (error) {
+          showFeedback(
+            "Your browser blocked clipboard access. You can download the CSV report instead.",
+            "error"
+          );
+        }
+      }
+
+      function csvCell(value) {
+        let text = String(value ?? "");
+
+        // Guard string cells against spreadsheet formula injection.
+        if (typeof value === "string" && /^[\s]*[=+\-@]/.test(text)) {
+          text = "'" + text;
+        }
+
+        return '"' + text.replace(/"/g, '""') + '"';
+      }
+
+      function downloadCSV() {
+        if (!latestReport) {
+          return;
+        }
+
+        const { trials, summary } = latestReport;
+
+        const rows = [
+          ["Section", "Trial", "Measured value", "Accepted value",
+            "Signed difference", "Absolute error", "Relative error",
+            "Percentage error", "Signed percentage error"],
+
+          ["Summary", "All trials", "", "", "",
+            summary.meanAbsoluteError,
+            summary.meanRelativeError,
+            summary.meanPercentError,
+            summary.meanSignedPercentError]
+        ];
+
+        trials.forEach(trial => {
+          rows.push([
+            "Trial",
+            trial.label,
+            trial.measured,
+            trial.accepted,
+            trial.difference,
+            trial.absoluteError,
+            trial.relativeError,
+            trial.percentageError,
+            trial.signedPercentageError
+          ]);
+        });
+
+        rows.push(
+          [],
+          ["Formula", "Absolute error", "|Measured value - Accepted value|"],
+          ["Formula", "Relative error", "Absolute error / |Accepted value|"],
+          ["Formula", "Percentage error", "Relative error * 100"],
+          ["Formula", "Signed percentage error", "(Measured value - Accepted value) / |Accepted value| * 100"],
+          ["Note", "Accepted reference values must be nonzero. Check that the units are consistent."]
+        );
+
+        const csv = "\uFEFF" + rows
+          .map(row => row.map(csvCell).join(","))
+          .join("\r\n");
+
+        const blob = new Blob([csv], {
+          type: "text/csv;charset=utf-8;"
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "percentage-error-analysis.csv";
+        link.style.display = "none";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+        showFeedback("Your CSV report has been prepared for download.", "success");
+      }
+
+      function resetCalculator() {
+        trialRows.replaceChildren();
+        createTrialRow();
+
+        clearFeedback();
+        clearResults();
+        updateTrialControls();
+      }
+
+      function loadExample() {
+        trialRows.replaceChildren();
+
+        createTrialRow("Trial 1", "9.8", "9.81");
+        createTrialRow("Trial 2", "9.79", "9.81");
+        createTrialRow("Trial 3", "9.85", "9.81");
+
+        calculate();
+      }
+
+      addTrialButton.addEventListener("click", () => {
+        if (rows().length >= MAX_TRIALS) {
+          showFeedback(
+            "You have reached the limit of " + MAX_TRIALS + " trials.",
+            "error"
+          );
+          return;
+        }
+
+        const nextNumber = rows().length + 1;
+
+        createTrialRow("Trial " + nextNumber);
+        invalidateResults();
+        clearFeedback();
+      });
+
+      exampleButton.addEventListener("click", loadExample);
+      resetButton.addEventListener("click", resetCalculator);
+      copyButton.addEventListener("click", copyReport);
+      downloadButton.addEventListener("click", downloadCSV);
+
+      printButton.addEventListener("click", () => {
+        if (latestReport) {
+          window.print();
+        }
+      });
+
+      trialRows.addEventListener("input", event => {
+        if (
+          event.target.matches(
+            ".label-input, .measured-input, .accepted-input"
+          )
+        ) {
+          if (event.target.matches(".label-input")) {
+            updateTrialControls();
+          }
+
+          invalidateResults();
+          event.target.removeAttribute("aria-invalid");
+        }
+      });
+
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        calculate();
+      });
+
+      document.getElementById("copyrightYear").textContent =
+        String(new Date().getFullYear());
+
+      // Start with one empty row, so visitors calculate their own results.
+      createTrialRow();
+    })();
+  </script>
+</body>
+</html>

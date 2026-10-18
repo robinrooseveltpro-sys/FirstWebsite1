@@ -1,0 +1,1797 @@
+/* =========================================================
+ConvertToToolsOnline
+Global stylesheet
+Version: 2.0
+
+Features:
+
+- Clean, modern interface
+- Responsive mobile-first layout
+- Accessible typography and focus indicators
+- Tool cards and live search
+- Consistent buttons and forms
+- Responsive navigation
+- Reusable colors and spacing
+- Reduced-motion support
+  ========================================================= */
+
+/* =========================================================
+
+1. Design tokens
+   ========================================================= */
+
+:root {
+color-scheme: light;
+
+--blue: #2563eb;
+--blue-dark: #1d4ed8;
+--blue-light: #eff6ff;
+
+--purple: #7c3aed;
+--purple-light: #f5f3ff;
+
+--text: #172033;
+--text-secondary: #526078;
+--text-muted: #64748b;
+
+--background: #ffffff;
+--background-soft: #f8fafc;
+--background-hover: #f1f5f9;
+
+--border: #e2e8f0;
+--border-strong: #cbd5e1;
+
+--success: #15803d;
+--success-background: #f0fdf4;
+
+--error: #b91c1c;
+--error-background: #fef2f2;
+
+--warning: #92400e;
+--warning-background: #fffbeb;
+
+--shadow-sm:
+0 1px 3px rgba(15, 23, 42, 0.06);
+
+--shadow-md:
+0 8px 24px rgba(15, 23, 42, 0.07);
+
+--shadow-lg:
+0 16px 40px rgba(15, 23, 42, 0.10);
+
+--radius-sm: 8px;
+--radius-md: 12px;
+--radius-lg: 18px;
+--radius-xl: 24px;
+
+--container-width: 1120px;
+--header-height: 72px;
+
+--transition:
+180ms ease;
+}
+
+/* =========================================================
+2. Reset and base styles
+========================================================= */
+
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+}
+
+html {
+scroll-behavior: smooth;
+scroll-padding-top: 88px;
+-webkit-text-size-adjust: 100%;
+text-size-adjust: 100%;
+}
+
+body {
+margin: 0;
+min-width: 320px;
+min-height: 100vh;
+
+display: flex;
+flex-direction: column;
+
+font-family:
+Inter,
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+Roboto,
+Helvetica,
+Arial,
+sans-serif;
+
+font-size: 16px;
+line-height: 1.7;
+font-weight: 400;
+
+color: var(--text);
+background: var(--background);
+
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+main {
+flex: 1 0 auto;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+max-width: 100%;
+}
+
+img,
+video {
+height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+font: inherit;
+}
+
+button {
+-webkit-tap-highlight-color: transparent;
+}
+
+button,
+[role="button"],
+a {
+touch-action: manipulation;
+}
+
+button:disabled {
+cursor: not-allowed;
+opacity: 0.6;
+}
+
+textarea {
+resize: vertical;
+}
+
+::selection {
+color: #ffffff;
+background: var(--blue);
+}
+
+/* =========================================================
+3. Accessibility and focus indicators
+========================================================= */
+
+:focus-visible {
+outline: 3px solid rgba(37, 99, 235, 0.65);
+outline-offset: 3px;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+outline: none;
+}
+
+.skip-link {
+position: absolute;
+z-index: 10000;
+top: 8px;
+left: 8px;
+
+padding: 12px 16px;
+border-radius: var(--radius-sm);
+
+color: #ffffff;
+background: var(--blue);
+
+transform: translateY(-150%);
+}
+
+.skip-link:focus {
+transform: translateY(0);
+}
+
+/* =========================================================
+4. Typography
+========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 0;
+color: var(--text);
+line-height: 1.3;
+font-weight: 750;
+overflow-wrap: break-word;
+}
+
+h1 {
+margin-bottom: 18px;
+font-size: clamp(2rem, 5vw, 3.25rem);
+letter-spacing: -0.045em;
+}
+
+h2 {
+margin-bottom: 14px;
+font-size: clamp(1.55rem, 3vw, 2.1rem);
+letter-spacing: -0.025em;
+}
+
+h3 {
+margin-bottom: 10px;
+font-size: clamp(1.1rem, 2vw, 1.3rem);
+}
+
+h4 {
+margin-bottom: 8px;
+font-size: 1.05rem;
+}
+
+p {
+margin-top: 0;
+margin-bottom: 16px;
+}
+
+p:last-child {
+margin-bottom: 0;
+}
+
+small,
+.text-small {
+font-size: 0.875rem;
+}
+
+.text-muted {
+color: var(--text-muted);
+}
+
+.text-secondary {
+color: var(--text-secondary);
+}
+
+.text-center {
+text-align: center;
+}
+
+.text-left {
+text-align: left;
+}
+
+.text-right {
+text-align: right;
+}
+
+strong,
+b {
+font-weight: 700;
+}
+
+/* =========================================================
+5. Links
+========================================================= */
+
+a {
+color: var(--blue);
+text-decoration: none;
+transition:
+color var(--transition),
+background-color var(--transition);
+}
+
+a:hover {
+color: var(--blue-dark);
+}
+
+a:not([class]) {
+text-decoration-thickness: 1px;
+text-underline-offset: 3px;
+}
+
+/* =========================================================
+6. Layout containers
+========================================================= */
+
+.container {
+width: min(100% - 40px, var(--container-width));
+margin-right: auto;
+margin-left: auto;
+}
+
+.container-sm {
+width: min(100% - 40px, 760px);
+margin-right: auto;
+margin-left: auto;
+}
+
+.container-lg {
+width: min(100% - 40px, 1280px);
+margin-right: auto;
+margin-left: auto;
+}
+
+.section {
+padding-top: 64px;
+padding-bottom: 64px;
+}
+
+.section-sm {
+padding-top: 36px;
+padding-bottom: 36px;
+}
+
+.section-header {
+max-width: 720px;
+margin: 0 auto 32px;
+text-align: center;
+}
+
+.section-header p {
+color: var(--text-secondary);
+font-size: 1.05rem;
+}
+
+.section-title {
+margin-bottom: 12px;
+}
+
+.section-description {
+max-width: 680px;
+margin: 0 auto;
+color: var(--text-secondary);
+}
+
+/* =========================================================
+7. Website header and navigation
+========================================================= */
+
+.site-header {
+position: relative;
+z-index: 100;
+
+width: 100%;
+min-height: var(--header-height);
+
+background: rgba(255, 255, 255, 0.97);
+border-bottom: 1px solid var(--border);
+
+box-shadow: var(--shadow-sm);
+}
+
+.site-header .container {
+min-height: var(--header-height);
+
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 20px;
+}
+
+.logo {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+
+flex-shrink: 0;
+
+color: var(--text) !important;
+
+font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+font-weight: 800;
+line-height: 1.25;
+letter-spacing: -0.045em;
+}
+
+.logo:hover {
+color: var(--blue) !important;
+}
+
+.site-header nav {
+display: flex;
+align-items: center;
+justify-content: flex-end;
+flex-wrap: wrap;
+gap: 8px;
+}
+
+.site-header nav a {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+min-height: 40px;
+padding: 8px 12px;
+
+border-radius: var(--radius-sm);
+
+color: var(--text-secondary);
+font-size: 0.95rem;
+font-weight: 550;
+}
+
+.site-header nav a:hover,
+.site-header nav a[aria-current="page"] {
+color: var(--blue);
+background: var(--blue-light);
+}
+
+/* =========================================================
+8. Optional mobile navigation button
+
+Works with common menu button classes.
+========================================================= */
+
+.menu-toggle,
+.mobile-menu-toggle,
+.nav-toggle,
+#mobileMenuButton,
+#menuToggle,
+#navToggle,
+[data-menu-toggle] {
+display: none;
+
+align-items: center;
+justify-content: center;
+
+min-width: 44px;
+min-height: 44px;
+padding: 8px 12px;
+
+border: 1px solid var(--border);
+border-radius: var(--radius-sm);
+
+color: var(--text);
+background: #ffffff;
+
+cursor: pointer;
+transition:
+background-color var(--transition),
+border-color var(--transition);
+}
+
+.menu-toggle:hover,
+.mobile-menu-toggle:hover,
+.nav-toggle:hover,
+#mobileMenuButton:hover,
+#menuToggle:hover,
+#navToggle:hover,
+[data-menu-toggle]:hover {
+background: var(--background-hover);
+border-color: var(--border-strong);
+}
+
+.menu-toggle[aria-expanded="true"],
+.mobile-menu-toggle[aria-expanded="true"],
+.nav-toggle[aria-expanded="true"],
+#mobileMenuButton[aria-expanded="true"],
+#menuToggle[aria-expanded="true"],
+#navToggle[aria-expanded="true"],
+[data-menu-toggle][aria-expanded="true"] {
+color: var(--blue);
+background: var(--blue-light);
+}
+
+/* =========================================================
+9. Hero section
+========================================================= */
+
+.hero,
+.hero-section {
+position: relative;
+overflow: hidden;
+
+padding: clamp(56px, 8vw, 100px) 20px;
+
+text-align: center;
+
+background:
+radial-gradient(
+ellipse at 15% 0%,
+rgba(124, 58, 237, 0.08),
+transparent 48%
+),
+radial-gradient(
+ellipse at 85% 10%,
+rgba(37, 99, 235, 0.10),
+transparent 48%
+),
+linear-gradient(
+180deg,
+#ffffff 0%,
+#f8faff 100%
+);
+}
+
+.hero-content {
+position: relative;
+z-index: 1;
+
+width: min(100%, 860px);
+margin: 0 auto;
+}
+
+.hero h1,
+.hero-section h1 {
+max-width: 900px;
+margin-right: auto;
+margin-left: auto;
+
+color: var(--text);
+}
+
+.hero h1 span,
+.hero-section h1 span {
+color: var(--blue);
+}
+
+.hero p,
+.hero-section p {
+max-width: 720px;
+margin: 0 auto 26px;
+
+color: var(--text-secondary);
+font-size: clamp(1rem, 2.5vw, 1.15rem);
+}
+
+.hero-buttons,
+.hero-actions {
+display: flex;
+align-items: center;
+justify-content: center;
+flex-wrap: wrap;
+gap: 12px;
+
+margin-top: 24px;
+}
+
+.hero-badge,
+.badge {
+display: inline-flex;
+align-items: center;
+gap: 7px;
+
+margin-bottom: 18px;
+padding: 6px 12px;
+
+color: var(--blue-dark);
+background: var(--blue-light);
+border: 1px solid #dbeafe;
+border-radius: 999px;
+
+font-size: 0.875rem;
+font-weight: 650;
+}
+
+/* =========================================================
+10. Buttons
+========================================================= */
+
+.btn,
+.button,
+button.btn,
+a.btn,
+.primary-btn,
+.secondary-btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+
+min-height: 44px;
+padding: 11px 18px;
+
+border: 1px solid transparent;
+border-radius: var(--radius-sm);
+
+font-size: 0.95rem;
+font-weight: 650;
+line-height: 1.4;
+text-align: center;
+text-decoration: none;
+
+cursor: pointer;
+
+transition:
+transform var(--transition),
+background-color var(--transition),
+border-color var(--transition),
+box-shadow var(--transition);
+}
+
+.btn:hover,
+.button:hover,
+.primary-btn:hover,
+.secondary-btn:hover {
+text-decoration: none;
+transform: translateY(-1px);
+}
+
+.btn-primary,
+.primary-btn,
+.btn.primary {
+color: #ffffff !important;
+background: var(--blue);
+border-color: var(--blue);
+box-shadow: 0 3px 8px rgba(37, 99, 235, 0.15);
+}
+
+.btn-primary:hover,
+.primary-btn:hover,
+.btn.primary:hover {
+color: #ffffff !important;
+background: var(--blue-dark);
+border-color: var(--blue-dark);
+box-shadow: var(--shadow-md);
+}
+
+.btn-secondary,
+.secondary-btn,
+.btn.secondary {
+color: var(--text) !important;
+background: #ffffff;
+border-color: var(--border-strong);
+}
+
+.btn-secondary:hover,
+.secondary-btn:hover,
+.btn.secondary:hover {
+color: var(--blue) !important;
+background: var(--background-soft);
+border-color: var(--blue);
+}
+
+.btn-purple {
+color: #ffffff !important;
+background: var(--purple);
+border-color: var(--purple);
+}
+
+.btn-purple:hover {
+color: #ffffff !important;
+background: #6d28d9;
+}
+
+.btn-block {
+display: flex;
+width: 100%;
+}
+
+.btn-small {
+min-height: 36px;
+padding: 7px 12px;
+font-size: 0.875rem;
+}
+
+.btn-large {
+min-height: 50px;
+padding: 13px 24px;
+font-size: 1rem;
+}
+
+/* =========================================================
+11. Search bar
+========================================================= */
+
+.search-section {
+position: relative;
+z-index: 2;
+
+width: min(100% - 40px, 720px);
+margin: -20px auto 48px;
+}
+
+.search-wrapper,
+.search-container,
+.search-box {
+position: relative;
+
+display: flex;
+align-items: center;
+gap: 10px;
+
+padding: 8px;
+
+background: #ffffff;
+border: 1px solid var(--border);
+border-radius: var(--radius-lg);
+
+box-shadow: var(--shadow-md);
+}
+
+.search-wrapper input,
+.search-container input,
+.search-box input,
+#toolSearch,
+#tool-search,
+#searchTools {
+width: 100%;
+min-width: 0;
+min-height: 46px;
+padding: 12px 14px;
+
+border: 0;
+outline: none;
+border-radius: var(--radius-sm);
+
+color: var(--text);
+background: transparent;
+
+font-size: 1rem;
+}
+
+.search-wrapper input:focus,
+.search-container input:focus,
+.search-box input:focus,
+#toolSearch:focus,
+#tool-search:focus,
+#searchTools:focus {
+outline: 2px solid transparent;
+}
+
+.search-wrapper:focus-within,
+.search-container:focus-within,
+.search-box:focus-within {
+border-color: var(--blue);
+box-shadow:
+0 0 0 3px rgba(37, 99, 235, 0.12),
+var(--shadow-md);
+}
+
+.search-wrapper input::placeholder,
+.search-container input::placeholder,
+.search-box input::placeholder,
+#toolSearch::placeholder,
+#tool-search::placeholder,
+#searchTools::placeholder {
+color: #94a3b8;
+}
+
+.search-icon {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+flex-shrink: 0;
+padding-left: 10px;
+
+color: var(--text-muted);
+font-size: 1.1rem;
+}
+
+.tool-search-status,
+.search-status {
+margin: 12px 2px 0;
+color: var(--text-secondary);
+font-size: 0.9rem;
+}
+
+/* =========================================================
+12. Sections and tool listings
+========================================================= */
+
+.tools-section,
+.tool-list-section {
+padding: 24px 0 64px;
+}
+
+.tools-section > .container > h2,
+.tools-section > .container > h3 {
+margin-bottom: 12px;
+}
+
+.tools-intro {
+max-width: 720px;
+margin-bottom: 28px;
+color: var(--text-secondary);
+}
+
+.tool-grid,
+.tools-grid,
+.tools-container,
+.tool-list,
+.features-grid,
+.cards-grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 22px;
+}
+
+/* =========================================================
+13. Tool cards
+========================================================= */
+
+.tool-card,
+[data-tool-card],
+.tool-item {
+position: relative;
+
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+
+min-width: 0;
+min-height: 190px;
+padding: 24px;
+
+border: 1px solid var(--border);
+border-radius: var(--radius-lg);
+
+background: #ffffff;
+box-shadow: var(--shadow-sm);
+
+transition:
+transform var(--transition),
+box-shadow var(--transition),
+border-color var(--transition);
+}
+
+.tool-card:hover,
+[data-tool-card]:hover,
+.tool-item:hover {
+transform: translateY(-4px);
+
+border-color: #bfdbfe;
+box-shadow: var(--shadow-md);
+}
+
+.tool-card h2,
+.tool-card h3,
+[data-tool-card] h2,
+[data-tool-card] h3,
+.tool-item h2,
+.tool-item h3 {
+margin-top: 0;
+margin-bottom: 10px;
+
+font-size: 1.1rem;
+letter-spacing: -0.015em;
+}
+
+.tool-card p,
+[data-tool-card] p,
+.tool-item p {
+margin-bottom: 16px;
+color: var(--text-secondary);
+font-size: 0.94rem;
+line-height: 1.65;
+}
+
+.tool-card > a:last-child,
+[data-tool-card] > a:last-child,
+.tool-item > a:last-child {
+margin-top: auto;
+font-weight: 650;
+}
+
+.tool-card > a:first-child,
+[data-tool-card] > a:first-child,
+.tool-item > a:first-child {
+color: inherit;
+}
+
+.tool-card > a:first-child:hover,
+[data-tool-card] > a:first-child:hover,
+.tool-item > a:first-child:hover {
+color: var(--blue);
+}
+
+.tool-icon,
+.feature-icon {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+width: 48px;
+height: 48px;
+margin-bottom: 18px;
+
+border-radius: var(--radius-md);
+
+color: var(--blue);
+background: var(--blue-light);
+
+font-size: 1.5rem;
+}
+
+.tool-icon.purple,
+.feature-icon.purple {
+color: var(--purple);
+background: var(--purple-light);
+}
+
+.tool-card .tag,
+.tool-tag {
+display: inline-flex;
+align-items: center;
+
+padding: 4px 9px;
+margin-bottom: 12px;
+
+border-radius: 999px;
+
+color: var(--blue-dark);
+background: var(--blue-light);
+
+font-size: 0.75rem;
+font-weight: 650;
+}
+
+/* =========================================================
+14. Feature cards and content cards
+========================================================= */
+
+.feature-card,
+.content-card {
+padding: 26px;
+
+border: 1px solid var(--border);
+border-radius: var(--radius-lg);
+
+background: #ffffff;
+box-shadow: var(--shadow-sm);
+}
+
+.feature-card h3,
+.content-card h3 {
+margin-bottom: 10px;
+}
+
+.feature-card p,
+.content-card p {
+color: var(--text-secondary);
+}
+
+.card {
+padding: 24px;
+border: 1px solid var(--border);
+border-radius: var(--radius-lg);
+background: #ffffff;
+box-shadow: var(--shadow-sm);
+}
+
+/* =========================================================
+15. Categories and badges
+========================================================= */
+
+.category-links,
+.category-list {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 10px;
+}
+
+.category-link,
+.category-chip {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+padding: 8px 14px;
+
+color: var(--text-secondary);
+background: #ffffff;
+border: 1px solid var(--border);
+border-radius: 999px;
+
+font-size: 0.9rem;
+font-weight: 550;
+}
+
+.category-link:hover,
+.category-chip:hover,
+.category-link.active,
+.category-chip.active {
+color: var(--blue-dark);
+background: var(--blue-light);
+border-color: #bfdbfe;
+}
+
+/* =========================================================
+16. Forms and inputs
+========================================================= */
+
+form {
+max-width: 100%;
+}
+
+label {
+display: inline-block;
+margin-bottom: 6px;
+font-weight: 600;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="submit"]),
+select,
+textarea {
+max-width: 100%;
+
+border: 1px solid var(--border-strong);
+border-radius: var(--radius-sm);
+
+color: var(--text);
+background: #ffffff;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="submit"]),
+select,
+textarea {
+padding: 11px 12px;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="submit"]):focus,
+select:focus,
+textarea:focus {
+border-color: var(--blue);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+width: 18px;
+height: 18px;
+accent-color: var(--blue);
+vertical-align: middle;
+}
+
+input[type="range"] {
+max-width: 100%;
+accent-color: var(--blue);
+}
+
+input[type="file"] {
+display: block;
+max-width: 100%;
+}
+
+fieldset {
+min-width: 0;
+margin: 0;
+padding: 18px;
+
+border: 1px solid var(--border);
+border-radius: var(--radius-md);
+}
+
+legend {
+padding: 0 8px;
+font-weight: 700;
+}
+
+.form-group {
+margin-bottom: 18px;
+}
+
+.form-help {
+display: block;
+margin-top: 6px;
+color: var(--text-muted);
+font-size: 0.875rem;
+}
+
+/* =========================================================
+17. Tool workspaces and result panels
+========================================================= */
+
+.tool-page,
+.tool-container,
+.tool-workspace {
+width: min(100% - 40px, 900px);
+margin: 40px auto 64px;
+}
+
+.tool-panel,
+.tool-box,
+.tool-workspace-panel,
+.result-panel {
+padding: clamp(18px, 4vw, 30px);
+
+border: 1px solid var(--border);
+border-radius: var(--radius-lg);
+
+background: #ffffff;
+box-shadow: var(--shadow-md);
+}
+
+.tool-page-header {
+margin-bottom: 28px;
+}
+
+.tool-page-header p {
+max-width: 760px;
+color: var(--text-secondary);
+}
+
+.tool-controls {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 18px;
+}
+
+.tool-control {
+min-width: 0;
+}
+
+.result,
+.tool-result,
+.output-box {
+max-width: 100%;
+margin-top: 18px;
+padding: 14px;
+
+overflow-wrap: anywhere;
+word-break: break-word;
+
+border: 1px solid var(--border);
+border-radius: var(--radius-sm);
+
+background: var(--background-soft);
+}
+
+.result:empty,
+.tool-result:empty {
+display: none;
+}
+
+.result-success {
+color: var(--success);
+background: var(--success-background);
+border-color: #bbf7d0;
+}
+
+.result-error {
+color: var(--error);
+background: var(--error-background);
+border-color: #fecaca;
+}
+
+.result-warning {
+color: var(--warning);
+background: var(--warning-background);
+border-color: #fde68a;
+}
+
+/* =========================================================
+18. Breadcrumb navigation
+========================================================= */
+
+.breadcrumbs,
+.breadcrumb,
+nav[aria-label="Breadcrumb"] {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 7px;
+
+margin-bottom: 24px;
+
+color: var(--text-muted);
+font-size: 0.875rem;
+}
+
+.breadcrumbs a,
+.breadcrumb a,
+nav[aria-label="Breadcrumb"] a {
+color: var(--blue);
+}
+
+.breadcrumbs a:hover,
+.breadcrumb a:hover,
+nav[aria-label="Breadcrumb"] a:hover {
+text-decoration: underline;
+}
+
+/* =========================================================
+19. FAQ sections
+========================================================= */
+
+.faq-section {
+margin-top: 42px;
+}
+
+.faq-list {
+margin-top: 22px;
+}
+
+.faq-item {
+padding: 20px 0;
+border-bottom: 1px solid var(--border);
+}
+
+.faq-item:first-child {
+border-top: 1px solid var(--border);
+}
+
+.faq-item h3 {
+margin-bottom: 8px;
+}
+
+.faq-item p {
+margin-bottom: 0;
+color: var(--text-secondary);
+}
+
+details {
+padding: 16px 0;
+border-bottom: 1px solid var(--border);
+}
+
+summary {
+cursor: pointer;
+font-weight: 650;
+}
+
+summary:hover {
+color: var(--blue);
+}
+
+details > :not(summary) {
+margin-top: 12px;
+}
+
+/* =========================================================
+20. Informational sections
+========================================================= */
+
+.content-section,
+.article-section {
+margin-top: 38px;
+}
+
+.content-section h2,
+.article-section h2 {
+margin-bottom: 14px;
+}
+
+.content-section p,
+.article-section p,
+.content-section li,
+.article-section li {
+color: var(--text-secondary);
+}
+
+.content-section ul,
+.content-section ol,
+.article-section ul,
+.article-section ol {
+padding-left: 24px;
+}
+
+.content-section li,
+.article-section li {
+margin-bottom: 8px;
+}
+
+.notice,
+.info-box {
+margin-top: 20px;
+padding: 16px;
+
+border: 1px solid #bfdbfe;
+border-radius: var(--radius-md);
+
+color: #1e40af;
+background: var(--blue-light);
+}
+
+.warning-box {
+padding: 16px;
+
+border: 1px solid #fde68a;
+border-radius: var(--radius-md);
+
+color: var(--warning);
+background: var(--warning-background);
+}
+
+/* =========================================================
+21. Tables
+========================================================= */
+
+.table-wrapper {
+width: 100%;
+overflow-x: auto;
+margin: 20px 0;
+
+border: 1px solid var(--border);
+border-radius: var(--radius-md);
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+text-align: left;
+}
+
+th,
+td {
+padding: 12px 16px;
+border-bottom: 1px solid var(--border);
+vertical-align: top;
+}
+
+th {
+color: var(--text);
+background: var(--background-soft);
+font-weight: 700;
+}
+
+tr:last-child td {
+border-bottom: 0;
+}
+
+/* =========================================================
+22. Code and preformatted text
+========================================================= */
+
+code,
+kbd,
+samp {
+font-family:
+"SFMono-Regular",
+Consolas,
+"Liberation Mono",
+monospace;
+
+font-size: 0.9em;
+}
+
+code {
+padding: 2px 5px;
+border-radius: 5px;
+background: var(--background-hover);
+overflow-wrap: anywhere;
+}
+
+pre {
+max-width: 100%;
+padding: 18px;
+
+overflow: auto;
+
+border: 1px solid var(--border);
+border-radius: var(--radius-md);
+
+background: var(--background-soft);
+
+line-height: 1.6;
+tab-size: 2;
+}
+
+pre code {
+padding: 0;
+background: transparent;
+overflow-wrap: normal;
+}
+
+/* =========================================================
+23. Loading states and utility classes
+========================================================= */
+
+.loading {
+opacity: 0.65;
+pointer-events: none;
+}
+
+.hidden,
+[hidden] {
+display: none !important;
+}
+
+.visually-hidden {
+position: absolute !important;
+
+width: 1px !important;
+height: 1px !important;
+
+padding: 0 !important;
+margin: -1px !important;
+
+overflow: hidden !important;
+
+clip: rect(0, 0, 0, 0) !important;
+white-space: nowrap !important;
+
+border: 0 !important;
+}
+
+.flex {
+display: flex;
+}
+
+.flex-wrap {
+flex-wrap: wrap;
+}
+
+.align-center {
+align-items: center;
+}
+
+.justify-center {
+justify-content: center;
+}
+
+.justify-between {
+justify-content: space-between;
+}
+
+.gap-sm {
+gap: 8px;
+}
+
+.gap-md {
+gap: 16px;
+}
+
+.gap-lg {
+gap: 24px;
+}
+
+.mt-0 {
+margin-top: 0;
+}
+
+.mt-1 {
+margin-top: 8px;
+}
+
+.mt-2 {
+margin-top: 16px;
+}
+
+.mt-3 {
+margin-top: 24px;
+}
+
+.mb-0 {
+margin-bottom: 0;
+}
+
+.mb-1 {
+margin-bottom: 8px;
+}
+
+.mb-2 {
+margin-bottom: 16px;
+}
+
+.mb-3 {
+margin-bottom: 24px;
+}
+
+.w-full {
+width: 100%;
+}
+
+.max-w-full {
+max-width: 100%;
+}
+
+/* =========================================================
+24. Website footer
+========================================================= */
+
+.site-footer {
+flex-shrink: 0;
+
+margin-top: 48px;
+padding: 30px 20px;
+
+border-top: 1px solid var(--border);
+
+color: var(--text-muted);
+background: var(--background-soft);
+
+text-align: center;
+font-size: 0.9rem;
+}
+
+.site-footer .container {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 12px;
+}
+
+.site-footer p {
+margin: 0;
+}
+
+.site-footer a {
+display: inline-block;
+margin: 4px 8px;
+color: var(--text-secondary);
+}
+
+.site-footer a:hover {
+color: var(--blue);
+text-decoration: underline;
+}
+
+/* =========================================================
+25. Responsive layouts: tablets
+========================================================= */
+
+@media (max-width: 900px) {
+.tool-grid,
+.tools-grid,
+.tools-container,
+.tool-list,
+.features-grid,
+.cards-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 18px;
+}
+
+.section {
+padding-top: 52px;
+padding-bottom: 52px;
+}
+
+.tool-card,
+[data-tool-card],
+.tool-item {
+padding: 21px;
+}
+
+.site-header .container {
+gap: 14px;
+}
+
+.site-header nav {
+gap: 4px;
+}
+
+.site-header nav a {
+padding-right: 9px;
+padding-left: 9px;
+}
+}
+
+/* =========================================================
+26. Responsive layouts: phones
+========================================================= */
+
+@media (max-width: 600px) {
+html {
+scroll-padding-top: 20px;
+}
+
+body {
+font-size: 15px;
+}
+
+.container,
+.container-sm,
+.container-lg {
+width: min(100% - 28px, var(--container-width));
+}
+
+.section {
+padding-top: 40px;
+padding-bottom: 40px;
+}
+
+.section-sm {
+padding-top: 28px;
+padding-bottom: 28px;
+}
+
+.section-header {
+margin-bottom: 24px;
+}
+
+.hero,
+.hero-section {
+padding: 54px 14px 62px;
+}
+
+.hero p,
+.hero-section p {
+font-size: 1rem;
+}
+
+.hero-buttons,
+.hero-actions {
+flex-direction: column;
+align-items: stretch;
+
+width: min(100%, 360px);
+margin-right: auto;
+margin-left: auto;
+
+}
+
+.hero-buttons .btn,
+.hero-actions .btn {
+width: 100%;
+}
+
+.search-section {
+width: calc(100% - 28px);
+margin-top: -14px;
+margin-bottom: 32px;
+}
+
+.search-wrapper,
+.search-container,
+.search-box {
+gap: 4px;
+padding: 5px;
+border-radius: var(--radius-md);
+}
+
+.search-wrapper input,
+.search-container input,
+.search-box input,
+#toolSearch,
+#tool-search,
+#searchTools {
+min-height: 44px;
+padding: 10px;
+font-size: 16px;
+}
+
+.tool-grid,
+.tools-grid,
+.tools-container,
+.tool-list,
+.features-grid,
+.cards-grid {
+grid-template-columns: minmax(0, 1fr);
+gap: 14px;
+}
+
+.tool-card,
+[data-tool-card],
+.tool-item,
+.feature-card,
+.content-card,
+.card {
+padding: 20px;
+border-radius: var(--radius-md);
+}
+
+.tool-card,
+[data-tool-card],
+.tool-item {
+min-height: 0;
+}
+
+.tool-icon,
+.feature-icon {
+width: 44px;
+height: 44px;
+margin-bottom: 14px;
+}
+
+.site-header {
+min-height: 62px;
+}
+
+.site-header .container {
+min-height: 62px;
+gap: 10px;
+}
+
+.site-header nav {
+max-width: 100%;
+gap: 2px;
+}
+
+.site-header nav a {
+min-height: 36px;
+padding: 6px 8px;
+font-size: 0.875rem;
+}
+
+.tool-page,
+.tool-container,
+.tool-workspace {
+width: calc(100% - 28px);
+margin-top: 28px;
+margin-bottom: 42px;
+}
+
+.tool-panel,
+.tool-box,
+.tool-workspace-panel,
+.result-panel {
+padding: 18px;
+border-radius: var(--radius-md);
+}
+
+.tool-controls {
+grid-template-columns: minmax(0, 1fr);
+gap: 12px;
+}
+
+.btn,
+.button,
+button.btn,
+a.btn,
+.primary-btn,
+.secondary-btn {
+max-width: 100%;
+}
+
+.btn-block {
+width: 100%;
+}
+
+.site-footer {
+margin-top: 32px;
+padding: 24px 14px;
+}
+
+.site-footer a {
+margin: 5px;
+}
+
+th,
+td {
+padding: 10px;
+}
+}
+
+/* =========================================================
+27. Very small screens
+========================================================= */
+
+@media (max-width: 360px) {
+.container,
+.container-sm,
+.container-lg {
+width: calc(100% - 24px);
+}
+
+.logo {
+font-size: 1rem;
+}
+
+.site-header .container {
+gap: 8px;
+}
+
+.site-header nav a {
+padding-right: 6px;
+padding-left: 6px;
+font-size: 0.8rem;
+}
+
+h1 {
+font-size: 1.8rem;
+}
+
+.tool-card,
+[data-tool-card],
+.tool-item {
+padding: 16px;
+}
+}
+
+/* =========================================================
+28. Reduced motion accessibility
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+*,
+*::before,
+*::after {
+scroll-behavior: auto !important;
+
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+
+transition-duration: 0.01ms !important;
+
+}
+}

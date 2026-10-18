@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HEIC to JPG Converter Online Free | ConvertToToolsOnline</title>
+
+  <meta name="description"
+    content="Convert HEIC to JPG online for free. Turn iPhone HEIC and HEIF photos into JPG images in your browser. Preview, adjust quality, and download your pictures.">
+
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="ConvertToToolsOnline">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical"
+    href="https://converttotoolsonline.com/heic-to-jpg.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free HEIC to JPG Converter">
+  <meta property="og:description"
+    content="Convert HEIC and HEIF photos to JPG online. Free, simple, and browser-based.">
+  <meta property="og:url"
+    content="https://converttotoolsonline.com/heic-to-jpg.html">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="HEIC to JPG Converter Online">
+  <meta name="twitter:description"
+    content="Convert iPhone HEIC photos into JPG images for free.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HEIC to JPG Converter",
+    "url": "https://converttotoolsonline.com/heic-to-jpg.html",
+    "description": "Convert HEIC and HEIF images to JPG directly in your browser.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "browserRequirements": "Requires JavaScript and an internet connection to load the conversion library",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I convert HEIC to JPG online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Select your HEIC or HEIF photos, choose your preferred JPG quality, and click Convert to JPG. Download each converted image when processing finishes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the HEIC to JPG converter free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This tool is free to use and does not require an account."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my photos uploaded to a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your selected photos are processed in your browser and are not intentionally uploaded to our server. The conversion library is downloaded from a third-party CDN."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a HEIC file?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HEIC is an image format commonly associated with photos taken on Apple devices. Some apps and websites do not accept HEIC files, so converting them to JPG can improve compatibility."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --text: #172033;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --background: #f5f8ff;
+      --white: #ffffff;
+      --green: #15803d;
+      --red: #dc2626;
+      --radius: 18px;
+      --shadow: 0 12px 35px rgba(15, 23, 42, .07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--background);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: .55;
+    }
+
+    .container {
+      width: min(100% - 30px, 1000px);
+      margin-inline: auto;
+    }
+
+    .header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 850;
+      letter-spacing: -.5px;
+    }
+
+    .brand span {
+      color: var(--primary);
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 44px 0 24px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      color: #1d4ed8;
+      background: #dbeafe;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    h1 {
+      margin: 15px 0 10px;
+      font-size: clamp(29px, 5vw, 43px);
+      line-height: 1.16;
+      letter-spacing: -1.4px;
+    }
+
+    .hero p {
+      max-width: 670px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .tool-card {
+      max-width: 820px;
+      margin: 15px auto 0;
+      padding: clamp(15px, 4vw, 28px);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .dropzone {
+      padding: 27px 15px;
+      text-align: center;
+      border: 2px dashed #bfdbfe;
+      border-radius: 15px;
+      background: #f8fbff;
+      transition: background .2s, border-color .2s;
+    }
+
+    .dropzone.dragover {
+      background: #dbeafe;
+      border-color: var(--primary);
+    }
+
+    .upload-icon {
+      width: 57px;
+      height: 57px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 12px;
+      border-radius: 16px;
+      background: #dbeafe;
+      color: var(--primary);
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .dropzone h2 {
+      margin: 0 0 5px;
+      font-size: 19px;
+    }
+
+    .dropzone p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .button {
+      min-height: 44px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 17px;
+      border: 0;
+      border-radius: 10px;
+      font-weight: 750;
+      transition: background .2s;
+    }
+
+    .button-primary {
+      color: #fff;
+      background: var(--primary);
+    }
+
+    .button-primary:hover:not(:disabled) {
+      background: var(--primary-dark);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+    }
+
+    .button-secondary:hover:not(:disabled) {
+      background: #e2e8f0;
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    .settings {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 21px;
+      padding: 15px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .setting-label {
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .quality-control {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      gap: 12px;
+      min-width: 180px;
+    }
+
+    .quality-control input {
+      width: 100%;
+      accent-color: var(--primary);
+    }
+
+    .quality-value {
+      min-width: 44px;
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 850;
+      text-align: right;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 23px 0 12px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .file-count {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .file-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .file-thumb {
+      flex: 0 0 63px;
+      width: 63px;
+      height: 63px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: #1d4ed8;
+      background: #eff6ff;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .file-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .file-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .file-name {
+      display: block;
+      overflow-wrap: anywhere;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .file-meta {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .file-status {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .file-status.success {
+      color: var(--green);
+    }
+
+    .file-status.error {
+      color: var(--red);
+    }
+
+    .file-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .small-button {
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .small-button:hover:not(:disabled) {
+      background: #eff6ff;
+    }
+
+    .small-button.download {
+      color: #fff;
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+
+    .empty-state {
+      padding: 22px;
+      color: var(--muted);
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .actions .button-primary {
+      flex: 1;
+    }
+
+    .status {
+      min-height: 26px;
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .status.error {
+      color: var(--red);
+    }
+
+    .status.success {
+      color: var(--green);
+    }
+
+    .privacy-note {
+      margin-top: 13px;
+      padding: 12px 14px;
+      color: #166534;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 11px;
+      font-size: 13px;
+    }
+
+    .content-section {
+      padding: 35px 0;
+    }
+
+    .info-card {
+      margin-bottom: 18px;
+      padding: 22px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .info-card h2 {
+      margin: 0 0 12px;
+      font-size: 23px;
+      letter-spacing: -.5px;
+    }
+
+    .info-card h3 {
+      margin: 20px 0 5px;
+      font-size: 17px;
+    }
+
+    .info-card p,
+    .info-card li {
+      color: #475569;
+    }
+
+    .steps {
+      padding-left: 22px;
+      margin-bottom: 0;
+    }
+
+    .steps li {
+      padding: 5px 0;
+    }
+
+    .related-tools {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .related-tools a {
+      padding: 8px 12px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .footer {
+      padding: 23px 0;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: min(100% - 22px, 1000px);
+      }
+
+      .nav {
+        min-height: 60px;
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      .hero {
+        padding-top: 32px;
+      }
+
+      .file-item {
+        gap: 8px;
+        padding: 9px;
+      }
+
+      .file-thumb {
+        flex-basis: 48px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .file-actions {
+        gap: 5px;
+      }
+
+      .small-button {
+        padding: 6px 7px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .actions .button {
+        width: 100%;
+      }
+
+      .info-card {
+        padding: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="index.html">
+        ConvertTo<span>ToolsOnline</span>
+      </a>
+
+      <a class="nav-link" href="index.html">← All Tools</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <span class="badge">Free Image Converter</span>
+
+      <h1>HEIC to JPG Converter</h1>
+
+      <p>
+        Convert HEIC and HEIF photos to JPG online for free.
+        Select your iPhone pictures, adjust image quality, and
+        download compatible JPG images directly to your device.
+      </p>
+    </section>
+
+    <section class="tool-card container" aria-label="HEIC conversion tool">
+      <div class="dropzone" id="dropzone">
+        <div class="upload-icon" aria-hidden="true">HEIC</div>
+
+        <h2>Convert your HEIC photos</h2>
+
+        <p>
+          Select HEIC or HEIF images, or drag and drop them here.
+        </p>
+
+        <button
+          type="button"
+          class="button button-primary"
+          id="chooseButton"
+        >
+          + Select HEIC Images
+        </button>
+
+        <input
+          type="file"
+          id="fileInput"
+          accept=".heic,.heif,image/heic,image/heif"
+          multiple
+          aria-label="Select HEIC or HEIF images"
+        >
+      </div>
+
+      <div class="settings">
+        <label class="setting-label" for="quality">
+          JPG Quality
+        </label>
+
+        <div class="quality-control">
+          <input
+            type="range"
+            id="quality"
+            min="40"
+            max="100"
+            value="90"
+            step="5"
+          >
+
+          <output class="quality-value" id="qualityValue" for="quality">
+            90%
+          </output>
+        </div>
+      </div>
+
+      <div class="section-heading">
+        <h2>Your Images</h2>
+        <span class="file-count" id="fileCount">0 images</span>
+      </div>
+
+      <div class="file-list" id="fileList" aria-live="polite">
+        <div class="empty-state">
+          Your selected images will appear here.
+        </div>
+      </div>
+
+      <div class="actions">
+        <button
+          type="button"
+          class="button button-primary"
+          id="convertButton"
+          disabled
+        >
+          Convert to JPG
+        </button>
+
+        <button
+          type="button"
+          class="button button-secondary"
+          id="clearButton"
+          disabled
+        >
+          Clear All
+        </button>
+      </div>
+
+      <div class="status" id="status" role="status" aria-live="polite">
+        Select one or more HEIC or HEIF images to begin.
+      </div>
+
+      <div class="privacy-note">
+        🔒 <strong>Privacy:</strong> Your selected photos are processed
+        in your browser and are not intentionally uploaded to our server.
+        The conversion library is downloaded from a third-party CDN.
+      </div>
+    </section>
+
+    <section class="content-section container">
+      <article class="info-card">
+        <h2>How to Convert HEIC to JPG Online</h2>
+
+        <p>
+          HEIC images can cause compatibility problems with some websites,
+          apps, and image editors. Converting them to JPG can make the
+          pictures easier to use.
+        </p>
+
+        <ol class="steps">
+          <li>Click Select HEIC Images and choose your photos.</li>
+          <li>Adjust the JPG quality setting if needed.</li>
+          <li>Click Convert to JPG to process your images.</li>
+          <li>Download each converted JPG file to your device.</li>
+        </ol>
+      </article>
+
+      <article class="info-card">
+        <h2>Why Convert HEIC to JPG?</h2>
+
+        <h3>Better compatibility</h3>
+        <p>
+          JPG is supported by many browsers, image editors, apps,
+          and online upload forms. Converting HEIC photos can help
+          when a website does not accept the original format.
+        </p>
+
+        <h3>Convert iPhone photos</h3>
+        <p>
+          HEIC is commonly associated with photos taken on Apple devices.
+          This tool can convert supported HEIC and HEIF files into JPG
+          images without requiring a desktop application.
+        </p>
+
+        <h3>Choose your JPG quality</h3>
+        <p>
+          Higher quality generally preserves more image detail and may
+          produce larger files. Lower quality can reduce file size but
+          may make compression artifacts more noticeable.
+        </p>
+
+        <h3>Understand the limitations</h3>
+        <p>
+          Conversion speed depends on your device and image size.
+          Some unusual, damaged, encrypted, or unsupported files may fail.
+          The original image's metadata may not be retained in the JPG.
+          This browser tool is intended for image conversion, not for
+          preserving every property of the original file.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>1. Is the HEIC to JPG converter free?</h3>
+        <p>
+          Yes. You can convert supported images for free without
+          creating an account.
+        </p>
+
+        <h3>2. Can I convert multiple HEIC images at once?</h3>
+        <p>
+          Yes. Select multiple files and the tool will process them
+          one by one. You can download each converted image separately.
+        </p>
+
+        <h3>3. Are my photos uploaded to your server?</h3>
+        <p>
+          The conversion takes place in your browser. The tool does not
+          intentionally upload your selected photos to our server.
+          Its conversion library is downloaded from a third-party CDN.
+        </p>
+
+        <h3>4. What is the difference between HEIC and JPG?</h3>
+        <p>
+          HEIC can store images efficiently, while JPG is widely supported
+          by websites and applications. Converting HEIC to JPG can improve
+          compatibility, although the resulting file may be larger.
+        </p>
+
+        <h3>5. Why is my HEIC file not converting?</h3>
+        <p>
+          The file may be damaged, unsupported, or too demanding for your
+          device's available memory. Make sure your internet connection
+          is active so the conversion library can load, and try a different
+          HEIC file.
+        </p>
+
+        <h3>6. Will converting HEIC to JPG reduce image quality?</h3>
+        <p>
+          JPG uses lossy compression, so some image information may be
+          discarded. Choose a higher quality setting when you want to
+          prioritize visual quality over file size.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Explore More Free Tools</h2>
+
+        <div class="related-tools">
+          <a href="image-compressor.html">Image Compressor</a>
+          <a href="image-resizer.html">Image Resizer</a>
+          <a href="jpg-to-pdf.html">JPG to PDF</a>
+          <a href="merge-pdf.html">Merge PDF</a>
+          <a href="qr-code-generator.html">QR Code Generator</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © <span id="year"></span> ConvertToToolsOnline.
+      Free online conversion tools.
+
+      <a href="index.html">Home</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+
+  <script>
+    "use strict";
+
+    const fileInput = document.getElementById("fileInput");
+    const chooseButton = document.getElementById("chooseButton");
+    const dropzone = document.getElementById("dropzone");
+    const fileList = document.getElementById("fileList");
+    const fileCount = document.getElementById("fileCount");
+    const convertButton = document.getElementById("convertButton");
+    const clearButton = document.getElementById("clearButton");
+    const qualityInput = document.getElementById("quality");
+    const qualityValue = document.getElementById("qualityValue");
+    const statusBox = document.getElementById("status");
+
+    let items = [];
+    let isWorking = false;
+    let nextId = 1;
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    function formatSize(bytes) {
+      if (bytes < 1024) {
+        return bytes + " B";
+      }
+
+      if (bytes < 1024 * 1024) {
+        return (bytes / 1024).toFixed(1) + " KB";
+      }
+
+      return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+    }
+
+    function setStatus(message, type = "") {
+      statusBox.textContent = message;
+      statusBox.className = "status" + (type ? " " + type : "");
+    }
+
+    function isHeicFile(file) {
+      return /\.(heic|heif)$/i.test(file.name);
+    }
+
+    function revokePreview(item) {
+      if (item.url) {
+        URL.revokeObjectURL(item.url);
+        item.url = "";
+      }
+
+      item.blob = null;
+    }
+
+    function downloadItem(item) {
+      if (!item.blob || !item.url) {
+        return;
+      }
+
+      const link = document.createElement("a");
+
+      link.href = item.url;
+      link.download =
+        item.file.name.replace(/\.(heic|heif)$/i, "") + ".jpg";
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }
+
+    function renderFiles() {
+      fileList.replaceChildren();
+
+      if (items.length === 0) {
+        const empty = document.createElement("div");
+
+        empty.className = "empty-state";
+        empty.textContent =
+          "Your selected images will appear here.";
+
+        fileList.appendChild(empty);
+      }
+
+      for (const item of items) {
+        const row = document.createElement("div");
+        row.className = "file-item";
+
+        const thumb = document.createElement("div");
+        thumb.className = "file-thumb";
+
+        if (item.url) {
+          const img = document.createElement("img");
+
+          img.src = item.url;
+          img.alt = "Converted JPG preview";
+          thumb.appendChild(img);
+        } else {
+          thumb.textContent = "HEIC";
+        }
+
+        const info = document.createElement("div");
+        info.className = "file-info";
+
+        const name = document.createElement("span");
+        name.className = "file-name";
+        name.textContent = item.file.name;
+        name.title = item.file.name;
+
+        const meta = document.createElement("span");
+        meta.className = "file-meta";
+        meta.textContent = formatSize(item.file.size);
+
+        const fileStatus = document.createElement("span");
+        fileStatus.className = "file-status";
+
+        if (item.status === "Converted") {
+          fileStatus.classList.add("success");
+        } else if (item.status === "Failed") {
+          fileStatus.classList.add("error");
+        }
+
+        fileStatus.textContent = item.error || item.status;
+
+        info.append(name, meta, fileStatus);
+
+        const actions = document.createElement("div");
+        actions.className = "file-actions";
+
+        if (item.blob && item.url) {
+          const downloadButton = document.createElement("button");
+
+          downloadButton.type = "button";
+          downloadButton.className = "small-button download";
+          downloadButton.textContent = "Download JPG";
+          downloadButton.disabled = isWorking;
+          downloadButton.addEventListener("click", () => {
+            downloadItem(item);
+          });
+
+          actions.appendChild(downloadButton);
+        }
+
+        const removeButton = document.createElement("button");
+
+        removeButton.type = "button";
+        removeButton.className = "small-button";
+        removeButton.textContent = "Remove";
+        removeButton.disabled = isWorking;
+
+        removeButton.addEventListener("click", () => {
+          removeItem(item.id);
+        });
+
+        actions.appendChild(removeButton);
+
+        row.append(thumb, info, actions);
+        fileList.appendChild(row);
+      }
+
+      fileCount.textContent =
+        items.length + " image" + (items.length === 1 ? "" : "s");
+
+      convertButton.disabled = items.length === 0 || isWorking;
+      clearButton.disabled = items.length === 0 || isWorking;
+      chooseButton.disabled = isWorking;
+      fileInput.disabled = isWorking;
+      qualityInput.disabled = isWorking;
+    }
+
+    function addFiles(fileCollection) {
+      if (isWorking) {
+        return;
+      }
+
+      let added = 0;
+      let skipped = 0;
+
+      for (const file of Array.from(fileCollection)) {
+        if (!isHeicFile(file)) {
+          skipped++;
+          continue;
+        }
+
+        const duplicate = items.some(existing =>
+          existing.file.name === file.name &&
+          existing.file.size === file.size &&
+          existing.file.lastModified === file.lastModified
+        );
+
+        if (duplicate) {
+          continue;
+        }
+
+        items.push({
+          id: nextId++,
+          file,
+          blob: null,
+          url: "",
+          status: "Ready",
+          error: ""
+        });
+
+        added++;
+      }
+
+      renderFiles();
+
+      if (skipped > 0) {
+        setStatus(
+          skipped + " unsupported file(s) skipped. Select HEIC or HEIF files.",
+          "error"
+        );
+      } else if (added > 0) {
+        setStatus(added + " image(s) added.");
+      } else {
+        setStatus("No new images were added.");
+      }
+    }
+
+    function removeItem(id) {
+      if (isWorking) {
+        return;
+      }
+
+      const item = items.find(entry => entry.id === id);
+
+      if (item) {
+        revokePreview(item);
+      }
+
+      items = items.filter(entry => entry.id !== id);
+
+      renderFiles();
+
+      setStatus(
+        items.length === 0
+          ? "Select one or more HEIC or HEIF images to begin."
+          : "Image removed."
+      );
+    }
+
+    function clearAll() {
+      if (isWorking) {
+        return;
+      }
+
+      for (const item of items) {
+        revokePreview(item);
+      }
+
+      items = [];
+
+      fileInput.value = "";
+      renderFiles();
+
+      setStatus("All selected images have been cleared.");
+    }
+
+    qualityInput.addEventListener("input", () => {
+      qualityValue.textContent = qualityInput.value + "%";
+    });
+
+    chooseButton.addEventListener("click", () => {
+      if (!isWorking) {
+        fileInput.click();
+      }
+    });
+
+    fileInput.addEventListener("change", event => {
+      addFiles(event.target.files);
+      fileInput.value = "";
+    });
+
+    ["dragenter", "dragover"].forEach(eventName => {
+      dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+
+        if (!isWorking) {
+          dropzone.classList.add("dragover");
+        }
+      });
+    });
+
+    ["dragleave", "drop"].forEach(eventName => {
+      dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+        dropzone.classList.remove("dragover");
+      });
+    });
+
+    dropzone.addEventListener("drop", event => {
+      if (!isWorking && event.dataTransfer) {
+        addFiles(event.dataTransfer.files);
+      }
+    });
+
+    clearButton.addEventListener("click", clearAll);
+
+    convertButton.addEventListener("click", async () => {
+      if (isWorking || items.length === 0) {
+        return;
+      }
+
+      if (typeof window.heic2any !== "function") {
+        setStatus(
+          "The conversion library could not load. Check your internet connection and refresh the page.",
+          "error"
+        );
+        return;
+      }
+
+      isWorking = true;
+
+      const quality = Number(qualityInput.value) / 100;
+      const currentItems = items.slice();
+      let succeeded = 0;
+      let failed = 0;
+
+      for (const item of currentItems) {
+        revokePreview(item);
+        item.status = "Waiting";
+        item.error = "";
+      }
+
+      convertButton.textContent = "Converting...";
+      renderFiles();
+
+      try {
+        for (let i = 0; i < currentItems.length; i++) {
+          const item = currentItems[i];
+
+          item.status = "Converting";
+
+          setStatus(
+            "Converting image " + (i + 1) + " of " +
+            currentItems.length + ": " + item.file.name
+          );
+
+          renderFiles();
+
+          try {
+            const result = await window.heic2any({
+              blob: item.file,
+              toType: "image/jpeg",
+              quality: quality,
+              multiple: false
+            });
+
+            const output = Array.isArray(result) ? result[0] : result;
+
+            if (!(output instanceof Blob) || output.size === 0) {
+              throw new Error("The converter returned an empty image.");
+            }
+
+            item.blob = output;
+            item.url = URL.createObjectURL(output);
+            item.status = "Converted";
+            item.error = "";
+
+            succeeded++;
+          } catch (error) {
+            console.error("Conversion failed:", item.file.name, error);
+
+            revokePreview(item);
+            item.status = "Failed";
+            item.error = "Conversion failed. Try another file.";
+            failed++;
+          }
+
+          renderFiles();
+        }
+
+        if (failed === 0) {
+          setStatus(
+            "Success! " + succeeded +
+            " image(s) converted. Use Download JPG beside each image.",
+            "success"
+          );
+        } else if (succeeded > 0) {
+          setStatus(
+            succeeded + " image(s) converted; " + failed +
+            " failed. Try another file for any image that failed.",
+            "error"
+          );
+        } else {
+          setStatus(
+            "The images could not be converted. Check that the files are valid HEIC or HEIF images.",
+            "error"
+          );
+        }
+      } finally {
+        isWorking = false;
+        convertButton.textContent = "Convert to JPG";
+        renderFiles();
+      }
+    });
+
+    renderFiles();
+  </script>
+</body>
+</html>

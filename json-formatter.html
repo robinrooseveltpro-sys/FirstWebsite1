@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JSON Formatter Online - Validate, Beautify &amp; Minify JSON</title>
+
+  <meta
+    name="description"
+    content="Use this free JSON formatter online to beautify, validate, minify, and sort JSON. Check syntax errors, view data statistics, and copy or download JSON instantly."
+  >
+
+  <meta name="robots" content="index,follow">
+
+  <link
+    rel="canonical"
+    href="https://converttotoolsonline.com/json-formatter.html"
+  >
+
+  <meta name="theme-color" content="#2563eb">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+
+  <meta
+    property="og:title"
+    content="JSON Formatter Online - Validate, Beautify &amp; Minify JSON"
+  >
+
+  <meta
+    property="og:description"
+    content="Format, validate, beautify, minify, and sort JSON online. Check your JSON and download clean output with this free browser-based tool."
+  >
+
+  <meta
+    property="og:url"
+    content="https://converttotoolsonline.com/json-formatter.html"
+  >
+
+  <meta name="twitter:card" content="summary">
+
+  <meta
+    name="twitter:title"
+    content="JSON Formatter Online - Free JSON Validator"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Format and validate JSON online, minify JSON, sort keys, check syntax, and download your formatted data."
+  >
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON Formatter Online",
+    "url": "https://converttotoolsonline.com/json-formatter.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A free online JSON formatter and validator for formatting, minifying, validating, and sorting JSON in the browser.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "browserRequirements": "JavaScript enabled"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a JSON formatter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A JSON formatter converts valid JSON into a consistently indented, readable representation without intentionally changing its data values. Many formatters also provide validation and minification."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I format JSON online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paste your JSON into the input editor, choose an indentation style, and select Format JSON. Review the result, then copy it or download it as a JSON file."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I validate JSON?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paste the data into the JSON validator and select Validate JSON. The tool checks whether the input follows JSON syntax and reports parser diagnostics when available."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between formatting and minifying JSON?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Formatting adds indentation and line breaks to make JSON easier to read. Minification removes unnecessary whitespace to produce a more compact representation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my JSON uploaded to a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This tool processes JSON in your browser using JavaScript. The JSON content you enter is not sent to a conversion server."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I sort JSON object keys?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Enable the sort keys option to sort object properties alphabetically, or use the dedicated sort and format action. Array element order is preserved."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I download formatted JSON?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can download the formatted or minified output as a JSON file after processing valid input."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --ink: #152238;
+      --muted: #627087;
+      --border: #e0e7f0;
+      --surface: #ffffff;
+      --background: #f5f8fd;
+      --green: #15803d;
+      --red: #b91c1c;
+      --amber: #92400e;
+      --shadow: 0 12px 35px rgba(25, 48, 90, .06);
+      --radius: 15px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--primary);
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1160px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand {
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -.4px;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--primary);
+    }
+
+    .home-link {
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--muted);
+    }
+
+    .container {
+      width: min(100% - 32px, 1050px);
+      margin: auto;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 39px 0 25px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 30px;
+      color: #1d4ed8;
+      background: #e8f0ff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .35px;
+    }
+
+    h1 {
+      margin: 13px 0 10px;
+      font-size: clamp(28px, 5vw, 42px);
+      letter-spacing: -1px;
+      line-height: 1.18;
+    }
+
+    .hero p {
+      max-width: 750px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .trust-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 9px 19px;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #40516a;
+    }
+
+    .trust-row span::before {
+      content: "✓";
+      color: var(--green);
+      margin-right: 6px;
+    }
+
+    .panel {
+      margin-bottom: 22px;
+      padding: 23px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      letter-spacing: -.35px;
+      line-height: 1.35;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .section-description {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .editor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .editor-box {
+      min-width: 0;
+    }
+
+    .editor-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .editor-heading label {
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .editor-heading span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    textarea {
+      display: block;
+      width: 100%;
+      min-height: 335px;
+      resize: vertical;
+      border: 1px solid #d4deeb;
+      border-radius: 10px;
+      padding: 14px;
+      background: #fcfdff;
+      color: #17253a;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      tab-size: 2;
+      overflow-wrap: normal;
+      white-space: pre;
+    }
+
+    textarea:focus,
+    input:focus,
+    select:focus {
+      border-color: var(--primary);
+    }
+
+    textarea[readonly] {
+      background: #f7f9fd;
+    }
+
+    .input-meta {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 5px 12px;
+      margin-top: 7px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+    }
+
+    .toolbar-top {
+      margin-bottom: 16px;
+    }
+
+    .toolbar-bottom {
+      margin-top: 15px;
+    }
+
+    .btn {
+      padding: 10px 14px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 800;
+      transition: background .15s ease;
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      color: #263951;
+      border-color: var(--border);
+      background: #fff;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #f1f5fb;
+    }
+
+    .btn-small {
+      padding: 7px 10px;
+      font-size: 12px;
+    }
+
+    .settings {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 13px 20px;
+      padding: 15px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      background: #f9fbff;
+      border-radius: 10px;
+    }
+
+    .setting {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .setting label {
+      color: #3f5068;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .setting select {
+      width: auto;
+      max-width: 100%;
+      border: 1px solid #d4deeb;
+      border-radius: 7px;
+      padding: 7px 10px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .check-setting {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #3f5068;
+    }
+
+    .check-setting input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--primary);
+    }
+
+    .status {
+      min-height: 22px;
+      margin-top: 12px;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+      color: var(--muted);
+    }
+
+    .status.success {
+      color: var(--green);
+    }
+
+    .status.error {
+      color: var(--red);
+    }
+
+    .status.warning {
+      color: var(--amber);
+    }
+
+    .notice {
+      margin-top: 16px;
+      padding: 13px 15px;
+      border: 1px solid #dbeafe;
+      border-radius: 10px;
+      background: #eff6ff;
+      color: #24416c;
+      font-size: 13px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .stat {
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #f8faff;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .stat-value {
+      margin-top: 4px;
+      font-size: 21px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .content-section {
+      margin-top: 26px;
+    }
+
+    .content-section p,
+    .content-section li {
+      color: #536278;
+      font-size: 15px;
+    }
+
+    .content-section h2 {
+      margin-bottom: 12px;
+    }
+
+    .content-section h3 {
+      margin-top: 22px;
+    }
+
+    .content-section code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #f0f4fa;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .92em;
+      overflow-wrap: anywhere;
+    }
+
+    .steps {
+      padding-left: 23px;
+    }
+
+    .steps li {
+      margin: 9px 0;
+      padding-left: 3px;
+    }
+
+    .example {
+      overflow: auto;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #f8faff;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      white-space: pre;
+    }
+
+    .related {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .related a {
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .related a:hover {
+      background: var(--primary-light);
+    }
+
+    .faq {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .faq h3 {
+      margin: 0 0 6px;
+    }
+
+    .faq p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .site-footer {
+      padding: 27px 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .site-footer a {
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .editor-grid {
+        grid-template-columns: 1fr;
+      }
+
+      textarea {
+        min-height: 270px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding-top: 29px;
+      }
+
+      .panel {
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .container {
+        width: min(100% - 22px, 1050px);
+      }
+
+      .nav {
+        padding: 13px 12px;
+      }
+
+      .brand {
+        font-size: 17px;
+      }
+
+      .settings {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 13px;
+      }
+
+      .toolbar .btn {
+        flex: 1 1 auto;
+      }
+
+      .stat-value {
+        font-size: 19px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Main navigation">
+    <a class="brand" href="/">
+      ConvertTo<span>ToolsOnline</span>
+    </a>
+
+    <a class="home-link" href="/">
+      ← All tools
+    </a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <span class="badge">FREE ONLINE DEVELOPER TOOL</span>
+
+    <h1>JSON Formatter Online</h1>
+
+    <p>
+      Use this free JSON formatter online to beautify, validate, minify,
+      and sort JSON. Check JSON syntax, make nested objects easier to read,
+      inspect data statistics, and download clean JSON directly from your
+      browser.
+    </p>
+
+    <div class="trust-row">
+      <span>Instant local processing</span>
+      <span>No account required</span>
+      <span>No conversion API</span>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="tool-heading">
+
+    <h2 id="tool-heading">Format and Validate JSON</h2>
+
+    <p class="section-description">
+      Paste JSON into the input editor or upload a JSON file.
+      Choose your formatting settings, process the data, and copy or
+      download the result.
+    </p>
+
+    <div class="toolbar toolbar-top">
+
+      <button type="button" class="btn btn-secondary" id="sampleBtn">
+        Load example
+      </button>
+
+      <button type="button" class="btn btn-secondary" id="uploadBtn">
+        Upload JSON
+      </button>
+
+      <button type="button" class="btn btn-secondary" id="clearBtn">
+        Clear
+      </button>
+
+      <input
+        type="file"
+        id="fileInput"
+        accept=".json,.txt,application/json,text/plain"
+        hidden
+      >
+    </div>
+
+    <div class="settings">
+
+      <div class="setting">
+        <label for="indentSelect">Indentation:</label>
+
+        <select id="indentSelect">
+          <option value="2">2 spaces</option>
+          <option value="4">4 spaces</option>
+          <option value="tab">Tab</option>
+        </select>
+      </div>
+
+      <label class="check-setting" for="sortKeys">
+        <input type="checkbox" id="sortKeys">
+        Sort object keys alphabetically
+      </label>
+    </div>
+
+    <div class="editor-grid">
+
+      <div class="editor-box">
+
+        <div class="editor-heading">
+          <label for="jsonInput">JSON input</label>
+          <span id="inputBytes">0 bytes</span>
+        </div>
+
+        <textarea
+          id="jsonInput"
+          spellcheck="false"
+          autocomplete="off"
+          autocapitalize="off"
+          aria-label="JSON input editor"
+          placeholder='Paste your JSON here, for example:
+{
+  "name": "ConvertToToolsOnline",
+  "type": "utility",
+  "free": true
+}'
+        ></textarea>
+
+        <div class="input-meta">
+          <span id="inputCharacters">0 characters</span>
+          <span>Maximum input size: 5 MB</span>
+        </div>
+
+      </div>
+
+      <div class="editor-box">
+
+        <div class="editor-heading">
+          <label for="jsonOutput">Formatted JSON output</label>
+          <span id="outputBytes">0 bytes</span>
+        </div>
+
+        <textarea
+          id="jsonOutput"
+          readonly
+          spellcheck="false"
+          aria-label="Formatted JSON output"
+          placeholder="Your formatted JSON will appear here."
+        ></textarea>
+
+        <div class="input-meta">
+          <span id="outputCharacters">0 characters</span>
+          <span id="outputMode">No output yet</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="toolbar toolbar-bottom">
+
+      <button type="button" class="btn btn-primary" id="formatBtn">
+        Format JSON
+      </button>
+
+      <button type="button" class="btn btn-secondary" id="validateBtn">
+        Validate JSON
+      </button>
+
+      <button type="button" class="btn btn-secondary" id="minifyBtn">
+        Minify JSON
+      </button>
+
+      <button type="button" class="btn btn-secondary" id="sortBtn">
+        Sort &amp; Format
+      </button>
+
+    </div>
+
+    <div class="toolbar toolbar-bottom">
+
+      <button type="button" class="btn btn-secondary" id="copyBtn" disabled>
+        Copy output
+      </button>
+
+      <button type="button" class="btn btn-secondary" id="downloadBtn" disabled>
+        Download JSON
+      </button>
+
+    </div>
+
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+
+    <div class="notice">
+      <strong>Privacy:</strong> your JSON is processed locally in this
+      browser. The text you enter is not uploaded to a conversion server.
+      For very large numeric identifiers, use JSON strings to help preserve
+      their exact digits.
+    </div>
+
+  </section>
+
+  <section class="panel" aria-labelledby="stats-heading">
+
+    <h2 id="stats-heading">JSON Data Statistics</h2>
+
+    <p class="section-description">
+      After successful processing, review the input size, object keys,
+      and maximum nesting depth.
+    </p>
+
+    <div class="stats-grid">
+
+      <div class="stat">
+        <div class="stat-label">Input size</div>
+        <div class="stat-value" id="statInputSize">—</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Output size</div>
+        <div class="stat-value" id="statOutputSize">—</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Object keys</div>
+        <div class="stat-value" id="statKeys">—</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Maximum depth</div>
+        <div class="stat-value" id="statDepth">—</div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="panel content-section" aria-labelledby="how-heading">
+
+    <h2 id="how-heading">How to Format JSON Online</h2>
+
+    <ol class="steps">
+      <li>
+        <strong>Enter your JSON.</strong>
+        Paste the JSON document into the input editor or upload a JSON file.
+      </li>
+
+      <li>
+        <strong>Choose the formatting settings.</strong>
+        Select two spaces, four spaces, or tabs for indentation.
+        Enable key sorting if you want object properties arranged alphabetically.
+      </li>
+
+      <li>
+        <strong>Format or validate your JSON.</strong>
+        Select Format JSON to make valid data readable, Validate JSON to
+        check its syntax, or Minify JSON to remove unnecessary whitespace.
+      </li>
+
+      <li>
+        <strong>Copy or download the result.</strong>
+        Copy the output to your clipboard or download it as a JSON file.
+      </li>
+    </ol>
+  </section>
+
+  <section class="panel content-section" aria-labelledby="what-heading">
+
+    <h2 id="what-heading">What Is a JSON Formatter?</h2>
+
+    <p>
+      A JSON formatter converts valid JavaScript Object Notation (JSON)
+      into a consistent, readable layout. It adds indentation and line breaks
+      so nested objects and arrays are easier to inspect. A JSON formatter
+      does not need to change the underlying data values when it beautifies
+      a document.
+    </p>
+
+    <p>
+      Developers commonly use a JSON formatter online when working with
+      API responses, application settings, webhook payloads, database
+      exports, configuration files, and test data. Compact JSON can be
+      difficult to read when it contains many nested objects. Formatting
+      makes the structure easier to understand.
+    </p>
+
+    <h3>JSON formatter and JSON validator</h3>
+
+    <p>
+      Formatting and validation solve different problems. A JSON validator
+      checks whether the input follows JSON syntax rules. A formatter
+      rearranges valid JSON into a readable layout. This tool provides
+      both actions in one interface, so you can check the syntax before
+      copying or downloading the output.
+    </p>
+
+    <h3>JSON beautifier</h3>
+
+    <p>
+      A JSON beautifier, also called a JSON pretty printer, adds consistent
+      indentation and line breaks. This is especially useful for long API
+      responses, nested arrays, and configuration documents that are
+      otherwise displayed on one line.
+    </p>
+
+    <h3>JSON minifier</h3>
+
+    <p>
+      A JSON minifier removes unnecessary whitespace while preserving the
+      parsed JSON data structure. Minified JSON is useful when a compact
+      representation is needed for storage, transmission, or a system
+      that expects a compact JSON document.
+    </p>
+
+    <h3>Sort JSON object keys</h3>
+
+    <p>
+      JSON object properties do not need to appear in alphabetical order.
+      Sorting keys can make two documents easier to inspect and compare.
+      This tool can sort object properties recursively while preserving
+      array element order. It is an optional transformation, not a
+      requirement for valid JSON.
+    </p>
+
+    <h3>Example of formatted JSON</h3>
+
+    <p>
+      This compact JSON:
+    </p>
+
+    <div class="example">{"name":"Asha","active":true,"settings":{"theme":"blue","notifications":false}}</div>
+
+    <p>
+      becomes easier to read when formatted:
+    </p>
+
+    <div class="example">{
+  "name": "Asha",
+  "active": true,
+  "settings": {
+    "theme": "blue",
+    "notifications": false
+  }
+}</div>
+
+    <h3>Understand JSON errors</h3>
+
+    <p>
+      Standard JSON syntax requires double-quoted property names and string
+      values, valid commas, matching braces and brackets, and valid number
+      notation. Trailing commas and comments are not part of standard JSON
+      syntax. If the browser reports an error position, the validator displays
+      the corresponding line and column as a debugging aid.
+    </p>
+
+    <h3>Working with other JSON formats</h3>
+
+    <p>
+      Formatting JSON is only one step in a data workflow. You may also need
+      to transform records into rows, move structured data into a spreadsheet,
+      or combine separate JSON documents. ConvertToToolsOnline offers related
+      tools for these tasks.
+    </p>
+
+  </section>
+
+  <section class="panel" aria-labelledby="related-heading">
+
+    <h2 id="related-heading">Related JSON Conversion Tools</h2>
+
+    <p class="section-description">
+      Choose another tool for your data conversion task.
+    </p>
+
+    <div class="related">
+
+      <a href="/json-to-csv.html">
+        JSON to CSV Converter
+      </a>
+
+      <a href="/csv-to-json.html">
+        CSV to JSON Converter
+      </a>
+
+      <a href="/json-to-excel.html">
+        JSON to Excel Converter
+      </a>
+
+      <a href="/merge-json.html">
+        Merge JSON
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- Keep the FAQ as the final main content section. -->
+  <section class="panel content-section" id="faq" aria-labelledby="faq-heading">
+
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+
+    <div class="faq">
+      <h3>What is a JSON formatter?</h3>
+
+      <p>
+        A JSON formatter converts valid JSON into a consistently indented,
+        readable representation without intentionally changing its data
+        values. Many formatters also provide validation and minification.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>How do I format JSON online?</h3>
+
+      <p>
+        Paste your JSON into the input editor, choose an indentation style,
+        and select Format JSON. Review the result, then copy it or download
+        it as a JSON file.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>How do I validate JSON?</h3>
+
+      <p>
+        Paste your data into the JSON validator and select Validate JSON.
+        The tool checks whether the input follows JSON syntax and reports
+        parser diagnostics when available.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>What is the difference between formatting and minifying JSON?</h3>
+
+      <p>
+        Formatting adds indentation and line breaks to make JSON easier
+        to read. Minification removes unnecessary whitespace to produce
+        a more compact representation.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Is my JSON uploaded to a server?</h3>
+
+      <p>
+        This tool processes JSON in your browser using JavaScript.
+        The JSON content you enter is not sent to a conversion server.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Can I sort JSON object keys?</h3>
+
+      <p>
+        Yes. Enable the sort keys option to sort object properties
+        alphabetically, or use the dedicated Sort &amp; Format action.
+        Array element order is preserved.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Can I download formatted JSON?</h3>
+
+      <p>
+        Yes. You can download the formatted or minified output as a
+        JSON file after processing valid input.
+      </p>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>
+    © <span id="year"></span>
+    <a href="/">ConvertToToolsOnline</a>.
+    Free online tools.
+  </p>
+</footer>
+
+<script>
+"use strict";
+
+(function () {
+  const $ = id => document.getElementById(id);
+
+  const MAX_INPUT_BYTES = 5 * 1024 * 1024;
+
+  const input = $("jsonInput");
+  const output = $("jsonOutput");
+  const status = $("status");
+  const fileInput = $("fileInput");
+
+  let lastValidJSON = null;
+  let lastOutput = "";
+
+  function setStatus(message, type = "") {
+    status.textContent = message;
+    status.className = "status" + (type ? " " + type : "");
+  }
+
+  function utf8Size(text) {
+    return new TextEncoder().encode(text).length;
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) {
+      return bytes + " B";
+    }
+
+    if (bytes < 1024 * 1024) {
+      return (bytes / 1024).toFixed(1) + " KB";
+    }
+
+    return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+  }
+
+  function updateInputMetrics() {
+    const text = input.value;
+
+    $("inputCharacters").textContent =
+      text.length.toLocaleString() + " characters";
+
+    $("inputBytes").textContent =
+      formatBytes(utf8Size(text));
+  }
+
+  function updateOutputMetrics() {
+    const text = output.value;
+
+    $("outputCharacters").textContent =
+      text.length.toLocaleString() + " characters";
+
+    $("outputBytes").textContent =
+      formatBytes(utf8Size(text));
+
+    $("copyBtn").disabled = text.length === 0;
+    $("downloadBtn").disabled = text.length === 0;
+  }
+
+  function resetStats() {
+    $("statInputSize").textContent = "—";
+    $("statOutputSize").textContent = "—";
+    $("statKeys").textContent = "—";
+    $("statDepth").textContent = "—";
+  }
+
+  function clearOutput() {
+    output.value = "";
+    lastValidJSON = null;
+    lastOutput = "";
+
+    $("outputMode").textContent = "No output yet";
+
+    updateOutputMetrics();
+    resetStats();
+  }
+
+  function getIndent() {
+    const value = $("indentSelect").value;
+
+    if (value === "tab") {
+      return "\t";
+    }
+
+    return Number(value);
+  }
+
+  /*
+   * Creates a recursively key-sorted copy without using recursive
+   * function calls. This is safer for deeply nested JSON documents.
+   */
+  function sortKeysDeep(value) {
+    if (value === null || typeof value !== "object") {
+      return value;
+    }
+
+    function makeContainer(source) {
+      return Array.isArray(source) ? [] : Object.create(null);
+    }
+
+    const result = makeContainer(value);
+    const stack = [{ source: value, target: result }];
+
+    while (stack.length > 0) {
+      const current = stack.pop();
+      const source = current.source;
+      const target = current.target;
+
+      if (Array.isArray(source)) {
+        for (let i = 0; i < source.length; i++) {
+          const child = source[i];
+
+          if (child !== null && typeof child === "object") {
+            const container = makeContainer(child);
+
+            target[i] = container;
+
+            stack.push({
+              source: child,
+              target: container
+            });
+          } else {
+            target[i] = child;
+          }
+        }
+      } else {
+        const keys = Object.keys(source).sort((a, b) =>
+          a.localeCompare(b)
+        );
+
+        for (const key of keys) {
+          const child = source[key];
+
+          if (child !== null && typeof child === "object") {
+            const container = makeContainer(child);
+
+            target[key] = container;
+
+            stack.push({
+              source: child,
+              target: container
+            });
+          } else {
+            target[key] = child;
+          }
+        }
+      }
+    }
+
+    return result;
+  }
+
+  /*
+   * Native JSON.parse provides reliable syntax validation.
+   * Error positions vary by browser, so line and column are shown
+   * only when they can be determined from the available diagnostics.
+   */
+  function locateJSONError(error, text) {
+    const message = String(error && error.message || "");
+
+    const lineColumn = message.match(
+      /line\s+(\d+)\s+column\s+(\d+)/i
+    );
+
+    if (lineColumn) {
+      return {
+        line: Number(lineColumn[1]),
+        column: Number(lineColumn[2])
+      };
+    }
+
+    const positionMatch = message.match(
+      /position\s+(\d+)/i
+    );
+
+    if (positionMatch) {
+      const position = Math.min(
+        Number(positionMatch[1]),
+        text.length
+      );
+
+      const before = text.slice(0, position);
+      const lines = before.split("\n");
+
+      return {
+        line: lines.length,
+        column: lines[lines.length - 1].length + 1
+      };
+    }
+
+    return null;
+  }
+
+  function readJSON() {
+    const text = input.value;
+
+    if (!text.trim()) {
+      throw new Error("Please enter JSON or upload a JSON file.");
+    }
+
+    if (utf8Size(text) > MAX_INPUT_BYTES) {
+      throw new Error(
+        "The input exceeds the 5 MB limit. Please use a smaller document."
+      );
+    }
+
+    try {
+      return JSON.parse(text);
+    } catch (error) {
+      const location = locateJSONError(error, text);
+
+      if (location) {
+        throw new Error(
+          "Invalid JSON near line " + location.line +
+          ", column " + location.column + ". " +
+          error.message
+        );
+      }
+
+      throw new Error(
+        "Invalid JSON. Check quotation marks, commas, braces, " +
+        "brackets, and number values. " + error.message
+      );
+    }
+  }
+
+  /*
+   * Count keys and nesting depth iteratively so the statistics
+   * function does not depend on recursive calls.
+   */
+  function calculateStats(value) {
+    let keyCount = 0;
+    let maxDepth = 0;
+
+    const stack = [{ value: value, depth: 0 }];
+
+    while (stack.length > 0) {
+      const item = stack.pop();
+      const current = item.value;
+      const depth = item.depth;
+
+      if (current === null || typeof current !== "object") {
+        continue;
+      }
+
+      const keys = Object.keys(current);
+
+      keyCount += Array.isArray(current) ? 0 : keys.length;
+
+      if (keys.length > 0) {
+        maxDepth = Math.max(maxDepth, depth + 1);
+      }
+
+      for (const key of keys) {
+        stack.push({
+          value: current[key],
+          depth: depth + 1
+        });
+      }
+    }
+
+    return {
+      keyCount: keyCount,
+      maxDepth: maxDepth
+    };
+  }
+
+  function updateStats(parsedValue, formattedText) {
+    $("statInputSize").textContent =
+      formatBytes(utf8Size(input.value));
+
+    $("statOutputSize").textContent =
+      formatBytes(utf8Size(formattedText));
+
+    const stats = calculateStats(parsedValue);
+
+    $("statKeys").textContent =
+      stats.keyCount.toLocaleString();
+
+    $("statDepth").textContent =
+      stats.maxDepth.toLocaleString();
+  }
+
+  function processJSON(mode, forceSort = false) {
+    clearOutput();
+
+    let parsed;
+
+    try {
+      parsed = readJSON();
+    } catch (error) {
+      setStatus(error.message, "error");
+      return;
+    }
+
+    try {
+      const shouldSort =
+        forceSort || $("sortKeys").checked;
+
+      const processed = shouldSort
+        ? sortKeysDeep(parsed)
+        : parsed;
+
+      let result;
+
+      if (mode === "minify") {
+        result = JSON.stringify(processed);
+      } else {
+        result = JSON.stringify(processed, null, getIndent());
+      }
+
+      /*
+       * JSON.stringify can return undefined for unusual non-JSON
+       * JavaScript values. Parsed JSON values should always serialize.
+       * This check also protects future changes to this function.
+       */
+      if (typeof result !== "string") {
+        throw new Error("The input could not be serialized as JSON.");
+      }
+
+      output.value = result;
+
+      lastValidJSON = processed;
+      lastOutput = result;
+
+      $("outputMode").textContent =
+        mode === "minify" ? "Minified JSON" : "Formatted JSON";
+
+      updateOutputMetrics();
+      updateStats(processed, result);
+
+      const modeMessage = {
+        format: "JSON formatted successfully.",
+        validate: "Valid JSON. Syntax check passed.",
+        minify: "JSON minified successfully.",
+        sort: "JSON keys sorted and formatted successfully."
+      };
+
+      setStatus(
+        modeMessage[mode] || "JSON processed successfully.",
+        "success"
+      );
+
+    } catch (error) {
+      clearOutput();
+
+      setStatus(
+        "Could not process this JSON: " + error.message,
+        "error"
+      );
+    }
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const temporary = document.createElement("textarea");
+
+    temporary.value = text;
+    temporary.style.position = "fixed";
+    temporary.style.left = "-9999px";
+
+    document.body.appendChild(temporary);
+    temporary.select();
+
+    const success = document.execCommand("copy");
+
+    temporary.remove();
+
+    if (!success) {
+      throw new Error("Clipboard access was unavailable.");
+    }
+  }
+
+  async function copyOutput() {
+    if (!output.value) {
+      setStatus("There is no output to copy.", "error");
+      return;
+    }
+
+    try {
+      await copyText(output.value);
+      setStatus("Formatted JSON copied to the clipboard.", "success");
+    } catch (error) {
+      setStatus(error.message, "error");
+    }
+  }
+
+  function downloadOutput() {
+    if (!output.value) {
+      setStatus("Format valid JSON before downloading.", "error");
+      return;
+    }
+
+    const blob = new Blob(
+      [output.value],
+      { type: "application/json;charset=utf-8" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = "formatted-json.json";
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    setStatus("JSON file downloaded.", "success");
+  }
+
+  function loadSample() {
+    input.value = JSON.stringify({
+      name: "ConvertToToolsOnline",
+      type: "utility website",
+      features: {
+        formatter: true,
+        validator: true,
+        minifier: true
+      },
+      categories: ["JSON", "CSV", "Developer Tools"],
+      settings: {
+        theme: "blue",
+        notifications: false,
+        maxItems: 25
+      }
+    });
+
+    updateInputMetrics();
+    processJSON("format");
+  }
+
+  function loadFile(file) {
+    if (!file) return;
+
+    if (file.size > MAX_INPUT_BYTES) {
+      setStatus(
+        "This file exceeds the 5 MB limit. Please choose a smaller file.",
+        "error"
+      );
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      input.value = String(reader.result || "");
+
+      updateInputMetrics();
+      clearOutput();
+
+      setStatus(
+        "Loaded " + file.name + ". Select an action to process the JSON.",
+        "success"
+      );
+    };
+
+    reader.onerror = () => {
+      setStatus(
+        "Could not read this file. Please try another file.",
+        "error"
+      );
+    };
+
+    reader.readAsText(file);
+  }
+
+  $("formatBtn").addEventListener("click", () => {
+    processJSON("format");
+  });
+
+  $("validateBtn").addEventListener("click", () => {
+    processJSON("validate");
+  });
+
+  $("minifyBtn").addEventListener("click", () => {
+    processJSON("minify");
+  });
+
+  $("sortBtn").addEventListener("click", () => {
+    processJSON("sort", true);
+  });
+
+  $("copyBtn").addEventListener("click", copyOutput);
+  $("downloadBtn").addEventListener("click", downloadOutput);
+
+  $("sampleBtn").addEventListener("click", loadSample);
+
+  $("uploadBtn").addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  fileInput.addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+
+    loadFile(file);
+
+    // Allow the same file to be selected a second time.
+    event.target.value = "";
+  });
+
+  $("clearBtn").addEventListener("click", () => {
+    input.value = "";
+
+    clearOutput();
+    updateInputMetrics();
+    setStatus("");
+    input.focus();
+  });
+
+  input.addEventListener("input", () => {
+    updateInputMetrics();
+    clearOutput();
+    setStatus("");
+  });
+
+  $("indentSelect").addEventListener("change", () => {
+    if (input.value.trim()) {
+      processJSON("format");
+    }
+  });
+
+  $("sortKeys").addEventListener("change", () => {
+    if (input.value.trim()) {
+      processJSON("format");
+    }
+  });
+
+  input.addEventListener("keydown", event => {
+    if ((event.ctrlKey || event.metaKey) &&
+        event.key === "Enter") {
+      event.preventDefault();
+      processJSON("format");
+    }
+
+    /*
+     * Preserve keyboard shortcuts and prevent accidental
+     * tab-navigation when inserting a tab into the editor.
+     */
+    if (event.key === "Tab" &&
+        !event.ctrlKey &&
+        !event.metaKey &&
+        !event.altKey) {
+      event.preventDefault();
+
+      const start = input.selectionStart;
+      const end = input.selectionEnd;
+      const insertion = "  ";
+
+      input.setRangeText(insertion, start, end, "end");
+
+      updateInputMetrics();
+      clearOutput();
+      setStatus("");
+    }
+  });
+
+  $("year").textContent = new Date().getFullYear();
+
+  updateInputMetrics();
+  updateOutputMetrics();
+  resetStats();
+
+})();
+</script>
+
+</body>
+</html>
