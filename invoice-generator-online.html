@@ -2,1264 +2,881 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Free Invoice Generator for Freelancers | Create Invoice PDF</title>
+  <title>Free Online Invoice Generator | ConvertToToolsOnline</title>
+  <meta name="description" content="Create professional invoices online for free. Add items, tax, discounts and your logo, calculate totals automatically, and print or save invoices as PDF.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="ConvertToToolsOnline">
 
-  <meta name="description"
-        content="Create professional invoices online for free. Add services, prices, tax, discounts and payment details, then print or save your invoice as a PDF. No signup needed.">
-
-  <meta name="robots" content="index,follow,max-image-preview:large">
-
-  <link rel="canonical"
-        href="https://converttotoolsonline.com/invoice-generator.html">
-
-  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://converttotoolsonline.com/invoice-generator-online.html">
+  <link rel="stylesheet" href="/style.css">
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="ConvertToToolsOnline">
-  <meta property="og:title"
-        content="Free Invoice Generator for Freelancers and Small Businesses">
-  <meta property="og:description"
-        content="Create, customize, and print professional invoices with editable services, taxes, discounts, currencies and payment details.">
-  <meta property="og:url"
-        content="https://converttotoolsonline.com/invoice-generator.html">
-
+  <meta property="og:title" content="Free Online Invoice Generator | ConvertToToolsOnline">
+  <meta property="og:description" content="Build a professional invoice with automatic totals, tax, discounts, multiple currencies and print-ready PDF output.">
+  <meta property="og:url" content="https://converttotoolsonline.com/invoice-generator-online.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Free Online Invoice Generator">
-  <meta name="twitter:description"
-        content="Create professional invoices and save them as PDFs directly from your browser.">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebApplication",
-        "name": "Free Invoice Generator",
-        "url": "https://converttotoolsonline.com/invoice-generator.html",
-        "description": "A browser-based invoice maker for freelancers and small businesses. Create itemized invoices, calculate discounts and taxes, and print invoices to PDF.",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
-        "isAccessibleForFree": true,
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "featureList": [
-          "Create and edit invoices",
-          "Calculate line item totals",
-          "Customize tax and discounts",
-          "Select invoice currency",
-          "Print or save invoices as PDF",
-          "Store a draft in browser storage",
-          "Export and import invoice drafts"
-        ]
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://converttotoolsonline.com/index.html"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Invoice Generator",
-            "item": "https://converttotoolsonline.com/invoice-generator.html"
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+  <meta name="twitter:description" content="Create invoices online with automatic calculations and print-ready PDF output.">
 
   <style>
+    /* Page-specific presentation is kept inside this HTML file.
+       The shared website stylesheet remains linked above. */
+
     :root {
-      --blue: #2563eb;
-      --blue-dark: #1d4ed8;
-      --blue-light: #eff6ff;
-      --purple: #7c3aed;
-      --ink: #172033;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --surface: #f8fafc;
-      --white: #ffffff;
-      --green: #15803d;
-      --red: #b91c1c;
-      --radius: 17px;
-      --shadow: 0 12px 36px rgba(15, 23, 42, 0.06);
+      --invoice-accent: #2459d3;
+      --invoice-accent-dark: #1e46aa;
+      --invoice-text: #172033;
+      --invoice-muted: #687386;
+      --invoice-border: #e0e5ee;
+      --invoice-soft: #f5f7fb;
+      --invoice-white: #ffffff;
+      --invoice-radius: 14px;
     }
 
-    * {
+    .invoice-page,
+    .invoice-page * {
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 25px;
-    }
-
-    body {
-      margin: 0;
-      background: #ffffff;
-      color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
-                   BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 14px;
-      line-height: 1.65;
-    }
-
-    input,
-    select,
-    textarea,
-    button {
-      font: inherit;
-    }
-
-    button,
-    select {
-      cursor: pointer;
-    }
-
-    a {
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    button:focus-visible,
-    input:focus-visible,
-    select:focus-visible,
-    textarea:focus-visible,
-    a:focus-visible {
-      outline: 3px solid rgba(37, 99, 235, 0.25);
-      outline-offset: 3px;
-    }
-
-    .container {
-      width: min(1180px, calc(100% - 36px));
+    .invoice-page {
+      width: 100%;
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 24px 18px 60px;
+      color: var(--invoice-text);
+      line-height: 1.6;
     }
 
-    .site-header {
-      border-bottom: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.96);
+    .invoice-page a {
+      color: var(--invoice-accent);
     }
 
-    .header-inner {
-      min-height: 72px;
+    .invoice-site-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 32px;
+      padding: 0 0 18px;
+      border-bottom: 1px solid var(--invoice-border);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--ink);
-      font-weight: 850;
-      letter-spacing: -0.35px;
-    }
-
-    .brand:hover {
+    .invoice-brand {
+      color: var(--invoice-text) !important;
       text-decoration: none;
+      font-size: 1.16rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
     }
 
-    .brand-icon {
-      width: 40px;
-      height: 40px;
-      display: grid;
+    .invoice-brand-mark {
+      display: inline-grid;
       place-items: center;
-      border-radius: 13px;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      color: white;
-      font-size: 20px;
-      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
-    }
-
-    .brand small {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 500;
+      width: 34px;
+      height: 34px;
+      margin-right: 8px;
+      border-radius: 9px;
+      background: var(--invoice-accent);
+      color: #fff;
+      vertical-align: middle;
+      font-size: 0.9rem;
       letter-spacing: 0;
     }
 
-    .main-nav {
+    .invoice-site-nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .main-nav a {
-      color: #475569;
-    }
-
-    .breadcrumb {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-top: 21px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .hero {
-      padding: 33px 0 27px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(265px, 0.75fr);
+      gap: 17px;
       align-items: center;
-      gap: 35px;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 5px 10px;
-      border: 1px solid #dbeafe;
-      border-radius: 999px;
-      background: var(--blue-light);
-      color: var(--blue-dark);
-      font-size: 10px;
-      font-weight: 850;
-      letter-spacing: 0.7px;
-      text-transform: uppercase;
+    .invoice-site-nav a {
+      color: var(--invoice-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
     }
 
-    h1 {
-      margin: 15px 0 12px;
-      font-size: clamp(31px, 4.5vw, 46px);
-      line-height: 1.14;
-      letter-spacing: -1.5px;
+    .invoice-site-nav a:hover {
+      color: var(--invoice-accent);
     }
 
-    .hero-copy {
-      max-width: 710px;
+    .invoice-breadcrumbs {
+      margin-bottom: 12px;
+      color: var(--invoice-muted);
+      font-size: 0.88rem;
+    }
+
+    .invoice-breadcrumbs a {
+      text-decoration: none;
+    }
+
+    .invoice-hero {
+      margin-bottom: 28px;
+    }
+
+    .invoice-hero h1 {
+      margin: 0 0 10px;
+      color: var(--invoice-text);
+      font-size: clamp(2rem, 4.3vw, 2.85rem);
+      line-height: 1.16;
+      letter-spacing: -0.045em;
+    }
+
+    .invoice-hero p {
+      max-width: 780px;
       margin: 0;
-      color: var(--muted);
-      font-size: 15px;
+      color: var(--invoice-muted);
+      font-size: 1.03rem;
     }
 
-    .hero-points {
+    .invoice-benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-top: 17px;
+      color: #45536a;
+      font-size: 0.9rem;
+    }
+
+    .invoice-benefits span::before {
+      content: "✓";
+      margin-right: 6px;
+      color: #16845b;
+      font-weight: 800;
+    }
+
+    .invoice-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0 0 16px;
+    }
+
+    .invoice-toolbar p {
+      margin: 0;
+      color: var(--invoice-muted);
+      font-size: 0.87rem;
+    }
+
+    .invoice-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 18px;
     }
 
-    .hero-point {
-      padding: 6px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: #475569;
-      background: white;
-      font-size: 11px;
-    }
-
-    .hero-card {
-      padding: 22px;
-      border: 1px solid #dbeafe;
-      border-radius: 20px;
-      background: linear-gradient(145deg, #eff6ff, #faf5ff);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card-label {
-      color: #475569;
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.45px;
-    }
-
-    .hero-card h2 {
-      margin: 8px 0;
-      font-size: 22px;
-      letter-spacing: -0.6px;
-    }
-
-    .hero-card p {
-      margin: 0 0 15px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .btn {
-      min-height: 39px;
+    .invoice-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 7px;
-      padding: 9px 13px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: white;
-      color: #334155;
-      font-size: 12px;
-      font-weight: 750;
-      text-align: center;
-      transition: background 0.15s ease, transform 0.15s ease;
-    }
-
-    .btn:hover {
-      background: #f1f5f9;
-      text-decoration: none;
-    }
-
-    .btn:active {
-      transform: translateY(1px);
-    }
-
-    .btn-primary {
-      border-color: var(--blue);
-      background: var(--blue);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      border-color: var(--blue-dark);
-      background: var(--blue-dark);
-      color: white;
-    }
-
-    .btn-soft {
-      border-color: #dbeafe;
-      background: var(--blue-light);
-      color: var(--blue-dark);
-    }
-
-    .btn-danger {
-      border-color: #fecaca;
+      min-height: 42px;
+      padding: 10px 15px;
+      border: 1px solid var(--invoice-border);
+      border-radius: 9px;
       background: #fff;
-      color: var(--red);
+      color: var(--invoice-text);
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
     }
 
-    .btn-small {
-      min-height: 30px;
-      padding: 5px 8px;
-      border-radius: 7px;
-      font-size: 10px;
+    .invoice-btn:hover {
+      border-color: #b7c4d8;
+      background: var(--invoice-soft);
     }
 
-    .action-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
+    .invoice-btn:focus-visible,
+    .invoice-page input:focus-visible,
+    .invoice-page textarea:focus-visible,
+    .invoice-page select:focus-visible {
+      outline: 3px solid #9dbaff;
+      outline-offset: 2px;
     }
 
-    .status-message {
-      min-height: 20px;
-      margin-top: 9px;
-      color: var(--muted);
-      font-size: 11px;
+    .invoice-btn-primary {
+      border-color: var(--invoice-accent);
+      background: var(--invoice-accent);
+      color: #fff;
     }
 
-    .status-message.error {
-      color: var(--red);
+    .invoice-btn-primary:hover {
+      border-color: var(--invoice-accent-dark);
+      background: var(--invoice-accent-dark);
+      color: #fff;
     }
 
-    .status-message.success {
-      color: var(--green);
+    .invoice-btn-danger {
+      color: #a52a38;
     }
 
-    .builder-layout {
+    .invoice-workspace {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
       align-items: start;
-      gap: 23px;
+      gap: 22px;
     }
 
-    .editor-card,
-    .preview-card {
+    .invoice-editor,
+    .invoice-preview-panel {
       min-width: 0;
-      border: 1px solid var(--border);
-      border-radius: 19px;
-      background: white;
-      box-shadow: var(--shadow);
+      border: 1px solid var(--invoice-border);
+      border-radius: var(--invoice-radius);
+      background: var(--invoice-white);
+      box-shadow: 0 5px 22px rgba(28, 43, 71, 0.045);
     }
 
-    .editor-card {
-      padding: 22px;
+    .invoice-editor {
+      padding: 20px;
     }
 
-    .card-heading {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 13px;
+    .invoice-preview-panel {
+      position: sticky;
+      top: 14px;
+      overflow: hidden;
+      padding: 18px;
+    }
+
+    .invoice-section {
+      padding: 0 0 20px;
       margin-bottom: 20px;
+      border-bottom: 1px solid var(--invoice-border);
     }
 
-    .card-heading h2 {
-      margin: 0 0 4px;
-      font-size: 20px;
-      letter-spacing: -0.55px;
+    .invoice-section:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: 0;
     }
 
-    .card-heading p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
+    .invoice-section h2 {
+      margin: 0 0 14px;
+      font-size: 1.06rem;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
     }
 
-    .step-number {
-      width: 36px;
-      height: 36px;
-      flex-shrink: 0;
-      display: grid;
-      place-items: center;
-      border-radius: 11px;
-      background: var(--blue-light);
-      color: var(--blue-dark);
-      font-weight: 850;
+    .invoice-section-description {
+      margin: -7px 0 13px;
+      color: var(--invoice-muted);
+      font-size: 0.84rem;
     }
 
-    .form-section {
-      padding: 19px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .form-section:first-of-type {
-      padding-top: 0;
-      border-top: 0;
-    }
-
-    .form-section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 14px;
-    }
-
-    .form-section-heading h3 {
-      margin: 0;
-      font-size: 14px;
-      font-weight: 850;
-    }
-
-    .form-section-heading span {
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    .form-grid {
+    .invoice-form-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 13px;
     }
 
-    .field {
+    .invoice-field {
       min-width: 0;
     }
 
-    .field.full {
+    .invoice-field-full {
       grid-column: 1 / -1;
     }
 
-    label {
+    .invoice-field label {
       display: block;
-      margin-bottom: 6px;
-      color: #334155;
-      font-size: 11px;
-      font-weight: 800;
+      margin-bottom: 5px;
+      color: #344158;
+      font-size: 0.84rem;
+      font-weight: 700;
     }
 
-    input,
-    select,
-    textarea {
+    .invoice-field input,
+    .invoice-field textarea,
+    .invoice-field select,
+    .invoice-item-row input,
+    .invoice-discount-controls select {
       width: 100%;
       min-width: 0;
-      border: 1px solid #cbd5e1;
-      border-radius: 9px;
-      background: white;
-      color: var(--ink);
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    input,
-    select {
-      min-height: 41px;
-      padding: 9px 10px;
-    }
-
-    textarea {
-      min-height: 78px;
-      padding: 10px;
-      resize: vertical;
-      line-height: 1.5;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: var(--blue);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.09);
-    }
-
-    .field-help {
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 10px;
-      line-height: 1.5;
-    }
-
-    .items-table-wrap {
-      width: 100%;
-      overflow-x: auto;
-      border: 1px solid var(--border);
-      border-radius: 11px;
-    }
-
-    .items-editor {
-      width: 100%;
-      min-width: 480px;
-      border-collapse: collapse;
-      font-size: 11px;
-    }
-
-    .items-editor th {
-      padding: 10px;
-      background: var(--surface);
-      color: #475569;
-      text-align: left;
-      font-size: 10px;
-      font-weight: 850;
-    }
-
-    .items-editor td {
-      padding: 8px;
-      border-top: 1px solid var(--border);
-      vertical-align: middle;
-    }
-
-    .items-editor input {
-      min-height: 36px;
-      padding: 7px;
-      border-radius: 7px;
-      font-size: 11px;
-    }
-
-    .items-editor .qty-col {
-      width: 85px;
-    }
-
-    .items-editor .rate-col {
-      width: 115px;
-    }
-
-    .items-editor .remove-col {
-      width: 45px;
-    }
-
-    .item-amount {
-      min-width: 82px;
-      color: #334155;
-      font-weight: 750;
-      text-align: right;
-      white-space: nowrap;
-    }
-
-    .remove-row {
-      width: 29px;
-      height: 29px;
-      padding: 0;
-      border: 1px solid #fecaca;
-      border-radius: 7px;
+      min-height: 42px;
+      padding: 10px 11px;
+      border: 1px solid #d7deea;
+      border-radius: 8px;
       background: #fff;
-      color: var(--red);
-      font-size: 17px;
-      line-height: 1;
+      color: var(--invoice-text);
+      font: inherit;
+      font-size: 0.92rem;
     }
 
-    .remove-row:hover {
-      background: #fef2f2;
+    .invoice-field textarea {
+      min-height: 76px;
+      resize: vertical;
     }
 
-    .item-toolbar {
+    .invoice-field input::placeholder,
+    .invoice-field textarea::placeholder,
+    .invoice-item-row input::placeholder {
+      color: #98a2b3;
+    }
+
+    .invoice-helper {
+      margin-top: 5px;
+      color: var(--invoice-muted);
+      font-size: 0.78rem;
+    }
+
+    .invoice-logo-controls {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
       gap: 10px;
-      margin-top: 11px;
     }
 
-    .item-counter {
-      color: var(--muted);
-      font-size: 10px;
+    .invoice-logo-controls input[type="file"] {
+      padding: 8px;
+      font-size: 0.82rem;
     }
 
-    .options-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 11px;
+    .invoice-logo-controls input[type="color"] {
+      width: 55px;
+      min-height: 42px;
+      padding: 4px;
+      cursor: pointer;
     }
 
-    .invoice-options-note {
-      margin-top: 11px;
-      padding: 11px;
-      border-radius: 9px;
-      background: var(--surface);
-      color: #64748b;
-      font-size: 10px;
-    }
-
-    .preview-column {
-      position: sticky;
-      top: 17px;
-      min-width: 0;
-    }
-
-    .preview-card {
-      padding: 17px;
-    }
-
-    .preview-toolbar {
+    .invoice-items-header {
       display: flex;
-      align-items: flex-start;
       justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 15px;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
-    .preview-toolbar h2 {
-      margin: 0 0 4px;
-      font-size: 16px;
-    }
-
-    .preview-toolbar p {
+    .invoice-items-header h2 {
       margin: 0;
-      color: var(--muted);
-      font-size: 10px;
     }
 
-    .paper-wrap {
-      overflow: hidden;
-      border: 1px solid #e2e8f0;
-      border-radius: 9px;
-      background: #edf2f7;
-      padding: 12px;
+    .invoice-item-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 74px 100px 36px;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .invoice-item-row input {
+      padding: 9px;
+    }
+
+    .invoice-item-remove {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 38px;
+      border: 1px solid #efd6da;
+      border-radius: 7px;
+      background: #fff7f7;
+      color: #a52a38;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .invoice-items-labels {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 74px 100px 36px;
+      gap: 8px;
+      margin-bottom: 6px;
+      color: var(--invoice-muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .invoice-items-labels span:nth-child(2),
+    .invoice-items-labels span:nth-child(3) {
+      text-align: center;
+    }
+
+    .invoice-items-labels span:last-child {
+      text-align: center;
+    }
+
+    .invoice-calculation-box {
+      padding: 14px;
+      border: 1px solid var(--invoice-border);
+      border-radius: 10px;
+      background: var(--invoice-soft);
+    }
+
+    .invoice-discount-controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 100px;
+      gap: 8px;
+    }
+
+    .invoice-totals-editor {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .invoice-preview-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .invoice-preview-heading h2 {
+      margin: 0;
+      font-size: 1.06rem;
+    }
+
+    .invoice-live-label {
+      padding: 4px 8px;
+      border-radius: 20px;
+      background: #eaf7ef;
+      color: #177548;
+      font-size: 0.73rem;
+      font-weight: 800;
     }
 
     .invoice-paper {
       width: 100%;
-      min-height: 600px;
-      padding: 25px 22px;
-      border: 1px solid #e2e8f0;
+      min-width: 0;
+      padding: clamp(16px, 2.7vw, 30px);
+      border: 1px solid #e3e7ef;
+      border-radius: 7px;
       background: #fff;
-      color: #172033;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+      color: #202a3c;
+      box-shadow: 0 3px 12px rgba(25, 38, 62, 0.055);
       overflow-wrap: anywhere;
     }
 
-    .invoice-top {
+    .invoice-paper-top {
       display: flex;
-      align-items: flex-start;
       justify-content: space-between;
-      gap: 12px;
-      padding-bottom: 21px;
-      border-bottom: 2px solid #172033;
+      align-items: flex-start;
+      gap: 15px;
+      padding-bottom: 22px;
+      border-bottom: 3px solid var(--invoice-accent);
     }
 
-    .invoice-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .invoice-logo,
-    .invoice-logo-placeholder {
-      width: 45px;
-      height: 45px;
-      flex-shrink: 0;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      border-radius: 10px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      font-size: 16px;
-      font-weight: 850;
-    }
-
-    .invoice-logo {
+    .invoice-preview-logo {
+      display: none;
+      max-width: 100px;
+      max-height: 70px;
+      margin-bottom: 10px;
       object-fit: contain;
-      background: white;
+      object-position: left center;
     }
 
-    .invoice-company {
-      min-width: 0;
-      font-size: 11px;
-      font-weight: 850;
-      line-height: 1.35;
+    .invoice-preview-company {
+      margin: 0 0 5px;
+      font-size: 1.13rem;
+      font-weight: 800;
+      line-height: 1.3;
     }
 
-    .invoice-company small {
-      display: block;
-      margin-top: 4px;
-      color: #64748b;
-      font-size: 9px;
-      font-weight: 500;
+    .invoice-preview-company-details {
+      color: #657087;
+      font-size: 0.77rem;
+      line-height: 1.65;
+      white-space: pre-line;
     }
 
-    .invoice-heading {
+    .invoice-paper-title {
       flex-shrink: 0;
+      color: var(--invoice-accent);
+      font-size: clamp(1.4rem, 2.7vw, 2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.05em;
       text-align: right;
     }
 
-    .invoice-heading strong {
-      display: block;
-      font-size: 23px;
-      line-height: 1.15;
-      letter-spacing: -1px;
+    .invoice-paper-number {
+      margin-top: 8px;
+      color: #657087;
+      font-size: 0.77rem;
+      font-weight: 600;
+      letter-spacing: 0;
     }
 
-    .invoice-heading small {
-      display: block;
-      margin-top: 6px;
-      color: #64748b;
-      font-size: 9px;
-    }
-
-    .invoice-status-pill {
-      display: inline-block;
-      margin-top: 7px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      font-size: 8px;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-
-    .invoice-meta {
+    .invoice-preview-parties {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin: 20px 0;
+      gap: 22px;
+      padding: 22px 0;
     }
 
-    .invoice-meta div {
-      min-width: 0;
-    }
-
-    .invoice-meta span,
-    .invoice-party-label {
-      display: block;
-      margin-bottom: 4px;
-      color: #64748b;
-      font-size: 8px;
-      font-weight: 850;
-      letter-spacing: 0.7px;
+    .invoice-preview-label {
+      margin-bottom: 5px;
+      color: #69758a;
+      font-size: 0.69rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .invoice-meta strong {
-      display: block;
-      font-size: 10px;
-      font-weight: 750;
-    }
-
-    .invoice-parties {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-bottom: 23px;
-    }
-
-    .invoice-party {
-      min-width: 0;
-      font-size: 9px;
-      line-height: 1.65;
-    }
-
-    .invoice-party strong {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 11px;
+    .invoice-preview-name {
+      margin-bottom: 5px;
+      font-size: 0.88rem;
+      font-weight: 800;
       line-height: 1.45;
     }
 
-    .invoice-party-text {
-      color: #475569;
-      overflow-wrap: anywhere;
+    .invoice-preview-address {
+      color: #657087;
+      font-size: 0.76rem;
+      line-height: 1.65;
+      white-space: pre-line;
     }
 
-    .invoice-table {
+    .invoice-preview-dates {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      padding: 11px 12px;
+      margin-bottom: 22px;
+      border-radius: 7px;
+      background: #f5f7fb;
+    }
+
+    .invoice-preview-dates strong {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.81rem;
+    }
+
+    .invoice-preview-dates .invoice-preview-label {
+      margin: 0;
+      font-size: 0.64rem;
+    }
+
+    .invoice-paper-table {
       width: 100%;
       border-collapse: collapse;
       table-layout: fixed;
-      margin: 0 0 17px;
-      font-size: 9px;
+      font-size: 0.76rem;
     }
 
-    .invoice-table th {
-      padding: 9px 6px;
-      background: #172033;
-      color: white;
+    .invoice-paper-table th {
+      padding: 10px 7px;
+      background: var(--invoice-accent);
+      color: #fff;
+      font-size: 0.66rem;
       text-align: left;
-      font-size: 8px;
-      font-weight: 750;
+      overflow-wrap: normal;
     }
 
-    .invoice-table th:first-child {
-      width: 43%;
-      border-radius: 5px 0 0 5px;
-    }
-
-    .invoice-table th:nth-child(2) {
-      width: 13%;
-      text-align: center;
-    }
-
-    .invoice-table th:nth-child(3) {
-      width: 21%;
-      text-align: right;
-    }
-
-    .invoice-table th:last-child {
-      width: 23%;
-      border-radius: 0 5px 5px 0;
-      text-align: right;
-    }
-
-    .invoice-table td {
-      padding: 10px 6px;
-      border-bottom: 1px solid #e2e8f0;
+    .invoice-paper-table td {
+      padding: 11px 7px;
+      border-bottom: 1px solid #e8ecf3;
       vertical-align: top;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
     }
 
-    .invoice-table td:nth-child(2) {
+    .invoice-paper-table th:first-child,
+    .invoice-paper-table td:first-child {
+      width: 45%;
+      text-align: left;
+    }
+
+    .invoice-paper-table th:nth-child(2),
+    .invoice-paper-table td:nth-child(2) {
+      width: 15%;
       text-align: center;
     }
 
-    .invoice-table td:nth-child(3),
-    .invoice-table td:last-child {
+    .invoice-paper-table th:nth-child(3),
+    .invoice-paper-table td:nth-child(3) {
+      width: 20%;
       text-align: right;
-      white-space: normal;
-      overflow-wrap: anywhere;
     }
 
-    .preview-desc {
-      display: block;
-      font-weight: 700;
+    .invoice-paper-table th:last-child,
+    .invoice-paper-table td:last-child {
+      width: 20%;
+      text-align: right;
     }
 
-    .invoice-totals {
-      width: min(100%, 260px);
-      margin-left: auto;
+    .invoice-line-description {
+      white-space: pre-line;
     }
 
-    .total-line {
+    .invoice-paper-totals {
+      width: 100%;
+      max-width: 270px;
+      margin: 18px 0 0 auto;
+      font-size: 0.8rem;
+    }
+
+    .invoice-total-row {
       display: flex;
-      align-items: baseline;
       justify-content: space-between;
       gap: 12px;
       padding: 5px 0;
-      color: #475569;
-      font-size: 9px;
     }
 
-    .total-line span:last-child {
+    .invoice-total-row span:first-child {
+      color: #657087;
+    }
+
+    .invoice-total-row span:last-child {
       font-weight: 700;
-      color: #172033;
       text-align: right;
-      overflow-wrap: anywhere;
     }
 
-    .total-line.grand-total {
-      margin-top: 5px;
-      padding-top: 11px;
-      border-top: 2px solid #172033;
-      color: #172033;
-      font-size: 12px;
-      font-weight: 850;
+    .invoice-total-grand {
+      margin-top: 7px;
+      padding-top: 12px;
+      border-top: 2px solid var(--invoice-accent);
+      font-size: 1rem;
     }
 
-    .total-line.grand-total span:last-child {
-      font-size: 14px;
-      font-weight: 850;
+    .invoice-total-grand span {
+      color: var(--invoice-text) !important;
+      font-weight: 900 !important;
     }
 
-    .invoice-bottom {
-      margin-top: 31px;
+    .invoice-preview-notes {
+      margin-top: 25px;
       padding-top: 16px;
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid #e8ecf3;
     }
 
-    .invoice-bottom-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 17px;
-    }
-
-    .invoice-bottom h4 {
+    .invoice-preview-notes h3 {
       margin: 0 0 6px;
-      font-size: 9px;
+      font-size: 0.77rem;
     }
 
-    .invoice-bottom p {
-      margin: 0;
-      color: #64748b;
-      font-size: 9px;
-      line-height: 1.6;
+    .invoice-preview-notes p {
+      margin: 0 0 14px;
+      color: #657087;
+      font-size: 0.75rem;
+      white-space: pre-line;
     }
 
-    .invoice-thanks {
-      margin-top: 22px;
-      color: #64748b;
-      font-size: 9px;
-      font-style: italic;
+    .invoice-preview-footer {
+      padding-top: 18px;
+      color: #8690a1;
+      font-size: 0.69rem;
       text-align: center;
     }
 
-    .privacy-note {
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
-      margin-top: 13px;
-      padding: 11px;
-      border: 1px solid #bbf7d0;
+    .invoice-status-message {
+      min-height: 22px;
+      margin: 11px 0 0;
+      color: #177548;
+      font-size: 0.82rem;
+    }
+
+    .invoice-privacy-note {
+      margin: 18px 0 0;
+      padding: 13px 15px;
+      border: 1px solid #dce9e0;
       border-radius: 10px;
-      background: #f0fdf4;
-      color: #166534;
-      font-size: 10px;
+      background: #f4faf5;
+      color: #365a42;
+      font-size: 0.85rem;
     }
 
-    .section {
-      padding-top: 57px;
+    .invoice-content {
+      margin-top: 58px;
     }
 
-    .section-heading {
-      margin-bottom: 19px;
+    .invoice-content section {
+      margin-bottom: 33px;
     }
 
-    .section-heading h2 {
-      margin: 0 0 6px;
-      font-size: clamp(23px, 3vw, 29px);
-      line-height: 1.25;
-      letter-spacing: -0.75px;
-    }
-
-    .section-heading p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 15px;
-    }
-
-    .feature-card {
-      padding: 20px;
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      background: white;
-    }
-
-    .feature-icon {
-      width: 39px;
-      height: 39px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 12px;
-      border-radius: 12px;
-      background: var(--blue-light);
-      color: var(--blue-dark);
-      font-size: 18px;
-    }
-
-    .feature-card h3 {
-      margin: 0 0 6px;
-      font-size: 14px;
-    }
-
-    .feature-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .content-card {
-      padding: 25px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: white;
-    }
-
-    .content-card h2 {
+    .invoice-content h2 {
       margin: 0 0 12px;
-      font-size: 24px;
-      line-height: 1.3;
-      letter-spacing: -0.65px;
+      color: var(--invoice-text);
+      font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+      line-height: 1.35;
+      letter-spacing: -0.025em;
     }
 
-    .content-card h3 {
-      margin: 24px 0 8px;
-      font-size: 17px;
+    .invoice-content h3 {
+      margin: 22px 0 8px;
+      font-size: 1.08rem;
     }
 
-    .content-card p {
-      color: #475569;
+    .invoice-content p,
+    .invoice-content li {
+      color: #536075;
+      font-size: 0.97rem;
+      line-height: 1.8;
     }
 
-    .content-card li {
-      margin: 7px 0;
-      color: #475569;
+    .invoice-content p {
+      margin: 0 0 12px;
     }
 
-    .content-card ul,
-    .content-card ol {
-      padding-left: 22px;
+    .invoice-content ul,
+    .invoice-content ol {
+      padding-left: 24px;
     }
 
-    .formula-box {
-      padding: 16px;
-      border-left: 3px solid var(--blue);
-      border-radius: 0 10px 10px 0;
-      background: var(--blue-light);
-      color: #334155;
+    .invoice-content li {
+      margin-bottom: 7px;
     }
 
-    .formula-box code {
-      color: #1d4ed8;
-      font-weight: 700;
+    .invoice-faq-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--invoice-border);
     }
 
-    .related-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 15px;
+    .invoice-faq-item h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
     }
 
-    .related-links a {
-      padding: 8px 11px;
-      border: 1px solid #dbeafe;
-      border-radius: 9px;
-      background: var(--blue-light);
-      color: #1d4ed8;
-      font-size: 11px;
-      font-weight: 750;
-    }
-
-    .faq-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .faq-item {
-      padding: 17px 18px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      background: white;
-    }
-
-    .faq-item h3 {
-      margin: 0 0 7px;
-      font-size: 14px;
-    }
-
-    .faq-item p {
+    .invoice-faq-item p {
       margin: 0;
-      color: #475569;
-      font-size: 12px;
     }
 
-    footer {
-      margin-top: 60px;
-      padding: 24px 0;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .footer-inner {
+    .invoice-bottom-links {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
+      gap: 13px;
     }
 
-    .footer-inner a {
-      color: #475569;
+    .invoice-bottom-links a {
+      font-weight: 700;
+      text-decoration: none;
     }
 
-    #logoFile {
-      font-size: 10px;
+    .invoice-hidden {
+      display: none !important;
     }
 
-    #importFile {
-      display: none;
+    .invoice-sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
-    @media (max-width: 960px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 22px;
+    @media (max-width: 900px) {
+      .invoice-workspace {
+        grid-template-columns: minmax(0, 1fr);
       }
 
-      .hero-card {
-        max-width: none;
-      }
-
-      .builder-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .preview-column {
+      .invoice-preview-panel {
         position: static;
       }
 
-      .feature-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .invoice-paper {
+        max-width: 680px;
+        margin: 0 auto;
       }
     }
 
-    @media (max-width: 560px) {
-      .container {
-        width: calc(100% - 24px);
+    @media (max-width: 520px) {
+      .invoice-page {
+        padding: 18px 12px 42px;
       }
 
-      .header-inner {
-        min-height: 63px;
+      .invoice-site-header {
+        margin-bottom: 22px;
       }
 
-      .brand {
-        gap: 8px;
-        font-size: 12px;
+      .invoice-site-nav {
+        gap: 11px;
       }
 
-      .brand-icon {
-        width: 35px;
-        height: 35px;
+      .invoice-site-nav a {
+        font-size: 0.82rem;
       }
 
-      .main-nav {
-        gap: 10px;
+      .invoice-editor,
+      .invoice-preview-panel {
+        padding: 14px;
+        border-radius: 11px;
       }
 
-      .main-nav a:nth-child(n+2) {
-        display: none;
+      .invoice-form-grid,
+      .invoice-totals-editor {
+        grid-template-columns: minmax(0, 1fr);
       }
 
-      .hero {
-        padding: 27px 0 23px;
-      }
-
-      h1 {
-        letter-spacing: -1px;
-      }
-
-      .editor-card {
-        padding: 15px;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .field.full {
+      .invoice-field-full {
         grid-column: auto;
       }
 
-      .options-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .invoice-item-row,
+      .invoice-items-labels {
+        grid-template-columns: minmax(0, 1fr) 52px 78px 30px;
+        gap: 5px;
       }
 
-      .options-grid .field:last-child {
-        grid-column: 1 / -1;
+      .invoice-item-row input {
+        padding: 8px 6px;
+        font-size: 0.83rem;
       }
 
-      .preview-card {
-        padding: 10px;
+      .invoice-item-remove {
+        width: 30px;
       }
 
-      .paper-wrap {
-        padding: 5px;
+      .invoice-items-labels {
+        font-size: 0.68rem;
+      }
+
+      .invoice-actions {
+        width: 100%;
+      }
+
+      .invoice-actions .invoice-btn {
+        flex: 1 1 auto;
+      }
+
+      .invoice-preview-parties {
+        gap: 12px;
       }
 
       .invoice-paper {
-        min-height: auto;
-        padding: 16px 11px;
+        padding: 14px 10px;
       }
 
-      .invoice-top {
-        gap: 6px;
+      .invoice-paper-table {
+        font-size: 0.68rem;
       }
 
-      .invoice-logo,
-      .invoice-logo-placeholder {
-        width: 32px;
-        height: 32px;
+      .invoice-paper-table th,
+      .invoice-paper-table td {
+        padding: 9px 4px;
       }
 
-      .invoice-heading strong {
-        font-size: 18px;
+      .invoice-paper-table th:first-child,
+      .invoice-paper-table td:first-child {
+        width: 40%;
       }
 
-      .invoice-company {
-        font-size: 9px;
+      .invoice-paper-table th:nth-child(2),
+      .invoice-paper-table td:nth-child(2) {
+        width: 15%;
       }
 
-      .invoice-parties {
-        gap: 10px;
+      .invoice-paper-table th:nth-child(3),
+      .invoice-paper-table td:nth-child(3) {
+        width: 22%;
       }
 
-      .invoice-table th,
-      .invoice-table td {
-        padding: 7px 4px;
-      }
-
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .content-card {
-        padding: 17px;
-      }
-
-      .section {
-        padding-top: 43px;
+      .invoice-paper-table th:last-child,
+      .invoice-paper-table td:last-child {
+        width: 23%;
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      * {
-        transition: none !important;
-      }
-    }
-
-    /* Print only the invoice preview. */
     @media print {
       @page {
         size: A4;
@@ -1268,8 +885,8 @@
 
       html,
       body {
-        width: auto !important;
-        min-width: 0 !important;
+        width: 100%;
+        min-height: 0;
         margin: 0 !important;
         padding: 0 !important;
         background: #fff !important;
@@ -1279,1924 +896,1505 @@
         visibility: hidden !important;
       }
 
-      #invoicePreview,
-      #invoicePreview * {
+      #invoice-preview,
+      #invoice-preview * {
         visibility: visible !important;
       }
 
-      .preview-column {
-        position: static !important;
-        display: block !important;
-        width: auto !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-
-      .preview-card,
-      .paper-wrap {
-        display: block !important;
-        width: auto !important;
+      #invoice-preview {
+        position: absolute !important;
+        inset: 0 auto auto 0 !important;
+        width: 100% !important;
+        max-width: none !important;
         margin: 0 !important;
         padding: 0 !important;
         overflow: visible !important;
-        border: 0 !important;
+        border: none !important;
         border-radius: 0 !important;
         background: #fff !important;
         box-shadow: none !important;
       }
 
-      #invoicePreview {
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
+      #invoice-preview .invoice-preview-heading {
+        display: none !important;
+      }
+
+      #invoice-preview .invoice-paper {
         width: 100% !important;
         max-width: none !important;
-        min-height: 0 !important;
         margin: 0 !important;
         padding: 0 !important;
         overflow: visible !important;
-        border: 0 !important;
+        border: none !important;
         border-radius: 0 !important;
         box-shadow: none !important;
-        background: white !important;
-        color: #172033 !important;
-      }
-
-      .invoice-table th {
-        print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
 
-      .invoice-paper,
-      .invoice-table,
-      .invoice-totals,
-      .invoice-bottom {
+      #invoice-preview .invoice-paper-table thead {
+        display: table-header-group;
+      }
+
+      #invoice-preview .invoice-paper-table tr {
         break-inside: avoid;
-        page-break-inside: avoid;
       }
 
-      .invoice-table {
-        font-size: 9pt !important;
+      #invoice-preview .invoice-paper-top,
+      #invoice-preview .invoice-preview-dates,
+      #invoice-preview .invoice-paper-table th,
+      #invoice-preview .invoice-total-grand {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
 
-      .invoice-table td,
-      .invoice-table th {
-        overflow-wrap: anywhere !important;
+      #invoice-preview .invoice-paper-table th {
+        color: #fff !important;
+      }
+
+      #invoice-preview .invoice-preview-footer {
+        display: none !important;
       }
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Free Online Invoice Generator",
+    "url": "https://converttotoolsonline.com/invoice-generator-online.html",
+    "description": "Create professional invoices online with itemized billing, automatic totals, tax, discounts, multiple currencies and print-to-PDF support.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "JavaScript enabled",
+    "isAccessibleForFree": true,
+    "publisher": {
+      "@type": "Organization",
+      "name": "ConvertToToolsOnline",
+      "url": "https://converttotoolsonline.com/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I create an invoice online for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enter your business and client details, add your products or services with quantities and prices, set the invoice dates, apply any relevant tax or discount, and use Print / Save PDF to create a copy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I download my invoice as a PDF?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Select Print / Save PDF and choose Save as PDF in your browser's print dialog if that option is available."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I add my company logo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Upload a supported image in the invoice editor. The logo is displayed in the invoice preview and included in print output."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How are invoice totals calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Each line total is quantity multiplied by unit price. The subtotal adds the line totals. The tool then subtracts the discount, calculates the entered tax rate on the discounted subtotal, adds shipping if entered, and calculates the amount due."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this invoice generator accounting software?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It creates invoice documents and calculates the amounts entered. It does not submit tax returns, process payments, or replace accounting advice or local invoicing requirements."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script src="/script.js" defer></script>
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="/index.html" aria-label="ConvertToToolsOnline homepage">
-        <span class="brand-icon" aria-hidden="true">▤</span>
-        <span>
-          ConvertToToolsOnline
-          <small>Simple tools. Useful results.</small>
-        </span>
+  <main class="invoice-page">
+    <header class="invoice-site-header">
+      <a class="invoice-brand" href="/index.html" aria-label="ConvertToToolsOnline home">
+        <span class="invoice-brand-mark" aria-hidden="true">CT</span>
+        ConvertToToolsOnline
       </a>
 
-      <nav class="main-nav" aria-label="Main navigation">
-        <a href="/index.html">All tools</a>
-        <a href="/merge-pdf.html">PDF tools</a>
-        <a href="/word-counter.html">Word Counter</a>
+      <nav class="invoice-site-nav" aria-label="Main navigation">
+        <a href="/index.html">Home</a>
+        <a href="/index.html">All Tools</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <main class="container">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
+    <nav class="invoice-breadcrumbs" aria-label="Breadcrumb">
       <a href="/index.html">Home</a>
-      <span aria-hidden="true">/</span>
+      <span aria-hidden="true"> / </span>
       <span aria-current="page">Invoice Generator</span>
     </nav>
 
-    <section class="hero" aria-labelledby="pageTitle">
-      <div>
-        <span class="eyebrow">Free business tool</span>
+    <section class="invoice-hero">
+      <h1>Free Online Invoice Generator</h1>
+      <p>
+        Create a professional invoice online without complicated software.
+        Add your business details, enter products or services, calculate totals
+        automatically, and print or save your invoice as a PDF.
+      </p>
 
-        <h1 id="pageTitle">Free Invoice Generator</h1>
-
-        <p class="hero-copy">
-          Create a professional invoice online for your freelance work,
-          services, or small business. Add your business details, list your
-          products or services, calculate taxes and discounts, and print
-          your finished invoice or save it as a PDF.
-        </p>
-
-        <div class="hero-points">
-          <span class="hero-point">✓ Free to use</span>
-          <span class="hero-point">✓ No account required</span>
-          <span class="hero-point">✓ Customizable invoice</span>
-          <span class="hero-point">✓ Browser-based</span>
-        </div>
+      <div class="invoice-benefits">
+        <span>Live invoice preview</span>
+        <span>Automatic calculations</span>
+        <span>Multiple currencies</span>
+        <span>No account required by this tool</span>
       </div>
-
-      <aside class="hero-card">
-        <div class="hero-card-label">Create your invoice</div>
-        <h2>From details to PDF</h2>
-        <p>
-          Enter your information, review the live invoice preview,
-          and use your browser's print dialog to save a PDF.
-        </p>
-        <div class="action-row">
-          <button class="btn btn-primary" id="heroCreate" type="button">
-            Start creating →
-          </button>
-          <button class="btn" id="heroExample" type="button">
-            Load example
-          </button>
-        </div>
-      </aside>
     </section>
 
-    <section id="invoiceBuilder" aria-label="Invoice creation tool">
-      <div class="builder-layout">
+    <div class="invoice-toolbar">
+      <p>Complete the fields and the invoice preview updates as you type.</p>
 
-        <!-- LEFT: INVOICE EDITOR -->
-        <section class="editor-card" id="invoiceEditor">
-          <div class="card-heading">
-            <div>
-              <h2>Build your invoice</h2>
-              <p>Complete the details below. Your preview updates automatically.</p>
+      <div class="invoice-actions">
+        <button type="button" class="invoice-btn" id="invoice-new">
+          New Invoice
+        </button>
+
+        <button type="button" class="invoice-btn" id="invoice-export">
+          Export Draft
+        </button>
+
+        <button type="button" class="invoice-btn" id="invoice-import-trigger">
+          Import Draft
+        </button>
+
+        <input
+          type="file"
+          id="invoice-import-file"
+          class="invoice-hidden"
+          accept=".json,application/json"
+          aria-label="Choose an invoice backup file"
+        >
+
+        <button type="button" class="invoice-btn invoice-btn-primary" id="invoice-print">
+          Print / Save PDF
+        </button>
+      </div>
+    </div>
+
+    <div class="invoice-workspace">
+      <section class="invoice-editor" aria-label="Invoice editor">
+        <div class="invoice-section">
+          <h2>Your Business</h2>
+
+          <div class="invoice-form-grid">
+            <div class="invoice-field invoice-field-full">
+              <label for="business-name">Business or seller name</label>
+              <input id="business-name" type="text" maxlength="140" autocomplete="organization" placeholder="Your Business Name">
             </div>
-            <span class="step-number" aria-hidden="true">01</span>
+
+            <div class="invoice-field">
+              <label for="business-email">Email address</label>
+              <input id="business-email" type="email" maxlength="150" autocomplete="email" placeholder="you@example.com">
+            </div>
+
+            <div class="invoice-field">
+              <label for="business-phone">Phone number</label>
+              <input id="business-phone" type="tel" maxlength="60" autocomplete="tel" placeholder="+977 ...">
+            </div>
+
+            <div class="invoice-field invoice-field-full">
+              <label for="business-address">Business address</label>
+              <textarea id="business-address" maxlength="600" autocomplete="street-address" placeholder="Street, city, postal code, country"></textarea>
+            </div>
+
+            <div class="invoice-field invoice-field-full">
+              <label for="business-tax-id">Business or tax ID (optional)</label>
+              <input id="business-tax-id" type="text" maxlength="100" placeholder="Registration number or tax ID">
+            </div>
+
+            <div class="invoice-field invoice-field-full">
+              <label for="invoice-logo">Business logo (optional)</label>
+              <div class="invoice-logo-controls">
+                <input id="invoice-logo" type="file" accept="image/png,image/jpeg,image/webp">
+                <button type="button" class="invoice-btn" id="invoice-remove-logo">
+                  Remove Logo
+                </button>
+              </div>
+              <div class="invoice-helper">
+                PNG, JPG or WebP. Maximum file size: 500 KB. The image is read locally by this page.
+              </div>
+            </div>
+
+            <div class="invoice-field">
+              <label for="invoice-accent">Invoice accent color</label>
+              <input id="invoice-accent" type="color" value="#2459d3">
+            </div>
+          </div>
+        </div>
+
+        <div class="invoice-section">
+          <h2>Bill To</h2>
+
+          <div class="invoice-form-grid">
+            <div class="invoice-field invoice-field-full">
+              <label for="client-name">Client or customer name</label>
+              <input id="client-name" type="text" maxlength="140" autocomplete="off" placeholder="Client or Company Name">
+            </div>
+
+            <div class="invoice-field">
+              <label for="client-email">Client email (optional)</label>
+              <input id="client-email" type="email" maxlength="150" placeholder="client@example.com">
+            </div>
+
+            <div class="invoice-field">
+              <label for="client-tax-id">Client tax ID (optional)</label>
+              <input id="client-tax-id" type="text" maxlength="100" placeholder="Tax or registration ID">
+            </div>
+
+            <div class="invoice-field invoice-field-full">
+              <label for="client-address">Client address</label>
+              <textarea id="client-address" maxlength="600" placeholder="Client address"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="invoice-section">
+          <h2>Invoice Details</h2>
+
+          <div class="invoice-form-grid">
+            <div class="invoice-field">
+              <label for="invoice-number">Invoice number</label>
+              <input id="invoice-number" type="text" maxlength="80" placeholder="INV-20261019-001">
+            </div>
+
+            <div class="invoice-field">
+              <label for="invoice-currency">Currency</label>
+              <select id="invoice-currency">
+                <option value="USD">USD — US Dollar</option>
+                <option value="NPR">NPR — Nepalese Rupee</option>
+                <option value="INR">INR — Indian Rupee</option>
+                <option value="EUR">EUR — Euro</option>
+                <option value="GBP">GBP — British Pound</option>
+                <option value="CAD">CAD — Canadian Dollar</option>
+                <option value="AUD">AUD — Australian Dollar</option>
+                <option value="JPY">JPY — Japanese Yen</option>
+                <option value="CNY">CNY — Chinese Yuan</option>
+                <option value="AED">AED — UAE Dirham</option>
+                <option value="SAR">SAR — Saudi Riyal</option>
+                <option value="PKR">PKR — Pakistani Rupee</option>
+                <option value="BDT">BDT — Bangladeshi Taka</option>
+                <option value="SGD">SGD — Singapore Dollar</option>
+                <option value="NZD">NZD — New Zealand Dollar</option>
+                <option value="ZAR">ZAR — South African Rand</option>
+                <option value="NGN">NGN — Nigerian Naira</option>
+                <option value="CHF">CHF — Swiss Franc</option>
+                <option value="SEK">SEK — Swedish Krona</option>
+                <option value="BRL">BRL — Brazilian Real</option>
+              </select>
+            </div>
+
+            <div class="invoice-field">
+              <label for="invoice-date">Invoice date</label>
+              <input id="invoice-date" type="date">
+            </div>
+
+            <div class="invoice-field">
+              <label for="invoice-due-date">Due date</label>
+              <input id="invoice-due-date" type="date">
+            </div>
+
+            <div class="invoice-field invoice-field-full">
+              <label for="invoice-reference">Reference or project (optional)</label>
+              <input id="invoice-reference" type="text" maxlength="150" placeholder="Project name, order number, or purchase order">
+            </div>
+          </div>
+        </div>
+
+        <div class="invoice-section">
+          <div class="invoice-items-header">
+            <h2>Products and Services</h2>
+            <button type="button" class="invoice-btn" id="invoice-add-item">
+              + Add Item
+            </button>
           </div>
 
-          <!-- YOUR BUSINESS -->
-          <section class="form-section" aria-labelledby="businessHeading">
-            <div class="form-section-heading">
-              <h3 id="businessHeading">Your business</h3>
-              <span>Invoice sender</span>
-            </div>
-
-            <div class="form-grid">
-              <div class="field full">
-                <label for="senderName">Business or freelancer name</label>
-                <input
-                  id="senderName"
-                  type="text"
-                  maxlength="120"
-                  autocomplete="organization"
-                  placeholder="Your business name"
-                >
-              </div>
-
-              <div class="field">
-                <label for="senderEmail">Email address</label>
-                <input
-                  id="senderEmail"
-                  type="email"
-                  maxlength="160"
-                  autocomplete="email"
-                  placeholder="you@example.com"
-                >
-              </div>
-
-              <div class="field">
-                <label for="senderPhone">Phone number</label>
-                <input
-                  id="senderPhone"
-                  type="text"
-                  maxlength="60"
-                  autocomplete="tel"
-                  placeholder="+1 555 0100"
-                >
-              </div>
-
-              <div class="field full">
-                <label for="senderAddress">Business address</label>
-                <textarea
-                  id="senderAddress"
-                  maxlength="500"
-                  autocomplete="street-address"
-                  placeholder="Street, city, postal code, country"
-                ></textarea>
-              </div>
-
-              <div class="field full">
-                <label for="logoFile">Business logo (optional)</label>
-                <input
-                  id="logoFile"
-                  type="file"
-                  accept="image/png,image/jpeg,image/webp,image/gif"
-                >
-                <div class="field-help">
-                  Use a PNG, JPG, WebP, or GIF image up to 2 MB.
-                  The selected logo stays in this page's current session.
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- CLIENT -->
-          <section class="form-section" aria-labelledby="clientHeading">
-            <div class="form-section-heading">
-              <h3 id="clientHeading">Bill to</h3>
-              <span>Customer details</span>
-            </div>
-
-            <div class="form-grid">
-              <div class="field full">
-                <label for="clientName">Client or customer name</label>
-                <input
-                  id="clientName"
-                  type="text"
-                  maxlength="120"
-                  autocomplete="name"
-                  placeholder="Client or company name"
-                >
-              </div>
-
-              <div class="field full">
-                <label for="clientEmail">Client email (optional)</label>
-                <input
-                  id="clientEmail"
-                  type="email"
-                  maxlength="160"
-                  autocomplete="email"
-                  placeholder="client@example.com"
-                >
-              </div>
-
-              <div class="field full">
-                <label for="clientAddress">Client address (optional)</label>
-                <textarea
-                  id="clientAddress"
-                  maxlength="500"
-                  placeholder="Billing address"
-                ></textarea>
-              </div>
-            </div>
-          </section>
-
-          <!-- INVOICE DETAILS -->
-          <section class="form-section" aria-labelledby="invoiceDetailsHeading">
-            <div class="form-section-heading">
-              <h3 id="invoiceDetailsHeading">Invoice details</h3>
-              <span>Number, date and currency</span>
-            </div>
-
-            <div class="form-grid">
-              <div class="field">
-                <label for="invoiceNumber">Invoice number</label>
-                <input
-                  id="invoiceNumber"
-                  type="text"
-                  maxlength="80"
-                  placeholder="INV-001"
-                >
-              </div>
-
-              <div class="field">
-                <label for="invoiceStatus">Invoice status</label>
-                <select id="invoiceStatus">
-                  <option value="Draft">Draft</option>
-                  <option value="Unpaid">Unpaid</option>
-                  <option value="Paid">Paid</option>
-                  <option value="Overdue">Overdue</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="invoiceDate">Invoice date</label>
-                <input id="invoiceDate" type="date">
-              </div>
-
-              <div class="field">
-                <label for="dueDate">Payment due date</label>
-                <input id="dueDate" type="date">
-              </div>
-
-              <div class="field full">
-                <label for="currency">Invoice currency</label>
-                <select id="currency">
-                  <option value="USD">USD — US Dollar</option>
-                  <option value="EUR">EUR — Euro</option>
-                  <option value="GBP">GBP — British Pound</option>
-                  <option value="CAD">CAD — Canadian Dollar</option>
-                  <option value="AUD">AUD — Australian Dollar</option>
-                  <option value="NZD">NZD — New Zealand Dollar</option>
-                  <option value="INR">INR — Indian Rupee</option>
-                  <option value="NPR">NPR — Nepalese Rupee</option>
-                  <option value="PKR">PKR — Pakistani Rupee</option>
-                  <option value="AED">AED — UAE Dirham</option>
-                  <option value="SAR">SAR — Saudi Riyal</option>
-                  <option value="SGD">SGD — Singapore Dollar</option>
-                  <option value="JPY">JPY — Japanese Yen</option>
-                  <option value="CNY">CNY — Chinese Yuan</option>
-                  <option value="CHF">CHF — Swiss Franc</option>
-                  <option value="ZAR">ZAR — South African Rand</option>
-                  <option value="BDT">BDT — Bangladeshi Taka</option>
-                </select>
-                <div class="field-help">
-                  Currency selection changes the displayed currency, not
-                  the underlying exchange rate. No currency conversion is performed.
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- ITEMS -->
-          <section class="form-section" aria-labelledby="itemsHeading">
-            <div class="form-section-heading">
-              <h3 id="itemsHeading">Products and services</h3>
-              <span>Itemized invoice</span>
-            </div>
-
-            <div class="items-table-wrap">
-              <table class="items-editor">
-                <thead>
-                  <tr>
-                    <th>Description</th>
-                    <th class="qty-col">Qty</th>
-                    <th class="rate-col">Unit price</th>
-                    <th>Amount</th>
-                    <th class="remove-col">
-                      <span class="visually-hidden">Remove</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody id="itemsBody"></tbody>
-              </table>
-            </div>
-
-            <div class="item-toolbar">
-              <span class="item-counter" id="itemCounter">1 item</span>
-
-              <button class="btn btn-soft" id="addItem" type="button">
-                + Add item
-              </button>
-            </div>
-
-            <div class="field-help">
-              Amount for each row = quantity × unit price.
-              Up to 40 rows can be added to one invoice.
-            </div>
-          </section>
-
-          <!-- TAX AND DISCOUNT -->
-          <section class="form-section" aria-labelledby="totalsHeading">
-            <div class="form-section-heading">
-              <h3 id="totalsHeading">Tax, discount and other charges</h3>
-              <span>Optional</span>
-            </div>
-
-            <div class="options-grid">
-              <div class="field">
-                <label for="discountRate">Discount (%)</label>
-                <input
-                  id="discountRate"
-                  type="number"
-                  min="0"
-                  max="100"
-                  step="0.01"
-                  value="0"
-                  inputmode="decimal"
-                >
-              </div>
-
-              <div class="field">
-                <label for="taxRate">Tax rate (%)</label>
-                <input
-                  id="taxRate"
-                  type="number"
-                  min="0"
-                  max="100"
-                  step="0.01"
-                  value="0"
-                  inputmode="decimal"
-                >
-              </div>
-
-              <div class="field">
-                <label for="extraCharge">Other charges</label>
-                <input
-                  id="extraCharge"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value="0"
-                  inputmode="decimal"
-                >
-              </div>
-            </div>
-
-            <div class="invoice-options-note">
-              The calculator applies the percentage discount to the subtotal,
-              then calculates tax on the discounted subtotal plus other charges.
-              Tax rules differ by location, so verify the calculation and required
-              invoice fields for your jurisdiction.
-            </div>
-          </section>
-
-          <!-- PAYMENT INFORMATION -->
-          <section class="form-section" aria-labelledby="paymentHeading">
-            <div class="form-section-heading">
-              <h3 id="paymentHeading">Notes and payment details</h3>
-              <span>Optional information</span>
-            </div>
-
-            <div class="form-grid">
-              <div class="field full">
-                <label for="paymentTerms">Payment instructions</label>
-                <textarea
-                  id="paymentTerms"
-                  maxlength="1200"
-                  placeholder="Payment method, account details, or instructions for your client"
-                ></textarea>
-              </div>
-
-              <div class="field full">
-                <label for="invoiceNotes">Notes or terms</label>
-                <textarea
-                  id="invoiceNotes"
-                  maxlength="1200"
-                  placeholder="Thank you for your business. Add any relevant notes or terms."
-                ></textarea>
-              </div>
-            </div>
-          </section>
-
-          <!-- DRAFT TOOLS -->
-          <section class="form-section" aria-labelledby="draftHeading">
-            <div class="form-section-heading">
-              <h3 id="draftHeading">Draft tools</h3>
-              <span>Save or move your invoice</span>
-            </div>
-
-            <div class="action-row">
-              <button class="btn" id="loadExample" type="button">
-                Load example
-              </button>
-
-              <button class="btn" id="exportDraft" type="button">
-                Export draft
-              </button>
-
-              <button class="btn" id="importDraft" type="button">
-                Import draft
-              </button>
-
-              <input
-                id="importFile"
-                type="file"
-                accept="application/json,.json"
-              >
-
-              <button class="btn btn-danger" id="clearAll" type="button">
-                New invoice
-              </button>
-            </div>
-
-            <div class="status-message" id="draftStatus" role="status" aria-live="polite"></div>
-          </section>
-        </section>
-
-        <!-- RIGHT: LIVE PREVIEW -->
-        <aside class="preview-column" aria-label="Invoice preview and PDF actions">
-          <section class="preview-card">
-            <div class="preview-toolbar">
-              <div>
-                <h2>Live invoice preview</h2>
-                <p>Review your invoice before printing.</p>
-              </div>
-
-              <button class="btn btn-primary" id="printInvoice" type="button">
-                Print / Save PDF
-              </button>
-            </div>
-
-            <div class="paper-wrap">
-              <div id="invoicePreview" class="invoice-paper">
-                <div class="invoice-top">
-                  <div class="invoice-brand">
-                    <div class="invoice-logo-placeholder">IN</div>
-                    <div class="invoice-company">
-                      Your Business
-                      <small>Business contact details</small>
-                    </div>
-                  </div>
-
-                  <div class="invoice-heading">
-                    <strong>INVOICE</strong>
-                    <small>INV-001</small>
-                  </div>
-                </div>
-
-                <p>Your invoice preview will appear here.</p>
-              </div>
-            </div>
-
-            <div class="privacy-note">
-              <span aria-hidden="true">✓</span>
-              <span>
-                Your invoice is generated in this browser. Draft details are
-                saved in this browser's local storage and are not sent to a
-                conversion server by this tool. Logo images are not included
-                in the saved draft.
-              </span>
-            </div>
-
-            <div class="status-message" id="printStatus" role="status" aria-live="polite"></div>
-          </section>
-        </aside>
-      </div>
-    </section>
-
-    <!-- FEATURE SECTION -->
-    <section class="section" aria-labelledby="featureHeading">
-      <div class="section-heading">
-        <h2 id="featureHeading">A practical invoice maker for everyday work</h2>
-        <p>Create an itemized invoice without using a complex billing system.</p>
-      </div>
-
-      <div class="feature-grid">
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">▤</div>
-          <h3>Professional invoice template</h3>
-          <p>
-            Add your sender information, customer details, invoice number,
-            issue date, due date and payment instructions.
-          </p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">＋</div>
-          <h3>Products and services</h3>
-          <p>
-            Add any number of itemized services or products, with editable
-            descriptions, quantities, unit prices and calculated line totals.
-          </p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">%</div>
-          <h3>Tax and discount calculator</h3>
-          <p>
-            Calculate percentage discounts, tax and additional charges
-            using the rates you enter.
-          </p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">PDF</div>
-          <h3>Print or save as PDF</h3>
-          <p>
-            Generate a print-ready invoice and use your browser's print
-            dialog to save it as a PDF.
-          </p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">◷</div>
-          <h3>Local draft storage</h3>
-          <p>
-            Your invoice draft automatically saves in your browser so you
-            can return to your work on the same browser and device.
-          </p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">⇧</div>
-          <h3>Import and export drafts</h3>
-          <p>
-            Export editable invoice details as JSON or import a previously
-            exported draft to continue editing it.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- SEO / HELP CONTENT -->
-    <section class="section" aria-labelledby="aboutHeading">
-      <article class="content-card">
-        <h2 id="aboutHeading">Free invoice generator for freelancers and small businesses</h2>
-
-        <p>
-          An invoice is a document that records the products or services
-          provided to a customer and the amount requested for payment.
-          A useful <strong>invoice generator</strong> lets you create that
-          document without manually calculating every line item or total.
-          This online invoice maker gives freelancers, independent contractors,
-          consultants and small businesses a straightforward way to prepare
-          their own invoice.
-        </p>
-
-        <p>
-          Use it as a freelance invoice generator, a basic invoice maker for
-          services, or a starting point for an invoice template. Enter the
-          required details, adjust the prices and calculation settings, and
-          review the invoice preview before using the print dialog.
-        </p>
-
-        <h3>How to create an invoice online</h3>
-
-        <ol>
-          <li>Enter your business or freelancer name and contact details.</li>
-          <li>Add the client's name, email and billing address.</li>
-          <li>Choose an invoice number, issue date, due date and currency.</li>
-          <li>Add each product or service with its quantity and unit price.</li>
-          <li>Enter any applicable discount, tax percentage and extra charges.</li>
-          <li>Review the calculated subtotal and final invoice total.</li>
-          <li>Enter payment instructions and any relevant invoice notes.</li>
-          <li>Select <strong>Print / Save PDF</strong> and choose the PDF option in your browser's print dialog.</li>
-        </ol>
-
-        <h3>How the invoice total is calculated</h3>
-
-        <p>
-          The calculator uses the quantities, prices, discount rate, tax rate
-          and additional charges you enter. Check the formulas below if you
-          want to understand the result or verify it independently.
-        </p>
-
-        <div class="formula-box">
-          <p>
-            <strong>Line item amount</strong><br>
-            <code>Quantity × Unit price</code>
+          <p class="invoice-section-description">
+            Enter a description, quantity, and unit price for each line.
           </p>
 
-          <p>
-            <strong>Subtotal</strong><br>
-            <code>Sum of all line item amounts</code>
-          </p>
+          <div class="invoice-items-labels" aria-hidden="true">
+            <span>Description</span>
+            <span>Qty</span>
+            <span>Rate</span>
+            <span>×</span>
+          </div>
 
-          <p>
-            <strong>Discount amount</strong><br>
-            <code>Subtotal × Discount percentage ÷ 100</code>
-          </p>
+          <div id="invoice-items-editor" aria-label="Invoice line items"></div>
 
-          <p>
-            <strong>Taxable calculation base used by this tool</strong><br>
-            <code>Subtotal − Discount + Other charges</code>
-          </p>
-
-          <p>
-            <strong>Tax amount</strong><br>
-            <code>Taxable calculation base × Tax percentage ÷ 100</code>
-          </p>
-
-          <p>
-            <strong>Final invoice total</strong><br>
-            <code>Subtotal − Discount + Other charges + Tax</code>
+          <p class="invoice-helper">
+            Line amount = quantity × unit price. Use a zero price for items that do not have a charge.
           </p>
         </div>
 
+        <div class="invoice-section">
+          <h2>Tax, Discount and Shipping</h2>
+
+          <div class="invoice-totals-editor">
+            <div class="invoice-field">
+              <label for="invoice-tax-label">Tax label</label>
+              <input id="invoice-tax-label" type="text" maxlength="40" value="Tax" placeholder="VAT, GST, Sales tax">
+            </div>
+
+            <div class="invoice-field">
+              <label for="invoice-tax-rate">Tax rate (%)</label>
+              <input id="invoice-tax-rate" type="number" min="0" max="100" step="0.01" value="0" inputmode="decimal">
+            </div>
+
+            <div class="invoice-field invoice-field-full">
+              <label for="invoice-discount">Discount</label>
+
+              <div class="invoice-discount-controls">
+                <input id="invoice-discount" type="number" min="0" step="0.01" value="0" inputmode="decimal" aria-label="Discount amount">
+                <select id="invoice-discount-mode" aria-label="Discount type">
+                  <option value="percent">Percent (%)</option>
+                  <option value="fixed">Fixed amount</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="invoice-field invoice-field-full">
+              <label for="invoice-shipping">Shipping or other charges</label>
+              <input id="invoice-shipping" type="number" min="0" step="0.01" value="0" inputmode="decimal">
+              <div class="invoice-helper">Optional amount added to the total.</div>
+            </div>
+          </div>
+
+          <div class="invoice-calculation-box" style="margin-top: 15px;">
+            <div class="invoice-total-row">
+              <span>Subtotal</span>
+              <span id="editor-subtotal">USD 0.00</span>
+            </div>
+            <div class="invoice-total-row">
+              <span>Discount</span>
+              <span id="editor-discount">USD 0.00</span>
+            </div>
+            <div class="invoice-total-row">
+              <span>Tax</span>
+              <span id="editor-tax">USD 0.00</span>
+            </div>
+            <div class="invoice-total-row">
+              <span>Shipping</span>
+              <span id="editor-shipping">USD 0.00</span>
+            </div>
+            <div class="invoice-total-row invoice-total-grand">
+              <span>Total Due</span>
+              <span id="editor-total">USD 0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="invoice-section">
+          <h2>Notes and Payment Terms</h2>
+
+          <div class="invoice-form-grid">
+            <div class="invoice-field invoice-field-full">
+              <label for="invoice-notes">Notes to client (optional)</label>
+              <textarea id="invoice-notes" maxlength="1200" placeholder="Thank you for your business."></textarea>
+            </div>
+
+            <div class="invoice-field invoice-field-full">
+              <label for="invoice-terms">Payment terms (optional)</label>
+              <textarea id="invoice-terms" maxlength="1200" placeholder="Payment due by the date shown above. Add your accepted payment methods or other terms."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="invoice-section">
+          <h2>Save or Export Your Draft</h2>
+          <p class="invoice-section-description">
+            Draft changes are saved in this browser when local storage is available.
+            Export a JSON backup if you need to move the draft to another device.
+          </p>
+
+          <div class="invoice-actions">
+            <button type="button" class="invoice-btn" id="invoice-export-bottom">
+              Download JSON Backup
+            </button>
+
+            <button type="button" class="invoice-btn invoice-btn-danger" id="invoice-clear-saved">
+              Clear Saved Draft
+            </button>
+          </div>
+
+          <p class="invoice-status-message" id="invoice-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="invoice-preview-panel" id="invoice-preview" aria-label="Live invoice preview">
+        <div class="invoice-preview-heading">
+          <h2>Invoice Preview</h2>
+          <span class="invoice-live-label">LIVE PREVIEW</span>
+        </div>
+
+        <article class="invoice-paper" id="invoice-paper">
+          <div class="invoice-paper-top">
+            <div>
+              <img id="preview-logo" class="invoice-preview-logo" alt="Business logo">
+              <div class="invoice-preview-company" id="preview-business-name">Your Business Name</div>
+              <div class="invoice-preview-company-details" id="preview-business-details"></div>
+            </div>
+
+            <div class="invoice-paper-title">
+              INVOICE
+              <div class="invoice-paper-number">
+                <span id="preview-invoice-number">Invoice number</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="invoice-preview-parties">
+            <div>
+              <div class="invoice-preview-label">Bill To</div>
+              <div class="invoice-preview-name" id="preview-client-name">Client or Company Name</div>
+              <div class="invoice-preview-address" id="preview-client-details"></div>
+            </div>
+
+            <div>
+              <div class="invoice-preview-label">From</div>
+              <div class="invoice-preview-name" id="preview-seller-name">Your Business Name</div>
+              <div class="invoice-preview-address" id="preview-seller-contact"></div>
+            </div>
+          </div>
+
+          <div class="invoice-preview-dates">
+            <div>
+              <div class="invoice-preview-label">Invoice Date</div>
+              <strong id="preview-invoice-date">—</strong>
+            </div>
+
+            <div>
+              <div class="invoice-preview-label">Due Date</div>
+              <strong id="preview-due-date">—</strong>
+            </div>
+          </div>
+
+          <div id="preview-reference-wrap" class="invoice-hidden" style="margin-bottom: 16px;">
+            <div class="invoice-preview-label">Reference</div>
+            <div id="preview-reference" style="font-size: 0.8rem;"></div>
+          </div>
+
+          <table class="invoice-paper-table">
+            <thead>
+              <tr>
+                <th scope="col">Description</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Rate</th>
+                <th scope="col">Amount</th>
+              </tr>
+            </thead>
+            <tbody id="preview-items">
+              <tr>
+                <td>Service or product</td>
+                <td>1</td>
+                <td>USD 0.00</td>
+                <td>USD 0.00</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="invoice-paper-totals">
+            <div class="invoice-total-row">
+              <span>Subtotal</span>
+              <span id="preview-subtotal">USD 0.00</span>
+            </div>
+
+            <div class="invoice-total-row invoice-hidden" id="preview-discount-row">
+              <span id="preview-discount-label">Discount</span>
+              <span id="preview-discount">USD 0.00</span>
+            </div>
+
+            <div class="invoice-total-row invoice-hidden" id="preview-tax-row">
+              <span id="preview-tax-label">Tax</span>
+              <span id="preview-tax">USD 0.00</span>
+            </div>
+
+            <div class="invoice-total-row invoice-hidden" id="preview-shipping-row">
+              <span>Shipping</span>
+              <span id="preview-shipping">USD 0.00</span>
+            </div>
+
+            <div class="invoice-total-row invoice-total-grand">
+              <span>Total Due</span>
+              <span id="preview-total">USD 0.00</span>
+            </div>
+          </div>
+
+          <div class="invoice-preview-notes invoice-hidden" id="preview-notes-wrap">
+            <h3>Notes</h3>
+            <p id="preview-notes"></p>
+          </div>
+
+          <div class="invoice-preview-notes invoice-hidden" id="preview-terms-wrap">
+            <h3>Payment Terms</h3>
+            <p id="preview-terms"></p>
+          </div>
+
+          <div class="invoice-preview-footer">
+            Generated with ConvertToToolsOnline
+          </div>
+        </article>
+
+        <p class="invoice-helper" style="margin-top: 12px;">
+          To create a PDF, select <strong>Print / Save PDF</strong> and choose
+          <strong>Save as PDF</strong> in your browser's print dialog.
+        </p>
+      </section>
+    </div>
+
+    <p class="invoice-privacy-note">
+      <strong>Privacy note:</strong> This invoice tool builds the preview in your
+      browser. Its draft is stored in your browser when local storage is available.
+      Export a JSON backup if you need a separate copy. Avoid using a shared or
+      public device for confidential client information.
+    </p>
+
+    <div class="invoice-content">
+      <section>
+        <h2>Create an Invoice Online in a Few Steps</h2>
         <p>
-          This is a general calculation model, not a statement of tax law.
-          Depending on your jurisdiction, the correct tax base, required
-          invoice fields, rounding rules and tax treatment may be different.
-          Confirm local requirements before issuing an invoice.
+          An invoice records the products or services supplied to a customer and
+          the amount requested in payment. With this free online invoice
+          generator, you can prepare a clear document without having to format a
+          spreadsheet or word-processing template manually.
         </p>
 
-        <h3>What should a freelance invoice template include?</h3>
+        <ol>
+          <li>Enter your business name and contact details.</li>
+          <li>Add your client's name and billing address.</li>
+          <li>Enter an invoice number, invoice date, and payment due date.</li>
+          <li>Add each product or service, including its quantity and unit price.</li>
+          <li>Enter any applicable tax rate, discount, and shipping charge.</li>
+          <li>Review the live preview, then print the invoice or save it as a PDF.</li>
+        </ol>
 
         <p>
-          The requirements for a valid invoice can vary by country, industry
-          and transaction. As a practical starting point, a freelance invoice
-          template commonly includes:
+          Check the details carefully before sending the invoice. The amounts are
+          calculated from the information you enter, so incorrect quantities,
+          prices, dates, or tax rates will affect the final document.
+        </p>
+      </section>
+
+      <section>
+        <h2>What Should a Professional Invoice Include?</h2>
+        <p>
+          The information needed on an invoice depends on the transaction and
+          the rules that apply to your business. A useful starting point is to
+          include the following details:
         </p>
 
         <ul>
-          <li>Your business or professional name and contact information.</li>
-          <li>Your client's name and relevant billing information.</li>
-          <li>A unique invoice number for identifying the document.</li>
-          <li>The invoice date and payment due date.</li>
-          <li>A clear description of the work, products or services supplied.</li>
-          <li>The quantity, unit price, subtotal and overall amount due.</li>
-          <li>Any applicable tax, discount or additional charge.</li>
-          <li>Payment instructions and any necessary terms or notes.</li>
+          <li>Your business or seller name and appropriate contact details.</li>
+          <li>The customer's name and relevant billing information.</li>
+          <li>A unique invoice number for recordkeeping.</li>
+          <li>The invoice issue date and payment due date, when applicable.</li>
+          <li>A clear description of each product or service.</li>
+          <li>Quantities, unit prices, subtotal, discounts and charges.</li>
+          <li>Applicable taxes and the total amount payable.</li>
+          <li>Payment instructions, reference numbers or terms when needed.</li>
         </ul>
 
         <p>
-          Some jurisdictions require additional information, such as tax
-          registration numbers, tax breakdowns, currency disclosures or
-          prescribed invoice wording. This general-purpose invoice maker
-          does not determine whether your document complies with those rules.
+          Depending on your jurisdiction and type of transaction, additional
+          information may be required. Confirm local invoicing, tax and
+          recordkeeping requirements before using a generated invoice as an
+          official tax document.
         </p>
+      </section>
 
-        <h3>Create a PDF invoice from your browser</h3>
+      <section>
+        <h2>How This Invoice Generator Calculates the Total</h2>
+        <p>
+          Each line amount is calculated by multiplying the quantity by the
+          unit price. The line amounts are added together to create the
+          subtotal. A discount is then deducted, tax is calculated on the
+          discounted subtotal, and any shipping or other charge entered is added.
+        </p>
 
         <p>
-          This tool does not require a third-party PDF service. When you use
-          Print / Save PDF, your browser opens its print interface. Select
-          the PDF destination available in your browser or operating system,
-          then review the page size and margins before saving.
+          The calculation used is:
         </p>
 
         <p>
-          The printable preview is designed for ordinary invoice information
-          and includes your business and client details, itemized charges,
-          invoice dates, tax, discount, total, notes and payment instructions.
-          Review the final printed document before sending it to your customer.
+          <strong>Subtotal</strong> = sum of quantity × unit price for all items
         </p>
-
-        <h3>Save and reuse invoice drafts</h3>
 
         <p>
-          Drafts are saved in local browser storage on the device you use.
-          They are not automatically synced to another device or browser.
-          You can also export a draft as a JSON file and import that file later.
-          Keep exported drafts secure because they can contain personal,
-          customer or business information. The business logo must be selected
-          again after reloading or importing a draft.
+          <strong>Discounted amount</strong> = subtotal − discount
         </p>
-
-        <h3>More useful tools</h3>
 
         <p>
-          Explore other practical tools on ConvertToToolsOnline:
+          <strong>Tax</strong> = discounted amount × tax rate ÷ 100
         </p>
 
-        <div class="related-links">
-          <a href="/index.html">Browse all tools</a>
-          <a href="/merge-pdf.html">Merge PDF files</a>
-          <a href="/word-counter.html">Word Counter</a>
+        <p>
+          <strong>Total due</strong> = discounted amount + tax + shipping
+        </p>
+
+        <p>
+          This is a general calculation method. Different tax systems may use
+          different tax bases, tax-inclusive prices, multiple tax rates or special
+          rounding rules. Check which calculation applies to your transaction.
+        </p>
+      </section>
+
+      <section>
+        <h2>Who Can Use an Online Invoice Maker?</h2>
+        <p>
+          A simple invoice maker can help freelancers, consultants, independent
+          contractors, designers, developers, service providers and small
+          businesses prepare itemized invoices. It is also useful when you need
+          a straightforward invoice for an individual project or one-off sale.
+        </p>
+
+        <p>
+          Select the appropriate currency for the document, add clear payment
+          terms, and verify all numbers before sharing the finished invoice.
+          Choosing a currency changes the displayed currency formatting; it does
+          not convert amounts using a live exchange rate.
+        </p>
+      </section>
+
+      <section>
+        <h2>Save or Print an Invoice as a PDF</h2>
+        <p>
+          Once the preview is correct, select <strong>Print / Save PDF</strong>.
+          Your browser opens its print dialog. On computers that support it,
+          select <strong>Save as PDF</strong> to save a digital copy, or select
+          a connected printer to print the invoice on paper. Options on mobile
+          devices depend on the browser and operating system.
+        </p>
+
+        <p>
+          Review the paper size, margins, and preview before saving. If your
+          invoice contains many line items, check that the table and totals are
+          readable across all pages. Keep a copy of the invoice for your records.
+        </p>
+      </section>
+
+      <section>
+        <h2>Important Limitations</h2>
+        <p>
+          This page creates an invoice document; it is not a complete accounting
+          or billing platform. It does not collect payment, send invoices to
+          customers, file taxes, verify tax registration, or confirm legal
+          compliance. It also does not obtain live currency exchange rates.
+        </p>
+
+        <p>
+          Use the tax, currency and billing fields that apply to your
+          transaction, and seek advice from a qualified professional when you
+          need help with local tax treatment or legal requirements.
+        </p>
+      </section>
+
+      <section>
+        <h2>Related Free Online Tools</h2>
+        <p>
+          Visit <a href="/index.html">all tools on ConvertToToolsOnline</a> to
+          find additional utilities for everyday work, calculations, image tasks,
+          and text processing.
+        </p>
+
+        <div class="invoice-bottom-links">
+          <a href="/index.html">Browse All Tools</a>
+          <a href="/about.html">About Us</a>
+          <a href="/contact.html">Contact</a>
         </div>
-      </article>
-    </section>
+      </section>
 
-    <!-- FAQ: final main-content section -->
-    <section class="section" id="faq" aria-labelledby="faqHeading">
-      <div class="section-heading">
-        <h2 id="faqHeading">Frequently asked questions</h2>
-        <p>Answers about creating and using an online invoice.</p>
-      </div>
+      <section id="invoice-faq">
+        <h2>Frequently Asked Questions</h2>
 
-      <div class="faq-list">
-        <article class="faq-item">
-          <h3>Is this invoice generator free?</h3>
+        <div class="invoice-faq-item">
+          <h3>1. How do I create an invoice online for free?</h3>
           <p>
-            Yes. The page provides invoice creation, calculations, draft
-            export and browser-based printing without requiring an account
-            or a paid conversion service.
+            Enter your business and client details, add line items with
+            quantities and prices, set the dates, and enter any relevant tax or
+            discount. Review the preview and use Print / Save PDF to create a copy.
           </p>
-        </article>
+        </div>
 
-        <article class="faq-item">
-          <h3>Can I create an invoice as a freelancer?</h3>
+        <div class="invoice-faq-item">
+          <h3>2. Can I download my invoice as a PDF?</h3>
           <p>
-            Yes. You can enter your professional details, describe your work,
-            add hourly or project-based charges, specify a due date, and
-            include payment instructions. Verify any invoice requirements
-            that apply to your location.
+            Yes. Select Print / Save PDF and choose Save as PDF in your browser's
+            print dialog when that option is available. You can also print the
+            invoice using a connected printer.
           </p>
-        </article>
+        </div>
 
-        <article class="faq-item">
-          <h3>How do I save my invoice as a PDF?</h3>
+        <div class="invoice-faq-item">
+          <h3>3. Can I add my company logo to an invoice?</h3>
           <p>
-            Select Print / Save PDF. In the browser's print dialog, choose
-            the available PDF destination, review the print preview, and
-            save the document.
+            Yes. Upload a supported PNG, JPEG or WebP image in the editor. The
+            logo appears in the preview and is included in print output.
           </p>
-        </article>
+        </div>
 
-        <article class="faq-item">
-          <h3>Can I add tax and a discount to my invoice?</h3>
+        <div class="invoice-faq-item">
+          <h3>4. Can I create invoices in Nepalese rupees or other currencies?</h3>
           <p>
-            Yes. Enter the applicable percentage discount and tax rate.
-            The tool calculates the resulting amounts using the formulas
-            explained on this page. Confirm local tax rules independently.
+            Yes. The currency selector includes NPR, USD, INR, EUR, GBP and
+            several other currencies. Selecting a currency changes the displayed
+            currency format, but does not perform exchange-rate conversion.
           </p>
-        </article>
+        </div>
 
-        <article class="faq-item">
-          <h3>Can I change the invoice currency?</h3>
+        <div class="invoice-faq-item">
+          <h3>5. How are taxes and discounts calculated?</h3>
           <p>
-            Yes. You can select from the currencies listed in the editor.
-            This changes how monetary values are displayed; it does not
-            convert the values using foreign exchange rates.
+            The tool calculates item amounts from quantity and rate, applies the
+            entered discount to the subtotal, calculates tax on the discounted
+            subtotal, and adds shipping or other charges. Check that this method
+            matches the rules for your transaction.
           </p>
-        </article>
+        </div>
 
-        <article class="faq-item">
-          <h3>Can I add my business logo?</h3>
+        <div class="invoice-faq-item">
+          <h3>6. Does this invoice generator save my work?</h3>
           <p>
-            Yes. Upload a supported image file of up to 2 MB to display it
-            on the invoice. The logo is kept in the current page session
-            and must be selected again after a reload.
+            It attempts to save your draft in this browser's local storage.
+            Storage may be unavailable or cleared by your browser, so use Export
+            Draft to download a JSON backup if you need to keep your work.
           </p>
-        </article>
+        </div>
 
-        <article class="faq-item">
-          <h3>Will my draft be available on another device?</h3>
+        <div class="invoice-faq-item">
+          <h3>7. Can I edit the invoice after downloading the PDF?</h3>
           <p>
-            No. Automatic draft storage is local to the browser and device
-            where you created it. Use Export draft and Import draft to
-            transfer editable invoice details.
+            The PDF is a document copy. To make further changes in this tool,
+            return to the editor and update your fields, or import a JSON backup
+            that you exported earlier. The PDF itself is not an editable form
+            within this tool.
           </p>
-        </article>
+        </div>
 
-        <article class="faq-item">
-          <h3>Does this generator guarantee that my invoice is tax compliant?</h3>
+        <div class="invoice-faq-item">
+          <h3>8. Does this tool replace accounting software?</h3>
           <p>
-            No. Invoice and tax requirements vary by jurisdiction and
-            transaction. The generator is a general-purpose document tool.
-            Confirm the required fields, tax calculations and applicable
-            rules before issuing an invoice.
+            No. It prepares invoice documents and calculates the amounts entered.
+            It does not manage accounts, process payments, file tax returns, or
+            determine whether an invoice meets every local legal requirement.
           </p>
-        </article>
-
-        <article class="faq-item">
-          <h3>Can I edit the invoice after creating it?</h3>
-          <p>
-            Yes. Change the details in the editor and the preview updates
-            automatically. Your draft is also saved in local browser storage.
-            Export a JSON copy if you need a portable backup.
-          </p>
-        </article>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
   </main>
 
-  <footer>
-    <div class="container footer-inner">
-      <span>© <span id="footerYear"></span> ConvertToToolsOnline</span>
-      <span>
-        <a href="/index.html">All tools</a>
-        &nbsp;·&nbsp;
-        Free browser-based invoice creation
-      </span>
-    </div>
-  </footer>
-
   <script>
-    "use strict";
-
-    const $ = (id) => document.getElementById(id);
-
-    const STORAGE_KEY = "ctto_invoice_generator_draft_v1";
-    const MAX_ITEMS = 40;
-    const MAX_IMPORT_BYTES = 1024 * 1024;
-    const MAX_LOGO_BYTES = 2 * 1024 * 1024;
-
-    const FIELD_IDS = [
-      "senderName",
-      "senderEmail",
-      "senderPhone",
-      "senderAddress",
-      "clientName",
-      "clientEmail",
-      "clientAddress",
-      "invoiceNumber",
-      "invoiceStatus",
-      "invoiceDate",
-      "dueDate",
-      "currency",
-      "discountRate",
-      "taxRate",
-      "extraCharge",
-      "paymentTerms",
-      "invoiceNotes"
-    ];
-
-    let logoDataUrl = "";
-    let saveTimer = null;
-    let saveSuppressed = false;
-
-    function escapeHTML(value) {
-      return String(value ?? "").replace(/[&<>"']/g, (character) => {
-        const map = {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        };
-
-        return map[character];
-      });
-    }
-
-    function escapeWithBreaks(value) {
-      return escapeHTML(value).replace(/\r\n|\r|\n/g, "<br>");
-    }
-
-    function getLocalISODate(date = new Date()) {
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
-
-      return `${year}-${month}-${day}`;
-    }
-
-    function addDaysISO(dateString, numberOfDays) {
-      const date = dateString
-        ? new Date(dateString + "T12:00:00")
-        : new Date();
-
-      date.setDate(date.getDate() + numberOfDays);
-
-      return getLocalISODate(date);
-    }
-
-    function makeDefaultInvoiceNumber() {
-      const date = getLocalISODate().replace(/-/g, "");
-      return `INV-${date}-001`;
-    }
-
-    function formatDate(dateString) {
-      if (!dateString) {
-        return "—";
-      }
-
-      const match = String(dateString).match(/^(\d{4})-(\d{2})-(\d{2})$/);
-
-      if (!match) {
-        return String(dateString);
-      }
-
-      const date = new Date(
-        Number(match[1]),
-        Number(match[2]) - 1,
-        Number(match[3]),
-        12
-      );
-
-      if (Number.isNaN(date.getTime())) {
-        return String(dateString);
-      }
-
-      return new Intl.DateTimeFormat(undefined, {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-      }).format(date);
-    }
-
-    function safeNumber(value, fallback = 0) {
-      const number = Number(value);
-
-      return Number.isFinite(number) ? number : fallback;
-    }
-
-    function money(value) {
-      const amount = Number.isFinite(value) ? value : 0;
-      const currency = $("currency").value || "USD";
-
-      try {
-        return new Intl.NumberFormat(undefined, {
-          style: "currency",
-          currency,
-          maximumFractionDigits: 2
-        }).format(amount);
-      } catch {
-        return `${currency} ${amount.toFixed(2)}`;
-      }
-    }
-
-    function numberText(value) {
-      return new Intl.NumberFormat(undefined, {
-        maximumFractionDigits: 2
-      }).format(value);
-    }
-
-    function setStatus(elementId, message, type = "") {
-      const element = $(elementId);
-
-      element.textContent = message;
-      element.className =
-        "status-message" + (type ? ` ${type}` : "");
-    }
-
-    function setDefaults() {
-      $("senderName").value = "";
-      $("senderEmail").value = "";
-      $("senderPhone").value = "";
-      $("senderAddress").value = "";
-
-      $("clientName").value = "";
-      $("clientEmail").value = "";
-      $("clientAddress").value = "";
-
-      $("invoiceNumber").value = makeDefaultInvoiceNumber();
-      $("invoiceStatus").value = "Draft";
-
-      const today = getLocalISODate();
-
-      $("invoiceDate").value = today;
-      $("dueDate").value = addDaysISO(today, 14);
-
-      $("currency").value = "USD";
-      $("discountRate").value = "0";
-      $("taxRate").value = "0";
-      $("extraCharge").value = "0";
-
-      $("paymentTerms").value = "";
-      $("invoiceNotes").value = "";
-
-      $("itemsBody").replaceChildren();
-      addItemRow({
-        description: "Services provided",
-        quantity: 1,
-        rate: 0
-      });
-
-      clearLogo();
-    }
-
-    function addItemRow(item = {}) {
-      const currentRows = $("itemsBody").querySelectorAll(".item-row");
-
-      if (currentRows.length >= MAX_ITEMS) {
-        setStatus(
-          "draftStatus",
-          `You can add up to ${MAX_ITEMS} items to one invoice.`,
-          "error"
-        );
-
-        return false;
-      }
-
-      const description =
-        typeof item.description === "string"
-          ? item.description.slice(0, 200)
-          : "";
-
-      const quantityNumber = safeNumber(item.quantity, 1);
-      const quantity = quantityNumber >= 0 ? quantityNumber : 1;
-
-      const rateNumber = safeNumber(item.rate, 0);
-      const rate = rateNumber >= 0 ? rateNumber : 0;
-
-      const row = document.createElement("tr");
-
-      row.className = "item-row";
-
-      row.innerHTML = `
-        <td>
-          <input
-            class="item-description"
-            type="text"
-            data-field="description"
-            maxlength="200"
-            aria-label="Item description"
-            placeholder="Product or service"
-            value="${escapeHTML(description)}"
-          >
-        </td>
-
-        <td>
-          <input
-            type="number"
-            data-field="quantity"
-            min="0"
-            step="0.01"
-            inputmode="decimal"
-            aria-label="Item quantity"
-            value="${quantity}"
-          >
-        </td>
-
-        <td>
-          <input
-            type="number"
-            data-field="rate"
-            min="0"
-            step="0.01"
-            inputmode="decimal"
-            aria-label="Unit price"
-            value="${rate}"
-          >
-        </td>
-
-        <td>
-          <div class="item-amount" data-item-amount>—</div>
-        </td>
-
-        <td>
-          <button
-            type="button"
-            class="remove-row"
-            data-action="remove-item"
-            aria-label="Remove item"
-            title="Remove item"
-          >×</button>
-        </td>
-      `;
-
-      $("itemsBody").appendChild(row);
-
-      refreshItemCounter();
-      updateInvoice();
-
-      return true;
-    }
-
-    function refreshItemCounter() {
-      const count = $("itemsBody").querySelectorAll(".item-row").length;
-
-      $("itemCounter").textContent =
-        `${count} ${count === 1 ? "item" : "items"}`;
-    }
-
-    function readItems() {
-      return Array.from(
-        $("itemsBody").querySelectorAll(".item-row")
-      ).map((row) => {
-        const description =
-          row.querySelector('[data-field="description"]').value;
-
-        const quantity = Math.max(
-          0,
-          safeNumber(row.querySelector('[data-field="quantity"]').value, 0)
-        );
-
-        const rate = Math.max(
-          0,
-          safeNumber(row.querySelector('[data-field="rate"]').value, 0)
-        );
-
-        return {
-          description,
-          quantity,
-          rate,
-          amount: quantity * rate
-        };
-      });
-    }
-
-    function readFormData() {
-      const data = {};
-
-      for (const id of FIELD_IDS) {
-        data[id] = $(id).value;
-      }
-
-      data.items = readItems().map((item) => ({
-        description: item.description,
-        quantity: item.quantity,
-        rate: item.rate
-      }));
-
-      return data;
-    }
-
-    function calculateTotals(items) {
-      const subtotal = items.reduce(
-        (sum, item) => sum + item.amount,
-        0
-      );
-
-      const rawDiscount = safeNumber($("discountRate").value, 0);
-      const rawTax = safeNumber($("taxRate").value, 0);
-      const rawExtra = safeNumber($("extraCharge").value, 0);
-
-      const discountRate = Math.min(100, Math.max(0, rawDiscount));
-      const taxRate = Math.min(100, Math.max(0, rawTax));
-      const extraCharge = Math.max(0, rawExtra);
-
-      const discount = subtotal * discountRate / 100;
-
-      const amountBeforeTax =
-        Math.max(0, subtotal - discount) + extraCharge;
-
-      const tax = amountBeforeTax * taxRate / 100;
-
-      const total = amountBeforeTax + tax;
-
-      return {
-        subtotal,
-        discountRate,
-        discount,
-        extraCharge,
-        amountBeforeTax,
-        taxRate,
-        tax,
-        total
-      };
-    }
-
-    function getInitials(name) {
-      const words = String(name || "")
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean);
-
-      if (!words.length) {
-        return "IN";
-      }
-
-      return words
-        .slice(0, 2)
-        .map((word) => word.charAt(0).toUpperCase())
-        .join("");
-    }
-
-    function renderItemRows(items) {
-      if (!items.length) {
-        return `
-          <tr>
-            <td colspan="4">No line items added.</td>
-          </tr>
-        `;
-      }
-
-      return items.map((item) => {
-        const description = item.description.trim() || "Service or product";
-
-        return `
-          <tr>
-            <td>
-              <span class="preview-desc">
-                ${escapeHTML(description)}
-              </span>
-            </td>
-
-            <td>${escapeHTML(numberText(item.quantity))}</td>
-
-            <td>${escapeHTML(money(item.rate))}</td>
-
-            <td>${escapeHTML(money(item.amount))}</td>
-          </tr>
-        `;
-      }).join("");
-    }
-
-    function renderTotals(totals) {
-      const lines = [];
-
-      lines.push(`
-        <div class="total-line">
-          <span>Subtotal</span>
-          <span>${escapeHTML(money(totals.subtotal))}</span>
-        </div>
-      `);
-
-      if (totals.discount > 0) {
-        lines.push(`
-          <div class="total-line">
-            <span>Discount (${numberText(totals.discountRate)}%)</span>
-            <span>−${escapeHTML(money(totals.discount))}</span>
-          </div>
-        `);
-      }
-
-      if (totals.extraCharge > 0) {
-        lines.push(`
-          <div class="total-line">
-            <span>Other charges</span>
-            <span>${escapeHTML(money(totals.extraCharge))}</span>
-          </div>
-        `);
-      }
-
-      if (totals.taxRate > 0) {
-        lines.push(`
-          <div class="total-line">
-            <span>Tax (${numberText(totals.taxRate)}%)</span>
-            <span>${escapeHTML(money(totals.tax))}</span>
-          </div>
-        `);
-      }
-
-      lines.push(`
-        <div class="total-line grand-total">
-          <span>Total</span>
-          <span>${escapeHTML(money(totals.total))}</span>
-        </div>
-      `);
-
-      return lines.join("");
-    }
-
-    function renderInvoice() {
-      const data = readFormData();
-      const items = readItems();
-      const totals = calculateTotals(items);
-
-      for (const row of $("itemsBody").querySelectorAll(".item-row")) {
-        const quantity = Math.max(
-          0,
-          safeNumber(row.querySelector('[data-field="quantity"]').value, 0)
-        );
-
-        const rate = Math.max(
-          0,
-          safeNumber(row.querySelector('[data-field="rate"]').value, 0)
-        );
-
-        row.querySelector("[data-item-amount]").textContent =
-          money(quantity * rate);
-      }
-
-      refreshItemCounter();
-
-      const businessName = data.senderName.trim() || "Your Business";
-      const senderEmail = data.senderEmail.trim();
-      const senderPhone = data.senderPhone.trim();
-      const senderAddress = data.senderAddress.trim();
-
-      const clientName = data.clientName.trim() || "Client Name";
-      const clientEmail = data.clientEmail.trim();
-      const clientAddress = data.clientAddress.trim();
-
-      const invoiceNumber = data.invoiceNumber.trim() || "INV-001";
-      const status = data.invoiceStatus || "Draft";
-
-      const logoMarkup = logoDataUrl
-        ? `<img class="invoice-logo" src="${escapeHTML(logoDataUrl)}" alt="Business logo">`
-        : `<div class="invoice-logo-placeholder">${escapeHTML(getInitials(businessName))}</div>`;
-
-      const senderDetails = [
-        senderAddress ? escapeWithBreaks(senderAddress) : "",
-        senderEmail ? escapeHTML(senderEmail) : "",
-        senderPhone ? escapeHTML(senderPhone) : ""
-      ].filter(Boolean).join("<br>");
-
-      const clientDetails = [
-        clientAddress ? escapeWithBreaks(clientAddress) : "",
-        clientEmail ? escapeHTML(clientEmail) : ""
-      ].filter(Boolean).join("<br>");
-
-      const invoiceHTML = `
-        <div class="invoice-top">
-          <div class="invoice-brand">
-            ${logoMarkup}
-
-            <div class="invoice-company">
-              ${escapeHTML(businessName)}
-              <small>${senderEmail ? escapeHTML(senderEmail) : "Business invoice"}</small>
-            </div>
-          </div>
-
-          <div class="invoice-heading">
-            <strong>INVOICE</strong>
-            <small>${escapeHTML(invoiceNumber)}</small>
-            <span class="invoice-status-pill">${escapeHTML(status)}</span>
-          </div>
-        </div>
-
-        <div class="invoice-meta">
-          <div>
-            <span>Invoice date</span>
-            <strong>${escapeHTML(formatDate(data.invoiceDate))}</strong>
-          </div>
-
-          <div>
-            <span>Due date</span>
-            <strong>${escapeHTML(formatDate(data.dueDate))}</strong>
-          </div>
-        </div>
-
-        <div class="invoice-parties">
-          <div class="invoice-party">
-            <span class="invoice-party-label">From</span>
-            <strong>${escapeHTML(businessName)}</strong>
-            <div class="invoice-party-text">
-              ${senderDetails || "Add your contact information"}
-            </div>
-          </div>
-
-          <div class="invoice-party">
-            <span class="invoice-party-label">Bill to</span>
-            <strong>${escapeHTML(clientName)}</strong>
-            <div class="invoice-party-text">
-              ${clientDetails || "Add your client's billing information"}
-            </div>
-          </div>
-        </div>
-
-        <table class="invoice-table">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Qty</th>
-              <th>Unit price</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            ${renderItemRows(items)}
-          </tbody>
-        </table>
-
-        <div class="invoice-totals">
-          ${renderTotals(totals)}
-        </div>
-
-        <div class="invoice-bottom">
-          <div class="invoice-bottom-grid">
-            <div>
-              <h4>Payment instructions</h4>
-              <p>${escapeWithBreaks(data.paymentTerms.trim()) || "Add your preferred payment method or instructions."}</p>
-            </div>
-
-            <div>
-              <h4>Notes</h4>
-              <p>${escapeWithBreaks(data.invoiceNotes.trim()) || "Thank you for your business."}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="invoice-thanks">Thank you for your business.</div>
-      `;
-
-      $("invoicePreview").innerHTML = invoiceHTML;
-    }
-
-    function saveDraft() {
-      if (saveSuppressed) {
-        return;
-      }
-
-      try {
-        const data = readFormData();
-
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({
-          version: 1,
-          savedAt: new Date().toISOString(),
-          data
-        }));
-
-        setStatus(
-          "draftStatus",
-          "Draft saved in this browser.",
-          "success"
-        );
-      } catch {
-        setStatus(
-          "draftStatus",
-          "The browser could not save this draft. Export it as a JSON backup.",
-          "error"
-        );
-      }
-    }
-
-    function scheduleSave() {
-      if (saveSuppressed) {
-        return;
-      }
-
-      clearTimeout(saveTimer);
-
-      saveTimer = setTimeout(saveDraft, 450);
-    }
-
-    function restoreData(data) {
-      if (!data || typeof data !== "object") {
-        throw new Error("The draft file is not in a supported format.");
-      }
-
-      saveSuppressed = true;
-
-      try {
-        for (const id of FIELD_IDS) {
-          if (typeof data[id] === "string" && $(id)) {
-            $(id).value = data[id];
-          }
-        }
-
-        if (Array.isArray(data.items)) {
-          if (data.items.length > MAX_ITEMS) {
-            throw new Error(
-              `A draft cannot contain more than ${MAX_ITEMS} items.`
-            );
-          }
-
-          $("itemsBody").replaceChildren();
-
-          for (const item of data.items) {
-            addItemRow({
-              description: item?.description,
-              quantity: item?.quantity,
-              rate: item?.rate
-            });
-          }
-
-          if (!data.items.length) {
-            addItemRow({
-              description: "",
-              quantity: 1,
-              rate: 0
-            });
-          }
-        }
-      } finally {
-        saveSuppressed = false;
-      }
-
-      renderInvoice();
-      saveDraft();
-    }
-
-    function loadStoredDraft() {
-      try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-
-        if (!stored) {
-          return false;
-        }
-
-        const parsed = JSON.parse(stored);
-
-        if (
-          !parsed ||
-          parsed.version !== 1 ||
-          !parsed.data ||
-          typeof parsed.data !== "object"
-        ) {
-          return false;
-        }
-
-        restoreData(parsed.data);
-
-        setStatus(
-          "draftStatus",
-          "Your saved local draft has been restored.",
-          "success"
-        );
-
-        return true;
-      } catch {
-        setStatus(
-          "draftStatus",
-          "A saved draft could not be restored. You can start a new invoice.",
-          "error"
-        );
-
-        return false;
-      }
-    }
-
-    function clearLogo() {
-      logoDataUrl = "";
-
-      if ($("logoFile")) {
-        $("logoFile").value = "";
-      }
-    }
-
-    function loadExample() {
-      saveSuppressed = true;
-
-      $("senderName").value = "Bright Studio";
-      $("senderEmail").value = "hello@example.com";
-      $("senderPhone").value = "+1 555 0100";
-      $("senderAddress").value = "100 Example Street\nNew York, NY";
-
-      $("clientName").value = "Acme Creative Co.";
-      $("clientEmail").value = "accounts@example.com";
-      $("clientAddress").value = "25 Market Road\nNew York, NY";
-
-      $("invoiceNumber").value = "INV-2026-001";
-      $("invoiceStatus").value = "Unpaid";
-
-      const today = getLocalISODate();
-
-      $("invoiceDate").value = today;
-      $("dueDate").value = addDaysISO(today, 14);
-
-      $("currency").value = "USD";
-      $("discountRate").value = "5";
-      $("taxRate").value = "8";
-      $("extraCharge").value = "15";
-
-      $("paymentTerms").value =
-        "Please use the payment method agreed with your service provider. Include the invoice number with your payment.";
-
-      $("invoiceNotes").value =
-        "Website design and creative services. Thank you for your business.";
-
-      $("itemsBody").replaceChildren();
-
-      addItemRow({
-        description: "Website design",
-        quantity: 1,
-        rate: 650
-      });
-
-      addItemRow({
-        description: "Content updates",
-        quantity: 3,
-        rate: 60
-      });
-
-      clearLogo();
-      saveSuppressed = false;
-
-      renderInvoice();
-      saveDraft();
-
-      setStatus(
-        "draftStatus",
-        "Example invoice loaded. Replace the sample information with your own.",
-        "success"
-      );
-
-      $("invoiceBuilder").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-
-    function clearAll() {
-      const confirmed = window.confirm(
-        "Start a new invoice? The current local draft will be replaced."
-      );
-
-      if (!confirmed) {
-        return;
-      }
-
-      clearTimeout(saveTimer);
-      saveSuppressed = true;
-
-      try {
-        localStorage.removeItem(STORAGE_KEY);
-      } catch {
-        // The page can still be reset if browser storage is unavailable.
-      }
-
-      setDefaults();
-      saveSuppressed = false;
-
-      renderInvoice();
-      saveDraft();
-
-      setStatus(
-        "draftStatus",
-        "A new invoice is ready.",
-        "success"
-      );
-
-      setStatus("printStatus", "");
-    }
-
-    function downloadBlob(contents, type, filename) {
-      const blob = new Blob([contents], { type });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-
-      link.href = url;
-      link.download = filename;
-
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    }
-
-    function exportDraft() {
-      const payload = {
-        application: "ConvertToToolsOnline Invoice Generator",
-        version: 1,
-        exportedAt: new Date().toISOString(),
-        data: readFormData()
-      };
-
-      const filenameBase =
-        ($("invoiceNumber").value.trim() || "invoice-draft")
-          .replace(/[^a-z0-9_-]/gi, "-")
-          .slice(0, 80);
-
-      downloadBlob(
-        JSON.stringify(payload, null, 2),
-        "application/json;charset=utf-8",
-        `${filenameBase}.json`
-      );
-
-      setStatus(
-        "draftStatus",
-        "Invoice draft exported as JSON. Keep the file secure if it contains customer details.",
-        "success"
-      );
-    }
-
-    async function importDraftFile(file) {
-      if (!file) {
-        return;
-      }
-
-      if (file.size > MAX_IMPORT_BYTES) {
-        setStatus(
-          "draftStatus",
-          "The draft file is too large. Choose a JSON file under 1 MB.",
-          "error"
-        );
-
-        return;
-      }
-
-      try {
-        const text = await file.text();
-        const parsed = JSON.parse(text);
-
-        const data =
-          parsed && parsed.data && typeof parsed.data === "object"
-            ? parsed.data
-            : parsed;
-
-        restoreData(data);
-
-        clearLogo();
-
-        setStatus(
-          "draftStatus",
-          "Invoice draft imported. Select your logo again if needed.",
-          "success"
-        );
-      } catch (error) {
-        setStatus(
-          "draftStatus",
-          error.message || "Unable to import this draft file.",
-          "error"
-        );
-      } finally {
-        $("importFile").value = "";
-      }
-    }
-
-    function handleLogo(file) {
-      if (!file) {
-        return;
-      }
-
-      const allowedTypes = [
-        "image/png",
-        "image/jpeg",
-        "image/webp",
-        "image/gif"
+    (() => {
+      "use strict";
+
+      const STORAGE_KEY = "ctto_invoice_generator_draft_v1";
+      const MAX_ITEMS = 100;
+      const MAX_TEXT_LENGTH = 1200;
+      let logoDataUrl = "";
+
+      const $ = (id) => document.getElementById(id);
+
+      const fields = [
+        "business-name",
+        "business-email",
+        "business-phone",
+        "business-address",
+        "business-tax-id",
+        "client-name",
+        "client-email",
+        "client-tax-id",
+        "client-address",
+        "invoice-number",
+        "invoice-currency",
+        "invoice-date",
+        "invoice-due-date",
+        "invoice-reference",
+        "invoice-tax-label",
+        "invoice-tax-rate",
+        "invoice-discount",
+        "invoice-discount-mode",
+        "invoice-shipping",
+        "invoice-notes",
+        "invoice-terms",
+        "invoice-accent"
       ];
 
-      if (!allowedTypes.includes(file.type)) {
-        setStatus(
-          "draftStatus",
-          "Select a PNG, JPG, WebP, or GIF image.",
-          "error"
-        );
-
-        $("logoFile").value = "";
-        return;
+      function localDateString(date = new Date()) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
       }
 
-      if (file.size > MAX_LOGO_BYTES) {
-        setStatus(
-          "draftStatus",
-          "The logo must be 2 MB or smaller.",
-          "error"
-        );
-
-        $("logoFile").value = "";
-        return;
+      function defaultInvoiceNumber() {
+        return "INV-" + localDateString().replaceAll("-", "") + "-001";
       }
 
-      const reader = new FileReader();
+      function addDays(dateString, days) {
+        const parts = dateString.split("-").map(Number);
+        const date = new Date(parts[0], parts[1] - 1, parts[2]);
+        date.setDate(date.getDate() + days);
+        return localDateString(date);
+      }
 
-      reader.onload = () => {
-        if (typeof reader.result !== "string") {
-          setStatus(
-            "draftStatus",
-            "Unable to read this logo image.",
-            "error"
-          );
+      function initDates() {
+        const today = localDateString();
+        $("invoice-date").value = today;
+        $("invoice-due-date").value = addDays(today, 14);
+        $("invoice-number").value = defaultInvoiceNumber();
+      }
 
+      function getValue(id) {
+        const element = $(id);
+        return element ? element.value.trim() : "";
+      }
+
+      function setText(id, value) {
+        const element = $(id);
+        if (element) element.textContent = value;
+      }
+
+      function showOrHide(id, shouldShow) {
+        const element = $(id);
+        if (element) {
+          element.classList.toggle("invoice-hidden", !shouldShow);
+        }
+      }
+
+      function num(value) {
+        const parsed = Number(value);
+        return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
+      }
+
+      function safeText(value, fallback = "") {
+        return String(value || "").slice(0, MAX_TEXT_LENGTH).trim() || fallback;
+      }
+
+      function getCurrency() {
+        const value = getValue("invoice-currency");
+        return /^[A-Z]{3}$/.test(value) ? value : "USD";
+      }
+
+      function money(value) {
+        const currency = getCurrency();
+
+        try {
+          return new Intl.NumberFormat(undefined, {
+            style: "currency",
+            currency,
+            currencyDisplay: "symbol"
+          }).format(Number.isFinite(value) ? value : 0);
+        } catch {
+          return currency + " " + (Number(value) || 0).toFixed(2);
+        }
+      }
+
+      function formatDate(value) {
+        if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return "—";
+
+        const parts = value.split("-").map(Number);
+        const date = new Date(parts[0], parts[1] - 1, parts[2]);
+
+        if (Number.isNaN(date.getTime())) return "—";
+
+        return new Intl.DateTimeFormat(undefined, {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        }).format(date);
+      }
+
+      function readItems() {
+        return Array.from(
+          $("invoice-items-editor").querySelectorAll(".invoice-item-row")
+        ).map((row) => {
+          const description = row.querySelector('[data-field="description"]').value;
+          const quantity = num(row.querySelector('[data-field="quantity"]').value);
+          const rate = num(row.querySelector('[data-field="rate"]').value);
+
+          return {
+            description: safeText(description, "Item description"),
+            quantity,
+            rate
+          };
+        });
+      }
+
+      function calculate() {
+        const items = readItems();
+        const subtotal = items.reduce(
+          (sum, item) => sum + item.quantity * item.rate,
+          0
+        );
+
+        const discountInput = num(getValue("invoice-discount"));
+        const discountMode = getValue("invoice-discount-mode");
+        let discount = discountMode === "percent"
+          ? subtotal * Math.min(discountInput, 100) / 100
+          : discountInput;
+
+        discount = Math.min(Math.max(discount, 0), subtotal);
+
+        const taxableAmount = Math.max(0, subtotal - discount);
+        const taxRate = Math.min(num(getValue("invoice-tax-rate")), 100);
+        const tax = taxableAmount * taxRate / 100;
+        const shipping = num(getValue("invoice-shipping"));
+        const total = taxableAmount + tax + shipping;
+
+        return {
+          items,
+          subtotal,
+          discount,
+          taxRate,
+          tax,
+          shipping,
+          total,
+          discountMode,
+          discountInput
+        };
+      }
+
+      function makeNode(tagName, className, text) {
+        const element = document.createElement(tagName);
+        if (className) element.className = className;
+        if (text !== undefined) element.textContent = text;
+        return element;
+      }
+
+      function makeItemRow(item = {}) {
+        const row = makeNode("div", "invoice-item-row");
+
+        const description = document.createElement("input");
+        description.type = "text";
+        description.maxLength = 250;
+        description.placeholder = "Service or product";
+        description.setAttribute("aria-label", "Item description");
+        description.dataset.field = "description";
+        description.value = String(item.description || "");
+        description.addEventListener("input", updateAll);
+
+        const quantity = document.createElement("input");
+        quantity.type = "number";
+        quantity.min = "0";
+        quantity.max = "1000000000";
+        quantity.step = "any";
+        quantity.inputMode = "decimal";
+        quantity.placeholder = "1";
+        quantity.setAttribute("aria-label", "Quantity");
+        quantity.dataset.field = "quantity";
+        quantity.value = item.quantity === undefined ? "1" : String(item.quantity);
+        quantity.addEventListener("input", updateAll);
+
+        const rate = document.createElement("input");
+        rate.type = "number";
+        rate.min = "0";
+        rate.max = "1000000000000";
+        rate.step = "any";
+        rate.inputMode = "decimal";
+        rate.placeholder = "0.00";
+        rate.setAttribute("aria-label", "Unit price");
+        rate.dataset.field = "rate";
+        rate.value = item.rate === undefined ? "0" : String(item.rate);
+        rate.addEventListener("input", updateAll);
+
+        const remove = makeNode("button", "invoice-item-remove", "×");
+        remove.type = "button";
+        remove.setAttribute("aria-label", "Remove line item");
+        remove.addEventListener("click", () => {
+          const rows = $("invoice-items-editor").querySelectorAll(".invoice-item-row");
+          if (rows.length <= 1) {
+            description.value = "";
+            quantity.value = "1";
+            rate.value = "0";
+          } else {
+            row.remove();
+          }
+          updateAll();
+        });
+
+        row.append(description, quantity, rate, remove);
+        return row;
+      }
+
+      function addItem(item) {
+        const container = $("invoice-items-editor");
+
+        if (container.querySelectorAll(".invoice-item-row").length >= MAX_ITEMS) {
+          showStatus("The maximum number of line items is " + MAX_ITEMS + ".", true);
           return;
         }
 
-        logoDataUrl = reader.result;
+        container.appendChild(makeItemRow(item));
+        updateAll();
+      }
 
-        renderInvoice();
+      function updatePreviewItems(items) {
+        const tbody = $("preview-items");
+        tbody.replaceChildren();
 
-        setStatus(
-          "draftStatus",
-          "Logo added to the current invoice preview.",
-          "success"
+        items.forEach((item) => {
+          const row = document.createElement("tr");
+          const descriptionCell = document.createElement("td");
+          const quantityCell = document.createElement("td");
+          const rateCell = document.createElement("td");
+          const amountCell = document.createElement("td");
+
+          descriptionCell.className = "invoice-line-description";
+          descriptionCell.textContent = item.description || "Item description";
+
+          quantityCell.textContent = new Intl.NumberFormat(undefined, {
+            maximumFractionDigits: 4
+          }).format(item.quantity);
+
+          rateCell.textContent = money(item.rate);
+          amountCell.textContent = money(item.quantity * item.rate);
+
+          row.append(
+            descriptionCell,
+            quantityCell,
+            rateCell,
+            amountCell
+          );
+
+          tbody.appendChild(row);
+        });
+
+        if (items.length === 0) {
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+          cell.colSpan = 4;
+          cell.textContent = "No items added";
+          row.appendChild(cell);
+          tbody.appendChild(row);
+        }
+      }
+
+      function updateBranding() {
+        const color = getValue("invoice-accent") || "#2459d3";
+        if (!/^#[0-9a-f]{6}$/i.test(color)) return;
+
+        document.documentElement.style.setProperty("--invoice-accent", color);
+
+        const button = $("invoice-print");
+        if (button) {
+          button.style.backgroundColor = color;
+          button.style.borderColor = color;
+        }
+      }
+
+      function updateAll() {
+        const totals = calculate();
+
+        updateBranding();
+
+        const businessName = safeText(getValue("business-name"), "Your Business Name");
+        const clientName = safeText(getValue("client-name"), "Client or Company Name");
+        const invoiceNumber = safeText(getValue("invoice-number"), "Invoice number");
+
+        const businessDetails = [
+          getValue("business-address"),
+          getValue("business-email"),
+          getValue("business-phone"),
+          getValue("business-tax-id") ? "Tax ID: " + getValue("business-tax-id") : ""
+        ].filter(Boolean).join("\n");
+
+        const clientDetails = [
+          getValue("client-address"),
+          getValue("client-email"),
+          getValue("client-tax-id") ? "Tax ID: " + getValue("client-tax-id") : ""
+        ].filter(Boolean).join("\n");
+
+        const sellerContact = [
+          getValue("business-email"),
+          getValue("business-phone")
+        ].filter(Boolean).join("\n");
+
+        setText("preview-business-name", businessName);
+        setText("preview-business-details", businessDetails);
+        setText("preview-invoice-number", invoiceNumber);
+        setText("preview-client-name", clientName);
+        setText("preview-client-details", clientDetails);
+        setText("preview-seller-name", businessName);
+        setText("preview-seller-contact", sellerContact);
+        setText("preview-invoice-date", formatDate(getValue("invoice-date")));
+        setText("preview-due-date", formatDate(getValue("invoice-due-date")));
+
+        const reference = getValue("invoice-reference");
+        setText("preview-reference", reference);
+        showOrHide("preview-reference-wrap", Boolean(reference));
+
+        const notes = getValue("invoice-notes");
+        setText("preview-notes", notes);
+        showOrHide("preview-notes-wrap", Boolean(notes));
+
+        const terms = getValue("invoice-terms");
+        setText("preview-terms", terms);
+        showOrHide("preview-terms-wrap", Boolean(terms));
+
+        const logo = $("preview-logo");
+        if (logoDataUrl) {
+          logo.src = logoDataUrl;
+          logo.style.display = "block";
+        } else {
+          logo.removeAttribute("src");
+          logo.style.display = "none";
+        }
+
+        updatePreviewItems(totals.items);
+
+        const taxLabel = safeText(getValue("invoice-tax-label"), "Tax");
+
+        setText("preview-subtotal", money(totals.subtotal));
+        setText("preview-discount", "−" + money(totals.discount));
+        setText("preview-discount-label", totals.discountMode === "percent"
+          ? "Discount (" + Math.min(totals.discountInput, 100) + "%)"
+          : "Discount");
+
+        setText("preview-tax-label", taxLabel + " (" + totals.taxRate + "%)");
+        setText("preview-tax", money(totals.tax));
+        setText("preview-shipping", money(totals.shipping));
+        setText("preview-total", money(totals.total));
+
+        showOrHide("preview-discount-row", totals.discount > 0);
+        showOrHide("preview-tax-row", totals.taxRate > 0);
+        showOrHide("preview-shipping-row", totals.shipping > 0);
+
+        setText("editor-subtotal", money(totals.subtotal));
+        setText("editor-discount", money(totals.discount));
+        setText("editor-tax", money(totals.tax));
+        setText("editor-shipping", money(totals.shipping));
+        setText("editor-total", money(totals.total));
+
+        saveDraft();
+      }
+
+      function collectDraft() {
+        const data = {};
+
+        fields.forEach((id) => {
+          data[id] = $(id).value;
+        });
+
+        data.items = readItems();
+        data.logoDataUrl = logoDataUrl;
+        data.version = 1;
+
+        return data;
+      }
+
+      function saveDraft() {
+        try {
+          const data = collectDraft();
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        } catch (error) {
+          // The editor remains usable if storage is full or unavailable.
+          if (error && error.name === "QuotaExceededError") {
+            showStatus("Draft storage is full. Export a JSON backup to keep your work.", true);
+          }
+        }
+      }
+
+      function showStatus(message, isError = false) {
+        const status = $("invoice-status");
+        status.textContent = message;
+        status.style.color = isError ? "#a52a38" : "#177548";
+      }
+
+      function validLogoData(value) {
+        return typeof value === "string" &&
+          /^data:image\/(png|jpeg|webp);base64,/i.test(value) &&
+          value.length < 800000;
+      }
+
+      function applyDraft(data) {
+        if (!data || typeof data !== "object" || Array.isArray(data)) {
+          throw new Error("Invalid backup file.");
+        }
+
+        fields.forEach((id) => {
+          if (typeof data[id] === "string" && $(id)) {
+            $(id).value = data[id];
+          }
+        });
+
+        const itemsContainer = $("invoice-items-editor");
+        itemsContainer.replaceChildren();
+
+        const importedItems = Array.isArray(data.items)
+          ? data.items.slice(0, MAX_ITEMS)
+          : [];
+
+        if (importedItems.length === 0) {
+          importedItems.push({ description: "", quantity: 1, rate: 0 });
+        }
+
+        importedItems.forEach((item) => {
+          const quantity = Math.min(Math.max(Number(item.quantity) || 0, 0), 1000000000);
+          const rate = Math.min(Math.max(Number(item.rate) || 0, 0), 1000000000000);
+
+          addItemWithoutUpdate({
+            description: safeText(item.description),
+            quantity,
+            rate
+          });
+        });
+
+        logoDataUrl = validLogoData(data.logoDataUrl) ? data.logoDataUrl : "";
+
+        updateAll();
+      }
+
+      function addItemWithoutUpdate(item) {
+        $("invoice-items-editor").appendChild(makeItemRow(item));
+      }
+
+      function exportDraft() {
+        try {
+          const json = JSON.stringify(collectDraft(), null, 2);
+          const blob = new Blob([json], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+
+          link.href = url;
+          link.download = "invoice-draft-" + localDateString() + ".json";
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+          showStatus("JSON draft backup downloaded.");
+        } catch {
+          showStatus("Could not export the draft. Check browser permissions and try again.", true);
+        }
+      }
+
+      function importDraftFile(file) {
+        if (!file) return;
+
+        if (file.size > 2 * 1024 * 1024) {
+          showStatus("The backup file is too large. Choose a JSON file under 2 MB.", true);
+          return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          try {
+            const parsed = JSON.parse(String(reader.result || ""));
+            applyDraft(parsed);
+            showStatus("Draft imported successfully.");
+          } catch (error) {
+            showStatus(
+              error && error.message === "Invalid backup file."
+                ? error.message
+                : "This backup could not be read. Select a valid invoice JSON backup.",
+              true
+            );
+          }
+        };
+
+        reader.onerror = () => {
+          showStatus("Could not read that file.", true);
+        };
+
+        reader.readAsText(file);
+      }
+
+      function loadSavedDraft() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return false;
+
+          const parsed = JSON.parse(raw);
+          applyDraft(parsed);
+          return true;
+        } catch {
+          showStatus("A saved draft could not be loaded. You can import a JSON backup.", true);
+          return false;
+        }
+      }
+
+      function startNewInvoice() {
+        const proceed = window.confirm(
+          "Start a new invoice? This replaces the current local draft. Export a backup first if you need to keep it."
         );
-      };
 
-      reader.onerror = () => {
-        setStatus(
-          "draftStatus",
-          "Unable to read the selected image.",
-          "error"
+        if (!proceed) return;
+
+        [
+          "client-name",
+          "client-email",
+          "client-tax-id",
+          "client-address",
+          "invoice-reference",
+          "invoice-notes",
+          "invoice-terms"
+        ].forEach((id) => {
+          $(id).value = "";
+        });
+
+        $("invoice-tax-label").value = "Tax";
+        $("invoice-tax-rate").value = "0";
+        $("invoice-discount").value = "0";
+        $("invoice-discount-mode").value = "percent";
+        $("invoice-shipping").value = "0";
+        $("invoice-currency").value = "USD";
+
+        initDates();
+        $("invoice-items-editor").replaceChildren();
+
+        addItemWithoutUpdate({
+          description: "",
+          quantity: 1,
+          rate: 0
+        });
+
+        logoDataUrl = "";
+        updateAll();
+        showStatus("New invoice started. Your business details were kept.");
+      }
+
+      function clearSavedDraft() {
+        const proceed = window.confirm(
+          "Delete the saved invoice draft from this browser? This does not delete any exported JSON backups."
         );
-      };
 
-      reader.readAsDataURL(file);
-    }
+        if (!proceed) return;
 
-    function printInvoice() {
-      renderInvoice();
-
-      setStatus(
-        "printStatus",
-        "In the print dialog, choose your PDF destination if available."
-      );
-
-      window.print();
-    }
-
-    // Update the live preview and save draft changes.
-    $("invoiceEditor").addEventListener("input", (event) => {
-      if (event.target.id === "logoFile") {
-        return;
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+          showStatus("Saved draft cleared from this browser.");
+        } catch {
+          showStatus("The browser did not allow the saved draft to be cleared.", true);
+        }
       }
 
-      renderInvoice();
-      scheduleSave();
-    });
+      function handleLogoUpload(file) {
+        if (!file) return;
 
-    $("invoiceEditor").addEventListener("change", (event) => {
-      if (event.target.id === "logoFile") {
-        return;
+        const allowedTypes = ["image/png", "image/jpeg", "image/webp"];
+
+        if (!allowedTypes.includes(file.type)) {
+          showStatus("Choose a PNG, JPEG, or WebP image.", true);
+          $("invoice-logo").value = "";
+          return;
+        }
+
+        if (file.size > 500 * 1024) {
+          showStatus("The logo must be 500 KB or smaller.", true);
+          $("invoice-logo").value = "";
+          return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          const result = String(reader.result || "");
+
+          if (!validLogoData(result)) {
+            showStatus("This image could not be processed. Try a smaller image.", true);
+            return;
+          }
+
+          logoDataUrl = result;
+          updateAll();
+          showStatus("Logo added to the invoice.");
+        };
+
+        reader.onerror = () => {
+          showStatus("Could not read that logo file.", true);
+        };
+
+        reader.readAsDataURL(file);
       }
 
-      renderInvoice();
-      scheduleSave();
-    });
+      function initialize() {
+        initDates();
 
-    // Add or remove item rows through event delegation.
-    $("itemsBody").addEventListener("click", (event) => {
-      const button = event.target.closest('[data-action="remove-item"]');
+        $("invoice-items-editor").appendChild(makeItemRow({
+          description: "",
+          quantity: 1,
+          rate: 0
+        }));
 
-      if (!button) {
-        return;
+        $("invoice-add-item").addEventListener("click", () => {
+          addItem({
+            description: "",
+            quantity: 1,
+            rate: 0
+          });
+        });
+
+        fields.forEach((id) => {
+          const element = $(id);
+          element.addEventListener("input", updateAll);
+          element.addEventListener("change", updateAll);
+        });
+
+        $("invoice-print").addEventListener("click", () => {
+          updateAll();
+          window.print();
+        });
+
+        $("invoice-new").addEventListener("click", startNewInvoice);
+        $("invoice-export").addEventListener("click", exportDraft);
+        $("invoice-export-bottom").addEventListener("click", exportDraft);
+        $("invoice-clear-saved").addEventListener("click", clearSavedDraft);
+
+        $("invoice-import-trigger").addEventListener("click", () => {
+          $("invoice-import-file").click();
+        });
+
+        $("invoice-import-file").addEventListener("change", (event) => {
+          const file = event.target.files && event.target.files[0];
+          importDraftFile(file);
+          event.target.value = "";
+        });
+
+        $("invoice-logo").addEventListener("change", (event) => {
+          handleLogoUpload(event.target.files && event.target.files[0]);
+        });
+
+        $("invoice-remove-logo").addEventListener("click", () => {
+          logoDataUrl = "";
+          $("invoice-logo").value = "";
+          updateAll();
+          showStatus("Logo removed.");
+        });
+
+        const loaded = loadSavedDraft();
+
+        if (!loaded) {
+          updateAll();
+        }
       }
 
-      const row = button.closest(".item-row");
-
-      if (!row) {
-        return;
-      }
-
-      const rows = $("itemsBody").querySelectorAll(".item-row");
-
-      if (rows.length === 1) {
-        row.querySelector('[data-field="description"]').value = "";
-        row.querySelector('[data-field="quantity"]').value = "1";
-        row.querySelector('[data-field="rate"]').value = "0";
-      } else {
-        row.remove();
-      }
-
-      renderInvoice();
-      scheduleSave();
-    });
-
-    $("addItem").addEventListener("click", () => {
-      const success = addItemRow({
-        description: "",
-        quantity: 1,
-        rate: 0
-      });
-
-      if (success) {
-        scheduleSave();
-
-        const rows = $("itemsBody").querySelectorAll(".item-row");
-        const newestRow = rows[rows.length - 1];
-
-        newestRow?.querySelector('[data-field="description"]')?.focus();
-      }
-    });
-
-    $("heroCreate").addEventListener("click", () => {
-      $("invoiceBuilder").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
-      setTimeout(() => $("senderName").focus(), 250);
-    });
-
-    $("heroExample").addEventListener("click", loadExample);
-    $("loadExample").addEventListener("click", loadExample);
-
-    $("printInvoice").addEventListener("click", printInvoice);
-
-    $("exportDraft").addEventListener("click", exportDraft);
-
-    $("importDraft").addEventListener("click", () => {
-      $("importFile").click();
-    });
-
-    $("importFile").addEventListener("change", (event) => {
-      const file = event.target.files?.[0];
-
-      importDraftFile(file);
-    });
-
-    $("logoFile").addEventListener("change", (event) => {
-      handleLogo(event.target.files?.[0]);
-    });
-
-    $("clearAll").addEventListener("click", clearAll);
-
-    // Initial page setup.
-    $("footerYear").textContent = new Date().getFullYear();
-
-    setDefaults();
-
-    if (!loadStoredDraft()) {
-      renderInvoice();
-    }
+      initialize();
+    })();
   </script>
 </body>
 </html>
