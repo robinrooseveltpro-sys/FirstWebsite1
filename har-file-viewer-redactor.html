@@ -1,0 +1,2286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HAR File Viewer & Redactor Online – Free</title>
+  <meta name="description" content="Open HAR files online, inspect HTTP requests, find errors and slow requests, review request timings, export CSV reports, and redact sensitive data before sharing.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/har-file-viewer-redactor.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HAR File Viewer & Privacy Redactor">
+  <meta property="og:description" content="Inspect browser network captures, filter failed requests, analyze timing information, and create a redacted HAR export.">
+  <meta property="og:url" content="https://converttotoolsonline.com/har-file-viewer-redactor.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="HAR File Viewer & Redactor">
+  <meta name="twitter:description" content="Inspect HAR network logs and prepare safer files for sharing.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HAR File Viewer & Privacy Redactor",
+    "url": "https://converttotoolsonline.com/har-file-viewer-redactor.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "Inspect HTTP Archive files, filter network requests, review timing data, export CSV summaries, and redact common sensitive fields in HAR exports.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    .har-app {
+      width: min(1160px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      color: #17202c;
+      line-height: 1.55;
+    }
+
+    .har-app,
+    .har-app * {
+      box-sizing: border-box;
+    }
+
+    .har-app [hidden] {
+      display: none !important;
+    }
+
+    .har-app :is(input, select, textarea, button, a):focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .har-app input,
+    .har-app select,
+    .har-app textarea,
+    .har-app button {
+      font: inherit;
+    }
+
+    .har-app button {
+      cursor: pointer;
+    }
+
+    .har-app a {
+      color: #245bcc;
+    }
+
+    .har-app .breadcrumb {
+      margin-bottom: 12px;
+      color: #637184;
+      font-size: .92rem;
+    }
+
+    .har-app .hero {
+      margin-bottom: 22px;
+    }
+
+    .har-app .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.55rem);
+      line-height: 1.17;
+      letter-spacing: -.035em;
+    }
+
+    .har-app .hero p {
+      max-width: 850px;
+      margin: 0;
+      color: #5b6878;
+    }
+
+    .har-app .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .har-app .pill {
+      padding: 5px 10px;
+      border: 1px solid #dfe4eb;
+      border-radius: 999px;
+      background: #f7f9fc;
+      font-size: .83rem;
+    }
+
+    .har-app .card {
+      min-width: 0;
+      padding: clamp(14px, 2.3vw, 22px);
+      border: 1px solid #dfe4eb;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .har-app .section {
+      margin-top: 18px;
+    }
+
+    .har-app h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .har-app h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .har-app .muted {
+      color: #637184;
+      font-size: .9rem;
+    }
+
+    .har-app .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 8px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+      font-weight: 650;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .har-app .button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .har-app .primary {
+      border-color: #245bcc;
+      background: #245bcc;
+      color: #fff;
+    }
+
+    .har-app .primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: #fff;
+    }
+
+    .har-app .button:disabled {
+      cursor: not-allowed;
+      opacity: .5;
+    }
+
+    .har-app .small {
+      min-height: 33px;
+      padding: 5px 9px;
+      font-size: .85rem;
+    }
+
+    .har-app .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .har-app .field {
+      min-width: 0;
+    }
+
+    .har-app .field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 750;
+    }
+
+    .har-app .field input[type="text"],
+    .har-app .field input[type="number"],
+    .har-app .field select,
+    .har-app .field textarea {
+      width: 100%;
+      min-width: 0;
+      min-height: 41px;
+      padding: 9px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .har-app .field textarea {
+      min-height: 220px;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: .85rem;
+      resize: vertical;
+    }
+
+    .har-app .upload {
+      padding: 20px 14px;
+      border: 2px dashed #b9c7d9;
+      border-radius: 12px;
+      background: #fafcff;
+      text-align: center;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .har-app .upload.is-dragging {
+      border-color: #245bcc;
+      background: #edf4ff;
+    }
+
+    .har-app .upload p {
+      margin: 0 0 10px;
+      color: #637184;
+      font-size: .9rem;
+    }
+
+    .har-app .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .har-app .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #dfe4eb;
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .har-app .check input {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: #245bcc;
+    }
+
+    .har-app .check strong {
+      display: block;
+      font-size: .9rem;
+    }
+
+    .har-app .check small {
+      display: block;
+      margin-top: 2px;
+      color: #637184;
+      line-height: 1.45;
+    }
+
+    .har-app .warning {
+      padding: 12px 14px;
+      border: 1px solid #ecd5a6;
+      border-radius: 10px;
+      background: #fff9ed;
+      color: #745016;
+      font-size: .9rem;
+    }
+
+    .har-app .safe-note {
+      padding: 12px 14px;
+      border: 1px solid #d8e6dc;
+      border-radius: 10px;
+      background: #f3faf5;
+      color: #285b38;
+      font-size: .9rem;
+    }
+
+    .har-app .status {
+      min-height: 23px;
+      margin: 10px 0 0;
+      font-size: .9rem;
+      overflow-wrap: anywhere;
+    }
+
+    .har-app .status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .har-app .status[data-kind="success"] {
+      color: #24623b;
+    }
+
+    .har-app .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .har-app .stat {
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid #dfe4eb;
+      border-radius: 9px;
+      background: #f7f9fc;
+    }
+
+    .har-app .stat-label {
+      display: block;
+      color: #637184;
+      font-size: .8rem;
+    }
+
+    .har-app .stat-value {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.12rem;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .har-app .filter-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) repeat(2, minmax(130px, 1fr));
+      gap: 12px;
+      align-items: end;
+    }
+
+    .har-app .table-wrap {
+      width: 100%;
+      overflow: auto;
+      margin-top: 14px;
+      border: 1px solid #dfe4eb;
+      border-radius: 10px;
+    }
+
+    .har-app table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .84rem;
+    }
+
+    .har-app th,
+    .har-app td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #e8edf3;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .har-app th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #f6f8fb;
+      color: #354252;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .har-app tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .har-app tbody tr:hover {
+      background: #f7faff;
+    }
+
+    .har-app .url-cell {
+      min-width: 260px;
+      max-width: 500px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .har-app .method {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-weight: 750;
+    }
+
+    .har-app .status-code {
+      display: inline-block;
+      min-width: 32px;
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #edf1f6;
+      font-weight: 750;
+      text-align: center;
+    }
+
+    .har-app .status-code.bad {
+      background: #ffeded;
+      color: #992828;
+    }
+
+    .har-app .status-code.good {
+      background: #eaf8ef;
+      color: #24623b;
+    }
+
+    .har-app .selected-row {
+      background: #edf4ff !important;
+    }
+
+    .har-app .detail-section {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #dfe4eb;
+    }
+
+    .har-app .detail-section h3 {
+      margin-bottom: 7px;
+    }
+
+    .har-app .kv-table {
+      width: 100%;
+      table-layout: fixed;
+      font-size: .86rem;
+    }
+
+    .har-app .kv-table td:first-child {
+      width: 34%;
+      color: #637184;
+      font-weight: 650;
+    }
+
+    .har-app .kv-table td {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .har-app pre {
+      max-height: 360px;
+      overflow: auto;
+      margin: 8px 0 0;
+      padding: 12px;
+      border: 1px solid #dfe4eb;
+      border-radius: 9px;
+      background: #f7f9fc;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: .82rem;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .har-app .pagination {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .har-app .spacer {
+      flex: 1 1 auto;
+    }
+
+    .har-app .article p,
+    .har-app .article li {
+      color: #354252;
+    }
+
+    .har-app .article li + li {
+      margin-top: 6px;
+    }
+
+    .har-app .faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid #dfe4eb;
+    }
+
+    .har-app .faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .har-app .faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .har-app .faq details p {
+      margin: 9px 0 0;
+      color: #637184;
+    }
+
+    @media (max-width: 760px) {
+      .har-app .filter-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .har-app .filter-grid .wide {
+        grid-column: 1 / -1;
+      }
+
+      .har-app .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .har-app {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .har-app .grid,
+      .har-app .filter-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .har-app .filter-grid .wide {
+        grid-column: auto;
+      }
+
+      .har-app .toolbar > .button {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .har-app *,
+      .har-app *::before,
+      .har-app *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="har-app">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>HAR File Viewer & Redactor</span>
+  </nav>
+
+  <header class="hero">
+    <h1>HAR File Viewer & Privacy Redactor</h1>
+    <p>
+      Open browser network captures, inspect requests and response timings, find HTTP errors,
+      filter slow calls, export a CSV summary, and prepare a redacted HAR file for sharing.
+    </p>
+    <div class="pills">
+      <span class="pill">HTTP request inspection</span>
+      <span class="pill">Error and timing filters</span>
+      <span class="pill">CSV export</span>
+      <span class="pill">Privacy-focused HAR export</span>
+    </div>
+  </header>
+
+  <section class="card" aria-labelledby="inputHeading">
+    <h2 id="inputHeading">1. Open a HAR file</h2>
+
+    <div class="upload" id="dropZone">
+      <p><strong>Drop a .har or JSON file here</strong></p>
+      <p>HAR captures may include cookies, authentication headers, URLs and request bodies. Treat them as sensitive.</p>
+      <input type="file" id="harFile" accept=".har,.json,application/json" hidden>
+      <button class="button primary" type="button" id="chooseFileBtn">Choose HAR file</button>
+    </div>
+
+    <div class="toolbar">
+      <button class="button small" type="button" id="sampleBtn">Load sample capture</button>
+      <button class="button small" type="button" id="clearBtn">Clear data</button>
+    </div>
+
+    <div class="field" style="margin-top:15px">
+      <label for="harText">Or paste HAR JSON</label>
+      <textarea id="harText" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder='Paste a HAR JSON document containing a "log" object and an "entries" array.'></textarea>
+    </div>
+
+    <div class="toolbar">
+      <button class="button primary" type="button" id="parseBtn">Parse HAR</button>
+      <span class="muted" id="fileInfo">Maximum file size: 30 MB.</span>
+    </div>
+
+    <p class="status" id="inputStatus" role="status" aria-live="polite"></p>
+
+    <div class="safe-note" style="margin-top:14px">
+      <strong>Local processing:</strong> this page parses the selected HAR in your browser.
+      It does not send the file to this website's conversion server. Avoid using a shared
+      device for captures containing active credentials.
+    </div>
+  </section>
+
+  <section class="card section" id="analysisPanel" hidden>
+    <h2>2. Analyze captured requests</h2>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-label">Total requests</span>
+        <span class="stat-value" id="totalRequests">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">HTTP errors (4xx/5xx)</span>
+        <span class="stat-value" id="errorRequests">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Recorded response size</span>
+        <span class="stat-value" id="totalBytes">0 B</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Longest recorded request</span>
+        <span class="stat-value" id="longestRequest">—</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="filter-grid">
+      <div class="field wide">
+        <label for="searchFilter">Search URL, method, status or content type</label>
+        <input type="text" id="searchFilter" placeholder="Example: /api/users or 500">
+      </div>
+
+      <div class="field">
+        <label for="methodFilter">HTTP method</label>
+        <select id="methodFilter">
+          <option value="">All methods</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="statusFilter">Response status</label>
+        <select id="statusFilter">
+          <option value="">All statuses</option>
+          <option value="success">2xx success</option>
+          <option value="redirect">3xx redirect</option>
+          <option value="client">4xx client error</option>
+          <option value="server">5xx server error</option>
+          <option value="failed">0 / missing status</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:5px">
+      <label class="check">
+        <input type="checkbox" id="errorsOnly">
+        <span>
+          <strong>Show errors only</strong>
+          <small>Requests with 4xx/5xx status or a zero/missing status.</small>
+        </span>
+      </label>
+
+      <label class="check">
+        <input type="checkbox" id="slowOnly">
+        <span>
+          <strong>Show slow requests only</strong>
+          <small>Requests with a recorded duration of at least one second.</small>
+        </span>
+      </label>
+    </div>
+
+    <div class="toolbar">
+      <button class="button small" type="button" id="resetFiltersBtn">Reset filters</button>
+      <span class="muted" id="filterSummary" aria-live="polite"></span>
+      <span class="spacer"></span>
+      <button class="button small" type="button" id="downloadCsvBtn">Export filtered CSV</button>
+    </div>
+
+    <label class="check">
+      <input type="checkbox" id="showSensitive">
+      <span>
+        <strong>Reveal values that look sensitive</strong>
+        <small>Turn this on only when needed. Values such as bearer tokens, cookies and common credential parameters are masked in the display by default.</small>
+      </span>
+    </label>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">View</th>
+            <th scope="col">Method</th>
+            <th scope="col">Status</th>
+            <th scope="col">Request URL</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Recorded size</th>
+            <th scope="col">Type</th>
+          </tr>
+        </thead>
+        <tbody id="requestRows">
+          <tr><td colspan="7">Load a HAR file to see requests.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination">
+      <button class="button small" type="button" id="previousPageBtn" disabled>Previous</button>
+      <span id="pageInfo" class="muted">Page 0 of 0</span>
+      <button class="button small" type="button" id="nextPageBtn" disabled>Next</button>
+      <span class="spacer"></span>
+      <span class="muted">50 rows per page</span>
+    </div>
+
+    <section class="detail-section" id="requestDetails" hidden aria-labelledby="detailHeading">
+      <h3 id="detailHeading">Request details</h3>
+      <p class="muted" id="detailIntro"></p>
+
+      <div class="toolbar">
+        <button class="button small" type="button" id="copyUrlBtn">Copy request URL</button>
+        <button class="button small" type="button" id="copyCurlBtn">Copy cURL command</button>
+      </div>
+
+      <label class="check">
+        <input type="checkbox" id="showBodies">
+        <span>
+          <strong>Show captured request / response body text</strong>
+          <small>Body content may contain private customer data, session details or credentials. Binary response bodies are not displayed.</small>
+        </span>
+      </label>
+
+      <div id="detailContent"></div>
+    </section>
+  </section>
+
+  <section class="card section" id="exportPanel" hidden>
+    <h2>3. Export a safer HAR file</h2>
+
+    <div class="warning">
+      <strong>Important:</strong> automated redaction is best-effort, not a guarantee that
+      every secret has been found. Inspect the exported file before sharing it, especially
+      if it came from an authenticated session or contains customer information.
+    </div>
+
+    <label class="check">
+      <input type="checkbox" id="exportFiltered" checked>
+      <span>
+        <strong>Export only requests matching current filters</strong>
+        <small>Turn this off to export the entire capture instead.</small>
+      </span>
+    </label>
+
+    <label class="check">
+      <input type="checkbox" id="includeBodies">
+      <span>
+        <strong>Include request and response bodies in the export</strong>
+        <small>Unchecked by default. Body data may contain secrets that automated redaction cannot recognize. Binary bodies will be omitted.</small>
+      </span>
+    </label>
+
+    <label class="check">
+      <input type="checkbox" id="redactSensitive" checked>
+      <span>
+        <strong>Redact common credentials and private headers</strong>
+        <small>Mask recognized tokens, credential-like query parameters, authorization headers and cookie values.</small>
+      </span>
+    </label>
+
+    <div class="toolbar">
+      <button class="button primary" type="button" id="downloadHarBtn">Download redacted HAR</button>
+    </div>
+
+    <p class="muted" id="exportSummary">
+      The export keeps the HAR structure where possible, removes request/response body text by default, and masks common sensitive fields.
+    </p>
+    <p class="status" id="exportStatus" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="card section article">
+    <h2>What is a HAR file?</h2>
+    <p>
+      HAR stands for HTTP Archive. A browser's developer tools can export a HAR file
+      containing a record of network requests made while a page loads. Depending on the
+      capture, it may include request URLs, HTTP methods, response status codes, headers,
+      timing measurements, cookies and text or binary payloads.
+    </p>
+
+    <h3>How to open a HAR file</h3>
+    <ol>
+      <li>Open the browser's Developer Tools and select the Network panel.</li>
+      <li>Reproduce the issue or reload the affected page.</li>
+      <li>Use the browser's export or save-network-log option to save a HAR file.</li>
+      <li>Open the file here and review failed requests, long durations and request details.</li>
+    </ol>
+
+    <h3>How to investigate slow requests</h3>
+    <p>
+      Filter the capture to find requests taking at least one second, then compare their
+      URLs, status codes, response sizes and recorded durations. HAR timing measurements
+      can contain phases such as DNS lookup, connection setup, waiting and receiving.
+      Some phase values can be absent or negative when not available in the capture.
+    </p>
+
+    <h3>Why should you redact a HAR before sharing?</h3>
+    <p>
+      Captures can contain credentials, cookies, session identifiers, personal data and
+      confidential request or response bodies. A redacted capture can be safer to share
+      for troubleshooting, but no automated filter can reliably detect every kind of
+      confidential value in arbitrary text.
+    </p>
+
+    <h3>What does this tool redact?</h3>
+    <p>
+      The redactor can mask common authentication headers, cookie values, credential-like
+      query parameters and recognized key names in JSON or form-encoded bodies. It removes
+      body text by default. Unknown field names, encoded data, custom formats, free-form
+      text and secrets embedded in unexpected locations may still need manual inspection.
+    </p>
+
+    <h3>What are the limitations?</h3>
+    <p>
+      This is a lightweight HAR viewer rather than a full browser network debugger. It does
+      not replay requests, access live network traffic, validate application behavior, or
+      guarantee full HAR schema compliance. Timing and size fields are shown as recorded;
+      unavailable values are not treated as measured values.
+    </p>
+  </section>
+
+  <section class="card section faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>How do I open a HAR file online?</summary>
+      <p>
+        Choose a HAR file or paste its JSON into the input box, then select Parse HAR.
+        The viewer displays request methods, URLs, status codes, recorded sizes and durations.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does this tool upload my HAR file?</summary>
+      <p>
+        No. The page reads the file in the browser and does not send the capture to this
+        website's conversion server. Other browser extensions, page scripts or device
+        monitoring software are outside the scope of this tool.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can a HAR file contain passwords or session cookies?</summary>
+      <p>
+        It can contain authentication headers, cookies, query parameters, request bodies
+        and response data. Treat the original capture as sensitive and inspect any redacted
+        export before sharing.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I export HAR requests to CSV?</summary>
+      <p>
+        Yes. Apply your filters and select Export filtered CSV. The exported request URLs
+        mask common credential-like query parameter values.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why is a response body missing?</summary>
+      <p>
+        Some HAR captures omit response bodies, and others contain only metadata or encoded
+        binary content. The viewer cannot reconstruct information that was never captured.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does redacting a HAR guarantee that it is safe to share?</summary>
+      <p>
+        No. Automated redaction detects common patterns only. Review URLs, custom headers,
+        text fields and any included bodies carefully before sharing a capture externally.
+      </p>
+    </details>
+  </section>
+
+  <p class="muted section">
+    Discover more tools on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_FILE_BYTES = 30 * 1024 * 1024;
+  const MAX_ENTRIES = 100000;
+  const PAGE_SIZE = 50;
+
+  const $ = id => document.getElementById(id);
+
+  let harObject = null;
+  let filteredEntries = [];
+  let currentPage = 0;
+  let selectedEntryIndex = null;
+  let busy = false;
+
+  const SECRET_NAME =
+    /(?:password|passwd|passphrase|secret|token|authorization|api[_-]?key|access[_-]?key|client[_-]?secret|refresh[_-]?token|session(?:id|_id)?|credential|signature|jwt|csrf|xsrf|private[_-]?key|id[_-]?token)/i;
+
+  const SECRET_HEADERS =
+    /^(?:authorization|proxy-authorization|cookie|set-cookie|x-api-key|api-key|x-auth-token|x-access-token|x-csrf-token|x-xsrf-token)$/i;
+
+  function setStatus(id, message, kind = "") {
+    const el = $(id);
+    el.textContent = message;
+    el.dataset.kind = kind;
+  }
+
+  function humanBytes(value) {
+    if (!Number.isFinite(value) || value < 0) return "Unknown";
+    if (value < 1024) return `${Math.round(value)} B`;
+    if (value < 1024 * 1024) return `${(value / 1024).toFixed(1)} KB`;
+    if (value < 1024 * 1024 * 1024) {
+      return `${(value / (1024 * 1024)).toFixed(2)} MB`;
+    }
+    return `${(value / (1024 * 1024 * 1024)).toFixed(2)} GB`;
+  }
+
+  function humanTime(ms) {
+    if (!Number.isFinite(ms) || ms < 0) return "Unknown";
+    if (ms < 1000) return `${Math.round(ms)} ms`;
+    return `${(ms / 1000).toFixed(2)} s`;
+  }
+
+  function isSensitiveName(name) {
+    return SECRET_NAME.test(String(name || ""));
+  }
+
+  function redactInlineSecrets(value) {
+    return String(value)
+      .replace(
+        /\b(Bearer|Basic)\s+[A-Za-z0-9._~+/=-]+/gi,
+        "$1 [REDACTED]"
+      )
+      .replace(
+        /(["']?(?:password|passwd|secret|token|api[_-]?key|access[_-]?key|client[_-]?secret|refresh[_-]?token|session(?:id|_id)?|authorization|credential|signature|jwt|csrf|xsrf)["']?\s*[:=]\s*["']?)[^"'&\s,}]+/gi,
+        "$1[REDACTED]"
+      );
+  }
+
+  function safeUrl(raw, reveal = false) {
+    const value = String(raw || "");
+    if (reveal) return value;
+    if (!value) return "(no URL recorded)";
+
+    try {
+      const parsed = new URL(value);
+      const params = parsed.searchParams;
+
+      for (const key of new Set(Array.from(params.keys()))) {
+        if (isSensitiveName(key)) {
+          params.set(key, "[REDACTED]");
+        }
+      }
+
+      // Query parameters are handled via URLSearchParams. User-info should not
+      // be disclosed by default either.
+      if (parsed.username) parsed.username = "[REDACTED]";
+      if (parsed.password) parsed.password = "[REDACTED]";
+
+      return parsed.toString();
+    } catch (error) {
+      // Some captures contain relative or non-standard URLs. Mask common
+      // secret-looking query values as a fallback.
+      return value.replace(
+        /([?&][^=&#]*(?:password|secret|token|api[_-]?key|access[_-]?key|session|signature|jwt|auth)[^=&#]*=)[^&#]*/gi,
+        "$1[REDACTED]"
+      );
+    }
+  }
+
+  function hideValue(name, value) {
+    const text = String(value ?? "");
+    if (!isSensitiveName(name) && !SECRET_HEADERS.test(String(name || ""))) {
+      return redactInlineSecrets(text);
+    }
+    return "[REDACTED]";
+  }
+
+  function statusCategory(status) {
+    const code = Number(status);
+
+    if (!Number.isFinite(code) || code === 0) return "failed";
+    if (code >= 200 && code < 300) return "success";
+    if (code >= 300 && code < 400) return "redirect";
+    if (code >= 400 && code < 500) return "client";
+    if (code >= 500 && code < 600) return "server";
+    return "other";
+  }
+
+  function entryMethod(entry) {
+    return String(entry?.request?.method || "UNKNOWN").toUpperCase();
+  }
+
+  function entryStatus(entry) {
+    const status = Number(entry?.response?.status);
+    return Number.isFinite(status) ? status : 0;
+  }
+
+  function entryUrl(entry) {
+    return String(entry?.request?.url || "");
+  }
+
+  function entryMimeType(entry) {
+    return String(
+      entry?.response?.content?.mimeType ||
+      entry?.response?.headers?.find(h => String(h.name).toLowerCase() === "content-type")?.value ||
+      ""
+    );
+  }
+
+  function entrySize(entry) {
+    const response = entry?.response || {};
+    const content = response.content || {};
+
+    const candidates = [
+      response._transferSize,
+      response.bodySize,
+      content.size
+    ];
+
+    for (const candidate of candidates) {
+      const n = Number(candidate);
+      if (Number.isFinite(n) && n >= 0) return n;
+    }
+
+    return -1;
+  }
+
+  function entryTime(entry) {
+    const n = Number(entry?.time);
+    return Number.isFinite(n) && n >= 0 ? n : -1;
+  }
+
+  function emptyState(message) {
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = 7;
+    cell.textContent = message;
+    row.appendChild(cell);
+    return row;
+  }
+
+  function appendCell(row, value, className = "") {
+    const cell = document.createElement("td");
+    cell.textContent = String(value ?? "");
+    if (className) cell.className = className;
+    row.appendChild(cell);
+    return cell;
+  }
+
+  function parseHarText(text) {
+    const normalized = String(text || "").replace(/^\uFEFF/, "").trim();
+
+    if (!normalized) {
+      throw new Error("Paste HAR JSON or choose a HAR file first.");
+    }
+
+    let data;
+
+    try {
+      data = JSON.parse(normalized);
+    } catch (error) {
+      throw new Error(`Invalid JSON: ${error.message}`);
+    }
+
+    if (!data || typeof data !== "object" || Array.isArray(data)) {
+      throw new Error("The JSON root must be an object.");
+    }
+
+    if (!data.log || typeof data.log !== "object") {
+      throw new Error('This does not look like a HAR file: the "log" object is missing.');
+    }
+
+    if (!Array.isArray(data.log.entries)) {
+      throw new Error('The HAR "log.entries" property must be an array.');
+    }
+
+    if (data.log.entries.length > MAX_ENTRIES) {
+      throw new Error(
+        `This capture contains ${data.log.entries.length.toLocaleString()} entries. The current limit is ${MAX_ENTRIES.toLocaleString()}.`
+      );
+    }
+
+    for (let i = 0; i < data.log.entries.length; i++) {
+      const entry = data.log.entries[i];
+
+      if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
+        throw new Error(`Entry ${i + 1} is not a valid object.`);
+      }
+
+      if (entry.request && typeof entry.request !== "object") {
+        throw new Error(`Entry ${i + 1} has an invalid request object.`);
+      }
+
+      if (entry.response && typeof entry.response !== "object") {
+        throw new Error(`Entry ${i + 1} has an invalid response object.`);
+      }
+    }
+
+    return data;
+  }
+
+  function loadHar(data, label = "HAR data loaded") {
+    harObject = data;
+    filteredEntries = [];
+    currentPage = 0;
+    selectedEntryIndex = null;
+
+    $("analysisPanel").hidden = false;
+    $("exportPanel").hidden = false;
+    $("requestDetails").hidden = true;
+
+    const entries = data.log.entries;
+    const methods = new Set(
+      entries.map(entryMethod).filter(method => method !== "UNKNOWN")
+    );
+
+    const methodSelect = $("methodFilter");
+    methodSelect.replaceChildren();
+
+    const allOption = document.createElement("option");
+    allOption.value = "";
+    allOption.textContent = "All methods";
+    methodSelect.appendChild(allOption);
+
+    Array.from(methods).sort().forEach(method => {
+      const option = document.createElement("option");
+      option.value = method;
+      option.textContent = method;
+      methodSelect.appendChild(option);
+    });
+
+    const errorCount = entries.filter(entry => {
+      const category = statusCategory(entryStatus(entry));
+      return category === "client" || category === "server";
+    }).length;
+
+    const totalSize = entries.reduce((sum, entry) => {
+      const size = entrySize(entry);
+      return sum + (size >= 0 ? size : 0);
+    }, 0);
+
+    const knownTimes = entries.map(entryTime).filter(time => time >= 0);
+    const longest = knownTimes.length ? Math.max(...knownTimes) : -1;
+
+    $("totalRequests").textContent = entries.length.toLocaleString();
+    $("errorRequests").textContent = errorCount.toLocaleString();
+    $("totalBytes").textContent = humanBytes(totalSize);
+    $("longestRequest").textContent = humanTime(longest);
+
+    applyFilters();
+
+    setStatus(
+      "inputStatus",
+      `${label}. Loaded ${entries.length.toLocaleString()} request(s).`,
+      "success"
+    );
+
+    setStatus("exportStatus", "");
+  }
+
+  function matchesFilters(entry) {
+    const term = $("searchFilter").value.trim().toLowerCase();
+    const method = $("methodFilter").value;
+    const category = $("statusFilter").value;
+    const errorsOnly = $("errorsOnly").checked;
+    const slowOnly = $("slowOnly").checked;
+
+    const status = entryStatus(entry);
+    const statusType = statusCategory(status);
+    const time = entryTime(entry);
+
+    if (method && entryMethod(entry) !== method) return false;
+
+    if (category && statusType !== category) return false;
+
+    if (errorsOnly &&
+        statusType !== "client" &&
+        statusType !== "server" &&
+        statusType !== "failed") {
+      return false;
+    }
+
+    if (slowOnly && !(time >= 1000)) return false;
+
+    if (term) {
+      const haystack = [
+        entryUrl(entry),
+        entryMethod(entry),
+        String(status),
+        entryMimeType(entry),
+        String(entry?.serverIPAddress || ""),
+        String(entry?.comment || "")
+      ].join(" ").toLowerCase();
+
+      if (!haystack.includes(term)) return false;
+    }
+
+    return true;
+  }
+
+  function applyFilters() {
+    if (!harObject) return;
+
+    filteredEntries = harObject.log.entries
+      .map((entry, index) => ({ entry, index }))
+      .filter(item => matchesFilters(item.entry));
+
+    currentPage = 0;
+
+    const pageCount = Math.max(1, Math.ceil(filteredEntries.length / PAGE_SIZE));
+
+    if (currentPage >= pageCount) currentPage = pageCount - 1;
+
+    renderTable();
+    updateSelectedCount();
+  }
+
+  function updateSelectedCount() {
+    $("selectedCount").textContent = filteredEntries.length.toLocaleString();
+    $("filterSummary").textContent =
+      `${filteredEntries.length.toLocaleString()} matching request(s)`;
+  }
+
+  function renderTable() {
+    const body = $("requestRows");
+    body.replaceChildren();
+
+    if (!filteredEntries.length) {
+      body.appendChild(emptyState("No requests match these filters."));
+      $("pageInfo").textContent = "Page 0 of 0";
+      $("previousPageBtn").disabled = true;
+      $("nextPageBtn").disabled = true;
+      return;
+    }
+
+    const totalPages = Math.ceil(filteredEntries.length / PAGE_SIZE);
+    const start = currentPage * PAGE_SIZE;
+    const pageItems = filteredEntries.slice(start, start + PAGE_SIZE);
+    const reveal = $("showSensitive").checked;
+
+    for (const item of pageItems) {
+      const entry = item.entry;
+      const row = document.createElement("tr");
+
+      if (selectedEntryIndex === item.index) {
+        row.classList.add("selected-row");
+      }
+
+      const viewCell = document.createElement("td");
+      const viewButton = document.createElement("button");
+
+      viewButton.type = "button";
+      viewButton.className = "button small";
+      viewButton.textContent = "Inspect";
+      viewButton.setAttribute(
+        "aria-label",
+        `Inspect request ${item.index + 1}`
+      );
+
+      viewButton.addEventListener("click", () => {
+        selectedEntryIndex = item.index;
+        renderTable();
+        renderDetails(item.entry, item.index);
+        $("requestDetails").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+
+      viewCell.appendChild(viewButton);
+      row.appendChild(viewCell);
+
+      appendCell(row, entryMethod(entry), "method");
+
+      const status = entryStatus(entry);
+      const statusCell = appendCell(row, status || "—");
+      const badge = document.createElement("span");
+      badge.className = "status-code";
+
+      const category = statusCategory(status);
+      if (category === "client" || category === "server" || category === "failed") {
+        badge.classList.add("bad");
+      } else if (category === "success") {
+        badge.classList.add("good");
+      }
+
+      badge.textContent = status || "—";
+      statusCell.replaceChildren(badge);
+
+      appendCell(row, safeUrl(entryUrl(entry), reveal), "url-cell");
+      appendCell(row, humanTime(entryTime(entry)));
+      appendCell(row, humanBytes(entrySize(entry)));
+      appendCell(row, entryMimeType(entry) || "—");
+
+      body.appendChild(row);
+    }
+
+    $("pageInfo").textContent =
+      `Page ${currentPage + 1} of ${totalPages}`;
+
+    $("previousPageBtn").disabled = currentPage <= 0;
+    $("nextPageBtn").disabled = currentPage >= totalPages - 1;
+  }
+
+  function createSection(title) {
+    const section = document.createElement("section");
+    section.className = "detail-section";
+
+    const heading = document.createElement("h3");
+    heading.textContent = title;
+
+    section.appendChild(heading);
+    return section;
+  }
+
+  function appendKeyValueTable(container, pairs) {
+    const table = document.createElement("table");
+    table.className = "kv-table";
+    const body = document.createElement("tbody");
+
+    if (!pairs.length) {
+      const row = document.createElement("tr");
+      const cell = document.createElement("td");
+      cell.colSpan = 2;
+      cell.textContent = "Not recorded.";
+      row.appendChild(cell);
+      body.appendChild(row);
+    } else {
+      for (const [key, value] of pairs) {
+        const row = document.createElement("tr");
+
+        const keyCell = document.createElement("td");
+        keyCell.textContent = String(key);
+
+        const valueCell = document.createElement("td");
+        valueCell.textContent = String(value ?? "");
+
+        row.append(keyCell, valueCell);
+        body.appendChild(row);
+      }
+    }
+
+    table.appendChild(body);
+    container.appendChild(table);
+  }
+
+  function headerPairs(headers) {
+    if (!Array.isArray(headers)) return [];
+
+    return headers.map(header => {
+      const name = String(header?.name || "(unnamed header)");
+      const value = $("showSensitive").checked
+        ? String(header?.value ?? "")
+        : hideValue(name, header?.value);
+
+      return [name, value];
+    });
+  }
+
+  function cookiePairs(cookies) {
+    if (!Array.isArray(cookies)) return [];
+
+    return cookies.map(cookie => {
+      const name = String(cookie?.name || "(unnamed cookie)");
+      const value = $("showSensitive").checked
+        ? String(cookie?.value ?? "")
+        : "[REDACTED]";
+
+      return [name, value];
+    });
+  }
+
+  function queryPairs(queryString) {
+    if (!Array.isArray(queryString)) return [];
+
+    return queryString.map(parameter => {
+      const name = String(parameter?.name || "(unnamed parameter)");
+      const value = $("showSensitive").checked
+        ? String(parameter?.value ?? "")
+        : hideValue(name, parameter?.value);
+
+      return [name, value];
+    });
+  }
+
+  function formatBodyValue(value, mimeType = "") {
+    if (value === undefined || value === null || value === "") {
+      return "No text body was captured.";
+    }
+
+    if (!$("showSensitive").checked) {
+      const safe = redactInlineSecrets(String(value));
+      return safe.slice(0, 12000) +
+        (safe.length > 12000 ? "\n[Display truncated]" : "");
+    }
+
+    const text = String(value);
+
+    return text.slice(0, 12000) +
+      (text.length > 12000 ? "\n[Display truncated]" : "");
+  }
+
+  function appendPre(container, text) {
+    const pre = document.createElement("pre");
+    pre.textContent = text;
+    container.appendChild(pre);
+  }
+
+  function renderDetails(entry, originalIndex) {
+    const area = $("detailContent");
+    area.replaceChildren();
+
+    const request = entry?.request || {};
+    const response = entry?.response || {};
+    const reveal = $("showSensitive").checked;
+
+    $("requestDetails").hidden = false;
+    $("detailHeading").textContent = `Request ${originalIndex + 1} details`;
+
+    $("detailIntro").textContent =
+      `${entryMethod(entry)} ${safeUrl(entryUrl(entry), reveal)} · Status ${entryStatus(entry) || "unknown"} · ${humanTime(entryTime(entry))}`;
+
+    const basics = createSection("Request summary");
+
+    appendKeyValueTable(basics, [
+      ["URL", safeUrl(entryUrl(entry), reveal)],
+      ["Method", entryMethod(entry)],
+      ["Status", entryStatus(entry) || "Not recorded"],
+      ["Status text", response.statusText || "Not recorded"],
+      ["MIME type", entryMimeType(entry) || "Not recorded"],
+      ["Duration", humanTime(entryTime(entry))],
+      ["Recorded size", humanBytes(entrySize(entry))],
+      ["Started at", entry.startedDateTime || "Not recorded"],
+      ["Remote IP", entry.serverIPAddress || "Not recorded"],
+      ["HTTP version", request.httpVersion || "Not recorded"]
+    ]);
+
+    area.appendChild(basics);
+
+    const reqHeaders = createSection("Request headers");
+    appendKeyValueTable(reqHeaders, headerPairs(request.headers));
+    area.appendChild(reqHeaders);
+
+    const resHeaders = createSection("Response headers");
+    appendKeyValueTable(resHeaders, headerPairs(response.headers));
+    area.appendChild(resHeaders);
+
+    const query = createSection("Query parameters");
+    appendKeyValueTable(query, queryPairs(request.queryString));
+    area.appendChild(query);
+
+    const reqCookies = createSection("Request cookies");
+    appendKeyValueTable(reqCookies, cookiePairs(request.cookies));
+    area.appendChild(reqCookies);
+
+    const resCookies = createSection("Response cookies");
+    appendKeyValueTable(resCookies, cookiePairs(response.cookies));
+    area.appendChild(resCookies);
+
+    const timings = entry.timings || {};
+    const timingSection = createSection("Recorded timing breakdown");
+
+    appendKeyValueTable(
+      timingSection,
+      ["blocked", "dns", "connect", "send", "wait", "receive", "ssl"]
+        .map(key => {
+          const n = Number(timings[key]);
+          return [
+            key,
+            Number.isFinite(n) && n >= 0 ? humanTime(n) : "Not recorded"
+          ];
+        })
+    );
+
+    area.appendChild(timingSection);
+
+    if ($("showBodies").checked) {
+      const requestBody = createSection("Request body");
+
+      const postData = request.postData || {};
+      appendKeyValueTable(requestBody, [
+        ["MIME type", postData.mimeType || "Not recorded"],
+        ["Body size", Number.isFinite(Number(postData.size)) ? humanBytes(Number(postData.size)) : "Unknown"]
+      ]);
+
+      const requestText = postData.text;
+      appendPre(
+        requestBody,
+        formatBodyValue(requestText, postData.mimeType)
+      );
+
+      if (Array.isArray(postData.params) && postData.params.length) {
+        const params = postData.params.map(parameter => [
+          String(parameter.name || "(unnamed parameter)"),
+          reveal
+            ? String(parameter.value ?? "")
+            : hideValue(parameter.name, parameter.value)
+        ]);
+
+        const formSection = document.createElement("div");
+        formSection.style.marginTop = "10px";
+        appendKeyValueTable(formSection, params);
+        requestBody.appendChild(formSection);
+      }
+
+      area.appendChild(requestBody);
+
+      const responseBody = createSection("Response body");
+
+      const content = response.content || {};
+
+      appendKeyValueTable(responseBody, [
+        ["MIME type", content.mimeType || "Not recorded"],
+        ["Encoding", content.encoding || "Not recorded"],
+        ["Recorded content size", Number.isFinite(Number(content.size)) ? humanBytes(Number(content.size)) : "Unknown"]
+      ]);
+
+      if (content.encoding === "base64") {
+        appendPre(
+          responseBody,
+          "This response body is base64-encoded. It is not decoded or rendered by this lightweight viewer."
+        );
+      } else {
+        appendPre(
+          responseBody,
+          formatBodyValue(content.text, content.mimeType)
+        );
+      }
+
+      area.appendChild(responseBody);
+    }
+
+    $("copyUrlBtn").onclick = () => {
+      const url = entryUrl(entry);
+      copyText(url, "Copy request URL");
+    };
+
+    $("copyCurlBtn").onclick = () => {
+      const curl = makeCurlCommand(entry);
+      copyText(curl, "Copy cURL command");
+    };
+  }
+
+  function shellQuote(value) {
+    // POSIX shell single-quote escaping for a generated command preview.
+    return "'" + String(value).replace(/'/g, "'\\''") + "'";
+  }
+
+  function makeCurlCommand(entry) {
+    const request = entry?.request || {};
+    const parts = ["curl", "--request", shellQuote(request.method || "GET")];
+
+    parts.push(shellQuote(entryUrl(entry)));
+
+    const headers = Array.isArray(request.headers) ? request.headers : [];
+
+    for (const header of headers) {
+      const name = String(header?.name || "");
+
+      // Avoid copying active credentials into commands by default.
+      const value = isSensitiveName(name) || SECRET_HEADERS.test(name)
+        ? "[REDACTED]"
+        : redactInlineSecrets(String(header?.value ?? ""));
+
+      parts.push("--header", shellQuote(`${name}: ${value}`));
+    }
+
+    const postData = request.postData;
+
+    if (postData && typeof postData.text === "string" && postData.text.length) {
+      parts.push("--data-raw", shellQuote("[BODY OMITTED — inspect before using]"));
+    }
+
+    return parts.join(" ");
+  }
+
+  async function copyText(value, label) {
+    try {
+      await navigator.clipboard.writeText(value);
+      setStatus("inputStatus", `${label}: copied to clipboard.`, "success");
+    } catch (error) {
+      // Clipboard access may be unavailable in some browsers or non-secure contexts.
+      const textarea = document.createElement("textarea");
+      textarea.value = value;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      let copied = false;
+
+      try {
+        copied = document.execCommand("copy");
+      } catch (copyError) {
+        copied = false;
+      }
+
+      textarea.remove();
+
+      setStatus(
+        "inputStatus",
+        copied
+          ? `${label}: copied to clipboard.`
+          : `${label}: automatic copy failed. Copy the text manually from the visible details.`,
+        copied ? "success" : "error"
+      );
+    }
+  }
+
+  function csvCell(value) {
+    let text = String(value ?? "");
+
+    // Reduce the risk of spreadsheet formula injection when CSV is opened.
+    if (/^[\s\u0000-\u001f]*[=+\-@]/.test(text)) {
+      text = "'" + text;
+    }
+
+    return `"${text.replace(/"/g, '""')}"`;
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  }
+
+  function exportCsv() {
+    if (!harObject) return;
+
+    const headers = [
+      "index",
+      "method",
+      "status",
+      "url",
+      "duration_ms",
+      "recorded_size_bytes",
+      "mime_type",
+      "started_at"
+    ];
+
+    const lines = [headers.map(csvCell).join(",")];
+
+    for (const item of filteredEntries) {
+      const entry = item.entry;
+
+      lines.push([
+        item.index + 1,
+        entryMethod(entry),
+        entryStatus(entry),
+        safeUrl(entryUrl(entry), false),
+        entryTime(entry) >= 0 ? entryTime(entry) : "",
+        entrySize(entry) >= 0 ? entrySize(entry) : "",
+        entryMimeType(entry),
+        entry.startedDateTime || ""
+      ].map(csvCell).join(","));
+    }
+
+    const csv = "\uFEFF" + lines.join("\r\n");
+
+    downloadBlob(
+      new Blob([csv], { type: "text/csv;charset=utf-8" }),
+      "har-filtered-requests.csv"
+    );
+
+    setStatus(
+      "exportStatus",
+      `Exported ${filteredEntries.length.toLocaleString()} filtered request(s) as CSV.`,
+      "success"
+    );
+  }
+
+  function redactNested(value, parentKey = "") {
+    if (Array.isArray(value)) {
+      return value.map(item => redactNested(item, parentKey));
+    }
+
+    if (value && typeof value === "object") {
+      const result = {};
+
+      for (const [key, child] of Object.entries(value)) {
+        if (isSensitiveName(key)) {
+          result[key] = "[REDACTED]";
+        } else {
+          result[key] = redactNested(child, key);
+        }
+      }
+
+      return result;
+    }
+
+    if (typeof value === "string") {
+      return redactInlineSecrets(value);
+    }
+
+    return value;
+  }
+
+  function sanitizeUrlForExport(raw, redact) {
+    if (!redact) return String(raw || "");
+
+    return safeUrl(raw, false);
+  }
+
+  function sanitizeHeaderArray(headers, redact) {
+    if (!Array.isArray(headers)) return;
+
+    for (const header of headers) {
+      if (!header || typeof header !== "object") continue;
+
+      const name = String(header.name || "");
+
+      if (redact && (isSensitiveName(name) || SECRET_HEADERS.test(name))) {
+        header.value = "[REDACTED]";
+      } else if (typeof header.value === "string") {
+        header.value = redact ? redactInlineSecrets(header.value) : header.value;
+      }
+    }
+  }
+
+  function sanitizeCookies(cookies) {
+    if (!Array.isArray(cookies)) return;
+
+    for (const cookie of cookies) {
+      if (!cookie || typeof cookie !== "object") continue;
+      cookie.value = "[REDACTED]";
+    }
+  }
+
+  function sanitizeNameValueArray(items, redact) {
+    if (!Array.isArray(items)) return;
+
+    for (const item of items) {
+      if (!item || typeof item !== "object") continue;
+
+      if (redact && isSensitiveName(item.name)) {
+        item.value = "[REDACTED]";
+      } else if (typeof item.value === "string") {
+        item.value = redact ? redactInlineSecrets(item.value) : item.value;
+      }
+    }
+  }
+
+  function sanitizeBody(text, mimeType) {
+    if (typeof text !== "string") return text;
+
+    const mime = String(mimeType || "").toLowerCase();
+
+    if (mime.includes("application/json") || /^[\s]*[\[{]/.test(text)) {
+      try {
+        const parsed = JSON.parse(text);
+        return JSON.stringify(redactNested(parsed), null, 2);
+      } catch (error) {
+        // Fall through for JSON-like text which is incomplete or malformed.
+      }
+    }
+
+    if (
+      mime.includes("application/x-www-form-urlencoded") ||
+      mime.includes("application/x-www-form-urlencoded;")
+    ) {
+      try {
+        const params = new URLSearchParams(text);
+        const keys = Array.from(new Set(Array.from(params.keys())));
+
+        for (const key of keys) {
+          if (isSensitiveName(key)) {
+            params.set(key, "[REDACTED]");
+          } else {
+            params.set(key, redactInlineSecrets(params.get(key) || ""));
+          }
+        }
+
+        return params.toString();
+      } catch (error) {
+        // Use the generic pattern scrubber below.
+      }
+    }
+
+    return redactInlineSecrets(text);
+  }
+
+  function makeRedactedHar() {
+    if (!harObject) {
+      throw new Error("Load a HAR file first.");
+    }
+
+    const includeBodies = $("includeBodies").checked;
+    const redact = $("redactSensitive").checked;
+    const filteredOnly = $("exportFiltered").checked;
+
+    const clone = JSON.parse(JSON.stringify(harObject));
+
+    if (filteredOnly) {
+      clone.log.entries = filteredEntries.map(item =>
+        clone.log.entries[item.index]
+      );
+    }
+
+    for (const entry of clone.log.entries) {
+      if (!entry || typeof entry !== "object") continue;
+
+      const request = entry.request || {};
+      const response = entry.response || {};
+
+      if (typeof request.url === "string") {
+        request.url = sanitizeUrlForExport(request.url, redact);
+      }
+
+      sanitizeHeaderArray(request.headers, redact);
+      sanitizeHeaderArray(response.headers, redact);
+
+      // Treat cookie values as sensitive regardless of the optional pattern
+      // redaction toggle. This is intentionally conservative.
+      sanitizeCookies(request.cookies);
+      sanitizeCookies(response.cookies);
+
+      sanitizeNameValueArray(request.queryString, redact);
+
+      if (request.postData && typeof request.postData === "object") {
+        if (includeBodies) {
+          const postData = request.postData;
+
+          if (typeof postData.text === "string") {
+            postData.text = redact
+              ? sanitizeBody(postData.text, postData.mimeType)
+              : postData.text;
+          }
+
+          sanitizeNameValueArray(postData.params, redact);
+          sanitizeNameValueArray(postData.headers, redact);
+        } else {
+          const mimeType = request.postData.mimeType;
+
+          request.postData = {
+            mimeType: mimeType || "application/octet-stream",
+            text: "[REQUEST BODY REMOVED FOR PRIVACY]"
+          };
+        }
+      }
+
+      if (response.content && typeof response.content === "object") {
+        const content = response.content;
+
+        if (includeBodies) {
+          if (String(content.encoding || "").toLowerCase() === "base64") {
+            content.text = "[BINARY RESPONSE BODY REMOVED]";
+            delete content.encoding;
+          } else if (typeof content.text === "string" && redact) {
+            content.text = sanitizeBody(content.text, content.mimeType);
+          } else if (typeof content.text === "string") {
+            content.text = redactInlineSecrets(content.text);
+          }
+        } else {
+          delete content.text;
+          delete content.encoding;
+        }
+      }
+
+      if (redact && typeof entry.comment === "string") {
+        entry.comment = redactInlineSecrets(entry.comment);
+      }
+    }
+
+    if (redact && Array.isArray(clone.log.pages)) {
+      for (const page of clone.log.pages) {
+        if (page && typeof page.title === "string") {
+          page.title = redactInlineSecrets(page.title);
+        }
+
+        if (page && typeof page.id === "string") {
+          page.id = redactInlineSecrets(page.id);
+        }
+      }
+    }
+
+    if (redact && typeof clone.log.comment === "string") {
+      clone.log.comment = redactInlineSecrets(clone.log.comment);
+    }
+
+    return {
+      data: clone,
+      count: clone.log.entries.length,
+      includeBodies,
+      redact,
+      filteredOnly
+    };
+  }
+
+  function exportHar() {
+    try {
+      const result = makeRedactedHar();
+
+      const output = JSON.stringify(result.data, null, 2);
+      const blob = new Blob([output], {
+        type: "application/json;charset=utf-8"
+      });
+
+      downloadBlob(blob, "redacted-network-capture.har");
+
+      const bodyMessage = result.includeBodies
+        ? "Bodies were included where available, with recognized patterns scrubbed."
+        : "Request and response body text was removed.";
+
+      const privacyMessage = result.redact
+        ? "Common credentials and cookie values were redacted."
+        : "Pattern-based redaction was turned off, but body removal and cookie masking still apply.";
+
+      setStatus(
+        "exportStatus",
+        `Export started with ${result.count.toLocaleString()} request(s). ${bodyMessage} ${privacyMessage} Review the downloaded HAR manually before sharing.`,
+        "success"
+      );
+    } catch (error) {
+      setStatus(
+        "exportStatus",
+        error && error.message
+          ? `Could not export HAR: ${error.message}`
+          : "Could not export HAR.",
+        "error"
+      );
+    }
+  }
+
+  async function readFile(file) {
+    if (!file) return;
+
+    if (file.size > MAX_FILE_BYTES) {
+      setStatus("inputStatus", "The selected file exceeds the 30 MB limit.", "error");
+      return;
+    }
+
+    try {
+      const text = await file.text();
+
+      if (text.length > MAX_FILE_BYTES) {
+        throw new Error("The file exceeds the 30 MB text limit.");
+      }
+
+      $("harText").value = text;
+      $("fileInfo").textContent =
+        `${file.name} · ${humanBytes(file.size)}`;
+
+      setStatus("inputStatus", "File loaded. Select Parse HAR to inspect it.");
+    } catch (error) {
+      setStatus(
+        "inputStatus",
+        error && error.message ? error.message : "Could not read the selected file.",
+        "error"
+      );
+    }
+  }
+
+  function parseAndLoad() {
+    try {
+      const text = $("harText").value;
+
+      if (text.length > MAX_FILE_BYTES) {
+        throw new Error("The pasted JSON exceeds the 30 MB limit.");
+      }
+
+      const data = parseHarText(text);
+      loadHar(data, "HAR parsed successfully");
+    } catch (error) {
+      setStatus(
+        "inputStatus",
+        error && error.message ? error.message : "Could not parse this HAR file.",
+        "error"
+      );
+    }
+  }
+
+  function loadSample() {
+    const sample = {
+      log: {
+        version: "1.2",
+        creator: { name: "Sample HAR", version: "1.0" },
+        pages: [],
+        entries: [
+          {
+            startedDateTime: "2026-01-01T10:00:00.000Z",
+            time: 125,
+            request: {
+              method: "GET",
+              url: "https://example.test/",
+              httpVersion: "HTTP/2",
+              headers: [
+                { name: "accept", value: "text/html" }
+              ],
+              queryString: [],
+              cookies: [],
+              headersSize: -1,
+              bodySize: 0
+            },
+            response: {
+              status: 200,
+              statusText: "OK",
+              httpVersion: "HTTP/2",
+              headers: [
+                { name: "content-type", value: "text/html" }
+              ],
+              cookies: [],
+              content: {
+                size: 12000,
+                mimeType: "text/html",
+                text: "<html><body>Harmless sample response</body></html>"
+              },
+              redirectURL: "",
+              headersSize: -1,
+              bodySize: 12000
+            },
+            cache: {},
+            timings: {
+              blocked: 0,
+              dns: 10,
+              connect: 15,
+              send: 1,
+              wait: 75,
+              receive: 24,
+              ssl: 8
+            }
+          },
+          {
+            startedDateTime: "2026-01-01T10:00:01.000Z",
+            time: 1330,
+            request: {
+              method: "GET",
+              url: "https://example.test/api/items?token=DEMO-SENSITIVE-VALUE",
+              httpVersion: "HTTP/2",
+              headers: [
+                { name: "accept", value: "application/json" },
+                { name: "authorization", value: "Bearer DEMO-SAMPLE-TOKEN" }
+              ],
+              queryString: [
+                { name: "token", value: "DEMO-SENSITIVE-VALUE" }
+              ],
+              cookies: [
+                { name: "sessionid", value: "DEMO-SESSION" }
+              ],
+              headersSize: -1,
+              bodySize: 0
+            },
+            response: {
+              status: 500,
+              statusText: "Internal Server Error",
+              httpVersion: "HTTP/2",
+              headers: [
+                { name: "content-type", value: "application/json" }
+              ],
+              cookies: [],
+              content: {
+                size: 70,
+                mimeType: "application/json",
+                text: JSON.stringify({
+                  error: "Example internal error",
+                  requestId: "demo-001"
+                })
+              },
+              redirectURL: "",
+              headersSize: -1,
+              bodySize: 70
+            },
+            cache: {},
+            timings: {
+              blocked: 2,
+              dns: 0,
+              connect: 0,
+              send: 1,
+              wait: 1260,
+              receive: 67,
+              ssl: -1
+            }
+          },
+          {
+            startedDateTime: "2026-01-01T10:00:03.000Z",
+            time: 45,
+            request: {
+              method: "POST",
+              url: "https://example.test/api/login",
+              httpVersion: "HTTP/2",
+              headers: [
+                { name: "content-type", value: "application/json" }
+              ],
+              queryString: [],
+              cookies: [],
+              postData: {
+                mimeType: "application/json",
+                text: JSON.stringify({
+                  username: "sample-user",
+                  password: "DEMO-PASSWORD"
+                })
+              },
+              headersSize: -1,
+              bodySize: 48
+            },
+            response: {
+              status: 401,
+              statusText: "Unauthorized",
+              httpVersion: "HTTP/2",
+              headers: [
+                { name: "content-type", value: "application/json" }
+              ],
+              cookies: [],
+              content: {
+                size: 35,
+                mimeType: "application/json",
+                text: JSON.stringify({ error: "Sample authorization failure" })
+              },
+              redirectURL: "",
+              headersSize: -1,
+              bodySize: 35
+            },
+            cache: {},
+            timings: {
+              blocked: 0,
+              dns: 0,
+              connect: 0,
+              send: 1,
+              wait: 20,
+              receive: 24,
+              ssl: -1
+            }
+          }
+        ]
+      }
+    };
+
+    $("harText").value = JSON.stringify(sample, null, 2);
+    $("fileInfo").textContent = "Built-in harmless sample capture.";
+    loadHar(sample, "Sample capture loaded");
+  }
+
+  function clearAll() {
+    harObject = null;
+    filteredEntries = [];
+    currentPage = 0;
+    selectedEntryIndex = null;
+
+    $("harText").value = "";
+    $("fileInfo").textContent = "Maximum file size: 30 MB.";
+    $("analysisPanel").hidden = true;
+    $("exportPanel").hidden = true;
+    $("requestDetails").hidden = true;
+
+    setStatus("inputStatus", "Data cleared.");
+    setStatus("exportStatus", "");
+  }
+
+  function resetFilters() {
+    $("searchFilter").value = "";
+    $("methodFilter").value = "";
+    $("statusFilter").value = "";
+    $("errorsOnly").checked = false;
+    $("slowOnly").checked = false;
+
+    selectedEntryIndex = null;
+    $("requestDetails").hidden = true;
+    applyFilters();
+  }
+
+  $("chooseFileBtn").addEventListener("click", () => $("harFile").click());
+
+  $("harFile").addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) readFile(file);
+    event.target.value = "";
+  });
+
+  $("parseBtn").addEventListener("click", parseAndLoad);
+  $("sampleBtn").addEventListener("click", loadSample);
+  $("clearBtn").addEventListener("click", clearAll);
+  $("downloadCsvBtn").addEventListener("click", exportCsv);
+  $("downloadHarBtn").addEventListener("click", exportHar);
+  $("resetFiltersBtn").addEventListener("click", resetFilters);
+
+  $("previousPageBtn").addEventListener("click", () => {
+    if (currentPage > 0) {
+      currentPage--;
+      renderTable();
+    }
+  });
+
+  $("nextPageBtn").addEventListener("click", () => {
+    const pages = Math.ceil(filteredEntries.length / PAGE_SIZE);
+
+    if (currentPage + 1 < pages) {
+      currentPage++;
+      renderTable();
+    }
+  });
+
+  [
+    "searchFilter",
+    "methodFilter",
+    "statusFilter",
+    "errorsOnly",
+    "slowOnly"
+  ].forEach(id => {
+    $(id).addEventListener(
+      id === "searchFilter" ? "input" : "change",
+      () => {
+        selectedEntryIndex = null;
+        $("requestDetails").hidden = true;
+        applyFilters();
+      }
+    );
+  });
+
+  $("showSensitive").addEventListener("change", () => {
+    renderTable();
+
+    if (selectedEntryIndex !== null && harObject) {
+      renderDetails(
+        harObject.log.entries[selectedEntryIndex],
+        selectedEntryIndex
+      );
+    }
+  });
+
+  $("showBodies").addEventListener("change", () => {
+    if (selectedEntryIndex !== null && harObject) {
+      renderDetails(
+        harObject.log.entries[selectedEntryIndex],
+        selectedEntryIndex
+      );
+    }
+  });
+
+  const dropZone = $("dropZone");
+
+  ["dragenter", "dragover"].forEach(eventName => {
+    dropZone.addEventListener(eventName, event => {
+      event.preventDefault();
+      dropZone.classList.add("is-dragging");
+    });
+  });
+
+  ["dragleave", "drop"].forEach(eventName => {
+    dropZone.addEventListener(eventName, event => {
+      event.preventDefault();
+      dropZone.classList.remove("is-dragging");
+    });
+  });
+
+  dropZone.addEventListener("drop", event => {
+    const file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+
+    if (file) readFile(file);
+  });
+
+  window.addEventListener("beforeunload", () => {
+    // The tool intentionally does not persist or upload HAR data.
+    harObject = null;
+    filteredEntries = [];
+  });
+})();
+</script>
+</body>
+</html>

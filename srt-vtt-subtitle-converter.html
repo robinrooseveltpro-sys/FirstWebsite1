@@ -1,0 +1,1345 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>SRT to VTT Converter & Subtitle Time Shifter Online</title>
+  <meta name="description" content="Convert SRT subtitles to VTT or VTT to SRT, shift caption timestamps forward or backward, validate subtitle timing, and download the processed subtitle file in your browser.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/srt-vtt-subtitle-converter.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SRT to VTT Converter & Subtitle Time Shifter">
+  <meta property="og:description" content="Convert subtitle formats, fix timing offsets and inspect subtitle errors online.">
+  <meta property="og:url" content="https://converttotoolsonline.com/srt-vtt-subtitle-converter.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SRT to VTT Converter">
+  <meta name="twitter:description" content="Convert and retime subtitle files in your browser.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "SRT to VTT Converter & Subtitle Time Shifter",
+    "url": "https://converttotoolsonline.com/srt-vtt-subtitle-converter.html",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "description": "Convert SRT and WebVTT subtitles, shift caption timestamps, and check subtitle timing.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    .subtool {
+      width: min(1040px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 55px;
+      color: #17202c;
+      line-height: 1.6;
+    }
+
+    .subtool,
+    .subtool * {
+      box-sizing: border-box;
+    }
+
+    .subtool [hidden] {
+      display: none !important;
+    }
+
+    .subtool :is(input, select, textarea, button, a):focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .subtool button,
+    .subtool input,
+    .subtool select,
+    .subtool textarea {
+      font: inherit;
+    }
+
+    .subtool button {
+      cursor: pointer;
+    }
+
+    .subtool a {
+      color: #245bcc;
+    }
+
+    .subtool .breadcrumb {
+      margin-bottom: 12px;
+      color: #627084;
+      font-size: .92rem;
+    }
+
+    .subtool .hero {
+      margin-bottom: 22px;
+    }
+
+    .subtool .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      line-height: 1.16;
+      letter-spacing: -.035em;
+    }
+
+    .subtool .hero p {
+      max-width: 790px;
+      margin: 0;
+      color: #5b6878;
+    }
+
+    .subtool .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .subtool .pill {
+      border: 1px solid #dce3eb;
+      border-radius: 999px;
+      background: #f7f9fc;
+      padding: 5px 10px;
+      font-size: .83rem;
+    }
+
+    .subtool .card {
+      min-width: 0;
+      padding: clamp(14px, 2.5vw, 22px);
+      border: 1px solid #dfe4eb;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .subtool .section {
+      margin-top: 18px;
+    }
+
+    .subtool h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .subtool h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .subtool .muted {
+      color: #627084;
+      font-size: .9rem;
+    }
+
+    .subtool .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 41px;
+      padding: 9px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+      font-weight: 650;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .subtool .button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .subtool .primary {
+      border-color: #245bcc;
+      background: #245bcc;
+      color: #fff;
+    }
+
+    .subtool .primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: #fff;
+    }
+
+    .subtool .button:disabled {
+      cursor: not-allowed;
+      opacity: .5;
+    }
+
+    .subtool .small-button {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: .86rem;
+    }
+
+    .subtool .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .subtool .field {
+      min-width: 0;
+    }
+
+    .subtool .field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 750;
+    }
+
+    .subtool .field input[type="number"],
+    .subtool .field input[type="text"],
+    .subtool .field select,
+    .subtool .field textarea {
+      width: 100%;
+      min-width: 0;
+      min-height: 42px;
+      padding: 9px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .subtool textarea {
+      display: block;
+      width: 100%;
+      min-height: 270px;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      background: #fff;
+      color: #17202c;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: .86rem;
+      line-height: 1.6;
+      resize: vertical;
+      tab-size: 2;
+    }
+
+    .subtool textarea[readonly] {
+      background: #f9fbfd;
+    }
+
+    .subtool .upload {
+      padding: 18px 14px;
+      border: 2px dashed #b9c7d9;
+      border-radius: 12px;
+      background: #fafcff;
+      text-align: center;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .subtool .upload.is-dragging {
+      border-color: #245bcc;
+      background: #edf4ff;
+    }
+
+    .subtool .upload p {
+      margin: 0 0 10px;
+      color: #627084;
+      font-size: .9rem;
+    }
+
+    .subtool .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .subtool .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+      align-items: start;
+    }
+
+    .subtool .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 12px;
+      padding: 10px;
+      border: 1px solid #dfe4eb;
+      border-radius: 9px;
+    }
+
+    .subtool .check input {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      margin-top: 4px;
+      accent-color: #245bcc;
+    }
+
+    .subtool .check strong {
+      display: block;
+      font-size: .91rem;
+    }
+
+    .subtool .check small {
+      display: block;
+      margin-top: 2px;
+      color: #627084;
+    }
+
+    .subtool .status {
+      min-height: 25px;
+      margin: 10px 0 0;
+      font-size: .9rem;
+      overflow-wrap: anywhere;
+    }
+
+    .subtool .status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .subtool .status[data-kind="success"] {
+      color: #24623b;
+    }
+
+    .subtool .notice {
+      padding: 12px 14px;
+      border: 1px solid #ecd5a6;
+      border-radius: 10px;
+      background: #fff9ed;
+      color: #745016;
+      font-size: .9rem;
+    }
+
+    .subtool .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .subtool .stat {
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid #dfe4eb;
+      border-radius: 9px;
+      background: #f7f9fc;
+    }
+
+    .subtool .stat-label {
+      display: block;
+      color: #627084;
+      font-size: .81rem;
+    }
+
+    .subtool .stat-value {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .subtool .messages {
+      margin-top: 12px;
+      padding-left: 20px;
+      font-size: .9rem;
+    }
+
+    .subtool .messages li + li {
+      margin-top: 5px;
+    }
+
+    .subtool .divider {
+      height: 1px;
+      margin: 18px 0;
+      border: 0;
+      background: #dfe4eb;
+    }
+
+    .subtool .article p,
+    .subtool .article li {
+      color: #354252;
+    }
+
+    .subtool .article li + li {
+      margin-top: 6px;
+    }
+
+    .subtool .faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid #dfe4eb;
+    }
+
+    .subtool .faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .subtool .faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .subtool .faq details p {
+      margin: 9px 0 0;
+      color: #627084;
+    }
+
+    @media (max-width: 760px) {
+      .subtool .grid,
+      .subtool .settings-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .subtool {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .subtool .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .subtool .toolbar > .button {
+        flex: 1 1 100%;
+      }
+
+      .subtool textarea {
+        min-height: 230px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .subtool *,
+      .subtool *::before,
+      .subtool *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="subtool">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>SRT / VTT Subtitle Converter</span>
+  </nav>
+
+  <header class="hero">
+    <h1>SRT to VTT Converter & Subtitle Time Shifter</h1>
+    <p>
+      Convert subtitles between SubRip (SRT) and WebVTT (VTT), fix captions that appear
+      too early or too late, inspect timing issues and download a processed subtitle file.
+    </p>
+    <div class="pills">
+      <span class="pill">SRT ↔ VTT</span>
+      <span class="pill">Adjust timing</span>
+      <span class="pill">Subtitle validation</span>
+      <span class="pill">No conversion server</span>
+    </div>
+  </header>
+
+  <section class="card" aria-labelledby="inputHeading">
+    <h2 id="inputHeading">1. Add your subtitle file</h2>
+
+    <div class="upload" id="dropZone">
+      <p><strong>Drop an SRT or VTT file here</strong></p>
+      <p>Or select a subtitle file from your device.</p>
+      <input type="file" id="fileInput" accept=".srt,.vtt,text/plain,text/vtt" hidden>
+      <button class="button primary" type="button" id="chooseFileBtn">Choose subtitle file</button>
+      <div class="muted" id="fileName" style="margin-top:9px">
+        You can also paste subtitle content into the text editor below.
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <button class="button small-button" type="button" id="loadSampleBtn">Load example</button>
+      <button class="button small-button" type="button" id="clearInputBtn">Clear input</button>
+    </div>
+
+    <div class="field" style="margin-top:15px">
+      <label for="inputText">Subtitle content</label>
+      <textarea id="inputText" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Paste your SRT or VTT content here…"></textarea>
+      <p class="muted" style="margin:6px 0 0">
+        Text is processed in this browser. The file input is read as text; UTF-8 is recommended.
+      </p>
+    </div>
+
+    <p class="status" id="inputStatus" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="card section" aria-labelledby="settingsHeading">
+    <h2 id="settingsHeading">2. Choose conversion settings</h2>
+
+    <div class="settings-grid">
+      <div class="field">
+        <label for="inputFormat">Input format</label>
+        <select id="inputFormat">
+          <option value="auto" selected>Auto-detect</option>
+          <option value="srt">SRT</option>
+          <option value="vtt">VTT / WebVTT</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="outputFormat">Output format</label>
+        <select id="outputFormat">
+          <option value="srt">SRT (.srt)</option>
+          <option value="vtt" selected>VTT / WebVTT (.vtt)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="shiftSeconds">Shift timing (seconds)</label>
+        <input type="number" id="shiftSeconds" min="-86400" max="86400" step="0.1" value="0">
+        <p class="muted" style="margin:5px 0 0">
+          Positive = later; negative = earlier. Decimals are supported.
+        </p>
+      </div>
+    </div>
+
+    <label class="check">
+      <input type="checkbox" id="sortCues">
+      <span>
+        <strong>Sort captions by start time</strong>
+        <small>Use this to reorder cues that are out of sequence. Leave unchecked to preserve the original cue order.</small>
+      </span>
+    </label>
+
+    <div class="notice" style="margin-top:15px">
+      <strong>Timing note:</strong> shifting can move captions before time zero. Negative results are
+      clamped to zero; any cue whose end time becomes equal to or earlier than its start time is
+      omitted. The result summary reports omitted cues.
+    </div>
+
+    <div class="toolbar">
+      <button class="button primary" type="button" id="processBtn">Convert and check subtitles</button>
+      <button class="button" type="button" id="sampleShiftBtn">Try a +2 second shift</button>
+    </div>
+
+    <p class="status" id="processStatus" role="status" aria-live="polite"></p>
+
+    <div id="resultsSummary" hidden>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-label">Valid subtitle cues</span>
+          <span class="stat-value" id="cueCount">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Overlapping cue pairs</span>
+          <span class="stat-value" id="overlapCount">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Cues omitted after shifting</span>
+          <span class="stat-value" id="droppedCount">0</span>
+        </div>
+      </div>
+
+      <ul class="messages" id="warningsList"></ul>
+    </div>
+  </section>
+
+  <section class="card section" aria-labelledby="outputHeading">
+    <h2 id="outputHeading">3. Preview and download</h2>
+    <div class="field">
+      <label for="outputText">Processed subtitle content</label>
+      <textarea id="outputText" readonly spellcheck="false" placeholder="Your converted subtitle file will appear here."></textarea>
+    </div>
+
+    <div class="toolbar">
+      <button class="button primary" type="button" id="downloadBtn" disabled>Download subtitle file</button>
+      <button class="button" type="button" id="copyBtn" disabled>Copy output</button>
+    </div>
+
+    <p class="status" id="outputStatus" role="status" aria-live="polite"></p>
+
+    <p class="muted">
+      Always test the downloaded subtitle with the video player or platform where you intend to use it.
+    </p>
+  </section>
+
+  <section class="card section article">
+    <h2>What does an SRT / VTT subtitle converter do?</h2>
+    <p>
+      SRT (SubRip) and VTT (WebVTT) are text-based formats that describe subtitle or caption
+      text and when it should appear. SRT commonly uses a comma before milliseconds; WebVTT uses
+      a period and begins with a <code>WEBVTT</code> header.
+    </p>
+
+    <h3>How to convert SRT to VTT</h3>
+    <ol>
+      <li>Choose an SRT file or paste its content.</li>
+      <li>Leave input format on Auto-detect or select SRT.</li>
+      <li>Choose VTT as the output format.</li>
+      <li>Keep the timing shift at zero unless you need to correct synchronization.</li>
+      <li>Process the file, review any warnings, and download the VTT file.</li>
+    </ol>
+
+    <h3>How to fix subtitles that are out of sync</h3>
+    <p>
+      If captions appear two seconds too early, enter <code>2</code> to move them later.
+      If captions appear two seconds too late, enter <code>-2</code> to move them earlier.
+      Small adjustments such as <code>0.5</code> or <code>-0.3</code> are supported.
+    </p>
+
+    <h3>What the validation warnings mean</h3>
+    <ul>
+      <li><strong>Malformed timing:</strong> the timestamp line does not match the supported format.</li>
+      <li><strong>Overlapping cues:</strong> two consecutive entries in the input timeline overlap.</li>
+      <li><strong>Out-of-order cues:</strong> a later entry starts before the previous entry.</li>
+      <li><strong>Omitted cues:</strong> shifting made a cue's end time equal to or earlier than its start time.</li>
+    </ul>
+
+    <h3>Important format limitations</h3>
+    <p>
+      SRT-to-VTT conversion is not a complete conversion of every advanced caption feature.
+      When converting VTT to SRT, cue identifiers, cue positioning settings, and VTT-specific
+      metadata cannot be represented in ordinary SRT, so they are not included. When converting
+      VTT to VTT, cue identifiers and inline cue settings are retained where present.
+    </p>
+    <p>
+      This tool checks common timestamp and sequence problems, but it does not guarantee
+      compliance with every player, broadcasting, accessibility or streaming specification.
+      It does not create subtitles from audio or translate caption text.
+    </p>
+
+    <h3>Does the tool upload my subtitle file?</h3>
+    <p>
+      The subtitle content is handled by browser-side JavaScript. The converter does not send
+      the subtitle text to this website's conversion server. Download the final file and test it
+      in your intended video player.
+    </p>
+  </section>
+
+  <section class="card section faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>How do I convert SRT to VTT online?</summary>
+      <p>
+        Load or paste your SRT content, select VTT as the output format, process it, and
+        download the resulting WebVTT subtitle file.
+      </p>
+    </details>
+
+    <details>
+      <summary>How do I convert VTT to SRT?</summary>
+      <p>
+        Select VTT as the input format and SRT as the output format. The converter changes
+        timestamps to SRT style and generates sequential SRT cue numbers.
+      </p>
+    </details>
+
+    <details>
+      <summary>How can I delay subtitles by two seconds?</summary>
+      <p>
+        Enter 2 in the timing-shift field. Positive values move captions later; negative values
+        move them earlier.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I shift subtitles earlier using a negative number?</summary>
+      <p>
+        Yes. For example, -1.5 shifts each cue 1.5 seconds earlier. Cues that no longer have a
+        valid duration after shifting are omitted and counted in the results.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does this tool generate subtitles from a video?</summary>
+      <p>
+        No. It converts and adjusts existing subtitle text files. It does not perform speech
+        recognition, audio transcription or automatic translation.
+      </p>
+    </details>
+
+    <details>
+      <summary>Will VTT styling and positioning be preserved in SRT?</summary>
+      <p>
+        Not completely. SRT has less structured support for cue settings than WebVTT.
+        VTT identifiers and positioning settings are not carried into SRT output.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I use this for a large subtitle file?</summary>
+      <p>
+        It can process ordinary text subtitle files in the browser, subject to your device's
+        memory and performance. Very large or unusually structured files may need separate
+        inspection.
+      </p>
+    </details>
+  </section>
+
+  <p class="muted section">
+    Discover more free utilities on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_INPUT_CHARS = 8_000_000;
+  const MAX_CUES = 200_000;
+
+  const $ = id => document.getElementById(id);
+
+  let processedText = "";
+  let processedFormat = "";
+  let processedFilenameBase = "subtitles";
+  let sourceFileName = "";
+
+  const SAMPLE_SRT =
+`1
+00:00:01,000 --> 00:00:03,000
+Welcome to this example.
+
+2
+00:00:03,500 --> 00:00:05,000
+These are sample subtitles.
+
+3
+00:00:06,000 --> 00:00:08,000
+Try shifting the timestamps by two seconds.`;
+
+  function setStatus(id, message, kind = "") {
+    const element = $(id);
+    element.textContent = message;
+    element.dataset.kind = kind;
+  }
+
+  function clearOutput() {
+    processedText = "";
+    processedFormat = "";
+    $("outputText").value = "";
+    $("downloadBtn").disabled = true;
+    $("copyBtn").disabled = true;
+    $("resultsSummary").hidden = true;
+  }
+
+  function normalizeText(text) {
+    return String(text || "")
+      .replace(/^\uFEFF/, "")
+      .replace(/\r\n?/g, "\n");
+  }
+
+  function detectFormat(text) {
+    return /^\s*WEBVTT(?:[ \t].*)?(?:\n|$)/i.test(text) ? "vtt" : "srt";
+  }
+
+  function parseTimestamp(timestamp) {
+    const value = String(timestamp).trim();
+    const pieces = value.split(/[.,]/);
+
+    if (pieces.length !== 2 || !/^\d{1,3}$/.test(pieces[1])) {
+      throw new Error(`Invalid timestamp: ${value}`);
+    }
+
+    const timeParts = pieces[0].split(":");
+
+    if (
+      (timeParts.length !== 2 && timeParts.length !== 3) ||
+      timeParts.some(part => !/^\d+$/.test(part))
+    ) {
+      throw new Error(`Invalid timestamp: ${value}`);
+    }
+
+    let hours = 0;
+    let minutes;
+    let seconds;
+
+    if (timeParts.length === 3) {
+      hours = Number(timeParts[0]);
+      minutes = Number(timeParts[1]);
+      seconds = Number(timeParts[2]);
+    } else {
+      minutes = Number(timeParts[0]);
+      seconds = Number(timeParts[1]);
+    }
+
+    if (
+      !Number.isSafeInteger(hours) ||
+      !Number.isSafeInteger(minutes) ||
+      !Number.isSafeInteger(seconds) ||
+      hours < 0 ||
+      minutes < 0 ||
+      seconds < 0 ||
+      minutes > 59 ||
+      seconds > 59
+    ) {
+      throw new Error(`Timestamp component out of range: ${value}`);
+    }
+
+    const milliseconds = Number(pieces[1].padEnd(3, "0"));
+
+    const total =
+      ((hours * 3600 + minutes * 60 + seconds) * 1000) + milliseconds;
+
+    if (!Number.isSafeInteger(total)) {
+      throw new Error(`Timestamp is too large: ${value}`);
+    }
+
+    return total;
+  }
+
+  function formatTimestamp(milliseconds, separator) {
+    const total = Math.max(0, Math.trunc(milliseconds));
+    const hours = Math.floor(total / 3_600_000);
+    const minutes = Math.floor((total % 3_600_000) / 60_000);
+    const seconds = Math.floor((total % 60_000) / 1_000);
+    const ms = total % 1_000;
+
+    return [
+      String(hours).padStart(2, "0"),
+      String(minutes).padStart(2, "0"),
+      String(seconds).padStart(2, "0")
+    ].join(":") + separator + String(ms).padStart(3, "0");
+  }
+
+  function parseSubtitles(input, requestedFormat) {
+    const text = normalizeText(input);
+
+    if (!text.trim()) {
+      throw new Error("Paste subtitle content or choose a subtitle file first.");
+    }
+
+    if (text.length > MAX_INPUT_CHARS) {
+      throw new Error("The input is too large. The current limit is 8 million characters.");
+    }
+
+    const format = requestedFormat === "auto"
+      ? detectFormat(text)
+      : requestedFormat;
+
+    const blocks = text.split(/\n[ \t]*\n+/);
+    const cues = [];
+    const errors = [];
+    let ignoredBlocks = 0;
+
+    const timeLinePattern =
+      /^((?:\d{2,}:)?\d{2}:\d{2}[.,]\d{1,3})[ \t]*-->[ \t]*((?:\d{2,}:)?\d{2}:\d{2}[.,]\d{1,3})(.*)$/;
+
+    for (let blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
+      const rawBlock = blocks[blockIndex].trim();
+
+      if (!rawBlock) continue;
+
+      const lines = rawBlock.split("\n");
+
+      if (/^WEBVTT(?:[ \t].*)?$/i.test(lines[0].trim())) {
+        ignoredBlocks++;
+        continue;
+      }
+
+      // VTT metadata blocks, not subtitle cues.
+      if (/^(NOTE|STYLE|REGION)(?:[ \t]|$)/i.test(lines[0].trim())) {
+        ignoredBlocks++;
+        continue;
+      }
+
+      let timeIndex = -1;
+      let match = null;
+
+      if (lines.length > 0) {
+        match = timeLinePattern.exec(lines[0].trim());
+
+        if (match) {
+          timeIndex = 0;
+        }
+      }
+
+      if (!match && lines.length > 1) {
+        match = timeLinePattern.exec(lines[1].trim());
+
+        if (match) {
+          timeIndex = 1;
+        }
+      }
+
+      if (!match) {
+        if (rawBlock.includes("-->")) {
+          errors.push(
+            `Block ${blockIndex + 1}: could not read the timestamp line.`
+          );
+        } else {
+          ignoredBlocks++;
+        }
+
+        continue;
+      }
+
+      let startMs;
+      let endMs;
+
+      try {
+        startMs = parseTimestamp(match[1]);
+        endMs = parseTimestamp(match[2]);
+      } catch (error) {
+        errors.push(`Block ${blockIndex + 1}: ${error.message}`);
+        continue;
+      }
+
+      if (endMs <= startMs) {
+        errors.push(
+          `Block ${blockIndex + 1}: end time must be later than start time.`
+        );
+        continue;
+      }
+
+      const identifier = timeIndex === 1 ? lines[0].trim() : "";
+      const bodyLines = lines.slice(timeIndex + 1);
+
+      // Keep the actual subtitle text intact apart from extra blank lines
+      // surrounding each cue block.
+      const body = bodyLines.join("\n").replace(/\n+$/, "");
+
+      cues.push({
+        startMs,
+        endMs,
+        text: body,
+        identifier,
+        settings: String(match[3] || "").trim(),
+        originalIndex: cues.length
+      });
+
+      if (cues.length > MAX_CUES) {
+        throw new Error(`This input exceeds the limit of ${MAX_CUES.toLocaleString()} subtitle cues.`);
+      }
+    }
+
+    if (errors.length) {
+      const summary = errors.slice(0, 8).join(" ");
+      const more = errors.length > 8
+        ? ` Plus ${errors.length - 8} additional error(s).`
+        : "";
+
+      throw new Error(
+        `Found ${errors.length} malformed or invalid cue block(s). ${summary}${more}`
+      );
+    }
+
+    if (!cues.length) {
+      throw new Error("No valid subtitle cues were found. Check the input format and timestamps.");
+    }
+
+    const warnings = [];
+    let overlaps = 0;
+    let outOfOrder = 0;
+
+    for (let i = 1; i < cues.length; i++) {
+      const previous = cues[i - 1];
+      const current = cues[i];
+
+      if (current.startMs < previous.startMs) {
+        outOfOrder++;
+      }
+
+      if (current.startMs < previous.endMs) {
+        overlaps++;
+      }
+    }
+
+    if (outOfOrder) {
+      warnings.push(
+        `${outOfOrder} cue(s) start earlier than the preceding cue. You can enable sorting by start time.`
+      );
+    }
+
+    if (overlaps) {
+      warnings.push(
+        `${overlaps} consecutive cue pair(s) overlap in the input order. Some overlaps may be intentional.`
+      );
+    }
+
+    if (ignoredBlocks) {
+      warnings.push(
+        `${ignoredBlocks} non-cue block(s) or unrecognized block(s) were skipped.`
+      );
+    }
+
+    return {
+      format,
+      cues,
+      warnings,
+      overlaps,
+      outOfOrder
+    };
+  }
+
+  function buildOutput(cues, outputFormat, inputFormat) {
+    const blocks = cues.map((cue, index) => {
+      const commaOrDot = outputFormat === "srt" ? "," : ".";
+
+      const timeLine =
+        `${formatTimestamp(cue.startMs, commaOrDot)} --> ` +
+        `${formatTimestamp(cue.endMs, commaOrDot)}`;
+
+      const settings = outputFormat === "vtt" && inputFormat === "vtt" && cue.settings
+        ? ` ${cue.settings}`
+        : "";
+
+      if (outputFormat === "srt") {
+        return `${index + 1}\n${timeLine}\n${cue.text}`;
+      }
+
+      // A VTT cue identifier is preserved only when the source is VTT.
+      // SRT's numeric counter is not a WebVTT cue identifier.
+      const identifier = inputFormat === "vtt" && cue.identifier
+        ? `${cue.identifier}\n`
+        : "";
+
+      return `${identifier}${timeLine}${settings}\n${cue.text}`;
+    });
+
+    return outputFormat === "vtt"
+      ? `WEBVTT\n\n${blocks.join("\n\n")}\n`
+      : `${blocks.join("\n\n")}\n`;
+  }
+
+  function safeFilenameBase(filename) {
+    return String(filename || "subtitles")
+      .replace(/\.(srt|vtt)$/i, "")
+      .replace(/[^A-Za-z0-9._-]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^[.-]+|[.-]+$/g, "")
+      .slice(0, 90) || "subtitles";
+  }
+
+  function renderWarnings(items) {
+    const list = $("warningsList");
+    list.replaceChildren();
+
+    if (!items.length) {
+      const item = document.createElement("li");
+      item.textContent = "No common sequence or timing warnings found.";
+      list.appendChild(item);
+      return;
+    }
+
+    for (const warning of items) {
+      const item = document.createElement("li");
+      item.textContent = warning;
+      list.appendChild(item);
+    }
+  }
+
+  function processSubtitles() {
+    clearOutput();
+    setStatus("processStatus", "Checking and converting subtitles…");
+
+    try {
+      const shiftInput = Number($("shiftSeconds").value);
+
+      if (
+        !Number.isFinite(shiftInput) ||
+        Math.abs(shiftInput) > 86400
+      ) {
+        throw new Error("The timing shift must be between -86400 and 86400 seconds.");
+      }
+
+      const parsed = parseSubtitles(
+        $("inputText").value,
+        $("inputFormat").value
+      );
+
+      const shiftMs = Math.round(shiftInput * 1000);
+      const outputFormat = $("outputFormat").value;
+      const warnings = [...parsed.warnings];
+
+      let cues = parsed.cues.map(cue => ({
+        ...cue,
+        startMs: Math.max(0, cue.startMs + shiftMs),
+        endMs: Math.max(0, cue.endMs + shiftMs)
+      }));
+
+      const beforeDropCount = cues.length;
+
+      cues = cues.filter(cue => cue.endMs > cue.startMs);
+      const droppedCount = beforeDropCount - cues.length;
+
+      if (droppedCount) {
+        warnings.push(
+          `${droppedCount} cue(s) were omitted because shifting left no valid positive duration.`
+        );
+      }
+
+      if ($("sortCues").checked) {
+        cues.sort((a, b) =>
+          a.startMs - b.startMs ||
+          a.endMs - b.endMs ||
+          a.originalIndex - b.originalIndex
+        );
+      }
+
+      if (!cues.length) {
+        throw new Error("No cues remain after applying the timing shift.");
+      }
+
+      const output = buildOutput(
+        cues,
+        outputFormat,
+        parsed.format
+      );
+
+      processedText = output;
+      processedFormat = outputFormat;
+      processedFilenameBase = safeFilenameBase(
+        sourceFileName || "subtitles"
+      );
+
+      $("outputText").value = output;
+      $("downloadBtn").disabled = false;
+      $("copyBtn").disabled = false;
+
+      $("cueCount").textContent = cues.length.toLocaleString();
+      $("overlapCount").textContent = parsed.overlaps.toLocaleString();
+      $("droppedCount").textContent = droppedCount.toLocaleString();
+      $("resultsSummary").hidden = false;
+
+      renderWarnings(warnings);
+
+      const shiftDescription = shiftMs === 0
+        ? "No timing shift applied."
+        : `Timing shift: ${shiftMs > 0 ? "+" : ""}${(shiftMs / 1000).toLocaleString()} second(s).`;
+
+      setStatus(
+        "processStatus",
+        `Converted ${cues.length.toLocaleString()} cue(s) from ${parsed.format.toUpperCase()} to ${outputFormat.toUpperCase()}. ${shiftDescription}`,
+        "success"
+      );
+
+      setStatus(
+        "outputStatus",
+        "Output is ready. Review the content and download the file.",
+        "success"
+      );
+    } catch (error) {
+      setStatus(
+        "processStatus",
+        error && error.message ? error.message : "Could not process the subtitle content.",
+        "error"
+      );
+
+      setStatus(
+        "outputStatus",
+        "No new output was generated. Correct the input or settings and try again.",
+        "error"
+      );
+    }
+  }
+
+  async function loadFile(file) {
+    if (!file) return;
+
+    if (file.size > MAX_INPUT_CHARS) {
+      setStatus(
+        "inputStatus",
+        "The selected file is too large for this tool's input limit.",
+        "error"
+      );
+      return;
+    }
+
+    try {
+      const text = await file.text();
+
+      if (text.length > MAX_INPUT_CHARS) {
+        throw new Error("The file exceeds the current character limit.");
+      }
+
+      $("inputText").value = normalizeText(text);
+      sourceFileName = file.name || "subtitles";
+
+      const extension = /\.vtt$/i.test(file.name) ? "vtt" :
+        /\.srt$/i.test(file.name) ? "srt" : "auto";
+
+      $("inputFormat").value = extension;
+
+      $("fileName").textContent =
+        `${sourceFileName} · ${(file.size / 1024).toFixed(1)} KB`;
+
+      clearOutput();
+      setStatus(
+        "inputStatus",
+        `Loaded ${sourceFileName}. Run the converter to check and process it.`,
+        "success"
+      );
+      setStatus("processStatus", "");
+    } catch (error) {
+      setStatus(
+        "inputStatus",
+        error && error.message ? error.message : "Could not read this file.",
+        "error"
+      );
+    }
+  }
+
+  function downloadOutput() {
+    if (!processedText || !processedFormat) {
+      setStatus("outputStatus", "Convert subtitles first.", "error");
+      return;
+    }
+
+    const extension = processedFormat === "vtt" ? "vtt" : "srt";
+    const filename = `${processedFilenameBase}-converted.${extension}`;
+    const blob = new Blob([processedText], {
+      type: "text/plain;charset=utf-8"
+    });
+
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+
+    setStatus("outputStatus", `Download started: ${filename}`, "success");
+  }
+
+  async function copyOutput() {
+    if (!processedText) return;
+
+    try {
+      await navigator.clipboard.writeText(processedText);
+      setStatus("outputStatus", "Subtitle content copied to clipboard.", "success");
+    } catch (error) {
+      $("outputText").focus();
+      $("outputText").select();
+
+      const copied = document.execCommand("copy");
+
+      setStatus(
+        "outputStatus",
+        copied
+          ? "Subtitle content copied to clipboard."
+          : "Automatic copying failed. The output is selected; copy it manually.",
+        copied ? "success" : "error"
+      );
+    }
+  }
+
+  $("chooseFileBtn").addEventListener("click", () => {
+    $("fileInput").click();
+  });
+
+  $("fileInput").addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) loadFile(file);
+    event.target.value = "";
+  });
+
+  $("loadSampleBtn").addEventListener("click", () => {
+    $("inputText").value = SAMPLE_SRT;
+    $("inputFormat").value = "srt";
+    $("outputFormat").value = "vtt";
+    $("shiftSeconds").value = "0";
+    $("sortCues").checked = false;
+
+    sourceFileName = "sample-subtitles.srt";
+    $("fileName").textContent = "Built-in SRT example loaded.";
+
+    clearOutput();
+    setStatus("inputStatus", "Example loaded. Click Convert and check subtitles.", "success");
+    setStatus("processStatus", "");
+  });
+
+  $("clearInputBtn").addEventListener("click", () => {
+    $("inputText").value = "";
+    $("fileName").textContent = "You can also paste subtitle content into the text editor below.";
+    sourceFileName = "";
+
+    clearOutput();
+    setStatus("inputStatus", "Input cleared.");
+    setStatus("processStatus", "");
+  });
+
+  $("sampleShiftBtn").addEventListener("click", () => {
+    if (!$("inputText").value.trim()) {
+      $("inputText").value = SAMPLE_SRT;
+      $("inputFormat").value = "srt";
+      sourceFileName = "sample-subtitles.srt";
+      $("fileName").textContent = "Built-in SRT example loaded.";
+    }
+
+    $("shiftSeconds").value = "2";
+    clearOutput();
+
+    setStatus(
+      "processStatus",
+      "A +2 second shift is selected. Click Convert and check subtitles."
+    );
+  });
+
+  $("processBtn").addEventListener("click", processSubtitles);
+  $("downloadBtn").addEventListener("click", downloadOutput);
+  $("copyBtn").addEventListener("click", copyOutput);
+
+  [
+    "inputText",
+    "inputFormat",
+    "outputFormat",
+    "shiftSeconds",
+    "sortCues"
+  ].forEach(id => {
+    $(id).addEventListener(id === "inputText" ? "input" : "change", () => {
+      clearOutput();
+      setStatus(
+        "processStatus",
+        "Settings or input changed. Convert again to regenerate the output."
+      );
+    });
+  });
+
+  const dropZone = $("dropZone");
+
+  ["dragenter", "dragover"].forEach(eventName => {
+    dropZone.addEventListener(eventName, event => {
+      event.preventDefault();
+      dropZone.classList.add("is-dragging");
+    });
+  });
+
+  ["dragleave", "drop"].forEach(eventName => {
+    dropZone.addEventListener(eventName, event => {
+      event.preventDefault();
+      dropZone.classList.remove("is-dragging");
+    });
+  });
+
+  dropZone.addEventListener("drop", event => {
+    const file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+
+    if (file) loadFile(file);
+  });
+})();
+</script>
+</body>
+</html>

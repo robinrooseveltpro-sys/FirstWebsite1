@@ -1,0 +1,2664 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Text Diff Checker Online - Compare Two Texts Free</title>
+  <meta name="description" content="Compare two texts online for free. Find added, removed, and changed lines or words, ignore whitespace and case differences, compare files, and download a diff report.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="https://converttotoolsonline.com/text-diff-checker.html">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Text Diff Checker Online - Compare Two Texts">
+  <meta property="og:description" content="Compare text, code, configuration files, and drafts. Highlight changes, ignore formatting differences, and export a comparison report.">
+  <meta property="og:url" content="https://converttotoolsonline.com/text-diff-checker.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Online Text Diff Checker">
+  <meta name="twitter:description" content="Find differences between two versions of text with line and character highlights, file upload, and downloadable reports.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Text Diff Checker",
+    "url": "https://converttotoolsonline.com/text-diff-checker.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based text comparison tool that highlights additions and deletions, supports side-by-side and unified views, and can ignore whitespace, letter-case, and blank-line differences.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Compare two text inputs",
+      "Upload text files",
+      "Side-by-side comparison",
+      "Unified comparison view",
+      "Line, word, and character-level highlighting",
+      "Ignore case differences",
+      "Ignore whitespace differences",
+      "Ignore blank lines",
+      "Hide unchanged lines",
+      "Copy and download comparison reports",
+      "Browser-based processing"
+    ]
+  }
+  </script>
+
+  <style>
+    .tdc-page {
+      margin: 0;
+      background: #f7f8fc;
+      color: #182237;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    .tdc-page *,
+    .tdc-page *::before,
+    .tdc-page *::after {
+      box-sizing: border-box;
+    }
+
+    .tdc-page a {
+      color: #2459c4;
+    }
+
+    .tdc-shell {
+      width: min(100% - 30px, 1150px);
+      margin-inline: auto;
+    }
+
+    .tdc-header {
+      border-bottom: 1px solid #e4e8f0;
+      background: #fff;
+    }
+
+    .tdc-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      min-height: 72px;
+      padding-block: 12px;
+    }
+
+    .tdc-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #182237 !important;
+      font-weight: 800;
+      letter-spacing: -.025em;
+      text-decoration: none;
+    }
+
+    .tdc-brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: #2459c4;
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 850;
+    }
+
+    .tdc-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      font-size: .9rem;
+    }
+
+    .tdc-nav a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .tdc-nav a:hover {
+      color: #2459c4;
+      text-decoration: underline;
+    }
+
+    .tdc-main {
+      padding-block: 36px 64px;
+    }
+
+    .tdc-hero {
+      max-width: 800px;
+      margin: 0 auto 25px;
+      text-align: center;
+    }
+
+    .tdc-eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #2459c4;
+      font-size: .81rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .tdc-hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.05rem);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+    }
+
+    .tdc-hero p {
+      max-width: 710px;
+      margin: 0 auto;
+      color: #59667c;
+      font-size: 1.03rem;
+    }
+
+    .tdc-privacy {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
+      color: #247448;
+      font-size: .87rem;
+      font-weight: 700;
+    }
+
+    .tdc-card {
+      padding: clamp(16px, 3vw, 27px);
+      border: 1px solid #e2e7f0;
+      border-radius: 19px;
+      background: #fff;
+      box-shadow: 0 12px 36px rgba(26, 41, 77, .055);
+    }
+
+    .tdc-heading {
+      margin-bottom: 17px;
+    }
+
+    .tdc-heading h2 {
+      margin: 0 0 5px;
+      font-size: 1.27rem;
+      letter-spacing: -.02em;
+    }
+
+    .tdc-muted {
+      color: #69758b;
+      font-size: .89rem;
+    }
+
+    .tdc-samples {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tdc-samples-label {
+      color: #536078;
+      font-size: .85rem;
+      font-weight: 750;
+    }
+
+    .tdc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 41px;
+      padding: 9px 14px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: #2459c4;
+      color: #fff !important;
+      font: inherit;
+      font-size: .9rem;
+      font-weight: 750;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none !important;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+
+    .tdc-btn:hover {
+      background: #1949a8;
+    }
+
+    .tdc-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .tdc-btn-secondary {
+      border-color: #d9e0eb;
+      background: #fff;
+      color: #34415b !important;
+    }
+
+    .tdc-btn-secondary:hover {
+      background: #f4f7fc;
+    }
+
+    .tdc-btn-small {
+      min-height: 33px;
+      padding: 6px 10px;
+      font-size: .81rem;
+    }
+
+    .tdc-page button:focus-visible,
+    .tdc-page input:focus-visible,
+    .tdc-page select:focus-visible,
+    .tdc-page textarea:focus-visible {
+      outline: 3px solid #91b4ff;
+      outline-offset: 3px;
+    }
+
+    .tdc-input-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+      align-items: stretch;
+    }
+
+    .tdc-input-panel {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #dde4ef;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .tdc-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 53px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e1e6ef;
+      background: #f8faff;
+    }
+
+    .tdc-panel-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .94rem;
+      font-weight: 800;
+    }
+
+    .tdc-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      border: 1px solid #dce3ef;
+      border-radius: 6px;
+      background: #fff;
+      color: #536078;
+      font-size: .72rem;
+      font-weight: 800;
+    }
+
+    .tdc-panel-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tdc-input {
+      display: block;
+      width: 100%;
+      min-height: 235px;
+      flex: 1 1 auto;
+      padding: 14px;
+      border: 0;
+      border-radius: 0;
+      resize: vertical;
+      background: #fff;
+      color: #24324a;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12.5px;
+      line-height: 1.75;
+      tab-size: 2;
+      white-space: pre;
+      overflow: auto;
+    }
+
+    .tdc-panel-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 12px;
+      border-top: 1px solid #e6eaf1;
+      color: #738097;
+      font-size: .77rem;
+    }
+
+    .tdc-options {
+      margin-top: 19px;
+      padding: 16px;
+      border: 1px solid #e0e6ef;
+      border-radius: 13px;
+      background: #fafbfe;
+    }
+
+    .tdc-options h3 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .tdc-options-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .tdc-field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .tdc-field label {
+      color: #35435c;
+      font-size: .86rem;
+      font-weight: 750;
+    }
+
+    .tdc-field select {
+      display: block;
+      width: 100%;
+      min-height: 41px;
+      padding: 8px 10px;
+      border: 1px solid #d5deeb;
+      border-radius: 9px;
+      background: #fff;
+      color: #1d2b43;
+      font: inherit;
+      font-size: .88rem;
+    }
+
+    .tdc-toggles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 15px;
+    }
+
+    .tdc-toggle {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: #526078;
+      font-size: .85rem;
+    }
+
+    .tdc-toggle input {
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: #2459c4;
+    }
+
+    .tdc-option-help {
+      margin-top: 10px;
+      color: #788398;
+      font-size: .79rem;
+    }
+
+    .tdc-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 17px;
+    }
+
+    .tdc-status {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border: 1px solid #dce3ef;
+      border-radius: 10px;
+      background: #f7f9ff;
+      color: #35435c;
+      font-size: .89rem;
+      overflow-wrap: anywhere;
+    }
+
+    .tdc-status--success {
+      border-color: #c7e7d1;
+      background: #f0fbf4;
+      color: #21663d;
+    }
+
+    .tdc-status--warning {
+      border-color: #efdfb8;
+      background: #fffbef;
+      color: #795e1b;
+    }
+
+    .tdc-status--error {
+      border-color: #edc7c7;
+      background: #fff4f4;
+      color: #982c2c;
+    }
+
+    .tdc-result-section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e9f1;
+    }
+
+    .tdc-result-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .tdc-result-heading h3 {
+      margin: 0 0 4px;
+      font-size: 1.13rem;
+    }
+
+    .tdc-view-switch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tdc-view-btn {
+      min-height: 37px;
+      padding: 7px 12px;
+      border: 1px solid #dbe2ec;
+      border-radius: 8px;
+      background: #fff;
+      color: #4b5a72;
+      font: inherit;
+      font-size: .84rem;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .tdc-view-btn[aria-pressed="true"] {
+      border-color: #b8caf2;
+      background: #edf3ff;
+      color: #2459c4;
+    }
+
+    .tdc-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 13px;
+    }
+
+    .tdc-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid #e0e6ef;
+      border-radius: 8px;
+      background: #fafbfe;
+      color: #536078;
+      font-size: .81rem;
+      font-weight: 750;
+    }
+
+    .tdc-stat-added {
+      border-color: #c8e7d1;
+      background: #f0fbf4;
+      color: #21663d;
+    }
+
+    .tdc-stat-removed {
+      border-color: #efcdcd;
+      background: #fff4f4;
+      color: #9a3030;
+    }
+
+    .tdc-result {
+      min-height: 140px;
+      overflow: hidden;
+      border: 1px solid #dfe5ef;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .tdc-result-empty {
+      display: grid;
+      place-items: center;
+      min-height: 170px;
+      padding: 25px;
+      color: #728097;
+      text-align: center;
+    }
+
+    .tdc-diff-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      border-bottom: 1px solid #e0e6ef;
+      background: #f8faff;
+      color: #46536b;
+      font-size: .83rem;
+      font-weight: 800;
+    }
+
+    .tdc-diff-head span {
+      padding: 10px 12px;
+    }
+
+    .tdc-diff-head span + span {
+      border-left: 1px solid #e0e6ef;
+    }
+
+    .tdc-diff-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      border-bottom: 1px solid #eff1f6;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .tdc-diff-row:last-child {
+      border-bottom: 0;
+    }
+
+    .tdc-diff-cell {
+      display: flex;
+      min-width: 0;
+      align-items: stretch;
+      border-left: 3px solid transparent;
+    }
+
+    .tdc-diff-cell + .tdc-diff-cell {
+      border-left-width: 3px;
+      border-left-style: solid;
+      border-left-color: #e5e9f0;
+    }
+
+    .tdc-line-number {
+      flex: 0 0 43px;
+      width: 43px;
+      padding: 5px 6px;
+      color: #8791a4;
+      background: #fafbfe;
+      text-align: right;
+      user-select: none;
+      border-right: 1px solid #edf0f5;
+    }
+
+    .tdc-line-text {
+      min-width: 0;
+      flex: 1 1 auto;
+      padding: 5px 9px;
+      color: #29374f;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .tdc-line-added {
+      border-left-color: #2e9b61 !important;
+      background: #effaf3;
+    }
+
+    .tdc-line-added .tdc-line-number {
+      background: #e4f6ea;
+      color: #247448;
+    }
+
+    .tdc-line-removed {
+      border-left-color: #d94b4b !important;
+      background: #fff2f2;
+    }
+
+    .tdc-line-removed .tdc-line-number {
+      background: #fde6e6;
+      color: #a53737;
+    }
+
+    .tdc-line-changed {
+      border-left-color: #d79a2d !important;
+      background: #fff9eb;
+    }
+
+    .tdc-line-changed .tdc-line-number {
+      background: #fff0d0;
+      color: #8b6418;
+    }
+
+    .tdc-word-removed {
+      border-radius: 2px;
+      background: #f5b9b9;
+      color: #661b1b;
+    }
+
+    .tdc-word-added {
+      border-radius: 2px;
+      background: #bce9ca;
+      color: #145b30;
+    }
+
+    .tdc-hidden-row {
+      padding: 8px 12px;
+      border-bottom: 1px solid #e5e9f1;
+      background: #f8faff;
+      color: #778398;
+      font-family: system-ui, sans-serif;
+      font-size: .79rem;
+      text-align: center;
+    }
+
+    .tdc-unified-row {
+      display: flex;
+      min-width: 0;
+      border-bottom: 1px solid #eff1f6;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .tdc-unified-row:last-child {
+      border-bottom: 0;
+    }
+
+    .tdc-unified-prefix {
+      flex: 0 0 26px;
+      width: 26px;
+      padding: 5px 6px;
+      text-align: center;
+      font-weight: 800;
+      color: #8993a5;
+      user-select: none;
+    }
+
+    .tdc-unified-text {
+      min-width: 0;
+      flex: 1 1 auto;
+      padding: 5px 9px;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .tdc-unified-row.is-added {
+      background: #effaf3;
+      color: #21663d;
+    }
+
+    .tdc-unified-row.is-added .tdc-unified-prefix {
+      background: #e4f6ea;
+      color: #247448;
+    }
+
+    .tdc-unified-row.is-removed {
+      background: #fff2f2;
+      color: #8e2828;
+    }
+
+    .tdc-unified-row.is-removed .tdc-unified-prefix {
+      background: #fde6e6;
+      color: #a53737;
+    }
+
+    .tdc-content {
+      width: min(100%, 850px);
+      margin: 44px auto 0;
+    }
+
+    .tdc-content section {
+      margin-top: 32px;
+    }
+
+    .tdc-content h2 {
+      margin: 0 0 12px;
+      color: #182237;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+    }
+
+    .tdc-content h3 {
+      margin: 21px 0 7px;
+      font-size: 1.08rem;
+    }
+
+    .tdc-content p,
+    .tdc-content li {
+      color: #536078;
+    }
+
+    .tdc-content p {
+      margin: 0 0 12px;
+    }
+
+    .tdc-content li {
+      margin-bottom: 7px;
+    }
+
+    .tdc-content ol,
+    .tdc-content ul {
+      padding-left: 24px;
+    }
+
+    .tdc-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .tdc-step {
+      padding: 16px;
+      border: 1px solid #e2e7f0;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .tdc-step-number {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin-bottom: 9px;
+      border-radius: 9px;
+      background: #edf3ff;
+      color: #2459c4;
+      font-weight: 850;
+    }
+
+    .tdc-step strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .tdc-step p {
+      margin: 0;
+      font-size: .9rem;
+    }
+
+    .tdc-code-block {
+      overflow-x: auto;
+      padding: 14px;
+      border: 1px solid #e0e6f0;
+      border-radius: 12px;
+      background: #fff;
+      color: #2b3a54;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .84rem;
+      line-height: 1.7;
+      white-space: pre;
+    }
+
+    .tdc-related {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .tdc-related a {
+      padding: 8px 12px;
+      border: 1px solid #dce2ed;
+      border-radius: 999px;
+      background: #fff;
+      text-decoration: none;
+      font-size: .9rem;
+    }
+
+    .tdc-related a:hover {
+      border-color: #aac0f3;
+      background: #f4f7ff;
+    }
+
+    .tdc-faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .tdc-faq-list details {
+      padding: 15px 17px;
+      border: 1px solid #e1e6ef;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .tdc-faq-list summary {
+      color: #26334b;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .tdc-faq-list details p {
+      margin: 10px 0 0;
+    }
+
+    .tdc-footer {
+      padding-block: 24px;
+      border-top: 1px solid #e4e8f0;
+      background: #fff;
+      color: #69758a;
+      font-size: .87rem;
+    }
+
+    .tdc-footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .tdc-footer a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .tdc-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .tdc-sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 850px) {
+      .tdc-options-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .tdc-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .tdc-shell {
+        width: min(100% - 22px, 1150px);
+      }
+
+      .tdc-main {
+        padding-top: 25px;
+      }
+
+      .tdc-header-inner {
+        align-items: flex-start;
+      }
+
+      .tdc-nav {
+        gap: 12px;
+        font-size: .83rem;
+      }
+
+      .tdc-input-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tdc-input {
+        min-height: 200px;
+      }
+
+      .tdc-options-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tdc-actions .tdc-btn {
+        flex: 1 1 100%;
+      }
+
+      .tdc-diff-head,
+      .tdc-diff-row {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+
+      .tdc-line-number {
+        flex-basis: 32px;
+        width: 32px;
+        padding-inline: 3px;
+        font-size: 10px;
+      }
+
+      .tdc-line-text {
+        padding-inline: 5px;
+        font-size: 11px;
+      }
+
+      .tdc-unified-text {
+        font-size: 11px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tdc-page *,
+      .tdc-page *::before,
+      .tdc-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="tdc-page">
+  <header class="tdc-header">
+    <div class="tdc-shell tdc-header-inner">
+      <a class="tdc-brand" href="/index.html" aria-label="ConvertToToolsOnline home">
+        <span class="tdc-brand-mark" aria-hidden="true">CT</span>
+        <span>ConvertToToolsOnline</span>
+      </a>
+
+      <nav class="tdc-nav" aria-label="Main navigation">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#all-tools">All tools</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="tdc-shell tdc-main">
+    <section class="tdc-hero" aria-labelledby="page-title">
+      <div class="tdc-eyebrow">Free developer and writing tool</div>
+      <h1 id="page-title">Text Diff Checker</h1>
+      <p>
+        Compare two versions of text online and find exactly what changed.
+        Highlight added and removed lines, inspect word or character changes,
+        ignore formatting differences, and download a comparison report.
+      </p>
+      <div class="tdc-privacy">
+        <span aria-hidden="true">●</span>
+        Comparison runs in your browser — your text is not uploaded to our server
+      </div>
+    </section>
+
+    <section class="tdc-card" aria-labelledby="tool-title">
+      <div class="tdc-heading">
+        <h2 id="tool-title">Compare two texts</h2>
+        <p class="tdc-muted">
+          Paste the original text and the revised version, or load files to compare them.
+        </p>
+      </div>
+
+      <div class="tdc-samples">
+        <span class="tdc-samples-label">Try an example:</span>
+        <button id="sampleTextBtn" class="tdc-btn tdc-btn-secondary tdc-btn-small"
+          type="button">Text editing</button>
+        <button id="sampleCodeBtn" class="tdc-btn tdc-btn-secondary tdc-btn-small"
+          type="button">Code changes</button>
+        <button id="sampleConfigBtn" class="tdc-btn tdc-btn-secondary tdc-btn-small"
+          type="button">Configuration</button>
+      </div>
+
+      <input id="originalFile" type="file"
+        accept=".txt,.md,.markdown,.json,.yaml,.yml,.xml,.html,.htm,.js,.css,.csv,.tsv,.log,.sql,.py,.php,.java,.ts,.jsx,.tsx,.sh,.env"
+        hidden aria-label="Choose original text file">
+
+      <input id="revisedFile" type="file"
+        accept=".txt,.md,.markdown,.json,.yaml,.yml,.xml,.html,.htm,.js,.css,.csv,.tsv,.log,.sql,.py,.php,.java,.ts,.jsx,.tsx,.sh,.env"
+        hidden aria-label="Choose revised text file">
+
+      <div class="tdc-input-grid">
+        <section class="tdc-input-panel" aria-labelledby="original-title">
+          <div class="tdc-panel-head">
+            <div class="tdc-panel-title">
+              <span id="original-title">Original text</span>
+              <span class="tdc-pill">OLD</span>
+            </div>
+            <div class="tdc-panel-tools">
+              <button id="uploadOriginalBtn"
+                class="tdc-btn tdc-btn-secondary tdc-btn-small"
+                type="button">Upload</button>
+              <button id="clearOriginalBtn"
+                class="tdc-btn tdc-btn-secondary tdc-btn-small"
+                type="button">Clear</button>
+            </div>
+          </div>
+
+          <label class="tdc-sr-only" for="originalText">Original text to compare</label>
+          <textarea id="originalText" class="tdc-input"
+            spellcheck="false" autocapitalize="off" autocomplete="off"
+            autocorrect="off" placeholder="Paste the original text here..."
+            aria-describedby="originalHint"></textarea>
+
+          <div class="tdc-panel-meta">
+            <span id="originalHint">Maximum input: 500 KB</span>
+            <span id="originalStats">0 characters</span>
+          </div>
+        </section>
+
+        <section class="tdc-input-panel" aria-labelledby="revised-title">
+          <div class="tdc-panel-head">
+            <div class="tdc-panel-title">
+              <span id="revised-title">Revised text</span>
+              <span class="tdc-pill">NEW</span>
+            </div>
+            <div class="tdc-panel-tools">
+              <button id="uploadRevisedBtn"
+                class="tdc-btn tdc-btn-secondary tdc-btn-small"
+                type="button">Upload</button>
+              <button id="clearRevisedBtn"
+                class="tdc-btn tdc-btn-secondary tdc-btn-small"
+                type="button">Clear</button>
+            </div>
+          </div>
+
+          <label class="tdc-sr-only" for="revisedText">Revised text to compare</label>
+          <textarea id="revisedText" class="tdc-input"
+            spellcheck="false" autocapitalize="off" autocomplete="off"
+            autocorrect="off" placeholder="Paste the revised text here..."
+            aria-describedby="revisedHint"></textarea>
+
+          <div class="tdc-panel-meta">
+            <span id="revisedHint">Maximum input: 500 KB</span>
+            <span id="revisedStats">0 characters</span>
+          </div>
+        </section>
+      </div>
+
+      <section class="tdc-options" aria-labelledby="options-title">
+        <h3 id="options-title">Comparison options</h3>
+
+        <div class="tdc-options-grid">
+          <div class="tdc-field">
+            <label for="precision">Highlight precision</label>
+            <select id="precision">
+              <option value="line" selected>Line differences</option>
+              <option value="word">Word-level changes</option>
+              <option value="character">Character-level changes</option>
+            </select>
+          </div>
+
+          <div class="tdc-field">
+            <label for="contextLines">Unchanged context lines</label>
+            <select id="contextLines">
+              <option value="0">0 lines</option>
+              <option value="1" selected>1 line</option>
+              <option value="3">3 lines</option>
+              <option value="5">5 lines</option>
+            </select>
+          </div>
+
+          <div class="tdc-field">
+            <label for="maxComplexity">Comparison size</label>
+            <select id="maxComplexity">
+              <option value="2500000" selected>Standard — recommended</option>
+              <option value="1000000">Lower memory use</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="tdc-toggles">
+          <label class="tdc-toggle">
+            <input id="ignoreWhitespace" type="checkbox">
+            <span>Ignore whitespace differences</span>
+          </label>
+
+          <label class="tdc-toggle">
+            <input id="ignoreCase" type="checkbox">
+            <span>Ignore uppercase and lowercase</span>
+          </label>
+
+          <label class="tdc-toggle">
+            <input id="ignoreBlankLines" type="checkbox">
+            <span>Ignore blank lines</span>
+          </label>
+
+          <label class="tdc-toggle">
+            <input id="hideUnchanged" type="checkbox" checked>
+            <span>Hide unchanged lines</span>
+          </label>
+
+          <label class="tdc-toggle">
+            <input id="autoCompare" type="checkbox" checked>
+            <span>Compare automatically as I type</span>
+          </label>
+        </div>
+
+        <p class="tdc-option-help">
+          Ignored differences are excluded from the comparison. Review your
+          options carefully if spaces or capitalization matter in the data
+          you are checking.
+        </p>
+      </section>
+
+      <div class="tdc-actions">
+        <button id="compareBtn" class="tdc-btn" type="button">
+          Compare texts
+        </button>
+        <button id="swapBtn" class="tdc-btn tdc-btn-secondary" type="button">
+          Swap original and revised
+        </button>
+        <button id="copyReportBtn" class="tdc-btn tdc-btn-secondary"
+          type="button" disabled>Copy report</button>
+        <button id="downloadReportBtn" class="tdc-btn tdc-btn-secondary"
+          type="button" disabled>Download report</button>
+        <button id="resetBtn" class="tdc-btn tdc-btn-secondary"
+          type="button">Reset example</button>
+      </div>
+
+      <div id="status" class="tdc-status" role="status"
+        aria-live="polite" hidden></div>
+
+      <section class="tdc-result-section" aria-labelledby="result-title">
+        <div class="tdc-result-heading">
+          <div>
+            <h3 id="result-title">Comparison results</h3>
+            <p class="tdc-muted">
+              Additions are green, removals are red, and changed lines can show word or character highlights.
+            </p>
+          </div>
+
+          <div class="tdc-view-switch" role="group" aria-label="Comparison layout">
+            <button id="sideBySideBtn" class="tdc-view-btn"
+              type="button" aria-pressed="true">Side by side</button>
+            <button id="unifiedBtn" class="tdc-view-btn"
+              type="button" aria-pressed="false">Unified view</button>
+          </div>
+        </div>
+
+        <div id="summary" class="tdc-summary" hidden></div>
+
+        <div id="result" class="tdc-result" aria-live="polite">
+          <div class="tdc-result-empty">
+            Enter two versions of text and select Compare texts.
+          </div>
+        </div>
+
+        <p class="tdc-option-help">
+          The exported result is a readable comparison report, not a
+          standards-compliant Git patch. For very large or highly repetitive
+          files, the reported alignment may differ from other diff engines.
+        </p>
+      </section>
+    </section>
+
+    <div class="tdc-content">
+      <section aria-labelledby="how-title">
+        <h2 id="how-title">How to compare two texts online</h2>
+        <p>
+          A text diff checker compares two versions of text and highlights
+          what has been added, removed, or changed. It is useful for reviewing
+          documents, checking source code, comparing configuration files,
+          and verifying edits before publishing or deploying them.
+        </p>
+
+        <div class="tdc-steps">
+          <div class="tdc-step">
+            <div class="tdc-step-number">1</div>
+            <strong>Enter both versions</strong>
+            <p>Paste the original and revised text, or upload a text file to each panel.</p>
+          </div>
+          <div class="tdc-step">
+            <div class="tdc-step-number">2</div>
+            <strong>Compare the differences</strong>
+            <p>Choose your comparison options and inspect highlighted additions and deletions.</p>
+          </div>
+          <div class="tdc-step">
+            <div class="tdc-step-number">3</div>
+            <strong>Export your report</strong>
+            <p>Use side-by-side or unified view, then copy or download the comparison report.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="understanding-title">
+        <h2 id="understanding-title">How to read a text comparison</h2>
+
+        <h3>Added lines</h3>
+        <p>
+          Green highlighting identifies lines present in the revised text
+          that do not match an equivalent line in the original under your
+          chosen comparison settings.
+        </p>
+
+        <h3>Removed lines</h3>
+        <p>
+          Red highlighting identifies lines in the original that no longer
+          have a matching line in the revised version.
+        </p>
+
+        <h3>Word and character highlights</h3>
+        <p>
+          In word-level and character-level modes, paired changed lines can
+          show smaller highlighted sections inside a line. This makes it
+          easier to find a renamed variable, changed number, edited sentence,
+          or altered configuration value.
+        </p>
+      </section>
+
+      <section aria-labelledby="examples-title">
+        <h2 id="examples-title">Example: compare two text versions</h2>
+
+        <h3>Original text</h3>
+        <pre class="tdc-code-block">Project: Atlas
+Environment: staging
+Retries: 3
+Logging: info</pre>
+
+        <h3>Revised text</h3>
+        <pre class="tdc-code-block">Project: Atlas
+Environment: production
+Retries: 5
+Logging: info
+Metrics: enabled</pre>
+
+        <p>
+          A comparison shows that the environment changed from staging to
+          production, the retry count changed from 3 to 5, and a metrics
+          setting was added. This can help you review configuration changes
+          before applying them.
+        </p>
+      </section>
+
+      <section aria-labelledby="ignore-title">
+        <h2 id="ignore-title">When should you ignore whitespace or case?</h2>
+
+        <h3>Ignore whitespace differences</h3>
+        <p>
+          This option collapses whitespace runs for matching purposes.
+          It can reduce noise caused by spacing or indentation changes,
+          particularly in prose and some configuration comparisons. It can
+          also hide meaningful changes in languages where spaces affect syntax,
+          so use it only when appropriate.
+        </p>
+
+        <h3>Ignore case differences</h3>
+        <p>
+          Case-insensitive comparison treats uppercase and lowercase versions
+          of a line as equivalent. This helps when reviewing text where letter
+          case is not important, but can conceal changes to case-sensitive code,
+          filenames, identifiers, or credentials.
+        </p>
+
+        <h3>Ignore blank lines</h3>
+        <p>
+          This removes blank lines from the comparison sequence. Use it to
+          focus on content rather than vertical spacing. The display still
+          uses original line numbers, but omitted blank lines will not be
+          highlighted as differences.
+        </p>
+      </section>
+
+      <section aria-labelledby="use-cases-title">
+        <h2 id="use-cases-title">What can you compare with a text diff checker?</h2>
+        <ul>
+          <li>
+            <strong>Documents and drafts:</strong> review edits to articles,
+            emails, policies, and written content.
+          </li>
+          <li>
+            <strong>Source code:</strong> compare small code snippets or file
+            versions when reviewing a change.
+          </li>
+          <li>
+            <strong>Configuration files:</strong> detect changes to settings,
+            environment values, and deployment configuration.
+          </li>
+          <li>
+            <strong>Data and logs:</strong> inspect differences in text exports,
+            CSV content, application logs, and plain-text reports.
+          </li>
+          <li>
+            <strong>Structured text:</strong> compare JSON, YAML, XML, Markdown,
+            and other text-based formats without needing to parse their data
+            structures first.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Are my files uploaded to a server?</h2>
+        <p>
+          Text comparison is performed in your browser. The files you select
+          are read locally, and their contents are not uploaded to our server
+          by this tool. The page does not save a comparison history to a
+          remote account.
+        </p>
+        <p>
+          The tool is intended for plain-text files, not binary documents
+          such as PDFs, Word files, or images. Do not treat a browser tool
+          as a complete security boundary: extensions or other software
+          operating on your device may have separate access to its content.
+        </p>
+      </section>
+
+      <section aria-labelledby="limits-title">
+        <h2 id="limits-title">Important limitations</h2>
+        <ul>
+          <li>
+            The tool compares text sequences, not the semantic meaning of
+            programming code or a document.
+          </li>
+          <li>
+            Similar or repeated lines can have more than one plausible
+            alignment. Other comparison applications may display a different
+            but still valid arrangement of the same changes.
+          </li>
+          <li>
+            The tool limits input size and comparison complexity to protect
+            browser responsiveness. Large files may need to be reduced or
+            compared in sections.
+          </li>
+          <li>
+            A successful text comparison does not guarantee that code runs,
+            a configuration is valid, or a document is legally correct.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="related-title">
+        <h2 id="related-title">Explore more free tools</h2>
+        <p>Continue working with text and structured data.</p>
+        <div class="tdc-related">
+          <a href="/html-entity-encoder-decoder.html">HTML Entity Encoder / Decoder</a>
+          <a href="/markdown-to-html-converter.html">Markdown to HTML Converter</a>
+          <a href="/json-formatter.html">JSON Formatter</a>
+          <a href="/yaml-to-json-converter.html">YAML to JSON Converter</a>
+          <a href="/index.html#all-tools">Browse all tools</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="faq-title">
+        <h2 id="faq-title">Frequently asked questions</h2>
+
+        <div class="tdc-faq-list">
+          <details>
+            <summary>What is a text diff checker?</summary>
+            <p>
+              A text diff checker compares two text versions and shows
+              additions and removals. It is commonly used for document
+              editing, code review, configuration checks, and content updates.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is this text comparison tool free?</summary>
+            <p>
+              Yes. The comparison, highlighting, copy, and download features
+              on this page are available without an account or a tool usage fee.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I compare text files instead of pasting text?</summary>
+            <p>
+              Yes. Use the Upload buttons to load one text file into the
+              original panel and another into the revised panel. Supported
+              formats include common plain-text and source-code extensions.
+            </p>
+          </details>
+
+          <details>
+            <summary>What is the difference between side-by-side and unified view?</summary>
+            <p>
+              Side-by-side view places the original and revised versions next
+              to each other. Unified view combines changed lines into one
+              column, which can be more compact on smaller screens.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I compare code with this tool?</summary>
+            <p>
+              Yes. Paste code or load source-code text files. The tool compares
+              their text and does not execute the code or guarantee that the
+              resulting version compiles.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I ignore spaces and capitalization?</summary>
+            <p>
+              Yes. Enable the whitespace or case options before comparing.
+              These options affect matching, so do not use them if whitespace
+              or letter case is significant to your code or data.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does this tool upload my text?</summary>
+            <p>
+              No. The comparison runs in your browser and the selected text
+              file contents are processed locally by this tool.
+            </p>
+          </details>
+
+          <details>
+            <summary>Why are unchanged lines hidden?</summary>
+            <p>
+              Hide unchanged lines is enabled by default so the changes are
+              easier to find. Turn it off to display all matching lines,
+              or select a context setting to show surrounding lines.
+            </p>
+          </details>
+
+          <details>
+            <summary>Why does another diff tool show different highlights?</summary>
+            <p>
+              Repeated lines can be aligned in multiple valid ways, and
+              different comparison algorithms can choose different alignments.
+              Ignore settings and the selected level of comparison can also
+              affect the visual result.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I download a Git patch from this tool?</summary>
+            <p>
+              This version exports a readable text comparison report, not
+              a standards-compliant unified Git patch. Use a Git diff tool
+              if you need a patch that can be applied automatically.
+            </p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="tdc-footer">
+    <div class="tdc-shell tdc-footer-inner">
+      <span>© <span id="footerYear">2026</span> ConvertToToolsOnline</span>
+      <span>
+        <a href="/about.html">About</a>
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        &nbsp;·&nbsp;
+        <a href="/terms.html">Terms</a>
+        &nbsp;·&nbsp;
+        <a href="/contact.html">Contact</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const MAX_FILE_BYTES = 500 * 1024;
+      const MAX_LINES = 10000;
+      const DEFAULT_MAX_CELLS = 2500000;
+      const MAX_INLINE_DIFF_CELLS = 200000;
+
+      const $ = function (id) {
+        return document.getElementById(id);
+      };
+
+      const originalText = $("originalText");
+      const revisedText = $("revisedText");
+      const originalFile = $("originalFile");
+      const revisedFile = $("revisedFile");
+      const result = $("result");
+      const summary = $("summary");
+
+      let latestOperations = [];
+      let latestRows = [];
+      let latestStats = null;
+      let currentView = "side";
+      let compareTimer = null;
+      let reportIsCurrent = false;
+
+      $("footerYear").textContent = String(new Date().getFullYear());
+
+      const samples = {
+        text: {
+          original: [
+            "Project Atlas",
+            "",
+            "The tool helps users compare documents.",
+            "Results can be copied to the clipboard.",
+            "Files are processed in the browser."
+          ].join("\n"),
+          revised: [
+            "Project Atlas",
+            "",
+            "The tool helps people compare documents and code.",
+            "Results can be copied or downloaded.",
+            "Files are processed in your browser.",
+            "A comparison report can be saved."
+          ].join("\n")
+        },
+
+        code: {
+          original: [
+            "function calculateTotal(items) {",
+            "  let total = 0;",
+            "  for (const item of items) {",
+            "    total += item.price;",
+            "  }",
+            "  return total;",
+            "}"
+          ].join("\n"),
+          revised: [
+            "function calculateTotal(items, taxRate = 0) {",
+            "  let total = 0;",
+            "  for (const item of items) {",
+            "    total += item.price;",
+            "  }",
+            "  return total * (1 + taxRate);",
+            "}"
+          ].join("\n")
+        },
+
+        config: {
+          original: [
+            "app:",
+            "  environment: staging",
+            "  retries: 3",
+            "  logging: info",
+            "  metrics: false"
+          ].join("\n"),
+          revised: [
+            "app:",
+            "  environment: production",
+            "  retries: 5",
+            "  logging: info",
+            "  metrics: true",
+            "  timeout: 30"
+          ].join("\n")
+        }
+      };
+
+      function setStatus(message, type) {
+        const element = $("status");
+        element.textContent = message;
+        element.className = "tdc-status";
+
+        if (type) {
+          element.classList.add("tdc-status--" + type);
+        }
+
+        element.hidden = false;
+      }
+
+      function clearStatus() {
+        const element = $("status");
+        element.textContent = "";
+        element.className = "tdc-status";
+        element.hidden = true;
+      }
+
+      function bytesOf(text) {
+        if (window.TextEncoder) {
+          return new TextEncoder().encode(text).length;
+        }
+
+        return new Blob([text]).size;
+      }
+
+      function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) {
+          return (bytes / 1024).toFixed(1) + " KB";
+        }
+
+        return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+      }
+
+      function updateInputStats() {
+        $("originalStats").textContent =
+          originalText.value.length.toLocaleString() + " characters · " +
+          formatBytes(bytesOf(originalText.value));
+
+        $("revisedStats").textContent =
+          revisedText.value.length.toLocaleString() + " characters · " +
+          formatBytes(bytesOf(revisedText.value));
+      }
+
+      function disableReport() {
+        reportIsCurrent = false;
+        $("copyReportBtn").disabled = true;
+        $("downloadReportBtn").disabled = true;
+      }
+
+      function invalidateComparison() {
+        disableReport();
+
+        if (autoCompare.checked) {
+          window.clearTimeout(compareTimer);
+          compareTimer = window.setTimeout(function () {
+            compare();
+          }, 250);
+        } else {
+          setStatus(
+            "Your text or options changed. Select Compare texts to refresh the results.",
+            "warning"
+          );
+        }
+      }
+
+      const autoCompare = $("autoCompare");
+
+      function getOptions() {
+        return {
+          ignoreWhitespace: $("ignoreWhitespace").checked,
+          ignoreCase: $("ignoreCase").checked,
+          ignoreBlankLines: $("ignoreBlankLines").checked,
+          hideUnchanged: $("hideUnchanged").checked,
+          context: Number($("contextLines").value),
+          precision: $("precision").value,
+          maxCells: Number($("maxComplexity").value)
+        };
+      }
+
+      function normalizeForMatching(text, options) {
+        let value = text;
+
+        if (options.ignoreWhitespace) {
+          value = value.replace(/\s+/g, " ").trim();
+        }
+
+        if (options.ignoreCase) {
+          value = value.toLowerCase();
+        }
+
+        return value;
+      }
+
+      function toLines(text, options) {
+        if (text === "") return [];
+
+        // Normalize common newline conventions for comparison, while keeping
+        // each line's original displayed text and original line number.
+        const rawLines = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
+        let lines = rawLines.map(function (line, index) {
+          return {
+            text: line,
+            number: index + 1,
+            key: normalizeForMatching(line, options)
+          };
+        });
+
+        if (options.ignoreBlankLines) {
+          lines = lines.filter(function (line) {
+            return line.text.trim() !== "";
+          });
+        }
+
+        if (lines.length > MAX_LINES) {
+          throw new Error(
+            "Each input can contain at most " + MAX_LINES +
+            " lines in this version. Compare a smaller section of the text."
+          );
+        }
+
+        return lines;
+      }
+
+      /*
+       * LCS-based sequence diff.
+       * Uses a typed-array matrix instead of nested JavaScript number arrays,
+       * and refuses comparisons that would exceed the configured cell limit.
+       */
+      function diffSequence(a, b, equals, maxCells) {
+        const n = a.length;
+        const m = b.length;
+        const columns = m + 1;
+        const cells = (n + 1) * columns;
+
+        if (!Number.isSafeInteger(cells) || cells > maxCells) {
+          throw new Error(
+            "This comparison is too complex for the selected memory setting. " +
+            "Try smaller text sections or choose the lower-memory option."
+          );
+        }
+
+        const dp = new Uint32Array(cells);
+
+        for (let i = n - 1; i >= 0; i -= 1) {
+          const row = i * columns;
+          const nextRow = (i + 1) * columns;
+
+          for (let j = m - 1; j >= 0; j -= 1) {
+            dp[row + j] = equals(a[i], b[j])
+              ? 1 + dp[nextRow + j + 1]
+              : Math.max(dp[nextRow + j], dp[row + j + 1]);
+          }
+        }
+
+        const operations = [];
+        let i = 0;
+        let j = 0;
+
+        while (i < n && j < m) {
+          if (equals(a[i], b[j])) {
+            operations.push({
+              type: "equal",
+              left: a[i],
+              right: b[j]
+            });
+            i += 1;
+            j += 1;
+          } else if (
+            dp[(i + 1) * columns + j] >=
+            dp[i * columns + j + 1]
+          ) {
+            operations.push({
+              type: "delete",
+              left: a[i]
+            });
+            i += 1;
+          } else {
+            operations.push({
+              type: "insert",
+              right: b[j]
+            });
+            j += 1;
+          }
+        }
+
+        while (i < n) {
+          operations.push({ type: "delete", left: a[i] });
+          i += 1;
+        }
+
+        while (j < m) {
+          operations.push({ type: "insert", right: b[j] });
+          j += 1;
+        }
+
+        return operations;
+      }
+
+      function compareLineObjects(a, b) {
+        return a.key === b.key;
+      }
+
+      function countChanges(operations) {
+        let added = 0;
+        let removed = 0;
+        let unchanged = 0;
+        let changedBlocks = 0;
+
+        let inChangeBlock = false;
+
+        operations.forEach(function (operation) {
+          if (operation.type === "equal") {
+            unchanged += 1;
+            inChangeBlock = false;
+          } else {
+            if (!inChangeBlock) {
+              changedBlocks += 1;
+              inChangeBlock = true;
+            }
+
+            if (operation.type === "insert") added += 1;
+            if (operation.type === "delete") removed += 1;
+          }
+        });
+
+        return {
+          added: added,
+          removed: removed,
+          unchanged: unchanged,
+          changedBlocks: changedBlocks
+        };
+      }
+
+      function buildRows(operations) {
+        const rows = [];
+        let index = 0;
+
+        while (index < operations.length) {
+          const operation = operations[index];
+
+          if (operation.type === "equal") {
+            rows.push({
+              type: "equal",
+              left: operation.left,
+              right: operation.right
+            });
+
+            index += 1;
+            continue;
+          }
+
+          const removed = [];
+          const added = [];
+
+          while (index < operations.length &&
+              operations[index].type !== "equal") {
+            const current = operations[index];
+
+            if (current.type === "delete") removed.push(current.left);
+            if (current.type === "insert") added.push(current.right);
+
+            index += 1;
+          }
+
+          const pairs = Math.max(removed.length, added.length);
+
+          for (let pair = 0; pair < pairs; pair += 1) {
+            const left = removed[pair] || null;
+            const right = added[pair] || null;
+
+            let type = "change";
+
+            if (left && !right) type = "removed";
+            else if (!left && right) type = "added";
+
+            rows.push({
+              type: type,
+              left: left,
+              right: right
+            });
+          }
+        }
+
+        return rows;
+      }
+
+      function makeVisibleRows(rows, options) {
+        if (!options.hideUnchanged) return rows.slice();
+
+        const hasChanges = rows.some(function (row) {
+          return row.type !== "equal";
+        });
+
+        if (!hasChanges) return [];
+
+        const keep = new Set();
+
+        rows.forEach(function (row, index) {
+          if (row.type !== "equal") {
+            const start = Math.max(0, index - options.context);
+            const end = Math.min(rows.length - 1, index + options.context);
+
+            for (let i = start; i <= end; i += 1) {
+              keep.add(i);
+            }
+          }
+        });
+
+        const visible = [];
+        let hiddenCount = 0;
+
+        rows.forEach(function (row, index) {
+          if (keep.has(index)) {
+            if (hiddenCount > 0) {
+              visible.push({
+                hidden: true,
+                count: hiddenCount
+              });
+
+              hiddenCount = 0;
+            }
+
+            visible.push(row);
+          } else {
+            hiddenCount += 1;
+          }
+        });
+
+        if (hiddenCount > 0) {
+          visible.push({
+            hidden: true,
+            count: hiddenCount
+          });
+        }
+
+        return visible;
+      }
+
+      function tokenize(text, precision) {
+        if (precision === "character") {
+          // Code-point comparison avoids splitting surrogate pairs.
+          if (typeof Intl !== "undefined" && Intl.Segmenter) {
+            try {
+              const segmenter = new Intl.Segmenter(undefined, {
+                granularity: "grapheme"
+              });
+
+              return Array.from(segmenter.segment(text), function (segment) {
+                return segment.segment;
+              });
+            } catch (error) {
+              // Fall through to code-point handling.
+            }
+          }
+
+          return Array.from(text);
+        }
+
+        // Keep whitespace as a token so surrounding spacing is preserved.
+        return text.split(/(\s+|[^\s]+)/).filter(Boolean);
+      }
+
+      function inlineOperations(leftText, rightText, precision) {
+        const leftTokens = tokenize(leftText, precision);
+        const rightTokens = tokenize(rightText, precision);
+
+        return diffSequence(
+          leftTokens,
+          rightTokens,
+          function (a, b) { return a === b; },
+          MAX_INLINE_DIFF_CELLS
+        );
+      }
+
+      function appendText(parent, text) {
+        parent.appendChild(document.createTextNode(text));
+      }
+
+      function appendTokenSpan(parent, text, className) {
+        const span = document.createElement("span");
+        span.className = className;
+        span.textContent = text;
+        parent.appendChild(span);
+      }
+
+      function renderInlineText(leftText, rightText, side, precision) {
+        const fragment = document.createDocumentFragment();
+
+        if (!leftText || !rightText || precision === "line") {
+          appendText(fragment, side === "left" ? leftText || "" : rightText || "");
+          return fragment;
+        }
+
+        let operations;
+
+        try {
+          operations = inlineOperations(leftText, rightText, precision);
+        } catch (error) {
+          // Keep the overall line diff useful if an exceptionally long
+          // individual line exceeds the intraline comparison limit.
+          appendText(fragment, side === "left" ? leftText : rightText);
+          return fragment;
+        }
+
+        operations.forEach(function (operation) {
+          if (operation.type === "equal") {
+            appendText(fragment, operation.left);
+          } else if (side === "left" && operation.type === "delete") {
+            appendTokenSpan(fragment, operation.left, "tdc-word-removed");
+          } else if (side === "right" && operation.type === "insert") {
+            appendTokenSpan(fragment, operation.right, "tdc-word-added");
+          }
+        });
+
+        return fragment;
+      }
+
+      function addLineCell(rowElement, line, side, rowType, otherLine, options) {
+        const cell = document.createElement("div");
+        cell.className = "tdc-diff-cell";
+
+        if (rowType === "added" && side === "right") {
+          cell.classList.add("tdc-line-added");
+        } else if (rowType === "removed" && side === "left") {
+          cell.classList.add("tdc-line-removed");
+        } else if (rowType === "change" && line) {
+          cell.classList.add("tdc-line-changed");
+        } else {
+          cell.classList.add("tdc-line-equal");
+        }
+
+        const number = document.createElement("span");
+        number.className = "tdc-line-number";
+        number.textContent = line ? String(line.number) : "";
+        number.setAttribute("aria-hidden", "true");
+
+        const content = document.createElement("span");
+        content.className = "tdc-line-text";
+
+        if (line) {
+          if (rowType === "change" && otherLine) {
+            content.appendChild(
+              renderInlineText(
+                side === "left" ? line.text : otherLine.text,
+                side === "right" ? line.text : otherLine.text,
+                side,
+                options.precision
+              )
+            );
+          } else {
+            appendText(content, line.text);
+          }
+        } else {
+          appendText(content, "");
+        }
+
+        cell.append(number, content);
+        rowElement.appendChild(cell);
+      }
+
+      function renderSideBySide(rows, options) {
+        result.replaceChildren();
+
+        const head = document.createElement("div");
+        head.className = "tdc-diff-head";
+
+        const leftHead = document.createElement("span");
+        leftHead.textContent = "Original";
+
+        const rightHead = document.createElement("span");
+        rightHead.textContent = "Revised";
+
+        head.append(leftHead, rightHead);
+        result.appendChild(head);
+
+        if (!rows.length) {
+          const empty = document.createElement("div");
+          empty.className = "tdc-result-empty";
+          empty.textContent = "No differences to display.";
+          result.appendChild(empty);
+          return;
+        }
+
+        const fragment = document.createDocumentFragment();
+
+        rows.forEach(function (row) {
+          if (row.hidden) {
+            const folded = document.createElement("div");
+            folded.className = "tdc-hidden-row";
+            folded.style.gridColumn = "1 / -1";
+            folded.textContent =
+              "… " + row.count + " unchanged line" +
+              (row.count === 1 ? "" : "s") + " hidden …";
+            fragment.appendChild(folded);
+            return;
+          }
+
+          const rowElement = document.createElement("div");
+          rowElement.className = "tdc-diff-row";
+
+          addLineCell(
+            rowElement,
+            row.left,
+            "left",
+            row.type,
+            row.right,
+            options
+          );
+
+          addLineCell(
+            rowElement,
+            row.right,
+            "right",
+            row.type,
+            row.left,
+            options
+          );
+
+          fragment.appendChild(rowElement);
+        });
+
+        result.appendChild(fragment);
+      }
+
+      function renderUnifiedLine(line, type, otherLine, options) {
+        const row = document.createElement("div");
+        row.className = "tdc-unified-row";
+
+        const prefix = document.createElement("span");
+        prefix.className = "tdc-unified-prefix";
+
+        const content = document.createElement("span");
+        content.className = "tdc-unified-text";
+
+        if (type === "removed") {
+          row.classList.add("is-removed");
+          prefix.textContent = "−";
+          prefix.setAttribute("aria-label", "Removed");
+        } else if (type === "added") {
+          row.classList.add("is-added");
+          prefix.textContent = "+";
+          prefix.setAttribute("aria-label", "Added");
+        } else {
+          prefix.textContent = " ";
+          prefix.setAttribute("aria-label", "Unchanged");
+        }
+
+        if (line) {
+          if (type === "change" && otherLine) {
+            content.appendChild(
+              renderInlineText(
+                type === "change" ? line.text : "",
+                type === "change" ? otherLine.text : "",
+                "left",
+                options.precision
+              )
+            );
+          } else {
+            appendText(content, line.text);
+          }
+        }
+
+        row.append(prefix, content);
+        return row;
+      }
+
+      function renderUnifiedRows(rows, options) {
+        result.replaceChildren();
+
+        if (!rows.length) {
+          const empty = document.createElement("div");
+          empty.className = "tdc-result-empty";
+          empty.textContent = "No differences to display.";
+          result.appendChild(empty);
+          return;
+        }
+
+        const fragment = document.createDocumentFragment();
+
+        rows.forEach(function (row) {
+          if (row.hidden) {
+            const folded = document.createElement("div");
+            folded.className = "tdc-hidden-row";
+            folded.textContent =
+              "… " + row.count + " unchanged line" +
+              (row.count === 1 ? "" : "s") + " hidden …";
+            fragment.appendChild(folded);
+            return;
+          }
+
+          if (row.type === "equal") {
+            fragment.appendChild(
+              renderUnifiedLine(row.left, "equal", null, options)
+            );
+          } else if (row.type === "change") {
+            const removed = renderUnifiedLine(
+              row.left, "removed", row.right, options
+            );
+
+            const added = renderUnifiedLine(
+              row.right, "added", row.left, options
+            );
+
+            if (options.precision !== "line") {
+              const leftContent = removed.querySelector(".tdc-unified-text");
+              const rightContent = added.querySelector(".tdc-unified-text");
+
+              leftContent.replaceChildren(
+                renderInlineText(row.left.text, row.right.text, "left", options.precision)
+              );
+
+              rightContent.replaceChildren(
+                renderInlineText(row.left.text, row.right.text, "right", options.precision)
+              );
+            }
+
+            fragment.append(removed, added);
+          } else if (row.type === "removed") {
+            fragment.appendChild(
+              renderUnifiedLine(row.left, "removed", null, options)
+            );
+          } else if (row.type === "added") {
+            fragment.appendChild(
+              renderUnifiedLine(row.right, "added", null, options)
+            );
+          }
+        });
+
+        result.appendChild(fragment);
+      }
+
+      function buildReport(operations, stats) {
+        const lines = [
+          "Text Diff Checker report",
+          "Generated locally by ConvertToToolsOnline",
+          "",
+          "Lines added: " + stats.added,
+          "Lines removed: " + stats.removed,
+          "Unchanged lines: " + stats.unchanged,
+          "",
+          "--- Original",
+          "+++ Revised"
+        ];
+
+        operations.forEach(function (operation) {
+          if (operation.type === "equal") {
+            lines.push("  " + operation.left.text);
+          } else if (operation.type === "delete") {
+            lines.push("- " + operation.left.text);
+          } else {
+            lines.push("+ " + operation.right.text);
+          }
+        });
+
+        lines.push("");
+        lines.push(
+          "Note: This is a readable comparison report, not an applicable Git patch."
+        );
+
+        return lines.join("\n");
+      }
+
+      function renderSummary(stats) {
+        summary.replaceChildren();
+        summary.hidden = false;
+
+        const items = [
+          ["Added: " + stats.added, "tdc-stat-added"],
+          ["Removed: " + stats.removed, "tdc-stat-removed"],
+          ["Unchanged: " + stats.unchanged, "tdc-stat"],
+          ["Change blocks: " + stats.changedBlocks, "tdc-stat"]
+        ];
+
+        items.forEach(function (item) {
+          const span = document.createElement("span");
+          span.className = item[1];
+          span.textContent = item[0];
+          summary.appendChild(span);
+        });
+      }
+
+      function renderResults() {
+        const options = getOptions();
+        const rows = buildRows(latestOperations);
+        latestRows = rows;
+
+        renderSummary(latestStats);
+
+        const hasChanges = latestStats.added > 0 || latestStats.removed > 0;
+
+        if (!hasChanges) {
+          result.replaceChildren();
+
+          const empty = document.createElement("div");
+          empty.className = "tdc-result-empty";
+          empty.textContent =
+            "No differences found with the current comparison settings.";
+
+          result.appendChild(empty);
+          return;
+        }
+
+        const visibleRows = makeVisibleRows(rows, options);
+
+        if (currentView === "side") {
+          renderSideBySide(visibleRows, options);
+        } else {
+          renderUnifiedRows(visibleRows, options);
+        }
+      }
+
+      function compare() {
+        clearStatus();
+        updateInputStats();
+        disableReport();
+
+        const leftText = originalText.value;
+        const rightText = revisedText.value;
+        const leftBytes = bytesOf(leftText);
+        const rightBytes = bytesOf(rightText);
+
+        if (leftBytes > MAX_FILE_BYTES || rightBytes > MAX_FILE_BYTES) {
+          result.replaceChildren();
+          summary.hidden = true;
+
+          setStatus(
+            "Each text must be at most 500 KB. Current sizes: original " +
+            formatBytes(leftBytes) + ", revised " + formatBytes(rightBytes) + ".",
+            "error"
+          );
+          return;
+        }
+
+        const options = getOptions();
+        const maxCells = options.maxCells;
+
+        try {
+          const leftLines = toLines(leftText, options);
+          const rightLines = toLines(rightText, options);
+
+          const operations = diffSequence(
+            leftLines,
+            rightLines,
+            compareLineObjects,
+            maxCells
+          );
+
+          latestOperations = operations;
+          latestStats = countChanges(operations);
+
+          renderResults();
+
+          reportIsCurrent = true;
+          $("copyReportBtn").disabled = false;
+          $("downloadReportBtn").disabled = false;
+
+          if (latestStats.added === 0 && latestStats.removed === 0) {
+            setStatus(
+              "Comparison complete. No differences were found with the selected options.",
+              "success"
+            );
+          } else {
+            setStatus(
+              "Comparison complete. Found " + latestStats.added +
+              " added line" + (latestStats.added === 1 ? "" : "s") +
+              " and " + latestStats.removed + " removed line" +
+              (latestStats.removed === 1 ? "" : "s") + ".",
+              "success"
+            );
+          }
+        } catch (error) {
+          latestOperations = [];
+          latestRows = [];
+          latestStats = null;
+          summary.hidden = true;
+          result.replaceChildren();
+
+          const empty = document.createElement("div");
+          empty.className = "tdc-result-empty";
+          empty.textContent = "The comparison could not be completed.";
+          result.appendChild(empty);
+
+          setStatus(
+            error && error.message
+              ? error.message
+              : "An unexpected error stopped the comparison.",
+            "error"
+          );
+        }
+      }
+
+      function switchView(view) {
+        currentView = view;
+
+        $("sideBySideBtn").setAttribute(
+          "aria-pressed", view === "side" ? "true" : "false"
+        );
+
+        $("unifiedBtn").setAttribute(
+          "aria-pressed", view === "unified" ? "true" : "false"
+        );
+
+        if (reportIsCurrent && latestStats) {
+          renderResults();
+        }
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        area.style.top = "0";
+
+        document.body.appendChild(area);
+        area.select();
+
+        const success = document.execCommand("copy");
+        area.remove();
+
+        if (!success) {
+          throw new Error("Automatic copying failed.");
+        }
+      }
+
+      async function copyReport() {
+        if (!reportIsCurrent || !latestStats) {
+          setStatus("Compare the texts before copying a report.", "warning");
+          return;
+        }
+
+        try {
+          await copyText(buildReport(latestOperations, latestStats));
+          setStatus("Comparison report copied to your clipboard.", "success");
+        } catch (error) {
+          setStatus(
+            "Automatic copying failed. Try the download option instead.",
+            "warning"
+          );
+        }
+      }
+
+      function downloadReport() {
+        if (!reportIsCurrent || !latestStats) {
+          setStatus("Compare the texts before downloading a report.", "warning");
+          return;
+        }
+
+        const report = buildReport(latestOperations, latestStats);
+        const blob = new Blob([report + "\n"], {
+          type: "text/plain;charset=utf-8"
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "text-diff-report.txt";
+        link.style.display = "none";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 1000);
+
+        setStatus("Comparison report download started.", "success");
+      }
+
+      async function loadFile(file, side) {
+        if (!file) return;
+
+        if (file.size > MAX_FILE_BYTES) {
+          setStatus(
+            "The selected file is " + formatBytes(file.size) +
+            ". The maximum file size is 500 KB.",
+            "error"
+          );
+          return;
+        }
+
+        try {
+          const text = await file.text();
+
+          if (bytesOf(text) > MAX_FILE_BYTES) {
+            throw new Error("The decoded file exceeds the 500 KB limit.");
+          }
+
+          if (side === "left") {
+            originalText.value = text;
+          } else {
+            revisedText.value = text;
+          }
+
+          updateInputStats();
+          invalidateComparison();
+
+          setStatus(
+            "Loaded " + file.name + " (" + formatBytes(file.size) + ").",
+            "success"
+          );
+        } catch (error) {
+          setStatus(
+            error && error.message ? error.message : "The file could not be read.",
+            "error"
+          );
+        } finally {
+          if (side === "left") originalFile.value = "";
+          else revisedFile.value = "";
+        }
+      }
+
+      function loadSample(name) {
+        if (!Object.prototype.hasOwnProperty.call(samples, name)) return;
+
+        originalText.value = samples[name].original;
+        revisedText.value = samples[name].revised;
+        updateInputStats();
+        compare();
+      }
+
+      function resetTool() {
+        originalText.value = samples.text.original;
+        revisedText.value = samples.text.revised;
+
+        $("ignoreWhitespace").checked = false;
+        $("ignoreCase").checked = false;
+        $("ignoreBlankLines").checked = false;
+        $("hideUnchanged").checked = true;
+        $("autoCompare").checked = true;
+        $("contextLines").value = "1";
+        $("precision").value = "line";
+        $("maxComplexity").value = String(DEFAULT_MAX_CELLS);
+
+        originalFile.value = "";
+        revisedFile.value = "";
+
+        clearStatus();
+        updateInputStats();
+        compare();
+      }
+
+      $("compareBtn").addEventListener("click", compare);
+      $("copyReportBtn").addEventListener("click", copyReport);
+      $("downloadReportBtn").addEventListener("click", downloadReport);
+      $("resetBtn").addEventListener("click", resetTool);
+
+      $("sideBySideBtn").addEventListener("click", function () {
+        switchView("side");
+      });
+
+      $("unifiedBtn").addEventListener("click", function () {
+        switchView("unified");
+      });
+
+      originalText.addEventListener("input", function () {
+        updateInputStats();
+        invalidateComparison();
+      });
+
+      revisedText.addEventListener("input", function () {
+        updateInputStats();
+        invalidateComparison();
+      });
+
+      [
+        "ignoreWhitespace",
+        "ignoreCase",
+        "ignoreBlankLines",
+        "hideUnchanged",
+        "contextLines",
+        "precision",
+        "maxComplexity"
+      ].forEach(function (id) {
+        $(id).addEventListener("change", function () {
+          invalidateComparison();
+        });
+      });
+
+      autoCompare.addEventListener("change", function () {
+        if (autoCompare.checked) {
+          compare();
+        } else {
+          window.clearTimeout(compareTimer);
+          setStatus(
+            "Automatic comparison is off. Click Compare texts to refresh results.",
+            "warning"
+          );
+        }
+      });
+
+      $("uploadOriginalBtn").addEventListener("click", function () {
+        originalFile.click();
+      });
+
+      $("uploadRevisedBtn").addEventListener("click", function () {
+        revisedFile.click();
+      });
+
+      originalFile.addEventListener("change", function () {
+        if (originalFile.files && originalFile.files[0]) {
+          loadFile(originalFile.files[0], "left");
+        }
+      });
+
+      revisedFile.addEventListener("change", function () {
+        if (revisedFile.files && revisedFile.files[0]) {
+          loadFile(revisedFile.files[0], "right");
+        }
+      });
+
+      $("clearOriginalBtn").addEventListener("click", function () {
+        originalText.value = "";
+        updateInputStats();
+        invalidateComparison();
+      });
+
+      $("clearRevisedBtn").addEventListener("click", function () {
+        revisedText.value = "";
+        updateInputStats();
+        invalidateComparison();
+      });
+
+      $("swapBtn").addEventListener("click", function () {
+        const original = originalText.value;
+
+        originalText.value = revisedText.value;
+        revisedText.value = original;
+
+        updateInputStats();
+        compare();
+      });
+
+      $("sampleTextBtn").addEventListener("click", function () {
+        loadSample("text");
+      });
+
+      $("sampleCodeBtn").addEventListener("click", function () {
+        loadSample("code");
+      });
+
+      $("sampleConfigBtn").addEventListener("click", function () {
+        loadSample("config");
+      });
+
+      // Ctrl/Cmd + Enter runs the comparison from either editor.
+      [originalText, revisedText].forEach(function (textarea) {
+        textarea.addEventListener("keydown", function (event) {
+          if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+            event.preventDefault();
+            window.clearTimeout(compareTimer);
+            compare();
+          }
+        });
+      });
+
+      updateInputStats();
+      resetTool();
+    })();
+  </script>
+</body>
+</html>

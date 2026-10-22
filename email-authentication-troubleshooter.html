@@ -1,0 +1,2037 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Email Authentication Checker – SPF, DKIM, DMARC & MX</title>
+  <meta name="description" content="Troubleshoot email authentication online. Check SPF, DKIM, DMARC and MX records, spot common DNS configuration issues, estimate SPF DNS lookup terms and get actionable guidance.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/email-authentication-troubleshooter.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Email Authentication Checker – SPF, DKIM, DMARC & MX">
+  <meta property="og:description" content="Find common email authentication problems and understand what to check next.">
+  <meta property="og:url" content="https://converttotoolsonline.com/email-authentication-troubleshooter.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Email Authentication Troubleshooter">
+  <meta name="twitter:description" content="Check public email DNS records and investigate authentication configuration issues.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Email Authentication Troubleshooter",
+    "url": "https://converttotoolsonline.com/email-authentication-troubleshooter.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "Check public SPF, DKIM, DMARC and MX records, identify common email DNS configuration problems, and get troubleshooting guidance.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    .emailcheck {
+      --ec-border: #dfe4eb;
+      --ec-muted: #637184;
+      --ec-accent: #245bcc;
+      width: min(1080px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      color: #17202c;
+      line-height: 1.6;
+    }
+
+    .emailcheck,
+    .emailcheck * {
+      box-sizing: border-box;
+    }
+
+    .emailcheck [hidden] {
+      display: none !important;
+    }
+
+    .emailcheck :is(input, select, button, a):focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .emailcheck input,
+    .emailcheck select,
+    .emailcheck button {
+      font: inherit;
+    }
+
+    .emailcheck button {
+      cursor: pointer;
+    }
+
+    .emailcheck a {
+      color: var(--ec-accent);
+    }
+
+    .emailcheck .breadcrumb {
+      margin-bottom: 12px;
+      color: var(--ec-muted);
+      font-size: .92rem;
+    }
+
+    .emailcheck .hero {
+      margin-bottom: 22px;
+    }
+
+    .emailcheck .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      line-height: 1.17;
+      letter-spacing: -.035em;
+    }
+
+    .emailcheck .hero p {
+      max-width: 850px;
+      margin: 0;
+      color: #5b6878;
+    }
+
+    .emailcheck .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .emailcheck .pill {
+      padding: 5px 10px;
+      border: 1px solid var(--ec-border);
+      border-radius: 999px;
+      background: #f7f9fc;
+      font-size: .83rem;
+    }
+
+    .emailcheck .card {
+      min-width: 0;
+      padding: clamp(14px, 2.4vw, 22px);
+      border: 1px solid var(--ec-border);
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .emailcheck .section {
+      margin-top: 18px;
+    }
+
+    .emailcheck h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .emailcheck h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .emailcheck .muted {
+      color: var(--ec-muted);
+      font-size: .9rem;
+    }
+
+    .emailcheck .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 41px;
+      padding: 8px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+      font-weight: 650;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .emailcheck .button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .emailcheck .primary {
+      border-color: var(--ec-accent);
+      background: var(--ec-accent);
+      color: #fff;
+    }
+
+    .emailcheck .primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: #fff;
+    }
+
+    .emailcheck .button:disabled {
+      cursor: not-allowed;
+      opacity: .48;
+    }
+
+    .emailcheck .small {
+      min-height: 33px;
+      padding: 5px 10px;
+      font-size: .85rem;
+    }
+
+    .emailcheck .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .emailcheck .field {
+      min-width: 0;
+    }
+
+    .emailcheck .field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 750;
+    }
+
+    .emailcheck .field input[type="text"],
+    .emailcheck .field select {
+      width: 100%;
+      min-width: 0;
+      min-height: 43px;
+      padding: 9px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .emailcheck .input-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .emailcheck .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 13px;
+      padding: 11px;
+      border: 1px solid var(--ec-border);
+      border-radius: 9px;
+    }
+
+    .emailcheck .check input {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      margin-top: 4px;
+      accent-color: var(--ec-accent);
+    }
+
+    .emailcheck .check strong {
+      display: block;
+      font-size: .91rem;
+    }
+
+    .emailcheck .check small {
+      display: block;
+      margin-top: 3px;
+      color: var(--ec-muted);
+      line-height: 1.45;
+    }
+
+    .emailcheck .notice {
+      padding: 12px 14px;
+      border: 1px solid #ecd5a6;
+      border-radius: 10px;
+      background: #fff9ed;
+      color: #745016;
+      font-size: .9rem;
+    }
+
+    .emailcheck .safe-note {
+      padding: 12px 14px;
+      border: 1px solid #d8e6dc;
+      border-radius: 10px;
+      background: #f3faf5;
+      color: #285b38;
+      font-size: .9rem;
+    }
+
+    .emailcheck .status {
+      min-height: 23px;
+      margin: 10px 0 0;
+      font-size: .9rem;
+      overflow-wrap: anywhere;
+    }
+
+    .emailcheck .status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .emailcheck .status[data-kind="success"] {
+      color: #24623b;
+    }
+
+    .emailcheck .summary {
+      margin-top: 14px;
+      padding: 15px;
+      border: 1px solid var(--ec-border);
+      border-radius: 10px;
+      background: #f7f9fc;
+    }
+
+    .emailcheck .summary strong {
+      display: block;
+      font-size: 1rem;
+    }
+
+    .emailcheck .summary p {
+      margin: 5px 0 0;
+      color: var(--ec-muted);
+      font-size: .9rem;
+    }
+
+    .emailcheck .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .emailcheck .stat {
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid var(--ec-border);
+      border-radius: 9px;
+      background: #f7f9fc;
+    }
+
+    .emailcheck .stat small {
+      display: block;
+      color: var(--ec-muted);
+      font-size: .79rem;
+    }
+
+    .emailcheck .stat strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.1rem;
+      overflow-wrap: anywhere;
+    }
+
+    .emailcheck .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 15px;
+      align-items: start;
+    }
+
+    .emailcheck .result-card {
+      min-width: 0;
+      padding: 15px;
+      border: 1px solid var(--ec-border);
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .emailcheck .result-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .emailcheck .result-head h3 {
+      margin: 0;
+    }
+
+    .emailcheck .badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: #edf1f6;
+      color: #39475a;
+      font-size: .77rem;
+      font-weight: 750;
+    }
+
+    .emailcheck .badge.good {
+      background: #e9f8ee;
+      color: #24623b;
+    }
+
+    .emailcheck .badge.warn {
+      background: #fff4dc;
+      color: #8b5a06;
+    }
+
+    .emailcheck .badge.bad {
+      background: #ffeded;
+      color: #992828;
+    }
+
+    .emailcheck .record {
+      margin-top: 9px;
+      padding: 10px;
+      border: 1px solid #e3e8ef;
+      border-radius: 8px;
+      background: #fafcff;
+    }
+
+    .emailcheck .record code {
+      display: block;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: pre-wrap;
+      font-size: .85rem;
+    }
+
+    .emailcheck .record small {
+      display: block;
+      margin-top: 5px;
+      color: var(--ec-muted);
+      font-size: .8rem;
+    }
+
+    .emailcheck .finding-list {
+      display: grid;
+      gap: 9px;
+      margin-top: 15px;
+    }
+
+    .emailcheck .finding {
+      padding: 12px;
+      border: 1px solid var(--ec-border);
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .emailcheck .finding h3 {
+      margin-bottom: 5px;
+    }
+
+    .emailcheck .finding p {
+      margin: 0;
+      color: #526174;
+      font-size: .9rem;
+    }
+
+    .emailcheck .finding.error {
+      border-left: 4px solid #b72c2c;
+    }
+
+    .emailcheck .finding.warning {
+      border-left: 4px solid #c58a21;
+    }
+
+    .emailcheck .finding.info {
+      border-left: 4px solid #4777ba;
+    }
+
+    .emailcheck .divider {
+      height: 1px;
+      margin: 18px 0;
+      border: 0;
+      background: var(--ec-border);
+    }
+
+    .emailcheck .article p,
+    .emailcheck .article li {
+      color: #354252;
+    }
+
+    .emailcheck .article li + li {
+      margin-top: 6px;
+    }
+
+    .emailcheck .faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--ec-border);
+    }
+
+    .emailcheck .faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .emailcheck .faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .emailcheck .faq details p {
+      margin: 9px 0 0;
+      color: var(--ec-muted);
+    }
+
+    @media (max-width: 720px) {
+      .emailcheck .input-grid,
+      .emailcheck .check-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .emailcheck .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .emailcheck {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .emailcheck .toolbar > .button {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .emailcheck *,
+      .emailcheck *::before,
+      .emailcheck *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="emailcheck">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>Email Authentication Troubleshooter</span>
+  </nav>
+
+  <header class="hero">
+    <h1>Email Authentication Checker: SPF, DKIM, DMARC & MX</h1>
+    <p>
+      Investigate common domain configuration problems that can affect email authentication.
+      Check public DNS records, identify missing or conflicting settings, and get practical
+      guidance on what to verify next.
+    </p>
+
+    <div class="pills">
+      <span class="pill">SPF record checks</span>
+      <span class="pill">DKIM selector lookup</span>
+      <span class="pill">DMARC policy review</span>
+      <span class="pill">MX record checks</span>
+    </div>
+  </header>
+
+  <section class="card" aria-labelledby="inputHeading">
+    <h2 id="inputHeading">1. Enter your email domain</h2>
+
+    <div class="input-grid">
+      <div class="field">
+        <label for="domainInput">Sending domain</label>
+        <input
+          type="text"
+          id="domainInput"
+          maxlength="253"
+          placeholder="example.com"
+          spellcheck="false"
+          autocomplete="url"
+        >
+        <p class="muted" style="margin:5px 0 0">
+          Enter the domain part of an email address, not the mailbox name.
+          For example, enter <code>example.com</code> for <code>person@example.com</code>.
+        </p>
+      </div>
+
+      <div class="field">
+        <label for="selectorInput">DKIM selector (optional)</label>
+        <input
+          type="text"
+          id="selectorInput"
+          maxlength="63"
+          placeholder="google, selector1, mail..."
+          spellcheck="false"
+          autocomplete="off"
+        >
+        <p class="muted" style="margin:5px 0 0">
+          Find this in your email provider's setup details or a message's DKIM-Signature header.
+        </p>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <button class="button primary" type="button" id="checkBtn">Check email authentication</button>
+      <button class="button" type="button" id="exampleBtn">Load example</button>
+      <button class="button" type="button" id="resetBtn">Reset</button>
+    </div>
+
+    <p class="status" id="inputStatus" role="status" aria-live="polite"></p>
+
+    <div class="notice" style="margin-top:14px">
+      <strong>Important:</strong> this tool reads public DNS records. It does not send a test
+      email, read your inbox, verify your sending IP reputation, or guarantee that a message
+      will reach the inbox.
+    </div>
+
+    <div class="safe-note" style="margin-top:12px">
+      <strong>Privacy:</strong> lookups are sent from your browser to Google Public DNS.
+      The domain and DNS query are visible to that provider; this website does not proxy the
+      queries through its own server.
+    </div>
+  </section>
+
+  <section class="card section" id="resultsPanel" hidden>
+    <h2>2. Authentication check results</h2>
+
+    <div class="summary">
+      <strong id="overallTitle">Analysis pending</strong>
+      <p id="overallText"></p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <small>SPF status</small>
+        <strong id="spfStat">—</strong>
+      </div>
+      <div class="stat">
+        <small>DKIM status</small>
+        <strong id="dkimStat">—</strong>
+      </div>
+      <div class="stat">
+        <small>DMARC status</small>
+        <strong id="dmarcStat">—</strong>
+      </div>
+      <div class="stat">
+        <small>MX status</small>
+        <strong id="mxStat">—</strong>
+      </div>
+    </div>
+
+    <div class="check-grid">
+      <article class="result-card">
+        <div class="result-head">
+          <h3>SPF — permitted senders</h3>
+          <span class="badge" id="spfBadge">Not checked</span>
+        </div>
+        <p class="muted" id="spfSummary"></p>
+        <div id="spfRecords"></div>
+      </article>
+
+      <article class="result-card">
+        <div class="result-head">
+          <h3>DKIM — message signatures</h3>
+          <span class="badge" id="dkimBadge">Not checked</span>
+        </div>
+        <p class="muted" id="dkimSummary"></p>
+        <div id="dkimRecords"></div>
+      </article>
+
+      <article class="result-card">
+        <div class="result-head">
+          <h3>DMARC — policy and alignment</h3>
+          <span class="badge" id="dmarcBadge">Not checked</span>
+        </div>
+        <p class="muted" id="dmarcSummary"></p>
+        <div id="dmarcRecords"></div>
+      </article>
+
+      <article class="result-card">
+        <div class="result-head">
+          <h3>MX — mail routing</h3>
+          <span class="badge" id="mxBadge">Not checked</span>
+        </div>
+        <p class="muted" id="mxSummary"></p>
+        <div id="mxRecords"></div>
+      </article>
+    </div>
+
+    <section class="section" aria-labelledby="findingsHeading">
+      <h2 id="findingsHeading">3. What should you fix?</h2>
+      <p class="muted">
+        Findings are based on public DNS answers and common configuration checks.
+        Confirm the actual sending service before changing records.
+      </p>
+      <div class="finding-list" id="findings"></div>
+    </section>
+
+    <div class="toolbar">
+      <button class="button small" type="button" id="copyReportBtn">Copy diagnostic report</button>
+      <button class="button small" type="button" id="checkAgainBtn">Check again</button>
+    </div>
+
+    <p class="status" id="reportStatus" role="status" aria-live="polite"></p>
+
+    <div class="notice" style="margin-top:15px">
+      <strong>Do not paste example records into DNS without checking your provider's instructions.</strong>
+      Incorrect SPF, DKIM or DMARC changes can interrupt legitimate email. Your DNS provider,
+      mailbox host and every authorized sending service must be considered before editing records.
+    </div>
+  </section>
+
+  <section class="card section article">
+    <h2>Why do emails go to spam or get rejected?</h2>
+    <p>
+      Email authentication helps receiving systems assess whether a message is authorized
+      to use a domain. Misconfigured DNS records can contribute to authentication failures,
+      spoofing exposure and rejected messages. Authentication alone does not determine inbox
+      placement: reputation, recipient policy, message content and other signals also matter.
+    </p>
+
+    <h3>What does SPF check?</h3>
+    <p>
+      Sender Policy Framework (SPF) publishes which sending hosts are authorized for a domain.
+      This checker looks for the domain's SPF TXT record, detects multiple SPF records, checks
+      the ending mechanism and estimates DNS-lookup-causing terms in the SPF policy and its
+      static include/redirect tree. The estimate is not a full RFC-compliant SPF evaluator.
+    </p>
+
+    <h3>What does DKIM check?</h3>
+    <p>
+      DomainKeys Identified Mail (DKIM) uses a selector to identify a public key in DNS.
+      This tool checks a selector you enter at
+      <code>selector._domainkey.example.com</code>. If the selector is unknown or omitted,
+      DKIM is marked as not checked. One missing selector does not prove the domain has no
+      DKIM configuration; providers may use different selectors or CNAME-based setups.
+    </p>
+
+    <h3>What does DMARC check?</h3>
+    <p>
+      Domain-based Message Authentication, Reporting and Conformance (DMARC) publishes policy
+      at <code>_dmarc.example.com</code>. This tool checks whether a recognizable DMARC TXT
+      record exists and reviews its policy, reporting and percentage tags. A policy of
+      <code>p=none</code> is a monitoring policy, not necessarily a configuration error. Move
+      to enforcement only when legitimate mail sources are understood and aligned.
+    </p>
+
+    <h3>What does MX check?</h3>
+    <p>
+      Mail exchanger records identify the destination mail servers for a domain. If your
+      domain should receive email, compare the returned MX records with the instructions from
+      your mail provider. A missing MX answer can be intentional for a domain that does not
+      receive email, so the tool should not automatically treat it as proof of a fault.
+    </p>
+
+    <h3>How should I fix a failed result?</h3>
+    <ol>
+      <li>Identify your actual mailbox and email-sending providers.</li>
+      <li>Compare the returned public DNS values with each provider's current setup instructions.</li>
+      <li>Resolve duplicate or invalid SPF records without removing required authorized senders.</li>
+      <li>Use the exact DKIM selector and public-key setup supplied by your email provider.</li>
+      <li>Start DMARC monitoring if appropriate, study reports, and apply a stricter policy only when ready.</li>
+      <li>Send a real test message and inspect its authentication results in the recipient's message headers.</li>
+    </ol>
+
+    <h3>Does a green result guarantee email delivery?</h3>
+    <p>
+      No. DNS presence and basic record syntax are only part of email authentication.
+      This browser tool does not verify a particular message's cryptographic DKIM signature,
+      SPF evaluation against its actual sending IP, DMARC alignment for that message,
+      blocklists, provider reputation or final inbox placement.
+    </p>
+  </section>
+
+  <section class="card section faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>Why are my emails going to spam?</summary>
+      <p>
+        Possible causes include failed SPF or DKIM authentication, DMARC alignment problems,
+        sender reputation, message content and recipient filtering. This tool checks public
+        DNS configuration but cannot determine the cause for a specific delivered message.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I check SPF, DKIM and DMARC for free?</summary>
+      <p>
+        Yes. Enter your sending domain to look up SPF and DMARC and inspect its MX records.
+        Provide a DKIM selector to check the corresponding public DNS key record.
+      </p>
+    </details>
+
+    <details>
+      <summary>What does an SPF record beginning with v=spf1 mean?</summary>
+      <p>
+        It identifies an SPF policy. The mechanisms and qualifiers that follow specify
+        how the policy evaluates permitted and non-permitted senders. Do not copy another
+        domain's SPF record without adapting it to your own authorized sending systems.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why does this tool need a DKIM selector?</summary>
+      <p>
+        DKIM public keys are published under selector-specific DNS names. The selector is
+        normally provided by the email service or shown in the DKIM-Signature header of
+        a real message.
+      </p>
+    </details>
+
+    <details>
+      <summary>Is p=none in DMARC a failure?</summary>
+      <p>
+        Not automatically. It requests monitoring rather than quarantine or rejection.
+        It can be useful while identifying legitimate email sources, but it does not enforce
+        protection against messages that fail DMARC.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can a correct DNS configuration still have email delivery problems?</summary>
+      <p>
+        Yes. A DNS checker cannot evaluate every factor that affects inbox placement or
+        a specific message. Inspect the recipient's authentication results, sending reputation,
+        applicable provider requirements and mail server responses as well.
+      </p>
+    </details>
+  </section>
+
+  <p class="muted section">
+    Explore more useful utilities on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const DNS_ENDPOINT = "https://dns.google/resolve";
+  const TIMEOUT_MS = 8000;
+  const MAX_NESTED_DNS_QUERIES = 20;
+  const MAX_SPF_DEPTH = 5;
+
+  const $ = id => document.getElementById(id);
+
+  let activeController = null;
+  let requestId = 0;
+  let busy = false;
+  let reportText = "";
+
+  const lastReportSections = [];
+
+  function setStatus(id, message, kind = "") {
+    const el = $(id);
+    el.textContent = message;
+    el.dataset.kind = kind;
+  }
+
+  function setBusy(value) {
+    busy = value;
+    $("checkBtn").disabled = value;
+    $("exampleBtn").disabled = value;
+    $("resetBtn").disabled = value;
+    $("checkAgainBtn").disabled = value;
+    $("checkBtn").textContent = value
+      ? "Checking records…"
+      : "Check email authentication";
+    $("domainInput").disabled = value;
+    $("selectorInput").disabled = value;
+  }
+
+  function normalizeDomain(input) {
+    let value = String(input || "").trim();
+
+    if (!value) {
+      throw new Error("Enter your email domain, such as example.com.");
+    }
+
+    if (/\s/.test(value)) {
+      throw new Error("The domain must not contain spaces.");
+    }
+
+    if (/^[a-z][a-z0-9+.-]*:\/\//i.test(value)) {
+      try {
+        const url = new URL(value);
+        if (!["http:", "https:"].includes(url.protocol)) {
+          throw new Error("Use a hostname or an HTTP/HTTPS URL.");
+        }
+        value = url.hostname;
+      } catch (error) {
+        throw new Error("Enter a valid hostname, such as example.com.");
+      }
+    }
+
+    value = value.replace(/\.$/, "").toLowerCase();
+
+    // Convert internationalized hostnames to ASCII when the browser can do so.
+    try {
+      value = new URL("https://" + value).hostname.toLowerCase();
+    } catch (error) {
+      throw new Error("Enter a valid domain name.");
+    }
+
+    if (!value || value.length > 253) {
+      throw new Error("The domain name is too long or empty.");
+    }
+
+    const labels = value.split(".");
+
+    if (
+      labels.length < 2 ||
+      labels.some(label =>
+        !label ||
+        label.length > 63 ||
+        !/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(label)
+      )
+    ) {
+      throw new Error("Enter a valid registered domain name.");
+    }
+
+    return value;
+  }
+
+  function validateSelector(input) {
+    const selector = String(input || "").trim();
+
+    if (!selector) return "";
+
+    if (
+      selector.length > 63 ||
+      !/^[a-z0-9_-]+$/i.test(selector)
+    ) {
+      throw new Error(
+        "The DKIM selector should contain only letters, numbers, underscores or hyphens."
+      );
+    }
+
+    return selector;
+  }
+
+  async function dnsQuery(name, type, signal) {
+    const url = new URL(DNS_ENDPOINT);
+    url.searchParams.set("name", name);
+    url.searchParams.set("type", type);
+
+    const response = await fetch(url.toString(), {
+      method: "GET",
+      headers: { "Accept": "application/dns-json" },
+      mode: "cors",
+      credentials: "omit",
+      cache: "no-store",
+      referrerPolicy: "no-referrer",
+      signal
+    });
+
+    if (!response.ok) {
+      throw new Error(`DNS service returned HTTP ${response.status}.`);
+    }
+
+    const data = await response.json();
+
+    if (!data || !Number.isInteger(Number(data.Status))) {
+      throw new Error("The DNS service returned an unexpected response.");
+    }
+
+    return {
+      name,
+      type,
+      status: Number(data.Status),
+      answers: Array.isArray(data.Answer) ? data.Answer.map(item => ({
+        name: String(item.name || ""),
+        type: Number(item.type),
+        ttl: Number(item.TTL),
+        data: String(item.data ?? "")
+      })) : [],
+      comment: data.Comment ? String(data.Comment) : ""
+    };
+  }
+
+  function errorResult(name, type, error) {
+    return {
+      name,
+      type,
+      status: null,
+      answers: [],
+      comment: "",
+      error: error && error.message ? error.message : "DNS lookup failed."
+    };
+  }
+
+  function isTimeoutError(error) {
+    return error && error.name === "AbortError";
+  }
+
+  function readableQueryError(error) {
+    if (isTimeoutError(error)) {
+      return "The DNS lookup timed out.";
+    }
+
+    const message = error && error.message ? error.message : "";
+
+    if (/failed to fetch|networkerror|load failed/i.test(message)) {
+      return "Could not reach Google Public DNS. Check your connection, browser restrictions or access to its DNS-over-HTTPS endpoint.";
+    }
+
+    return message || "DNS lookup failed.";
+  }
+
+  // TXT character strings may be displayed as multiple quoted chunks in DNS
+  // presentation format. Concatenate those chunks for record inspection.
+  function decodeTxtData(data) {
+    const value = String(data || "").trim();
+
+    if (!value.startsWith('"')) return value;
+
+    const parts = [];
+    let i = 0;
+
+    while (i < value.length) {
+      while (i < value.length && /\s/.test(value[i])) i++;
+      if (i >= value.length) break;
+
+      if (value[i] !== '"') return value;
+
+      i++;
+      let chunk = "";
+      let closed = false;
+
+      while (i < value.length) {
+        const character = value[i];
+
+        if (character === "\\") {
+          if (i + 1 < value.length) {
+            chunk += value[i + 1];
+            i += 2;
+            continue;
+          }
+        }
+
+        if (character === '"') {
+          i++;
+          closed = true;
+          break;
+        }
+
+        chunk += character;
+        i++;
+      }
+
+      if (!closed) return value;
+      parts.push(chunk);
+    }
+
+    return parts.join("");
+  }
+
+  function txtValues(result) {
+    if (!result || !Array.isArray(result.answers)) return [];
+
+    return result.answers
+      .filter(answer => answer.type === 16)
+      .map(answer => ({
+        value: decodeTxtData(answer.data),
+        ttl: answer.ttl,
+        owner: answer.name
+      }));
+  }
+
+  function findSpfRecords(txt) {
+    return txt.filter(record =>
+      /^v=spf1(?:\s|$)/i.test(record.value.trim())
+    );
+  }
+
+  function parseTags(record) {
+    const result = new Map();
+    const duplicates = [];
+    const tokens = String(record || "").split(";");
+
+    for (const token of tokens) {
+      const item = token.trim();
+      if (!item) continue;
+
+      const equals = item.indexOf("=");
+      if (equals <= 0) continue;
+
+      const key = item.slice(0, equals).trim().toLowerCase();
+      const value = item.slice(equals + 1).trim();
+
+      if (result.has(key)) duplicates.push(key);
+      else result.set(key, value);
+    }
+
+    return { tags: result, duplicates };
+  }
+
+  function getSpfEnding(record) {
+    const tokens = record.trim().split(/\s+/).slice(1);
+
+    for (const token of tokens) {
+      if (/^[+?~\-]?all$/i.test(token)) {
+        return token[0] === "+" ? "+all" : token.toLowerCase();
+      }
+    }
+
+    return "";
+  }
+
+  function hasSpfVersion(record) {
+    return /^v=spf1(?:\s|$)/i.test(String(record || "").trim());
+  }
+
+  function findSpfLookupTerms(record) {
+    const tokens = String(record || "").trim().split(/\s+/).slice(1);
+    const terms = [];
+
+    for (const original of tokens) {
+      const token = original.replace(/^[+?~-]/, "");
+      const lower = token.toLowerCase();
+
+      if (lower.startsWith("include:")) {
+        terms.push({
+          kind: "include",
+          domain: token.slice(token.indexOf(":") + 1).split("/")[0]
+        });
+        continue;
+      }
+
+      if (lower.startsWith("redirect=")) {
+        terms.push({
+          kind: "redirect",
+          domain: token.slice(token.indexOf("=") + 1).split("/")[0]
+        });
+        continue;
+      }
+
+      if (/^(?:a|mx|ptr|exists)(?::|\/|$)/i.test(token)) {
+        const mechanism = token.match(/^(a|mx|ptr|exists)/i)[1].toLowerCase();
+        terms.push({ kind: mechanism, domain: "" });
+        continue;
+      }
+
+      // SPF evaluation terminates when the all mechanism is reached, so
+      // later terms are not counted as possible evaluation paths.
+      if (/^all$/i.test(token)) break;
+    }
+
+    return terms;
+  }
+
+  async function estimateSpfLookups(rootDomain, rootRecord, signal) {
+    const state = {
+      termCount: 0,
+      queryCount: 0,
+      cache: new Map(),
+      warnings: [],
+      unresolved: 0
+    };
+
+    async function fetchSpfAt(domain) {
+      const cleanDomain = String(domain || "").replace(/\.$/, "").toLowerCase();
+
+      if (
+        !cleanDomain ||
+        cleanDomain.includes("%{") ||
+        cleanDomain.length > 253 ||
+        cleanDomain.split(".").some(label =>
+          !label || label.length > 63 ||
+          !/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(label)
+        )
+      ) {
+        state.warnings.push(`Could not expand a dynamic or invalid SPF domain: ${cleanDomain || "(empty)"}.`);
+        state.unresolved++;
+        return null;
+      }
+
+      if (state.cache.has(cleanDomain)) {
+        return state.cache.get(cleanDomain);
+      }
+
+      if (state.queryCount >= MAX_NESTED_DNS_QUERIES) {
+        state.warnings.push("Nested SPF scanning stopped at the safety limit.");
+        state.unresolved++;
+        return null;
+      }
+
+      state.queryCount++;
+
+      const pending = (async () => {
+        try {
+          const result = await dnsQuery(cleanDomain, "TXT", signal);
+          return {
+            result,
+            spf: findSpfRecords(txtValues(result))
+          };
+        } catch (error) {
+          state.warnings.push(`Could not inspect nested SPF domain ${cleanDomain}.`);
+          state.unresolved++;
+          return null;
+        }
+      })();
+
+      state.cache.set(cleanDomain, pending);
+      return pending;
+    }
+
+    async function walk(domain, record, path, depth) {
+      if (depth > MAX_SPF_DEPTH) {
+        state.warnings.push("Nested SPF scanning reached the recursion-depth limit.");
+        state.unresolved++;
+        return;
+      }
+
+      const terms = findSpfLookupTerms(record);
+
+      for (const term of terms) {
+        state.termCount++;
+
+        if (term.kind !== "include" && term.kind !== "redirect") {
+          continue;
+        }
+
+        const target = String(term.domain || "").trim().replace(/\.$/, "").toLowerCase();
+
+        if (!target) {
+          state.warnings.push(`An SPF ${term.kind} has no usable target.`);
+          state.unresolved++;
+          continue;
+        }
+
+        if (target.includes("%{")) {
+          state.warnings.push(`A dynamic SPF macro in ${term.kind}:${target} could not be expanded.`);
+          state.unresolved++;
+          continue;
+        }
+
+        if (path.includes(target)) {
+          state.warnings.push(`A possible SPF include/redirect loop was found at ${target}.`);
+          state.unresolved++;
+          continue;
+        }
+
+        const nested = await fetchSpfAt(target);
+
+        if (!nested) continue;
+
+        if (nested.result.status !== 0) {
+          state.warnings.push(`A nested SPF lookup for ${target} returned DNS status ${nested.result.status}.`);
+          state.unresolved++;
+          continue;
+        }
+
+        if (nested.spf.length !== 1) {
+          if (nested.spf.length === 0) {
+            state.warnings.push(`No SPF TXT record was found at nested domain ${target}.`);
+          } else {
+            state.warnings.push(`Multiple SPF records were found at nested domain ${target}.`);
+          }
+          state.unresolved++;
+          continue;
+        }
+
+        await walk(
+          target,
+          nested.spf[0].value,
+          [...path, target],
+          depth + 1
+        );
+      }
+    }
+
+    await walk(rootDomain, rootRecord, [rootDomain.toLowerCase()], 0);
+
+    return {
+      termCount: state.termCount,
+      queryCount: state.queryCount,
+      unresolved: state.unresolved,
+      warnings: state.warnings
+    };
+  }
+
+  function setBadge(id, text, severity) {
+    const badge = $(id);
+    badge.textContent = text;
+    badge.className = "badge";
+
+    if (severity) badge.classList.add(severity);
+  }
+
+  function addRecord(container, value, meta = "") {
+    const box = document.createElement("div");
+    box.className = "record";
+
+    const code = document.createElement("code");
+    code.textContent = value || "(empty record)";
+
+    box.appendChild(code);
+
+    if (meta) {
+      const small = document.createElement("small");
+      small.textContent = meta;
+      box.appendChild(small);
+    }
+
+    container.appendChild(box);
+  }
+
+  function showMessage(container, message) {
+    const box = document.createElement("div");
+    box.className = "record";
+    box.textContent = message;
+    container.appendChild(box);
+  }
+
+  function setCard(idPrefix, summary, badge, severity, records) {
+    $(idPrefix + "Summary").textContent = summary;
+    setBadge(idPrefix + "Badge", badge, severity);
+
+    const container = $(idPrefix + "Records");
+    container.replaceChildren();
+
+    for (const item of records) {
+      addRecord(container, item.value, item.meta || "");
+    }
+
+    if (!records.length) {
+      showMessage(container, "No matching record value is available to display.");
+    }
+  }
+
+  function parseSpfSummary(records, estimate) {
+    if (records.length === 0) {
+      return {
+        status: "Missing",
+        severity: "bad",
+        summary: "No SPF TXT record was found at the root domain. Check the actual sending domain and DNS zone."
+      };
+    }
+
+    if (records.length > 1) {
+      return {
+        status: "Multiple records",
+        severity: "bad",
+        summary: "More than one SPF policy was found. Multiple SPF records at the same owner name can cause SPF permerror."
+      };
+    }
+
+    const record = records[0].value.trim();
+
+    if (!hasSpfVersion(record)) {
+      return {
+        status: "Invalid syntax",
+        severity: "bad",
+        summary: "The TXT value does not start with v=spf1."
+      };
+    }
+
+    const ending = getSpfEnding(record);
+    const messages = [];
+
+    if (!ending) {
+      messages.push("No explicit all mechanism was found.");
+    } else if (ending === "+all") {
+      messages.push("+all is permissive and can authorize any sender under the SPF policy.");
+    } else if (ending === "?all") {
+      messages.push("?all gives neutral results for unmatched senders.");
+    } else if (ending === "~all") {
+      messages.push("~all marks unmatched senders as softfail.");
+    } else if (ending === "-all") {
+      messages.push("-all marks unmatched senders as fail.");
+    }
+
+    if (estimate.termCount > 10) {
+      messages.push(`The recursive static estimate found ${estimate.termCount} DNS-lookup-causing terms, above SPF's 10-term DNS lookup limit in applicable evaluations.`);
+    } else {
+      messages.push(`The recursive static estimate found ${estimate.termCount} DNS-lookup-causing term(s). This is not a full SPF evaluator; actual evaluation and limits depend on the records and mechanisms used.`);
+    }
+
+    if (estimate.unresolved > 0) {
+      messages.push(`${estimate.unresolved} nested SPF item(s) could not be fully inspected.`);
+    }
+
+    return {
+      status: records.length === 1 && ending && ending !== "+all" ? "Record found" : "Review needed",
+      severity: ending === "+all" || !ending || estimate.termCount > 10 || estimate.unresolved > 0 ? "warn" : "good",
+      summary: messages.join(" ")
+    };
+  }
+
+  function analyzeDmarc(records, lookupResult) {
+    if (lookupResult.error) {
+      return {
+        status: "Lookup failed",
+        severity: "bad",
+        summary: lookupResult.error,
+        data: null
+      };
+    }
+
+    if (lookupResult.status === 3 || records.length === 0) {
+      return {
+        status: "Missing",
+        severity: "bad",
+        summary: "No recognizable DMARC TXT record was found at _dmarc." +
+          $("domainInput").value.trim() + ". Verify that the record is published under the correct owner name.",
+        data: null
+      };
+    }
+
+    const dmarcRecords = records.filter(record =>
+      /^v=DMARC1(?:\s*;|$)/i.test(record.value.trim())
+    );
+
+    if (dmarcRecords.length === 0) {
+      return {
+        status: "No DMARC policy",
+        severity: "bad",
+        summary: "TXT data was returned, but no recognizable v=DMARC1 policy was found.",
+        data: null
+      };
+    }
+
+    if (dmarcRecords.length > 1) {
+      return {
+        status: "Multiple policies",
+        severity: "bad",
+        summary: "Multiple DMARC records were found. Publish one valid DMARC record at the owner name.",
+        data: null
+      };
+    }
+
+    const raw = dmarcRecords[0].value.trim();
+    const parsed = parseTags(raw);
+    const policy = (parsed.tags.get("p") || "").toLowerCase();
+    const policyValid = ["none", "quarantine", "reject"].includes(policy);
+
+    const messages = [];
+
+    if (!policyValid) {
+      messages.push("The p= policy tag is missing or has an unrecognized value.");
+    } else if (policy === "none") {
+      messages.push("p=none is monitoring mode. It does not request quarantine or rejection for messages that fail DMARC.");
+    } else {
+      messages.push(`The published policy is p=${policy}. Check reporting and alignment before changing it.`);
+    }
+
+    if (parsed.duplicates.length) {
+      messages.push("Duplicate tag(s) were found: " + parsed.duplicates.join(", ") + ".");
+    }
+
+    if (parsed.tags.has("pct")) {
+      const pct = Number(parsed.tags.get("pct"));
+      if (!Number.isFinite(pct) || pct < 0 || pct > 100) {
+        messages.push("The pct tag is outside the recognized range.");
+      } else if (pct < 100) {
+        messages.push(`pct=${pct} means the policy is applied to a subset, where supported.`);
+      }
+    }
+
+    if (!parsed.tags.has("rua")) {
+      messages.push("No aggregate-report destination (rua) is published. Reporting is optional, but it is useful during a monitoring rollout.");
+    }
+
+    return {
+      status: policyValid ? "Record found" : "Review needed",
+      severity: !policyValid || parsed.duplicates.length ? "bad" : "good",
+      summary: messages.join(" "),
+      data: { raw, tags: parsed.tags }
+    };
+  }
+
+  function analyzeMx(result) {
+    if (result.error) {
+      return {
+        status: "Lookup failed",
+        severity: "bad",
+        summary: result.error,
+        records: []
+      };
+    }
+
+    const answers = result.answers.filter(answer => answer.type === 15);
+
+    if (result.status !== 0 && result.status !== 3) {
+      return {
+        status: "DNS error",
+        severity: "bad",
+        summary: `MX lookup returned DNS status ${result.status}.`,
+        records: []
+      };
+    }
+
+    if (!answers.length) {
+      return {
+        status: "No MX answer",
+        severity: "warn",
+        summary: "No MX record was returned. If the domain should receive email, verify the mail provider's required MX records. A missing MX answer is not by itself proof that outgoing email authentication is broken.",
+        records: []
+      };
+    }
+
+    const parsed = answers.map(answer => {
+      const match = /^(\d+)\s+(.+)$/.exec(answer.data.trim());
+
+      return {
+        value: answer.data,
+        priority: match ? Number(match[1]) : null,
+        target: match ? match[2] : answer.data,
+        ttl: answer.ttl
+      };
+    });
+
+    const nullMx = parsed.length === 1 &&
+      parsed[0].priority === 0 &&
+      parsed[0].target === ".";
+
+    if (nullMx) {
+      return {
+        status: "Null MX",
+        severity: "info",
+        summary: "The domain publishes a Null MX, which explicitly indicates that it does not accept email.",
+        records: parsed
+      };
+    }
+
+    return {
+      status: "Record found",
+      severity: "good",
+      summary: `${parsed.length} MX record(s) were returned. Confirm their destinations and priorities against your mail provider's instructions.`,
+      records: parsed
+    };
+  }
+
+  function analyzeDkim(result, selector) {
+    if (!selector) {
+      return {
+        status: "Not checked",
+        severity: "warn",
+        summary: "Enter the DKIM selector from your mail provider or a real message header to check the corresponding public key.",
+        records: []
+      };
+    }
+
+    if (result.error) {
+      return {
+        status: "Lookup failed",
+        severity: "bad",
+        summary: result.error,
+        records: []
+      };
+    }
+
+    const relevant = result.answers.filter(answer =>
+      answer.type === 16 || answer.type === 5
+    );
+
+    const txt = txtValues(result).filter(record =>
+      /^v=DKIM1(?:\s*;|$)/i.test(record.value.trim()) ||
+      /(?:^|;)\s*p\s*=/i.test(record.value)
+    );
+
+    if (txt.length) {
+      const records = txt.map(item => ({
+        value: item.value,
+        meta: `Owner: ${item.owner} · TTL: ${item.ttl}s`
+      }));
+
+      const keyRecords = txt.filter(item => {
+        const parsed = parseTags(item.value.replace(/^v=DKIM1\s*;?/i, ""));
+        return parsed.tags.has("p");
+      });
+
+      const revoked = txt.some(item =>
+        /(?:^|;)\s*p\s*=\s*(?:;|$)/i.test(item.value)
+      );
+
+      return {
+        status: revoked ? "Review key" : "Record found",
+        severity: revoked ? "warn" : "good",
+        summary: revoked
+          ? "A DKIM-like record was found, but its p= value appears empty or revoked. Check the selector and your provider's configuration."
+          : "A DKIM-like TXT record was found. This proves the public record exists, not that an email's signature is valid or aligned.",
+        records
+      };
+    }
+
+    if (relevant.length) {
+      return {
+        status: "Alias found",
+        severity: "warn",
+        summary: "A CNAME or other relevant answer was found at the selector. Follow the target and confirm the provider's DKIM setup; this basic checker does not validate the full key chain.",
+        records: relevant.map(item => ({
+          value: item.data,
+          meta: `DNS type ${item.type} · TTL ${item.ttl}s`
+        }))
+      };
+    }
+
+    return {
+      status: "Not found",
+      severity: "bad",
+      summary: "No obvious DKIM public key record was found for this selector. Verify the selector from the actual DKIM-Signature header; other selectors may exist.",
+      records: []
+    };
+  }
+
+  function buildFindings(domain, spfResult, spfRecords, spfAnalysis, dmarcResult,
+                         dmarcRecords, dmarcAnalysis, mxAnalysis, dkimAnalysis,
+                         selector, mxQuery, txtQuery, dmarcQuery) {
+    const findings = [];
+
+    function add(level, title, body) {
+      findings.push({ level, title, body });
+    }
+
+    if (txtQuery.error) {
+      add("error", "SPF lookup could not complete", txtQuery.error);
+    } else if (spfRecords.length === 0) {
+      add("error", "No SPF record found", `No SPF policy was found in the public TXT answers for ${domain}. Confirm the envelope-sender domain used by your messages and the DNS zone you manage.`);
+    } else if (spfRecords.length > 1) {
+      add("error", "Multiple SPF records", "Multiple v=spf1 policies were found at this owner name. Review your authorized sending services and combine the intended mechanisms into one valid SPF policy rather than publishing several SPF records.");
+    } else {
+      if (spfAnalysis.summary.includes("+all")) {
+        add("error", "Overly permissive SPF ending", "The SPF policy uses +all, which can authorize any sender under the policy. Confirm the intended senders and change the policy carefully; do not blindly replace it without checking all services.");
+      } else if (!getSpfEnding(spfRecords[0].value)) {
+        add("warning", "SPF ending not clearly defined", "The record does not contain a recognized all mechanism. Check it against the SPF syntax and intended policy.");
+      }
+
+      if (spfAnalysis.estimate && spfAnalysis.estimate.termCount > 10) {
+        add("error", "SPF DNS-lookup term estimate exceeds 10", `The static recursive scan found ${spfAnalysis.estimate.termCount} lookup-causing terms. This is an estimate, not a complete SPF evaluation; use a dedicated SPF evaluator to confirm the actual lookup-limit result.`);
+      }
+
+      if (spfAnalysis.estimate && spfAnalysis.estimate.warnings.length) {
+        add("warning", "Nested SPF checks were incomplete", spfAnalysis.estimate.warnings.join(" "));
+      }
+
+      if (getSpfEnding(spfRecords[0].value) === "~all") {
+        add("info", "SPF uses softfail", "The policy ends with ~all. This treats unmatched senders as softfail. Whether this is appropriate depends on your mail setup; do not change it without checking legitimate sending services.");
+      }
+    }
+
+    if (dmarcQuery.error) {
+      add("error", "DMARC lookup could not complete", dmarcQuery.error);
+    } else if (!dmarcAnalysis.data) {
+      add("error", "No valid DMARC policy detected", `No single recognizable DMARC policy was validated at _dmarc.${domain}. Check the record name and syntax.`);
+    } else {
+      const policy = dmarcAnalysis.data.tags.get("p");
+
+      if (policy === "none") {
+        add("warning", "DMARC is in monitoring mode", "p=none is not necessarily wrong. It does not ask receivers to quarantine or reject failing messages. Study aggregate reports and identify legitimate senders before considering a stricter policy.");
+      } else if (policy === "quarantine" || policy === "reject") {
+        add("info", "DMARC enforcement is configured", `The published policy is p=${policy}. Verify that SPF/DKIM alignment works for every legitimate sending service before changing the policy.`);
+      }
+
+      if (dmarcAnalysis.data.tags.has("rua") === false) {
+        add("info", "No aggregate-report destination", "The DMARC record has no rua tag. Reporting is optional; it can help identify unknown senders and alignment failures during a rollout.");
+      }
+    }
+
+    if (mxQuery.error) {
+      add("warning", "MX lookup could not complete", mxQuery.error);
+    } else if (!mxAnalysis.records.length) {
+      add("warning", "No MX records returned", "If this domain is expected to receive email, compare it with the receiving mail service's required MX configuration. Some domains intentionally do not accept incoming mail.");
+    } else if (mxAnalysis.status === "Null MX") {
+      add("info", "Domain publishes Null MX", "This is appropriate only if the domain intentionally does not accept email. A domain used for receiving mail needs a valid receiving setup.");
+    }
+
+    if (!selector) {
+      add("info", "DKIM selector not supplied", "To test a DKIM public key, get the selector from your email service or the DKIM-Signature header of a real message.");
+    } else if (dkimAnalysis.status === "Not found") {
+      add("warning", "DKIM key not found for this selector", "Double-check the selector and provider setup. A failed lookup for one selector does not prove all DKIM selectors are missing.");
+    } else if (dkimAnalysis.status === "Record found") {
+      add("info", "DKIM DNS record found", "A public key record was found for the selector. Test a real sent message to confirm the signature actually verifies and aligns.");
+    }
+
+    add("info", "These are DNS-level checks", "Passing checks do not test a live email, sending IP reputation, blocklists, message content, cryptographic DKIM verification, DMARC alignment for a particular message, or inbox placement.");
+
+    return findings;
+  }
+
+  function renderFindings(findings) {
+    const container = $("findings");
+    container.replaceChildren();
+
+    if (!findings.length) {
+      const item = document.createElement("div");
+      item.className = "finding info";
+      item.textContent = "No additional finding is available.";
+      container.appendChild(item);
+      return;
+    }
+
+    for (const finding of findings) {
+      const item = document.createElement("article");
+      item.className = `finding ${finding.level}`;
+
+      const heading = document.createElement("h3");
+      heading.textContent = finding.title;
+
+      const paragraph = document.createElement("p");
+      paragraph.textContent = finding.body;
+
+      item.append(heading, paragraph);
+      container.appendChild(item);
+    }
+  }
+
+  async function checkDomain() {
+    if (busy) return;
+
+    let domain;
+    let selector;
+
+    try {
+      domain = normalizeDomain($("domainInput").value);
+      selector = validateSelector($("selectorInput").value);
+    } catch (error) {
+      setStatus("inputStatus", error.message, "error");
+      return;
+    }
+
+    if (activeController) activeController.abort();
+
+    activeController = new AbortController();
+    const myRequest = ++requestId;
+    const signal = activeController.signal;
+
+    const timeoutId = setTimeout(() => {
+      if (activeController && myRequest === requestId) {
+        activeController.abort();
+      }
+    }, TIMEOUT_MS);
+
+    setBusy(true);
+    $("resultsPanel").hidden = true;
+    reportText = "";
+
+    setStatus(
+      "inputStatus",
+      `Checking public SPF, DMARC and MX records for ${domain}…`
+    );
+
+    try {
+      const dkimName = selector
+        ? `${selector}._domainkey.${domain}`
+        : "";
+
+      const initialLookups = [
+        dnsQuery(domain, "TXT", signal).catch(error =>
+          errorResult(domain, "TXT", readableQueryError(error))
+        ),
+        dnsQuery(domain, "MX", signal).catch(error =>
+          errorResult(domain, "MX", readableQueryError(error))
+        ),
+        dnsQuery(`_dmarc.${domain}`, "TXT", signal).catch(error =>
+          errorResult(`_dmarc.${domain}`, "TXT", readableQueryError(error))
+        )
+      ];
+
+      if (selector) {
+        initialLookups.push(
+          dnsQuery(dkimName, "TXT", signal).catch(error =>
+            errorResult(dkimName, "TXT", readableQueryError(error))
+          )
+        );
+      }
+
+      const initial = await Promise.all(initialLookups);
+
+      if (myRequest !== requestId) return;
+
+      const [txtQuery, mxQuery, dmarcQuery] = initial;
+      const dkimQuery = selector ? initial[3] : null;
+
+      const rootTxt = txtQuery.error ? [] : txtValues(txtQuery);
+      const spfRecords = findSpfRecords(rootTxt);
+
+      let estimate = {
+        termCount: 0,
+        queryCount: 0,
+        unresolved: 0,
+        warnings: []
+      };
+
+      if (spfRecords.length === 1) {
+        setStatus("inputStatus", "Reading SPF include/redirect records and analyzing results…");
+
+        estimate = await estimateSpfLookups(
+          domain,
+          spfRecords[0].value,
+          signal
+        );
+      }
+
+      if (myRequest !== requestId) return;
+
+      const spfAnalysis = parseSpfSummary(
+        spfRecords,
+        estimate
+      );
+
+      spfAnalysis.estimate = estimate;
+
+      const dmarcTxt = dmarcQuery.error ? [] : txtValues(dmarcQuery);
+      const dmarcAnalysis = analyzeDmarc(dmarcTxt, dmarcQuery);
+      const mxAnalysis = analyzeMx(mxQuery);
+
+      const dkimAnalysis = selector
+        ? analyzeDkim(dkimQuery, selector)
+        : {
+            status: "Not checked",
+            severity: "warn",
+            summary: "A selector is required to test the specific public key.",
+            records: []
+          };
+
+      const spfRendered = spfRecords.map(item => ({
+        value: item.value,
+        meta: `Owner: ${item.owner} · TTL: ${item.ttl}s`
+      }));
+
+      if (spfAnalysis.estimate && spfAnalysis.estimate.queryCount) {
+        spfRendered.push({
+          value: `Estimated DNS-lookup-causing terms: ${estimate.termCount}`,
+          meta: `${estimate.queryCount} nested TXT query/queries attempted. This is a static estimate, not a complete SPF evaluation.`
+        });
+      }
+
+      setCard(
+        "spf",
+        spfAnalysis.summary,
+        spfAnalysis.status,
+        spfAnalysis.severity,
+        spfRendered
+      );
+
+      setCard(
+        "dkim",
+        dkimAnalysis.summary,
+        dkimAnalysis.status,
+        dkimAnalysis.severity,
+        dkimAnalysis.records
+      );
+
+      const dmarcRendered = dmarcTxt.map(item => ({
+        value: item.value,
+        meta: `Owner: ${item.owner} · TTL: ${item.ttl}s`
+      }));
+
+      if (dmarcQuery.error) {
+        dmarcRendered.push({ value: `Lookup error: ${dmarcQuery.error}` });
+      }
+
+      setCard(
+        "dmarc",
+        dmarcAnalysis.summary,
+        dmarcAnalysis.status,
+        dmarcAnalysis.severity,
+        dmarcRendered
+      );
+
+      setCard(
+        "mx",
+        mxAnalysis.summary,
+        mxAnalysis.status,
+        mxAnalysis.severity,
+        mxAnalysis.records.map(item => ({
+          value: item.value,
+          meta: `Priority: ${item.priority === null ? "not parsed" : item.priority} · TTL: ${item.ttl ?? "unknown"}s`
+        }))
+      );
+
+      $("spfStat").textContent = spfAnalysis.status;
+      $("dkimStat").textContent = dkimAnalysis.status;
+      $("dmarcStat").textContent = dmarcAnalysis.status;
+      $("mxStat").textContent = mxAnalysis.status;
+
+      const findings = buildFindings(
+        domain,
+        txtQuery,
+        spfRecords,
+        spfAnalysis,
+        dmarcQuery,
+        dmarcTxt,
+        dmarcAnalysis,
+        mxAnalysis,
+        dkimAnalysis,
+        selector,
+        mxQuery,
+        txtQuery,
+        dmarcQuery
+      );
+
+      renderFindings(findings);
+
+      const hasErrors = findings.some(item => item.level === "error");
+      const hasWarnings = findings.some(item => item.level === "warning");
+
+      $("overallTitle").textContent = hasErrors
+        ? "Configuration issues need review"
+        : hasWarnings
+          ? "Some settings need review"
+          : "No obvious issue found in the checked DNS records";
+
+      $("overallText").textContent =
+        `Checked ${domain} using public DNS answers. ` +
+        `This review covers record presence and common configuration patterns, not live-message authentication or guaranteed inbox placement.`;
+
+      const lines = [
+        "Email Authentication Troubleshooter Report",
+        `Domain: ${domain}`,
+        `DKIM selector: ${selector || "(not checked)"}`,
+        "",
+        `SPF: ${spfAnalysis.status}`,
+        spfAnalysis.summary,
+        ...spfRecords.map(item => `SPF TXT: ${item.value}`),
+        `SPF DNS-lookup-causing terms (static estimate): ${estimate.termCount}`,
+        "",
+        `DKIM: ${dkimAnalysis.status}`,
+        dkimAnalysis.summary,
+        ...dkimAnalysis.records.map(item => `DKIM: ${item.value}`),
+        "",
+        `DMARC: ${dmarcAnalysis.status}`,
+        dmarcAnalysis.summary,
+        ...dmarcTxt.map(item => `DMARC TXT: ${item.value}`),
+        "",
+        `MX: ${mxAnalysis.status}`,
+        mxAnalysis.summary,
+        ...mxAnalysis.records.map(item => `MX: ${item.value}`),
+        "",
+        "Findings:",
+        ...findings.map(item => `[${item.level.toUpperCase()}] ${item.title}: ${item.body}`),
+        "",
+        "Limitations: DNS-level checks only. No email was sent, no DKIM signature was cryptographically tested, and no inbox-placement guarantee is provided."
+      ];
+
+      reportText = lines.join("\n");
+
+      $("resultsPanel").hidden = false;
+
+      setStatus(
+        "inputStatus",
+        "Check complete. Review the findings and confirm your mail provider's configuration before changing DNS.",
+        "success"
+      );
+    } catch (error) {
+      if (myRequest !== requestId) return;
+
+      setStatus(
+        "inputStatus",
+        error && error.message
+          ? `Could not complete the check: ${error.message}`
+          : "Could not complete the check. Try again.",
+        "error"
+      );
+    } finally {
+      clearTimeout(timeoutId);
+
+      if (myRequest === requestId) {
+        setBusy(false);
+      }
+    }
+  }
+
+  async function copyReport() {
+    if (!reportText) {
+      setStatus("reportStatus", "Run the checker before copying a report.", "error");
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(reportText);
+
+      setStatus(
+        "reportStatus",
+        "Diagnostic report copied to clipboard.",
+        "success"
+      );
+    } catch (error) {
+      const textarea = document.createElement("textarea");
+      textarea.value = reportText;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      let copied = false;
+
+      try {
+        copied = document.execCommand("copy");
+      } catch (copyError) {
+        copied = false;
+      }
+
+      textarea.remove();
+
+      setStatus(
+        "reportStatus",
+        copied
+          ? "Diagnostic report copied to clipboard."
+          : "Automatic copy failed. Try again in a secure browser context.",
+        copied ? "success" : "error"
+      );
+    }
+  }
+
+  function reset() {
+    requestId++;
+
+    if (activeController) {
+      activeController.abort();
+      activeController = null;
+    }
+
+    setBusy(false);
+
+    $("domainInput").value = "";
+    $("selectorInput").value = "";
+    $("resultsPanel").hidden = true;
+
+    reportText = "";
+
+    setStatus("inputStatus", "Enter a domain to start.");
+    setStatus("reportStatus", "");
+    $("domainInput").focus();
+  }
+
+  $("checkBtn").addEventListener("click", checkDomain);
+  $("checkAgainBtn").addEventListener("click", checkDomain);
+  $("copyReportBtn").addEventListener("click", copyReport);
+  $("resetBtn").addEventListener("click", reset);
+
+  $("exampleBtn").addEventListener("click", () => {
+    $("domainInput").value = "example.com";
+    $("selectorInput").value = "";
+    checkDomain();
+  });
+
+  $("domainInput").addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      checkDomain();
+    }
+  });
+
+  $("selectorInput").addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      checkDomain();
+    }
+  });
+
+  setStatus(
+    "inputStatus",
+    "Ready. Enter your domain and an optional DKIM selector."
+  );
+})();
+</script>
+</body>
+</html>

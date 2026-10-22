@@ -1,669 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f8ff">
 
-  <title>Free Online Tools for Images, PDF &amp; Data | ConvertToToolsOnline</title>
-  <meta name="description" content="Free online tools for image compression, image conversion, PDF, JSON, CSV, timestamps, calculators, invoices, marketing, and design.">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="author" content="ConvertToToolsOnline">
-  <meta name="theme-color" content="#2563eb">
-
+  <title>ConvertToToolsOnline – Free Online Tools & Converters</title>
+  <meta name="description" content="Explore free online tools for images, PDF documents, text, JSON, CSV, SEO, email authentication, DNS troubleshooting, calculations and everyday tasks.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://converttotoolsonline.com/">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="ConvertToToolsOnline">
-  <meta property="og:title" content="Free Online Tools | ConvertToToolsOnline">
-  <meta property="og:description" content="Explore free online tools for images, PDF, data conversion, calculators, productivity, marketing, and design.">
+  <meta property="og:title" content="ConvertToToolsOnline – Free Online Tools & Converters">
+  <meta property="og:description" content="Find practical browser tools for documents, images, developer tasks, website troubleshooting and calculations.">
   <meta property="og:url" content="https://converttotoolsonline.com/">
   <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ConvertToToolsOnline – Free Online Tools">
+  <meta name="twitter:description" content="Browse free online converters and problem-solving utilities.">
 
-  <!-- Shared CSS and JavaScript from your first website -->
   <link rel="stylesheet" href="/style.css">
   <script src="/script.js" defer></script>
-
-  <style>
-    :root {
-      --cto-primary: #2563eb;
-      --cto-primary-dark: #1d4ed8;
-      --cto-ink: #172033;
-      --cto-muted: #637083;
-      --cto-border: #e2e8f0;
-      --cto-surface: #ffffff;
-      --cto-background: #f7f9fc;
-      --cto-radius: 18px;
-      --cto-shadow: 0 8px 28px rgba(15, 23, 42, 0.055);
-    }
-
-    .cto-home,
-    .cto-home * {
-      box-sizing: border-box;
-    }
-
-    .cto-home {
-      margin: 0;
-      background: var(--cto-background);
-      color: var(--cto-ink);
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    .cto-home a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .cto-home button,
-    .cto-home input {
-      font: inherit;
-    }
-
-    .cto-container {
-      width: min(1160px, calc(100% - 36px));
-      margin-inline: auto;
-    }
-
-    .cto-header {
-      position: relative;
-      z-index: 5;
-      background: #ffffff;
-      border-bottom: 1px solid var(--cto-border);
-    }
-
-    .cto-header-inner {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .cto-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 11px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .cto-brand-mark {
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      background: var(--cto-primary);
-      border-radius: 12px;
-      font-size: 23px;
-      font-weight: 800;
-    }
-
-    .cto-brand-name span {
-      color: var(--cto-primary);
-    }
-
-    .cto-nav {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 24px;
-      color: #475569;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .cto-nav a:hover {
-      color: var(--cto-primary);
-    }
-
-    .cto-nav .cto-nav-contact {
-      color: white;
-      background: var(--cto-primary);
-      padding: 10px 16px;
-      border-radius: 10px;
-    }
-
-    .cto-nav .cto-nav-contact:hover {
-      background: var(--cto-primary-dark);
-      color: #fff;
-    }
-
-    .cto-hero {
-      padding: 76px 0 48px;
-      background:
-        radial-gradient(circle at 12% 8%, rgba(96, 165, 250, 0.15), transparent 32%),
-        radial-gradient(circle at 88% 5%, rgba(129, 140, 248, 0.13), transparent 30%),
-        #ffffff;
-      border-bottom: 1px solid var(--cto-border);
-    }
-
-    .cto-hero-inner {
-      max-width: 850px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .cto-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 18px;
-      padding: 7px 13px;
-      color: #1d4ed8;
-      background: #eff6ff;
-      border: 1px solid #dbeafe;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.7px;
-      text-transform: uppercase;
-    }
-
-    .cto-hero h1 {
-      max-width: 800px;
-      margin: 0 auto 19px;
-      font-size: clamp(34px, 5.5vw, 58px);
-      line-height: 1.1;
-      letter-spacing: -2px;
-      font-weight: 850;
-    }
-
-    .cto-hero h1 span {
-      color: var(--cto-primary);
-    }
-
-    .cto-hero-description {
-      max-width: 690px;
-      margin: 0 auto 30px;
-      color: var(--cto-muted);
-      font-size: 17px;
-      line-height: 1.8;
-    }
-
-    .cto-search {
-      display: flex;
-      max-width: 670px;
-      margin: 0 auto;
-      padding: 7px;
-      gap: 8px;
-      background: #fff;
-      border: 1px solid #dbe3ee;
-      border-radius: 15px;
-      box-shadow: 0 12px 34px rgba(37, 99, 235, 0.08);
-    }
-
-    .cto-search-icon {
-      display: grid;
-      align-items: center;
-      padding-left: 13px;
-      color: #64748b;
-      font-size: 23px;
-    }
-
-    .cto-search input {
-      flex: 1;
-      width: 100%;
-      min-width: 0;
-      padding: 12px 5px;
-      color: var(--cto-ink);
-      background: transparent;
-      border: 0;
-      outline: none;
-    }
-
-    .cto-search input:focus-visible {
-      outline: 2px solid #93c5fd;
-      outline-offset: 2px;
-      border-radius: 6px;
-    }
-
-    .cto-search button {
-      flex-shrink: 0;
-      padding: 12px 21px;
-      color: #fff;
-      background: var(--cto-primary);
-      border: 0;
-      border-radius: 10px;
-      font-weight: 750;
-      cursor: pointer;
-    }
-
-    .cto-search button:hover {
-      background: var(--cto-primary-dark);
-    }
-
-    .cto-hero-note {
-      margin: 15px 0 0;
-      color: #64748b;
-      font-size: 13px;
-    }
-
-    .cto-main {
-      padding: 54px 0 66px;
-    }
-
-    .cto-section-heading {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 24px;
-    }
-
-    .cto-section-heading h2 {
-      margin: 0 0 5px;
-      font-size: clamp(26px, 3vw, 34px);
-      line-height: 1.2;
-      letter-spacing: -1px;
-    }
-
-    .cto-section-heading p {
-      margin: 0;
-      color: var(--cto-muted);
-      font-size: 15px;
-    }
-
-    .cto-result-count {
-      color: #64748b;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .cto-filter-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-bottom: 30px;
-    }
-
-    .cto-filter {
-      padding: 9px 15px;
-      background: #fff;
-      color: #475569;
-      border: 1px solid var(--cto-border);
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.18s ease, color 0.18s ease,
-        border-color 0.18s ease;
-    }
-
-    .cto-filter:hover,
-    .cto-filter.is-active {
-      background: var(--cto-primary);
-      color: #fff;
-      border-color: var(--cto-primary);
-    }
-
-    .cto-tool-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .cto-tool-card {
-      display: flex;
-      min-width: 0;
-      min-height: 230px;
-      flex-direction: column;
-      padding: 23px;
-      background: var(--cto-surface);
-      border: 1px solid var(--cto-border);
-      border-radius: var(--cto-radius);
-      box-shadow: 0 2px 7px rgba(15, 23, 42, 0.018);
-      transition: transform 0.18s ease, box-shadow 0.18s ease,
-        border-color 0.18s ease;
-    }
-
-    .cto-tool-card:hover {
-      transform: translateY(-4px);
-      border-color: #b7cdfb;
-      box-shadow: var(--cto-shadow);
-    }
-
-    .cto-tool-card:focus-visible {
-      outline: 3px solid #93c5fd;
-      outline-offset: 3px;
-    }
-
-    .cto-tool-icon {
-      display: grid;
-      place-items: center;
-      width: 48px;
-      height: 48px;
-      margin-bottom: 17px;
-      border-radius: 14px;
-      background: #eff6ff;
-      font-size: 25px;
-    }
-
-    .cto-tool-card h3 {
-      margin: 0 0 8px;
-      color: #172033;
-      font-size: 17px;
-      line-height: 1.35;
-      letter-spacing: -0.2px;
-    }
-
-    .cto-tool-card p {
-      flex: 1;
-      margin: 0 0 18px;
-      color: var(--cto-muted);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .cto-tool-open {
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      width: 100%;
-      margin-top: auto;
-      padding-top: 13px;
-      color: var(--cto-primary);
-      border-top: 1px solid #edf0f5;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .cto-tool-card:hover .cto-tool-open {
-      color: var(--cto-primary-dark);
-    }
-
-    .cto-tool-arrow {
-      font-size: 19px;
-      line-height: 1;
-      transition: transform 0.18s ease;
-    }
-
-    .cto-tool-card:hover .cto-tool-arrow {
-      transform: translateX(3px);
-    }
-
-    .cto-empty-state {
-      display: none;
-      margin-top: 20px;
-      padding: 35px 20px;
-      text-align: center;
-      background: #fff;
-      border: 1px dashed #cbd5e1;
-      border-radius: var(--cto-radius);
-    }
-
-    .cto-empty-state h3 {
-      margin: 0 0 8px;
-    }
-
-    .cto-empty-state p {
-      margin: 0;
-      color: var(--cto-muted);
-    }
-
-    .cto-info-section {
-      padding: 54px 0;
-      background: #fff;
-      border-top: 1px solid var(--cto-border);
-    }
-
-    .cto-info-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 48px;
-      align-items: start;
-    }
-
-    .cto-info-section h2 {
-      margin: 0 0 15px;
-      font-size: clamp(25px, 3vw, 31px);
-      line-height: 1.25;
-      letter-spacing: -0.8px;
-    }
-
-    .cto-info-section p {
-      color: var(--cto-muted);
-      font-size: 14px;
-      line-height: 1.85;
-    }
-
-    .cto-info-section p:first-of-type {
-      margin-top: 0;
-    }
-
-    .cto-faq-list {
-      display: grid;
-      gap: 11px;
-    }
-
-    .cto-faq-list details {
-      padding: 16px 18px;
-      background: #f8fafc;
-      border: 1px solid var(--cto-border);
-      border-radius: 12px;
-    }
-
-    .cto-faq-list summary {
-      color: #1e293b;
-      font-size: 14px;
-      font-weight: 750;
-      cursor: pointer;
-    }
-
-    .cto-faq-list details p {
-      margin: 12px 0 0;
-      font-size: 13px;
-    }
-
-    .cto-footer {
-      padding: 36px 0 24px;
-      color: #cbd5e1;
-      background: #101827;
-    }
-
-    .cto-footer-inner {
-      display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
-      gap: 30px;
-      padding-bottom: 26px;
-    }
-
-    .cto-footer .cto-brand {
-      color: #fff;
-    }
-
-    .cto-footer-description {
-      max-width: 510px;
-      margin: 14px 0 0;
-      color: #a7b3c5;
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    .cto-footer h2 {
-      margin: 0 0 12px;
-      color: #fff;
-      font-size: 15px;
-    }
-
-    .cto-footer-links {
-      display: grid;
-      gap: 9px;
-      font-size: 13px;
-    }
-
-    .cto-footer-links a {
-      width: fit-content;
-      color: #cbd5e1;
-      overflow-wrap: anywhere;
-    }
-
-    .cto-footer-links a:hover {
-      color: #93c5fd;
-    }
-
-    .cto-footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      padding-top: 19px;
-      border-top: 1px solid #293548;
-      color: #94a3b8;
-      font-size: 12px;
-    }
-
-    .cto-footer-bottom p {
-      margin: 0;
-    }
-
-    .cto-hidden {
-      display: none !important;
-    }
-
-    @media (max-width: 900px) {
-      .cto-tool-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .cto-nav {
-        gap: 14px;
-      }
-
-      .cto-info-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-    }
-
-    @media (max-width: 620px) {
-      .cto-container {
-        width: min(100% - 28px, 1160px);
-      }
-
-      .cto-header-inner {
-        min-height: auto;
-        padding-top: 14px;
-        padding-bottom: 14px;
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 13px;
-      }
-
-      .cto-brand {
-        font-size: 18px;
-      }
-
-      .cto-brand-mark {
-        width: 36px;
-        height: 36px;
-      }
-
-      .cto-nav {
-        width: 100%;
-        gap: 10px 17px;
-        font-size: 12px;
-      }
-
-      .cto-nav .cto-nav-contact {
-        padding: 7px 11px;
-      }
-
-      .cto-hero {
-        padding: 52px 0 38px;
-      }
-
-      .cto-hero h1 {
-        letter-spacing: -1.3px;
-      }
-
-      .cto-hero-description {
-        font-size: 15px;
-      }
-
-      .cto-search {
-        gap: 3px;
-        padding: 5px;
-      }
-
-      .cto-search-icon {
-        padding-left: 8px;
-        font-size: 19px;
-      }
-
-      .cto-search input {
-        font-size: 14px;
-      }
-
-      .cto-search button {
-        padding: 10px 12px;
-        font-size: 13px;
-      }
-
-      .cto-main {
-        padding: 39px 0 45px;
-      }
-
-      .cto-section-heading {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .cto-filter-row {
-        gap: 7px;
-        margin-bottom: 22px;
-      }
-
-      .cto-filter {
-        padding: 8px 11px;
-        font-size: 12px;
-      }
-
-      .cto-tool-grid {
-        grid-template-columns: 1fr;
-        gap: 13px;
-      }
-
-      .cto-tool-card {
-        min-height: 0;
-        padding: 20px;
-      }
-
-      .cto-tool-icon {
-        width: 43px;
-        height: 43px;
-        margin-bottom: 13px;
-      }
-
-      .cto-tool-card p {
-        margin-bottom: 14px;
-      }
-
-      .cto-footer-inner {
-        grid-template-columns: 1fr;
-        gap: 26px;
-      }
-
-      .cto-footer-bottom {
-        flex-direction: column;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .cto-home *,
-      .cto-home *::before,
-      .cto-home *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-      }
-    }
-  </style>
 
   <script type="application/ld+json">
   {
@@ -672,511 +30,1457 @@
       {
         "@type": "WebSite",
         "@id": "https://converttotoolsonline.com/#website",
-        "name": "ConvertToToolsOnline",
         "url": "https://converttotoolsonline.com/",
-        "description": "Free online tools for image conversion, PDF, data, calculations, productivity, marketing, and design."
+        "name": "ConvertToToolsOnline",
+        "description": "Free online utilities for files, documents, text, data, developers, website troubleshooting and calculations.",
+        "inLanguage": "en"
       },
       {
         "@type": "Organization",
         "@id": "https://converttotoolsonline.com/#organization",
         "name": "ConvertToToolsOnline",
-        "url": "https://converttotoolsonline.com/",
-        "email": "rabinpandey878@gmail.com",
-        "telephone": "+9779714170081"
+        "url": "https://converttotoolsonline.com/"
       },
       {
-        "@type": "CollectionPage",
-        "@id": "https://converttotoolsonline.com/#webpage",
-        "name": "Free Online Tools",
+        "@type": "WebPage",
+        "@id": "https://converttotoolsonline.com/#homepage",
         "url": "https://converttotoolsonline.com/",
+        "name": "Free Online Tools and Converters",
         "isPartOf": {
           "@id": "https://converttotoolsonline.com/#website"
         },
         "about": {
           "@id": "https://converttotoolsonline.com/#organization"
-        }
+        },
+        "inLanguage": "en"
       }
     ]
   }
   </script>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --ct-ink: #172033;
+      --ct-muted: #607087;
+      --ct-blue: #245bcc;
+      --ct-blue-dark: #194aa8;
+      --ct-line: #dfe6ef;
+      --ct-bg: #f5f8ff;
+      --ct-white: #fff;
+      --ct-radius: 16px;
+      --ct-shadow: 0 6px 24px rgba(20, 35, 60, .055);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 20px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--ct-bg);
+      color: var(--ct-ink);
+      font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a {
+      color: var(--ct-blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 3px solid #9dbbff;
+      outline-offset: 3px;
+    }
+
+    .ct-home [hidden] {
+      display: none !important;
+    }
+
+    .ct-container {
+      width: min(1200px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    .ct-skip {
+      position: absolute;
+      top: 8px;
+      left: -9999px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: white;
+      color: var(--ct-ink);
+    }
+
+    .ct-skip:focus {
+      left: 10px;
+    }
+
+    .ct-header {
+      position: relative;
+      z-index: 10;
+      background: #fff;
+      border-bottom: 1px solid var(--ct-line);
+    }
+
+    .ct-header-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .ct-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--ct-ink);
+      font-weight: 850;
+      letter-spacing: -.4px;
+    }
+
+    .ct-brand:hover {
+      text-decoration: none;
+    }
+
+    .ct-brand-mark {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      flex: 0 0 auto;
+      border-radius: 12px;
+      background: var(--ct-blue);
+      color: #fff;
+      font-size: .95rem;
+      font-weight: 900;
+    }
+
+    .ct-brand-name span {
+      color: var(--ct-blue);
+    }
+
+    .ct-nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .ct-nav a {
+      color: #475569;
+      font-size: .93rem;
+      font-weight: 700;
+    }
+
+    .ct-nav a:hover {
+      color: var(--ct-blue);
+    }
+
+    .ct-menu-button {
+      display: none;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--ct-line);
+      border-radius: 9px;
+      background: white;
+      color: var(--ct-ink);
+      font-weight: 750;
+    }
+
+    .ct-hero {
+      padding: 62px 0 48px;
+      border-bottom: 1px solid var(--ct-line);
+      background: linear-gradient(130deg, #f8fbff 0%, #eaf1ff 56%, #f6f2ff 100%);
+    }
+
+    .ct-eyebrow {
+      margin: 0 0 10px;
+      color: var(--ct-blue);
+      font-size: .76rem;
+      font-weight: 850;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .ct-hero h1 {
+      max-width: 900px;
+      margin: 0 0 17px;
+      font-size: clamp(2.2rem, 5.4vw, 4rem);
+      line-height: 1.07;
+      letter-spacing: -.055em;
+    }
+
+    .ct-hero h1 span {
+      display: block;
+      color: var(--ct-blue);
+    }
+
+    .ct-lead {
+      max-width: 790px;
+      margin: 0;
+      color: #475569;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      line-height: 1.8;
+    }
+
+    .ct-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 11px;
+      margin-top: 23px;
+    }
+
+    .ct-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      min-height: 43px;
+      padding: 10px 15px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ct-ink);
+      font-weight: 750;
+      text-align: center;
+    }
+
+    .ct-button:hover {
+      border-color: #a9bce4;
+      text-decoration: none;
+    }
+
+    .ct-button-primary {
+      border-color: var(--ct-blue);
+      background: var(--ct-blue);
+      color: #fff;
+    }
+
+    .ct-button-primary:hover {
+      border-color: var(--ct-blue-dark);
+      background: var(--ct-blue-dark);
+      color: #fff;
+    }
+
+    .ct-benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      margin: 22px 0 0;
+      padding: 0;
+      color: var(--ct-muted);
+      font-size: .9rem;
+      list-style: none;
+    }
+
+    .ct-benefits li::before {
+      content: "✓";
+      margin-right: 7px;
+      color: #16804a;
+      font-weight: 900;
+    }
+
+    .ct-section {
+      padding: 40px 0;
+    }
+
+    .ct-section-heading {
+      margin-bottom: 21px;
+    }
+
+    .ct-section-heading h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      letter-spacing: -.035em;
+      line-height: 1.25;
+    }
+
+    .ct-section-heading p:last-child {
+      max-width: 820px;
+      margin: 0;
+      color: var(--ct-muted);
+    }
+
+    .ct-category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .ct-category {
+      display: block;
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid var(--ct-line);
+      border-radius: 13px;
+      background: white;
+      box-shadow: var(--ct-shadow);
+      color: var(--ct-ink);
+      text-align: left;
+    }
+
+    .ct-category:hover,
+    .ct-category[aria-pressed="true"] {
+      border-color: #a9bff4;
+      background: #f4f7ff;
+    }
+
+    .ct-category strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: .96rem;
+    }
+
+    .ct-category span {
+      display: block;
+      color: var(--ct-muted);
+      font-size: .83rem;
+      line-height: 1.5;
+    }
+
+    .ct-directory {
+      padding-top: 26px;
+    }
+
+    .ct-directory-bar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      margin: 20px 0 13px;
+    }
+
+    .ct-search {
+      position: relative;
+      min-width: 0;
+    }
+
+    .ct-search label {
+      position: absolute;
+      top: 8px;
+      left: 13px;
+      color: var(--ct-muted);
+      font-size: .76rem;
+      font-weight: 750;
+    }
+
+    .ct-search input {
+      width: 100%;
+      min-height: 54px;
+      padding: 26px 13px 7px;
+      border: 1px solid #cbd5e1;
+      border-radius: 11px;
+      background: #fff;
+      color: var(--ct-ink);
+    }
+
+    .ct-clear-button {
+      min-height: 54px;
+      padding: 10px 15px;
+      border: 1px solid #cbd5e1;
+      border-radius: 11px;
+      background: #fff;
+      color: var(--ct-ink);
+      font-weight: 750;
+    }
+
+    .ct-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 13px 0 16px;
+    }
+
+    .ct-filter {
+      min-height: 35px;
+      padding: 6px 11px;
+      border: 1px solid var(--ct-line);
+      border-radius: 999px;
+      background: #fff;
+      color: #475569;
+      font-size: .85rem;
+      font-weight: 750;
+    }
+
+    .ct-filter:hover,
+    .ct-filter[aria-pressed="true"] {
+      border-color: #a9bff4;
+      background: #edf4ff;
+      color: var(--ct-blue-dark);
+    }
+
+    .ct-directory-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 15px;
+      margin: 0 0 15px;
+      color: var(--ct-muted);
+      font-size: .88rem;
+    }
+
+    .ct-tool-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .ct-tool-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 9px;
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid var(--ct-line);
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: var(--ct-shadow);
+      transition: transform .15s ease, border-color .15s ease;
+    }
+
+    .ct-tool-card:hover {
+      transform: translateY(-2px);
+      border-color: #bdccef;
+    }
+
+    .ct-tool-card[hidden] {
+      display: none !important;
+    }
+
+    .ct-tool-icon {
+      display: grid;
+      place-items: center;
+      min-width: 42px;
+      height: 42px;
+      padding: 0 7px;
+      border: 1px solid #dce7ff;
+      border-radius: 11px;
+      background: #eef4ff;
+      color: #244caf;
+      font-size: .91rem;
+      font-weight: 900;
+    }
+
+    .ct-tool-category {
+      color: var(--ct-muted);
+      font-size: .72rem;
+      font-weight: 850;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .ct-tool-card h3 {
+      margin: 0;
+      font-size: 1.04rem;
+      line-height: 1.35;
+    }
+
+    .ct-tool-card h3 a {
+      color: var(--ct-ink);
+      overflow-wrap: anywhere;
+    }
+
+    .ct-tool-card p {
+      margin: 0;
+      color: var(--ct-muted);
+      font-size: .9rem;
+      line-height: 1.65;
+    }
+
+    .ct-open-tool {
+      margin-top: auto;
+      padding-top: 6px;
+      font-size: .9rem;
+      font-weight: 850;
+    }
+
+    .ct-legacy-links {
+      padding-top: 3px;
+      font-size: .81rem;
+      line-height: 1.6;
+    }
+
+    .ct-empty {
+      display: none;
+      padding: 26px 18px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 14px;
+      background: #fff;
+      color: var(--ct-muted);
+      text-align: center;
+    }
+
+    .ct-empty.is-visible {
+      display: block;
+    }
+
+    .ct-about-section {
+      border-top: 1px solid var(--ct-line);
+      background: #fff;
+    }
+
+    .ct-about-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 38px;
+    }
+
+    .ct-about-grid h2 {
+      margin: 0;
+      font-size: clamp(1.65rem, 3vw, 2.3rem);
+      line-height: 1.2;
+      letter-spacing: -.04em;
+    }
+
+    .ct-about-copy p {
+      margin: 0 0 13px;
+      color: var(--ct-muted);
+    }
+
+    .ct-footer {
+      padding: 35px 0 17px;
+      background: #111c32;
+      color: #d5deed;
+    }
+
+    .ct-footer-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 28px;
+    }
+
+    .ct-footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      color: #fff;
+      font-weight: 850;
+    }
+
+    .ct-footer-brand:hover {
+      text-decoration: none;
+    }
+
+    .ct-footer-grid p {
+      max-width: 390px;
+      color: #bdc8db;
+      font-size: .91rem;
+    }
+
+    .ct-footer-links {
+      display: grid;
+      align-content: start;
+      gap: 7px;
+    }
+
+    .ct-footer-links strong {
+      margin-bottom: 4px;
+      color: #fff;
+    }
+
+    .ct-footer-links a {
+      color: #cbd5e1;
+      font-size: .92rem;
+    }
+
+    .ct-footer-links a:hover {
+      color: #fff;
+    }
+
+    .ct-footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px solid #32405a;
+      color: #aebbd0;
+      font-size: .84rem;
+    }
+
+    .ct-footer-bottom p {
+      margin: 0;
+    }
+
+    @media (max-width: 950px) {
+      .ct-category-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .ct-tool-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .ct-header-inner {
+        min-height: 65px;
+      }
+
+      .ct-menu-button {
+        display: inline-flex;
+      }
+
+      .ct-nav {
+        display: none;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        right: 0;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--ct-line);
+        background: #fff;
+      }
+
+      .ct-nav.is-open {
+        display: block;
+      }
+
+      .ct-nav-inner {
+        display: grid;
+        gap: 0;
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .ct-nav-inner a {
+        padding: 10px 0;
+      }
+
+      .ct-hero {
+        padding: 44px 0 35px;
+      }
+
+      .ct-about-grid {
+        grid-template-columns: 1fr;
+        gap: 13px;
+      }
+
+      .ct-footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .ct-container {
+        width: calc(100% - 22px);
+      }
+
+      .ct-tool-grid,
+      .ct-footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ct-category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+      }
+
+      .ct-category {
+        padding: 12px;
+      }
+
+      .ct-tool-card {
+        padding: 16px;
+      }
+
+      .ct-directory-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .ct-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .ct-benefits {
+        display: grid;
+        gap: 7px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<div class="cto-home">
+<a class="ct-skip" href="#main-content">Skip to content</a>
 
-  <header class="cto-header">
-    <div class="cto-container cto-header-inner">
-      <a class="cto-brand" href="/" aria-label="ConvertToToolsOnline homepage">
-        <span class="cto-brand-mark" aria-hidden="true">C</span>
-        <span class="cto-brand-name">Convert<span>ToTools</span>Online</span>
-      </a>
+<header class="ct-header">
+  <div class="ct-container ct-header-inner">
+    <a class="ct-brand" href="/" aria-label="ConvertToToolsOnline home">
+      <span class="ct-brand-mark" aria-hidden="true">CT</span>
+      <span class="ct-brand-name">Convert<span>ToToolsOnline</span></span>
+    </a>
 
-      <nav class="cto-nav" aria-label="Main navigation">
+    <button
+      class="ct-menu-button"
+      id="ct-menu-button"
+      type="button"
+      aria-controls="ct-main-nav"
+      aria-expanded="false"
+    >Menu</button>
+
+    <nav class="ct-nav" id="ct-main-nav" aria-label="Main navigation">
+      <div class="ct-nav-inner">
         <a href="/" aria-current="page">Home</a>
-        <a href="#tools">All Tools</a>
-        <a href="#about-tools">About</a>
-        <a class="cto-nav-contact" href="/Contact.html">Contact</a>
+        <a href="#tools">All tools</a>
+        <a href="#categories">Categories</a>
+        <a href="/Contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="ct-home" id="main-content">
+  <section class="ct-hero">
+    <div class="ct-container">
+      <p class="ct-eyebrow">A practical digital toolbox</p>
+      <h1>Free Online Tools <span>for Real Everyday Problems</span></h1>
+      <p class="ct-lead">
+        Convert files, work with text and data, prepare documents, inspect website
+        configurations, and troubleshoot common digital tasks. Choose a dedicated tool
+        and get straight to the job.
+      </p>
+
+      <div class="ct-hero-actions">
+        <a class="ct-button ct-button-primary" href="#tools">Explore all tools <span aria-hidden="true">↓</span></a>
+        <a class="ct-button" href="#categories">Browse categories <span aria-hidden="true">→</span></a>
+      </div>
+
+      <ul class="ct-benefits">
+        <li>Direct links to individual tools</li>
+        <li>Searchable directory</li>
+        <li>Mobile-friendly layout</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ct-section" id="categories">
+    <div class="ct-container">
+      <div class="ct-section-heading">
+        <p class="ct-eyebrow">Browse by task</p>
+        <h2>Find the right tool faster</h2>
+        <p>Select a category to filter the directory. You can also search by a tool name or the problem you need to solve.</p>
+      </div>
+
+      <div class="ct-category-grid">
+        <button class="ct-category" type="button" data-filter="images" aria-pressed="false">
+          <strong>Images &amp; media</strong>
+          <span>Compress, resize, compare and convert images or subtitles.</span>
+        </button>
+
+        <button class="ct-category" type="button" data-filter="documents" aria-pressed="false">
+          <strong>PDF &amp; documents</strong>
+          <span>Extract, merge, convert and prepare documents.</span>
+        </button>
+
+        <button class="ct-category" type="button" data-filter="data" aria-pressed="false">
+          <strong>Text &amp; data</strong>
+          <span>Process JSON, CSV, YAML, text and structured data.</span>
+        </button>
+
+        <button class="ct-category" type="button" data-filter="developer" aria-pressed="false">
+          <strong>Developer &amp; SEO</strong>
+          <span>Inspect DNS, HAR, metadata, robots files and code.</span>
+        </button>
+
+        <button class="ct-category" type="button" data-filter="calculators" aria-pressed="false">
+          <strong>Calculators</strong>
+          <span>Calculate electricity costs, percentages and working days.</span>
+        </button>
+
+        <button class="ct-category" type="button" data-filter="business" aria-pressed="false">
+          <strong>Business &amp; email</strong>
+          <span>Create invoices, signatures and marketing links.</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="ct-section ct-directory" id="tools">
+    <div class="ct-container">
+      <div class="ct-section-heading">
+        <p class="ct-eyebrow">The full directory</p>
+        <h2>All online tools and converters</h2>
+        <p>Search by name, format, file type or task. Tool links use the filenames available in your current root-level upload.</p>
+      </div>
+
+      <div class="ct-directory-bar">
+        <div class="ct-search">
+          <label for="ct-search-input">Search all tools</label>
+          <input id="ct-search-input" type="search" placeholder="Try “PDF”, “JSON”, “DNS” or “email”" autocomplete="off">
+        </div>
+        <button class="ct-clear-button" id="ct-clear-search" type="button">Clear search</button>
+      </div>
+
+      <div class="ct-filter-bar" aria-label="Filter tools by category">
+        <button class="ct-filter" type="button" data-filter="all" aria-pressed="true">All tools</button>
+        <button class="ct-filter" type="button" data-filter="images" aria-pressed="false">Images &amp; media</button>
+        <button class="ct-filter" type="button" data-filter="documents" aria-pressed="false">PDF &amp; documents</button>
+        <button class="ct-filter" type="button" data-filter="data" aria-pressed="false">Text &amp; data</button>
+        <button class="ct-filter" type="button" data-filter="developer" aria-pressed="false">Developer &amp; SEO</button>
+        <button class="ct-filter" type="button" data-filter="calculators" aria-pressed="false">Calculators</button>
+        <button class="ct-filter" type="button" data-filter="business" aria-pressed="false">Business &amp; email</button>
+      </div>
+
+      <div class="ct-directory-meta">
+        <span id="ct-results-count" aria-live="polite">Loading directory…</span>
+        <span>Choose a tool to open its dedicated page.</span>
+      </div>
+
+      <div class="ct-tool-grid" id="ct-tool-grid">
+
+        <!-- IMAGES AND MEDIA -->
+        <article class="ct-tool-card" data-category="images" data-search="image compressor compress reduce file size optimize jpeg webp png">
+          <span class="ct-tool-icon" aria-hidden="true">IMG</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/image-compressor.html">Image Compressor</a></h3>
+          <p>Reduce image file sizes for websites, sharing and uploads.</p>
+          <a class="ct-open-tool" href="/image-compressor.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images" data-search="image resizer resize dimensions width height image">
+          <span class="ct-tool-icon" aria-hidden="true">↔</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/image-resizer.html">Image Resizer</a></h3>
+          <p>Resize pictures to dimensions required by an app, website or form.</p>
+          <a class="ct-open-tool" href="/image-resizer.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images" data-search="webp to jpg converter convert image webp jpeg">
+          <span class="ct-tool-icon" aria-hidden="true">WEBP</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/WEBP-to-jpg-converter.html">WebP to JPG Converter</a></h3>
+          <p>Convert WebP images into JPG files for broader compatibility.</p>
+          <a class="ct-open-tool" href="/WEBP-to-jpg-converter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images" data-search="heic to jpg iphone photo converter">
+          <span class="ct-tool-icon" aria-hidden="true">HEIC</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/heic-to-jpg.html">HEIC to JPG Converter</a></h3>
+          <p>Convert compatible HEIC photos into JPG images.</p>
+          <a class="ct-open-tool" href="/heic-to-jpg.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images" data-search="image color picker hex rgb color palette pixel">
+          <span class="ct-tool-icon" aria-hidden="true">HEX</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/image-color-picker.html">Image Color Picker</a></h3>
+          <p>Pick colors from an image and inspect their color values.</p>
+          <a class="ct-open-tool" href="/image-color-picker.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images" data-search="image comparison before after pixel difference visual screenshot compare">
+          <span class="ct-tool-icon" aria-hidden="true">A/B</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/image-comparison-tool.html">Image Comparison Tool</a></h3>
+          <p>Compare original and edited images with a slider and pixel difference map.</p>
+          <a class="ct-open-tool" href="/image-comparison-tool.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images" data-search="image metadata viewer exif camera data photo information">
+          <span class="ct-tool-icon" aria-hidden="true">EXIF</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/image-metadata-viewer.html">Image Metadata Viewer</a></h3>
+          <p>Inspect image metadata and learn what information a file contains.</p>
+          <a class="ct-open-tool" href="/image-metadata-viewer.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images" data-search="favicon generator website icon browser tab">
+          <span class="ct-tool-icon" aria-hidden="true">ICO</span>
+          <span class="ct-tool-category">Images &amp; design</span>
+          <h3><a href="/Favicon-generator.html">Favicon Generator</a></h3>
+          <p>Prepare favicon assets for a website or browser tab.</p>
+          <a class="ct-open-tool" href="/Favicon-generator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images" data-search="css gradient generator background colors visual css">
+          <span class="ct-tool-icon" aria-hidden="true">CSS</span>
+          <span class="ct-tool-category">Images &amp; design</span>
+          <h3><a href="/css-gradient-generator.html">CSS Gradient Generator</a></h3>
+          <p>Create gradient settings for website backgrounds and interface elements.</p>
+          <a class="ct-open-tool" href="/css-gradient-generator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images" data-search="srt vtt subtitle converter time shift synchronization subtitles">
+          <span class="ct-tool-icon" aria-hidden="true">SRT</span>
+          <span class="ct-tool-category">Video &amp; subtitles</span>
+          <h3><a href="/srt-vtt-subtitle-converter.html">SRT / VTT Subtitle Converter</a></h3>
+          <p>Convert subtitle formats and shift caption timing forward or backward.</p>
+          <a class="ct-open-tool" href="/srt-vtt-subtitle-converter.html">Open tool →</a>
+        </article>
+
+        <!-- PDF AND DOCUMENTS -->
+        <article class="ct-tool-card" data-category="documents" data-search="jpg to pdf convert image photos to PDF">
+          <span class="ct-tool-icon" aria-hidden="true">JPG</span>
+          <span class="ct-tool-category">PDF &amp; documents</span>
+          <h3><a href="/jpg-to-pdf.html">JPG to PDF Converter</a></h3>
+          <p>Turn JPG images into a PDF document.</p>
+          <a class="ct-open-tool" href="/jpg-to-pdf.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="documents" data-search="merge pdf combine join multiple pdf documents">
+          <span class="ct-tool-icon" aria-hidden="true">PDF+</span>
+          <span class="ct-tool-category">PDF &amp; documents</span>
+          <h3><a href="/merge-pdf.html">Merge PDF Files</a></h3>
+          <p>Combine multiple PDF documents into one file.</p>
+          <a class="ct-open-tool" href="/merge-pdf.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="documents" data-search="pdf page extractor extract selected pages split pdf">
+          <span class="ct-tool-icon" aria-hidden="true">PAGES</span>
+          <span class="ct-tool-category">PDF &amp; documents</span>
+          <h3><a href="/pdf-page-extractor.html">PDF Page Extractor</a></h3>
+          <p>Extract selected pages from a PDF into a separate document.</p>
+          <a class="ct-open-tool" href="/pdf-page-extractor.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="documents" data-search="add page numbers pdf pagination headers footers">
+          <span class="ct-tool-icon" aria-hidden="true">#</span>
+          <span class="ct-tool-category">PDF &amp; documents</span>
+          <h3><a href="/add-page-numbers-to-pdf.html">Add Page Numbers to PDF</a></h3>
+          <p>Number selected PDF pages with a custom starting number and position.</p>
+          <a class="ct-open-tool" href="/add-page-numbers-to-pdf.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="documents" data-search="pdf to jpg png converter render pages images">
+          <span class="ct-tool-icon" aria-hidden="true">PDF→IMG</span>
+          <span class="ct-tool-category">PDF &amp; documents</span>
+          <h3><a href="/pdf-to-jpg-png-converter.html">PDF to JPG / PNG Converter</a></h3>
+          <p>Convert selected PDF pages to image files with adjustable resolution.</p>
+          <a class="ct-open-tool" href="/pdf-to-jpg-png-converter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="business" data-search="invoice generator free create invoice billing">
+          <span class="ct-tool-icon" aria-hidden="true">INV</span>
+          <span class="ct-tool-category">Business</span>
+          <h3><a href="/Invoice-generator-free">Free Invoice Generator</a></h3>
+          <p>Create an invoice document for a customer or project.</p>
+          <a class="ct-open-tool" href="/Invoice-generator-free">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="business" data-search="online invoice generator invoice creation business billing">
+          <span class="ct-tool-icon" aria-hidden="true">INV+</span>
+          <span class="ct-tool-category">Business</span>
+          <h3><a href="/invoice-generator-online.html">Online Invoice Generator</a></h3>
+          <p>Prepare an invoice using the online invoice builder.</p>
+          <a class="ct-open-tool" href="/invoice-generator-online.html">Open tool →</a>
+        </article>
+
+        <!-- TEXT AND DATA -->
+        <article class="ct-tool-card" data-category="data" data-search="word counter words characters sentences reading time text">
+          <span class="ct-tool-icon" aria-hidden="true">TXT</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/word-counter.html">Word Counter</a></h3>
+          <p>Count words and characters and inspect basic text statistics.</p>
+          <a class="ct-open-tool" href="/word-counter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="text diff checker compare text differences changes">
+          <span class="ct-tool-icon" aria-hidden="true">DIFF</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/text-diff-checker.html">Text Diff Checker</a></h3>
+          <p>Compare two text versions and identify changes.</p>
+          <a class="ct-open-tool" href="/text-diff-checker.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="markdown to html converter markdown preview HTML">
+          <span class="ct-tool-icon" aria-hidden="true">MD</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/markdown-to-html-converter.html">Markdown to HTML Converter</a></h3>
+          <p>Convert Markdown text into HTML markup with a preview.</p>
+          <a class="ct-open-tool" href="/markdown-to-html-converter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="html entity encoder decoder special characters escaping">
+          <span class="ct-tool-icon" aria-hidden="true">HTML</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/html-entity-encoder-decoder.html">HTML Entity Encoder / Decoder</a></h3>
+          <p>Encode special characters into HTML entities or decode them back.</p>
+          <a class="ct-open-tool" href="/html-entity-encoder-decoder.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="json formatter validator pretty print inspect JSON">
+          <span class="ct-tool-icon" aria-hidden="true">JSON</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/json-formatter.html">JSON Formatter</a></h3>
+          <p>Format and validate JSON data for easier inspection.</p>
+          <a class="ct-open-tool" href="/json-formatter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="json schema validator schema validation structure">
+          <span class="ct-tool-icon" aria-hidden="true">JSC</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/Json-schema-validator.html">JSON Schema Validator</a></h3>
+          <p>Check JSON data against a supplied schema.</p>
+          <a class="ct-open-tool" href="/Json-schema-validator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="json to csv converter export rows spreadsheet">
+          <span class="ct-tool-icon" aria-hidden="true">CSV</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/Json-to-CSV-converter.html">JSON to CSV Converter</a></h3>
+          <p>Convert supported JSON data into a CSV file.</p>
+          <a class="ct-open-tool" href="/Json-to-CSV-converter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="csv to json converter tabular data JSON">
+          <span class="ct-tool-icon" aria-hidden="true">CSV→</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/csv-to-json.html">CSV to JSON Converter</a></h3>
+          <p>Convert CSV rows into JSON records.</p>
+          <a class="ct-open-tool" href="/csv-to-json.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="csv cleaner validator clean rows duplicate blanks whitespace">
+          <span class="ct-tool-icon" aria-hidden="true">CLEAN</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/csv-cleaner-validator.html">CSV Cleaner &amp; Validator</a></h3>
+          <p>Inspect CSV files and clean common row and formatting problems.</p>
+          <a class="ct-open-tool" href="/csv-cleaner-validator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="csv to sql converter INSERT SQL database">
+          <span class="ct-tool-icon" aria-hidden="true">SQL</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/csv-to-sql-converter.html">CSV to SQL Converter</a></h3>
+          <p>Generate SQL insert statements from CSV data.</p>
+          <a class="ct-open-tool" href="/csv-to-sql-converter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="merge json files objects arrays combine JSON">
+          <span class="ct-tool-icon" aria-hidden="true">MERGE</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/Merge-JSON-merger.html">JSON Merger</a></h3>
+          <p>Combine supported JSON objects or arrays.</p>
+          <a class="ct-open-tool" href="/Merge-JSON-merger.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="json to excel xlsx spreadsheet converter">
+          <span class="ct-tool-icon" aria-hidden="true">XLSX</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/json-to-excel-converter.html">JSON to Excel Converter</a></h3>
+          <p>Convert compatible JSON records into a spreadsheet file.</p>
+          <a class="ct-open-tool" href="/json-to-excel-converter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="json to typescript types interfaces code generation">
+          <span class="ct-tool-icon" aria-hidden="true">TS</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/json-to-typescript.html">JSON to TypeScript</a></h3>
+          <p>Generate TypeScript type declarations from JSON examples.</p>
+          <a class="ct-open-tool" href="/json-to-typescript.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer" data-search="jsonpath tester query JSONPath expression">
+          <span class="ct-tool-icon" aria-hidden="true">PATH</span>
+          <span class="ct-tool-category">Developer</span>
+          <h3><a href="/jsonpath-tester.html">JSONPath Tester</a></h3>
+          <p>Test JSONPath expressions against JSON input.</p>
+          <a class="ct-open-tool" href="/jsonpath-tester.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer" data-search="jwt decoder JSON web token decode header payload claims">
+          <span class="ct-tool-icon" aria-hidden="true">JWT</span>
+          <span class="ct-tool-category">Developer</span>
+          <h3><a href="/jwt-decoder.html">JWT Decoder</a></h3>
+          <p>Inspect JWT headers and payloads without treating decoding as signature verification.</p>
+          <a class="ct-open-tool" href="/jwt-decoder.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="yaml to json converter transform configuration">
+          <span class="ct-tool-icon" aria-hidden="true">YAML</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/yaml-to-json-converter.html">YAML to JSON Converter</a></h3>
+          <p>Convert supported YAML data into JSON.</p>
+          <a class="ct-open-tool" href="/yaml-to-json-converter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer" data-search="SQL formatter SQL query format indent">
+          <span class="ct-tool-icon" aria-hidden="true">SQL</span>
+          <span class="ct-tool-category">Developer</span>
+          <h3><a href="/sql-formatter.html">SQL Formatter</a></h3>
+          <p>Format SQL statements for more readable queries.</p>
+          <a class="ct-open-tool" href="/sql-formatter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="UUID generator unique identifiers UUID v4 v7">
+          <span class="ct-tool-icon" aria-hidden="true">UUID</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/uuid-generator.html">UUID Generator</a></h3>
+          <p>Generate UUID identifiers for development and test data.</p>
+          <a class="ct-open-tool" href="/uuid-generator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data" data-search="unix timestamp converter epoch time date conversion unix">
+          <span class="ct-tool-icon" aria-hidden="true">TIME</span>
+          <span class="ct-tool-category">Date &amp; developer</span>
+          <h3><a href="/unix-timestamp-converter-online.html">Unix Timestamp Converter</a></h3>
+          <p>Convert between Unix epoch timestamps and human-readable dates.</p>
+          <a class="ct-open-tool" href="/unix-timestamp-converter-online.html">Open tool →</a>
+          <p class="ct-legacy-links">
+            Existing alternate versions:
+            <a href="/unix-timestamp-converter.html">older version</a> ·
+            <a href="/unix-timestamp-converter%20(1).html">legacy copy</a>
+          </p>
+        </article>
+
+        <!-- DEVELOPER, SEO AND DOMAIN TROUBLESHOOTING -->
+        <article class="ct-tool-card" data-category="developer" data-search="cron expression generator schedule cron syntax">
+          <span class="ct-tool-icon" aria-hidden="true">CRON</span>
+          <span class="ct-tool-category">Developer</span>
+          <h3><a href="/cron-expression-generator.html">Cron Expression Generator</a></h3>
+          <p>Build cron expressions for scheduled tasks.</p>
+          <a class="ct-open-tool" href="/cron-expression-generator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer" data-search="robots txt generator validator robots crawler instructions">
+          <span class="ct-tool-icon" aria-hidden="true">ROBOTS</span>
+          <span class="ct-tool-category">SEO</span>
+          <h3><a href="/robots-txt-generator.html">Robots.txt Generator &amp; Validator</a></h3>
+          <p>Build or inspect robots.txt rules for crawlers.</p>
+          <a class="ct-open-tool" href="/robots-txt-generator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer" data-search="sitemap XML validator SEO sitemap errors">
+          <span class="ct-tool-icon" aria-hidden="true">MAP</span>
+          <span class="ct-tool-category">SEO</span>
+          <h3><a href="/sitemap-xml-validator.html">Sitemap XML Validator</a></h3>
+          <p>Check sitemap XML structure and identify common formatting errors.</p>
+          <a class="ct-open-tool" href="/sitemap-xml-validator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer" data-search="SEO meta tag generator title description social preview">
+          <span class="ct-tool-icon" aria-hidden="true">SEO</span>
+          <span class="ct-tool-category">SEO</span>
+          <h3><a href="/seo-meta-tag-generator.html">SEO Meta Tag Generator</a></h3>
+          <p>Create title, description and social metadata for a webpage.</p>
+          <a class="ct-open-tool" href="/seo-meta-tag-generator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="business" data-search="UTM builder campaign URL analytics tracking marketing">
+          <span class="ct-tool-icon" aria-hidden="true">UTM</span>
+          <span class="ct-tool-category">Marketing</span>
+          <h3><a href="/UTM-builder-free.html">UTM Builder</a></h3>
+          <p>Add campaign-tracking parameters to a URL for analytics.</p>
+          <a class="ct-open-tool" href="/UTM-builder-free.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer" data-search="HAR file viewer network requests failed slow request redact credentials">
+          <span class="ct-tool-icon" aria-hidden="true">HAR</span>
+          <span class="ct-tool-category">Troubleshooting</span>
+          <h3><a href="/har-file-viewer-redactor.html">HAR File Viewer &amp; Redactor</a></h3>
+          <p>Inspect browser network logs, find failed requests and prepare a redacted export.</p>
+          <a class="ct-open-tool" href="/har-file-viewer-redactor.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer" data-search="DNS record checker propagation A AAAA CNAME MX TXT NS">
+          <span class="ct-tool-icon" aria-hidden="true">DNS</span>
+          <span class="ct-tool-category">Troubleshooting</span>
+          <h3><a href="/dns-record-propagation-checker.html">DNS Record &amp; Propagation Checker</a></h3>
+          <p>Compare public DNS responses and check whether an expected record value appears.</p>
+          <a class="ct-open-tool" href="/dns-record-propagation-checker.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="business" data-search="email authentication checker SPF DKIM DMARC MX email spam">
+          <span class="ct-tool-icon" aria-hidden="true">MAIL</span>
+          <span class="ct-tool-category">Email troubleshooting</span>
+          <h3><a href="/email-authentication-troubleshooter.html">Email Authentication Troubleshooter</a></h3>
+          <p>Check public SPF, DKIM, DMARC and MX records for common configuration issues.</p>
+          <a class="ct-open-tool" href="/email-authentication-troubleshooter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer" data-search="XML formatter validator pretty print minify XML">
+          <span class="ct-tool-icon" aria-hidden="true">XML</span>
+          <span class="ct-tool-category">Developer</span>
+          <h3><a href="/xml-formatter-validator.html">XML Formatter &amp; Validator</a></h3>
+          <p>Format XML, minify it and check whether the document is well formed.</p>
+          <a class="ct-open-tool" href="/xml-formatter-validator.html">Open tool →</a>
+        </article>
+
+        <!-- CALCULATORS -->
+        <article class="ct-tool-card" data-category="calculators" data-search="percentage error calculator experimental theoretical measurement error">
+          <span class="ct-tool-icon" aria-hidden="true">%</span>
+          <span class="ct-tool-category">Calculator</span>
+          <h3><a href="/percentage-error-calculator.html">Percentage Error Calculator</a></h3>
+          <p>Calculate percentage error between measured and reference values.</p>
+          <a class="ct-open-tool" href="/percentage-error-calculator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="calculators" data-search="working days calculator weekdays business days dates">
+          <span class="ct-tool-icon" aria-hidden="true">DAYS</span>
+          <span class="ct-tool-category">Calculator</span>
+          <h3><a href="/working-days-calculator.html">Working Days Calculator</a></h3>
+          <p>Calculate working days between two dates using the tool's available options.</p>
+          <a class="ct-open-tool" href="/working-days-calculator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="calculators" data-search="electricity cost calculator power watts kwh price usage">
+          <span class="ct-tool-icon" aria-hidden="true">kWh</span>
+          <span class="ct-tool-category">Calculator</span>
+          <h3><a href="/electricity-cost-calculator.html">Electricity Cost Calculator</a></h3>
+          <p>Estimate electricity usage costs from appliance power, operating time and rate.</p>
+          <a class="ct-open-tool" href="/electricity-cost-calculator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="business" data-search="freelance project profit calculator fees costs income">
+          <span class="ct-tool-icon" aria-hidden="true">ROI</span>
+          <span class="ct-tool-category">Business</span>
+          <h3><a href="/freelance-project-profit-calculator.html">Freelance Project Profit Calculator</a></h3>
+          <p>Estimate project profit after costs, time and other expenses.</p>
+          <a class="ct-open-tool" href="/freelance-project-profit-calculator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="business" data-search="email signature generator professional signature contact">
+          <span class="ct-tool-icon" aria-hidden="true">SIG</span>
+          <span class="ct-tool-category">Business</span>
+          <h3><a href="/Free-Email-Signature-Generator">Free Email Signature Generator</a></h3>
+          <p>Prepare a formatted email signature for professional communication.</p>
+          <a class="ct-open-tool" href="/Free-Email-Signature-Generator">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="business" data-search="QR code generator website link text QR">
+          <span class="ct-tool-icon" aria-hidden="true">QR</span>
+          <span class="ct-tool-category">Business &amp; marketing</span>
+          <h3><a href="/qr-code-generator.html">QR Code Generator</a></h3>
+          <p>Create a QR code from a supported link or text input.</p>
+          <a class="ct-open-tool" href="/qr-code-generator.html">Open tool →</a>
+        </article>
+      </div>
+
+      <div class="ct-empty" id="ct-empty-state">
+        <strong>No matching tools found.</strong>
+        <p>Try another keyword or clear your filters to see the complete directory.</p>
+        <button class="ct-button ct-button-primary" id="ct-empty-reset" type="button">Show all tools</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="ct-section ct-about-section" id="about">
+    <div class="ct-container ct-about-grid">
+      <div>
+        <p class="ct-eyebrow">About the toolbox</p>
+        <h2>Tools built around useful tasks</h2>
+      </div>
+      <div class="ct-about-copy">
+        <p>
+          ConvertToToolsOnline brings everyday converters, file utilities, developer helpers
+          and troubleshooting tools into one searchable directory. Each listing has a
+          dedicated page and a specific purpose.
+        </p>
+        <p>
+          Processing and privacy behavior differ by tool. Read the instructions on the
+          individual page before using it with sensitive files, credentials or business data.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-grid">
+      <div>
+        <a class="ct-footer-brand" href="/">
+          <span class="ct-brand-mark" aria-hidden="true">CT</span>
+          <span>ConvertToToolsOnline</span>
+        </a>
+        <p>
+          Practical online tools for documents, images, data, development and everyday work.
+        </p>
+      </div>
+
+      <nav class="ct-footer-links" aria-label="Tool navigation">
+        <strong>Explore</strong>
+        <a href="#tools">All tools</a>
+        <a href="#categories">Categories</a>
+        <a href="/sitemap.xml">XML sitemap</a>
+      </nav>
+
+      <nav class="ct-footer-links" aria-label="Site information">
+        <strong>Contact &amp; information</strong>
+        <a href="/Contact.html">Contact</a>
+        <a href="#about">About the toolbox</a>
+        <a href="#main-content">Back to top ↑</a>
       </nav>
     </div>
-  </header>
 
-  <main>
-    <section class="cto-hero">
-      <div class="cto-container cto-hero-inner">
-        <div class="cto-eyebrow">
-          <span aria-hidden="true">✦</span>
-          Online tools for everyday work
-        </div>
-
-        <h1>Useful Free Online Tools for <span>Everyday Tasks</span></h1>
-
-        <p class="cto-hero-description">
-          Convert files, work with data, calculate results, create business
-          documents, and design useful assets with our collection of online tools.
-        </p>
-
-        <form class="cto-search" id="cto-search-form" role="search">
-          <span class="cto-search-icon" aria-hidden="true">⌕</span>
-          <input
-            type="search"
-            id="cto-search-input"
-            aria-label="Search online tools"
-            placeholder="Search tools, e.g. image, JSON, invoice..."
-            autocomplete="off"
-          >
-          <button type="submit">Search</button>
-        </form>
-
-        <p class="cto-hero-note">
-          Find the tool you need, open its page, and follow its instructions.
-        </p>
-      </div>
-    </section>
-
-    <section class="cto-main" id="tools">
-      <div class="cto-container">
-        <div class="cto-section-heading">
-          <div>
-            <h2>Explore Our Tools</h2>
-            <p>Choose a tool below or search by name or task.</p>
-          </div>
-          <span class="cto-result-count" id="cto-result-count" aria-live="polite">
-            28 tools
-          </span>
-        </div>
-
-        <div class="cto-filter-row" aria-label="Filter tools by category">
-          <button class="cto-filter is-active" type="button" data-filter="all" aria-pressed="true">All Tools</button>
-          <button class="cto-filter" type="button" data-filter="images" aria-pressed="false">Images &amp; PDF</button>
-          <button class="cto-filter" type="button" data-filter="data" aria-pressed="false">Text &amp; Data</button>
-          <button class="cto-filter" type="button" data-filter="calculators" aria-pressed="false">Calculators</button>
-          <button class="cto-filter" type="button" data-filter="business" aria-pressed="false">Business &amp; Marketing</button>
-          <button class="cto-filter" type="button" data-filter="developer" aria-pressed="false">Developer &amp; Design</button>
-        </div>
-
-        <div class="cto-tool-grid" id="cto-tool-grid">
-
-          <!-- IMAGES AND PDF -->
-
-          <a class="cto-tool-card" href="/image-compressor.html" data-category="images">
-            <span class="cto-tool-icon" aria-hidden="true">🗜️</span>
-            <h3>Image Compressor</h3>
-            <p>Reduce image file sizes for easier sharing, storage, and website use.</p>
-            <span class="cto-tool-open">Open Image Compressor <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/image-resizer.html" data-category="images">
-            <span class="cto-tool-icon" aria-hidden="true">↔️</span>
-            <h3>Image Resizer</h3>
-            <p>Resize images to dimensions suited to your project or intended use.</p>
-            <span class="cto-tool-open">Open Image Resizer <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/heic-to-jpg.html" data-category="images">
-            <span class="cto-tool-icon" aria-hidden="true">🖼️</span>
-            <h3>HEIC to JPG Converter</h3>
-            <p>Convert HEIC images into the widely supported JPG image format.</p>
-            <span class="cto-tool-open">Open HEIC Converter <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/WEBP-to-jpg-converter.html" data-category="images">
-            <span class="cto-tool-icon" aria-hidden="true">🔄</span>
-            <h3>WebP to JPG Converter</h3>
-            <p>Convert WebP images into JPG format for broader compatibility.</p>
-            <span class="cto-tool-open">Open WebP Converter <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/jpg-to-pdf.html" data-category="images">
-            <span class="cto-tool-icon" aria-hidden="true">📄</span>
-            <h3>JPG to PDF Converter</h3>
-            <p>Turn JPG images into PDF documents using the available conversion options.</p>
-            <span class="cto-tool-open">Open JPG to PDF <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/merge-pdf.html" data-category="images">
-            <span class="cto-tool-icon" aria-hidden="true">📚</span>
-            <h3>Merge PDF</h3>
-            <p>Combine supported PDF files into a single document.</p>
-            <span class="cto-tool-open">Open PDF Merger <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <!-- TEXT AND DATA -->
-
-          <a class="cto-tool-card" href="/word-counter.html" data-category="data">
-            <span class="cto-tool-icon" aria-hidden="true">📝</span>
-            <h3>Word Counter</h3>
-            <p>Count words and characters in text for writing, editing, and content tasks.</p>
-            <span class="cto-tool-open">Open Word Counter <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/json-formatter.html" data-category="data">
-            <span class="cto-tool-icon" aria-hidden="true">{ }</span>
-            <h3>JSON Formatter &amp; Validator</h3>
-            <p>Format JSON for readability and check its syntax for common errors.</p>
-            <span class="cto-tool-open">Open JSON Formatter <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/Json-to-CSV-converter.html" data-category="data">
-            <span class="cto-tool-icon" aria-hidden="true">📊</span>
-            <h3>JSON to CSV Converter</h3>
-            <p>Convert supported JSON data into a CSV format for further analysis.</p>
-            <span class="cto-tool-open">Open JSON to CSV <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/csv-to-json.html" data-category="data">
-            <span class="cto-tool-icon" aria-hidden="true">↔️</span>
-            <h3>CSV to JSON Converter</h3>
-            <p>Transform CSV data into JSON for compatible applications and workflows.</p>
-            <span class="cto-tool-open">Open CSV to JSON <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/json-to-excel-converter.html" data-category="data">
-            <span class="cto-tool-icon" aria-hidden="true">📗</span>
-            <h3>JSON to Excel Converter</h3>
-            <p>Prepare supported JSON data for use in spreadsheet workflows.</p>
-            <span class="cto-tool-open">Open JSON to Excel <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/Merge-JSON-merger.html" data-category="data">
-            <span class="cto-tool-icon" aria-hidden="true">🧩</span>
-            <h3>Merge JSON</h3>
-            <p>Combine JSON inputs according to the merge options provided by the tool.</p>
-            <span class="cto-tool-open">Open JSON Merger <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <!-- CALCULATORS -->
-
-          <a class="cto-tool-card" href="/working-days-calculator.html" data-category="calculators">
-            <span class="cto-tool-icon" aria-hidden="true">📅</span>
-            <h3>Working Days Calculator</h3>
-            <p>Calculate working days between dates using the options supported by the calculator.</p>
-            <span class="cto-tool-open">Calculate Working Days <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/percentage-error-calculator.html" data-category="calculators">
-            <span class="cto-tool-icon" aria-hidden="true">％</span>
-            <h3>Percentage Error Calculator</h3>
-            <p>Calculate percentage error when comparing measured and reference values.</p>
-            <span class="cto-tool-open">Calculate Percentage Error <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/electricity-cost-calculator.html" data-category="calculators">
-            <span class="cto-tool-icon" aria-hidden="true">⚡</span>
-            <h3>Electricity Cost Calculator</h3>
-            <p>Estimate appliance electricity usage and cost from your entered values.</p>
-            <span class="cto-tool-open">Calculate Electricity Cost <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/freelance-project-profit-calculator.html" data-category="calculators">
-            <span class="cto-tool-icon" aria-hidden="true">💰</span>
-            <h3>Freelance Project Profit Calculator</h3>
-            <p>Estimate project costs, revenue, and profit using your own figures.</p>
-            <span class="cto-tool-open">Calculate Project Profit <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <!-- BUSINESS AND MARKETING -->
-
-          <a class="cto-tool-card" href="/Invoice-generator-free" data-category="business">
-            <span class="cto-tool-icon" aria-hidden="true">🧾</span>
-            <h3>Free Invoice Generator</h3>
-            <p>Create an invoice using the fields and output options available on the page.</p>
-            <span class="cto-tool-open">Open Invoice Generator <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/invoice-generator-online.html" data-category="business">
-            <span class="cto-tool-icon" aria-hidden="true">📋</span>
-            <h3>Online Invoice Generator</h3>
-            <p>Prepare invoice details and use the page's available invoice output features.</p>
-            <span class="cto-tool-open">Open Online Invoice Generator <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/Free-Email-Signature-Generator" data-category="business">
-            <span class="cto-tool-icon" aria-hidden="true">✉️</span>
-            <h3>Free Email Signature Generator</h3>
-            <p>Build an email signature for professional messages and correspondence.</p>
-            <span class="cto-tool-open">Create Email Signature <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/UTM-builder-free.html" data-category="business">
-            <span class="cto-tool-icon" aria-hidden="true">🔗</span>
-            <h3>UTM Campaign URL Builder</h3>
-            <p>Add campaign tracking parameters to links used in marketing campaigns.</p>
-            <span class="cto-tool-open">Open UTM Builder <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/qr-code-generator.html" data-category="business">
-            <span class="cto-tool-icon" aria-hidden="true">▦</span>
-            <h3>QR Code Generator</h3>
-            <p>Create QR codes from supported input, such as text or a web address.</p>
-            <span class="cto-tool-open">Generate a QR Code <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <!-- DEVELOPER AND DESIGN TOOLS -->
-
-          <a class="cto-tool-card" href="/cron-expression-generator.html" data-category="developer">
-            <span class="cto-tool-icon" aria-hidden="true">⏱️</span>
-            <h3>Cron Expression Generator</h3>
-            <p>Build cron schedule expressions using the settings offered by the tool.</p>
-            <span class="cto-tool-open">Open Cron Generator <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/sitemap-xml-validator.html" data-category="developer">
-            <span class="cto-tool-icon" aria-hidden="true">🗺️</span>
-            <h3>Sitemap XML Validator</h3>
-            <p>Check sitemap XML structure using the validator's supported checks.</p>
-            <span class="cto-tool-open">Validate Sitemap XML <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/unix-timestamp-converter.html" data-category="developer">
-            <span class="cto-tool-icon" aria-hidden="true">🕒</span>
-            <h3>Unix Timestamp Converter</h3>
-            <p>Convert between Unix timestamps and readable date and time values.</p>
-            <span class="cto-tool-open">Open Timestamp Converter <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/unix-timestamp-converter-online.html" data-category="developer">
-            <span class="cto-tool-icon" aria-hidden="true">⌚</span>
-            <h3>Online Unix Timestamp Converter</h3>
-            <p>Open the alternative timestamp converter page for date and epoch conversions.</p>
-            <span class="cto-tool-open">Open Online Converter <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/unix-timestamp-converter%20%281%29.html" data-category="developer">
-            <span class="cto-tool-icon" aria-hidden="true">🗓️</span>
-            <h3>Unix Timestamp Converter — Alternate Page</h3>
-            <p>Access the additional timestamp converter file in your current website.</p>
-            <span class="cto-tool-open">Open Alternate Converter <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/Favicon-generator.html" data-category="developer">
-            <span class="cto-tool-icon" aria-hidden="true">🎨</span>
-            <h3>Favicon Generator</h3>
-            <p>Create favicon assets for use with websites and supported browser features.</p>
-            <span class="cto-tool-open">Open Favicon Generator <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-          <a class="cto-tool-card" href="/css-gradient-generator.html" data-category="developer">
-            <span class="cto-tool-icon" aria-hidden="true">🌈</span>
-            <h3>CSS Gradient Generator</h3>
-            <p>Customize gradient colors and create CSS for supported gradient designs.</p>
-            <span class="cto-tool-open">Design a CSS Gradient <span class="cto-tool-arrow">→</span></span>
-          </a>
-
-        </div>
-
-        <div class="cto-empty-state" id="cto-empty-state" role="status">
-          <h3>No matching tools found</h3>
-          <p>Try another search term or select a different category.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="cto-info-section" id="about-tools">
-      <div class="cto-container cto-info-grid">
-        <div>
-          <h2>Simple Tools for Everyday Tasks</h2>
-          <p>
-            ConvertToToolsOnline brings together utilities for file conversion,
-            data formatting, calculations, business documents, campaign links,
-            and web design. Use the tool that matches your task and follow its
-            individual instructions.
-          </p>
-          <p>
-            Tool features and supported input formats can vary from page to page.
-            Review the instructions and limitations on the relevant tool before
-            relying on its output for an important task.
-          </p>
-        </div>
-
-        <div>
-          <h2>Frequently Asked Questions</h2>
-          <div class="cto-faq-list">
-            <details>
-              <summary>Are these tools free to use?</summary>
-              <p>
-                The website presents these tools for free use. Any individual
-                page should clearly explain its functionality and any applicable
-                limitations.
-              </p>
-            </details>
-
-            <details>
-              <summary>How do I find a particular tool?</summary>
-              <p>
-                Use the search box to search by tool name or task, or select a
-                category to narrow the tools displayed on this homepage.
-              </p>
-            </details>
-
-            <details>
-              <summary>Can I use these tools on a phone?</summary>
-              <p>
-                This homepage is designed to adapt to mobile screens. The
-                experience and supported features of each individual tool depend
-                on its implementation and your browser.
-              </p>
-            </details>
-
-            <details>
-              <summary>What should I do if a tool does not open?</summary>
-              <p>
-                Check that the corresponding HTML page has been uploaded to the
-                website with the exact filename and capitalization used by its
-                link. You can contact us if the problem continues.
-              </p>
-            </details>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="cto-footer">
-    <div class="cto-container">
-      <div class="cto-footer-inner">
-        <div>
-          <a class="cto-brand" href="/" aria-label="ConvertToToolsOnline homepage">
-            <span class="cto-brand-mark" aria-hidden="true">C</span>
-            <span class="cto-brand-name">Convert<span>ToTools</span>Online</span>
-          </a>
-          <p class="cto-footer-description">
-            Online utilities for image conversion, PDF, data, calculations,
-            productivity, marketing, and design.
-          </p>
-        </div>
-
-        <div>
-          <h2>Contact</h2>
-          <div class="cto-footer-links">
-            <a href="/Contact.html">Contact Page</a>
-            <a href="mailto:rabinpandey878@gmail.com">rabinpandey878@gmail.com</a>
-            <a href="tel:+9779714170081">+977 9714170081</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="cto-footer-bottom">
-        <p>&copy; <span id="cto-current-year">2026</span> ConvertToToolsOnline. All rights reserved.</p>
-        <p>Free online tools for everyday work.</p>
-      </div>
+    <div class="ct-footer-bottom">
+      <p>© <span id="ct-year">2026</span> ConvertToToolsOnline. All rights reserved.</p>
+      <p>Free utilities for practical tasks.</p>
     </div>
-  </footer>
-
-</div>
+  </div>
+</footer>
 
 <script>
-(function () {
+(() => {
   "use strict";
 
-  const searchForm = document.getElementById("cto-search-form");
-  const searchInput = document.getElementById("cto-search-input");
-  const filterButtons = Array.from(
-    document.querySelectorAll(".cto-filter")
-  );
-  const toolCards = Array.from(
-    document.querySelectorAll(".cto-tool-card")
-  );
-  const resultCount = document.getElementById("cto-result-count");
-  const emptyState = document.getElementById("cto-empty-state");
-  const yearElement = document.getElementById("cto-current-year");
+  const searchInput = document.getElementById("ct-search-input");
+  const clearButton = document.getElementById("ct-clear-search");
+  const emptyReset = document.getElementById("ct-empty-reset");
+  const resultsCount = document.getElementById("ct-results-count");
+  const emptyState = document.getElementById("ct-empty-state");
+  const cards = Array.from(document.querySelectorAll(".ct-tool-card"));
+  const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
+  const menuButton = document.getElementById("ct-menu-button");
+  const navigation = document.getElementById("ct-main-nav");
 
   let activeCategory = "all";
 
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
+  document.getElementById("ct-year").textContent = String(new Date().getFullYear());
+
+  // Support search links such as /?q=pdf or /?q=json.
+  const initialParams = new URLSearchParams(window.location.search);
+  const initialQuery = initialParams.get("q");
+
+  if (initialQuery) {
+    searchInput.value = initialQuery.slice(0, 120);
   }
 
-  function filterTools() {
-    const query = (searchInput.value || "").trim().toLowerCase();
+  function setActiveCategory(category) {
+    activeCategory = category;
+
+    filterButtons.forEach(button => {
+      button.setAttribute(
+        "aria-pressed",
+        String(button.dataset.filter === category)
+      );
+    });
+  }
+
+  function updateDirectory() {
+    const query = searchInput.value.trim().toLowerCase();
     let visibleCount = 0;
 
-    toolCards.forEach(function (card) {
+    cards.forEach(card => {
       const category = card.dataset.category || "";
-      const searchableText = card.textContent.toLowerCase();
-      const categoryMatches =
+      const searchableText = (
+        card.textContent + " " + (card.dataset.search || "")
+      ).toLowerCase();
+
+      const categoryMatch =
         activeCategory === "all" || category === activeCategory;
-      const searchMatches =
-        query.length === 0 || searchableText.includes(query);
 
-      const shouldShow = categoryMatches && searchMatches;
+      const textMatch = !query || searchableText.includes(query);
+      const visible = categoryMatch && textMatch;
 
-      card.classList.toggle("cto-hidden", !shouldShow);
-      card.setAttribute("aria-hidden", String(!shouldShow));
+      card.hidden = !visible;
 
-      if (shouldShow) {
-        visibleCount += 1;
+      if (visible) visibleCount++;
+    });
+
+    resultsCount.textContent =
+      `Showing ${visibleCount} of ${cards.length} tool listings.`;
+
+    emptyState.classList.toggle("is-visible", visibleCount === 0);
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      setActiveCategory(button.dataset.filter);
+      updateDirectory();
+
+      const directory = document.getElementById("tools");
+      if (button.classList.contains("ct-category")) {
+        directory.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  });
+
+  searchInput.addEventListener("input", updateDirectory);
+
+  clearButton.addEventListener("click", () => {
+    searchInput.value = "";
+    setActiveCategory("all");
+    updateDirectory();
+    searchInput.focus();
+
+    // Keep browser history and the visible address in sync with cleared search.
+    if (window.location.search) {
+      window.history.replaceState({}, "", window.location.pathname + window.location.hash);
+    }
+  });
+
+  function showAllTools() {
+    searchInput.value = "";
+    setActiveCategory("all");
+    updateDirectory();
+    searchInput.focus();
+  }
+
+  emptyReset.addEventListener("click", showAllTools);
+
+  if (menuButton && navigation) {
+    menuButton.addEventListener("click", () => {
+      const isOpen = navigation.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navigation.addEventListener("click", event => {
+      if (event.target.closest("a")) {
+        navigation.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
       }
     });
 
-    if (resultCount) {
-      resultCount.textContent =
-        visibleCount + (visibleCount === 1 ? " tool" : " tools");
-    }
-
-    if (emptyState) {
-      emptyState.style.display = visibleCount === 0 ? "block" : "none";
-    }
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && navigation.classList.contains("is-open")) {
+        navigation.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.focus();
+      }
+    });
   }
 
-  filterButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      activeCategory = button.dataset.filter || "all";
-
-      filterButtons.forEach(function (item) {
-        const isActive = item === button;
-        item.classList.toggle("is-active", isActive);
-        item.setAttribute("aria-pressed", String(isActive));
-      });
-
-      filterTools();
-    });
-  });
-
-  searchInput.addEventListener("input", filterTools);
-
-  searchForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    filterTools();
-
-    document.getElementById("tools").scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
-      block: "start"
-    });
-  });
-
-  searchInput.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      searchInput.value = "";
-      filterTools();
-      searchInput.blur();
+  // Close navigation if the viewport switches to desktop layout.
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 700 && navigation && menuButton) {
+      navigation.classList.remove("is-open");
+      menuButton.setAttribute("aria-expanded", "false");
     }
   });
 
-  filterTools();
+  updateDirectory();
 })();
 </script>
-
 </body>
 </html>

@@ -1,0 +1,1938 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>UUID Generator Online - Bulk UUID v4 & v7 Free</title>
+  <meta name="description" content="Generate UUID v4 and v7 online for free. Create up to 1,000 IDs, copy JSON or SQL values, format UUIDs, and validate existing identifiers in your browser.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="https://converttotoolsonline.com/uuid-generator.html">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="UUID Generator Online - Bulk UUID v4 & v7">
+  <meta property="og:description" content="Generate bulk UUIDs, copy developer-friendly output, validate identifiers, and inspect UUID versions and v7 timestamps.">
+  <meta property="og:url" content="https://converttotoolsonline.com/uuid-generator.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Online UUID Generator">
+  <meta name="twitter:description" content="Generate UUID v4 and v7, export batches, and validate existing UUIDs directly in your browser.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "UUID Generator",
+    "url": "https://converttotoolsonline.com/uuid-generator.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based UUID v4 and v7 generator with batch generation, output formatting, JSON and SQL exports, UUID validation, and UUID v7 timestamp inspection.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Generate UUID v4 values",
+      "Generate UUID v7 values",
+      "Generate batches of up to 1,000 UUIDs",
+      "Standard, compact, braced, parenthesized, and URN formats",
+      "Uppercase and lowercase output",
+      "JSON array and SQL VALUES output",
+      "UUID validation and duplicate detection",
+      "UUID version and UUID v7 timestamp inspection",
+      "Browser-based processing"
+    ]
+  }
+  </script>
+
+  <style>
+    .uuid-page {
+      margin: 0;
+      background: #f7f8fc;
+      color: #182237;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    .uuid-page *,
+    .uuid-page *::before,
+    .uuid-page *::after {
+      box-sizing: border-box;
+    }
+
+    .uuid-page a {
+      color: #2459c4;
+    }
+
+    .uuid-shell {
+      width: min(100% - 30px, 1120px);
+      margin-inline: auto;
+    }
+
+    .uuid-header {
+      border-bottom: 1px solid #e4e8f0;
+      background: #fff;
+    }
+
+    .uuid-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      min-height: 72px;
+      padding-block: 12px;
+    }
+
+    .uuid-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #182237 !important;
+      font-weight: 800;
+      letter-spacing: -.025em;
+      text-decoration: none;
+    }
+
+    .uuid-brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: #2459c4;
+      color: white;
+      font-size: .82rem;
+      font-weight: 850;
+    }
+
+    .uuid-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      font-size: .9rem;
+    }
+
+    .uuid-nav a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .uuid-nav a:hover {
+      color: #2459c4;
+      text-decoration: underline;
+    }
+
+    .uuid-main {
+      padding-block: 36px 64px;
+    }
+
+    .uuid-hero {
+      max-width: 790px;
+      margin: 0 auto 25px;
+      text-align: center;
+    }
+
+    .uuid-eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #2459c4;
+      font-size: .81rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .uuid-hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.05rem);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+    }
+
+    .uuid-hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #59667c;
+      font-size: 1.03rem;
+    }
+
+    .uuid-privacy {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
+      color: #247448;
+      font-size: .87rem;
+      font-weight: 700;
+    }
+
+    .uuid-card {
+      padding: clamp(17px, 3vw, 28px);
+      border: 1px solid #e2e7f0;
+      border-radius: 19px;
+      background: #fff;
+      box-shadow: 0 12px 36px rgba(26, 41, 77, .055);
+    }
+
+    .uuid-card-heading {
+      margin-bottom: 20px;
+    }
+
+    .uuid-card-heading h2 {
+      margin: 0 0 5px;
+      font-size: 1.27rem;
+      letter-spacing: -.02em;
+    }
+
+    .uuid-muted {
+      color: #69758b;
+      font-size: .89rem;
+    }
+
+    .uuid-section-label {
+      margin: 24px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e4e8f0;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .uuid-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .uuid-field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .uuid-field label {
+      color: #35435c;
+      font-size: .88rem;
+      font-weight: 750;
+    }
+
+    .uuid-field input,
+    .uuid-field select,
+    .uuid-field textarea {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      min-height: 43px;
+      padding: 10px 12px;
+      border: 1px solid #d5deeb;
+      border-radius: 10px;
+      background: #fff;
+      color: #1d2b43;
+      font: inherit;
+      font-size: .92rem;
+    }
+
+    .uuid-field textarea {
+      min-height: 190px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .uuid-page input:focus-visible,
+    .uuid-page select:focus-visible,
+    .uuid-page textarea:focus-visible,
+    .uuid-page button:focus-visible {
+      outline: 3px solid #91b4ff;
+      outline-offset: 3px;
+    }
+
+    .uuid-help {
+      color: #788398;
+      font-size: .79rem;
+    }
+
+    .uuid-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 7px;
+    }
+
+    .uuid-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 10px 15px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: #2459c4;
+      color: #fff !important;
+      font: inherit;
+      font-size: .91rem;
+      font-weight: 750;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none !important;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+
+    .uuid-btn:hover {
+      background: #1949a8;
+    }
+
+    .uuid-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .uuid-btn-secondary {
+      border-color: #d9e0eb;
+      background: #fff;
+      color: #34415b !important;
+    }
+
+    .uuid-btn-secondary:hover {
+      background: #f4f7fc;
+    }
+
+    .uuid-btn-small {
+      min-height: 33px;
+      padding: 6px 10px;
+      font-size: .81rem;
+    }
+
+    .uuid-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 17px;
+    }
+
+    .uuid-format-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .uuid-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #526078;
+      font-size: .88rem;
+    }
+
+    .uuid-toggle input {
+      width: 17px;
+      height: 17px;
+      accent-color: #2459c4;
+    }
+
+    .uuid-output-panel {
+      margin-top: 20px;
+      border: 1px solid #dde4ef;
+      border-radius: 13px;
+      overflow: hidden;
+    }
+
+    .uuid-output-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid #e1e6ef;
+      background: #f8faff;
+    }
+
+    .uuid-output-title {
+      font-size: .94rem;
+      font-weight: 800;
+    }
+
+    .uuid-output-meta {
+      color: #69758b;
+      font-size: .79rem;
+    }
+
+    .uuid-output {
+      display: block;
+      width: 100%;
+      min-height: 230px;
+      padding: 15px;
+      border: 0;
+      border-radius: 0;
+      resize: vertical;
+      background: #fff;
+      color: #21314a;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.75;
+      white-space: pre;
+      overflow: auto;
+    }
+
+    .uuid-status {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border: 1px solid #dce3ef;
+      border-radius: 10px;
+      background: #f7f9ff;
+      color: #35435c;
+      font-size: .89rem;
+      overflow-wrap: anywhere;
+    }
+
+    .uuid-status--success {
+      border-color: #c7e7d1;
+      background: #f0fbf4;
+      color: #21663d;
+    }
+
+    .uuid-status--warning {
+      border-color: #efdfb8;
+      background: #fffbef;
+      color: #795e1b;
+    }
+
+    .uuid-status--error {
+      border-color: #edc7c7;
+      background: #fff4f4;
+      color: #982c2c;
+    }
+
+    .uuid-inspector {
+      margin-top: 30px;
+      padding-top: 25px;
+      border-top: 1px solid #e5e9f1;
+    }
+
+    .uuid-inspector-heading {
+      margin-bottom: 16px;
+    }
+
+    .uuid-inspector-heading h3 {
+      margin: 0 0 5px;
+      font-size: 1.14rem;
+    }
+
+    .uuid-inspector-input {
+      display: block;
+      width: 100%;
+      min-height: 160px;
+      padding: 13px;
+      border: 1px solid #d5deeb;
+      border-radius: 11px;
+      background: #fff;
+      color: #21314a;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      resize: vertical;
+    }
+
+    .uuid-inspector-results {
+      margin-top: 18px;
+    }
+
+    .uuid-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 13px;
+    }
+
+    .uuid-summary-item {
+      padding: 6px 10px;
+      border: 1px solid #e0e6ef;
+      border-radius: 8px;
+      background: #fafbfe;
+      color: #536078;
+      font-size: .81rem;
+      font-weight: 750;
+    }
+
+    .uuid-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid #e0e6ef;
+      border-radius: 11px;
+    }
+
+    .uuid-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      font-size: .84rem;
+    }
+
+    .uuid-table th,
+    .uuid-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid #e7ebf2;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .uuid-table th {
+      background: #f8faff;
+      color: #46536b;
+      font-weight: 800;
+    }
+
+    .uuid-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .uuid-table code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .uuid-valid {
+      color: #267447;
+      font-weight: 800;
+    }
+
+    .uuid-invalid {
+      color: #a42d2d;
+      font-weight: 800;
+    }
+
+    .uuid-duplicate {
+      color: #9a6615;
+      font-weight: 800;
+    }
+
+    .uuid-content {
+      width: min(100%, 850px);
+      margin: 44px auto 0;
+    }
+
+    .uuid-content section {
+      margin-top: 32px;
+    }
+
+    .uuid-content h2 {
+      margin: 0 0 12px;
+      color: #182237;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+    }
+
+    .uuid-content h3 {
+      margin: 21px 0 7px;
+      font-size: 1.08rem;
+    }
+
+    .uuid-content p,
+    .uuid-content li {
+      color: #536078;
+    }
+
+    .uuid-content p {
+      margin: 0 0 12px;
+    }
+
+    .uuid-content li {
+      margin-bottom: 7px;
+    }
+
+    .uuid-content ol,
+    .uuid-content ul {
+      padding-left: 24px;
+    }
+
+    .uuid-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .uuid-step {
+      padding: 16px;
+      border: 1px solid #e2e7f0;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .uuid-step-number {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin-bottom: 9px;
+      border-radius: 9px;
+      background: #edf3ff;
+      color: #2459c4;
+      font-weight: 850;
+    }
+
+    .uuid-step strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .uuid-step p {
+      margin: 0;
+      font-size: .9rem;
+    }
+
+    .uuid-code-block {
+      overflow-x: auto;
+      padding: 14px;
+      border: 1px solid #e0e6f0;
+      border-radius: 12px;
+      background: #fff;
+      color: #2b3a54;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .85rem;
+      line-height: 1.7;
+      white-space: pre;
+    }
+
+    .uuid-related {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .uuid-related a {
+      padding: 8px 12px;
+      border: 1px solid #dce2ed;
+      border-radius: 999px;
+      background: #fff;
+      text-decoration: none;
+      font-size: .9rem;
+    }
+
+    .uuid-related a:hover {
+      border-color: #aac0f3;
+      background: #f4f7ff;
+    }
+
+    .uuid-faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .uuid-faq-list details {
+      padding: 15px 17px;
+      border: 1px solid #e1e6ef;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .uuid-faq-list summary {
+      color: #26334b;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .uuid-faq-list details p {
+      margin: 10px 0 0;
+    }
+
+    .uuid-footer {
+      padding-block: 24px;
+      border-top: 1px solid #e4e8f0;
+      background: #fff;
+      color: #69758a;
+      font-size: .87rem;
+    }
+
+    .uuid-footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .uuid-footer a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .uuid-footer a:hover {
+      text-decoration: underline;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 760px) {
+      .uuid-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .uuid-shell {
+        width: min(100% - 22px, 1120px);
+      }
+
+      .uuid-main {
+        padding-top: 25px;
+      }
+
+      .uuid-header-inner {
+        align-items: flex-start;
+      }
+
+      .uuid-nav {
+        gap: 12px;
+        font-size: .83rem;
+      }
+
+      .uuid-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .uuid-actions .uuid-btn {
+        flex: 1 1 100%;
+      }
+
+      .uuid-format-options {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .uuid-output {
+        min-height: 200px;
+        font-size: 12px;
+      }
+
+      .uuid-table {
+        min-width: 580px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .uuid-page *,
+      .uuid-page *::before,
+      .uuid-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="uuid-page">
+  <header class="uuid-header">
+    <div class="uuid-shell uuid-header-inner">
+      <a class="uuid-brand" href="/index.html" aria-label="ConvertToToolsOnline home">
+        <span class="uuid-brand-mark" aria-hidden="true">CT</span>
+        <span>ConvertToToolsOnline</span>
+      </a>
+
+      <nav class="uuid-nav" aria-label="Main navigation">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#all-tools">All tools</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="uuid-shell uuid-main">
+    <section class="uuid-hero" aria-labelledby="page-title">
+      <div class="uuid-eyebrow">Free developer utility</div>
+      <h1 id="page-title">UUID Generator Online</h1>
+      <p>
+        Generate UUID v4 and UUID v7 identifiers in bulk, copy them as JSON
+        or SQL values, and validate existing UUIDs. Choose your preferred
+        format and inspect UUID versions directly in your browser.
+      </p>
+      <div class="uuid-privacy">
+        <span aria-hidden="true">●</span>
+        Browser-based generation — no account or upload required
+      </div>
+    </section>
+
+    <section class="uuid-card" aria-labelledby="generator-title">
+      <div class="uuid-card-heading">
+        <h2 id="generator-title">Generate UUIDs in bulk</h2>
+        <div class="uuid-muted">
+          Create identifiers for testing, database records, fixtures, applications,
+          and development workflows.
+        </div>
+      </div>
+
+      <div class="uuid-section-label">1. Choose generation options</div>
+
+      <div class="uuid-fields">
+        <div class="uuid-field">
+          <label for="uuidVersion">UUID version</label>
+          <select id="uuidVersion">
+            <option value="4" selected>UUID v4 — random</option>
+            <option value="7">UUID v7 — timestamp-based</option>
+          </select>
+          <span class="uuid-help">
+            Select v4 for random IDs or v7 when timestamp ordering is useful.
+          </span>
+        </div>
+
+        <div class="uuid-field">
+          <label for="uuidCount">Number of UUIDs</label>
+          <input id="uuidCount" type="number" min="1" max="1000"
+            step="1" value="10" inputmode="numeric">
+          <span class="uuid-help">Generate from 1 to 1,000 identifiers per batch.</span>
+        </div>
+
+        <div class="uuid-field">
+          <label for="uuidFormat">UUID format</label>
+          <select id="uuidFormat">
+            <option value="standard" selected>Standard with hyphens</option>
+            <option value="compact">Compact — no hyphens</option>
+            <option value="braces">Braces — {UUID}</option>
+            <option value="parentheses">Parentheses — (UUID)</option>
+            <option value="urn">URN — urn:uuid:UUID</option>
+          </select>
+        </div>
+
+        <div class="uuid-field">
+          <label for="uuidCase">Letter case</label>
+          <select id="uuidCase">
+            <option value="lower" selected>Lowercase</option>
+            <option value="upper">UPPERCASE</option>
+          </select>
+        </div>
+
+        <div class="uuid-field">
+          <label for="outputMode">Output format</label>
+          <select id="outputMode">
+            <option value="lines" selected>One UUID per line</option>
+            <option value="comma">Comma-separated</option>
+            <option value="json">JSON string array</option>
+            <option value="sql">SQL VALUES rows</option>
+          </select>
+          <span class="uuid-help">
+            Choose a format suited to your next development task.
+          </span>
+        </div>
+
+        <div class="uuid-field">
+          <label>Quick quantity</label>
+          <div class="uuid-presets">
+            <button class="uuid-btn uuid-btn-secondary uuid-btn-small"
+              type="button" data-count="1">1</button>
+            <button class="uuid-btn uuid-btn-secondary uuid-btn-small"
+              type="button" data-count="10">10</button>
+            <button class="uuid-btn uuid-btn-secondary uuid-btn-small"
+              type="button" data-count="50">50</button>
+            <button class="uuid-btn uuid-btn-secondary uuid-btn-small"
+              type="button" data-count="100">100</button>
+            <button class="uuid-btn uuid-btn-secondary uuid-btn-small"
+              type="button" data-count="1000">1,000</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="uuid-actions">
+        <button id="generateBtn" class="uuid-btn" type="button">
+          Generate UUIDs
+        </button>
+        <button id="copyOutputBtn" class="uuid-btn uuid-btn-secondary"
+          type="button" disabled>Copy output</button>
+        <button id="copyJsonBtn" class="uuid-btn uuid-btn-secondary"
+          type="button" disabled>Copy JSON array</button>
+        <button id="downloadBtn" class="uuid-btn uuid-btn-secondary"
+          type="button" disabled>Download results</button>
+        <button id="clearGeneratedBtn" class="uuid-btn uuid-btn-secondary"
+          type="button">Clear results</button>
+      </div>
+
+      <div id="generatorStatus" class="uuid-status" role="status"
+        aria-live="polite" hidden></div>
+
+      <div id="generatedPanel" class="uuid-output-panel" hidden>
+        <div class="uuid-output-head">
+          <div>
+            <div class="uuid-output-title">Generated identifiers</div>
+            <div id="generatedMeta" class="uuid-output-meta"></div>
+          </div>
+          <button id="useLatestBtn" class="uuid-btn uuid-btn-secondary uuid-btn-small"
+            type="button">Inspect latest UUID</button>
+        </div>
+
+        <label class="uuid-help" for="generatedOutput"
+          style="display:block;padding:10px 14px 0;">
+          Your generated output
+        </label>
+        <textarea id="generatedOutput" class="uuid-output"
+          readonly spellcheck="false"
+          aria-label="Generated UUID output"></textarea>
+      </div>
+
+      <section class="uuid-inspector" aria-labelledby="inspector-title">
+        <div class="uuid-inspector-heading">
+          <h3 id="inspector-title">Validate and inspect UUIDs</h3>
+          <p class="uuid-muted">
+            Paste UUIDs one per line or separate them with commas or semicolons.
+            Check format, version, duplicates, and UUID v7 timestamps.
+          </p>
+        </div>
+
+        <div class="uuid-field">
+          <label for="inspectInput">UUIDs to validate</label>
+          <textarea id="inspectInput" class="uuid-inspector-input"
+            maxlength="100000"
+            spellcheck="false"
+            placeholder="Example:
+550e8400-e29b-41d4-a716-446655440000
+018f0c78-9abc-7def-8123-456789abcdef"></textarea>
+          <span class="uuid-help">
+            Up to 1,000 entries per validation. Standard, compact, braced,
+            parenthesized, and urn:uuid representations are accepted.
+          </span>
+        </div>
+
+        <div class="uuid-actions">
+          <button id="validateBtn" class="uuid-btn" type="button">
+            Validate UUIDs
+          </button>
+          <button id="sampleInspectBtn" class="uuid-btn uuid-btn-secondary"
+            type="button">Load example UUIDs</button>
+          <button id="useGeneratedBtn" class="uuid-btn uuid-btn-secondary"
+            type="button">Use generated UUIDs</button>
+          <button id="clearInspectBtn" class="uuid-btn uuid-btn-secondary"
+            type="button">Clear validator</button>
+        </div>
+
+        <div id="inspectorStatus" class="uuid-status" role="status"
+          aria-live="polite" hidden></div>
+
+        <div id="inspectorResults" class="uuid-inspector-results" hidden>
+          <div id="validationSummary" class="uuid-summary"></div>
+
+          <div class="uuid-table-wrap">
+            <table class="uuid-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Input</th>
+                  <th scope="col">Validation</th>
+                  <th scope="col">Details</th>
+                </tr>
+              </thead>
+              <tbody id="validationRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <div class="uuid-content">
+      <section aria-labelledby="how-title">
+        <h2 id="how-title">How to generate a UUID online</h2>
+        <p>
+          A UUID, or universally unique identifier, is a 128-bit identifier
+          designed so systems can create identifiers independently without
+          requesting sequential numbers from one central authority. UUIDs
+          are commonly used for database records, application objects,
+          API resources, test data, and message identifiers.
+        </p>
+
+        <div class="uuid-steps">
+          <div class="uuid-step">
+            <div class="uuid-step-number">1</div>
+            <strong>Choose a UUID version</strong>
+            <p>Select random UUID v4 or timestamp-based UUID v7.</p>
+          </div>
+          <div class="uuid-step">
+            <div class="uuid-step-number">2</div>
+            <strong>Set the quantity and format</strong>
+            <p>Generate one ID or a batch of up to 1,000 identifiers.</p>
+          </div>
+          <div class="uuid-step">
+            <div class="uuid-step-number">3</div>
+            <strong>Copy or export</strong>
+            <p>Copy the output, create a JSON array, export SQL values, or download your batch.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="versions-title">
+        <h2 id="versions-title">UUID v4 vs. UUID v7</h2>
+
+        <h3>UUID v4: random identifiers</h3>
+        <p>
+          UUID v4 uses randomly generated bits, apart from the bits reserved
+          for its version and variant. It is a widely supported general-purpose
+          choice when you want identifiers that do not contain a creation
+          timestamp. This page uses the browser's cryptographic random-number
+          API rather than ordinary pseudorandom values from Math.random().
+        </p>
+
+        <h3>UUID v7: timestamp-based identifiers</h3>
+        <p>
+          UUID v7 puts a Unix timestamp in milliseconds at the beginning of
+          the identifier and uses random data for the remaining applicable
+          bits. This structure makes UUID v7 values generally sortable by
+          timestamp, which can be useful for database records and event data.
+        </p>
+
+        <p>
+          This implementation fills the remaining non-version and non-variant
+          bits with random data. Multiple UUID v7 values generated within the
+          same millisecond are not guaranteed to be strictly ordered by their
+          generation sequence. Use a dedicated monotonic implementation if
+          strict within-millisecond ordering is a requirement.
+        </p>
+      </section>
+
+      <section aria-labelledby="format-title">
+        <h2 id="format-title">UUID formats and examples</h2>
+        <p>
+          A standard UUID is commonly shown as 32 hexadecimal characters
+          grouped into five blocks: 8-4-4-4-12. Its textual representation
+          contains 36 characters including the four hyphens.
+        </p>
+
+        <pre class="uuid-code-block">Standard:
+550e8400-e29b-41d4-a716-446655440000
+
+Compact:
+550e8400e29b41d4a716446655440000
+
+Braced:
+{550e8400-e29b-41d4-a716-446655440000}
+
+URN:
+urn:uuid:550e8400-e29b-41d4-a716-446655440000</pre>
+
+        <p>
+          Braces, parentheses, compact notation, and URN notation are alternate
+          representations. Check the expected format of the software or database
+          receiving the identifier before using a formatted value.
+        </p>
+      </section>
+
+      <section aria-labelledby="uses-title">
+        <h2 id="uses-title">Common uses for UUIDs</h2>
+        <ul>
+          <li>
+            <strong>Database records:</strong> assign nonsequential identifiers
+            to users, orders, products, and other entities.
+          </li>
+          <li>
+            <strong>Development and testing:</strong> create fixture data,
+            sample IDs, and test records in bulk.
+          </li>
+          <li>
+            <strong>Distributed applications:</strong> create identifiers
+            without requesting the next number from a central server.
+          </li>
+          <li>
+            <strong>Event and message tracking:</strong> attach identifiers
+            to jobs, events, and application records.
+          </li>
+          <li>
+            <strong>Database ordering:</strong> consider UUID v7 when
+            timestamp-based ordering is useful and supported by the application.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="validation-title-content">
+        <h2 id="validation-title-content">How UUID validation works</h2>
+        <p>
+          The validator checks whether an input follows the recognized UUID
+          text format and the standard UUID variant/version layout. It also
+          identifies the Nil UUID and Max UUID special values. It normalizes
+          supported presentation styles before checking the identifier.
+        </p>
+        <p>
+          A format check does not prove that an identifier exists in a database,
+          belongs to a particular user, was generated by a trustworthy system,
+          or has never been used elsewhere. UUID generation and application-level
+          uniqueness checks are different tasks.
+        </p>
+      </section>
+
+      <section aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Privacy and secure generation</h2>
+        <p>
+          UUID creation and validation run in the current browser tab.
+          The tool does not need to send identifiers to a server. Generation
+          depends on the browser's Web Crypto API. If that API is unavailable,
+          the tool reports that it cannot generate IDs instead of silently
+          falling back to Math.random().
+        </p>
+        <p>
+          UUIDs are identifiers, not automatically secure access tokens.
+          UUID v7 embeds a timestamp and therefore reveals approximate creation
+          time. Do not use a UUID alone as a password, authentication secret,
+          or authorization mechanism.
+        </p>
+      </section>
+
+      <section aria-labelledby="limits-title">
+        <h2 id="limits-title">Important limitations</h2>
+        <ul>
+          <li>
+            This version generates UUID v4 and v7. It does not generate
+            UUID v1, v3, v5, or v6 values.
+          </li>
+          <li>
+            UUID v7 has timestamp-based ordering, but this implementation does
+            not maintain a monotonic counter across IDs created in the same
+            millisecond.
+          </li>
+          <li>
+            The validator checks supported textual formats and version/variant
+            bits. It cannot establish whether an ID is registered or unique
+            in an external system.
+          </li>
+          <li>
+            Generated values should still be validated against the requirements
+            of your particular programming language, schema, database, or API.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="related-title">
+        <h2 id="related-title">Explore more developer tools</h2>
+        <p>
+          Continue with structured-data utilities for your development workflow.
+        </p>
+        <div class="uuid-related">
+          <a href="/json-formatter.html">JSON Formatter</a>
+          <a href="/yaml-to-json-converter.html">YAML to JSON Converter</a>
+          <a href="/index.html#all-tools">Browse all tools</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="faq-title">
+        <h2 id="faq-title">Frequently asked questions</h2>
+
+        <div class="uuid-faq-list">
+          <details>
+            <summary>What is a UUID?</summary>
+            <p>
+              A UUID is a 128-bit identifier intended to be generated by
+              different systems without central registration. UUIDs are
+              commonly used for records, resources, and messages.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is this UUID generator free?</summary>
+            <p>
+              Yes. You can generate, validate, copy, and download UUIDs
+              using the features on this page without an account or a
+              tool usage fee.
+            </p>
+          </details>
+
+          <details>
+            <summary>What is the difference between UUID v4 and UUID v7?</summary>
+            <p>
+              UUID v4 is based on random data and does not embed a timestamp.
+              UUID v7 places a Unix-millisecond timestamp at the beginning,
+              followed by random or optional ordering data. UUID v7 is useful
+              when timestamp-based ordering is desirable.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I generate multiple UUIDs at once?</summary>
+            <p>
+              Yes. Choose a quantity between 1 and 1,000, then generate the
+              batch. You can copy the results, export a JSON array or SQL
+              VALUES rows, or download the generated output.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I use UUIDs as database IDs?</summary>
+            <p>
+              Many databases and applications support UUID identifiers.
+              Confirm which UUID versions your platform accepts and whether
+              the selected storage format is compatible with your schema.
+            </p>
+          </details>
+
+          <details>
+            <summary>Are UUIDs guaranteed never to collide?</summary>
+            <p>
+              No. UUIDs are designed to provide a very low collision
+              probability under the assumptions of their generation method,
+              not a mathematical guarantee that collisions are impossible.
+              Applications with strict uniqueness requirements should enforce
+              the appropriate constraints.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can a UUID be validated online?</summary>
+            <p>
+              Yes. Paste identifiers into the validator to check supported
+              syntax, version and variant layout, and duplicates within
+              the submitted batch. The tool cannot check existence in an
+              external database.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does UUID v7 reveal when it was generated?</summary>
+            <p>
+              UUID v7 stores a Unix timestamp in milliseconds at the
+              beginning of its value. It therefore exposes approximate
+              creation time and should not be treated as a secret identifier.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does this tool upload my UUIDs?</summary>
+            <p>
+              No. Generation, formatting, and validation run in your browser.
+              This tool does not need to upload the identifiers to a server.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I use a UUID as an API key or password?</summary>
+            <p>
+              Do not assume that an identifier is an appropriate secret.
+              UUID v7 reveals timestamp information, and application security
+              should rely on purpose-built authentication and authorization
+              mechanisms rather than a UUID alone.
+            </p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="uuid-footer">
+    <div class="uuid-shell uuid-footer-inner">
+      <span>© <span id="footerYear">2026</span> ConvertToToolsOnline</span>
+      <span>
+        <a href="/about.html">About</a>
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        &nbsp;·&nbsp;
+        <a href="/terms.html">Terms</a>
+        &nbsp;·&nbsp;
+        <a href="/contact.html">Contact</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const MAX_GENERATE = 1000;
+      const MAX_VALIDATE = 1000;
+      const MAX_VALIDATE_CHARS = 100000;
+
+      const $ = function (id) {
+        return document.getElementById(id);
+      };
+
+      let canonicalUuids = [];
+      let formattedUuids = [];
+      let lastVersion = "";
+      let generatedOutputText = "";
+
+      $("footerYear").textContent = String(new Date().getFullYear());
+
+      function setStatus(id, message, type) {
+        const el = $(id);
+        el.textContent = message;
+        el.className = "uuid-status";
+
+        if (type) {
+          el.classList.add("uuid-status--" + type);
+        }
+
+        el.hidden = false;
+      }
+
+      function clearStatus(id) {
+        const el = $(id);
+        el.textContent = "";
+        el.className = "uuid-status";
+        el.hidden = true;
+      }
+
+      function hasSecureRandom() {
+        return Boolean(
+          window.crypto &&
+          typeof window.crypto.getRandomValues === "function"
+        );
+      }
+
+      function bytesToCanonical(bytes) {
+        const hex = Array.from(bytes, function (byte) {
+          return byte.toString(16).padStart(2, "0");
+        }).join("");
+
+        return [
+          hex.slice(0, 8),
+          hex.slice(8, 12),
+          hex.slice(12, 16),
+          hex.slice(16, 20),
+          hex.slice(20, 32)
+        ].join("-");
+      }
+
+      function randomBytes() {
+        if (!hasSecureRandom()) {
+          throw new Error(
+            "This browser does not provide the Web Crypto random-number API required by this generator."
+          );
+        }
+
+        const bytes = new Uint8Array(16);
+        window.crypto.getRandomValues(bytes);
+        return bytes;
+      }
+
+      function generateV4() {
+        const bytes = randomBytes();
+
+        // UUID v4: four version bits and two RFC variant bits are fixed.
+        bytes[6] = (bytes[6] & 0x0f) | 0x40;
+        bytes[8] = (bytes[8] & 0x3f) | 0x80;
+
+        return bytesToCanonical(bytes);
+      }
+
+      function generateV7() {
+        const bytes = randomBytes();
+
+        // UUID v7 uses a 48-bit Unix timestamp in milliseconds at the start.
+        let timestamp = Date.now();
+
+        for (let index = 5; index >= 0; index -= 1) {
+          bytes[index] = timestamp % 256;
+          timestamp = Math.floor(timestamp / 256);
+        }
+
+        // Version field = 7; variant field = RFC variant 10xx.
+        bytes[6] = (bytes[6] & 0x0f) | 0x70;
+        bytes[8] = (bytes[8] & 0x3f) | 0x80;
+
+        return bytesToCanonical(bytes);
+      }
+
+      function formatUuid(canonical) {
+        const format = $("uuidFormat").value;
+        const upper = $("uuidCase").value === "upper";
+        const compact = canonical.replace(/-/g, "");
+        let result;
+
+        switch (format) {
+          case "compact":
+            result = compact;
+            break;
+
+          case "braces":
+            result = "{" + canonical + "}";
+            break;
+
+          case "parentheses":
+            result = "(" + canonical + ")";
+            break;
+
+          case "urn":
+            result = "urn:uuid:" + (upper ? canonical.toUpperCase() : canonical);
+            return result;
+
+          default:
+            result = canonical;
+        }
+
+        return upper ? result.toUpperCase() : result.toLowerCase();
+      }
+
+      function formatOutput(values) {
+        const mode = $("outputMode").value;
+
+        switch (mode) {
+          case "comma":
+            return values.join(", ");
+
+          case "json":
+            return JSON.stringify(values, null, 2);
+
+          case "sql":
+            return values.map(function (value) {
+              return "('" + value.replace(/'/g, "''") + "')";
+            }).join(",\n");
+
+          default:
+            return values.join("\n");
+        }
+      }
+
+      function generateBatch() {
+        clearStatus("generatorStatus");
+
+        const count = Number($("uuidCount").value);
+        const version = $("uuidVersion").value;
+
+        if (!Number.isInteger(count) || count < 1 || count > MAX_GENERATE) {
+          setStatus(
+            "generatorStatus",
+            "Enter a whole number between 1 and " + MAX_GENERATE + ".",
+            "error"
+          );
+          $("uuidCount").focus();
+          return;
+        }
+
+        if (!hasSecureRandom()) {
+          setStatus(
+            "generatorStatus",
+            "Secure random generation is unavailable in this browser. Try an updated browser with Web Crypto support. This tool will not use Math.random() as a fallback.",
+            "error"
+          );
+          return;
+        }
+
+        try {
+          const created = [];
+
+          for (let index = 0; index < count; index += 1) {
+            created.push(version === "7" ? generateV7() : generateV4());
+          }
+
+          const unique = new Set(created);
+
+          if (unique.size !== created.length) {
+            throw new Error(
+              "A duplicate occurred in this batch. Generate a new batch before using these IDs."
+            );
+          }
+
+          canonicalUuids = created;
+          formattedUuids = created.map(formatUuid);
+          lastVersion = version;
+          generatedOutputText = formatOutput(formattedUuids);
+
+          $("generatedOutput").value = generatedOutputText;
+          $("generatedMeta").textContent =
+            count.toLocaleString() + " UUID" +
+            (count === 1 ? "" : "s") +
+            " · Version " + version +
+            " · " + $("uuidFormat").options[$("uuidFormat").selectedIndex].text +
+            " · " + $("outputMode").options[$("outputMode").selectedIndex].text;
+
+          $("generatedPanel").hidden = false;
+          $("copyOutputBtn").disabled = false;
+          $("copyJsonBtn").disabled = false;
+          $("downloadBtn").disabled = false;
+
+          setStatus(
+            "Generated " + count.toLocaleString() +
+            " UUID v" + version + " identifier" +
+            (count === 1 ? "" : "s") +
+            " using the browser's cryptographic random API.",
+            "success"
+          );
+        } catch (error) {
+          setStatus(
+            "UUID generation failed: " +
+            (error && error.message ? error.message : "Unknown error."),
+            "error"
+          );
+        }
+      }
+
+      function reformatExistingBatch() {
+        if (!canonicalUuids.length) return;
+
+        formattedUuids = canonicalUuids.map(formatUuid);
+        generatedOutputText = formatOutput(formattedUuids);
+        $("generatedOutput").value = generatedOutputText;
+
+        $("generatedMeta").textContent =
+          canonicalUuids.length.toLocaleString() + " UUID" +
+          (canonicalUuids.length === 1 ? "" : "s") +
+          " · Version " + lastVersion +
+          " · " + $("uuidFormat").options[$("uuidFormat").selectedIndex].text +
+          " · " + $("outputMode").options[$("outputMode").selectedIndex].text;
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        area.style.top = "0";
+
+        document.body.appendChild(area);
+        area.select();
+
+        const copied = document.execCommand("copy");
+        area.remove();
+
+        if (!copied) {
+          throw new Error("The browser could not copy text automatically.");
+        }
+      }
+
+      async function copyOutput() {
+        if (!generatedOutputText) return;
+
+        try {
+          await copyText(generatedOutputText);
+          setStatus("generatorStatus", "Generated output copied.", "success");
+        } catch (error) {
+          $("generatedOutput").focus();
+          $("generatedOutput").select();
+
+          setStatus(
+            "generatorStatus",
+            "Automatic copying failed. The output is selected so you can copy it manually.",
+            "warning"
+          );
+        }
+      }
+
+      async function copyJson() {
+        if (!canonicalUuids.length) return;
+
+        try {
+          const json = JSON.stringify(formattedUuids, null, 2);
+          await copyText(json);
+
+          setStatus(
+            "generatorStatus",
+            "Copied the UUID batch as a JSON array of strings.",
+            "success"
+          );
+        } catch (error) {
+          setStatus(
+            "generatorStatus",
+            "Automatic copying failed. Use Copy output with JSON array selected.",
+            "warning"
+          );
+        }
+      }
+
+      function downloadResults() {
+        if (!generatedOutputText) return;
+
+        const mode = $("outputMode").value;
+        const extension = mode === "json" ? "json" : "txt";
+        const mime = mode === "json"
+          ? "application/json;charset=utf-8"
+          : "text/plain;charset=utf-8";
+
+        const blob = new Blob([generatedOutputText + "\n"], { type: mime });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "uuid-v" + lastVersion + "-" +
+          canonicalUuids.length + "." + extension;
+        link.style.display = "none";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 1000);
+
+        setStatus(
+          "Download started: " + link.download,
+          "success"
+        );
+      }
+
+      function clearGenerated() {
+        canonicalUuids = [];
+        formattedUuids = [];
+        lastVersion = "";
+        generatedOutputText = "";
+
+        $("generatedOutput").value = "";
+        $("generatedPanel").hidden = true;
+        $("copyOutputBtn").disabled = true;
+        $("copyJsonBtn").disabled = true;
+        $("downloadBtn").disabled = true;
+
+        clearStatus("generatorStatus");
+      }
+
+      function normalizeUuid(input) {
+        let value = input.trim();
+
+        if (!value) {
+          return { valid: false, reason: "Empty value" };
+        }
+
+        if (/^urn:uuid:/i.test(value)) {
+          value = value.slice(9);
+        }
+
+        if (
+          (value.startsWith("{") && value.endsWith("}")) ||
+          (value.startsWith("(") && value.endsWith(")"))
+        ) {
+          value = value.slice(1, -1);
+        }
+
+        value = value.toLowerCase();
+
+        if (/^[0-9a-f]{32}$/.test(value)) {
+          value = [
+            value.slice(0, 8),
+            value.slice(8, 12),
+            value.slice(12, 16),
+            value.slice(16, 20),
+            value.slice(20, 32)
+          ].join("-");
+        }
+
+        if (
+          !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value)
+        ) {
+          return {
+            valid: false,
+            reason: "Invalid UUID text format"
+          };
+        }
+
+        const compact = value.replace(/-/g, "");
+
+        if (/^0{32}$/.test(compact)) {
+          return {
+            valid: true,
+            canonical: value,
+            special: "Nil UUID",
+            version: "Nil UUID",
+            variant: "Special Nil value",
+            timestamp: null
+          };
+        }
+
+        if (/^f{32}$/.test(compact)) {
+          return {
+            valid: true,
+            canonical: value,
+            special: "Max UUID",
+            version: "Max UUID",
+            variant: "Special Max value",
+            timestamp: null
+          };
+        }
+
+        const versionDigit = parseInt(value.charAt(14), 16);
+        const variantDigit = value.charAt(19);
+
+        if (versionDigit < 1 || versionDigit > 8) {
+          return {
+            valid: false,
+            reason: "Unsupported UUID version field"
+          };
+        }
+
+        if (!/[89ab]/i.test(variantDigit)) {
+          return {
+            valid: false,
+            reason: "Invalid RFC UUID variant bits"
+          };
+        }
+
+        const versionNames = {
+          1: "UUID v1 — time-based",
+          2: "UUID v2 — DCE Security",
+          3: "UUID v3 — name-based MD5",
+          4: "UUID v4 — random",
+          5: "UUID v5 — name-based SHA-1",
+          6: "UUID v6 — reordered time-based",
+          7: "UUID v7 — timestamp-based",
+          8: "UUID v8 — custom"
+        };
+
+        let timestamp = null;
+
+        if (versionDigit === 7) {
+          const hex = compact.slice(0, 12);
+          const milliseconds = parseInt(hex, 16);
+
+          if (Number.isFinite(milliseconds)) {
+            const date = new Date(milliseconds);
+
+            if (!Number.isNaN(date.getTime())) {
+              timestamp = date.toISOString();
+            }
+          }
+        }
+
+        return {
+          valid: true,
+          canonical: value,
+          special: "",
+          version: versionNames[versionDigit] || ("UUID v" + versionDigit),
+          variant: "RFC standard variant",
+          timestamp: timestamp
+        };
+      }
+
+      function createCell(text, className) {
+        const td = document.createElement("td");
+        td.textContent = text;
+
+        if (className) {
+          td.className = className;
+        }
+
+        return td;
+      }
+
+      function validateBatch() {
+        clearStatus("inspectorStatus");
+
+        const raw = $("inspectInput").value;
+
+        $("inspectorResults").hidden = true;
+        $("validationRows").replaceChildren();
+        $("validationSummary").replaceChildren();
+
+        if (!raw.trim()) {
+          setStatus(
+            "inspectorStatus",
+            "Paste at least one UUID before running validation.",
+            "warning"
+          );
+          return;
+        }
+
+        if (raw.length > MAX_VALIDATE_CHARS) {
+          setStatus(
+            "inspectorStatus",
+            "The input is too long. Keep the validation input under 100,000 characters.",
+            "error"
+          );
+          return;
+        }
+
+        const tokens = raw.split(/[\s,;]+/).filter(Boolean);
+
+        if (tokens.length > MAX_VALIDATE) {
+          setStatus(
+            "inspectorStatus",
+            "This validator accepts up to " + MAX_VALIDATE + " values per check.",
+            "error"
+          );
+          return;
+        }
+
+        const seen = new Set();
+        const rows = [];
+        let validCount = 0;
+        let invalidCount = 0;
+        let duplicateCount = 0;
+
+        tokens.forEach(function (token, index) {
+          const result = normalizeUuid(token);
+          let isDuplicate = false;
+
+          if (result.valid) {
+            validCount++;
+
+            if (seen.has(result.canonical)) {
+              isDuplicate = true;
+              duplicateCount++;
+            } else {
+              seen.add(result.canonical);
+            }
+          } else {
+            invalidCount++;
+          }
+
+          rows.push({
+            index: index + 1,
+            input: token,
+            result: result,
+            duplicate: isDuplicate
+          });
+        });
+
+        const fragment = document.createDocumentFragment();
+
+        rows.forEach(function (item) {
+          const tr = document.createElement("tr");
+          tr.appendChild(createCell(String(item.index)));
+
+          const inputCell = document.createElement("td");
+          const code = document.createElement("code");
+          code.textContent = item.input;
+          inputCell.appendChild(code);
+          tr.appendChild(inputCell);
+
+          if (!item.result.valid) {
+            tr.appendChild(createCell("Invalid", "uuid-invalid"));
+            tr.appendChild(createCell(item.result.reason));
+          } else if (item.duplicate) {
+            tr.appendChild(createCell("Valid duplicate", "uuid-duplicate"));
+            tr.appendChild(createCell(
+              item.result.version +
+              (item.result.timestamp ? " · " + item.result.timestamp : "") +
+              " · Repeated value"
+            ));
+          } else {
+            tr.appendChild(createCell("Valid", "uuid-valid"));
+
+            let details = item.result.version + " · " + item.result.variant;
+
+            if (item.result.timestamp) {
+              details += " · Timestamp: " + item.result.timestamp;
+            }
+
+            tr.appendChild(createCell(details));
+          }
+
+          fragment.appendChild(tr);
+        });
+
+        $("validationRows").appendChild(fragment);
+
+        const summaryItems = [
+          ["Total: " + tokens.length],
+          ["Valid: " + validCount],
+          ["Invalid: " + invalidCount],
+          ["Duplicates: " + duplicateCount]
+        ];
+
+        summaryItems.forEach(function (pair) {
+          const item = document.createElement("span");
+          item.className = "uuid-summary-item";
+          item.textContent = pair[0];
+          $("validationSummary").appendChild(item);
+        });
+
+        $("inspectorResults").hidden = false;
+
+        if (invalidCount === 0 && duplicateCount === 0) {
+          setStatus(
+            "Validation complete. All " + validCount +
+            " values use a recognized UUID format, with no duplicates in this batch.",
+            "success"
+          );
+        } else {
+          setStatus(
+            "Validation complete: " + validCount + " valid, " +
+            invalidCount + " invalid, and " + duplicateCount +
+            " repeated value" + (duplicateCount === 1 ? "" : "s") +
+            " found. A valid format does not prove uniqueness in an external database.",
+            invalidCount > 0 ? "warning" : "warning"
+          );
+        }
+      }
+
+      function clearInspector() {
+        $("inspectInput").value = "";
+        $("validationRows").replaceChildren();
+        $("validationSummary").replaceChildren();
+        $("inspectorResults").hidden = true;
+        clearStatus("inspectorStatus");
+      }
+
+      $("generateBtn").addEventListener("click", generateBatch);
+      $("copyOutputBtn").addEventListener("click", copyOutput);
+      $("copyJsonBtn").addEventListener("click", copyJson);
+      $("downloadBtn").addEventListener("click", downloadResults);
+      $("clearGeneratedBtn").addEventListener("click", clearGenerated);
+      $("validateBtn").addEventListener("click", validateBatch);
+      $("clearInspectBtn").addEventListener("click", clearInspector);
+
+      $("uuidFormat").addEventListener("change", reformatExistingBatch);
+      $("uuidCase").addEventListener("change", reformatExistingBatch);
+      $("outputMode").addEventListener("change", reformatExistingBatch);
+
+      $("uuidCount").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          generateBatch();
+        }
+      });
+
+      document.querySelectorAll("[data-count]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          $("uuidCount").value = button.dataset.count;
+          $("uuidCount").focus();
+        });
+      });
+
+      $("useLatestBtn").addEventListener("click", function () {
+        if (!canonicalUuids.length) {
+          setStatus(
+            "generatorStatus",
+            "Generate at least one UUID first.",
+            "warning"
+          );
+          return;
+        }
+
+        $("inspectInput").value = canonicalUuids[canonicalUuids.length - 1];
+        $("inspectInput").focus();
+        validateBatch();
+      });
+
+      $("useGeneratedBtn").addEventListener("click", function () {
+        if (!canonicalUuids.length) {
+          setStatus(
+            "inspectorStatus",
+            "Generate UUIDs before using this shortcut.",
+            "warning"
+          );
+          return;
+        }
+
+        $("inspectInput").value = canonicalUuids.join("\n");
+        validateBatch();
+      });
+
+      $("sampleInspectBtn").addEventListener("click", function () {
+        $("inspectInput").value = [
+          "550e8400-e29b-41d4-a716-446655440000",
+          "550e8400-e29b-41d4-a716-446655440000",
+          "018f0c78-9abc-7def-8123-456789abcdef",
+          "not-a-valid-uuid",
+          "{00000000-0000-0000-0000-000000000000}"
+        ].join("\n");
+
+        validateBatch();
+      });
+
+      // Example generation is user-triggered: no IDs are created on page load.
+      clearGenerated();
+      clearInspector();
+    })();
+  </script>
+</body>
+</html>

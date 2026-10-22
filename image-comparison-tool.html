@@ -1,0 +1,1874 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Image Comparison Tool Online – Compare Images & Pixel Differences</title>
+  <meta name="description" content="Compare two images online with a before-and-after slider, side-by-side view, adjustable overlay, and pixel difference map. Measure changed pixels and download the difference image in your browser.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/image-comparison-tool.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Image Comparison Tool – Compare Images Online">
+  <meta property="og:description" content="Compare before-and-after images, highlight pixel differences and download a difference map.">
+  <meta property="og:url" content="https://converttotoolsonline.com/image-comparison-tool.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Image Comparison Tool Online">
+  <meta name="twitter:description" content="Compare images with a slider, overlay and pixel difference checker.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Comparison Tool Online",
+    "url": "https://converttotoolsonline.com/image-comparison-tool.html",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "description": "Compare two images using side-by-side, slider, overlay and pixel-difference views, with a downloadable difference image.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    .ict {
+      --ict-border: #dfe4eb;
+      --ict-muted: #637184;
+      --ict-accent: #245bcc;
+      width: min(1100px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      color: #17202c;
+      line-height: 1.6;
+    }
+
+    .ict,
+    .ict * {
+      box-sizing: border-box;
+    }
+
+    .ict [hidden] {
+      display: none !important;
+    }
+
+    .ict :is(input, select, button, a):focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .ict input,
+    .ict select,
+    .ict button {
+      font: inherit;
+    }
+
+    .ict button {
+      cursor: pointer;
+    }
+
+    .ict a {
+      color: var(--ict-accent);
+    }
+
+    .ict .breadcrumb {
+      margin-bottom: 12px;
+      color: var(--ict-muted);
+      font-size: .92rem;
+    }
+
+    .ict .hero {
+      margin-bottom: 22px;
+    }
+
+    .ict .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.55rem);
+      line-height: 1.17;
+      letter-spacing: -.035em;
+    }
+
+    .ict .hero p {
+      max-width: 840px;
+      margin: 0;
+      color: #5b6878;
+    }
+
+    .ict .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .ict .pill {
+      padding: 5px 10px;
+      border: 1px solid var(--ict-border);
+      border-radius: 999px;
+      background: #f7f9fc;
+      font-size: .83rem;
+    }
+
+    .ict .card {
+      min-width: 0;
+      padding: clamp(14px, 2.4vw, 22px);
+      border: 1px solid var(--ict-border);
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .ict .section {
+      margin-top: 18px;
+    }
+
+    .ict h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .ict h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .ict .muted {
+      color: var(--ict-muted);
+      font-size: .9rem;
+    }
+
+    .ict .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 8px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+      font-weight: 650;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .ict .button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .ict .primary {
+      border-color: var(--ict-accent);
+      background: var(--ict-accent);
+      color: #fff;
+    }
+
+    .ict .primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: #fff;
+    }
+
+    .ict .button:disabled {
+      cursor: not-allowed;
+      opacity: .48;
+    }
+
+    .ict .small {
+      min-height: 33px;
+      padding: 5px 9px;
+      font-size: .85rem;
+    }
+
+    .ict .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .ict .spacer {
+      flex: 1 1 auto;
+    }
+
+    .ict .field {
+      min-width: 0;
+    }
+
+    .ict .field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 750;
+    }
+
+    .ict .field input[type="text"],
+    .ict .field select {
+      width: 100%;
+      min-width: 0;
+      min-height: 41px;
+      padding: 9px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .ict .field input[type="range"] {
+      width: 100%;
+      accent-color: var(--ict-accent);
+    }
+
+    .ict .image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .ict .upload-card {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--ict-border);
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .ict .upload-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .ict .drop {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 138px;
+      padding: 14px;
+      border: 2px dashed #b9c7d9;
+      border-radius: 10px;
+      background: #fafcff;
+      text-align: center;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .ict .drop.is-dragging {
+      border-color: var(--ict-accent);
+      background: #edf4ff;
+    }
+
+    .ict .drop p {
+      margin: 0 0 10px;
+      color: var(--ict-muted);
+      font-size: .88rem;
+      overflow-wrap: anywhere;
+    }
+
+    .ict .file-info {
+      min-height: 39px;
+      margin-top: 10px;
+      color: var(--ict-muted);
+      font-size: .84rem;
+      overflow-wrap: anywhere;
+    }
+
+    .ict .file-info strong {
+      color: #17202c;
+    }
+
+    .ict .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .ict .stat {
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid var(--ict-border);
+      border-radius: 9px;
+      background: #f7f9fc;
+    }
+
+    .ict .stat-label {
+      display: block;
+      color: var(--ict-muted);
+      font-size: .8rem;
+    }
+
+    .ict .stat-value {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.12rem;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .ict .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    .ict .notice {
+      padding: 12px 14px;
+      border: 1px solid #ecd5a6;
+      border-radius: 10px;
+      background: #fff9ed;
+      color: #745016;
+      font-size: .9rem;
+    }
+
+    .ict .safe-note {
+      padding: 12px 14px;
+      border: 1px solid #d8e6dc;
+      border-radius: 10px;
+      background: #f3faf5;
+      color: #285b38;
+      font-size: .9rem;
+    }
+
+    .ict .status {
+      min-height: 23px;
+      margin: 10px 0 0;
+      font-size: .9rem;
+      overflow-wrap: anywhere;
+    }
+
+    .ict .status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .ict .status[data-kind="success"] {
+      color: #24623b;
+    }
+
+    .ict .view-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ict .view-header h2 {
+      margin: 0;
+    }
+
+    .ict .view-stage {
+      width: 100%;
+      max-height: 690px;
+      margin: 14px auto 0;
+      overflow: hidden;
+      border: 1px solid #dfe4eb;
+      border-radius: 10px;
+      background-color: #f4f6f9;
+      background-image:
+        linear-gradient(45deg, #e9edf2 25%, transparent 25%),
+        linear-gradient(-45deg, #e9edf2 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e9edf2 75%),
+        linear-gradient(-45deg, transparent 75%, #e9edf2 75%);
+      background-size: 18px 18px;
+      background-position: 0 0, 0 9px, 9px -9px, -9px 0;
+    }
+
+    .ict .stage-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    .ict .side-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      align-items: start;
+      margin-top: 14px;
+    }
+
+    .ict .side-card {
+      min-width: 0;
+      padding: 10px;
+      border: 1px solid #dfe4eb;
+      border-radius: 10px;
+      background: #f7f9fc;
+    }
+
+    .ict .side-label {
+      margin-bottom: 8px;
+      font-size: .88rem;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+    }
+
+    .ict .side-image-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-height: 600px;
+      overflow: hidden;
+      border: 1px solid #dfe4eb;
+      background-color: #fff;
+      background-image:
+        linear-gradient(45deg, #edf0f4 25%, transparent 25%),
+        linear-gradient(-45deg, #edf0f4 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #edf0f4 75%),
+        linear-gradient(-45deg, transparent 75%, #edf0f4 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+    }
+
+    .ict .side-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 590px;
+      object-fit: contain;
+    }
+
+    .ict .slider-stage {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .ict .slider-stage .stage-image {
+      position: absolute;
+      inset: 0;
+    }
+
+    .ict .slider-top {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      clip-path: inset(0 calc(100% - var(--ict-split, 50%)) 0 0);
+    }
+
+    .ict .slider-divider {
+      position: absolute;
+      z-index: 3;
+      top: 0;
+      bottom: 0;
+      left: var(--ict-split, 50%);
+      width: 3px;
+      background: #fff;
+      box-shadow: 0 0 0 1px rgba(20, 35, 55, .2), 0 0 8px rgba(0, 0, 0, .18);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .ict .slider-divider::after {
+      content: "↔";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      background: #245bcc;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 800;
+      transform: translate(-50%, -50%);
+    }
+
+    .ict .overlay-stage {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .ict .overlay-stage .stage-image {
+      position: absolute;
+      inset: 0;
+    }
+
+    .ict .overlay-top {
+      z-index: 2;
+      opacity: .5;
+    }
+
+    .ict .range-line {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      margin-top: 13px;
+    }
+
+    .ict .range-line label {
+      display: block;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .ict .range-line output {
+      font-size: .88rem;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .ict .diff-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .ict .diff-stat {
+      padding: 11px;
+      border: 1px solid var(--ict-border);
+      border-radius: 9px;
+      background: #f7f9fc;
+    }
+
+    .ict .diff-stat small {
+      display: block;
+      color: var(--ict-muted);
+      font-size: .81rem;
+    }
+
+    .ict .diff-stat strong {
+      display: block;
+      margin-top: 3px;
+      font-size: 1.1rem;
+      overflow-wrap: anywhere;
+    }
+
+    .ict .divider {
+      height: 1px;
+      margin: 18px 0;
+      border: 0;
+      background: var(--ict-border);
+    }
+
+    .ict .article p,
+    .ict .article li {
+      color: #354252;
+    }
+
+    .ict .article li + li {
+      margin-top: 6px;
+    }
+
+    .ict .faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--ict-border);
+    }
+
+    .ict .faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .ict .faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .ict .faq details p {
+      margin: 9px 0 0;
+      color: var(--ict-muted);
+    }
+
+    @media (max-width: 760px) {
+      .ict .settings-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .ict .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .ict {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .ict .image-grid,
+      .ict .settings-grid,
+      .ict .side-grid,
+      .ict .diff-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .ict .toolbar > .button {
+        flex: 1 1 100%;
+      }
+
+      .ict .view-stage {
+        max-height: 60vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ict *,
+      .ict *::before,
+      .ict *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="ict">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>Image Comparison Tool</span>
+  </nav>
+
+  <header class="hero">
+    <h1>Image Comparison Tool Online</h1>
+    <p>
+      Compare two images side by side, drag a before-and-after slider, adjust overlay
+      opacity, and highlight pixel-level differences. Measure changed pixels and download
+      a difference image for review.
+    </p>
+
+    <div class="pills">
+      <span class="pill">Before-and-after slider</span>
+      <span class="pill">Pixel difference map</span>
+      <span class="pill">Changed pixel percentage</span>
+      <span class="pill">Local browser processing</span>
+    </div>
+  </header>
+
+  <section class="card" aria-labelledby="inputHeading">
+    <h2 id="inputHeading">1. Choose both images</h2>
+
+    <div class="image-grid">
+      <div class="upload-card">
+        <h3>Image A — Original</h3>
+        <div class="drop" id="dropA">
+          <p id="dropTextA">Drop the original image here, or select a file.</p>
+          <input type="file" id="fileA" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp,image/avif" hidden>
+          <button class="button" type="button" id="chooseA">Choose image A</button>
+        </div>
+        <div class="file-info" id="infoA">No image selected.</div>
+      </div>
+
+      <div class="upload-card">
+        <h3>Image B — Changed version</h3>
+        <div class="drop" id="dropB">
+          <p id="dropTextB">Drop the changed image here, or select a file.</p>
+          <input type="file" id="fileB" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp,image/avif" hidden>
+          <button class="button" type="button" id="chooseB">Choose image B</button>
+        </div>
+        <div class="file-info" id="infoB">No image selected.</div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <button class="button primary" type="button" id="compareBtn" disabled>Compare images</button>
+      <button class="button" type="button" id="swapBtn" disabled>Swap A and B</button>
+      <button class="button" type="button" id="clearBtn">Clear all</button>
+      <button class="button" type="button" id="sampleBtn">Load sample</button>
+    </div>
+
+    <p class="muted" style="margin:10px 0 0">
+      Supported formats depend on your browser. PNG, JPG and WebP are recommended.
+      Maximum input size: 25 MB per image. SVG files are not accepted by this pixel comparison tool.
+    </p>
+
+    <p class="status" id="inputStatus" role="status" aria-live="polite"></p>
+
+    <div class="safe-note" style="margin-top:12px">
+      <strong>Privacy:</strong> both images are processed in your browser. This page does not
+      upload them to this website's conversion server. Browser decoding support and available
+      device memory may limit very large or unusual files.
+    </div>
+  </section>
+
+  <section class="card section" aria-labelledby="settingsHeading">
+    <h2 id="settingsHeading">2. Choose comparison settings</h2>
+
+    <div class="settings-grid">
+      <div class="field">
+        <label for="viewMode">Comparison view</label>
+        <select id="viewMode">
+          <option value="slider" selected>Before-and-after slider</option>
+          <option value="side">Side by side</option>
+          <option value="overlay">Adjustable overlay</option>
+          <option value="diff">Pixel difference map</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="sizeMode">Image alignment</label>
+        <select id="sizeMode">
+          <option value="preserve" selected>Preserve pixels, align top-left</option>
+          <option value="stretch">Resize B to match A</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="threshold">Difference threshold</label>
+        <input type="range" id="threshold" min="0" max="255" value="15" step="1">
+        <p class="muted" style="margin:4px 0 0">
+          Threshold: <strong id="thresholdValue">15</strong> / 255
+        </p>
+      </div>
+    </div>
+
+    <div class="range-line" id="sliderSettings">
+      <label for="sliderPosition">Before / after divider</label>
+      <output id="sliderPositionLabel" for="sliderPosition">50%</output>
+      <input type="range" id="sliderPosition" min="0" max="100" value="50" step="1" style="grid-column:1/-1">
+    </div>
+
+    <div class="range-line" id="overlaySettings" hidden>
+      <label for="overlayOpacity">Image B overlay opacity</label>
+      <output id="overlayOpacityLabel" for="overlayOpacity">50%</output>
+      <input type="range" id="overlayOpacity" min="0" max="100" value="50" step="1" style="grid-column:1/-1">
+    </div>
+
+    <div class="notice" style="margin-top:15px">
+      <strong>How pixel comparison works:</strong> corresponding pixel colors are compared
+      using the average absolute difference across the red, green, blue and alpha channels.
+      A pixel counts as changed when the value exceeds your threshold. Image resizing can
+      introduce differences, so review the images visually before treating the score as proof
+      that a file is identical or different.
+    </div>
+
+    <div class="toolbar">
+      <button class="button primary" type="button" id="runBtn" disabled>Run comparison</button>
+      <button class="button" type="button" id="downloadDiffBtn" disabled>Download difference PNG</button>
+    </div>
+
+    <p class="status" id="compareStatus" role="status" aria-live="polite"></p>
+    <p class="muted" id="progressText" aria-live="polite"></p>
+  </section>
+
+  <section class="card section" id="resultsPanel" hidden>
+    <div class="view-header">
+      <div>
+        <h2>3. Comparison results</h2>
+        <p class="muted" id="resultDescription" style="margin:4px 0 0"></p>
+      </div>
+      <button class="button small" id="rerunBtn" type="button">Recalculate</button>
+    </div>
+
+    <div class="diff-summary">
+      <div class="diff-stat">
+        <small>Changed pixels</small>
+        <strong id="changedPixels">—</strong>
+      </div>
+      <div class="diff-stat">
+        <small>Changed pixel percentage</small>
+        <strong id="changedPercent">—</strong>
+      </div>
+      <div class="diff-stat">
+        <small>Comparison canvas</small>
+        <strong id="canvasDimensions">—</strong>
+      </div>
+    </div>
+
+    <div id="sideView" class="side-grid" hidden>
+      <div class="side-card">
+        <div class="side-label">Image A — Original</div>
+        <div class="side-image-wrap">
+          <img class="side-image" id="sideImageA" alt="Image A comparison preview">
+        </div>
+      </div>
+
+      <div class="side-card">
+        <div class="side-label">Image B — Changed</div>
+        <div class="side-image-wrap">
+          <img class="side-image" id="sideImageB" alt="Image B comparison preview">
+        </div>
+      </div>
+    </div>
+
+    <div class="view-stage slider-stage" id="sliderView" hidden>
+      <img class="stage-image" id="sliderImageB" alt="Image B, the changed version">
+      <div class="slider-top" id="sliderTop">
+        <img class="stage-image" id="sliderImageA" alt="Image A, the original version">
+      </div>
+      <div class="slider-divider" id="sliderDivider"></div>
+    </div>
+
+    <div class="view-stage overlay-stage" id="overlayView" hidden>
+      <img class="stage-image" id="overlayImageA" alt="Original image underneath the overlay">
+      <img class="stage-image overlay-top" id="overlayImageB" alt="Changed image overlaid on the original">
+    </div>
+
+    <div class="view-stage" id="diffView" hidden>
+      <img class="stage-image" id="diffImage" alt="Pixel difference map highlighting changed image areas">
+    </div>
+
+    <div class="toolbar">
+      <button class="button primary" type="button" id="downloadA">Download normalized image A</button>
+      <button class="button primary" type="button" id="downloadB">Download normalized image B</button>
+    </div>
+
+    <p class="muted" style="margin-top:10px">
+      Normalized images are PNG copies of the canvases used for comparison. Transparent
+      areas may appear in the output when the selected alignment method preserves different
+      original image dimensions.
+    </p>
+  </section>
+
+  <section class="card section article">
+    <h2>What does an image comparison tool do?</h2>
+    <p>
+      An image comparison tool helps you see how two images differ. It can be useful when
+      reviewing design revisions, comparing screenshots, checking an image export, comparing
+      retouched photos, or inspecting whether a compressed image appears different from its
+      original.
+    </p>
+
+    <h3>How to compare two images online</h3>
+    <ol>
+      <li>Choose the original image and the changed image.</li>
+      <li>Select a view such as the before-and-after slider, side-by-side comparison or overlay.</li>
+      <li>For pixel analysis, choose the difference map and set an appropriate threshold.</li>
+      <li>Review the changed pixel count and percentage alongside the visual results.</li>
+      <li>Download the difference map or normalized comparison images if needed.</li>
+    </ol>
+
+    <h3>What is a pixel difference map?</h3>
+    <p>
+      A pixel difference map compares the color values at corresponding positions in two
+      rendered images. This tool highlights pixels whose average absolute color-channel
+      difference exceeds the selected threshold. The changed percentage is the number of
+      highlighted pixels divided by the total comparison canvas pixels.
+    </p>
+
+    <h3>Why does the comparison threshold matter?</h3>
+    <p>
+      A low threshold counts small color changes, which can include antialiasing differences
+      and compression artifacts. A higher threshold ignores smaller changes but may also
+      miss subtle edits. There is no universal threshold that works for every image.
+    </p>
+
+    <h3>What if the images have different dimensions?</h3>
+    <p>
+      With “Preserve pixels, align top-left,” the tool creates a shared canvas large enough
+      for both images and leaves unmatched areas transparent. These areas may count as
+      differences. With “Resize B to match A,” the second image is stretched to image A's
+      dimensions before comparing. That can be useful for some exports, but distortion may
+      create misleading results.
+    </p>
+
+    <h3>Does a zero difference percentage prove two files are identical?</h3>
+    <p>
+      No. It only indicates that the rendered pixels in the comparison canvases did not
+      exceed the selected threshold. It does not prove that the original files have identical
+      bytes, metadata, animation frames, embedded profiles or other file properties.
+    </p>
+
+    <h3>Are my images uploaded?</h3>
+    <p>
+      The image files are decoded and compared locally in the browser. The page does not send
+      them to this website's conversion server. The browser must support the selected format,
+      and large images may use substantial memory.
+    </p>
+  </section>
+
+  <section class="card section faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>How can I compare two images online?</summary>
+      <p>
+        Load image A and image B, then use the slider, side-by-side, overlay or difference
+        view to inspect what changed.
+      </p>
+    </details>
+
+    <details>
+      <summary>How do I compare two screenshots?</summary>
+      <p>
+        Upload both screenshots and select the difference map to highlight pixel changes.
+        If their dimensions differ, choose an alignment method and review the output carefully.
+      </p>
+    </details>
+
+    <details>
+      <summary>What does changed pixel percentage mean?</summary>
+      <p>
+        It is the percentage of pixels on the shared comparison canvas whose average absolute
+        color-channel difference exceeds your selected threshold. It is not a percentage of
+        files, objects or semantic content that changed.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why are many pixels marked as different?</summary>
+      <p>
+        Differences can arise from changed content, image resizing, color profiles, compression,
+        antialiasing or a shift in alignment. Try matching dimensions and increasing the
+        threshold, then inspect the slider view.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I download the differences?</summary>
+      <p>
+        Yes. Run the comparison and select Download difference PNG. The exported file is a
+        visual difference map, not a report of the original image file metadata.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does image comparison upload my photos?</summary>
+      <p>
+        No. This page compares images locally in the browser and does not upload them to this
+        website's conversion server.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does this tool support animated GIF comparison?</summary>
+      <p>
+        Animated image handling depends on browser decoding. This tool compares a decoded
+        image representation rather than providing frame-by-frame animation analysis.
+      </p>
+    </details>
+  </section>
+
+  <p class="muted section">
+    Explore more free utilities on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_FILE_BYTES = 25 * 1024 * 1024;
+  const MAX_SOURCE_PIXELS = 60_000_000;
+  const MAX_COMPARE_PIXELS = 12_000_000;
+  const MAX_DIMENSION = 12000;
+
+  const $ = id => document.getElementById(id);
+
+  const images = {
+    A: { file: null, width: 0, height: 0 },
+    B: { file: null, width: 0, height: 0 }
+  };
+
+  let comparison = null;
+  let operationId = 0;
+  let differenceId = 0;
+  let isBusy = false;
+
+  function setStatus(id, message, kind = "") {
+    const element = $(id);
+    element.textContent = message;
+    element.dataset.kind = kind;
+  }
+
+  function formatBytes(bytes) {
+    if (!Number.isFinite(bytes) || bytes < 0) return "Unknown";
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  function safeName(name) {
+    return String(name || "image")
+      .replace(/\.[^.]+$/, "")
+      .replace(/[^A-Za-z0-9._-]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^[.-]+|[.-]+$/g, "")
+      .slice(0, 80) || "image";
+  }
+
+  function revokeUrl(url) {
+    if (url) URL.revokeObjectURL(url);
+  }
+
+  function clearComparison() {
+    differenceId++;
+
+    if (comparison) {
+      revokeUrl(comparison.urlA);
+      revokeUrl(comparison.urlB);
+      revokeUrl(comparison.diffUrl);
+    }
+
+    comparison = null;
+
+    $("resultsPanel").hidden = true;
+    $("downloadDiffBtn").disabled = true;
+    $("rerunBtn").disabled = false;
+
+    $("changedPixels").textContent = "—";
+    $("changedPercent").textContent = "—";
+    $("canvasDimensions").textContent = "—";
+
+    $("progressText").textContent = "";
+  }
+
+  function updateBusy(busy) {
+    isBusy = busy;
+
+    $("compareBtn").disabled = busy || !images.A.file || !images.B.file;
+    $("runBtn").disabled = busy || !comparison;
+    $("chooseA").disabled = busy;
+    $("chooseB").disabled = busy;
+    $("swapBtn").disabled = busy || !images.A.file || !images.B.file;
+    $("clearBtn").disabled = busy;
+    $("sampleBtn").disabled = busy;
+
+    [
+      "fileA", "fileB", "viewMode", "sizeMode", "threshold",
+      "sliderPosition", "overlayOpacity"
+    ].forEach(id => {
+      $(id).disabled = busy;
+    });
+  }
+
+  async function decodeFile(file) {
+    if (!file) throw new Error("Choose an image first.");
+
+    if (file.size > MAX_FILE_BYTES) {
+      throw new Error("Each image must be no larger than 25 MB.");
+    }
+
+    const extension = (file.name.match(/\.([^.]+)$/)?.[1] || "").toLowerCase();
+
+    if (file.type === "image/svg+xml" || extension === "svg") {
+      throw new Error("SVG files are not supported here. Export the SVG to PNG first.");
+    }
+
+    const acceptedTypes = new Set([
+      "image/png",
+      "image/jpeg",
+      "image/webp",
+      "image/gif",
+      "image/bmp",
+      "image/avif"
+    ]);
+
+    const acceptedExtensions = /\.(png|jpe?g|webp|gif|bmp|avif)$/i;
+
+    if (file.type && !acceptedTypes.has(file.type.toLowerCase())) {
+      throw new Error("This image format is not supported by the tool's file picker.");
+    }
+
+    if (!file.type && !acceptedExtensions.test(file.name)) {
+      throw new Error("Choose a PNG, JPG, WebP, GIF, BMP or AVIF image.");
+    }
+
+    if ("createImageBitmap" in window) {
+      try {
+        const bitmap = await createImageBitmap(file);
+
+        if (
+          !bitmap.width ||
+          !bitmap.height ||
+          bitmap.width * bitmap.height > MAX_SOURCE_PIXELS
+        ) {
+          bitmap.close();
+          throw new Error("The image is empty or exceeds the 60-megapixel source limit.");
+        }
+
+        return {
+          source: bitmap,
+          width: bitmap.width,
+          height: bitmap.height,
+          close: () => bitmap.close()
+        };
+      } catch (error) {
+        if (error && error.message &&
+            /60-megapixel|empty or exceeds/.test(error.message)) {
+          throw error;
+        }
+
+        // Fall back to HTMLImageElement for browsers where createImageBitmap
+        // cannot decode a supported file.
+      }
+    }
+
+    const url = URL.createObjectURL(file);
+
+    try {
+      const image = new Image();
+      image.decoding = "async";
+
+      await new Promise((resolve, reject) => {
+        image.onload = resolve;
+        image.onerror = () => reject(
+          new Error("The browser could not decode this image format.")
+        );
+        image.src = url;
+      });
+
+      if (
+        !image.naturalWidth ||
+        !image.naturalHeight ||
+        image.naturalWidth * image.naturalHeight > MAX_SOURCE_PIXELS
+      ) {
+        throw new Error("The image is empty or exceeds the 60-megapixel source limit.");
+      }
+
+      return {
+        source: image,
+        width: image.naturalWidth,
+        height: image.naturalHeight,
+        close: () => {
+          image.src = "";
+          URL.revokeObjectURL(url);
+        }
+      };
+    } catch (error) {
+      URL.revokeObjectURL(url);
+      throw error;
+    }
+  }
+
+  async function loadImage(file, slot) {
+    if (!file || isBusy) return;
+
+    const thisOperation = ++operationId;
+    clearComparison();
+
+    const previous = images[slot];
+    previous.file = null;
+    previous.width = 0;
+    previous.height = 0;
+
+    $("info" + slot).textContent = "Loading image…";
+    $("dropText" + slot).textContent = file.name;
+
+    setStatus(
+      "inputStatus",
+      `Reading image ${slot}: ${file.name}…`
+    );
+
+    try {
+      const decoded = await decodeFile(file);
+
+      if (thisOperation !== operationId) {
+        decoded.close();
+        return;
+      }
+
+      images[slot] = {
+        file,
+        width: decoded.width,
+        height: decoded.height
+      };
+
+      decoded.close();
+
+      updateFileInfo(slot);
+      updateButtons();
+
+      setStatus(
+        "inputStatus",
+        `Image ${slot} loaded: ${file.name}.`,
+        "success"
+      );
+
+      setStatus(
+        "compareStatus",
+        images.A.file && images.B.file
+          ? "Both images are ready. Select Compare images."
+          : "Choose the second image to compare."
+      );
+    } catch (error) {
+      if (thisOperation !== operationId) return;
+
+      images[slot] = { file: null, width: 0, height: 0 };
+
+      $("info" + slot).textContent = "Could not load this image.";
+      $("dropText" + slot).textContent = "Choose an image to try again.";
+
+      updateButtons();
+
+      setStatus(
+        "inputStatus",
+        error && error.message
+          ? `Image ${slot}: ${error.message}`
+          : `Image ${slot} could not be loaded.`,
+        "error"
+      );
+    }
+  }
+
+  function updateFileInfo(slot) {
+    const item = images[slot];
+
+    if (!item.file) {
+      $("info" + slot).textContent = "No image selected.";
+      $("dropText" + slot).textContent =
+        slot === "A" ? "Drop the original image here, or select a file."
+                     : "Drop the changed image here, or select a file.";
+      return;
+    }
+
+    $("info" + slot).replaceChildren();
+
+    const strong = document.createElement("strong");
+    strong.textContent = item.file.name;
+
+    const detail = document.createElement("div");
+    detail.textContent =
+      `${item.width.toLocaleString()} × ${item.height.toLocaleString()} px · ${formatBytes(item.file.size)}`;
+
+    $("info" + slot).append(strong, detail);
+    $("dropText" + slot).textContent = item.file.name;
+  }
+
+  function updateButtons() {
+    const canCompare = Boolean(images.A.file && images.B.file);
+
+    $("compareBtn").disabled = isBusy || !canCompare;
+    $("swapBtn").disabled = isBusy || !canCompare;
+  }
+
+  function createCanvas(width, height) {
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+
+    const context = canvas.getContext("2d", {
+      alpha: true,
+      willReadFrequently: true
+    });
+
+    if (!context) {
+      throw new Error("Could not create a canvas. Try another browser.");
+    }
+
+    return { canvas, context };
+  }
+
+  function makeCanvasLayout(a, b, sizeMode) {
+    let logicalWidth;
+    let logicalHeight;
+
+    if (sizeMode === "stretch") {
+      logicalWidth = a.width;
+      logicalHeight = a.height;
+    } else {
+      logicalWidth = Math.max(a.width, b.width);
+      logicalHeight = Math.max(a.height, b.height);
+    }
+
+    const rawPixels = logicalWidth * logicalHeight;
+
+    const scale = Math.min(
+      1,
+      Math.sqrt(MAX_COMPARE_PIXELS / rawPixels),
+      MAX_DIMENSION / logicalWidth,
+      MAX_DIMENSION / logicalHeight
+    );
+
+    const width = Math.max(1, Math.floor(logicalWidth * scale));
+    const height = Math.max(1, Math.floor(logicalHeight * scale));
+
+    return { width, height, scale, sizeMode };
+  }
+
+  function drawNormalizedImage(decoded, canvas, context, slot, layout) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (slot === "B" && layout.sizeMode === "stretch") {
+      context.drawImage(
+        decoded.source,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+    } else {
+      const width = decoded.width * layout.scale;
+      const height = decoded.height * layout.scale;
+
+      context.drawImage(
+        decoded.source,
+        0,
+        0,
+        width,
+        height
+      );
+    }
+  }
+
+  function canvasToBlob(canvas, type = "image/png") {
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(blob => {
+        if (!blob) {
+          reject(new Error("Could not encode the comparison image."));
+          return;
+        }
+        resolve(blob);
+      }, type);
+    });
+  }
+
+  async function makeObjectUrl(canvas) {
+    const blob = await canvasToBlob(canvas, "image/png");
+    return URL.createObjectURL(blob);
+  }
+
+  async function compareImages() {
+    if (isBusy) return;
+
+    if (!images.A.file || !images.B.file) {
+      setStatus("compareStatus", "Choose both images first.", "error");
+      return;
+    }
+
+    clearComparison();
+
+    const thisOperation = ++operationId;
+    updateBusy(true);
+    setStatus("compareStatus", "Preparing images…");
+    $("progressText").textContent = "Decoding both images and preparing a shared canvas.";
+
+    let decodedA = null;
+    let decodedB = null;
+
+    try {
+      decodedA = await decodeFile(images.A.file);
+      decodedB = await decodeFile(images.B.file);
+
+      if (thisOperation !== operationId) {
+        throw new Error("The selected files changed. Run the comparison again.");
+      }
+
+      const layout = makeCanvasLayout(
+        decodedA,
+        decodedB,
+        $("sizeMode").value
+      );
+
+      const aCanvas = createCanvas(layout.width, layout.height);
+      const bCanvas = createCanvas(layout.width, layout.height);
+
+      drawNormalizedImage(
+        decodedA,
+        aCanvas.canvas,
+        aCanvas.context,
+        "A",
+        layout
+      );
+
+      drawNormalizedImage(
+        decodedB,
+        bCanvas.canvas,
+        bCanvas.context,
+        "B",
+        layout
+      );
+
+      if (thisOperation !== operationId) {
+        throw new Error("The selected files changed. Run the comparison again.");
+      }
+
+      setStatus("compareStatus", "Preparing previews and calculating pixel differences…");
+
+      const urlA = await makeObjectUrl(aCanvas.canvas);
+      const urlB = await makeObjectUrl(bCanvas.canvas);
+
+      if (thisOperation !== operationId) {
+        revokeUrl(urlA);
+        revokeUrl(urlB);
+        throw new Error("The selected files changed. Run the comparison again.");
+      }
+
+      comparison = {
+        canvasA: aCanvas.canvas,
+        canvasB: bCanvas.canvas,
+        width: layout.width,
+        height: layout.height,
+        urlA,
+        urlB,
+        diffCanvas: null,
+        diffUrl: null,
+        changedPixels: 0,
+        totalPixels: layout.width * layout.height,
+        changedPercent: 0
+      };
+
+      $("resultsPanel").hidden = false;
+
+      $("canvasDimensions").textContent =
+        `${layout.width.toLocaleString()} × ${layout.height.toLocaleString()}`;
+
+      const aInfo = `${images.A.width} × ${images.A.height}`;
+      const bInfo = `${images.B.width} × ${images.B.height}`;
+
+      $("resultDescription").textContent =
+        `Image A: ${aInfo} px · Image B: ${bInfo} px · ` +
+        (layout.scale < 1
+          ? `Comparison scaled to fit browser memory limits (${Math.round(layout.scale * 100)}%).`
+          : "Images prepared for comparison.");
+
+      $("sideImageA").src = urlA;
+      $("sideImageB").src = urlB;
+      $("sliderImageA").src = urlA;
+      $("sliderImageB").src = urlB;
+      $("overlayImageA").src = urlA;
+      $("overlayImageB").src = urlB;
+
+      updateSliderPosition();
+      updateOverlayOpacity();
+      updateViewVisibility();
+
+      // Computing the diff once makes the changed-pixel summary available
+      // even if the slider view is selected initially.
+      await regenerateDifference(thisOperation);
+
+      if (thisOperation !== operationId) {
+        throw new Error("The selected files changed. Run the comparison again.");
+      }
+
+      updateViewVisibility();
+
+      setStatus(
+        "compareStatus",
+        "Comparison complete. Explore the views and download the difference map if needed.",
+        "success"
+      );
+
+      $("progressText").textContent =
+        "The pixel percentage applies to the normalized comparison canvas and selected threshold.";
+    } catch (error) {
+      if (thisOperation === operationId) {
+        clearComparison();
+        setStatus(
+          "compareStatus",
+          error && error.message
+            ? `Comparison failed: ${error.message}`
+            : "Comparison failed. Try smaller images or another format.",
+          "error"
+        );
+      }
+    } finally {
+      if (decodedA) decodedA.close();
+      if (decodedB) decodedB.close();
+
+      if (thisOperation === operationId) {
+        updateBusy(false);
+        updateButtons();
+      }
+    }
+  }
+
+  async function regenerateDifference(expectedOperation = operationId) {
+    if (!comparison) {
+      throw new Error("Compare two images first.");
+    }
+
+    const id = ++differenceId;
+
+    const aCanvas = comparison.canvasA;
+    const bCanvas = comparison.canvasB;
+
+    const aContext = aCanvas.getContext("2d", { willReadFrequently: true });
+    const bContext = bCanvas.getContext("2d", { willReadFrequently: true });
+
+    const width = comparison.width;
+    const height = comparison.height;
+
+    const aData = aContext.getImageData(0, 0, width, height).data;
+    const bData = bContext.getImageData(0, 0, width, height).data;
+
+    const output = createCanvas(width, height);
+    const outImage = output.context.createImageData(width, height);
+    const outData = outImage.data;
+
+    const threshold = Number($("threshold").value);
+    let changed = 0;
+
+    // Pixel channels are compared at the same normalized coordinate. This is
+    // a rendered-pixel metric, not a byte-for-byte file comparison.
+    for (let i = 0; i < aData.length; i += 4) {
+      const dr = Math.abs(aData[i] - bData[i]);
+      const dg = Math.abs(aData[i + 1] - bData[i + 1]);
+      const db = Math.abs(aData[i + 2] - bData[i + 2]);
+      const da = Math.abs(aData[i + 3] - bData[i + 3]);
+
+      const averageDifference = (dr + dg + db + da) / 4;
+
+      if (averageDifference > threshold) {
+        changed++;
+
+        // Magenta/red indicates pixels exceeding the current threshold.
+        const intensity = Math.min(255, 120 + Math.round(averageDifference / 2));
+
+        outData[i] = 255;
+        outData[i + 1] = Math.max(0, 70 - Math.round(intensity / 5));
+        outData[i + 2] = intensity;
+        outData[i + 3] = 255;
+      } else {
+        // Dim grayscale background keeps differences easy to locate.
+        const gray = Math.round(
+          (aData[i] * 0.2126 +
+           aData[i + 1] * 0.7152 +
+           aData[i + 2] * 0.0722) * 0.38
+        );
+
+        outData[i] = gray;
+        outData[i + 1] = gray;
+        outData[i + 2] = gray;
+        outData[i + 3] = 255;
+      }
+    }
+
+    output.context.putImageData(outImage, 0, 0);
+
+    const blob = await canvasToBlob(output.canvas, "image/png");
+    const url = URL.createObjectURL(blob);
+
+    if (
+      id !== differenceId ||
+      !comparison ||
+      expectedOperation !== operationId
+    ) {
+      revokeUrl(url);
+      return;
+    }
+
+    revokeUrl(comparison.diffUrl);
+
+    comparison.diffCanvas = output.canvas;
+    comparison.diffUrl = url;
+    comparison.changedPixels = changed;
+    comparison.changedPercent =
+      (changed / (width * height)) * 100;
+
+    $("diffImage").src = url;
+    $("changedPixels").textContent = changed.toLocaleString();
+    $("changedPercent").textContent =
+      `${comparison.changedPercent.toFixed(3)}%`;
+
+    $("downloadDiffBtn").disabled = false;
+  }
+
+  function updateSliderPosition() {
+    const percentage = Number($("sliderPosition").value);
+
+    $("sliderPositionLabel").textContent = `${percentage}%`;
+    $("sliderTop").style.setProperty("--ict-split", `${percentage}%`);
+    $("sliderDivider").style.setProperty("--ict-split", `${percentage}%`);
+  }
+
+  function updateOverlayOpacity() {
+    const percentage = Number($("overlayOpacity").value);
+
+    $("overlayOpacityLabel").textContent = `${percentage}%`;
+    $("overlayImageB").style.opacity = String(percentage / 100);
+  }
+
+  function updateViewVisibility() {
+    if (!comparison) return;
+
+    const mode = $("viewMode").value;
+
+    $("sideView").hidden = mode !== "side";
+    $("sliderView").hidden = mode !== "slider";
+    $("overlayView").hidden = mode !== "overlay";
+    $("diffView").hidden = mode !== "diff";
+
+    $("sliderSettings").hidden = mode !== "slider";
+    $("overlaySettings").hidden = mode !== "overlay";
+
+    if (mode === "diff" && comparison.diffUrl) {
+      $("diffImage").src = comparison.diffUrl;
+    }
+  }
+
+  async function refreshDifferenceForThreshold() {
+    if (!comparison || isBusy) return;
+
+    setStatus("compareStatus", "Updating pixel difference map…");
+
+    try {
+      await regenerateDifference(operationId);
+      updateViewVisibility();
+
+      setStatus(
+        "compareStatus",
+        "Difference map updated for the selected threshold.",
+        "success"
+      );
+    } catch (error) {
+      setStatus(
+        "compareStatus",
+        error && error.message
+          ? error.message
+          : "Could not update the difference map.",
+        "error"
+      );
+    }
+  }
+
+  async function downloadCanvas(canvas, filename) {
+    const blob = await canvasToBlob(canvas, "image/png");
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 2000);
+  }
+
+  async function downloadDiff() {
+    if (!comparison || !comparison.diffCanvas || isBusy) return;
+
+    try {
+      await downloadCanvas(
+        comparison.diffCanvas,
+        `${safeName(images.A.file.name)}-difference.png`
+      );
+
+      setStatus("compareStatus", "Difference PNG download started.", "success");
+    } catch (error) {
+      setStatus(
+        "compareStatus",
+        error && error.message ? error.message : "Could not download the difference image.",
+        "error"
+      );
+    }
+  }
+
+  async function swapImages() {
+    if (isBusy || !images.A.file || !images.B.file) return;
+
+    operationId++;
+    clearComparison();
+
+    const temporary = images.A;
+    images.A = images.B;
+    images.B = temporary;
+
+    updateFileInfo("A");
+    updateFileInfo("B");
+    updateButtons();
+
+    setStatus("inputStatus", "Images swapped.");
+    setStatus("compareStatus", "Run the comparison again to analyze the swapped images.");
+  }
+
+  async function clearAll() {
+    if (isBusy) return;
+
+    operationId++;
+    clearComparison();
+
+    images.A = { file: null, width: 0, height: 0 };
+    images.B = { file: null, width: 0, height: 0 };
+
+    $("fileA").value = "";
+    $("fileB").value = "";
+
+    updateFileInfo("A");
+    updateFileInfo("B");
+    updateButtons();
+
+    setStatus("inputStatus", "Images cleared.");
+    setStatus("compareStatus", "");
+  }
+
+  async function loadSample() {
+    if (isBusy) return;
+
+    operationId++;
+    clearComparison();
+
+    // Create two local demonstration images; no external network image is needed.
+    const first = createCanvas(480, 300);
+    const second = createCanvas(480, 300);
+
+    function drawSample(canvas, context, isChanged) {
+      const w = canvas.width;
+      const h = canvas.height;
+
+      context.fillStyle = "#f1f5fb";
+      context.fillRect(0, 0, w, h);
+
+      context.fillStyle = "#245bcc";
+      context.fillRect(40, 40, 180, 90);
+
+      context.fillStyle = "#17202c";
+      context.font = "bold 25px Arial";
+      context.fillText("Sample image", 40, 180);
+
+      context.fillStyle = "#2d9d64";
+      context.beginPath();
+      context.arc(isChanged ? 340 : 310, 100, 42, 0, Math.PI * 2);
+      context.fill();
+
+      context.strokeStyle = "#e15b5b";
+      context.lineWidth = 5;
+      context.beginPath();
+      context.moveTo(45, 230);
+      context.lineTo(isChanged ? 250 : 200, 260);
+      context.stroke();
+
+      if (isChanged) {
+        context.fillStyle = "#7b46b5";
+        context.fillRect(310, 200, 90, 44);
+      }
+    }
+
+    drawSample(first.canvas, first.context, false);
+    drawSample(second.canvas, second.context, true);
+
+    try {
+      const blobA = await canvasToBlob(first.canvas, "image/png");
+      const blobB = await canvasToBlob(second.canvas, "image/png");
+
+      const fileA = new File([blobA], "sample-original.png", { type: "image/png" });
+      const fileB = new File([blobB], "sample-changed.png", { type: "image/png" });
+
+      // Attach the generated files through the same validation path as user files.
+      await loadImage(fileA, "A");
+      await loadImage(fileB, "B");
+    } catch (error) {
+      setStatus(
+        "inputStatus",
+        error && error.message
+          ? `Could not create sample images: ${error.message}`
+          : "Could not create sample images.",
+        "error"
+      );
+    }
+  }
+
+  $("chooseA").addEventListener("click", () => $("fileA").click());
+  $("chooseB").addEventListener("click", () => $("fileB").click());
+
+  $("fileA").addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) loadImage(file, "A");
+    event.target.value = "";
+  });
+
+  $("fileB").addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) loadImage(file, "B");
+    event.target.value = "";
+  });
+
+  function addDropHandling(zoneId, slot) {
+    const zone = $(zoneId);
+
+    ["dragenter", "dragover"].forEach(type => {
+      zone.addEventListener(type, event => {
+        event.preventDefault();
+        zone.classList.add("is-dragging");
+      });
+    });
+
+    ["dragleave", "drop"].forEach(type => {
+      zone.addEventListener(type, event => {
+        event.preventDefault();
+        zone.classList.remove("is-dragging");
+      });
+    });
+
+    zone.addEventListener("drop", event => {
+      const file = event.dataTransfer &&
+        event.dataTransfer.files &&
+        event.dataTransfer.files[0];
+
+      if (file) loadImage(file, slot);
+    });
+  }
+
+  addDropHandling("dropA", "A");
+  addDropHandling("dropB", "B");
+
+  $("compareBtn").addEventListener("click", compareImages);
+  $("runBtn").addEventListener("click", compareImages);
+  $("rerunBtn").addEventListener("click", compareImages);
+  $("swapBtn").addEventListener("click", swapImages);
+  $("clearBtn").addEventListener("click", clearAll);
+  $("sampleBtn").addEventListener("click", loadSample);
+  $("downloadDiffBtn").addEventListener("click", downloadDiff);
+
+  $("downloadA").addEventListener("click", async () => {
+    if (!comparison || isBusy) return;
+
+    try {
+      await downloadCanvas(
+        comparison.canvasA,
+        `${safeName(images.A.file.name)}-normalized.png`
+      );
+    } catch (error) {
+      setStatus("compareStatus", "Could not download normalized image A.", "error");
+    }
+  });
+
+  $("downloadB").addEventListener("click", async () => {
+    if (!comparison || isBusy) return;
+
+    try {
+      await downloadCanvas(
+        comparison.canvasB,
+        `${safeName(images.B.file.name)}-normalized.png`
+      );
+    } catch (error) {
+      setStatus("compareStatus", "Could not download normalized image B.", "error");
+    }
+  });
+
+  $("viewMode").addEventListener("change", updateViewVisibility);
+
+  $("sliderPosition").addEventListener("input", updateSliderPosition);
+
+  $("overlayOpacity").addEventListener("input", updateOverlayOpacity);
+
+  $("threshold").addEventListener("input", () => {
+    $("thresholdValue").textContent = $("threshold").value;
+  });
+
+  $("threshold").addEventListener("change", refreshDifferenceForThreshold);
+
+  $("sizeMode").addEventListener("change", () => {
+    setStatus(
+      "compareStatus",
+      "Alignment changed. Run the comparison again to apply the new setting."
+    );
+  });
+
+  window.addEventListener("beforeunload", () => {
+    if (comparison) {
+      revokeUrl(comparison.urlA);
+      revokeUrl(comparison.urlB);
+      revokeUrl(comparison.diffUrl);
+    }
+  });
+
+  updateFileInfo("A");
+  updateFileInfo("B");
+  updateButtons();
+  updateSliderPosition();
+  updateOverlayOpacity();
+})();
+</script>
+</body>
+</html>

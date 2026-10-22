@@ -1,0 +1,1779 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CSV to SQL Converter Online – Generate INSERT Statements</title>
+  <meta name="description" content="Convert CSV files to SQL INSERT statements online for MySQL, PostgreSQL, SQLite and SQL Server. Configure table names, batch inserts, NULL values and optional CREATE TABLE output.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/csv-to-sql-converter.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CSV to SQL Converter Online">
+  <meta property="og:description" content="Generate SQL INSERT statements from CSV data for four popular database systems.">
+  <meta property="og:url" content="https://converttotoolsonline.com/csv-to-sql-converter.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CSV to SQL Converter Online">
+  <meta name="twitter:description" content="Convert CSV data into SQL scripts in your browser.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CSV to SQL Converter Online",
+    "url": "https://converttotoolsonline.com/csv-to-sql-converter.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based utility that converts CSV data into SQL INSERT statements for MySQL, PostgreSQL, SQLite and SQL Server.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I convert CSV to SQL?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Upload a CSV file or paste the contents, set the table name and target database, select your options and generate SQL INSERT statements. Review the output before downloading or running it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which databases does this CSV to SQL converter support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tool generates SQL for MySQL, PostgreSQL, SQLite and SQL Server, including database-specific identifier quoting and common value escaping."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this converter preserve leading zeros?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, by default values are treated as text in the generated SQL, so values such as 00127 stay quoted as text. Optional type inference can change how numeric-looking values are emitted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool upload my CSV data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The CSV is parsed and converted in your browser. The page does not upload your data to this website. The parsing library is loaded from a CDN."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I generate a CREATE TABLE statement too?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. An optional CREATE TABLE statement uses text-compatible columns for the selected database. You should review and adjust column types, keys and constraints for your actual schema."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is generated SQL safe to run directly in production?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The generator escapes common SQL string values and quotes identifiers for the selected dialect, but you should review the result and test it in a non-production database first. SQL modes, schema requirements, data types and database settings can affect execution."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .c2s-page {
+      --c2s-border: #dfe4eb;
+      --c2s-muted: #5d6878;
+      --c2s-accent: #245bcc;
+      --c2s-soft: #f6f8fb;
+      --c2s-radius: 14px;
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      color: #17202c;
+      line-height: 1.6;
+    }
+
+    .c2s-page,
+    .c2s-page * {
+      box-sizing: border-box;
+    }
+
+    .c2s-page [hidden] {
+      display: none !important;
+    }
+
+    .c2s-page input,
+    .c2s-page select,
+    .c2s-page textarea,
+    .c2s-page button {
+      font: inherit;
+    }
+
+    .c2s-page button {
+      cursor: pointer;
+    }
+
+    .c2s-page :is(input, select, textarea, button, a):focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .c2s-page a {
+      color: var(--c2s-accent);
+    }
+
+    .c2s-breadcrumb {
+      margin-bottom: 12px;
+      color: var(--c2s-muted);
+      font-size: .92rem;
+    }
+
+    .c2s-header {
+      margin-bottom: 22px;
+    }
+
+    .c2s-header h1 {
+      margin: 0 0 9px;
+      font-size: clamp(1.8rem, 4vw, 2.55rem);
+      line-height: 1.17;
+      letter-spacing: -.035em;
+    }
+
+    .c2s-header p {
+      max-width: 820px;
+      margin: 0;
+      color: var(--c2s-muted);
+    }
+
+    .c2s-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .c2s-pill {
+      padding: 5px 10px;
+      border: 1px solid #d0e7d6;
+      border-radius: 999px;
+      background: #eef8f0;
+      color: #285b38;
+      font-size: .84rem;
+    }
+
+    .c2s-card {
+      min-width: 0;
+      padding: clamp(14px, 2.4vw, 22px);
+      border: 1px solid var(--c2s-border);
+      border-radius: var(--c2s-radius);
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .c2s-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .c2s-card h3 {
+      margin: 0 0 9px;
+      font-size: 1rem;
+    }
+
+    .c2s-muted {
+      color: var(--c2s-muted);
+      font-size: .9rem;
+    }
+
+    .c2s-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 41px;
+      padding: 9px 14px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #192536;
+      font-weight: 650;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .c2s-button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .c2s-button-primary {
+      border-color: var(--c2s-accent);
+      background: var(--c2s-accent);
+      color: #fff;
+    }
+
+    .c2s-button-primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: #fff;
+    }
+
+    .c2s-button:disabled {
+      cursor: not-allowed;
+      opacity: .48;
+    }
+
+    .c2s-upload {
+      padding: 20px 14px;
+      border: 2px dashed #b8c6d8;
+      border-radius: 12px;
+      background: #fafcff;
+      text-align: center;
+      transition: border-color .15s ease, background .15s ease;
+    }
+
+    .c2s-upload.is-dragging {
+      border-color: var(--c2s-accent);
+      background: #edf4ff;
+    }
+
+    .c2s-upload strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.05rem;
+    }
+
+    .c2s-upload p {
+      margin: 0 0 12px;
+      color: var(--c2s-muted);
+      font-size: .9rem;
+    }
+
+    .c2s-field {
+      min-width: 0;
+    }
+
+    .c2s-field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .c2s-field input[type="text"],
+    .c2s-field input[type="number"],
+    .c2s-field select,
+    .c2s-field textarea {
+      width: 100%;
+      min-width: 0;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .c2s-field textarea {
+      min-height: 230px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .88rem;
+      line-height: 1.55;
+      tab-size: 2;
+    }
+
+    .c2s-output {
+      min-height: 350px !important;
+      background: #fbfcfe !important;
+    }
+
+    .c2s-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .c2s-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .c2s-option {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 11px;
+      border: 1px solid var(--c2s-border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .c2s-option input {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: var(--c2s-accent);
+    }
+
+    .c2s-option strong {
+      display: block;
+      font-size: .91rem;
+    }
+
+    .c2s-option small {
+      display: block;
+      margin-top: 2px;
+      color: var(--c2s-muted);
+      line-height: 1.45;
+    }
+
+    .c2s-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .c2s-spacer {
+      flex: 1 1 auto;
+    }
+
+    .c2s-divider {
+      height: 1px;
+      margin: 19px 0;
+      border: 0;
+      background: var(--c2s-border);
+    }
+
+    .c2s-status {
+      min-height: 25px;
+      margin: 11px 0 0;
+      font-size: .91rem;
+      overflow-wrap: anywhere;
+    }
+
+    .c2s-status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .c2s-status[data-kind="success"] {
+      color: #24623b;
+    }
+
+    .c2s-warning {
+      padding: 12px 14px;
+      border: 1px solid #eed8ac;
+      border-radius: 10px;
+      background: #fff9ed;
+      color: #745016;
+      font-size: .9rem;
+    }
+
+    .c2s-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .c2s-stat {
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid var(--c2s-border);
+      border-radius: 10px;
+      background: var(--c2s-soft);
+    }
+
+    .c2s-stat-label {
+      display: block;
+      color: var(--c2s-muted);
+      font-size: .82rem;
+    }
+
+    .c2s-stat-value {
+      display: block;
+      margin-top: 4px;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 800;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .c2s-table-wrap {
+      max-width: 100%;
+      overflow: auto;
+      border: 1px solid var(--c2s-border);
+      border-radius: 10px;
+    }
+
+    .c2s-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: .88rem;
+    }
+
+    .c2s-table th,
+    .c2s-table td {
+      min-width: 120px;
+      max-width: 330px;
+      padding: 9px 11px;
+      border-bottom: 1px solid var(--c2s-border);
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .c2s-table th {
+      background: var(--c2s-soft);
+      font-weight: 750;
+    }
+
+    .c2s-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .c2s-list {
+      padding-left: 20px;
+    }
+
+    .c2s-list li + li {
+      margin-top: 7px;
+    }
+
+    .c2s-article p,
+    .c2s-article li {
+      color: #354252;
+    }
+
+    .c2s-section {
+      margin-top: 20px;
+    }
+
+    .c2s-section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .c2s-section-head h2 {
+      margin: 0;
+    }
+
+    .c2s-faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--c2s-border);
+    }
+
+    .c2s-faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .c2s-faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .c2s-faq details p {
+      margin: 9px 0 0;
+      color: var(--c2s-muted);
+    }
+
+    .c2s-privacy {
+      padding: 12px 14px;
+      border-left: 3px solid #cad7e9;
+      background: var(--c2s-soft);
+      color: var(--c2s-muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 760px) {
+      .c2s-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .c2s-stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .c2s-page {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .c2s-options {
+        grid-template-columns: 1fr;
+      }
+
+      .c2s-toolbar > .c2s-button {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .c2s-page *,
+      .c2s-page *::before,
+      .c2s-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="c2s-page">
+  <nav class="c2s-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>CSV to SQL Converter</span>
+  </nav>
+
+  <header class="c2s-header">
+    <h1>CSV to SQL Converter Online</h1>
+    <p>
+      Convert CSV data into SQL INSERT statements for MySQL, PostgreSQL, SQLite,
+      or SQL Server. Configure your table, choose insert batch size, preview the
+      generated SQL and download a script for review.
+    </p>
+    <div class="c2s-pills">
+      <span class="c2s-pill">Four database dialects</span>
+      <span class="c2s-pill">Browser-based processing</span>
+      <span class="c2s-pill">SQL export</span>
+    </div>
+  </header>
+
+  <section class="c2s-card" aria-labelledby="inputTitle">
+    <h2 id="inputTitle">1. Add your CSV data</h2>
+
+    <div class="c2s-upload" id="uploadZone">
+      <strong>Drop a CSV or TSV file here</strong>
+      <p>Or choose a file from your device. Maximum file size: 10 MB.</p>
+      <input
+        type="file"
+        id="fileInput"
+        accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values,text/plain"
+        hidden
+      >
+      <button class="c2s-button c2s-button-primary" type="button" id="chooseFileBtn">
+        Choose CSV file
+      </button>
+      <div class="c2s-muted" id="fileLabel" style="margin-top:10px">
+        Your data is processed inside your browser.
+      </div>
+    </div>
+
+    <div class="c2s-field" style="margin-top:16px">
+      <label for="csvInput">CSV input</label>
+      <textarea
+        id="csvInput"
+        spellcheck="false"
+        autocomplete="off"
+        autocapitalize="off"
+        placeholder="id,name,email&#10;1,Alice,alice@example.com&#10;2,Bob,bob@example.com"
+      ></textarea>
+    </div>
+
+    <div class="c2s-toolbar">
+      <button type="button" class="c2s-button" id="loadSampleBtn">Load sample</button>
+      <button type="button" class="c2s-button" id="clearBtn">Clear</button>
+      <span class="c2s-spacer"></span>
+      <span class="c2s-muted" id="inputStats">No data loaded yet.</span>
+    </div>
+
+    <hr class="c2s-divider">
+
+    <h2>2. Configure SQL generation</h2>
+
+    <div class="c2s-grid">
+      <div class="c2s-field">
+        <label for="dialect">Target database</label>
+        <select id="dialect">
+          <option value="mysql">MySQL</option>
+          <option value="postgres">PostgreSQL</option>
+          <option value="sqlite">SQLite</option>
+          <option value="sqlserver">SQL Server</option>
+        </select>
+      </div>
+
+      <div class="c2s-field">
+        <label for="tableName">Table name</label>
+        <input
+          type="text"
+          id="tableName"
+          value="my_table"
+          maxlength="150"
+          spellcheck="false"
+          placeholder="my_table"
+        >
+        <div class="c2s-muted">Example: customers or public.customers</div>
+      </div>
+
+      <div class="c2s-field">
+        <label for="delimiter">CSV delimiter</label>
+        <select id="delimiter">
+          <option value="auto">Detect automatically</option>
+          <option value=",">Comma (,)</option>
+          <option value=";">Semicolon (;)</option>
+          <option value="tab">Tab (TSV)</option>
+          <option value="|">Pipe (|)</option>
+        </select>
+      </div>
+
+      <div class="c2s-field">
+        <label for="batchSize">Rows per INSERT statement</label>
+        <input
+          type="number"
+          id="batchSize"
+          value="100"
+          min="1"
+          max="500"
+          step="1"
+        >
+        <div class="c2s-muted">Choose from 1 to 500 rows per statement.</div>
+      </div>
+    </div>
+
+    <div class="c2s-options">
+      <label class="c2s-option">
+        <input type="checkbox" id="hasHeader" checked>
+        <span>
+          <strong>First row contains column names</strong>
+          <small>Uncheck if the first row is data and you need generated column names.</small>
+        </span>
+      </label>
+
+      <label class="c2s-option">
+        <input type="checkbox" id="normalizeHeaders" checked>
+        <span>
+          <strong>Normalize column names</strong>
+          <small>Create simple, unique SQL column identifiers from the headers.</small>
+        </span>
+      </label>
+
+      <label class="c2s-option">
+        <input type="checkbox" id="emptyAsNull">
+        <span>
+          <strong>Convert empty cells to SQL NULL</strong>
+          <small>An empty value is different from an empty text string.</small>
+        </span>
+      </label>
+
+      <label class="c2s-option">
+        <input type="checkbox" id="trimValues">
+        <span>
+          <strong>Trim leading and trailing spaces</strong>
+          <small>Off by default to avoid changing the original cell values.</small>
+        </span>
+      </label>
+
+      <label class="c2s-option">
+        <input type="checkbox" id="inferTypes">
+        <span>
+          <strong>Infer basic numeric and boolean values</strong>
+          <small>Disabled by default to preserve leading zeros and text identifiers.</small>
+        </span>
+      </label>
+
+      <label class="c2s-option">
+        <input type="checkbox" id="createTable">
+        <span>
+          <strong>Include CREATE TABLE</strong>
+          <small>Generate a starter table definition with text-compatible columns.</small>
+        </span>
+      </label>
+    </div>
+
+    <div class="c2s-warning" style="margin-top:15px">
+      Treat generated SQL as a draft for review. A correct-looking INSERT script can still
+      fail because of column types, permissions, database settings, constraints or existing
+      table definitions. Test it against a non-production database first.
+    </div>
+
+    <div class="c2s-toolbar">
+      <button class="c2s-button c2s-button-primary" type="button" id="generateBtn">
+        Generate SQL
+      </button>
+      <span class="c2s-muted">Large inputs may need more browser memory.</span>
+    </div>
+
+    <p class="c2s-status" id="statusMessage" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="c2s-card c2s-section" id="resultSection" hidden>
+    <div class="c2s-section-head">
+      <h2>Generated SQL</h2>
+      <span class="c2s-muted" id="outputSummary"></span>
+    </div>
+
+    <div class="c2s-stat-grid">
+      <div class="c2s-stat">
+        <span class="c2s-stat-label">Data rows</span>
+        <span class="c2s-stat-value" id="statRows">0</span>
+      </div>
+      <div class="c2s-stat">
+        <span class="c2s-stat-label">Columns</span>
+        <span class="c2s-stat-value" id="statColumns">0</span>
+      </div>
+      <div class="c2s-stat">
+        <span class="c2s-stat-label">INSERT statements</span>
+        <span class="c2s-stat-value" id="statStatements">0</span>
+      </div>
+      <div class="c2s-stat">
+        <span class="c2s-stat-label">SQL size</span>
+        <span class="c2s-stat-value" id="statSize">0 KB</span>
+      </div>
+    </div>
+
+    <div class="c2s-field" style="margin-top:16px">
+      <label for="sqlOutput">SQL output</label>
+      <textarea
+        class="c2s-output"
+        id="sqlOutput"
+        spellcheck="false"
+        readonly
+        aria-label="Generated SQL output"
+      ></textarea>
+    </div>
+
+    <div class="c2s-toolbar">
+      <button class="c2s-button c2s-button-primary" type="button" id="downloadBtn">
+        Download SQL file
+      </button>
+      <button class="c2s-button" type="button" id="copyBtn">Copy SQL</button>
+      <button class="c2s-button" type="button" id="downloadReportBtn">
+        Download generation report
+      </button>
+    </div>
+
+    <p class="c2s-muted" style="margin-top:10px" id="generationNote"></p>
+  </section>
+
+  <section class="c2s-card c2s-section" id="previewSection" hidden>
+    <div class="c2s-section-head">
+      <h2>CSV data preview</h2>
+      <span class="c2s-muted" id="previewSummary"></span>
+    </div>
+    <p class="c2s-muted">
+      The preview shows a small sample of the parsed data. The generated SQL includes the
+      complete dataset, up to the tool's input limits.
+    </p>
+    <div class="c2s-table-wrap">
+      <table class="c2s-table">
+        <thead id="previewHead"></thead>
+        <tbody id="previewBody"></tbody>
+      </table>
+    </div>
+    <p class="c2s-muted" id="previewNote" style="margin-top:10px"></p>
+  </section>
+
+  <section class="c2s-card c2s-section c2s-article">
+    <h2>What is a CSV to SQL converter?</h2>
+    <p>
+      A CSV to SQL converter transforms tabular data into SQL statements that can insert
+      records into a relational database. Instead of writing an INSERT statement for every
+      row by hand, you can generate a script from a spreadsheet export or CSV file.
+    </p>
+
+    <h3>When is CSV to SQL useful?</h3>
+    <ul class="c2s-list">
+      <li><strong>Database seeding:</strong> Populate a local development or test database with example records.</li>
+      <li><strong>One-time data imports:</strong> Prepare smaller datasets for review before importing them into a table.</li>
+      <li><strong>Test fixtures:</strong> Turn tabular examples into repeatable scripts for QA and development.</li>
+      <li><strong>Migration preparation:</strong> Build an INSERT script that a developer or database administrator can inspect before execution.</li>
+    </ul>
+
+    <h3>How to convert CSV to SQL</h3>
+    <ol class="c2s-list">
+      <li>Upload a CSV/TSV file or paste the contents into the input box.</li>
+      <li>Choose the destination database and enter a valid table name.</li>
+      <li>Check whether the first row contains headers and choose the cleaning and type-handling options.</li>
+      <li>Set the number of rows in each INSERT statement.</li>
+      <li>Generate the script, review the values and download the SQL file.</li>
+      <li>Test the script using a disposable or staging database before using it in an important environment.</li>
+    </ol>
+
+    <h3>Why values are text by default</h3>
+    <p>
+      Values such as <code>00127</code>, postal codes, SKU codes and account identifiers can
+      lose important leading zeros if treated as numbers. For that reason, this converter
+      quotes values as text by default. Many database columns can convert those string
+      literals to the target column type, but you must confirm this behavior for your schema.
+    </p>
+    <p>
+      Optional basic type inference emits recognized numeric and boolean values without text
+      quotes. It is a convenience, not a complete database type inference system. It does not
+      infer date formats, column constraints, precision, foreign keys or application-specific
+      meanings.
+    </p>
+
+    <h3>What does CREATE TABLE do?</h3>
+    <p>
+      The optional statement creates a starter table using text-compatible columns. It is not
+      a complete schema generator. Review data types, lengths, primary keys, indexes, unique
+      constraints, default values and relationships before using it as a real database schema.
+    </p>
+
+    <div class="c2s-privacy">
+      <strong>Privacy:</strong> this page parses and converts your CSV in your browser. It does
+      not include an endpoint to upload your data. The CSV parser is loaded from a CDN. This
+      does not protect information displayed on a shared device, stored in clipboard history
+      or included in the SQL file you choose to download.
+    </div>
+  </section>
+
+  <section class="c2s-card c2s-section c2s-faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>How do I convert CSV to SQL?</summary>
+      <p>
+        Load a CSV file or paste its text, choose the target database, table name and options,
+        then generate and review the SQL INSERT script before downloading it.
+      </p>
+    </details>
+
+    <details>
+      <summary>Which databases are supported?</summary>
+      <p>
+        This tool provides common identifier quoting and value escaping for MySQL, PostgreSQL,
+        SQLite and SQL Server. Always review the output against your particular server version
+        and settings.
+      </p>
+    </details>
+
+    <details>
+      <summary>Will leading zeros be preserved?</summary>
+      <p>
+        Values are treated as text by default, so strings such as postal codes and product IDs
+        keep leading zeros. Enabling basic type inference can change how recognized numeric
+        values are emitted.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I create the database table too?</summary>
+      <p>
+        You can include a starter CREATE TABLE statement. It uses generic text-compatible
+        columns and does not infer a complete production schema, keys, indexes or constraints.
+      </p>
+    </details>
+
+    <details>
+      <summary>What is the difference between NULL and an empty string?</summary>
+      <p>
+        SQL NULL represents a missing or unknown value, whereas an empty string is a real text
+        value containing zero characters. Use the NULL option only when it matches your intended
+        data meaning.
+      </p>
+    </details>
+
+    <details>
+      <summary>Are uploaded CSV files sent to a server?</summary>
+      <p>
+        The page reads and transforms your selected file locally in the browser. It does not
+        upload the CSV contents to this website. The parser library is loaded from a CDN.
+      </p>
+    </details>
+
+    <details>
+      <summary>Should I execute the generated SQL directly in production?</summary>
+      <p>
+        No. Review the script and test it in a non-production environment first. Check schema
+        names, data types, permissions, constraints, SQL mode, encoding and database-specific
+        behavior before using it with important data.
+      </p>
+    </details>
+  </section>
+
+  <p class="c2s-muted c2s-section">
+    Explore other utilities on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.7.0/papaparse.min.js"></script>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_FILE_BYTES = 10 * 1024 * 1024;
+  const MAX_DATA_ROWS = 50000;
+  const MAX_OUTPUT_CHARS = 40000000;
+  const MAX_PREVIEW_ROWS = 10;
+  const MAX_PREVIEW_COLUMNS = 8;
+
+  const $ = id => document.getElementById(id);
+
+  const csvInput = $("csvInput");
+  const fileInput = $("fileInput");
+  const uploadZone = $("uploadZone");
+  const statusMessage = $("statusMessage");
+  const fileLabel = $("fileLabel");
+
+  let sourceFilename = "data.csv";
+  let lastGenerated = null;
+  let revision = 0;
+
+  const delimiterChoices = {
+    auto: "",
+    ",": ",",
+    ";": ";",
+    tab: "\t",
+    "|": "|"
+  };
+
+  function setStatus(message, kind = "") {
+    statusMessage.textContent = message;
+    statusMessage.dataset.kind = kind;
+  }
+
+  function formatNumber(number) {
+    return Number(number || 0).toLocaleString();
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  function delimiterName(delimiter) {
+    if (delimiter === "\t") return "Tab";
+    if (delimiter === ",") return "Comma";
+    if (delimiter === ";") return "Semicolon";
+    if (delimiter === "|") return "Pipe";
+    return "Unknown";
+  }
+
+  function resetResults() {
+    lastGenerated = null;
+    $("resultSection").hidden = true;
+    $("previewSection").hidden = true;
+    $("sqlOutput").value = "";
+    $("downloadBtn").disabled = true;
+    $("copyBtn").disabled = true;
+    $("downloadReportBtn").disabled = true;
+  }
+
+  function markChanged() {
+    revision++;
+    resetResults();
+
+    if (csvInput.value.trim()) {
+      setStatus("Input or settings changed. Generate SQL again to update the output.");
+    } else {
+      setStatus("");
+    }
+  }
+
+  function getText(value) {
+    return value === null || value === undefined ? "" : String(value);
+  }
+
+  function rowIsBlank(row) {
+    return row.every(value => getText(value).trim() === "");
+  }
+
+  function safeIdentifierPart(value, fallback) {
+    let result = getText(value)
+      .trim()
+      .replace(/[^A-Za-z0-9_$]+/g, "_")
+      .replace(/_+/g, "_")
+      .replace(/^_+|_+$/g, "");
+
+    if (!result) result = fallback;
+    if (!/^[A-Za-z_]/.test(result)) result = "_" + result;
+
+    return result;
+  }
+
+  function safeTableName(rawName) {
+    const original = getText(rawName).trim();
+    if (!original) return ["my_table"];
+
+    // Dots separate schema/table (or database/schema/table) identifiers.
+    // Each part is sanitized and quoted separately later.
+    const parts = original.split(".").slice(0, 3);
+
+    return parts.map((part, index) =>
+      safeIdentifierPart(part, index === parts.length - 1 ? "my_table" : "my_schema")
+    );
+  }
+
+  function normalizeColumnName(value, index) {
+    let result = getText(value)
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9_$]+/g, "_")
+      .replace(/_+/g, "_")
+      .replace(/^_+|_+$/g, "");
+
+    if (!result) result = `column_${index + 1}`;
+    if (!/^[a-z_]/.test(result)) result = "_" + result;
+
+    return result;
+  }
+
+  function makeUniqueNames(names) {
+    const used = new Set();
+
+    return names.map((name, index) => {
+      const base = getText(name).trim() || `column_${index + 1}`;
+      let candidate = base;
+      let suffix = 2;
+
+      while (used.has(candidate.toLowerCase())) {
+        candidate = `${base}_${suffix}`;
+        suffix++;
+      }
+
+      used.add(candidate.toLowerCase());
+      return candidate;
+    });
+  }
+
+  function quoteIdentifier(identifier, dialect) {
+    const value = getText(identifier);
+
+    if (dialect === "mysql") {
+      return "`" + value.replace(/`/g, "``") + "`";
+    }
+
+    if (dialect === "sqlserver") {
+      return "[" + value.replace(/]/g, "]]") + "]";
+    }
+
+    return '"' + value.replace(/"/g, '""') + '"';
+  }
+
+  function quoteQualifiedName(parts, dialect) {
+    return parts.map(part => quoteIdentifier(part, dialect)).join(".");
+  }
+
+  function quoteColumnList(columns, dialect) {
+    return columns.map(column => quoteIdentifier(column, dialect)).join(", ");
+  }
+
+  function sqlStringLiteral(value, dialect) {
+    const text = getText(value);
+
+    if (text.includes("\u0000")) {
+      throw new Error(
+        "A cell contains a NUL character, which cannot be exported safely as an ordinary SQL text literal."
+      );
+    }
+
+    if (dialect === "mysql") {
+      // MySQL uses backslash escapes under its usual SQL mode. Review output
+      // if the server uses NO_BACKSLASH_ESCAPES.
+      const escaped = text
+        .replace(/\\/g, "\\\\")
+        .replace(/\u001A/g, "\\Z")
+        .replace(/\r/g, "\\r")
+        .replace(/\n/g, "\\n")
+        .replace(/\t/g, "\\t")
+        .replace(/'/g, "\\'");
+
+      return "'" + escaped + "'";
+    }
+
+    const escaped = text.replace(/'/g, "''");
+
+    if (dialect === "sqlserver") {
+      return "N'" + escaped + "'";
+    }
+
+    return "'" + escaped + "'";
+  }
+
+  function inferLiteral(value, dialect, options) {
+    const text = getText(value);
+
+    if (text === "" && options.emptyAsNull) {
+      return "NULL";
+    }
+
+    if (options.inferTypes) {
+      const lowercase = text.toLowerCase();
+
+      if (lowercase === "true" || lowercase === "false") {
+        if (dialect === "sqlserver") {
+          return lowercase === "true" ? "1" : "0";
+        }
+        return lowercase.toUpperCase();
+      }
+
+      /*
+       * Preserve leading-zero identifiers such as 00127 as text.
+       * This deliberately infers only basic decimal / scientific notation;
+       * it does not guess dates, currencies or business-specific values.
+       */
+      const numericPattern =
+        /^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?$/;
+
+      if (numericPattern.test(text) && text.length <= 100) {
+        return text;
+      }
+    }
+
+    return sqlStringLiteral(text, dialect);
+  }
+
+  function createTableColumnType(dialect) {
+    if (dialect === "sqlserver") return "NVARCHAR(MAX)";
+    if (dialect === "mysql") return "TEXT";
+    return "TEXT";
+  }
+
+  function makeOutputFilename(extension) {
+    const base = getText(sourceFilename)
+      .replace(/\.[^.]+$/, "")
+      .replace(/[^A-Za-z0-9._-]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^[.-]+|[.-]+$/g, "")
+      .slice(0, 80);
+
+    return `${base || "data"}.${extension}`;
+  }
+
+  function createSql(rows, columns, tableParts, dialect, options) {
+    const quotedTable = quoteQualifiedName(tableParts, dialect);
+    const quotedColumns = quoteColumnList(columns, dialect);
+    const statements = [];
+    const batchSize = options.batchSize;
+    const rowCount = rows.length;
+
+    let createTableSql = "";
+
+    if (options.createTable) {
+      const typeName = createTableColumnType(dialect);
+
+      const definitions = columns.map(column =>
+        `  ${quoteIdentifier(column, dialect)} ${typeName}`
+      );
+
+      createTableSql =
+        `CREATE TABLE ${quotedTable} (\n` +
+        definitions.join(",\n") +
+        "\n);\n\n";
+    }
+
+    for (let offset = 0; offset < rowCount; offset += batchSize) {
+      const batch = rows.slice(offset, offset + batchSize);
+
+      const values = batch.map(row => {
+        const cells = columns.map((column, columnIndex) => {
+          const cell = row[columnIndex] ?? "";
+          return inferLiteral(cell, dialect, options);
+        });
+
+        return "  (" + cells.join(", ") + ")";
+      });
+
+      const statement =
+        `INSERT INTO ${quotedTable} (${quotedColumns}) VALUES\n` +
+        values.join(",\n") +
+        ";";
+
+      statements.push(statement);
+    }
+
+    let result = createTableSql + statements.join("\n\n");
+
+    if (result && !result.endsWith("\n")) {
+      result += "\n";
+    }
+
+    if (result.length > MAX_OUTPUT_CHARS) {
+      throw new Error(
+        "Generated SQL would exceed the 40 MB output limit. Try a smaller CSV or split the file into smaller batches."
+      );
+    }
+
+    return {
+      sql: result,
+      statementCount: statements.length,
+      tableSqlIncluded: Boolean(createTableSql)
+    };
+  }
+
+  function addPreviewCell(row, value, isHeader = false) {
+    const cell = document.createElement(isHeader ? "th" : "td");
+    if (isHeader) cell.scope = "col";
+
+    let text = getText(value);
+
+    if (text.length > 500) {
+      text = text.slice(0, 500) + "…";
+    }
+
+    cell.textContent = text;
+    row.appendChild(cell);
+  }
+
+  function renderPreview(columns, dataRows) {
+    const head = $("previewHead");
+    const body = $("previewBody");
+    head.replaceChildren();
+    body.replaceChildren();
+
+    const visibleColumns = columns.slice(0, MAX_PREVIEW_COLUMNS);
+    const headerRow = document.createElement("tr");
+
+    visibleColumns.forEach(column => addPreviewCell(headerRow, column, true));
+    head.appendChild(headerRow);
+
+    const visibleRows = dataRows.slice(0, MAX_PREVIEW_ROWS);
+
+    visibleRows.forEach(dataRow => {
+      const row = document.createElement("tr");
+
+      visibleColumns.forEach((column, index) => {
+        addPreviewCell(row, dataRow[index] ?? "");
+      });
+
+      body.appendChild(row);
+    });
+
+    $("previewSummary").textContent =
+      `${formatNumber(dataRows.length)} rows · ${formatNumber(columns.length)} columns`;
+
+    const notes = [];
+
+    if (dataRows.length > MAX_PREVIEW_ROWS) {
+      notes.push(`Showing the first ${MAX_PREVIEW_ROWS} rows.`);
+    }
+
+    if (columns.length > MAX_PREVIEW_COLUMNS) {
+      notes.push(`Showing the first ${MAX_PREVIEW_COLUMNS} columns.`);
+    }
+
+    if (!notes.length) {
+      notes.push("All rows and columns are visible in this preview.");
+    }
+
+    $("previewNote").textContent = notes.join(" ");
+    $("previewSection").hidden = false;
+  }
+
+  function analyzeAndGenerate() {
+    if (!window.Papa || typeof window.Papa.parse !== "function") {
+      setStatus(
+        "The CSV parser did not load. Check your connection, reload the page and try again.",
+        "error"
+      );
+      return;
+    }
+
+    let inputText = csvInput.value;
+
+    if (inputText.charCodeAt(0) === 0xFEFF) {
+      inputText = inputText.slice(1);
+    }
+
+    if (!inputText.trim()) {
+      resetResults();
+      setStatus("Enter CSV data or choose a file first.", "error");
+      return;
+    }
+
+    const inputBytes = new Blob([inputText]).size;
+
+    if (inputBytes > MAX_FILE_BYTES) {
+      setStatus("The input exceeds the 10 MB limit. Split it into smaller files.", "error");
+      return;
+    }
+
+    const runRevision = revision;
+    setStatus("Parsing CSV and generating SQL…");
+
+    try {
+      const selectedDelimiter = $("delimiter").value;
+      const delimiter = delimiterChoices[selectedDelimiter] ?? "";
+
+      const parsed = Papa.parse(inputText, {
+        delimiter,
+        dynamicTyping: false,
+        skipEmptyLines: false,
+        quoteChar: '"',
+        escapeChar: '"',
+        comments: false
+      });
+
+      if (runRevision !== revision) return;
+
+      if (!parsed.data || !parsed.data.length) {
+        throw new Error("No rows were found in the input.");
+      }
+
+      let allRows = parsed.data.map(row => {
+        const values = Array.isArray(row) ? row : [row];
+        return values.map(getText);
+      });
+
+      const originalWidths = allRows.map(row => row.length);
+      const columnCount = Math.max(0, ...originalWidths);
+
+      if (columnCount < 1) {
+        throw new Error("No columns could be detected.");
+      }
+
+      const unevenRowCount = originalWidths.filter(
+        width => width !== columnCount
+      ).length;
+
+      const hasHeader = $("hasHeader").checked;
+      const normalizeHeaders = $("normalizeHeaders").checked;
+      const trimValues = $("trimValues").checked;
+
+      if (trimValues) {
+        allRows = allRows.map(row => row.map(value => value.trim()));
+      }
+
+      let rawHeaders;
+      let dataRows;
+
+      if (hasHeader) {
+        rawHeaders = allRows[0].slice();
+        while (rawHeaders.length < columnCount) rawHeaders.push("");
+        dataRows = allRows.slice(1);
+      } else {
+        rawHeaders = Array.from(
+          { length: columnCount },
+          (_, index) => `column_${index + 1}`
+        );
+        dataRows = allRows.slice();
+      }
+
+      // Remove a fully blank data row. This avoids generating INSERT rows
+      // that contain only empty values. Blank individual cells remain intact.
+      dataRows = dataRows.filter(row => !rowIsBlank(row));
+
+      if (dataRows.length === 0) {
+        throw new Error(
+          "No nonblank data rows remain. Check whether the input has a header row only."
+        );
+      }
+
+      if (dataRows.length > MAX_DATA_ROWS) {
+        throw new Error(
+          `This tool currently supports up to ${formatNumber(MAX_DATA_ROWS)} data rows per run. Split the CSV for a larger dataset.`
+        );
+      }
+
+      // Preserve all present values; pad shorter rows to the widest observed row.
+      dataRows = dataRows.map(row => {
+        const next = row.slice();
+        while (next.length < columnCount) next.push("");
+        return next;
+      });
+
+      let outputHeaders = rawHeaders.map((header, index) => {
+        const value = getText(header).trim();
+
+        if (normalizeHeaders) {
+          return safeIdentifierPart(
+            normalizeColumnName(value, index),
+            `column_${index + 1}`
+          );
+        }
+
+        return value || `column_${index + 1}`;
+      });
+
+      // SQL column names must be unique for ordinary table definitions.
+      outputHeaders = makeUniqueNames(outputHeaders);
+
+      const dialect = $("dialect").value;
+      const tableParts = safeTableName($("tableName").value);
+
+      const batchRaw = Number.parseInt($("batchSize").value, 10);
+      if (!Number.isInteger(batchRaw) || batchRaw < 1 || batchRaw > 500) {
+        throw new Error("Batch size must be a whole number between 1 and 500.");
+      }
+
+      const options = {
+        hasHeader,
+        normalizeHeaders,
+        trimValues,
+        emptyAsNull: $("emptyAsNull").checked,
+        inferTypes: $("inferTypes").checked,
+        createTable: $("createTable").checked,
+        batchSize: batchRaw
+      };
+
+      const generated = createSql(
+        dataRows,
+        outputHeaders,
+        tableParts,
+        dialect,
+        options
+      );
+
+      const mismatchedWidths = unevenRowCount > 0;
+      const actualDelimiter = parsed.meta && parsed.meta.delimiter
+        ? parsed.meta.delimiter
+        : ",";
+
+      const report = {
+        tool: "ConvertToToolsOnline CSV to SQL Converter",
+        generatedAt: new Date().toISOString(),
+        sourceFile: sourceFilename,
+        dialect,
+        tableName: tableParts.join("."),
+        inputDelimiter: delimiterName(actualDelimiter),
+        dataRows: dataRows.length,
+        columns: outputHeaders.length,
+        insertStatements: generated.statementCount,
+        outputBytes: new Blob([generated.sql]).size,
+        irregularRowsDetected: unevenRowCount,
+        parserWarnings: (parsed.errors || []).map(error => ({
+          code: getText(error.code),
+          message: getText(error.message),
+          row: Number.isFinite(error.row) ? error.row + 1 : null
+        })),
+        outputColumnNames: outputHeaders,
+        originalHeaders: rawHeaders,
+        options,
+        warnings: [
+          "Review SQL before execution; compatibility depends on database settings and schema.",
+          "Type inference is basic and does not infer dates, column constraints, indexes or relationships.",
+          "CREATE TABLE output uses generic text-compatible column types.",
+          ...(mismatchedWidths
+            ? ["Input contains rows with different numbers of fields; shorter rows were padded with empty values."]
+            : [])
+        ]
+      };
+
+      lastGenerated = {
+        sql: generated.sql,
+        report,
+        rows: dataRows,
+        columns: outputHeaders,
+        dialect,
+        options,
+        inputRevision: runRevision
+      };
+
+      renderResults(lastGenerated, actualDelimiter, unevenRowCount);
+      setStatus(
+        `SQL generated successfully: ${formatNumber(dataRows.length)} data rows, ${formatNumber(generated.statementCount)} INSERT statement(s).`,
+        "success"
+      );
+    } catch (error) {
+      resetResults();
+
+      setStatus(
+        error && error.message
+          ? `Could not generate SQL: ${error.message}`
+          : "Could not generate SQL. Check the CSV data and settings.",
+        "error"
+      );
+    }
+  }
+
+  function renderResults(result, actualDelimiter, unevenRowCount) {
+    const report = result.report;
+    const size = new Blob([result.sql]).size;
+
+    $("resultSection").hidden = false;
+    $("sqlOutput").value = result.sql;
+
+    $("statRows").textContent = formatNumber(report.dataRows);
+    $("statColumns").textContent = formatNumber(report.columns);
+    $("statStatements").textContent = formatNumber(report.insertStatements);
+    $("statSize").textContent = formatBytes(size);
+
+    $("outputSummary").textContent =
+      `${report.dialect} · ${report.tableName}`;
+
+    const notes = [
+      `Detected input separator: ${delimiterName(actualDelimiter)}.`,
+      `Table name used: ${report.tableName}.`
+    ];
+
+    if (unevenRowCount) {
+      notes.push(
+        `${formatNumber(unevenRowCount)} row(s) had a different field count. Shorter rows were padded with empty cells.`
+      );
+    }
+
+    if (result.options.inferTypes) {
+      notes.push(
+        "Basic type inference is enabled. Review numeric and boolean values carefully."
+      );
+    } else {
+      notes.push(
+        "Values are treated as text by default to preserve identifiers and leading zeros."
+      );
+    }
+
+    if (result.options.createTable) {
+      notes.push(
+        "A generic CREATE TABLE statement is included. Customize column types and constraints before relying on it."
+      );
+    }
+
+    if (result.dialect === "mysql") {
+      notes.push(
+        "MySQL string escaping uses the usual backslash-escape mode; verify compatibility if NO_BACKSLASH_ESCAPES is enabled."
+      );
+    }
+
+    $("generationNote").textContent = notes.join(" ");
+    $("inputStats").textContent =
+      `${formatNumber(report.dataRows)} data rows processed`;
+
+    $("downloadBtn").disabled = false;
+    $("copyBtn").disabled = false;
+    $("downloadReportBtn").disabled = false;
+
+    renderPreview(result.columns, result.rows);
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    textarea.style.pointerEvents = "none";
+
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const copied = document.execCommand("copy");
+    textarea.remove();
+
+    if (!copied) throw new Error("Clipboard copy failed.");
+  }
+
+  function downloadBlob(filename, content, mimeType) {
+    const blob = content instanceof Blob
+      ? content
+      : new Blob([content], { type: mimeType });
+
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1200);
+  }
+
+  async function copySql() {
+    if (!lastGenerated) return;
+
+    try {
+      await copyText(lastGenerated.sql);
+      setStatus("Generated SQL copied to the clipboard.", "success");
+    } catch (error) {
+      setStatus("Copy failed. Use the SQL download button instead.", "error");
+    }
+  }
+
+  function downloadSql() {
+    if (!lastGenerated) return;
+
+    downloadBlob(
+      makeOutputFilename("sql"),
+      lastGenerated.sql,
+      "application/sql;charset=utf-8"
+    );
+
+    setStatus("SQL download started. Review it before execution.", "success");
+  }
+
+  function downloadReport() {
+    if (!lastGenerated) return;
+
+    downloadBlob(
+      makeOutputFilename("json"),
+      JSON.stringify(lastGenerated.report, null, 2),
+      "application/json;charset=utf-8"
+    );
+
+    setStatus("Generation report prepared for download.", "success");
+  }
+
+  async function readFile(file) {
+    if (!file) return;
+
+    if (file.size > MAX_FILE_BYTES) {
+      setStatus("This file exceeds the 10 MB limit.", "error");
+      return;
+    }
+
+    const validExtension = /\.(csv|tsv|txt)$/i.test(file.name);
+    const validMime = [
+      "",
+      "text/plain",
+      "text/csv",
+      "text/tab-separated-values",
+      "application/vnd.ms-excel"
+    ].includes(file.type);
+
+    if (!validExtension && !validMime) {
+      setStatus("Choose a CSV, TSV or plain-text delimited file.", "error");
+      return;
+    }
+
+    try {
+      const text = await file.text();
+
+      if (text.includes("\u0000")) {
+        setStatus("The selected file appears to contain binary data, not ordinary CSV text.", "error");
+        return;
+      }
+
+      if (new Blob([text]).size > MAX_FILE_BYTES) {
+        setStatus("The decoded text exceeds the 10 MB input limit.", "error");
+        return;
+      }
+
+      csvInput.value = text;
+      sourceFilename = file.name || "data.csv";
+      fileLabel.textContent = `${sourceFilename} · ${formatBytes(file.size)} loaded`;
+
+      markChanged();
+      setStatus("File loaded. Check your settings and generate SQL.", "success");
+    } catch (error) {
+      setStatus("Could not read this file. Try another CSV or TSV file.", "error");
+    }
+  }
+
+  function loadSample() {
+    csvInput.value = [
+      "id,name,email,postal_code,active",
+      '1,"Alice Smith","alice@example.com","00127",true',
+      '2,"O\'Brien, Bob","bob@example.com","00652",false',
+      '3,"Charlie","charlie@example.com","10400",true'
+    ].join("\n");
+
+    sourceFilename = "sample-customers.csv";
+    fileLabel.textContent = "Sample data loaded.";
+    markChanged();
+
+    setStatus("Sample loaded. Generate SQL to see how values are escaped.");
+  }
+
+  function clearInput() {
+    csvInput.value = "";
+    fileInput.value = "";
+    sourceFilename = "data.csv";
+    fileLabel.textContent = "Your data is processed inside your browser.";
+    $("inputStats").textContent = "No data loaded yet.";
+
+    revision++;
+    resetResults();
+    setStatus("");
+  }
+
+  $("chooseFileBtn").addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) readFile(file);
+    fileInput.value = "";
+  });
+
+  $("loadSampleBtn").addEventListener("click", loadSample);
+  $("clearBtn").addEventListener("click", clearInput);
+  $("generateBtn").addEventListener("click", analyzeAndGenerate);
+  $("copyBtn").addEventListener("click", copySql);
+  $("downloadBtn").addEventListener("click", downloadSql);
+  $("downloadReportBtn").addEventListener("click", downloadReport);
+
+  csvInput.addEventListener("input", markChanged);
+
+  [
+    "dialect",
+    "tableName",
+    "delimiter",
+    "batchSize",
+    "hasHeader",
+    "normalizeHeaders",
+    "emptyAsNull",
+    "trimValues",
+    "inferTypes",
+    "createTable"
+  ].forEach(id => {
+    $(id).addEventListener("change", markChanged);
+
+    if (id === "tableName" || id === "batchSize") {
+      $(id).addEventListener("input", markChanged);
+    }
+  });
+
+  ["dragenter", "dragover"].forEach(type => {
+    uploadZone.addEventListener(type, event => {
+      event.preventDefault();
+      uploadZone.classList.add("is-dragging");
+    });
+  });
+
+  ["dragleave", "drop"].forEach(type => {
+    uploadZone.addEventListener(type, event => {
+      event.preventDefault();
+      uploadZone.classList.remove("is-dragging");
+    });
+  });
+
+  uploadZone.addEventListener("drop", event => {
+    const file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+
+    if (file) readFile(file);
+  });
+
+  window.addEventListener("dragover", event => event.preventDefault());
+
+  window.addEventListener("drop", event => {
+    if (!uploadZone.contains(event.target)) {
+      event.preventDefault();
+    }
+  });
+
+  resetResults();
+})();
+</script>
+</body>
+</html>

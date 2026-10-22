@@ -1,0 +1,2121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Markdown to HTML Converter Online - Free Tool</title>
+  <meta name="description" content="Convert Markdown to HTML online for free. Preview your content, convert GitHub-Flavored Markdown tables and task lists, sanitize HTML, and download your result.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="https://converttotoolsonline.com/markdown-to-html-converter.html">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Markdown to HTML Converter Online">
+  <meta property="og:description" content="Convert Markdown into sanitized HTML with live preview, GitHub-Flavored Markdown support, and copy and download options.">
+  <meta property="og:url" content="https://converttotoolsonline.com/markdown-to-html-converter.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Markdown to HTML Converter">
+  <meta name="twitter:description" content="Convert Markdown to HTML, preview the result, and export HTML fragments or complete HTML documents.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Markdown to HTML Converter",
+    "url": "https://converttotoolsonline.com/markdown-to-html-converter.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based Markdown to HTML converter with GitHub-Flavored Markdown support, sandboxed preview, HTML sanitization, file upload, and downloadable HTML output.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Convert Markdown to HTML",
+      "GitHub-Flavored Markdown tables and task lists",
+      "Live HTML preview",
+      "Sanitized HTML output",
+      "HTML fragment or complete document export",
+      "Upload Markdown files",
+      "Copy and download generated HTML",
+      "Browser-based conversion"
+    ]
+  }
+  </script>
+
+  <style>
+    .mdc-page {
+      margin: 0;
+      background: #f7f8fc;
+      color: #182237;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    .mdc-page *,
+    .mdc-page *::before,
+    .mdc-page *::after {
+      box-sizing: border-box;
+    }
+
+    .mdc-page a {
+      color: #2459c4;
+    }
+
+    .mdc-shell {
+      width: min(100% - 30px, 1140px);
+      margin-inline: auto;
+    }
+
+    .mdc-header {
+      border-bottom: 1px solid #e4e8f0;
+      background: #fff;
+    }
+
+    .mdc-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      min-height: 72px;
+      padding-block: 12px;
+    }
+
+    .mdc-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #182237 !important;
+      font-weight: 800;
+      letter-spacing: -.025em;
+      text-decoration: none;
+    }
+
+    .mdc-brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: #2459c4;
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 850;
+    }
+
+    .mdc-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      font-size: .9rem;
+    }
+
+    .mdc-nav a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .mdc-nav a:hover {
+      color: #2459c4;
+      text-decoration: underline;
+    }
+
+    .mdc-main {
+      padding-block: 36px 64px;
+    }
+
+    .mdc-hero {
+      max-width: 800px;
+      margin: 0 auto 25px;
+      text-align: center;
+    }
+
+    .mdc-eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #2459c4;
+      font-size: .81rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .mdc-hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.05rem);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+    }
+
+    .mdc-hero p {
+      max-width: 710px;
+      margin: 0 auto;
+      color: #59667c;
+      font-size: 1.03rem;
+    }
+
+    .mdc-privacy {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
+      color: #247448;
+      font-size: .87rem;
+      font-weight: 700;
+    }
+
+    .mdc-card {
+      padding: clamp(16px, 3vw, 26px);
+      border: 1px solid #e2e7f0;
+      border-radius: 19px;
+      background: #fff;
+      box-shadow: 0 12px 36px rgba(26, 41, 77, .055);
+    }
+
+    .mdc-heading {
+      margin-bottom: 17px;
+    }
+
+    .mdc-heading h2 {
+      margin: 0 0 5px;
+      font-size: 1.27rem;
+      letter-spacing: -.02em;
+    }
+
+    .mdc-muted {
+      color: #69758b;
+      font-size: .89rem;
+    }
+
+    .mdc-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .mdc-toolbar-label {
+      margin-right: 2px;
+      color: #536078;
+      font-size: .85rem;
+      font-weight: 750;
+    }
+
+    .mdc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 41px;
+      padding: 9px 14px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: #2459c4;
+      color: #fff !important;
+      font: inherit;
+      font-size: .9rem;
+      font-weight: 750;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none !important;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+
+    .mdc-btn:hover {
+      background: #1949a8;
+    }
+
+    .mdc-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .mdc-btn-secondary {
+      border-color: #d9e0eb;
+      background: #fff;
+      color: #34415b !important;
+    }
+
+    .mdc-btn-secondary:hover {
+      background: #f4f7fc;
+    }
+
+    .mdc-btn-small {
+      min-height: 33px;
+      padding: 6px 10px;
+      font-size: .81rem;
+    }
+
+    .mdc-page button:focus-visible,
+    .mdc-page input:focus-visible,
+    .mdc-page select:focus-visible,
+    .mdc-page textarea:focus-visible,
+    .mdc-page a:focus-visible {
+      outline: 3px solid #91b4ff;
+      outline-offset: 3px;
+    }
+
+    .mdc-editors {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+      align-items: stretch;
+    }
+
+    .mdc-panel {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #dde4ef;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .mdc-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 53px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e1e6ef;
+      background: #f8faff;
+    }
+
+    .mdc-panel-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .94rem;
+      font-weight: 800;
+    }
+
+    .mdc-pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #dce3ef;
+      border-radius: 6px;
+      padding: 2px 7px;
+      background: #fff;
+      color: #536078;
+      font-size: .72rem;
+      font-weight: 800;
+    }
+
+    .mdc-panel-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .mdc-editor {
+      display: block;
+      width: 100%;
+      min-height: 330px;
+      flex: 1 1 auto;
+      padding: 15px;
+      border: 0;
+      border-radius: 0;
+      resize: vertical;
+      background: #fff;
+      color: #22314a;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12.5px;
+      line-height: 1.75;
+      tab-size: 2;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .mdc-editor:focus-visible {
+      outline-offset: -4px;
+    }
+
+    .mdc-output-editor {
+      background: #fbfcff;
+    }
+
+    .mdc-panel-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 12px;
+      border-top: 1px solid #e6eaf1;
+      color: #738097;
+      font-size: .77rem;
+    }
+
+    .mdc-options {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid #e0e6ef;
+      border-radius: 13px;
+      background: #fafbfe;
+    }
+
+    .mdc-options h3 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .mdc-option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mdc-field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .mdc-field label {
+      color: #35435c;
+      font-size: .87rem;
+      font-weight: 750;
+    }
+
+    .mdc-field input,
+    .mdc-field select {
+      display: block;
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid #d5deeb;
+      border-radius: 9px;
+      background: #fff;
+      color: #1d2b43;
+      font: inherit;
+      font-size: .9rem;
+    }
+
+    .mdc-toggle-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 14px;
+    }
+
+    .mdc-toggle {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: #526078;
+      font-size: .86rem;
+    }
+
+    .mdc-toggle input {
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: #2459c4;
+    }
+
+    .mdc-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 17px;
+    }
+
+    .mdc-status {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border: 1px solid #dce3ef;
+      border-radius: 10px;
+      background: #f7f9ff;
+      color: #35435c;
+      font-size: .89rem;
+      overflow-wrap: anywhere;
+    }
+
+    .mdc-status--success {
+      border-color: #c7e7d1;
+      background: #f0fbf4;
+      color: #21663d;
+    }
+
+    .mdc-status--warning {
+      border-color: #efdfb8;
+      background: #fffbef;
+      color: #795e1b;
+    }
+
+    .mdc-status--error {
+      border-color: #edc7c7;
+      background: #fff4f4;
+      color: #982c2c;
+    }
+
+    .mdc-preview-section {
+      margin-top: 27px;
+      padding-top: 23px;
+      border-top: 1px solid #e5e9f1;
+    }
+
+    .mdc-preview-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .mdc-preview-head h3 {
+      margin: 0 0 4px;
+      font-size: 1.12rem;
+    }
+
+    .mdc-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .mdc-tab {
+      min-height: 37px;
+      padding: 7px 12px;
+      border: 1px solid #dbe2ec;
+      border-radius: 8px;
+      background: #fff;
+      color: #4b5a72;
+      font: inherit;
+      font-size: .84rem;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .mdc-tab[aria-selected="true"] {
+      border-color: #b8caf2;
+      background: #edf3ff;
+      color: #2459c4;
+    }
+
+    .mdc-preview-wrap {
+      overflow: hidden;
+      min-height: 300px;
+      border: 1px solid #dfe5ef;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .mdc-preview-frame {
+      display: block;
+      width: 100%;
+      min-height: 360px;
+      border: 0;
+      background: #fff;
+    }
+
+    .mdc-preview-placeholder {
+      display: grid;
+      place-items: center;
+      min-height: 300px;
+      padding: 25px;
+      color: #718097;
+      text-align: center;
+    }
+
+    .mdc-preview-note {
+      margin-top: 9px;
+      color: #788398;
+      font-size: .8rem;
+    }
+
+    .mdc-content {
+      width: min(100%, 850px);
+      margin: 44px auto 0;
+    }
+
+    .mdc-content section {
+      margin-top: 32px;
+    }
+
+    .mdc-content h2 {
+      margin: 0 0 12px;
+      color: #182237;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+    }
+
+    .mdc-content h3 {
+      margin: 21px 0 7px;
+      font-size: 1.08rem;
+    }
+
+    .mdc-content p,
+    .mdc-content li {
+      color: #536078;
+    }
+
+    .mdc-content p {
+      margin: 0 0 12px;
+    }
+
+    .mdc-content li {
+      margin-bottom: 7px;
+    }
+
+    .mdc-content ol,
+    .mdc-content ul {
+      padding-left: 24px;
+    }
+
+    .mdc-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .mdc-step {
+      padding: 16px;
+      border: 1px solid #e2e7f0;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .mdc-step-number {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin-bottom: 9px;
+      border-radius: 9px;
+      background: #edf3ff;
+      color: #2459c4;
+      font-weight: 850;
+    }
+
+    .mdc-step strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .mdc-step p {
+      margin: 0;
+      font-size: .9rem;
+    }
+
+    .mdc-code-block {
+      overflow-x: auto;
+      padding: 14px;
+      border: 1px solid #e0e6f0;
+      border-radius: 12px;
+      background: #fff;
+      color: #2b3a54;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .84rem;
+      line-height: 1.7;
+      white-space: pre;
+    }
+
+    .mdc-related {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .mdc-related a {
+      padding: 8px 12px;
+      border: 1px solid #dce2ed;
+      border-radius: 999px;
+      background: #fff;
+      text-decoration: none;
+      font-size: .9rem;
+    }
+
+    .mdc-related a:hover {
+      border-color: #aac0f3;
+      background: #f4f7ff;
+    }
+
+    .mdc-faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mdc-faq-list details {
+      padding: 15px 17px;
+      border: 1px solid #e1e6ef;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .mdc-faq-list summary {
+      color: #26334b;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .mdc-faq-list details p {
+      margin: 10px 0 0;
+    }
+
+    .mdc-footer {
+      padding-block: 24px;
+      border-top: 1px solid #e4e8f0;
+      background: #fff;
+      color: #69758a;
+      font-size: .87rem;
+    }
+
+    .mdc-footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .mdc-footer a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .mdc-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .mdc-sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 800px) {
+      .mdc-editors {
+        grid-template-columns: 1fr;
+      }
+
+      .mdc-editor {
+        min-height: 250px;
+      }
+
+      .mdc-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .mdc-shell {
+        width: min(100% - 22px, 1140px);
+      }
+
+      .mdc-main {
+        padding-top: 25px;
+      }
+
+      .mdc-header-inner {
+        align-items: flex-start;
+      }
+
+      .mdc-nav {
+        gap: 12px;
+        font-size: .83rem;
+      }
+
+      .mdc-option-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mdc-actions .mdc-btn {
+        flex: 1 1 100%;
+      }
+
+      .mdc-toolbar .mdc-btn {
+        flex: 1 1 auto;
+      }
+
+      .mdc-editor {
+        min-height: 220px;
+        padding: 12px;
+        font-size: 12px;
+      }
+
+      .mdc-preview-frame {
+        min-height: 320px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mdc-page *,
+      .mdc-page *::before,
+      .mdc-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="mdc-page">
+  <header class="mdc-header">
+    <div class="mdc-shell mdc-header-inner">
+      <a class="mdc-brand" href="/index.html" aria-label="ConvertToToolsOnline home">
+        <span class="mdc-brand-mark" aria-hidden="true">CT</span>
+        <span>ConvertToToolsOnline</span>
+      </a>
+
+      <nav class="mdc-nav" aria-label="Main navigation">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#all-tools">All tools</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mdc-shell mdc-main">
+    <section class="mdc-hero" aria-labelledby="page-title">
+      <div class="mdc-eyebrow">Free developer tool</div>
+      <h1 id="page-title">Markdown to HTML Converter</h1>
+      <p>
+        Convert Markdown into HTML online with live preview, GitHub-Flavored
+        Markdown support, safe HTML output, and export options. Upload a
+        Markdown file, copy the HTML, or download a complete HTML document.
+      </p>
+      <div class="mdc-privacy">
+        <span aria-hidden="true">●</span>
+        Conversion runs in your browser — your Markdown is not uploaded to our server
+      </div>
+    </section>
+
+    <section class="mdc-card" aria-labelledby="tool-title">
+      <div class="mdc-heading">
+        <h2 id="tool-title">Convert Markdown to HTML online</h2>
+        <p class="mdc-muted">
+          Write or upload Markdown, then convert, preview, copy, or download your HTML.
+        </p>
+      </div>
+
+      <div class="mdc-toolbar">
+        <span class="mdc-toolbar-label">Try an example:</span>
+        <button id="sampleBasicBtn" class="mdc-btn mdc-btn-secondary mdc-btn-small"
+          type="button">Basic Markdown</button>
+        <button id="sampleTableBtn" class="mdc-btn mdc-btn-secondary mdc-btn-small"
+          type="button">Tables &amp; tasks</button>
+        <button id="sampleCodeBtn" class="mdc-btn mdc-btn-secondary mdc-btn-small"
+          type="button">Code &amp; links</button>
+      </div>
+
+      <input
+        id="markdownFile"
+        type="file"
+        accept=".md,.markdown,.mdown,.mkd,.txt,text/plain,text/markdown"
+        hidden
+        aria-label="Choose a Markdown file"
+      >
+
+      <div class="mdc-editors">
+        <section id="inputPanel" class="mdc-panel" aria-labelledby="input-title">
+          <div class="mdc-panel-head">
+            <div class="mdc-panel-title">
+              <span id="input-title">Markdown input</span>
+              <span class="mdc-pill">.md</span>
+            </div>
+            <div class="mdc-panel-tools">
+              <button id="uploadBtn"
+                class="mdc-btn mdc-btn-secondary mdc-btn-small"
+                type="button">Upload</button>
+              <button id="clearInputBtn"
+                class="mdc-btn mdc-btn-secondary mdc-btn-small"
+                type="button">Clear</button>
+            </div>
+          </div>
+
+          <label class="mdc-sr-only" for="markdownInput">
+            Enter or paste Markdown
+          </label>
+          <textarea
+            id="markdownInput"
+            class="mdc-editor"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            placeholder="# Write Markdown here..."
+            aria-describedby="markdownHint"
+          ></textarea>
+
+          <div class="mdc-panel-meta">
+            <span id="markdownHint">Maximum input: 1 MB</span>
+            <span id="inputStats">0 characters</span>
+          </div>
+        </section>
+
+        <section class="mdc-panel" aria-labelledby="output-title">
+          <div class="mdc-panel-head">
+            <div class="mdc-panel-title">
+              <span id="output-title">HTML output</span>
+              <span class="mdc-pill">HTML</span>
+            </div>
+            <div class="mdc-panel-tools">
+              <button id="copyHtmlBtn"
+                class="mdc-btn mdc-btn-secondary mdc-btn-small"
+                type="button" disabled>Copy HTML</button>
+              <button id="downloadHtmlBtn"
+                class="mdc-btn mdc-btn-secondary mdc-btn-small"
+                type="button" disabled>Download</button>
+            </div>
+          </div>
+
+          <div class="mdc-tabs" role="tablist" aria-label="Output display"
+            style="padding:10px 12px 0;">
+            <button id="sourceTab" class="mdc-tab" type="button"
+              role="tab" aria-selected="true" aria-controls="htmlOutputPanel">
+              HTML source
+            </button>
+            <button id="previewTab" class="mdc-tab" type="button"
+              role="tab" aria-selected="false" aria-controls="htmlPreviewPanel">
+              Live preview
+            </button>
+          </div>
+
+          <div id="htmlOutputPanel" role="tabpanel" aria-labelledby="sourceTab">
+            <label class="mdc-sr-only" for="htmlOutput">
+              Converted HTML source
+            </label>
+            <textarea id="htmlOutput" class="mdc-editor mdc-output-editor"
+              readonly spellcheck="false"
+              placeholder="Your sanitized HTML will appear here..."></textarea>
+          </div>
+
+          <div id="htmlPreviewPanel" role="tabpanel"
+            aria-labelledby="previewTab" hidden>
+            <iframe
+              id="previewFrame"
+              class="mdc-preview-frame"
+              title="Sanitized Markdown rendering preview"
+              sandbox=""
+              referrerpolicy="no-referrer"
+            ></iframe>
+            <div class="mdc-preview-note" style="padding:0 12px 12px;">
+              Scripts and external network resources are blocked in this preview.
+            </div>
+          </div>
+
+          <div class="mdc-panel-meta">
+            <span id="outputTypeLabel">Sanitized HTML fragment</span>
+            <span id="outputStats">0 characters</span>
+          </div>
+        </section>
+      </div>
+
+      <section class="mdc-options" aria-labelledby="options-title">
+        <h3 id="options-title">Conversion options</h3>
+
+        <div class="mdc-option-grid">
+          <div class="mdc-field">
+            <label for="outputType">HTML output type</label>
+            <select id="outputType">
+              <option value="fragment" selected>HTML fragment</option>
+              <option value="document">Complete HTML document</option>
+            </select>
+            <span class="mdc-muted">
+              Choose just the generated content or a complete HTML file.
+            </span>
+          </div>
+
+          <div class="mdc-field">
+            <label for="documentTitle">HTML document title</label>
+            <input id="documentTitle" type="text" maxlength="200"
+              value="Markdown document"
+              placeholder="My Markdown document">
+            <span class="mdc-muted">
+              Used when generating a complete HTML document.
+            </span>
+          </div>
+
+          <div class="mdc-field">
+            <label for="documentLanguage">Document language</label>
+            <input id="documentLanguage" type="text" maxlength="35"
+              value="en" placeholder="en">
+            <span class="mdc-muted">
+              Language tag for the complete document, such as en or en-US.
+            </span>
+          </div>
+
+          <div class="mdc-field">
+            <label for="documentStyle">Complete-document styling</label>
+            <select id="documentStyle">
+              <option value="simple" selected>Clean, readable default CSS</option>
+              <option value="minimal">Minimal styling</option>
+            </select>
+            <span class="mdc-muted">
+              This setting affects full-document export, not the HTML fragment.
+            </span>
+          </div>
+        </div>
+
+        <div class="mdc-toggle-list">
+          <label class="mdc-toggle">
+            <input id="gfmEnabled" type="checkbox" checked>
+            <span>Enable GitHub-Flavored Markdown features such as tables, task lists, and strikethrough.</span>
+          </label>
+
+          <label class="mdc-toggle">
+            <input id="hardBreaks" type="checkbox">
+            <span>Convert single line breaks into HTML line breaks.</span>
+          </label>
+
+          <label class="mdc-toggle">
+            <input id="autoConvert" type="checkbox" checked>
+            <span>Update HTML and preview automatically while editing.</span>
+          </label>
+        </div>
+
+        <p class="mdc-muted" style="margin:13px 0 0;">
+          HTML is sanitized before appearing in output and preview. Unsafe tags,
+          event handlers, and dangerous URL schemes may be removed.
+        </p>
+      </section>
+
+      <div class="mdc-actions">
+        <button id="convertBtn" class="mdc-btn" type="button">
+          Convert Markdown to HTML
+        </button>
+        <button id="copyMarkdownBtn"
+          class="mdc-btn mdc-btn-secondary"
+          type="button">Copy Markdown</button>
+        <button id="resetBtn"
+          class="mdc-btn mdc-btn-secondary"
+          type="button">Reset example</button>
+      </div>
+
+      <div id="status" class="mdc-status" role="status"
+        aria-live="polite" hidden></div>
+    </section>
+
+    <div class="mdc-content">
+      <section aria-labelledby="how-title">
+        <h2 id="how-title">How to convert Markdown to HTML</h2>
+        <p>
+          Markdown is a lightweight way to write headings, lists, links,
+          tables, emphasis, and code using plain text. HTML is the markup
+          used to describe page structure in browsers. This Markdown to HTML
+          converter transforms your Markdown into HTML that can be copied
+          into a content management system, website, or other HTML workflow.
+        </p>
+
+        <div class="mdc-steps">
+          <div class="mdc-step">
+            <div class="mdc-step-number">1</div>
+            <strong>Enter Markdown</strong>
+            <p>Type or paste Markdown, or upload a .md or .markdown file.</p>
+          </div>
+          <div class="mdc-step">
+            <div class="mdc-step-number">2</div>
+            <strong>Choose options and preview</strong>
+            <p>Enable GitHub-Flavored Markdown or hard line breaks, then review the rendered result.</p>
+          </div>
+          <div class="mdc-step">
+            <div class="mdc-step-number">3</div>
+            <strong>Export your HTML</strong>
+            <p>Copy the HTML fragment or download a complete HTML document.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="example-title">
+        <h2 id="example-title">Markdown to HTML example</h2>
+
+        <h3>Markdown input</h3>
+        <pre class="mdc-code-block"># Welcome
+
+This is **bold text** and this is *italic text*.
+
+## Useful links
+
+- Learn Markdown
+- Convert it to HTML
+
+Visit [Example](https://example.com).
+
+| Tool | Status |
+| --- | --- |
+| Converter | Ready |
+| Export | Available |</pre>
+
+        <h3>Equivalent HTML structure</h3>
+        <pre class="mdc-code-block">&lt;h1&gt;Welcome&lt;/h1&gt;
+&lt;p&gt;This is &lt;strong&gt;bold text&lt;/strong&gt; and this is &lt;em&gt;italic text&lt;/em&gt;.&lt;/p&gt;
+&lt;h2&gt;Useful links&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Learn Markdown&lt;/li&gt;
+  &lt;li&gt;Convert it to HTML&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Visit &lt;a href="https://example.com"&gt;Example&lt;/a&gt;.&lt;/p&gt;</pre>
+
+        <p>
+          The exact generated markup can vary by parser and enabled extensions.
+          The converter uses a Markdown parser with GitHub-Flavored Markdown
+          options and sanitizes its HTML output before displaying it.
+        </p>
+      </section>
+
+      <section aria-labelledby="gfm-title">
+        <h2 id="gfm-title">What is GitHub-Flavored Markdown?</h2>
+        <p>
+          GitHub-Flavored Markdown (GFM) adds commonly used features on top
+          of the CommonMark baseline. Depending on the enabled features, these
+          include tables, strikethrough, task lists, and automatic links.
+          This makes the converter useful for README files, project
+          documentation, release notes, and technical notes.
+        </p>
+
+        <h3>Tables</h3>
+        <p>
+          Pipe-delimited Markdown tables are converted into HTML table
+          elements, letting the receiving webpage style the table through
+          its own CSS.
+        </p>
+
+        <h3>Task lists</h3>
+        <p>
+          GFM-style task list markers can become list items with checkbox
+          inputs. In the sanitized output, some interactive or unsafe HTML
+          may be removed for safety, so verify the result against your
+          intended display.
+        </p>
+
+        <h3>Fenced code blocks</h3>
+        <p>
+          Triple backticks create code blocks. Language labels can be
+          represented in the generated markup, but this page does not
+          promise automatic syntax highlighting in the exported file.
+        </p>
+      </section>
+
+      <section aria-labelledby="fragment-title">
+        <h2 id="fragment-title">HTML fragment or complete HTML document?</h2>
+
+        <h3>HTML fragment</h3>
+        <p>
+          An HTML fragment contains only the generated content, such as
+          headings, paragraphs, lists, tables, and links. Choose this when
+          you plan to paste the content inside an existing page or CMS editor.
+          It does not include the document's doctype, head, or body wrapper.
+        </p>
+
+        <h3>Complete HTML document</h3>
+        <p>
+          A complete document includes a doctype, language attribute,
+          character encoding, viewport metadata, title, styles, and a body
+          containing your converted content. It can be saved as an HTML file
+          and opened in a browser. Its embedded CSS is a basic starting point,
+          not a complete website design system.
+        </p>
+      </section>
+
+      <section aria-labelledby="security-title">
+        <h2 id="security-title">Why sanitize Markdown-generated HTML?</h2>
+        <p>
+          Markdown parsers can convert user input into HTML, including some
+          embedded HTML supplied in the source. A Markdown parser alone
+          should not be assumed to make the result safe. This page sanitizes
+          generated markup before showing the source or rendering the preview,
+          and the preview iframe disables scripts and restricts external
+          resources.
+        </p>
+        <p>
+          Sanitization can remove or alter raw HTML and attributes that a
+          document author expected to keep. This is intentional for the
+          safer output mode. Review the resulting HTML before publishing it,
+          particularly if it contains content supplied by others.
+        </p>
+      </section>
+
+      <section aria-labelledby="uses-title">
+        <h2 id="uses-title">When should you convert Markdown to HTML?</h2>
+        <ul>
+          <li><strong>Website content:</strong> convert Markdown notes into HTML fragments for an existing page.</li>
+          <li><strong>Documentation:</strong> turn Markdown documentation into content that can be embedded elsewhere.</li>
+          <li><strong>README files:</strong> preview and export project documentation for a different publishing workflow.</li>
+          <li><strong>Blog drafts:</strong> convert headings, emphasis, links, lists, and tables for a CMS that accepts HTML.</li>
+          <li><strong>Learning and testing:</strong> compare Markdown syntax with the HTML elements it produces.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="limitations-title">
+        <h2 id="limitations-title">Important limitations</h2>
+        <ul>
+          <li>
+            This is a browser-based Markdown converter, not a full Markdown
+            publishing platform or a complete website generator.
+          </li>
+          <li>
+            The preview blocks remote network resources. Images or resources
+            that require external URLs may not appear in the preview even
+            when their sanitized references remain in the output.
+          </li>
+          <li>
+            Sanitization can remove raw HTML or attributes. Verify output
+            before publishing, especially when converting complex HTML
+            embedded inside Markdown.
+          </li>
+          <li>
+            This page does not provide a guarantee that the resulting
+            document will render identically in every CMS, browser, email
+            client, or Markdown implementation.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="related-title">
+        <h2 id="related-title">Explore more developer tools</h2>
+        <p>
+          Continue with other utilities for text, markup, and structured data.
+        </p>
+        <div class="mdc-related">
+          <a href="/html-entity-encoder-decoder.html">HTML Entity Encoder / Decoder</a>
+          <a href="/json-formatter.html">JSON Formatter</a>
+          <a href="/yaml-to-json-converter.html">YAML to JSON Converter</a>
+          <a href="/index.html#all-tools">Browse all tools</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="faq-title">
+        <h2 id="faq-title">Frequently asked questions</h2>
+
+        <div class="mdc-faq-list">
+          <details>
+            <summary>How do I convert Markdown to HTML online?</summary>
+            <p>
+              Paste your Markdown into the input editor or upload a Markdown
+              file. The converter parses it, sanitizes the resulting HTML,
+              and updates the output and preview. You can copy the HTML or
+              download it as an HTML file.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is this Markdown to HTML converter free?</summary>
+            <p>
+              Yes. The conversion, preview, copy, and download features on
+              this page are available without an account or a tool usage fee.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does this tool support GitHub-Flavored Markdown?</summary>
+            <p>
+              Yes. The GFM option enables features such as tables, task lists,
+              strikethrough, and autolinks supported by the parser.
+              Sanitization may alter some HTML used by task lists or raw markup.
+            </p>
+          </details>
+
+          <details>
+            <summary>Are my Markdown files uploaded to a server?</summary>
+            <p>
+              The Markdown is converted in the browser. The selected text file
+              is read locally, and its content is not uploaded to our server
+              by this tool. The page loads the parser and sanitizer libraries
+              from a CDN.
+            </p>
+          </details>
+
+          <details>
+            <summary>What is the difference between an HTML fragment and a full document?</summary>
+            <p>
+              A fragment contains only the converted content. A full HTML
+              document also includes the doctype, head, page title, character
+              encoding, viewport metadata, body wrapper, and basic styles.
+            </p>
+          </details>
+
+          <details>
+            <summary>Why does the output remove some HTML?</summary>
+            <p>
+              The HTML sanitizer filters certain tags, attributes, and
+              dangerous URL patterns to reduce the risk of unsafe markup.
+              This can change raw HTML embedded in Markdown. Review the
+              output before using it on a production site.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I use the generated HTML in WordPress or another CMS?</summary>
+            <p>
+              You can copy an HTML fragment into a CMS that accepts HTML,
+              subject to the CMS's own filtering rules. Preview the page
+              after publishing because themes and editors can alter markup
+              or styling.
+            </p>
+          </details>
+
+          <details>
+            <summary>Why do external images not appear in the preview?</summary>
+            <p>
+              The preview is sandboxed and restricts external network
+              resources to reduce unwanted requests while rendering untrusted
+              content. Some remote images may therefore be blocked.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does the converter add CSS styles to the output?</summary>
+            <p>
+              HTML fragment mode returns the sanitized markup without a
+              document-wide stylesheet. Complete-document mode can add
+              basic styles, which you can adjust after downloading.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can Markdown contain raw HTML?</summary>
+            <p>
+              Some Markdown parsers allow embedded HTML. This converter
+              sanitizes the parsed output, so unsafe tags or attributes
+              may be removed. It is intended to produce safer content,
+              not to preserve arbitrary embedded HTML unchanged.
+            </p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="mdc-footer">
+    <div class="mdc-shell mdc-footer-inner">
+      <span>© <span id="footerYear">2026</span> ConvertToToolsOnline</span>
+      <span>
+        <a href="/about.html">About</a>
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        &nbsp;·&nbsp;
+        <a href="/terms.html">Terms</a>
+        &nbsp;·&nbsp;
+        <a href="/contact.html">Contact</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- Marked parses Markdown; DOMPurify sanitizes its HTML output. -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@18.1.1/lib/marked.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.4.17/dist/purify.min.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const MAX_INPUT_BYTES = 1 * 1024 * 1024;
+
+      const $ = function (id) {
+        return document.getElementById(id);
+      };
+
+      const markdownInput = $("markdownInput");
+      const htmlOutput = $("htmlOutput");
+      const markdownFile = $("markdownFile");
+      const inputPanel = $("inputPanel");
+      const previewFrame = $("previewFrame");
+      const outputType = $("outputType");
+      const autoConvert = $("autoConvert");
+      const gfmEnabled = $("gfmEnabled");
+      const hardBreaks = $("hardBreaks");
+
+      let safeFragment = "";
+      let convertedMarkdown = "";
+      let isFresh = false;
+      let activeTab = "source";
+
+      $("footerYear").textContent = String(new Date().getFullYear());
+
+      const examples = {
+        basic: [
+          "# Markdown to HTML",
+          "",
+          "Convert **Markdown** into *HTML* with a live preview.",
+          "",
+          "## What you can do",
+          "",
+          "- Write headings, paragraphs, and lists",
+          "- Add [links](https://example.com)",
+          "- Export HTML for another project",
+          "",
+          "> Preview the output before publishing.",
+          "",
+          "This is `inline code`."
+        ].join("\n"),
+
+        table: [
+          "# Project checklist",
+          "",
+          "| Task | Status | Priority |",
+          "| --- | --- | --- |",
+          "| Build page | Done | High |",
+          "| Test output | In progress | High |",
+          "| Publish | Pending | Normal |",
+          "",
+          "## To do",
+          "",
+          "- [x] Create the draft",
+          "- [ ] Review the generated HTML",
+          "- [ ] Publish the page",
+          "",
+          "~~Old plan~~ New plan"
+        ].join("\n"),
+
+        code: [
+          "# API example",
+          "",
+          "Read the [API guide](https://example.com/docs).",
+          "",
+          "```javascript",
+          "function greet(name) {",
+          '  return `Hello, ${name}!`;',
+          "}",
+          "",
+          "console.log(greet('World'));",
+          "```",
+          "",
+          "You can also write inline code such as `npm run build`."
+        ].join("\n")
+      };
+
+      const previewStyles = `
+        :root { color-scheme: light; }
+        * { box-sizing: border-box; }
+        body {
+          margin: 0;
+          padding: 22px;
+          color: #202a3b;
+          background: #ffffff;
+          font: 15px/1.7 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          overflow-wrap: anywhere;
+        }
+        h1, h2, h3, h4, h5, h6 {
+          color: #17243a;
+          line-height: 1.3;
+          margin: 1.25em 0 .55em;
+        }
+        h1 { margin-top: 0; font-size: 1.9rem; }
+        h2 { font-size: 1.5rem; }
+        h3 { font-size: 1.2rem; }
+        p { margin: .8em 0; }
+        a { color: #2459c4; overflow-wrap: anywhere; }
+        img { max-width: 100%; height: auto; }
+        blockquote {
+          margin: 1em 0;
+          padding: 4px 0 4px 16px;
+          border-left: 4px solid #d4deef;
+          color: #5c6880;
+        }
+        pre {
+          overflow: auto;
+          padding: 14px;
+          border: 1px solid #e2e7f0;
+          border-radius: 9px;
+          background: #f6f8fc;
+          color: #26364f;
+          font: 12.5px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          white-space: pre;
+        }
+        code {
+          padding: 2px 4px;
+          border-radius: 4px;
+          background: #f1f4f9;
+          font: .9em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+        pre code { padding: 0; background: transparent; }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 1em 0;
+          overflow-wrap: anywhere;
+        }
+        th, td {
+          padding: 8px 10px;
+          border: 1px solid #dfe5ef;
+          text-align: left;
+        }
+        th { background: #f5f7fb; }
+        hr { border: 0; border-top: 1px solid #e2e7ef; margin: 1.8em 0; }
+        li { margin: .25em 0; }
+      `;
+
+      const documentStyles = `
+        body {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 32px 22px;
+          color: #202a3b;
+          background: #ffffff;
+          font: 16px/1.75 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+          color: #17243a;
+          line-height: 1.3;
+          margin: 1.35em 0 .55em;
+        }
+        h1 { margin-top: 0; font-size: 2.1rem; }
+        h2 { font-size: 1.6rem; }
+        h3 { font-size: 1.25rem; }
+        a { color: #2459c4; overflow-wrap: anywhere; }
+        img { max-width: 100%; height: auto; }
+        blockquote {
+          margin: 1em 0;
+          padding: 4px 0 4px 16px;
+          border-left: 4px solid #d4deef;
+          color: #5c6880;
+        }
+        pre {
+          overflow: auto;
+          padding: 15px;
+          border: 1px solid #e2e7f0;
+          border-radius: 9px;
+          background: #f6f8fc;
+          color: #26364f;
+          font: 13px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+        code {
+          padding: 2px 4px;
+          border-radius: 4px;
+          background: #f1f4f9;
+          font: .9em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+        pre code { padding: 0; background: transparent; }
+        table { width: 100%; border-collapse: collapse; margin: 1.2em 0; }
+        th, td { padding: 9px 11px; border: 1px solid #dfe5ef; text-align: left; }
+        th { background: #f5f7fb; }
+        hr { border: 0; border-top: 1px solid #e2e7ef; margin: 1.8em 0; }
+      `;
+
+      function byteLength(text) {
+        if (window.TextEncoder) {
+          return new TextEncoder().encode(text).length;
+        }
+
+        return new Blob([text]).size;
+      }
+
+      function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) {
+          return (bytes / 1024).toFixed(1) + " KB";
+        }
+
+        return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+      }
+
+      function countWords(text) {
+        const trimmed = text.trim();
+        return trimmed ? trimmed.split(/\s+/).length : 0;
+      }
+
+      function setStatus(message, type) {
+        const status = $("status");
+        status.textContent = message;
+        status.className = "mdc-status";
+
+        if (type) {
+          status.classList.add("mdc-status--" + type);
+        }
+
+        status.hidden = false;
+      }
+
+      function clearStatus() {
+        const status = $("status");
+        status.textContent = "";
+        status.className = "mdc-status";
+        status.hidden = true;
+      }
+
+      function updateStats() {
+        const input = markdownInput.value;
+        const output = htmlOutput.value;
+
+        $("inputStats").textContent =
+          input.length.toLocaleString() + " characters · " +
+          countWords(input).toLocaleString() + " words · " +
+          formatBytes(byteLength(input));
+
+        $("outputStats").textContent =
+          output.length.toLocaleString() + " characters · " +
+          formatBytes(byteLength(output));
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function validLanguageCode(value) {
+        const language = value.trim();
+
+        if (!/^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/.test(language)) {
+          return "en";
+        }
+
+        return language;
+      }
+
+      function getStylesForDocument() {
+        if ($("documentStyle").value === "minimal") {
+          return "body{font-family:system-ui,sans-serif;line-height:1.6;max-width:900px;margin:0 auto;padding:24px;overflow-wrap:anywhere}img{max-width:100%;height:auto}pre{overflow:auto}table{border-collapse:collapse;max-width:100%}th,td{padding:8px;border:1px solid #ddd;text-align:left}";
+        }
+
+        return documentStyles;
+      }
+
+      function createFullDocument(fragment) {
+        const title = $("documentTitle").value.trim() || "Markdown document";
+        const language = validLanguageCode($("documentLanguage").value);
+        const styles = getStylesForDocument();
+
+        return [
+          "<!DOCTYPE html>",
+          '<html lang="' + escapeHtml(language) + '">',
+          "<head>",
+          '  <meta charset="UTF-8">',
+          '  <meta name="viewport" content="width=device-width, initial-scale=1">',
+          "  <title>" + escapeHtml(title) + "</title>",
+          "  <style>",
+          styles,
+          "  </style>",
+          "</head>",
+          "<body>",
+          fragment,
+          "</body>",
+          "</html>"
+        ].join("\n");
+      }
+
+      function makeSafeHtml(markdown) {
+        if (!window.marked || typeof window.marked.parse !== "function") {
+          throw new Error(
+            "The Markdown parser did not load. Check your internet connection and reload the page."
+          );
+        }
+
+        if (!window.DOMPurify ||
+            typeof window.DOMPurify.sanitize !== "function") {
+          throw new Error(
+            "The HTML sanitizer did not load. Reload this page before processing content."
+          );
+        }
+
+        const parsed = window.marked.parse(markdown, {
+          gfm: gfmEnabled.checked,
+          breaks: hardBreaks.checked,
+          async: false
+        });
+
+        if (typeof parsed !== "string") {
+          throw new Error("The Markdown parser did not return an HTML string.");
+        }
+
+        // Always sanitize generated markup before exposing it to users.
+        // Inline style attributes and document-level elements are not needed
+        // for a content fragment and are excluded from sanitized output.
+        return window.DOMPurify.sanitize(parsed, {
+          USE_PROFILES: { html: true },
+          FORBID_TAGS: [
+            "script",
+            "iframe",
+            "object",
+            "embed",
+            "form",
+            "button",
+            "textarea",
+            "select",
+            "option",
+            "style",
+            "link",
+            "meta",
+            "base"
+          ],
+          FORBID_ATTR: ["style"],
+          ALLOW_UNKNOWN_PROTOCOLS: false
+        });
+      }
+
+      function createPreviewDocument(fragment) {
+        // The sandboxed preview blocks scripts and network connections.
+        // External images may not appear because this CSP allows only data/blob
+        // images. This does not change a permitted image URL in exported HTML.
+        const csp =
+          "default-src 'none'; " +
+          "img-src data: blob:; " +
+          "style-src 'unsafe-inline'; " +
+          "script-src 'none'; " +
+          "connect-src 'none'; " +
+          "font-src 'none'; " +
+          "media-src 'none'; " +
+          "object-src 'none'; " +
+          "frame-src 'none'; " +
+          "form-action 'none'; " +
+          "base-uri 'none'";
+
+        return [
+          "<!DOCTYPE html>",
+          '<html lang="en">',
+          "<head>",
+          '  <meta charset="UTF-8">',
+          '  <meta name="viewport" content="width=device-width, initial-scale=1">',
+          '  <meta http-equiv="Content-Security-Policy" content="' + csp + '">',
+          "  <style>",
+          previewStyles,
+          "  </style>",
+          "</head>",
+          "<body>",
+          fragment || "<p>Enter Markdown to see your preview.</p>",
+          "</body>",
+          "</html>"
+        ].join("\n");
+      }
+
+      function getExportHtml(fragment) {
+        return outputType.value === "document"
+          ? createFullDocument(fragment)
+          : fragment;
+      }
+
+      function updateTab() {
+        const isSource = activeTab === "source";
+
+        $("sourceTab").setAttribute("aria-selected", isSource ? "true" : "false");
+        $("previewTab").setAttribute("aria-selected", isSource ? "false" : "true");
+
+        $("htmlOutputPanel").hidden = !isSource;
+        $("htmlPreviewPanel").hidden = isSource;
+      }
+
+      function updateOutputFromFragment() {
+        htmlOutput.value = getExportHtml(safeFragment);
+
+        $("outputTypeLabel").textContent =
+          outputType.value === "document"
+            ? "Sanitized complete HTML document"
+            : "Sanitized HTML fragment";
+
+        $("copyHtmlBtn").disabled = !htmlOutput.value;
+        $("downloadHtmlBtn").disabled = !htmlOutput.value;
+
+        // The iframe is sandboxed and its document has a restrictive CSP.
+        previewFrame.srcdoc = createPreviewDocument(safeFragment);
+
+        updateStats();
+      }
+
+      function setStale(message) {
+        isFresh = false;
+        $("copyHtmlBtn").disabled = true;
+        $("downloadHtmlBtn").disabled = true;
+
+        if (autoConvert.checked) {
+          convertMarkdown(false);
+        } else {
+          clearStatus();
+          setStatus(
+            message || "Your input has changed. Convert Markdown to HTML to update the result.",
+            "warning"
+          );
+        }
+      }
+
+      function convertMarkdown(announce) {
+        clearStatus();
+
+        const source = markdownInput.value;
+        const bytes = byteLength(source);
+
+        if (bytes > MAX_INPUT_BYTES) {
+          safeFragment = "";
+          convertedMarkdown = "";
+          htmlOutput.value = "";
+          isFresh = false;
+          $("copyHtmlBtn").disabled = true;
+          $("downloadHtmlBtn").disabled = true;
+          updateStats();
+
+          setStatus(
+            "Your Markdown is " + formatBytes(bytes) +
+            ". The maximum supported input size is 1 MB.",
+            "error"
+          );
+          return;
+        }
+
+        if (!source.trim()) {
+          safeFragment = "";
+          convertedMarkdown = "";
+          htmlOutput.value = "";
+          isFresh = true;
+          $("copyHtmlBtn").disabled = true;
+          $("downloadHtmlBtn").disabled = true;
+          previewFrame.srcdoc = createPreviewDocument("");
+          updateStats();
+
+          if (announce) {
+            setStatus("Enter Markdown or load an example before converting.", "warning");
+          }
+
+          return;
+        }
+
+        try {
+          safeFragment = makeSafeHtml(source);
+          convertedMarkdown = source;
+          isFresh = true;
+
+          updateOutputFromFragment();
+
+          if (announce) {
+            setStatus(
+              "Conversion completed. Review the sanitized HTML and preview before publishing.",
+              "success"
+            );
+          }
+        } catch (error) {
+          safeFragment = "";
+          htmlOutput.value = "";
+          isFresh = false;
+
+          $("copyHtmlBtn").disabled = true;
+          $("downloadHtmlBtn").disabled = true;
+          previewFrame.srcdoc = createPreviewDocument("");
+          updateStats();
+
+          setStatus(
+            "Conversion failed: " +
+            (error && error.message ? error.message : "An unexpected error occurred."),
+            "error"
+          );
+        }
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        textarea.style.top = "0";
+
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        const copied = document.execCommand("copy");
+        textarea.remove();
+
+        if (!copied) {
+          throw new Error("The browser could not copy text automatically.");
+        }
+      }
+
+      async function copyHtml() {
+        if (!isFresh || !htmlOutput.value) {
+          setStatus("Convert the Markdown before copying HTML.", "warning");
+          return;
+        }
+
+        try {
+          await copyText(htmlOutput.value);
+          setStatus("Generated HTML copied to your clipboard.", "success");
+        } catch (error) {
+          htmlOutput.focus();
+          htmlOutput.select();
+
+          setStatus(
+            "Automatic copying failed. The HTML source is selected so you can copy it manually.",
+            "warning"
+          );
+        }
+      }
+
+      async function copyMarkdown() {
+        const source = markdownInput.value;
+
+        if (!source) {
+          setStatus("There is no Markdown input to copy.", "warning");
+          return;
+        }
+
+        try {
+          await copyText(source);
+          setStatus("Markdown input copied to your clipboard.", "success");
+        } catch (error) {
+          markdownInput.focus();
+          markdownInput.select();
+
+          setStatus(
+            "Automatic copying failed. The Markdown input is selected so you can copy it manually.",
+            "warning"
+          );
+        }
+      }
+
+      function downloadHtml() {
+        if (!isFresh || !htmlOutput.value) {
+          setStatus("Convert the Markdown before downloading HTML.", "warning");
+          return;
+        }
+
+        const blob = new Blob([htmlOutput.value + "\n"], {
+          type: "text/html;charset=utf-8"
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = outputType.value === "document"
+          ? "markdown-to-html.html"
+          : "markdown-html-fragment.html";
+        link.style.display = "none";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 1000);
+
+        setStatus("HTML download started: " + link.download, "success");
+      }
+
+      function loadExample(name) {
+        if (!Object.prototype.hasOwnProperty.call(examples, name)) return;
+
+        markdownInput.value = examples[name];
+        clearStatus();
+        convertMarkdown(true);
+      }
+
+      function resetTool() {
+        markdownInput.value = examples.basic;
+        outputType.value = "fragment";
+        $("documentTitle").value = "Markdown document";
+        $("documentLanguage").value = "en";
+        $("documentStyle").value = "simple";
+        gfmEnabled.checked = true;
+        hardBreaks.checked = false;
+        autoConvert.checked = true;
+
+        activeTab = "source";
+        updateTab();
+        convertMarkdown(true);
+        markdownInput.focus();
+      }
+
+      async function loadMarkdownFile(file) {
+        if (!file) return;
+
+        if (file.size > MAX_INPUT_BYTES) {
+          setStatus(
+            "This file is " + formatBytes(file.size) +
+            ". The maximum supported file size is 1 MB.",
+            "error"
+          );
+          return;
+        }
+
+        try {
+          const source = await file.text();
+
+          if (byteLength(source) > MAX_INPUT_BYTES) {
+            throw new Error("The decoded text exceeds the 1 MB limit.");
+          }
+
+          markdownInput.value = source;
+          convertMarkdown(true);
+          setStatus(
+            "Loaded " + file.name + " (" + formatBytes(file.size) + ") and converted its contents.",
+            "success"
+          );
+        } catch (error) {
+          setStatus(
+            error && error.message ? error.message : "The file could not be read.",
+            "error"
+          );
+        } finally {
+          markdownFile.value = "";
+        }
+      }
+
+      $("sourceTab").addEventListener("click", function () {
+        activeTab = "source";
+        updateTab();
+      });
+
+      $("previewTab").addEventListener("click", function () {
+        activeTab = "preview";
+        updateTab();
+      });
+
+      $("convertBtn").addEventListener("click", function () {
+        convertMarkdown(true);
+      });
+
+      markdownInput.addEventListener("input", function () {
+        isFresh = false;
+
+        if (autoConvert.checked) {
+          convertMarkdown(false);
+        } else {
+          setStale();
+        }
+      });
+
+      ["outputType", "documentTitle", "documentLanguage", "documentStyle"]
+        .forEach(function (id) {
+          $(id).addEventListener("input", function () {
+            if (isFresh) {
+              updateOutputFromFragment();
+            } else if (autoConvert.checked) {
+              convertMarkdown(false);
+            }
+          });
+
+          $(id).addEventListener("change", function () {
+            if (isFresh) {
+              updateOutputFromFragment();
+            } else if (autoConvert.checked) {
+              convertMarkdown(false);
+            }
+          });
+        });
+
+      [gfmEnabled, hardBreaks].forEach(function (checkbox) {
+        checkbox.addEventListener("change", function () {
+          if (autoConvert.checked) {
+            convertMarkdown(false);
+          } else {
+            setStale();
+          }
+        });
+      });
+
+      autoConvert.addEventListener("change", function () {
+        if (autoConvert.checked) {
+          convertMarkdown(false);
+        } else {
+          setStatus(
+            "Automatic conversion is off. Click Convert Markdown to HTML after changing the input or options.",
+            "warning"
+          );
+        }
+      });
+
+      $("uploadBtn").addEventListener("click", function () {
+        markdownFile.click();
+      });
+
+      markdownFile.addEventListener("change", function () {
+        if (markdownFile.files && markdownFile.files[0]) {
+          loadMarkdownFile(markdownFile.files[0]);
+        }
+      });
+
+      inputPanel.addEventListener("dragover", function (event) {
+        if (event.dataTransfer && event.dataTransfer.types.includes("Files")) {
+          event.preventDefault();
+        }
+      });
+
+      inputPanel.addEventListener("drop", function (event) {
+        if (event.dataTransfer && event.dataTransfer.files &&
+            event.dataTransfer.files.length) {
+          event.preventDefault();
+          loadMarkdownFile(event.dataTransfer.files[0]);
+        }
+      });
+
+      $("clearInputBtn").addEventListener("click", function () {
+        markdownInput.value = "";
+        convertMarkdown(false);
+        clearStatus();
+        markdownInput.focus();
+      });
+
+      $("copyHtmlBtn").addEventListener("click", copyHtml);
+      $("copyMarkdownBtn").addEventListener("click", copyMarkdown);
+      $("downloadHtmlBtn").addEventListener("click", downloadHtml);
+      $("resetBtn").addEventListener("click", resetTool);
+
+      $("sampleBasicBtn").addEventListener("click", function () {
+        loadExample("basic");
+      });
+
+      $("sampleTableBtn").addEventListener("click", function () {
+        loadExample("table");
+      });
+
+      $("sampleCodeBtn").addEventListener("click", function () {
+        loadExample("code");
+      });
+
+      markdownInput.addEventListener("keydown", function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+          event.preventDefault();
+          convertMarkdown(true);
+        }
+
+        if (event.key === "Tab") {
+          event.preventDefault();
+
+          const start = markdownInput.selectionStart;
+          const end = markdownInput.selectionEnd;
+          const text = markdownInput.value;
+
+          markdownInput.value =
+            text.substring(0, start) + "  " + text.substring(end);
+
+          markdownInput.selectionStart = markdownInput.selectionEnd = start + 2;
+
+          if (autoConvert.checked) {
+            convertMarkdown(false);
+          } else {
+            setStale();
+          }
+        }
+      });
+
+      updateTab();
+      updateStats();
+
+      // Load a useful, editable example on the first visit.
+      loadExample("basic");
+    })();
+  </script>
+</body>
+</html>

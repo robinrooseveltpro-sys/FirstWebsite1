@@ -1,0 +1,2262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>PDF Page Extractor Online - Extract PDF Pages Free</title>
+  <meta name="description" content="Extract pages from a PDF online for free. Select page numbers or ranges, keep pages in your chosen order, preview your selection, and download a new PDF in your browser.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="https://converttotoolsonline.com/pdf-page-extractor.html">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PDF Page Extractor Online - Extract Selected Pages">
+  <meta property="og:description" content="Extract specific PDF pages into a new PDF. Use page ranges, select odd or even pages, check your selection, and download locally.">
+  <meta property="og:url" content="https://converttotoolsonline.com/pdf-page-extractor.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free PDF Page Extractor">
+  <meta name="twitter:description" content="Select pages from a PDF, extract them in your preferred order, and download a new PDF directly in your browser.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF Page Extractor",
+    "url": "https://converttotoolsonline.com/pdf-page-extractor.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based PDF page extraction tool that extracts selected PDF pages using page ranges and downloads a new PDF without uploading the original file to the website's server.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Extract selected PDF pages",
+      "Select pages by ranges",
+      "Extract odd or even pages",
+      "Extract first or last pages",
+      "Reorder selected pages",
+      "Preview selected page numbers",
+      "Download extracted pages as a PDF",
+      "Process PDF files in the browser"
+    ]
+  }
+  </script>
+
+  <style>
+    .pfe-page {
+      margin: 0;
+      background: #f7f8fc;
+      color: #182237;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    .pfe-page *,
+    .pfe-page *::before,
+    .pfe-page *::after {
+      box-sizing: border-box;
+    }
+
+    .pfe-page a {
+      color: #2459c4;
+    }
+
+    .pfe-shell {
+      width: min(100% - 30px, 1100px);
+      margin-inline: auto;
+    }
+
+    .pfe-header {
+      border-bottom: 1px solid #e4e8f0;
+      background: #fff;
+    }
+
+    .pfe-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      min-height: 72px;
+      padding-block: 12px;
+    }
+
+    .pfe-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #182237 !important;
+      font-weight: 800;
+      letter-spacing: -.025em;
+      text-decoration: none;
+    }
+
+    .pfe-brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: #2459c4;
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 850;
+    }
+
+    .pfe-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      font-size: .9rem;
+    }
+
+    .pfe-nav a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .pfe-nav a:hover {
+      color: #2459c4;
+      text-decoration: underline;
+    }
+
+    .pfe-main {
+      padding-block: 36px 64px;
+    }
+
+    .pfe-hero {
+      max-width: 800px;
+      margin: 0 auto 25px;
+      text-align: center;
+    }
+
+    .pfe-eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #2459c4;
+      font-size: .81rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .pfe-hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.05rem);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+    }
+
+    .pfe-hero p {
+      max-width: 710px;
+      margin: 0 auto;
+      color: #59667c;
+      font-size: 1.03rem;
+    }
+
+    .pfe-privacy {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
+      color: #247448;
+      font-size: .87rem;
+      font-weight: 700;
+    }
+
+    .pfe-card {
+      padding: clamp(16px, 3vw, 27px);
+      border: 1px solid #e2e7f0;
+      border-radius: 19px;
+      background: #fff;
+      box-shadow: 0 12px 36px rgba(26, 41, 77, .055);
+    }
+
+    .pfe-heading {
+      margin-bottom: 18px;
+    }
+
+    .pfe-heading h2 {
+      margin: 0 0 5px;
+      font-size: 1.27rem;
+      letter-spacing: -.02em;
+    }
+
+    .pfe-muted {
+      color: #69758b;
+      font-size: .89rem;
+    }
+
+    .pfe-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 10px 15px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: #2459c4;
+      color: #fff !important;
+      font: inherit;
+      font-size: .91rem;
+      font-weight: 750;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none !important;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+
+    .pfe-btn:hover {
+      background: #1949a8;
+    }
+
+    .pfe-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .pfe-btn-secondary {
+      border-color: #d9e0eb;
+      background: #fff;
+      color: #34415b !important;
+    }
+
+    .pfe-btn-secondary:hover {
+      background: #f4f7fc;
+    }
+
+    .pfe-btn-small {
+      min-height: 33px;
+      padding: 6px 10px;
+      font-size: .81rem;
+    }
+
+    .pfe-page button:focus-visible,
+    .pfe-page input:focus-visible,
+    .pfe-page select:focus-visible {
+      outline: 3px solid #91b4ff;
+      outline-offset: 3px;
+    }
+
+    .pfe-dropzone {
+      display: grid;
+      justify-items: center;
+      gap: 11px;
+      padding: clamp(28px, 5vw, 45px) 18px;
+      border: 2px dashed #bccded;
+      border-radius: 16px;
+      background: #f8faff;
+      text-align: center;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .pfe-dropzone.is-dragging {
+      border-color: #2459c4;
+      background: #edf3ff;
+    }
+
+    .pfe-upload-icon {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: #eaf0ff;
+      color: #2459c4;
+      font-size: 1.7rem;
+      font-weight: 800;
+    }
+
+    .pfe-dropzone h3 {
+      margin: 0;
+      font-size: 1.08rem;
+    }
+
+    .pfe-dropzone p {
+      margin: 0;
+      color: #68758b;
+      font-size: .9rem;
+    }
+
+    .pfe-file-input {
+      display: none;
+    }
+
+    .pfe-file-card {
+      display: grid;
+      gap: 13px;
+      margin-top: 17px;
+      padding: 15px;
+      border: 1px solid #dfe5ef;
+      border-radius: 13px;
+      background: #fafbfe;
+    }
+
+    .pfe-file-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .pfe-file-name {
+      overflow-wrap: anywhere;
+      color: #24324a;
+      font-weight: 800;
+    }
+
+    .pfe-file-meta {
+      margin-top: 4px;
+      color: #69758b;
+      font-size: .83rem;
+    }
+
+    .pfe-file-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pfe-file-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .pfe-stat {
+      padding: 10px 11px;
+      border: 1px solid #e0e6ef;
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .pfe-stat-label {
+      color: #738097;
+      font-size: .76rem;
+    }
+
+    .pfe-stat-value {
+      margin-top: 2px;
+      color: #26344d;
+      font-size: .96rem;
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .pfe-section-heading {
+      margin: 25px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e4e8f0;
+      font-size: 1.03rem;
+      font-weight: 800;
+    }
+
+    .pfe-field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .pfe-field label {
+      color: #35435c;
+      font-size: .88rem;
+      font-weight: 750;
+    }
+
+    .pfe-field input,
+    .pfe-field select {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      min-height: 43px;
+      padding: 10px 12px;
+      border: 1px solid #d5deeb;
+      border-radius: 10px;
+      background: #fff;
+      color: #1d2b43;
+      font: inherit;
+      font-size: .91rem;
+    }
+
+    .pfe-field input:disabled,
+    .pfe-field select:disabled {
+      color: #7c879a;
+      background: #f3f5f8;
+      cursor: not-allowed;
+    }
+
+    .pfe-help {
+      color: #788398;
+      font-size: .8rem;
+    }
+
+    .pfe-option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .pfe-range-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 11px;
+    }
+
+    .pfe-option-toggle {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 14px;
+      color: #526078;
+      font-size: .87rem;
+    }
+
+    .pfe-option-toggle input {
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: #2459c4;
+    }
+
+    .pfe-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 19px;
+    }
+
+    .pfe-status {
+      margin-top: 15px;
+      padding: 12px 14px;
+      border: 1px solid #dce3ef;
+      border-radius: 10px;
+      background: #f7f9ff;
+      color: #35435c;
+      font-size: .89rem;
+      overflow-wrap: anywhere;
+    }
+
+    .pfe-status--success {
+      border-color: #c7e7d1;
+      background: #f0fbf4;
+      color: #21663d;
+    }
+
+    .pfe-status--warning {
+      border-color: #efdfb8;
+      background: #fffbef;
+      color: #795e1b;
+    }
+
+    .pfe-status--error {
+      border-color: #edc7c7;
+      background: #fff4f4;
+      color: #982c2c;
+    }
+
+    .pfe-selection {
+      margin-top: 23px;
+      padding-top: 22px;
+      border-top: 1px solid #e4e8f0;
+    }
+
+    .pfe-selection-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .pfe-selection-head h3 {
+      margin: 0 0 4px;
+      font-size: 1.08rem;
+    }
+
+    .pfe-page-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      min-height: 40px;
+      padding: 12px;
+      border: 1px solid #e0e6ef;
+      border-radius: 11px;
+      background: #fafbfe;
+    }
+
+    .pfe-page-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      min-height: 31px;
+      padding: 5px 9px;
+      border: 1px solid #cfdcf4;
+      border-radius: 7px;
+      background: #edf3ff;
+      color: #254b95;
+      font-size: .81rem;
+      font-weight: 800;
+    }
+
+    .pfe-page-chip-more {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      color: #65738a;
+      font-size: .8rem;
+    }
+
+    .pfe-selection-summary {
+      margin-top: 10px;
+      color: #536078;
+      font-size: .85rem;
+      overflow-wrap: anywhere;
+    }
+
+    .pfe-result {
+      margin-top: 25px;
+      padding: 18px;
+      border: 1px solid #cfe7d6;
+      border-radius: 14px;
+      background: #f6fcf7;
+    }
+
+    .pfe-result h3 {
+      margin: 0 0 5px;
+      color: #215d38;
+      font-size: 1.12rem;
+    }
+
+    .pfe-result-details {
+      margin: 0;
+      color: #526078;
+      font-size: .88rem;
+      overflow-wrap: anywhere;
+    }
+
+    .pfe-result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 15px;
+    }
+
+    .pfe-validation {
+      margin-top: 22px;
+      padding: 16px;
+      border: 1px solid #e0e6ef;
+      border-radius: 12px;
+      background: #fafbfe;
+    }
+
+    .pfe-validation h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+    }
+
+    .pfe-check-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pfe-check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      color: #526078;
+      font-size: .86rem;
+    }
+
+    .pfe-check-icon {
+      flex: 0 0 20px;
+      font-weight: 850;
+    }
+
+    .pfe-check-item.is-good .pfe-check-icon {
+      color: #247448;
+    }
+
+    .pfe-check-item.is-warning .pfe-check-icon {
+      color: #a36612;
+    }
+
+    .pfe-check-item.is-error .pfe-check-icon {
+      color: #ae3030;
+    }
+
+    .pfe-content {
+      width: min(100%, 850px);
+      margin: 44px auto 0;
+    }
+
+    .pfe-content section {
+      margin-top: 32px;
+    }
+
+    .pfe-content h2 {
+      margin: 0 0 12px;
+      color: #182237;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+    }
+
+    .pfe-content h3 {
+      margin: 21px 0 7px;
+      font-size: 1.08rem;
+    }
+
+    .pfe-content p,
+    .pfe-content li {
+      color: #536078;
+    }
+
+    .pfe-content p {
+      margin: 0 0 12px;
+    }
+
+    .pfe-content li {
+      margin-bottom: 7px;
+    }
+
+    .pfe-content ol,
+    .pfe-content ul {
+      padding-left: 24px;
+    }
+
+    .pfe-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .pfe-step {
+      padding: 16px;
+      border: 1px solid #e2e7f0;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .pfe-step-number {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin-bottom: 9px;
+      border-radius: 9px;
+      background: #edf3ff;
+      color: #2459c4;
+      font-weight: 850;
+    }
+
+    .pfe-step strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .pfe-step p {
+      margin: 0;
+      font-size: .9rem;
+    }
+
+    .pfe-code-block {
+      overflow-x: auto;
+      padding: 14px;
+      border: 1px solid #e0e6f0;
+      border-radius: 12px;
+      background: #fff;
+      color: #2b3a54;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .85rem;
+      line-height: 1.7;
+      white-space: pre;
+    }
+
+    .pfe-related {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .pfe-related a {
+      padding: 8px 12px;
+      border: 1px solid #dce2ed;
+      border-radius: 999px;
+      background: #fff;
+      text-decoration: none;
+      font-size: .9rem;
+    }
+
+    .pfe-related a:hover {
+      border-color: #aac0f3;
+      background: #f4f7ff;
+    }
+
+    .pfe-faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .pfe-faq-list details {
+      padding: 15px 17px;
+      border: 1px solid #e1e6ef;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .pfe-faq-list summary {
+      color: #26334b;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .pfe-faq-list details p {
+      margin: 10px 0 0;
+    }
+
+    .pfe-footer {
+      padding-block: 24px;
+      border-top: 1px solid #e4e8f0;
+      background: #fff;
+      color: #69758a;
+      font-size: .87rem;
+    }
+
+    .pfe-footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .pfe-footer a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .pfe-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .pfe-sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 800px) {
+      .pfe-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .pfe-file-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .pfe-shell {
+        width: min(100% - 22px, 1100px);
+      }
+
+      .pfe-main {
+        padding-top: 25px;
+      }
+
+      .pfe-header-inner {
+        align-items: flex-start;
+      }
+
+      .pfe-nav {
+        gap: 12px;
+        font-size: .83rem;
+      }
+
+      .pfe-option-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pfe-actions .pfe-btn,
+      .pfe-result-actions .pfe-btn {
+        flex: 1 1 100%;
+      }
+
+      .pfe-preset-row {
+        align-items: stretch;
+      }
+
+      .pfe-file-head {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pfe-page *,
+      .pfe-page *::before,
+      .pfe-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="pfe-page">
+  <header class="pfe-header">
+    <div class="pfe-shell pfe-header-inner">
+      <a class="pfe-brand" href="/index.html" aria-label="ConvertToToolsOnline home">
+        <span class="pfe-brand-mark" aria-hidden="true">CT</span>
+        <span>ConvertToToolsOnline</span>
+      </a>
+
+      <nav class="pfe-nav" aria-label="Main navigation">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#all-tools">All tools</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="pfe-shell pfe-main">
+    <section class="pfe-hero" aria-labelledby="page-title">
+      <div class="pfe-eyebrow">Free PDF utility</div>
+      <h1 id="page-title">PDF Page Extractor</h1>
+      <p>
+        Extract specific pages from a PDF and save them as a new PDF.
+        Choose individual pages, page ranges, odd or even pages, or the
+        beginning or end of a document. Check your selection before exporting.
+      </p>
+      <div class="pfe-privacy">
+        <span aria-hidden="true">●</span>
+        PDF pages are processed locally in your browser
+      </div>
+    </section>
+
+    <section class="pfe-card" aria-labelledby="tool-title">
+      <div class="pfe-heading">
+        <h2 id="tool-title">Extract pages from your PDF</h2>
+        <p class="pfe-muted">
+          Upload your PDF, choose the pages you need, and download the extracted document.
+        </p>
+      </div>
+
+      <input id="pdfFile" class="pfe-file-input"
+        type="file" accept="application/pdf,.pdf"
+        aria-label="Choose a PDF document">
+
+      <div id="dropZone" class="pfe-dropzone">
+        <div class="pfe-upload-icon" aria-hidden="true">PDF</div>
+        <h3>Choose a PDF file</h3>
+        <p>Drag and drop your PDF here or browse your device.</p>
+        <button id="choosePdfBtn" class="pfe-btn" type="button">
+          Choose PDF
+        </button>
+        <div class="pfe-help">
+          PDF files only · Maximum file size: 50 MB
+        </div>
+      </div>
+
+      <div id="fileCard" class="pfe-file-card" hidden>
+        <div class="pfe-file-head">
+          <div>
+            <div id="fileName" class="pfe-file-name"></div>
+            <div id="fileMeta" class="pfe-file-meta"></div>
+          </div>
+          <div class="pfe-file-actions">
+            <button id="changePdfBtn" class="pfe-btn pfe-btn-secondary"
+              type="button">Choose another PDF</button>
+            <button id="clearPdfBtn" class="pfe-btn pfe-btn-secondary"
+              type="button">Clear PDF</button>
+          </div>
+        </div>
+
+        <div class="pfe-file-stats">
+          <div class="pfe-stat">
+            <div class="pfe-stat-label">PDF pages</div>
+            <div id="pageCountStat" class="pfe-stat-value">—</div>
+          </div>
+          <div class="pfe-stat">
+            <div class="pfe-stat-label">Original file size</div>
+            <div id="fileSizeStat" class="pfe-stat-value">—</div>
+          </div>
+          <div class="pfe-stat">
+            <div class="pfe-stat-label">Selected pages</div>
+            <div id="selectedCountStat" class="pfe-stat-value">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pfe-section-heading">1. Choose pages to extract</div>
+
+      <div class="pfe-option-grid">
+        <div class="pfe-field">
+          <label for="selectionMode">Selection method</label>
+          <select id="selectionMode" disabled>
+            <option value="custom" selected>Custom page numbers or ranges</option>
+            <option value="all">All pages</option>
+            <option value="odd">Odd-numbered pages</option>
+            <option value="even">Even-numbered pages</option>
+            <option value="first">First page only</option>
+            <option value="last">Last page only</option>
+            <option value="last3">Last 3 pages</option>
+          </select>
+          <span class="pfe-help">
+            Page numbers start at 1. Presets are based on the PDF's page count.
+          </span>
+        </div>
+
+        <div class="pfe-field">
+          <label for="pageRanges">Page numbers or ranges</label>
+          <input id="pageRanges" type="text"
+            placeholder="Example: 1-3, 5, 8-10"
+            value="" disabled>
+          <span class="pfe-help">
+            Enter ranges separated by commas, e.g. 1-3, 5, 8-10.
+          </span>
+        </div>
+
+        <div class="pfe-field">
+          <label for="outputFilename">Output filename</label>
+          <input id="outputFilename" type="text"
+            value="extracted-pages.pdf"
+            maxlength="160"
+            placeholder="extracted-pages.pdf">
+          <span class="pfe-help">
+            The downloaded document will use this filename.
+          </span>
+        </div>
+
+        <div class="pfe-field">
+          <label>Quick selection</label>
+          <div class="pfe-range-presets">
+            <button class="pfe-btn pfe-btn-secondary pfe-btn-small"
+              type="button" data-mode="first">First page</button>
+            <button class="pfe-btn pfe-btn-secondary pfe-btn-small"
+              type="button" data-mode="last">Last page</button>
+            <button class="pfe-btn pfe-btn-secondary pfe-btn-small"
+              type="button" data-mode="odd">Odd pages</button>
+            <button class="pfe-btn pfe-btn-secondary pfe-btn-small"
+              type="button" data-mode="even">Even pages</button>
+          </div>
+        </div>
+      </div>
+
+      <label class="pfe-option-toggle">
+        <input id="preserveOrder" type="checkbox" checked disabled>
+        <span>Preserve the order of page ranges as entered. Uncheck to arrange selected pages in ascending numerical order.</span>
+      </label>
+
+      <div class="pfe-actions">
+        <button id="extractBtn" class="pfe-btn" type="button" disabled>
+          Extract selected pages
+        </button>
+        <button id="selectAllBtn" class="pfe-btn pfe-btn-secondary"
+          type="button" disabled>Select all pages</button>
+        <button id="clearSelectionBtn" class="pfe-btn pfe-btn-secondary"
+          type="button" disabled>Clear selection</button>
+      </div>
+
+      <div id="status" class="pfe-status" role="status"
+        aria-live="polite" hidden></div>
+
+      <section class="pfe-selection" aria-labelledby="selection-title">
+        <div class="pfe-selection-head">
+          <div>
+            <h3 id="selection-title">Selected page numbers</h3>
+            <p class="pfe-muted">
+              Check the page order and total before extracting.
+            </p>
+          </div>
+        </div>
+
+        <div id="pageChips" class="pfe-page-chips">
+          <span class="pfe-muted">Upload a PDF to view your selected page numbers.</span>
+        </div>
+        <p id="selectionSummary" class="pfe-selection-summary">
+          No PDF loaded.
+        </p>
+      </section>
+
+      <section id="resultPanel" class="pfe-result"
+        aria-labelledby="result-title" hidden>
+        <h3 id="result-title">Your extracted PDF is ready</h3>
+        <p id="resultDetails" class="pfe-result-details"></p>
+
+        <div class="pfe-result-actions">
+          <button id="downloadResultBtn" class="pfe-btn" type="button">
+            Download extracted PDF
+          </button>
+          <button id="extractAgainBtn" class="pfe-btn pfe-btn-secondary"
+            type="button">Extract a different selection</button>
+        </div>
+      </section>
+
+      <div class="pfe-validation" aria-labelledby="checks-title">
+        <h3 id="checks-title">File and selection checks</h3>
+        <ul id="validationList" class="pfe-check-list">
+          <li class="pfe-check-item">
+            <span class="pfe-check-icon">•</span>
+            <span>Upload a PDF to begin.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="pfe-content">
+      <section aria-labelledby="how-title">
+        <h2 id="how-title">How to extract pages from a PDF online</h2>
+        <p>
+          A PDF page extractor lets you create a smaller PDF containing
+          only the pages you need. This can be useful for sharing a section
+          of a report, separating an appendix, preparing selected forms,
+          or creating a focused document from a longer PDF.
+        </p>
+
+        <div class="pfe-steps">
+          <div class="pfe-step">
+            <div class="pfe-step-number">1</div>
+            <strong>Upload your PDF</strong>
+            <p>Choose a PDF file from your phone, tablet, or computer.</p>
+          </div>
+          <div class="pfe-step">
+            <div class="pfe-step-number">2</div>
+            <strong>Select the pages</strong>
+            <p>Enter page numbers or ranges, or choose odd, even, first, or last pages.</p>
+          </div>
+          <div class="pfe-step">
+            <div class="pfe-step-number">3</div>
+            <strong>Extract and download</strong>
+            <p>Review your selection, create a new PDF, and save it to your device.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="ranges-title">
+        <h2 id="ranges-title">How to select PDF pages by range</h2>
+        <p>
+          The page range box accepts individual page numbers and inclusive
+          ranges. Separate each selection with a comma. Page numbering starts
+          at 1, which represents the first page of the PDF.
+        </p>
+
+        <pre class="pfe-code-block">1       Extract the first page
+1-3     Extract pages 1, 2, and 3
+2,5,8   Extract pages 2, 5, and 8
+1-3,7   Extract pages 1, 2, 3, and 7
+5-8,1   Extract pages 5 through 8, then page 1</pre>
+
+        <p>
+          The tool removes duplicate selections and reports the issue.
+          When preserve-order mode is enabled, it keeps the order of the
+          ranges you enter; otherwise, pages are sorted by page number.
+        </p>
+      </section>
+
+      <section aria-labelledby="uses-title">
+        <h2 id="uses-title">When should you use a PDF page extractor?</h2>
+        <ul>
+          <li>
+            <strong>Reports and research:</strong> extract a selected chapter,
+            appendix, or set of pages.
+          </li>
+          <li>
+            <strong>Business documents:</strong> create a separate document
+            containing the pages relevant to a particular task.
+          </li>
+          <li>
+            <strong>Forms and applications:</strong> save the specific pages
+            you need to review or share.
+          </li>
+          <li>
+            <strong>Study materials:</strong> create a smaller PDF with
+            selected pages from a longer document.
+          </li>
+          <li>
+            <strong>Odd or even pages:</strong> extract one page-number group
+            from a document for certain printing or review workflows.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Are my PDF files uploaded to a server?</h2>
+        <p>
+          The selected PDF is read and processed in your browser using
+          JavaScript. The tool does not upload the PDF to our server. The
+          PDF processing library is loaded from a CDN, so an internet
+          connection is required when the library has not already loaded.
+        </p>
+        <p>
+          Browser-based processing reduces the need to send a document to
+          a remote PDF service, but it is not a guarantee against access by
+          browser extensions or other software running on your device.
+          Avoid using an untrusted device for confidential files.
+        </p>
+      </section>
+
+      <section aria-labelledby="limits-title">
+        <h2 id="limits-title">Important PDF extraction limitations</h2>
+        <ul>
+          <li>
+            This version supports files up to 50 MB and limits each extracted
+            output to 1,000 pages to help manage browser memory.
+          </li>
+          <li>
+            Password-protected or encrypted PDFs may not open. Remove
+            protection only when you have permission to do so, using a
+            compatible trusted tool.
+          </li>
+          <li>
+            Extracting pages does not reliably preserve document-level
+            features such as all bookmarks, interactive form behavior,
+            digital signatures, or every type of metadata.
+          </li>
+          <li>
+            Extracting pages is not the same as redacting information.
+            Content that appears hidden or covered may remain in a PDF's
+            underlying data.
+          </li>
+          <li>
+            The tool preserves the selected pages' visual content as copied
+            by the PDF library. It does not convert them into editable text,
+            perform OCR, or guarantee that every unusual PDF structure
+            can be copied successfully.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="related-title">
+        <h2 id="related-title">Explore more PDF tools</h2>
+        <p>
+          Continue with other PDF and document utilities on
+          ConvertToToolsOnline.
+        </p>
+        <div class="pfe-related">
+          <a href="/merge-pdf.html">Merge PDF</a>
+          <a href="/jpg-to-pdf.html">JPG to PDF Converter</a>
+          <a href="/index.html#all-tools">Browse all tools</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="faq-title">
+        <h2 id="faq-title">Frequently asked questions</h2>
+
+        <div class="pfe-faq-list">
+          <details>
+            <summary>How do I extract specific pages from a PDF?</summary>
+            <p>
+              Upload your PDF, enter page numbers or ranges such as 1-3, 5,
+              or 8-10, check the selected pages, and click Extract selected
+              pages. Download the resulting PDF when processing finishes.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is this PDF page extractor free?</summary>
+            <p>
+              Yes. This page lets you select, extract, and download PDF pages
+              without a tool usage fee or an account.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I extract multiple nonconsecutive pages?</summary>
+            <p>
+              Yes. Enter page numbers and ranges separated by commas.
+              For example, 1-3, 6, 9-10 selects pages 1, 2, 3, 6, 9, and 10.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I change the order of extracted pages?</summary>
+            <p>
+              Yes. Keep preserve-order mode enabled and enter ranges in
+              the order you want them to appear in the output. Turn it off
+              to put selected pages in ascending page-number order.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does extracting pages reduce PDF file size?</summary>
+            <p>
+              It may, because pages you do not need are omitted. The exact
+              size depends on embedded resources and PDF structure; this
+              tool is not a dedicated PDF compressor.
+            </p>
+          </details>
+
+          <details>
+            <summary>Are my PDF files uploaded?</summary>
+            <p>
+              No. The PDF is processed locally in your browser by this tool.
+              The processing library is loaded from a CDN, but the selected
+              PDF file itself is not uploaded to our server.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I extract pages from a password-protected PDF?</summary>
+            <p>
+              Password-protected or encrypted PDFs may not be supported by
+              this version. If you are authorized to access the file, use a
+              suitable trusted PDF application to produce an accessible
+              copy before trying again.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does extraction remove hidden or sensitive information?</summary>
+            <p>
+              No. Page extraction is not a redaction tool. Information in
+              selected pages can remain present even if it appears hidden
+              or visually covered. Use a dedicated redaction workflow for
+              sensitive information.
+            </p>
+          </details>
+
+          <details>
+            <summary>Why did my PDF fail to load?</summary>
+            <p>
+              The file may be damaged, encrypted, unsupported, larger than
+              the file limit, or too complex for your browser's available
+              memory. Try a valid PDF and close other resource-intensive
+              browser tabs if necessary.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does the output keep bookmarks and digital signatures?</summary>
+            <p>
+              Not necessarily. Creating a PDF from copied pages may not
+              preserve every document-level feature, interactive form,
+              bookmark, or digital signature. Check the result carefully
+              if your document depends on those features.
+            </p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pfe-footer">
+    <div class="pfe-shell pfe-footer-inner">
+      <span>© <span id="footerYear">2026</span> ConvertToToolsOnline</span>
+      <span>
+        <a href="/about.html">About</a>
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        &nbsp;·&nbsp;
+        <a href="/terms.html">Terms</a>
+        &nbsp;·&nbsp;
+        <a href="/contact.html">Contact</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const MAX_FILE_BYTES = 50 * 1024 * 1024;
+      const MAX_OUTPUT_PAGES = 1000;
+      const MAX_PAGE_CHIPS = 180;
+
+      const $ = function (id) {
+        return document.getElementById(id);
+      };
+
+      const pdfFile = $("pdfFile");
+      const dropZone = $("dropZone");
+      const fileCard = $("fileCard");
+      const selectionMode = $("selectionMode");
+      const pageRanges = $("pageRanges");
+      const preserveOrder = $("preserveOrder");
+      const outputFilename = $("outputFilename");
+      const statusElement = $("status");
+
+      let sourcePdf = null;
+      let sourceFile = null;
+      let sourcePageCount = 0;
+      let extractedBytes = null;
+      let selectedPageNumbers = [];
+      let processing = false;
+
+      $("footerYear").textContent = String(new Date().getFullYear());
+
+      function setStatus(message, type) {
+        statusElement.textContent = message;
+        statusElement.className = "pfe-status";
+
+        if (type) {
+          statusElement.classList.add("pfe-status--" + type);
+        }
+
+        statusElement.hidden = false;
+      }
+
+      function clearStatus() {
+        statusElement.textContent = "";
+        statusElement.className = "pfe-status";
+        statusElement.hidden = true;
+      }
+
+      function byteLength(text) {
+        if (window.TextEncoder) {
+          return new TextEncoder().encode(text).length;
+        }
+
+        return new Blob([text]).size;
+      }
+
+      function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) {
+          return (bytes / 1024).toFixed(1) + " KB";
+        }
+
+        return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+      }
+
+      function setProcessing(value) {
+        processing = value;
+
+        $("extractBtn").disabled = !sourcePdf || value;
+        $("choosePdfBtn").disabled = value;
+        $("changePdfBtn").disabled = value;
+        $("clearPdfBtn").disabled = value;
+
+        $("extractBtn").textContent =
+          value ? "Extracting pages..." : "Extract selected pages";
+      }
+
+      function clearOutput() {
+        extractedBytes = null;
+        $("resultPanel").hidden = true;
+      }
+
+      function normalizePdfHeader(buffer) {
+        const length = Math.min(buffer.byteLength, 1024);
+        const bytes = new Uint8Array(buffer, 0, length);
+        let header = "";
+
+        for (let index = 0; index < bytes.length; index += 1) {
+          header += String.fromCharCode(bytes[index]);
+        }
+
+        return header.includes("%PDF-");
+      }
+
+      function safeBaseName(name) {
+        const withoutExtension = String(name || "document")
+          .replace(/\.pdf$/i, "");
+
+        const safe = withoutExtension
+          .replace(/[<>:"/\\|?*\u0000-\u001F\u007F]/g, "-")
+          .replace(/[. ]+$/g, "")
+          .trim()
+          .slice(0, 100);
+
+        return safe || "document";
+      }
+
+      function getOutputFilename() {
+        let name = outputFilename.value.trim();
+
+        name = name
+          .replace(/[<>:"/\\|?*\u0000-\u001F\u007F]/g, "-")
+          .replace(/[. ]+$/g, "")
+          .trim()
+          .slice(0, 150);
+
+        if (!name) {
+          name = "extracted-pages";
+        }
+
+        name = name.replace(/\.pdf$/i, "").trim();
+
+        if (!name) {
+          name = "extracted-pages";
+        }
+
+        return name + ".pdf";
+      }
+
+      function makeRangeFromPages(pages) {
+        if (!pages.length) return "";
+
+        const ranges = [];
+        let start = pages[0];
+        let previous = pages[0];
+
+        for (let index = 1; index < pages.length; index += 1) {
+          const page = pages[index];
+
+          if (page === previous + 1) {
+            previous = page;
+            continue;
+          }
+
+          ranges.push(start === previous ? String(start) : start + "-" + previous);
+          start = page;
+          previous = page;
+        }
+
+        ranges.push(start === previous ? String(start) : start + "-" + previous);
+
+        return ranges.join(", ");
+      }
+
+      function parsePageRanges(value, pageCount) {
+        const raw = value.trim();
+
+        if (!raw) {
+          throw new Error("Enter at least one page number or range.");
+        }
+
+        const terms = raw.split(/[;,]/);
+        const pages = [];
+        const seen = new Set();
+        let duplicateCount = 0;
+
+        for (const untrimmedTerm of terms) {
+          const term = untrimmedTerm.trim();
+
+          if (!term) {
+            throw new Error(
+              "The page range contains an empty item. Use a format such as 1-3, 5, 8-10."
+            );
+          }
+
+          const match = term.match(/^(\d+)(?:\s*[-–]\s*(\d+))?$/);
+
+          if (!match) {
+            throw new Error(
+              "Invalid range \"" + term +
+              "\". Use page numbers or ranges such as 1-3, 5, 8-10."
+            );
+          }
+
+          const start = Number(match[1]);
+          const end = match[2] ? Number(match[2]) : start;
+
+          if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end)) {
+            throw new Error("Page numbers must be valid whole numbers.");
+          }
+
+          if (start < 1 || end < 1) {
+            throw new Error("Page numbers begin at 1; zero and negative numbers are not valid.");
+          }
+
+          if (start > end) {
+            throw new Error(
+              "The range \"" + term +
+              "\" starts after it ends. Use ascending ranges such as 3-7."
+            );
+          }
+
+          if (start > pageCount || end > pageCount) {
+            throw new Error(
+              "The range \"" + term + "\" exceeds this PDF's " +
+              pageCount + " pages."
+            );
+          }
+
+          // A range cannot exceed the document's own page count, which
+          // protects against excessively large range loops.
+          for (let page = start; page <= end; page += 1) {
+            if (seen.has(page)) {
+              duplicateCount += 1;
+              continue;
+            }
+
+            seen.add(page);
+            pages.push(page);
+
+            if (pages.length > MAX_OUTPUT_PAGES) {
+              throw new Error(
+                "You selected more than " + MAX_OUTPUT_PAGES +
+                " unique pages. Extract a smaller selection or use separate batches."
+              );
+            }
+          }
+        }
+
+        if (!pages.length) {
+          throw new Error("No pages were selected.");
+        }
+
+        if (!preserveOrder.checked) {
+          pages.sort(function (a, b) {
+            return a - b;
+          });
+        }
+
+        return {
+          pages: pages,
+          duplicateCount: duplicateCount
+        };
+      }
+
+      function getPresetPages(mode, count) {
+        const pages = [];
+
+        switch (mode) {
+          case "all":
+            for (let page = 1; page <= count; page += 1) {
+              pages.push(page);
+            }
+            break;
+
+          case "odd":
+            for (let page = 1; page <= count; page += 2) {
+              pages.push(page);
+            }
+            break;
+
+          case "even":
+            for (let page = 2; page <= count; page += 2) {
+              pages.push(page);
+            }
+            break;
+
+          case "first":
+            if (count >= 1) pages.push(1);
+            break;
+
+          case "last":
+            if (count >= 1) pages.push(count);
+            break;
+
+          case "last3":
+            for (let page = Math.max(1, count - 2); page <= count; page += 1) {
+              pages.push(page);
+            }
+            break;
+
+          default:
+            return null;
+        }
+
+        return pages;
+      }
+
+      function getSelection() {
+        if (!sourcePdf || !sourcePageCount) {
+          throw new Error("Upload a PDF before selecting pages.");
+        }
+
+        let pages;
+        let duplicateCount = 0;
+        const mode = selectionMode.value;
+
+        if (mode === "custom") {
+          const result = parsePageRanges(pageRanges.value, sourcePageCount);
+          pages = result.pages;
+          duplicateCount = result.duplicateCount;
+        } else {
+          pages = getPresetPages(mode, sourcePageCount) || [];
+
+          if (!preserveOrder.checked) {
+            pages.sort(function (a, b) {
+              return a - b;
+            });
+          }
+        }
+
+        if (!pages.length) {
+          throw new Error("No pages were selected.");
+        }
+
+        if (pages.length > MAX_OUTPUT_PAGES) {
+          throw new Error(
+            "The selection contains more than " + MAX_OUTPUT_PAGES +
+            " pages. Select a smaller range to protect browser memory."
+          );
+        }
+
+        return {
+          pages: pages,
+          duplicateCount: duplicateCount
+        };
+      }
+
+      function updateSelectionDisplay() {
+        const chips = $("pageChips");
+        chips.replaceChildren();
+
+        if (!sourcePdf) {
+          const note = document.createElement("span");
+          note.className = "pfe-muted";
+          note.textContent = "Upload a PDF to view your selected page numbers.";
+          chips.appendChild(note);
+
+          $("selectionSummary").textContent = "No PDF loaded.";
+          $("selectedCountStat").textContent = "—";
+          updateValidation();
+          return;
+        }
+
+        try {
+          const selection = getSelection();
+          selectedPageNumbers = selection.pages.slice();
+
+          const visiblePages = selection.pages.slice(0, MAX_PAGE_CHIPS);
+          const fragment = document.createDocumentFragment();
+
+          visiblePages.forEach(function (page) {
+            const chip = document.createElement("span");
+            chip.className = "pfe-page-chip";
+            chip.textContent = String(page);
+            chip.title = "PDF page " + page;
+            fragment.appendChild(chip);
+          });
+
+          if (selection.pages.length > MAX_PAGE_CHIPS) {
+            const remaining = document.createElement("span");
+            remaining.className = "pfe-page-chip-more";
+            remaining.textContent =
+              "+ " + (selection.pages.length - MAX_PAGE_CHIPS) + " more pages";
+            fragment.appendChild(remaining);
+          }
+
+          chips.appendChild(fragment);
+
+          $("selectedCountStat").textContent =
+            selection.pages.length.toLocaleString();
+
+          $("selectionSummary").textContent =
+            selection.pages.length + " page" +
+            (selection.pages.length === 1 ? "" : "s") +
+            " selected: " + makeRangeFromPages(selection.pages) +
+            (selection.duplicateCount
+              ? " · " + selection.duplicateCount + " duplicate selection(s) ignored"
+              : "");
+
+          $("extractBtn").disabled = processing;
+
+          if (selection.duplicateCount) {
+            setStatus(
+              "Duplicate page selections were ignored. Your page list contains each page only once.",
+              "warning"
+            );
+          } else {
+            clearStatus();
+          }
+        } catch (error) {
+          selectedPageNumbers = [];
+          $("selectedCountStat").textContent = "—";
+
+          const note = document.createElement("span");
+          note.className = "pfe-muted";
+          note.textContent = "Review the page range to see selected pages.";
+          chips.appendChild(note);
+
+          $("selectionSummary").textContent =
+            error.message || "Page selection is invalid.";
+
+          $("extractBtn").disabled = true;
+
+          setStatus(
+            error.message || "The selected page range is invalid.",
+            "warning"
+          );
+        }
+
+        updateValidation();
+      }
+
+      function addCheck(list, kind, message) {
+        const item = document.createElement("li");
+        item.className = "pfe-check-item is-" + kind;
+
+        const icon = document.createElement("span");
+        icon.className = "pfe-check-icon";
+        icon.textContent =
+          kind === "good" ? "✓" :
+          kind === "error" ? "!" : "•";
+
+        const text = document.createElement("span");
+        text.textContent = message;
+
+        item.append(icon, text);
+        list.appendChild(item);
+      }
+
+      function updateValidation() {
+        const list = $("validationList");
+        list.replaceChildren();
+
+        if (!sourcePdf) {
+          addCheck(list, "warning", "Upload a PDF to begin page extraction.");
+          addCheck(
+            list,
+            "good",
+            "The tool is designed to read the PDF locally in your browser."
+          );
+          return;
+        }
+
+        addCheck(
+          list,
+          "good",
+          "PDF loaded: " + sourcePageCount +
+          " page" + (sourcePageCount === 1 ? "" : "s") + "."
+        );
+
+        try {
+          const selection = getSelection();
+
+          addCheck(
+            list,
+            "good",
+            selection.pages.length + " unique page" +
+            (selection.pages.length === 1 ? "" : "s") +
+            " selected and within the document's page count."
+          );
+
+          if (selection.duplicateCount) {
+            addCheck(
+              list,
+              "warning",
+              selection.duplicateCount + " repeated page selection(s) were ignored."
+            );
+          }
+
+          if (selection.pages.length === sourcePageCount) {
+            addCheck(
+              list,
+              "warning",
+              "All pages are selected. Extraction can still be useful, but it may not significantly reduce file size."
+            );
+          }
+
+          if (sourcePageCount > 2000) {
+            addCheck(
+              list,
+              "warning",
+              "This PDF has more than 2,000 pages. Processing may consume substantial memory; consider smaller batches."
+            );
+          }
+        } catch (error) {
+          addCheck(
+            list,
+            "error",
+            error.message || "Your current page selection needs correction."
+          );
+        }
+
+        addCheck(
+          list,
+          "good",
+          "Extraction creates a new PDF; it does not delete or modify the source file."
+        );
+
+        addCheck(
+          list,
+          "warning",
+          "Copied pages may not retain every bookmark, form feature, or digital signature."
+        );
+      }
+
+      function updatePresetRange() {
+        if (!sourcePdf) return;
+
+        const mode = selectionMode.value;
+
+        if (mode === "custom") {
+          pageRanges.disabled = false;
+          return;
+        }
+
+        const pages = getPresetPages(mode, sourcePageCount) || [];
+
+        pageRanges.value = makeRangeFromPages(pages);
+        pageRanges.disabled = true;
+
+        updateSelectionDisplay();
+      }
+
+      function setPreset(mode) {
+        selectionMode.value = mode;
+
+        if (mode === "custom") {
+          pageRanges.disabled = false;
+          updateSelectionDisplay();
+          return;
+        }
+
+        updatePresetRange();
+      }
+
+      function clearSource() {
+        sourcePdf = null;
+        sourceFile = null;
+        sourcePageCount = 0;
+        selectedPageNumbers = [];
+
+        clearOutput();
+        clearStatus();
+
+        fileCard.hidden = true;
+        dropZone.hidden = false;
+
+        $("fileName").textContent = "";
+        $("fileMeta").textContent = "";
+        $("pageCountStat").textContent = "—";
+        $("fileSizeStat").textContent = "—";
+        $("selectedCountStat").textContent = "—";
+
+        selectionMode.disabled = true;
+        pageRanges.disabled = true;
+        preserveOrder.disabled = true;
+
+        $("extractBtn").disabled = true;
+        $("selectAllBtn").disabled = true;
+        $("clearSelectionBtn").disabled = true;
+
+        pdfFile.value = "";
+
+        updateSelectionDisplay();
+      }
+
+      async function loadPdf(file) {
+        if (!file) return;
+
+        if (processing) {
+          setStatus("Wait for the current PDF operation to finish.", "warning");
+          return;
+        }
+
+        if (file.size > MAX_FILE_BYTES) {
+          setStatus(
+            "This PDF is " + formatBytes(file.size) +
+            ". The maximum supported file size is 50 MB.",
+            "error"
+          );
+          pdfFile.value = "";
+          return;
+        }
+
+        if (!file.size) {
+          setStatus("The selected file is empty. Choose a valid PDF.", "error");
+          pdfFile.value = "";
+          return;
+        }
+
+        if (file.type && file.type !== "application/pdf" &&
+            !/\.pdf$/i.test(file.name)) {
+          setStatus("Please choose a PDF file.", "error");
+          pdfFile.value = "";
+          return;
+        }
+
+        clearSource();
+        setProcessing(true);
+        setStatus("Reading and checking your PDF locally...", "warning");
+
+        try {
+          if (!window.PDFLib ||
+              !window.PDFLib.PDFDocument ||
+              typeof window.PDFLib.PDFDocument.load !== "function") {
+            throw new Error(
+              "The PDF processing library did not load. Check your internet connection and reload the page."
+            );
+          }
+
+          const buffer = await file.arrayBuffer();
+
+          if (!normalizePdfHeader(buffer)) {
+            throw new Error(
+              "The file does not appear to be a valid PDF. Choose a PDF with a valid %PDF- header."
+            );
+          }
+
+          const loadedPdf = await window.PDFLib.PDFDocument.load(buffer, {
+            updateMetadata: false
+          });
+
+          const pageCount = loadedPdf.getPageCount();
+
+          if (!Number.isInteger(pageCount) || pageCount < 1) {
+            throw new Error("The PDF does not contain any readable pages.");
+          }
+
+          sourcePdf = loadedPdf;
+          sourceFile = file;
+          sourcePageCount = pageCount;
+
+          selectionMode.disabled = false;
+          preserveOrder.disabled = false;
+
+          $("fileName").textContent = file.name;
+          $("fileMeta").textContent =
+            formatBytes(file.size) + " · PDF document loaded locally";
+
+          $("pageCountStat").textContent =
+            pageCount.toLocaleString();
+
+          $("fileSizeStat").textContent =
+            formatBytes(file.size);
+
+          fileCard.hidden = false;
+          dropZone.hidden = true;
+
+          selectionMode.value = "custom";
+          pageRanges.disabled = false;
+          pageRanges.value = pageCount >= 3 ? "1-3" : "1";
+
+          outputFilename.value =
+            safeBaseName(file.name) + "-extracted.pdf";
+
+          $("selectAllBtn").disabled = false;
+          $("clearSelectionBtn").disabled = false;
+
+          clearOutput();
+          updateSelectionDisplay();
+
+          setStatus(
+            "PDF loaded successfully. Select the pages you want to extract.",
+            "success"
+          );
+        } catch (error) {
+          sourcePdf = null;
+          sourceFile = null;
+          sourcePageCount = 0;
+
+          const rawMessage = error && error.message
+            ? error.message
+            : String(error);
+
+          let message = rawMessage;
+
+          if (/encrypt|password|decrypt/i.test(rawMessage)) {
+            message =
+              "This PDF appears to be encrypted or password-protected. This version may not open it. If you are authorized, use a trusted PDF application to create an accessible copy.";
+          } else if (/invalid pdf|pdf header|No PDF header|Failed to parse/i.test(rawMessage)) {
+            message =
+              "The PDF could not be read. The file may be damaged, unsupported, or not a valid PDF.";
+          }
+
+          clearSource();
+          setStatus("Unable to load PDF: " + message, "error");
+        } finally {
+          setProcessing(false);
+          pdfFile.value = "";
+        }
+      }
+
+      async function extractSelectedPages() {
+        clearStatus();
+
+        if (processing) return;
+
+        if (!sourcePdf) {
+          setStatus("Choose a PDF file first.", "warning");
+          return;
+        }
+
+        if (!window.PDFLib || !window.PDFLib.PDFDocument) {
+          setStatus(
+            "The PDF processing library is unavailable. Reload the page and try again.",
+            "error"
+          );
+          return;
+        }
+
+        let selection;
+
+        try {
+          selection = getSelection();
+        } catch (error) {
+          setStatus(
+            error.message || "Choose a valid page range.",
+            "error"
+          );
+          return;
+        }
+
+        if (selection.pages.length > MAX_OUTPUT_PAGES) {
+          setStatus(
+            "Select no more than " + MAX_OUTPUT_PAGES +
+            " pages per output PDF.",
+            "error"
+          );
+          return;
+        }
+
+        clearOutput();
+        setProcessing(true);
+        setStatus(
+          "Extracting " + selection.pages.length +
+          " page" + (selection.pages.length === 1 ? "" : "s") +
+          ". Keep this tab open while the PDF is being created.",
+          "warning"
+        );
+
+        try {
+          const outputPdf = await window.PDFLib.PDFDocument.create();
+          const indices = selection.pages.map(function (page) {
+            return page - 1;
+          });
+
+          // The user-selected order is preserved in indices.
+          const copiedPages = await outputPdf.copyPages(sourcePdf, indices);
+
+          copiedPages.forEach(function (page) {
+            outputPdf.addPage(page);
+          });
+
+          const safeTitle = "Extracted pages from " +
+            safeBaseName(sourceFile ? sourceFile.name : "PDF");
+
+          outputPdf.setTitle(safeTitle);
+          outputPdf.setSubject(
+            "Extracted PDF page numbers: " +
+            makeRangeFromPages(selection.pages)
+          );
+          outputPdf.setCreator("ConvertToToolsOnline PDF Page Extractor");
+          outputPdf.setProducer("pdf-lib");
+          outputPdf.setCreationDate(new Date());
+
+          const bytes = await outputPdf.save({
+            useObjectStreams: true
+          });
+
+          if (!bytes || !bytes.length) {
+            throw new Error("The extracted PDF output is empty.");
+          }
+
+          extractedBytes = bytes;
+
+          $("resultDetails").textContent =
+            selection.pages.length + " page" +
+            (selection.pages.length === 1 ? "" : "s") +
+            " extracted from " +
+            (sourceFile ? sourceFile.name : "your PDF") +
+            ". Output size: " + formatBytes(bytes.length) +
+            ". Original size: " + formatBytes(sourceFile ? sourceFile.size : 0) +
+            ". The source PDF has not been modified.";
+
+          $("resultPanel").hidden = false;
+
+          setStatus(
+            "Extraction complete. Review the result details and download your new PDF.",
+            "success"
+          );
+
+          $("resultPanel").scrollIntoView({
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+              ? "auto"
+              : "smooth",
+            block: "nearest"
+          });
+        } catch (error) {
+          extractedBytes = null;
+          $("resultPanel").hidden = true;
+
+          const message = error && error.message
+            ? error.message
+            : "An unexpected PDF processing error occurred.";
+
+          setStatus(
+            "Extraction failed: " + message +
+            " The file may use unsupported features or be too complex for available browser memory.",
+            "error"
+          );
+        } finally {
+          setProcessing(false);
+        }
+      }
+
+      function downloadExtractedPdf() {
+        if (!extractedBytes || !extractedBytes.length) {
+          setStatus("Extract your selected pages before downloading.", "warning");
+          return;
+        }
+
+        const filename = getOutputFilename();
+        const blob = new Blob([extractedBytes], {
+          type: "application/pdf"
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = filename;
+        link.style.display = "none";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 1500);
+
+        setStatus("Download started: " + filename, "success");
+      }
+
+      function setCustomRange(value) {
+        selectionMode.value = "custom";
+        pageRanges.disabled = !sourcePdf;
+        pageRanges.value = value;
+        updateSelectionDisplay();
+      }
+
+      function clearSelection() {
+        if (!sourcePdf) return;
+
+        selectionMode.value = "custom";
+        pageRanges.disabled = false;
+        pageRanges.value = "";
+
+        clearOutput();
+        updateSelectionDisplay();
+        setStatus(
+          "Selection cleared. Enter a page number or range to continue.",
+          "warning"
+        );
+      }
+
+      $("choosePdfBtn").addEventListener("click", function () {
+        pdfFile.click();
+      });
+
+      $("changePdfBtn").addEventListener("click", function () {
+        pdfFile.click();
+      });
+
+      pdfFile.addEventListener("change", function () {
+        if (pdfFile.files && pdfFile.files[0]) {
+          loadPdf(pdfFile.files[0]);
+        }
+      });
+
+      ["dragenter", "dragover"].forEach(function (eventName) {
+        dropZone.addEventListener(eventName, function (event) {
+          event.preventDefault();
+          dropZone.classList.add("is-dragging");
+        });
+      });
+
+      ["dragleave", "drop"].forEach(function (eventName) {
+        dropZone.addEventListener(eventName, function (event) {
+          event.preventDefault();
+          dropZone.classList.remove("is-dragging");
+        });
+      });
+
+      dropZone.addEventListener("drop", function (event) {
+        if (event.dataTransfer && event.dataTransfer.files &&
+            event.dataTransfer.files.length) {
+          loadPdf(event.dataTransfer.files[0]);
+        }
+      });
+
+      selectionMode.addEventListener("change", function () {
+        if (!sourcePdf) return;
+
+        clearOutput();
+        updatePresetRange();
+      });
+
+      pageRanges.addEventListener("input", function () {
+        if (selectionMode.value !== "custom") {
+          selectionMode.value = "custom";
+        }
+
+        clearOutput();
+        updateSelectionDisplay();
+      });
+
+      preserveOrder.addEventListener("change", function () {
+        clearOutput();
+        updateSelectionDisplay();
+      });
+
+      outputFilename.addEventListener("input", function () {
+        // A file name change does not invalidate the extracted PDF bytes.
+      });
+
+      document.querySelectorAll("[data-mode]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          if (!sourcePdf) {
+            setStatus("Upload a PDF before choosing pages.", "warning");
+            return;
+          }
+
+          clearOutput();
+          setPreset(button.dataset.mode);
+        });
+      });
+
+      $("selectAllBtn").addEventListener("click", function () {
+        if (!sourcePdf) return;
+
+        clearOutput();
+        setPreset("all");
+      });
+
+      $("clearSelectionBtn").addEventListener("click", clearSelection);
+
+      $("extractBtn").addEventListener("click", extractSelectedPages);
+      $("downloadResultBtn").addEventListener("click", downloadExtractedPdf);
+
+      $("extractAgainBtn").addEventListener("click", function () {
+        clearOutput();
+        clearStatus();
+
+        const toolTop = $("tool-title");
+
+        toolTop.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+          block: "start"
+        });
+      });
+
+      $("clearPdfBtn").addEventListener("click", function () {
+        if (processing) return;
+        clearSource();
+      });
+
+      // Initialize with no file and no automatic download or server request.
+      clearSource();
+      updateValidation();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>SQL Formatter Online – Beautify & Format SQL Queries</title>
+  <meta name="description" content="Format SQL online with a free SQL formatter and beautifier. Beautify MySQL, PostgreSQL, SQLite, SQL Server, Oracle, BigQuery and Snowflake queries with custom indentation and keyword casing.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/sql-formatter.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SQL Formatter Online – SQL Beautifier">
+  <meta property="og:description" content="Beautify and format SQL queries with database dialects, indentation options, keyword casing, copy and download features.">
+  <meta property="og:url" content="https://converttotoolsonline.com/sql-formatter.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SQL Formatter Online">
+  <meta name="twitter:description" content="Format SQL queries for readability in your browser.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "SQL Formatter Online",
+    "url": "https://converttotoolsonline.com/sql-formatter.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based SQL formatter and beautifier with multiple SQL dialects, indentation options, keyword casing, and SQL file export.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    .sqlf-page {
+      --sqlf-border: #dfe4eb;
+      --sqlf-muted: #5c6878;
+      --sqlf-accent: #245bcc;
+      --sqlf-soft: #f6f8fb;
+      --sqlf-radius: 14px;
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      color: #17202c;
+      line-height: 1.6;
+    }
+
+    .sqlf-page,
+    .sqlf-page * {
+      box-sizing: border-box;
+    }
+
+    .sqlf-page [hidden] {
+      display: none !important;
+    }
+
+    .sqlf-page input,
+    .sqlf-page select,
+    .sqlf-page textarea,
+    .sqlf-page button {
+      font: inherit;
+    }
+
+    .sqlf-page button {
+      cursor: pointer;
+    }
+
+    .sqlf-page :is(input, select, textarea, button, a):focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .sqlf-page a {
+      color: var(--sqlf-accent);
+    }
+
+    .sqlf-breadcrumb {
+      margin-bottom: 12px;
+      color: var(--sqlf-muted);
+      font-size: .92rem;
+    }
+
+    .sqlf-header {
+      margin-bottom: 22px;
+    }
+
+    .sqlf-header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.55rem);
+      line-height: 1.17;
+      letter-spacing: -.035em;
+    }
+
+    .sqlf-header p {
+      max-width: 830px;
+      margin: 0;
+      color: var(--sqlf-muted);
+    }
+
+    .sqlf-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .sqlf-pill {
+      padding: 5px 10px;
+      border: 1px solid #d0e7d6;
+      border-radius: 999px;
+      background: #eef8f0;
+      color: #285b38;
+      font-size: .84rem;
+    }
+
+    .sqlf-card {
+      min-width: 0;
+      padding: clamp(14px, 2.4vw, 22px);
+      border: 1px solid var(--sqlf-border);
+      border-radius: var(--sqlf-radius);
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .sqlf-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .sqlf-card h3 {
+      margin: 0 0 9px;
+      font-size: 1rem;
+    }
+
+    .sqlf-muted {
+      color: var(--sqlf-muted);
+      font-size: .9rem;
+    }
+
+    .sqlf-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 41px;
+      padding: 9px 14px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #192536;
+      font-weight: 650;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .sqlf-button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .sqlf-button-primary {
+      border-color: var(--sqlf-accent);
+      background: var(--sqlf-accent);
+      color: #fff;
+    }
+
+    .sqlf-button-primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: #fff;
+    }
+
+    .sqlf-button:disabled {
+      cursor: not-allowed;
+      opacity: .48;
+    }
+
+    .sqlf-button-small {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: .85rem;
+    }
+
+    .sqlf-field {
+      min-width: 0;
+    }
+
+    .sqlf-field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 750;
+    }
+
+    .sqlf-field select,
+    .sqlf-field input[type="text"],
+    .sqlf-field textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 10px 11px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .sqlf-field textarea {
+      min-height: 360px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .85rem;
+      line-height: 1.6;
+      tab-size: 2;
+      overflow-wrap: anywhere;
+    }
+
+    .sqlf-editor {
+      background: #fbfcfe !important;
+    }
+
+    .sqlf-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .sqlf-spacer {
+      flex: 1 1 auto;
+    }
+
+    .sqlf-upload {
+      padding: 18px 14px;
+      border: 2px dashed #b8c6d8;
+      border-radius: 11px;
+      background: #fafcff;
+      text-align: center;
+      transition: border-color .15s ease, background .15s ease;
+    }
+
+    .sqlf-upload.is-dragging {
+      border-color: var(--sqlf-accent);
+      background: #edf4ff;
+    }
+
+    .sqlf-upload strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    .sqlf-upload p {
+      margin: 0 0 10px;
+      color: var(--sqlf-muted);
+      font-size: .9rem;
+    }
+
+    .sqlf-options {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 15px;
+    }
+
+    .sqlf-options .sqlf-field {
+      min-width: 0;
+    }
+
+    .sqlf-check {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      margin-top: 14px;
+      padding: 11px;
+      border: 1px solid var(--sqlf-border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .sqlf-check input {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: var(--sqlf-accent);
+    }
+
+    .sqlf-check strong {
+      display: block;
+      font-size: .9rem;
+    }
+
+    .sqlf-check small {
+      display: block;
+      margin-top: 2px;
+      color: var(--sqlf-muted);
+      line-height: 1.45;
+    }
+
+    .sqlf-status {
+      min-height: 24px;
+      margin: 11px 0 0;
+      font-size: .91rem;
+      overflow-wrap: anywhere;
+    }
+
+    .sqlf-status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .sqlf-status[data-kind="success"] {
+      color: #24623b;
+    }
+
+    .sqlf-warning {
+      padding: 12px 14px;
+      border: 1px solid #ecd5a6;
+      border-radius: 10px;
+      background: #fff9ed;
+      color: #745016;
+      font-size: .9rem;
+    }
+
+    .sqlf-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .sqlf-stat {
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid var(--sqlf-border);
+      border-radius: 10px;
+      background: var(--sqlf-soft);
+    }
+
+    .sqlf-stat-label {
+      display: block;
+      color: var(--sqlf-muted);
+      font-size: .81rem;
+    }
+
+    .sqlf-stat-value {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sqlf-result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+
+    .sqlf-result-panel {
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid var(--sqlf-border);
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .sqlf-panel-heading {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .sqlf-panel-heading h2 {
+      margin: 0;
+    }
+
+    .sqlf-result-panel textarea {
+      min-height: 350px;
+    }
+
+    .sqlf-section {
+      margin-top: 20px;
+    }
+
+    .sqlf-section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .sqlf-section-head h2 {
+      margin: 0;
+    }
+
+    .sqlf-code {
+      display: block;
+      padding: 13px;
+      border-radius: 9px;
+      background: var(--sqlf-soft);
+      color: #223047;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .87rem;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .sqlf-article p,
+    .sqlf-article li {
+      color: #354252;
+    }
+
+    .sqlf-article li + li {
+      margin-top: 7px;
+    }
+
+    .sqlf-divider {
+      height: 1px;
+      margin: 18px 0;
+      border: 0;
+      background: var(--sqlf-border);
+    }
+
+    .sqlf-faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--sqlf-border);
+    }
+
+    .sqlf-faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .sqlf-faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .sqlf-faq details p {
+      margin: 9px 0 0;
+      color: var(--sqlf-muted);
+    }
+
+    @media (max-width: 850px) {
+      .sqlf-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .sqlf-result-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .sqlf-page {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .sqlf-options {
+        grid-template-columns: 1fr;
+      }
+
+      .sqlf-stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .sqlf-toolbar > .sqlf-button {
+        flex: 1 1 100%;
+      }
+
+      .sqlf-field textarea {
+        min-height: 270px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sqlf-page *,
+      .sqlf-page *::before,
+      .sqlf-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="sqlf-page">
+  <nav class="sqlf-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>SQL Formatter</span>
+  </nav>
+
+  <header class="sqlf-header">
+    <h1>SQL Formatter Online</h1>
+    <p>
+      Beautify SQL queries with consistent indentation, readable clauses and configurable
+      keyword casing. Choose a database dialect, format a query, and copy or download
+      the result directly from your browser.
+    </p>
+    <div class="sqlf-pills">
+      <span class="sqlf-pill">Multiple SQL dialects</span>
+      <span class="sqlf-pill">Browser-side formatting</span>
+      <span class="sqlf-pill">Copy and download</span>
+    </div>
+  </header>
+
+  <section class="sqlf-card" aria-labelledby="inputHeading">
+    <h2 id="inputHeading">Format your SQL query</h2>
+
+    <div class="sqlf-warning">
+      <strong>Important:</strong> Formatting is not the same as validating or executing SQL.
+      The formatter can reject unsupported syntax, and a successfully formatted query can
+      still contain database errors or unsafe operations. Review the output before running it.
+    </div>
+
+    <div class="sqlf-field" style="margin-top:15px">
+      <label for="sqlInput">SQL input</label>
+      <textarea
+        id="sqlInput"
+        spellcheck="false"
+        autocomplete="off"
+        autocapitalize="off"
+        placeholder="Paste your SQL query here…"
+      ></textarea>
+    </div>
+
+    <div class="sqlf-upload" id="uploadZone" style="margin-top:12px">
+      <strong>Load a SQL file</strong>
+      <p>Drop a .sql or .txt file here, or browse your device. Maximum size: 2 MB.</p>
+      <input type="file" id="fileInput" accept=".sql,.txt" hidden>
+      <button class="sqlf-button" type="button" id="chooseFileBtn">Choose SQL file</button>
+      <div class="sqlf-muted" id="fileLabel" style="margin-top:8px">
+        SQL is processed locally by this page after its formatter library loads.
+      </div>
+    </div>
+
+    <div class="sqlf-toolbar">
+      <button class="sqlf-button" type="button" id="sampleBtn">Load example</button>
+      <button class="sqlf-button" type="button" id="clearBtn">Clear input</button>
+      <span class="sqlf-spacer"></span>
+      <span class="sqlf-muted" id="inputStats">0 characters</span>
+    </div>
+
+    <hr class="sqlf-divider">
+
+    <h3>Formatting options</h3>
+
+    <div class="sqlf-options">
+      <div class="sqlf-field">
+        <label for="dialect">SQL dialect</label>
+        <select id="dialect">
+          <option value="sql">Standard SQL</option>
+          <option value="mysql">MySQL</option>
+          <option value="mariadb">MariaDB</option>
+          <option value="postgresql">PostgreSQL</option>
+          <option value="sqlite">SQLite</option>
+          <option value="transactsql">SQL Server (T-SQL)</option>
+          <option value="plsql">Oracle PL/SQL</option>
+          <option value="bigquery">Google BigQuery</option>
+          <option value="snowflake">Snowflake</option>
+          <option value="redshift">Amazon Redshift</option>
+          <option value="clickhouse">ClickHouse</option>
+          <option value="db2">IBM DB2</option>
+          <option value="duckdb">DuckDB</option>
+          <option value="hive">Apache Hive</option>
+          <option value="trino">Trino / Presto</option>
+        </select>
+      </div>
+
+      <div class="sqlf-field">
+        <label for="keywordCase">Keyword casing</label>
+        <select id="keywordCase">
+          <option value="upper">UPPERCASE keywords</option>
+          <option value="lower">lowercase keywords</option>
+          <option value="preserve">Preserve original case</option>
+        </select>
+      </div>
+
+      <div class="sqlf-field">
+        <label for="indentWidth">Indentation width</label>
+        <select id="indentWidth">
+          <option value="2">2 spaces</option>
+          <option value="4" selected>4 spaces</option>
+          <option value="8">8 spaces</option>
+        </select>
+      </div>
+
+      <div class="sqlf-field">
+        <label for="indentStyle">Indentation character</label>
+        <select id="indentStyle">
+          <option value="spaces">Spaces</option>
+          <option value="tabs">Tabs</option>
+        </select>
+      </div>
+
+      <div class="sqlf-field">
+        <label for="expressionWidth">Expression width</label>
+        <select id="expressionWidth">
+          <option value="50">50 characters</option>
+          <option value="80" selected>80 characters</option>
+          <option value="120">120 characters</option>
+          <option value="200">200 characters</option>
+        </select>
+      </div>
+
+      <div class="sqlf-field">
+        <label for="querySpacing">Spacing between queries</label>
+        <select id="querySpacing">
+          <option value="1" selected>1 blank line</option>
+          <option value="2">2 blank lines</option>
+          <option value="0">No blank lines</option>
+        </select>
+      </div>
+    </div>
+
+    <label class="sqlf-check">
+      <input type="checkbox" id="formatOnInput">
+      <span>
+        <strong>Format automatically while typing</strong>
+        <small>May be slower for large queries. Automatic formatting runs after a short pause.</small>
+      </span>
+    </label>
+
+    <div class="sqlf-toolbar">
+      <button type="button" class="sqlf-button sqlf-button-primary" id="formatBtn">
+        Format SQL
+      </button>
+      <button type="button" class="sqlf-button" id="useOutputBtn" disabled>
+        Use output as input
+      </button>
+    </div>
+
+    <p class="sqlf-status" id="statusMessage" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="sqlf-card sqlf-section" id="outputSection" hidden>
+    <div class="sqlf-section-head">
+      <h2>Formatted SQL output</h2>
+      <span class="sqlf-muted" id="outputState">Ready</span>
+    </div>
+
+    <div class="sqlf-stat-grid">
+      <div class="sqlf-stat">
+        <span class="sqlf-stat-label">Input lines</span>
+        <span class="sqlf-stat-value" id="inputLines">0</span>
+      </div>
+      <div class="sqlf-stat">
+        <span class="sqlf-stat-label">Output lines</span>
+        <span class="sqlf-stat-value" id="outputLines">0</span>
+      </div>
+      <div class="sqlf-stat">
+        <span class="sqlf-stat-label">Input size</span>
+        <span class="sqlf-stat-value" id="inputBytes">0 B</span>
+      </div>
+      <div class="sqlf-stat">
+        <span class="sqlf-stat-label">Output size</span>
+        <span class="sqlf-stat-value" id="outputBytes">0 B</span>
+      </div>
+    </div>
+
+    <div class="sqlf-field" style="margin-top:15px">
+      <label for="sqlOutput">Formatted query</label>
+      <textarea class="sqlf-editor" id="sqlOutput" readonly spellcheck="false" aria-label="Formatted SQL output"></textarea>
+    </div>
+
+    <div class="sqlf-toolbar">
+      <button type="button" class="sqlf-button sqlf-button-primary" id="copyOutputBtn">
+        Copy formatted SQL
+      </button>
+      <button type="button" class="sqlf-button" id="downloadOutputBtn">
+        Download .sql
+      </button>
+    </div>
+
+    <p class="sqlf-muted" style="margin-top:10px">
+      Formatting changes whitespace for readability. Still review dialect-specific syntax,
+      comments, procedural code and parameter placeholders before execution.
+    </p>
+  </section>
+
+  <section class="sqlf-card sqlf-section sqlf-article">
+    <h2>What is a SQL formatter?</h2>
+    <p>
+      A SQL formatter, also called a SQL beautifier, rearranges whitespace and indentation
+      in a SQL query so clauses and expressions are easier to read. It is particularly useful
+      when SQL has been generated by an application, copied from logs, compressed into one line,
+      or inherited from an unfamiliar codebase.
+    </p>
+
+    <h3>Why format SQL?</h3>
+    <ul>
+      <li><strong>Readability:</strong> separate SELECT, FROM, WHERE, GROUP BY and ORDER BY clauses.</li>
+      <li><strong>Code review:</strong> make joins, filters, nesting and aggregation easier to scan.</li>
+      <li><strong>Maintenance:</strong> establish consistent whitespace across query files.</li>
+      <li><strong>Debugging:</strong> make a complicated query easier to inspect before investigating its behavior.</li>
+    </ul>
+
+    <h3>Supported SQL dialects</h3>
+    <p>
+      The formatter supports common dialects such as MySQL, MariaDB, PostgreSQL, SQLite,
+      SQL Server, Oracle PL/SQL, BigQuery, Snowflake, Redshift, ClickHouse, DB2, DuckDB,
+      Hive, and Trino. The exact output depends on the selected dialect and the syntax
+      the formatter recognizes.
+    </p>
+
+    <h3>SQL formatting is not SQL validation</h3>
+    <p>
+      A formatter is not a database engine. It does not connect to your database, confirm that
+      tables exist, check permissions, verify the result of a query, or guarantee semantic
+      equivalence for every possible SQL dialect. Stored procedures and unusual templating
+      syntax may require specialized tools.
+    </p>
+
+    <h3>How to format a SQL query</h3>
+    <ol>
+      <li>Paste your query or load a SQL file.</li>
+      <li>Select the database dialect that matches your query.</li>
+      <li>Choose keyword casing, indentation, expression width, and query spacing.</li>
+      <li>Press Format SQL and inspect the result.</li>
+      <li>Copy the output or download it as a .sql file.</li>
+    </ol>
+
+    <p>
+      The page processes the query in your browser after loading the formatter library from
+      a CDN. Your SQL input is not sent to a SQL formatting endpoint by this tool, but
+      browser extensions or a compromised device can still access page contents.
+    </p>
+  </section>
+
+  <section class="sqlf-card sqlf-section sqlf-faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>What is the difference between SQL formatter and SQL beautifier?</summary>
+      <p>
+        The terms are commonly used for the same task: improving SQL readability by organizing
+        indentation, clause layout and whitespace.
+      </p>
+    </details>
+
+    <details>
+      <summary>Which SQL databases are supported?</summary>
+      <p>
+        Common supported dialects include MySQL, MariaDB, PostgreSQL, SQLite, SQL Server,
+        Oracle PL/SQL, BigQuery, Snowflake, Redshift, ClickHouse, DB2, DuckDB, Hive and Trino.
+        Use the dialect selector that matches your query.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does formatting SQL change what the query does?</summary>
+      <p>
+        The formatter is intended to change whitespace and keyword presentation, not query
+        logic. However, no formatter can guarantee correct behavior for every dialect and
+        every unusual syntax, so compare and test important queries before execution.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I format a one-line SQL query?</summary>
+      <p>
+        Yes. Paste the single-line query, select the correct dialect and choose Format SQL
+        to create a more readable layout.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why does the formatter show an error?</summary>
+      <p>
+        The SQL may contain syntax unsupported by the selected dialect, incomplete expressions,
+        application-specific templates, or stored-procedure syntax the formatter cannot parse.
+        Try the correct dialect and review any unusual SQL features.
+      </p>
+    </details>
+
+    <details>
+      <summary>Are my SQL queries uploaded?</summary>
+      <p>
+        This page does not upload your SQL query to a formatting server. Formatting is performed
+        in the browser using the library loaded from a CDN.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can this tool optimize SQL or prove it is valid?</summary>
+      <p>
+        No. It formats SQL text. It does not run query plans, benchmark database performance,
+        connect to a database, or validate schema-dependent behavior.
+      </p>
+    </details>
+  </section>
+
+  <p class="sqlf-muted sqlf-section">
+    Explore more browser utilities on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql-formatter/15.9.0/sql-formatter.min.js"></script>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_INPUT_BYTES = 2 * 1024 * 1024;
+  const MAX_OUTPUT_BYTES = 8 * 1024 * 1024;
+
+  const $ = id => document.getElementById(id);
+
+  const sqlInput = $("sqlInput");
+  const sqlOutput = $("sqlOutput");
+  const fileInput = $("fileInput");
+  const uploadZone = $("uploadZone");
+  const statusMessage = $("statusMessage");
+
+  let sourceFilename = "query.sql";
+  let lastInputSnapshot = "";
+  let lastOutputSnapshot = "";
+  let autoFormatTimer = null;
+
+  const dialectLabels = {
+    sql: "Standard SQL",
+    mysql: "MySQL",
+    mariadb: "MariaDB",
+    postgresql: "PostgreSQL",
+    sqlite: "SQLite",
+    transactsql: "SQL Server",
+    plsql: "Oracle PL/SQL",
+    bigquery: "BigQuery",
+    snowflake: "Snowflake",
+    redshift: "Amazon Redshift",
+    clickhouse: "ClickHouse",
+    db2: "IBM DB2",
+    duckdb: "DuckDB",
+    hive: "Apache Hive",
+    trino: "Trino / Presto"
+  };
+
+  function setStatus(message, kind = "") {
+    statusMessage.textContent = message;
+    statusMessage.dataset.kind = kind;
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  function lineCount(text) {
+    return text.length ? text.split(/\r\n|\r|\n/).length : 0;
+  }
+
+  function updateInputStats() {
+    const text = sqlInput.value;
+    $("inputStats").textContent =
+      `${text.length.toLocaleString()} characters · ${formatBytes(new Blob([text]).size)}`;
+  }
+
+  function invalidateOutput() {
+    lastInputSnapshot = "";
+    lastOutputSnapshot = "";
+    $("outputSection").hidden = true;
+    $("useOutputBtn").disabled = true;
+    $("copyOutputBtn").disabled = true;
+    $("downloadOutputBtn").disabled = true;
+  }
+
+  function getFormatter() {
+    if (
+      !window.sqlFormatter ||
+      typeof window.sqlFormatter.format !== "function"
+    ) {
+      throw new Error(
+        "The SQL formatter library did not load. Check your internet connection and reload the page."
+      );
+    }
+
+    return window.sqlFormatter;
+  }
+
+  function collectOptions() {
+    const tabWidth = Number($("indentWidth").value);
+    const expressionWidth = Number($("expressionWidth").value);
+    const linesBetweenQueries = Number($("querySpacing").value);
+
+    if (![2, 4, 8].includes(tabWidth)) {
+      throw new Error("Choose an indentation width of 2, 4 or 8.");
+    }
+
+    if (![50, 80, 120, 200].includes(expressionWidth)) {
+      throw new Error("Choose a supported expression width.");
+    }
+
+    if (![0, 1, 2].includes(linesBetweenQueries)) {
+      throw new Error("Choose a valid number of blank lines between queries.");
+    }
+
+    return {
+      language: $("dialect").value,
+      keywordCase: $("keywordCase").value,
+      tabWidth,
+      useTabs: $("indentStyle").value === "tabs",
+      expressionWidth,
+      linesBetweenQueries
+    };
+  }
+
+  function formatSql() {
+    const original = sqlInput.value;
+
+    if (!original.trim()) {
+      invalidateOutput();
+      setStatus("Paste or load a SQL query before formatting.", "error");
+      return;
+    }
+
+    const inputByteSize = new Blob([original]).size;
+
+    if (inputByteSize > MAX_INPUT_BYTES) {
+      invalidateOutput();
+      setStatus("The SQL input exceeds the 2 MB limit.", "error");
+      return;
+    }
+
+    try {
+      const formatter = getFormatter();
+      const options = collectOptions();
+
+      setStatus("Formatting SQL…");
+
+      const formatted = formatter.format(original, options);
+      const outputByteSize = new Blob([formatted]).size;
+
+      if (outputByteSize > MAX_OUTPUT_BYTES) {
+        throw new Error("Formatted SQL exceeds the 8 MB output limit.");
+      }
+
+      if (!formatted.trim()) {
+        throw new Error("The formatter produced an empty result.");
+      }
+
+      sqlOutput.value = formatted;
+      lastInputSnapshot = original;
+      lastOutputSnapshot = formatted;
+
+      $("outputSection").hidden = false;
+
+      $("inputLines").textContent = lineCount(original).toLocaleString();
+      $("outputLines").textContent = lineCount(formatted).toLocaleString();
+      $("inputBytes").textContent = formatBytes(inputByteSize);
+      $("outputBytes").textContent = formatBytes(outputByteSize);
+
+      $("outputState").textContent = dialectLabels[options.language] || options.language;
+
+      $("useOutputBtn").disabled = false;
+      $("copyOutputBtn").disabled = false;
+      $("downloadOutputBtn").disabled = false;
+
+      setStatus(
+        `SQL formatted successfully using ${dialectLabels[options.language] || options.language}.`,
+        "success"
+      );
+    } catch (error) {
+      invalidateOutput();
+
+      setStatus(
+        error && error.message
+          ? `Could not format this SQL: ${error.message}`
+          : "Could not format the SQL. Check the query and selected dialect.",
+        "error"
+      );
+    }
+  }
+
+  function loadSample() {
+    sqlInput.value = [
+      "select c.id,c.first_name,c.last_name,count(o.id) as order_count,sum(o.total) as total_spent",
+      "from customers c left join orders o on o.customer_id=c.id",
+      "where c.active=true and (o.status='paid' or o.status='shipped')",
+      "group by c.id,c.first_name,c.last_name",
+      "having count(o.id)>2",
+      "order by total_spent desc;",
+      "",
+      "select status,count(*) as total from orders group by status order by total desc;"
+    ].join("\n");
+
+    sourceFilename = "sample-query.sql";
+    $("fileLabel").textContent = "Example SQL loaded.";
+    updateInputStats();
+    invalidateOutput();
+    setStatus("Example query loaded. Select Format SQL to beautify it.");
+  }
+
+  function clearInput() {
+    sqlInput.value = "";
+    sqlOutput.value = "";
+    sourceFilename = "query.sql";
+    $("fileLabel").textContent = "SQL is processed locally by this page after its formatter library loads.";
+    updateInputStats();
+    invalidateOutput();
+    setStatus("");
+  }
+
+  function safeFilename(name) {
+    const base = String(name || "query")
+      .replace(/\.[^.]+$/, "")
+      .replace(/[^A-Za-z0-9._-]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^[.-]+|[.-]+$/g, "")
+      .slice(0, 80);
+
+    return `${base || "query"}.sql`;
+  }
+
+  function downloadText(filename, content, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1200);
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    textarea.style.pointerEvents = "none";
+
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const copied = document.execCommand("copy");
+    textarea.remove();
+
+    if (!copied) {
+      throw new Error("Clipboard copy failed.");
+    }
+  }
+
+  async function copyOutput() {
+    if (!lastOutputSnapshot || sqlOutput.value !== lastOutputSnapshot) {
+      setStatus("Format the query again before copying its output.", "error");
+      return;
+    }
+
+    try {
+      await copyText(lastOutputSnapshot);
+      setStatus("Formatted SQL copied to the clipboard.", "success");
+    } catch (error) {
+      setStatus("Copy failed. You can select the output text and copy it manually.", "error");
+    }
+  }
+
+  function downloadOutput() {
+    if (!lastOutputSnapshot || sqlOutput.value !== lastOutputSnapshot) {
+      setStatus("Format the query again before downloading output.", "error");
+      return;
+    }
+
+    downloadText(
+      safeFilename(sourceFilename),
+      lastOutputSnapshot,
+      "text/plain;charset=utf-8"
+    );
+
+    setStatus("Formatted SQL download started.", "success");
+  }
+
+  function useOutputAsInput() {
+    if (!lastOutputSnapshot || sqlOutput.value !== lastOutputSnapshot) {
+      setStatus("There is no current formatted result to use.", "error");
+      return;
+    }
+
+    sqlInput.value = lastOutputSnapshot;
+    updateInputStats();
+    invalidateOutput();
+
+    setStatus(
+      "Formatted SQL moved into the input. Format again to apply any new options.",
+      "success"
+    );
+
+    sqlInput.focus();
+  }
+
+  async function loadFile(file) {
+    if (!file) return;
+
+    if (file.size > MAX_INPUT_BYTES) {
+      setStatus("The selected file exceeds the 2 MB limit.", "error");
+      return;
+    }
+
+    if (!/\.(sql|txt)$/i.test(file.name)) {
+      setStatus("Choose a .sql or .txt file.", "error");
+      return;
+    }
+
+    try {
+      const text = await file.text();
+
+      if (text.includes("\u0000")) {
+        setStatus("The selected file appears to contain binary data, not ordinary SQL text.", "error");
+        return;
+      }
+
+      if (new Blob([text]).size > MAX_INPUT_BYTES) {
+        setStatus("The decoded text exceeds the 2 MB limit.", "error");
+        return;
+      }
+
+      sqlInput.value = text;
+      sourceFilename = file.name || "query.sql";
+      $("fileLabel").textContent =
+        `${sourceFilename} · ${formatBytes(file.size)} loaded`;
+
+      updateInputStats();
+      invalidateOutput();
+
+      setStatus("SQL file loaded. Review the selected dialect and format options.");
+    } catch (error) {
+      setStatus("Could not read this file. Try another .sql or .txt file.", "error");
+    }
+  }
+
+  function scheduleAutoFormat() {
+    if (!$("formatOnInput").checked) return;
+
+    window.clearTimeout(autoFormatTimer);
+
+    autoFormatTimer = window.setTimeout(() => {
+      formatSql();
+    }, 650);
+  }
+
+  $("formatBtn").addEventListener("click", formatSql);
+  $("sampleBtn").addEventListener("click", loadSample);
+  $("clearBtn").addEventListener("click", clearInput);
+  $("useOutputBtn").addEventListener("click", useOutputAsInput);
+  $("copyOutputBtn").addEventListener("click", copyOutput);
+  $("downloadOutputBtn").addEventListener("click", downloadOutput);
+
+  $("chooseFileBtn").addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) loadFile(file);
+    fileInput.value = "";
+  });
+
+  sqlInput.addEventListener("input", () => {
+    updateInputStats();
+    invalidateOutput();
+
+    if (sqlInput.value.trim()) {
+      setStatus("Input changed. Format again to update the result.");
+    } else {
+      setStatus("");
+    }
+
+    scheduleAutoFormat();
+  });
+
+  [
+    "dialect",
+    "keywordCase",
+    "indentWidth",
+    "indentStyle",
+    "expressionWidth",
+    "querySpacing"
+  ].forEach(id => {
+    $(id).addEventListener("change", () => {
+      invalidateOutput();
+
+      if (sqlInput.value.trim()) {
+        setStatus("Formatting options changed. Format again to apply them.");
+        scheduleAutoFormat();
+      }
+    });
+  });
+
+  $("formatOnInput").addEventListener("change", () => {
+    window.clearTimeout(autoFormatTimer);
+
+    if ($("formatOnInput").checked && sqlInput.value.trim()) {
+      scheduleAutoFormat();
+    }
+  });
+
+  ["dragenter", "dragover"].forEach(type => {
+    uploadZone.addEventListener(type, event => {
+      event.preventDefault();
+      uploadZone.classList.add("is-dragging");
+    });
+  });
+
+  ["dragleave", "drop"].forEach(type => {
+    uploadZone.addEventListener(type, event => {
+      event.preventDefault();
+      uploadZone.classList.remove("is-dragging");
+    });
+  });
+
+  uploadZone.addEventListener("drop", event => {
+    const file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+
+    if (file) loadFile(file);
+  });
+
+  // Prevent dropped files outside the upload area from navigating away.
+  window.addEventListener("dragover", event => event.preventDefault());
+
+  window.addEventListener("drop", event => {
+    if (!uploadZone.contains(event.target)) {
+      event.preventDefault();
+    }
+  });
+
+  updateInputStats();
+  invalidateOutput();
+})();
+</script>
+</body>
+</html>

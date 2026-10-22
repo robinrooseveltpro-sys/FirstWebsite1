@@ -1,0 +1,1573 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JSON to TypeScript Converter Online – Generate Interfaces</title>
+  <meta name="description" content="Convert JSON to TypeScript interfaces and types online. Generate nested types, union types, optional properties and nullable fields. Customize type names, copy code or download a .ts file.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/json-to-typescript.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JSON to TypeScript Converter Online">
+  <meta property="og:description" content="Generate TypeScript interfaces from JSON with nested types, optional fields and union types.">
+  <meta property="og:url" content="https://converttotoolsonline.com/json-to-typescript.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JSON to TypeScript Converter">
+  <meta name="twitter:description" content="Turn a JSON sample into editable TypeScript interfaces and types.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON to TypeScript Converter Online",
+    "url": "https://converttotoolsonline.com/json-to-typescript.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based JSON to TypeScript generator with nested interfaces, union types, optional-property settings, readonly properties, copying and TypeScript file export.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    .jts-page {
+      --jts-border: #dfe4eb;
+      --jts-muted: #5b6878;
+      --jts-accent: #245bcc;
+      --jts-soft: #f6f8fb;
+      --jts-radius: 14px;
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      color: #17202c;
+      line-height: 1.6;
+    }
+
+    .jts-page,
+    .jts-page * {
+      box-sizing: border-box;
+    }
+
+    .jts-page [hidden] {
+      display: none !important;
+    }
+
+    .jts-page input,
+    .jts-page select,
+    .jts-page textarea,
+    .jts-page button {
+      font: inherit;
+    }
+
+    .jts-page button {
+      cursor: pointer;
+    }
+
+    .jts-page :is(input, select, textarea, button, a):focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .jts-page a {
+      color: var(--jts-accent);
+    }
+
+    .jts-breadcrumb {
+      margin-bottom: 12px;
+      color: var(--jts-muted);
+      font-size: .92rem;
+    }
+
+    .jts-header {
+      margin-bottom: 22px;
+    }
+
+    .jts-header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.55rem);
+      line-height: 1.17;
+      letter-spacing: -.035em;
+    }
+
+    .jts-header p {
+      max-width: 840px;
+      margin: 0;
+      color: var(--jts-muted);
+    }
+
+    .jts-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .jts-pill {
+      padding: 5px 10px;
+      border: 1px solid #d0e7d6;
+      border-radius: 999px;
+      background: #eef8f0;
+      color: #285b38;
+      font-size: .84rem;
+    }
+
+    .jts-card {
+      min-width: 0;
+      padding: clamp(14px, 2.4vw, 22px);
+      border: 1px solid var(--jts-border);
+      border-radius: var(--jts-radius);
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .jts-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .jts-card h3 {
+      margin: 0 0 9px;
+      font-size: 1rem;
+    }
+
+    .jts-muted {
+      color: var(--jts-muted);
+      font-size: .9rem;
+    }
+
+    .jts-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 8px 13px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #192536;
+      font-weight: 650;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .jts-button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .jts-button-primary {
+      border-color: var(--jts-accent);
+      background: var(--jts-accent);
+      color: #fff;
+    }
+
+    .jts-button-primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: #fff;
+    }
+
+    .jts-button:disabled {
+      cursor: not-allowed;
+      opacity: .48;
+    }
+
+    .jts-button-small {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: .85rem;
+    }
+
+    .jts-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .jts-spacer {
+      flex: 1 1 auto;
+    }
+
+    .jts-field {
+      min-width: 0;
+    }
+
+    .jts-field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 750;
+    }
+
+    .jts-field input[type="text"],
+    .jts-field select,
+    .jts-field textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 10px 11px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .jts-field textarea {
+      min-height: 310px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .85rem;
+      line-height: 1.55;
+      tab-size: 2;
+      overflow-wrap: anywhere;
+    }
+
+    .jts-output {
+      min-height: 390px !important;
+      background: #fbfcfe !important;
+    }
+
+    .jts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    .jts-panel {
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid var(--jts-border);
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .jts-panel-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+    }
+
+    .jts-panel-head h3 {
+      margin: 0;
+    }
+
+    .jts-upload {
+      padding: 15px;
+      border: 2px dashed #b8c6d8;
+      border-radius: 11px;
+      background: #fafcff;
+      text-align: center;
+      transition: border-color .15s ease, background .15s ease;
+    }
+
+    .jts-upload.is-dragging {
+      border-color: var(--jts-accent);
+      background: #edf4ff;
+    }
+
+    .jts-upload strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .jts-upload p {
+      margin: 0 0 10px;
+      color: var(--jts-muted);
+      font-size: .9rem;
+    }
+
+    .jts-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .jts-check {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 11px;
+      border: 1px solid var(--jts-border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .jts-check input {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: var(--jts-accent);
+    }
+
+    .jts-check strong {
+      display: block;
+      font-size: .91rem;
+    }
+
+    .jts-check small {
+      display: block;
+      margin-top: 2px;
+      color: var(--jts-muted);
+      line-height: 1.45;
+    }
+
+    .jts-status {
+      min-height: 25px;
+      margin: 11px 0 0;
+      font-size: .91rem;
+      overflow-wrap: anywhere;
+    }
+
+    .jts-status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .jts-status[data-kind="success"] {
+      color: #24623b;
+    }
+
+    .jts-warning {
+      padding: 12px 14px;
+      border: 1px solid #ecd5a6;
+      border-radius: 10px;
+      background: #fff9ed;
+      color: #745016;
+      font-size: .9rem;
+    }
+
+    .jts-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .jts-stat {
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid var(--jts-border);
+      border-radius: 9px;
+      background: var(--jts-soft);
+    }
+
+    .jts-stat-label {
+      display: block;
+      color: var(--jts-muted);
+      font-size: .81rem;
+    }
+
+    .jts-stat-value {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.3rem;
+      line-height: 1.2;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .jts-result {
+      padding: 13px;
+      border: 1px solid var(--jts-border);
+      border-radius: 10px;
+      background: var(--jts-soft);
+    }
+
+    .jts-result[data-kind="warning"] {
+      border-color: #ecd5a6;
+      background: #fff9ed;
+    }
+
+    .jts-result-title {
+      font-weight: 800;
+    }
+
+    .jts-section {
+      margin-top: 20px;
+    }
+
+    .jts-section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .jts-section-head h2 {
+      margin: 0;
+    }
+
+    .jts-code {
+      display: block;
+      padding: 12px;
+      border-radius: 9px;
+      background: var(--jts-soft);
+      color: #223047;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .86rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .jts-divider {
+      height: 1px;
+      margin: 18px 0;
+      border: 0;
+      background: var(--jts-border);
+    }
+
+    .jts-article p,
+    .jts-article li {
+      color: #354252;
+    }
+
+    .jts-article li + li {
+      margin-top: 7px;
+    }
+
+    .jts-faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--jts-border);
+    }
+
+    .jts-faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .jts-faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .jts-faq details p {
+      margin: 9px 0 0;
+      color: var(--jts-muted);
+    }
+
+    @media (max-width: 800px) {
+      .jts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .jts-page {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .jts-options {
+        grid-template-columns: 1fr;
+      }
+
+      .jts-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .jts-toolbar > .jts-button {
+        flex: 1 1 100%;
+      }
+
+      .jts-field textarea {
+        min-height: 250px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .jts-page *,
+      .jts-page *::before,
+      .jts-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="jts-page">
+  <nav class="jts-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>JSON to TypeScript</span>
+  </nav>
+
+  <header class="jts-header">
+    <h1>JSON to TypeScript Converter</h1>
+    <p>
+      Turn a JSON sample into TypeScript interfaces or type aliases.
+      Generate nested object types, union types and optional properties, then
+      copy the code or download a ready-to-edit TypeScript file.
+    </p>
+
+    <div class="jts-pills">
+      <span class="jts-pill">Nested type inference</span>
+      <span class="jts-pill">Optional properties</span>
+      <span class="jts-pill">Download .ts</span>
+    </div>
+  </header>
+
+  <section class="jts-card" aria-labelledby="inputHeading">
+    <h2 id="inputHeading">1. Enter JSON data</h2>
+
+    <div class="jts-grid">
+      <section class="jts-panel">
+        <div class="jts-panel-head">
+          <h3>JSON input</h3>
+          <button type="button" class="jts-button jts-button-small" id="formatJsonBtn">
+            Format JSON
+          </button>
+        </div>
+
+        <div class="jts-field">
+          <label for="jsonInput">Paste your JSON sample</label>
+          <textarea
+            id="jsonInput"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off"
+            placeholder="Paste an API response or JSON object here…"
+          ></textarea>
+        </div>
+
+        <div class="jts-toolbar">
+          <button type="button" class="jts-button" id="sampleBtn">Load example</button>
+          <button type="button" class="jts-button" id="validSampleBtn">Load simple example</button>
+          <button type="button" class="jts-button" id="uploadBtn">Upload JSON</button>
+          <button type="button" class="jts-button" id="clearBtn">Clear</button>
+          <input type="file" id="fileInput" accept=".json,.txt,application/json,text/plain" hidden>
+        </div>
+
+        <p class="jts-muted" id="inputInfo" style="margin:8px 0 0">
+          No JSON input loaded.
+        </p>
+
+        <div class="jts-upload" id="dropZone" style="margin-top:12px">
+          <strong>Drop a JSON file here</strong>
+          <p>Maximum input size: 1 MB. Your file is processed locally.</p>
+        </div>
+      </section>
+
+      <section class="jts-panel">
+        <h3>2. Configure TypeScript output</h3>
+
+        <div class="jts-field">
+          <label for="rootName">Root type name</label>
+          <input id="rootName" type="text" value="Root" maxlength="80" spellcheck="false" placeholder="Example: ApiResponse">
+          <p class="jts-muted" style="margin:5px 0 0">
+            Letters, numbers and underscores are converted to a valid PascalCase name.
+          </p>
+        </div>
+
+        <div class="jts-field" style="margin-top:14px">
+          <label for="outputStyle">Output style</label>
+          <select id="outputStyle">
+            <option value="interface">Interfaces for objects</option>
+            <option value="type">Type aliases for objects</option>
+          </select>
+        </div>
+
+        <div class="jts-field" style="margin-top:14px">
+          <label for="optionalMode">Optional-property strategy</label>
+          <select id="optionalMode">
+            <option value="infer">Infer from object samples</option>
+            <option value="all">Make all properties optional</option>
+            <option value="none">Make all properties required</option>
+          </select>
+          <p class="jts-muted" style="margin:5px 0 0">
+            In inference mode, a key missing from some objects in an array becomes optional.
+          </p>
+        </div>
+
+        <div class="jts-options">
+          <label class="jts-check">
+            <input type="checkbox" id="exportTypes" checked>
+            <span>
+              <strong>Add export keyword</strong>
+              <small>Generate export interface or export type declarations.</small>
+            </span>
+          </label>
+
+          <label class="jts-check">
+            <input type="checkbox" id="readonlyProps">
+            <span>
+              <strong>Readonly properties</strong>
+              <small>Prefix properties with readonly.</small>
+            </span>
+          </label>
+        </div>
+
+        <div class="jts-toolbar">
+          <button type="button" class="jts-button jts-button-primary" id="generateBtn">
+            Generate TypeScript
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <p class="jts-status" id="statusMessage" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="jts-card jts-section" id="resultSection" hidden>
+    <div class="jts-section-head">
+      <h2>Generated TypeScript</h2>
+      <span class="jts-muted" id="outputSummary"></span>
+    </div>
+
+    <div class="jts-result" id="resultNotice">
+      <div class="jts-result-title">Generated from your JSON sample</div>
+      <p class="jts-muted" style="margin:5px 0 0">
+        Review inferred optionality, null types and empty arrays before using these types in a project.
+      </p>
+    </div>
+
+    <div class="jts-stats">
+      <div class="jts-stat">
+        <span class="jts-stat-label">Declared types</span>
+        <span class="jts-stat-value" id="typeCount">0</span>
+      </div>
+      <div class="jts-stat">
+        <span class="jts-stat-label">Output lines</span>
+        <span class="jts-stat-value" id="lineCount">0</span>
+      </div>
+      <div class="jts-stat">
+        <span class="jts-stat-label">Output size</span>
+        <span class="jts-stat-value" id="outputSize">0 B</span>
+      </div>
+    </div>
+
+    <div class="jts-field" style="margin-top:15px">
+      <label for="typescriptOutput">TypeScript code</label>
+      <textarea class="jts-output" id="typescriptOutput" readonly spellcheck="false" aria-label="Generated TypeScript output"></textarea>
+    </div>
+
+    <div class="jts-toolbar">
+      <button type="button" class="jts-button jts-button-primary" id="copyBtn">
+        Copy TypeScript
+      </button>
+      <button type="button" class="jts-button" id="downloadBtn">
+        Download .ts file
+      </button>
+    </div>
+
+    <section class="jts-section">
+      <h3>Inference notes</h3>
+      <ul id="warningList"></ul>
+    </section>
+  </section>
+
+  <section class="jts-card jts-section jts-article">
+    <h2>What does a JSON to TypeScript converter do?</h2>
+    <p>
+      JSON is a data format; TypeScript adds static types to JavaScript development.
+      A JSON to TypeScript converter examines a JSON sample and generates type definitions
+      that describe the observed values. These definitions can make API responses easier to
+      work with in an editor and help a type checker catch mistakes in application code.
+    </p>
+
+    <h3>How JSON values map to TypeScript</h3>
+    <ul>
+      <li><strong>JSON strings:</strong> usually become <code>string</code>.</li>
+      <li><strong>Numbers:</strong> become <code>number</code>; ordinary JSON does not distinguish integers from decimals in the same way.</li>
+      <li><strong>Booleans:</strong> become <code>boolean</code>.</li>
+      <li><strong>Objects:</strong> become named interfaces or type aliases.</li>
+      <li><strong>Arrays:</strong> become array types, potentially containing unions.</li>
+      <li><strong>Nulls:</strong> are represented as <code>null</code> when observed alongside other values.</li>
+    </ul>
+
+    <h3>Why use multiple representative records?</h3>
+    <p>
+      A single JSON object only shows the fields present in that example. It cannot tell
+      whether a missing property is optional in the actual API. An array with several object
+      examples can reveal when a key appears in some records but not others, allowing the
+      generator to suggest optional properties.
+    </p>
+
+    <h3>Null is not the same as optional</h3>
+    <p>
+      A property such as <code>nickname: null</code> indicates an observed null value.
+      An omitted <code>nickname</code> property indicates that the key was absent in that
+      sample. A real API may permit both states, so you might need
+      <code>nickname?: string | null</code> after reviewing the API contract.
+    </p>
+
+    <h3>Why empty arrays need review</h3>
+    <p>
+      From an empty array alone, a converter cannot infer the intended element type.
+      This generator uses <code>unknown[]</code> rather than guessing whether the elements
+      should be strings, numbers or objects.
+    </p>
+
+    <h3>Important limitation: types are not runtime validation</h3>
+    <p>
+      Generated TypeScript describes the shape your code expects. TypeScript's type
+      information is erased when compiled to JavaScript, so generated interfaces do not
+      automatically validate data received from an API at runtime. For untrusted data,
+      use a runtime validation strategy in addition to static types.
+    </p>
+
+    <div class="jts-warning">
+      <strong>Recommended workflow:</strong> paste a representative API response, generate
+      the initial types, review optional and nullable properties, adjust domain-specific
+      types, then type-check the result in your own TypeScript project.
+    </div>
+  </section>
+
+  <section class="jts-card jts-section jts-faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>How do I convert JSON to TypeScript?</summary>
+      <p>
+        Paste or upload JSON, choose a root type name and output style, then select
+        Generate TypeScript. Review the inferred properties before copying or downloading the code.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does it support nested JSON objects?</summary>
+      <p>
+        Yes. Nested objects become separate named declarations, and parent declarations
+        refer to those generated types.
+      </p>
+    </details>
+
+    <details>
+      <summary>How are optional properties inferred?</summary>
+      <p>
+        In inference mode, if several objects are observed for a type and a key is absent
+        from some of them, that property is marked optional. A single object does not provide
+        enough evidence to identify potentially optional fields.
+      </p>
+    </details>
+
+    <details>
+      <summary>What happens when a value is null?</summary>
+      <p>
+        When a field contains both null and a non-null value, the generator emits a union
+        including null. If all observations are null, it uses unknown because the non-null
+        type cannot be inferred from that sample.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can it generate TypeScript from a JSON array?</summary>
+      <p>
+        Yes. It infers a root array type and combines the observed element types. Arrays of
+        objects are analyzed together to find properties that are absent from some records.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does this tool send my JSON to a server?</summary>
+      <p>
+        No JSON upload endpoint is used by this page. Parsing and generation run in your
+        browser, without an external conversion library.
+      </p>
+    </details>
+
+    <details>
+      <summary>Will generated types validate API responses at runtime?</summary>
+      <p>
+        No. Type definitions help TypeScript check code during development, but they do not
+        automatically verify incoming values at runtime. Add runtime validation where your
+        application needs it.
+      </p>
+    </details>
+  </section>
+
+  <p class="jts-muted jts-section">
+    Explore more developer utilities on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_INPUT_BYTES = 1024 * 1024;
+  const MAX_DEPTH = 60;
+  const MAX_OUTPUT_BYTES = 5 * 1024 * 1024;
+
+  const $ = id => document.getElementById(id);
+
+  const jsonInput = $("jsonInput");
+  const typescriptOutput = $("typescriptOutput");
+  const fileInput = $("fileInput");
+  const dropZone = $("dropZone");
+  const statusMessage = $("statusMessage");
+
+  let lastGenerated = "";
+  let currentReport = null;
+  let revision = 0;
+
+  function setStatus(message, kind = "") {
+    statusMessage.textContent = message;
+    statusMessage.dataset.kind = kind;
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  function updateInputInfo() {
+    const text = jsonInput.value;
+    $("inputInfo").textContent = text.trim()
+      ? `${text.length.toLocaleString()} characters · ${formatBytes(new Blob([text]).size)}`
+      : "No JSON input loaded.";
+  }
+
+  function clearGenerated() {
+    lastGenerated = "";
+    currentReport = null;
+    typescriptOutput.value = "";
+    $("resultSection").hidden = true;
+    $("copyBtn").disabled = true;
+    $("downloadBtn").disabled = true;
+    $("warningList").replaceChildren();
+  }
+
+  function changed() {
+    revision++;
+    clearGenerated();
+    updateInputInfo();
+
+    if (jsonInput.value.trim()) {
+      setStatus("Input or options changed. Generate the types again to refresh the output.");
+    } else {
+      setStatus("");
+    }
+  }
+
+  function pascalCase(value, fallback = "Root") {
+    let text = String(value || "")
+      .trim()
+      .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+      .replace(/[^A-Za-z0-9_$]+/g, " ")
+      .trim();
+
+    let name = text
+      .split(/\s+/)
+      .filter(Boolean)
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .join("");
+
+    name = name.replace(/[^A-Za-z0-9_$]/g, "");
+
+    if (!name) name = fallback;
+    if (!/^[A-Za-z_$]/.test(name)) name = "_" + name;
+
+    return name;
+  }
+
+  function propertyName(value) {
+    const key = String(value);
+
+    if (/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key)) {
+      return key;
+    }
+
+    // JSON.stringify produces a valid double-quoted TypeScript property name.
+    return JSON.stringify(key);
+  }
+
+  function singularArrayName(value) {
+    const name = pascalCase(value, "Item");
+
+    if (/(?:status|series|news)$/i.test(name)) return name;
+
+    if (/ies$/.test(name)) return name.slice(0, -3) + "y";
+
+    if (/s$/.test(name) && !/ss$/.test(name)) {
+      return name.slice(0, -1);
+    }
+
+    return name + "Item";
+  }
+
+  function normalizeRootName() {
+    const name = pascalCase($("rootName").value, "Root");
+    $("rootName").value = name;
+    return name;
+  }
+
+  function createGenerator(options, rootName) {
+    const state = {
+      usedNames: new Set([rootName]),
+      declarations: [],
+      warnings: new Set(),
+      nodeCount: 0
+    };
+
+    function uniqueTypeName(suggestion) {
+      const base = pascalCase(suggestion, "GeneratedType");
+      let candidate = base;
+      let suffix = 2;
+
+      while (state.usedNames.has(candidate)) {
+        candidate = base + suffix;
+        suffix++;
+      }
+
+      state.usedNames.add(candidate);
+      return candidate;
+    }
+
+    function isJsonObject(value) {
+      return value !== null &&
+        typeof value === "object" &&
+        !Array.isArray(value);
+    }
+
+    function buildObject(objectSamples, suggestion, depth, fixedName = null) {
+      if (depth > MAX_DEPTH) {
+        state.warnings.add(
+          `The nesting depth for "${suggestion}" exceeded ${MAX_DEPTH}; a deeper type was replaced with unknown.`
+        );
+        return "unknown";
+      }
+
+      if (state.nodeCount > 50000) {
+        state.warnings.add(
+          "The generator reached its internal declaration limit; some very large structures may need to be split."
+        );
+        return "unknown";
+      }
+
+      const name = fixedName || uniqueTypeName(suggestion);
+      state.nodeCount++;
+
+      const keys = [];
+      const seenKeys = new Set();
+
+      for (const object of objectSamples) {
+        for (const key of Object.keys(object)) {
+          if (!seenKeys.has(key)) {
+            seenKeys.add(key);
+            keys.push(key);
+          }
+        }
+      }
+
+      const fields = [];
+
+      for (const key of keys) {
+        const observedValues = [];
+        let appearances = 0;
+
+        for (const object of objectSamples) {
+          if (Object.prototype.hasOwnProperty.call(object, key)) {
+            appearances++;
+            observedValues.push(object[key]);
+          }
+        }
+
+        const optional = options.optionalMode === "all" ||
+          (
+            options.optionalMode === "infer" &&
+            objectSamples.length > 1 &&
+            appearances < objectSamples.length
+          );
+
+        const inferred = inferType(
+          observedValues,
+          key,
+          depth + 1
+        );
+
+        fields.push({
+          key,
+          optional,
+          type: inferred
+        });
+      }
+
+      const declaration = {
+        name,
+        fields,
+        depth
+      };
+
+      // Child declarations are generated by inferType before the parent is
+      // appended, so nested declarations appear before their references.
+      state.declarations.push(declaration);
+
+      return name;
+    }
+
+    function inferType(values, suggestion, depth) {
+      if (depth > MAX_DEPTH) {
+        state.warnings.add(
+          `The type for "${suggestion}" exceeded the maximum recursion depth and was set to unknown.`
+        );
+        return "unknown";
+      }
+
+      if (++state.nodeCount > 50000) {
+        state.warnings.add(
+          "The input produced more than 50,000 inspected type nodes. Simplify the sample or split it into smaller pieces."
+        );
+        return "unknown";
+      }
+
+      const nonNull = values.filter(value => value !== null);
+      const includesNull = values.some(value => value === null);
+
+      if (nonNull.length === 0) {
+        if (values.length) {
+          state.warnings.add(
+            `"${suggestion}" was only null in the sample, so it was inferred as unknown.`
+          );
+        }
+        return "unknown";
+      }
+
+      const types = [];
+
+      const primitiveKinds = new Set();
+
+      for (const value of nonNull) {
+        if (Array.isArray(value)) {
+          primitiveKinds.add("array");
+        } else if (isJsonObject(value)) {
+          primitiveKinds.add("object");
+        } else if (typeof value === "string") {
+          primitiveKinds.add("string");
+        } else if (typeof value === "number") {
+          primitiveKinds.add("number");
+        } else if (typeof value === "boolean") {
+          primitiveKinds.add("boolean");
+        } else {
+          primitiveKinds.add("unknown");
+        }
+      }
+
+      for (const kind of ["string", "number", "boolean", "unknown"]) {
+        if (primitiveKinds.has(kind)) {
+          types.push(kind);
+        }
+      }
+
+      if (primitiveKinds.has("object")) {
+        const objects = nonNull.filter(isJsonObject);
+        const nestedType = buildObject(
+          objects,
+          suggestion,
+          depth + 1
+        );
+
+        types.push(nestedType);
+      }
+
+      if (primitiveKinds.has("array")) {
+        const arrays = nonNull.filter(Array.isArray);
+        const elements = [];
+
+        for (const array of arrays) {
+          for (const item of array) {
+            elements.push(item);
+          }
+        }
+
+        if (!elements.length) {
+          state.warnings.add(
+            `"${suggestion}" contained an empty array. Its element type cannot be inferred, so unknown[] was used.`
+          );
+
+          types.push("unknown[]");
+        } else {
+          const itemName = singularArrayName(suggestion);
+          const itemType = inferType(elements, itemName, depth + 1);
+
+          const arrayType = itemType.includes(" | ")
+            ? `(${itemType})[]`
+            : `${itemType}[]`;
+
+          types.push(arrayType);
+        }
+      }
+
+      if (includesNull && !types.includes("null")) {
+        types.push("null");
+      }
+
+      const uniqueTypes = [...new Set(types)];
+
+      return uniqueTypes.join(" | ") || "unknown";
+    }
+
+    function renderDeclaration(declaration) {
+      const exportPrefix = options.exportTypes ? "export " : "";
+      const readonlyPrefix = options.readonlyProps ? "readonly " : "";
+
+      const fields = declaration.fields.map(field => {
+        const key = propertyName(field.key);
+        const question = field.optional ? "?" : "";
+
+        return `  ${readonlyPrefix}${key}${question}: ${field.type};`;
+      });
+
+      if (options.outputStyle === "interface") {
+        return `${exportPrefix}interface ${declaration.name} {\n` +
+          fields.join("\n") +
+          (fields.length ? "\n" : "") +
+          "}";
+      }
+
+      return `${exportPrefix}type ${declaration.name} = {\n` +
+        fields.join("\n") +
+        (fields.length ? "\n" : "") +
+        "};";
+    }
+
+    function generate(rootValue) {
+      let rootType;
+
+      if (isJsonObject(rootValue)) {
+        rootType = buildObject(
+          [rootValue],
+          rootName,
+          0,
+          rootName
+        );
+      } else {
+        rootType = inferType(
+          [rootValue],
+          rootName,
+          0
+        );
+
+        // A root array, primitive or null requires a root type alias.
+        state.declarations.push({
+          name: rootName,
+          depth: -1,
+          rootAlias: rootType
+        });
+      }
+
+      const output = [
+        "// Generated from a JSON sample.",
+        "// Review optionality and nullability against your actual API contract.",
+        "// TypeScript types do not validate JSON at runtime.",
+        ""
+      ];
+
+      if (state.warnings.size) {
+        output.push("// Inference notes:");
+
+        for (const warning of state.warnings) {
+          output.push("// - " + warning.replace(/\r?\n/g, " "));
+        }
+
+        output.push("");
+      }
+
+      for (const declaration of state.declarations) {
+        if (declaration.rootAlias !== undefined) {
+          const exportPrefix = options.exportTypes ? "export " : "";
+          output.push(
+            `${exportPrefix}type ${declaration.name} = ${declaration.rootAlias};`
+          );
+        } else {
+          output.push(renderDeclaration(declaration));
+        }
+        output.push("");
+      }
+
+      const code = output.join("\n").trimEnd() + "\n";
+
+      if (new Blob([code]).size > MAX_OUTPUT_BYTES) {
+        throw new Error(
+          "The generated TypeScript exceeds the 5 MB output limit. Try a smaller JSON sample."
+        );
+      }
+
+      return {
+        code,
+        typeCount: state.declarations.length,
+        warnings: Array.from(state.warnings)
+      };
+    }
+
+    return { generate };
+  }
+
+  function generateTypes() {
+    clearGenerated();
+
+    const input = jsonInput.value;
+
+    if (!input.trim()) {
+      setStatus("Paste or upload JSON before generating TypeScript.", "error");
+      return;
+    }
+
+    if (new Blob([input]).size > MAX_INPUT_BYTES) {
+      setStatus("The JSON input exceeds the 1 MB limit.", "error");
+      return;
+    }
+
+    let parsed;
+
+    try {
+      parsed = JSON.parse(input);
+    } catch (error) {
+      setStatus(`Invalid JSON: ${error.message}`, "error");
+      return;
+    }
+
+    const runRevision = revision;
+
+    try {
+      const rootName = normalizeRootName();
+
+      const options = {
+        outputStyle: $("outputStyle").value,
+        optionalMode: $("optionalMode").value,
+        exportTypes: $("exportTypes").checked,
+        readonlyProps: $("readonlyProps").checked
+      };
+
+      const generator = createGenerator(options, rootName);
+      const result = generator.generate(parsed);
+
+      if (runRevision !== revision) return;
+
+      lastGenerated = result.code;
+      currentReport = {
+        generatedAt: new Date().toISOString(),
+        rootName,
+        typeCount: result.typeCount,
+        warnings: result.warnings,
+        outputStyle: options.outputStyle,
+        optionalMode: options.optionalMode
+      };
+
+      typescriptOutput.value = result.code;
+      $("resultSection").hidden = false;
+
+      $("typeCount").textContent = result.typeCount.toLocaleString();
+      $("lineCount").textContent =
+        result.code.split(/\r\n|\r|\n/).length.toLocaleString();
+      $("outputSize").textContent =
+        formatBytes(new Blob([result.code]).size);
+
+      $("outputSummary").textContent =
+        `${rootName} · ${options.outputStyle === "interface" ? "Interfaces" : "Type aliases"}`;
+
+      $("warningList").replaceChildren();
+
+      if (result.warnings.length) {
+        $("resultNotice").dataset.kind = "warning";
+
+        result.warnings.forEach(warning => {
+          const item = document.createElement("li");
+          item.textContent = warning;
+          $("warningList").appendChild(item);
+        });
+      } else {
+        $("resultNotice").dataset.kind = "";
+
+        const item = document.createElement("li");
+        item.textContent =
+          "No special inference warnings were detected. You should still review the output against the actual API contract.";
+        $("warningList").appendChild(item);
+      }
+
+      $("copyBtn").disabled = false;
+      $("downloadBtn").disabled = false;
+
+      setStatus(
+        `Generated ${result.typeCount} TypeScript declaration(s) successfully.`,
+        "success"
+      );
+    } catch (error) {
+      clearGenerated();
+
+      setStatus(
+        error && error.message
+          ? `Could not generate types: ${error.message}`
+          : "Could not generate TypeScript. Try a smaller or simpler JSON sample.",
+        "error"
+      );
+    }
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    textarea.style.pointerEvents = "none";
+
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const copied = document.execCommand("copy");
+    textarea.remove();
+
+    if (!copied) throw new Error("Clipboard copy failed.");
+  }
+
+  async function copyOutput() {
+    if (!lastGenerated || typescriptOutput.value !== lastGenerated) {
+      setStatus("Generate the TypeScript again before copying.", "error");
+      return;
+    }
+
+    try {
+      await copyText(lastGenerated);
+      setStatus("TypeScript code copied to the clipboard.", "success");
+    } catch (error) {
+      setStatus("Copy failed. Select the output and copy it manually.", "error");
+    }
+  }
+
+  function safeFilename(value) {
+    const cleaned = String(value || "generated-types")
+      .replace(/[^A-Za-z0-9_-]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 80);
+
+    return `${cleaned || "generated-types"}.ts`;
+  }
+
+  function downloadOutput() {
+    if (!lastGenerated || typescriptOutput.value !== lastGenerated) {
+      setStatus("Generate the TypeScript again before downloading.", "error");
+      return;
+    }
+
+    const blob = new Blob(
+      [lastGenerated],
+      { type: "text/plain;charset=utf-8" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = safeFilename($("rootName").value);
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1200);
+
+    setStatus("TypeScript file prepared for download.", "success");
+  }
+
+  function loadSample(simple = false) {
+    const example = simple
+      ? {
+          id: 1001,
+          name: "Alex",
+          active: true,
+          score: 98.5
+        }
+      : {
+          users: [
+            {
+              id: 101,
+              name: "Alice",
+              email: "alice@example.com",
+              active: true,
+              profile: {
+                city: "Kathmandu",
+                tags: ["developer", "member"]
+              },
+              nickname: null
+            },
+            {
+              id: 102,
+              name: "Bob",
+              active: false,
+              profile: {
+                city: "Pokhara",
+                tags: ["member"]
+              }
+            },
+            {
+              id: 103,
+              name: "Carol",
+              email: "carol@example.com",
+              active: true,
+              profile: {
+                city: "Lalitpur",
+                tags: []
+              },
+              nickname: "CJ"
+            }
+          ],
+          total: 3,
+          metadata: {
+            source: "demo",
+            version: 1
+          }
+        };
+
+    jsonInput.value = JSON.stringify(example, null, 2);
+    $("rootName").value = simple ? "User" : "ApiResponse";
+    changed();
+
+    setStatus("Example JSON loaded. Select Generate TypeScript to build the types.");
+  }
+
+  function clearInput() {
+    jsonInput.value = "";
+    clearGenerated();
+    revision++;
+    updateInputInfo();
+    setStatus("");
+  }
+
+  function formatJson() {
+    if (!jsonInput.value.trim()) {
+      setStatus("Enter JSON before formatting.", "error");
+      return;
+    }
+
+    try {
+      jsonInput.value = JSON.stringify(JSON.parse(jsonInput.value), null, 2);
+      changed();
+      setStatus("JSON formatted successfully.", "success");
+    } catch (error) {
+      setStatus(`Cannot format invalid JSON: ${error.message}`, "error");
+    }
+  }
+
+  async function readFile(file) {
+    if (!file) return;
+
+    if (file.size > MAX_INPUT_BYTES) {
+      setStatus("The selected file exceeds the 1 MB limit.", "error");
+      return;
+    }
+
+    if (file.type && ![
+      "application/json",
+      "text/plain",
+      "application/octet-stream"
+    ].includes(file.type) && !/\.json$/i.test(file.name)) {
+      setStatus("Choose a JSON file or plain-text file.", "error");
+      return;
+    }
+
+    try {
+      const text = await file.text();
+
+      if (text.includes("\u0000")) {
+        setStatus("The selected file appears to contain binary data, not JSON text.", "error");
+        return;
+      }
+
+      jsonInput.value = text;
+      changed();
+
+      setStatus("JSON file loaded. Review the input and generate TypeScript.", "success");
+    } catch (error) {
+      setStatus("Could not read this file. Try another JSON file.", "error");
+    }
+  }
+
+  $("generateBtn").addEventListener("click", generateTypes);
+  $("sampleBtn").addEventListener("click", () => loadSample(false));
+  $("validSampleBtn").addEventListener("click", () => loadSample(true));
+  $("clearBtn").addEventListener("click", clearInput);
+  $("formatJsonBtn").addEventListener("click", formatJson);
+
+  $("uploadBtn").addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) readFile(file);
+    fileInput.value = "";
+  });
+
+  jsonInput.addEventListener("input", changed);
+
+  [
+    "rootName",
+    "outputStyle",
+    "optionalMode",
+    "exportTypes",
+    "readonlyProps"
+  ].forEach(id => {
+    $(id).addEventListener("change", () => {
+      clearGenerated();
+      revision++;
+
+      if (jsonInput.value.trim()) {
+        setStatus("Options changed. Generate the TypeScript again to apply them.");
+      }
+    });
+  });
+
+  $("copyBtn").addEventListener("click", copyOutput);
+  $("downloadBtn").addEventListener("click", downloadOutput);
+
+  ["dragenter", "dragover"].forEach(name => {
+    dropZone.addEventListener(name, event => {
+      event.preventDefault();
+      dropZone.classList.add("is-dragging");
+    });
+  });
+
+  ["dragleave", "drop"].forEach(name => {
+    dropZone.addEventListener(name, event => {
+      event.preventDefault();
+      dropZone.classList.remove("is-dragging");
+    });
+  });
+
+  dropZone.addEventListener("drop", event => {
+    const file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+
+    if (file) readFile(file);
+  });
+
+  window.addEventListener("dragover", event => event.preventDefault());
+
+  window.addEventListener("drop", event => {
+    if (!dropZone.contains(event.target)) {
+      event.preventDefault();
+    }
+  });
+
+  updateInputInfo();
+  clearGenerated();
+})();
+</script>
+</body>
+</html>

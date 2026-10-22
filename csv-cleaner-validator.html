@@ -1,0 +1,1801 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CSV Cleaner & Validator Online – Remove Duplicates</title>
+  <meta name="description" content="Clean CSV files online by trimming whitespace, removing blank and duplicate rows, checking inconsistent columns, fixing headers and exporting cleaned data. Free browser-based CSV cleaner.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/csv-cleaner-validator.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CSV Cleaner & Validator Online">
+  <meta property="og:description" content="Remove duplicate CSV rows, trim whitespace, detect data issues and download a cleaned CSV file in your browser.">
+  <meta property="og:url" content="https://converttotoolsonline.com/csv-cleaner-validator.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CSV Cleaner & Validator Online">
+  <meta name="twitter:description" content="Clean CSV data, review validation issues, and export a cleaned file.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CSV Cleaner and Validator Online",
+    "url": "https://converttotoolsonline.com/csv-cleaner-validator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based CSV cleaning and validation utility for removing blank or duplicate rows, trimming whitespace, checking inconsistent columns and exporting cleaned CSV data.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I clean a CSV file online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Upload a CSV or paste its contents, choose your cleaning options, and run the cleaner. Review the results, then download the cleaned CSV."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can this CSV cleaner remove duplicate rows?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can remove rows that match across all columns. An optional case-insensitive comparison treats values with different letter casing as equal. The first matching row is kept."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool upload my CSV file?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tool reads the selected file and processes its contents in your browser. It has no CSV upload endpoint. The CSV parsing library is loaded from a CDN."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does CSV validation check?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tool checks parsing warnings, inconsistent row widths, blank headers, duplicate header names, blank cells and duplicate rows. These checks do not guarantee that the data is factually correct or valid for every application."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert a CSV file with semicolons or tabs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can select automatic delimiter detection or choose commas, semicolons, tabs or pipes for input. You can select a separate delimiter for the exported file."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .csvc-page {
+      --csvc-border: #dfe4eb;
+      --csvc-muted: #5b6879;
+      --csvc-accent: #245bcc;
+      --csvc-soft: #f6f8fb;
+      --csvc-radius: 14px;
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      color: #17202c;
+      line-height: 1.6;
+    }
+
+    .csvc-page,
+    .csvc-page * {
+      box-sizing: border-box;
+    }
+
+    .csvc-page [hidden] {
+      display: none !important;
+    }
+
+    .csvc-page input,
+    .csvc-page select,
+    .csvc-page textarea,
+    .csvc-page button {
+      font: inherit;
+    }
+
+    .csvc-page button {
+      cursor: pointer;
+    }
+
+    .csvc-page :is(input, select, textarea, button, a):focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .csvc-page a {
+      color: var(--csvc-accent);
+    }
+
+    .csvc-breadcrumb {
+      margin-bottom: 12px;
+      color: var(--csvc-muted);
+      font-size: .92rem;
+    }
+
+    .csvc-header {
+      margin-bottom: 22px;
+    }
+
+    .csvc-header h1 {
+      margin: 0 0 9px;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.17;
+      letter-spacing: -.035em;
+    }
+
+    .csvc-header p {
+      max-width: 830px;
+      margin: 0;
+      color: var(--csvc-muted);
+    }
+
+    .csvc-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .csvc-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border: 1px solid #d0e7d6;
+      border-radius: 999px;
+      background: #eef8f0;
+      color: #285a38;
+      font-size: .85rem;
+    }
+
+    .csvc-card {
+      min-width: 0;
+      padding: clamp(14px, 2.4vw, 22px);
+      border: 1px solid var(--csvc-border);
+      border-radius: var(--csvc-radius);
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .csvc-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .csvc-card h3 {
+      margin: 0 0 9px;
+      font-size: 1rem;
+    }
+
+    .csvc-muted {
+      color: var(--csvc-muted);
+      font-size: .9rem;
+    }
+
+    .csvc-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 41px;
+      padding: 9px 14px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #192536;
+      font-weight: 650;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .csvc-button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .csvc-button-primary {
+      border-color: var(--csvc-accent);
+      background: var(--csvc-accent);
+      color: #fff;
+    }
+
+    .csvc-button-primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: #fff;
+    }
+
+    .csvc-button:disabled {
+      cursor: not-allowed;
+      opacity: .48;
+    }
+
+    .csvc-button-small {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: .86rem;
+    }
+
+    .csvc-button-danger {
+      color: #982f2f;
+      border-color: #e6c9c9;
+    }
+
+    .csvc-upload {
+      padding: 20px 14px;
+      border: 2px dashed #b8c6d8;
+      border-radius: 12px;
+      background: #fafcff;
+      text-align: center;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .csvc-upload.is-dragging {
+      border-color: var(--csvc-accent);
+      background: #edf4ff;
+    }
+
+    .csvc-upload strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.05rem;
+    }
+
+    .csvc-upload p {
+      margin: 0 0 12px;
+      color: var(--csvc-muted);
+      font-size: .9rem;
+    }
+
+    .csvc-file-note {
+      margin-top: 9px;
+      color: var(--csvc-muted);
+      font-size: .86rem;
+      overflow-wrap: anywhere;
+    }
+
+    .csvc-field {
+      min-width: 0;
+    }
+
+    .csvc-field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .csvc-field select,
+    .csvc-field input[type="text"],
+    .csvc-field input[type="search"],
+    .csvc-field textarea {
+      width: 100%;
+      min-width: 0;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .csvc-field textarea {
+      min-height: 215px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .88rem;
+      line-height: 1.55;
+      tab-size: 2;
+    }
+
+    .csvc-input-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .csvc-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .csvc-toolbar .csvc-spacer {
+      flex: 1 1 auto;
+    }
+
+    .csvc-options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 14px;
+    }
+
+    .csvc-option {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 11px;
+      border: 1px solid var(--csvc-border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .csvc-option input {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: var(--csvc-accent);
+    }
+
+    .csvc-option strong {
+      display: block;
+      font-size: .91rem;
+    }
+
+    .csvc-option small {
+      display: block;
+      margin-top: 2px;
+      color: var(--csvc-muted);
+      line-height: 1.45;
+    }
+
+    .csvc-divider {
+      height: 1px;
+      border: 0;
+      margin: 19px 0;
+      background: var(--csvc-border);
+    }
+
+    .csvc-status {
+      min-height: 25px;
+      margin: 11px 0 0;
+      font-size: .91rem;
+      overflow-wrap: anywhere;
+    }
+
+    .csvc-status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .csvc-status[data-kind="success"] {
+      color: #24623b;
+    }
+
+    .csvc-section {
+      margin-top: 20px;
+    }
+
+    .csvc-section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .csvc-section-head h2 {
+      margin: 0;
+    }
+
+    .csvc-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .csvc-stat {
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid var(--csvc-border);
+      border-radius: 10px;
+      background: var(--csvc-soft);
+    }
+
+    .csvc-stat-label {
+      display: block;
+      color: var(--csvc-muted);
+      font-size: .82rem;
+    }
+
+    .csvc-stat-value {
+      display: block;
+      margin-top: 4px;
+      font-size: clamp(1.2rem, 2vw, 1.65rem);
+      font-weight: 800;
+      line-height: 1.15;
+      font-variant-numeric: tabular-nums;
+      overflow-wrap: anywhere;
+    }
+
+    .csvc-results-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--csvc-border);
+      border-radius: 10px;
+      background: var(--csvc-soft);
+      font-size: .9rem;
+    }
+
+    .csvc-issue-list {
+      display: grid;
+      gap: 8px;
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .csvc-issue-list li {
+      padding: 10px 12px;
+      border: 1px solid var(--csvc-border);
+      border-radius: 9px;
+      background: #fff;
+      overflow-wrap: anywhere;
+    }
+
+    .csvc-issue-list li[data-severity="warning"] {
+      border-color: #eed5a6;
+      background: #fffaf0;
+    }
+
+    .csvc-issue-list li[data-severity="info"] {
+      border-color: #cbdcf4;
+      background: #f5f9ff;
+    }
+
+    .csvc-table-wrap {
+      max-width: 100%;
+      overflow: auto;
+      border: 1px solid var(--csvc-border);
+      border-radius: 10px;
+    }
+
+    .csvc-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: .86rem;
+    }
+
+    .csvc-table th,
+    .csvc-table td {
+      min-width: 115px;
+      max-width: 320px;
+      padding: 9px 11px;
+      border-bottom: 1px solid var(--csvc-border);
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .csvc-table th {
+      background: var(--csvc-soft);
+      font-weight: 750;
+    }
+
+    .csvc-table td {
+      color: #364252;
+    }
+
+    .csvc-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .csvc-empty {
+      padding: 15px;
+      border: 1px dashed var(--csvc-border);
+      border-radius: 10px;
+      color: var(--csvc-muted);
+      font-size: .91rem;
+    }
+
+    .csvc-article p,
+    .csvc-article li {
+      color: #354252;
+    }
+
+    .csvc-article li + li {
+      margin-top: 7px;
+    }
+
+    .csvc-faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--csvc-border);
+    }
+
+    .csvc-faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .csvc-faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .csvc-faq details p {
+      margin: 9px 0 0;
+      color: var(--csvc-muted);
+    }
+
+    .csvc-privacy-note {
+      padding: 12px 14px;
+      border-left: 3px solid #c9d6e8;
+      background: var(--csvc-soft);
+      color: var(--csvc-muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 820px) {
+      .csvc-input-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .csvc-stat-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 500px) {
+      .csvc-page {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .csvc-options-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .csvc-stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .csvc-toolbar > .csvc-button {
+        flex: 1 1 100%;
+      }
+
+      .csvc-table th,
+      .csvc-table td {
+        padding: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .csvc-page *,
+      .csvc-page *::before,
+      .csvc-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="csvc-page">
+  <nav class="csvc-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>CSV Cleaner &amp; Validator</span>
+  </nav>
+
+  <header class="csvc-header">
+    <h1>CSV Cleaner &amp; Validator Online</h1>
+    <p>
+      Clean messy CSV files, remove duplicate records, trim extra spaces,
+      remove blank rows, review inconsistent columns, and export a cleaned file.
+      Use it for spreadsheet exports, contact lists and structured data.
+    </p>
+
+    <div class="csvc-pills">
+      <span class="csvc-pill">Runs in your browser</span>
+      <span class="csvc-pill">CSV and TSV input</span>
+      <span class="csvc-pill">Cleaning report included</span>
+    </div>
+  </header>
+
+  <section class="csvc-card" aria-labelledby="inputHeading">
+    <h2 id="inputHeading">1. Add your CSV data</h2>
+
+    <div class="csvc-upload" id="uploadZone">
+      <strong>Drop your CSV or TSV file here</strong>
+      <p>Or choose a file from your device. Maximum file size: 15 MB.</p>
+
+      <input
+        type="file"
+        id="fileInput"
+        accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values,text/plain"
+        hidden
+      >
+
+      <button type="button" class="csvc-button csvc-button-primary" id="chooseFileBtn">
+        Choose CSV file
+      </button>
+
+      <div class="csvc-file-note" id="fileLabel">
+        You can also paste CSV text into the box below.
+      </div>
+    </div>
+
+    <div class="csvc-field" style="margin-top:16px">
+      <label for="csvInput">CSV input</label>
+      <textarea
+        id="csvInput"
+        spellcheck="false"
+        autocomplete="off"
+        autocapitalize="off"
+        placeholder="Name,Email,City&#10;Alice,alice@example.com,Kathmandu&#10;Bob,bob@example.com,Pokhara&#10;Bob,bob@example.com,Pokhara"
+      ></textarea>
+    </div>
+
+    <div class="csvc-toolbar">
+      <button class="csvc-button" type="button" id="sampleBtn">Load sample</button>
+      <button class="csvc-button" type="button" id="clearInputBtn">Clear input</button>
+      <span class="csvc-spacer"></span>
+      <span class="csvc-muted" id="inputStats">No data processed yet.</span>
+    </div>
+
+    <hr class="csvc-divider">
+
+    <h3>2. Configure cleaning rules</h3>
+
+    <div class="csvc-input-grid">
+      <div class="csvc-field">
+        <label for="inputDelimiter">Input delimiter</label>
+        <select id="inputDelimiter">
+          <option value="auto">Detect automatically</option>
+          <option value=",">Comma (,)</option>
+          <option value=";">Semicolon (;)</option>
+          <option value="tab">Tab (TSV)</option>
+          <option value="|">Pipe (|)</option>
+        </select>
+      </div>
+
+      <div class="csvc-field">
+        <label for="outputDelimiter">Output delimiter</label>
+        <select id="outputDelimiter">
+          <option value="same">Use detected input delimiter</option>
+          <option value=",">Comma (,)</option>
+          <option value=";">Semicolon (;)</option>
+          <option value="tab">Tab (TSV)</option>
+          <option value="|">Pipe (|)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="csvc-options-grid" style="margin-top:14px">
+      <label class="csvc-option">
+        <input type="checkbox" id="trimCells" checked>
+        <span>
+          <strong>Trim cell whitespace</strong>
+          <small>Remove leading and trailing spaces in each cell.</small>
+        </span>
+      </label>
+
+      <label class="csvc-option">
+        <input type="checkbox" id="removeBlankRows" checked>
+        <span>
+          <strong>Remove blank rows</strong>
+          <small>Drop rows whose cells are all empty or whitespace.</small>
+        </span>
+      </label>
+
+      <label class="csvc-option">
+        <input type="checkbox" id="removeDuplicates" checked>
+        <span>
+          <strong>Remove duplicate rows</strong>
+          <small>Keep the first occurrence of each matching row across all columns.</small>
+        </span>
+      </label>
+
+      <label class="csvc-option">
+        <input type="checkbox" id="ignoreCase">
+        <span>
+          <strong>Ignore letter case in duplicates</strong>
+          <small>For example, “Kathmandu” and “kathmandu” can match.</small>
+        </span>
+      </label>
+
+      <label class="csvc-option">
+        <input type="checkbox" id="hasHeader" checked>
+        <span>
+          <strong>First row contains column names</strong>
+          <small>Keep the first row as headers instead of treating it as data.</small>
+        </span>
+      </label>
+
+      <label class="csvc-option">
+        <input type="checkbox" id="normalizeHeaders">
+        <span>
+          <strong>Normalize column names</strong>
+          <small>Convert headers to lowercase snake_case and make duplicates unique.</small>
+        </span>
+      </label>
+    </div>
+
+    <div class="csvc-toolbar">
+      <button type="button" class="csvc-button csvc-button-primary" id="cleanBtn">
+        Analyze and clean CSV
+      </button>
+      <span class="csvc-muted">Review the result before downloading.</span>
+    </div>
+
+    <p class="csvc-status" id="statusMessage" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="csvc-card csvc-section" id="resultsSection" hidden>
+    <div class="csvc-section-head">
+      <h2>Cleaning results</h2>
+      <span class="csvc-muted" id="resultsLabel"></span>
+    </div>
+
+    <div class="csvc-stat-grid">
+      <div class="csvc-stat">
+        <span class="csvc-stat-label">Rows before</span>
+        <span class="csvc-stat-value" id="statBefore">0</span>
+      </div>
+      <div class="csvc-stat">
+        <span class="csvc-stat-label">Rows after</span>
+        <span class="csvc-stat-value" id="statAfter">0</span>
+      </div>
+      <div class="csvc-stat">
+        <span class="csvc-stat-label">Duplicates removed</span>
+        <span class="csvc-stat-value" id="statDuplicates">0</span>
+      </div>
+      <div class="csvc-stat">
+        <span class="csvc-stat-label">Blank rows removed</span>
+        <span class="csvc-stat-value" id="statBlanks">0</span>
+      </div>
+      <div class="csvc-stat">
+        <span class="csvc-stat-label">Irregular rows</span>
+        <span class="csvc-stat-value" id="statIrregular">0</span>
+      </div>
+    </div>
+
+    <div class="csvc-results-note" id="resultsNote"></div>
+
+    <h3 style="margin-top:18px">Validation findings</h3>
+    <ul class="csvc-issue-list" id="issueList"></ul>
+
+    <div class="csvc-toolbar">
+      <button class="csvc-button csvc-button-primary" type="button" id="downloadCsvBtn">
+        Download cleaned CSV
+      </button>
+      <button class="csvc-button" type="button" id="copyCsvBtn">
+        Copy cleaned CSV
+      </button>
+      <button class="csvc-button" type="button" id="downloadReportBtn">
+        Download quality report
+      </button>
+    </div>
+  </section>
+
+  <section class="csvc-card csvc-section" id="previewSection" hidden>
+    <div class="csvc-section-head">
+      <h2>Cleaned data preview</h2>
+      <span class="csvc-muted" id="previewLabel"></span>
+    </div>
+
+    <p class="csvc-muted">
+      The preview shows only the first 15 data rows and up to 12 columns.
+      The downloaded file retains all processed rows and columns.
+    </p>
+
+    <div class="csvc-table-wrap" id="previewWrap">
+      <table class="csvc-table">
+        <thead id="previewHead"></thead>
+        <tbody id="previewBody"></tbody>
+      </table>
+    </div>
+
+    <p class="csvc-muted" style="margin-top:10px" id="previewNote"></p>
+  </section>
+
+  <section class="csvc-card csvc-section csvc-article">
+    <h2>What does a CSV cleaner do?</h2>
+    <p>
+      A CSV cleaner helps make a comma-separated values file more consistent before you
+      import it into a spreadsheet, database, CRM, reporting pipeline or another application.
+      CSV files often need a little preparation after being exported from multiple systems.
+    </p>
+
+    <h3>Common CSV data problems</h3>
+    <ul>
+      <li><strong>Whitespace:</strong> Extra spaces can cause two visually similar names or IDs to be treated differently.</li>
+      <li><strong>Duplicate records:</strong> Repeated rows can inflate counts or create duplicate entries during an import.</li>
+      <li><strong>Blank rows:</strong> Empty lines may cause problems for some downstream workflows.</li>
+      <li><strong>Inconsistent columns:</strong> Some rows contain fewer or more values than the widest row.</li>
+      <li><strong>Messy headers:</strong> Blank, repeated or inconsistent column names can make data mapping harder.</li>
+    </ul>
+
+    <h3>How to clean a CSV file</h3>
+    <ol>
+      <li>Upload a CSV or TSV file, or paste the data into the input box.</li>
+      <li>Set the delimiter or use automatic detection.</li>
+      <li>Select the cleaning rules appropriate for your data.</li>
+      <li>Run the cleaner and review the validation findings.</li>
+      <li>Inspect the preview, download the cleaned file, and check it in your destination application.</li>
+    </ol>
+
+    <h3>How duplicate removal works</h3>
+    <p>
+      Duplicate removal compares complete data rows. If two rows match according to the
+      selected comparison settings, the first row is kept and later matching rows are removed.
+      When case-insensitive comparison is enabled, capitalization differences are ignored.
+    </p>
+    <p>
+      This is not the same as matching only an email address or customer ID. If two rows contain
+      the same email but different names or other fields, this tool treats them as different
+      records. Review your requirements before removing production data.
+    </p>
+
+    <h3>What CSV validation can and cannot tell you</h3>
+    <p>
+      This tool can flag structural issues such as parser warnings, uneven row widths, repeated
+      headers, blank values and duplicate rows. It cannot determine whether every email address
+      exists, whether a customer record is genuine, or whether a value is semantically correct
+      for your business. A structurally consistent CSV can still contain inaccurate data.
+    </p>
+
+    <div class="csvc-privacy-note">
+      <strong>Privacy:</strong> this page reads and processes your input in the browser.
+      It does not send the CSV content to this website. The parsing library is loaded from a
+      CDN, and browser memory limitations may affect very large files. For sensitive data,
+      use a trusted device and verify the downloaded output before sharing it.
+    </div>
+  </section>
+
+  <section class="csvc-card csvc-section csvc-faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>How do I clean a CSV file online?</summary>
+      <p>
+        Upload a file or paste CSV content, select your cleaning settings, and choose
+        “Analyze and clean CSV.” Review the report and preview before exporting the result.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can this tool remove duplicate rows?</summary>
+      <p>
+        Yes. It compares complete rows and keeps the first occurrence. Optional case-insensitive
+        comparison ignores differences in capitalization, but it does not deduplicate by just one
+        selected column.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does it remove empty rows and trim spaces?</summary>
+      <p>
+        Yes. Both options are enabled by default. You can switch them off if the spaces or blank
+        rows are meaningful to your data.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does this tool upload my CSV file?</summary>
+      <p>
+        The tool processes your pasted or selected data in your browser and does not send the
+        CSV content to this website. The CSV parser is loaded from a CDN.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I clean a semicolon-separated or tab-separated file?</summary>
+      <p>
+        Yes. You can select automatic delimiter detection or explicitly choose comma, semicolon,
+        tab or pipe as the input delimiter. Output delimiter settings are independent.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why are there irregular rows in the report?</summary>
+      <p>
+        Some rows have a different number of fields from the widest row. The tool preserves
+        existing values and pads shorter rows with empty cells so the exported table is
+        rectangular. Review those rows before using the output.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does validation guarantee that my CSV is correct?</summary>
+      <p>
+        No. It checks several common structural and consistency problems, but it does not
+        validate all business rules, every possible CSV dialect, or the factual accuracy of
+        your data.
+      </p>
+    </details>
+  </section>
+
+  <p class="csvc-muted csvc-section">
+    Explore more tools on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.7.0/papaparse.min.js"></script>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_FILE_BYTES = 15 * 1024 * 1024;
+  const MAX_PREVIEW_ROWS = 15;
+  const MAX_PREVIEW_COLUMNS = 12;
+  const MAX_REPORT_ISSUES = 100;
+
+  const $ = id => document.getElementById(id);
+
+  const csvInput = $("csvInput");
+  const fileInput = $("fileInput");
+  const uploadZone = $("uploadZone");
+  const fileLabel = $("fileLabel");
+  const statusMessage = $("statusMessage");
+  const resultsSection = $("resultsSection");
+  const previewSection = $("previewSection");
+  const issueList = $("issueList");
+
+  let sourceFilename = "cleaned-data.csv";
+  let lastResult = null;
+  let inputRevision = 0;
+
+  const delimiterMap = {
+    auto: "",
+    ",": ",",
+    ";": ";",
+    tab: "\t",
+    "|": "|"
+  };
+
+  function setStatus(message, kind = "") {
+    statusMessage.textContent = message;
+    statusMessage.dataset.kind = kind;
+  }
+
+  function formatNumber(value) {
+    return Number(value || 0).toLocaleString();
+  }
+
+  function delimiterLabel(delimiter) {
+    if (delimiter === "\t") return "Tab";
+    if (delimiter === ",") return "Comma";
+    if (delimiter === ";") return "Semicolon";
+    if (delimiter === "|") return "Pipe";
+    return "Unknown";
+  }
+
+  function outputFilename(base, extension) {
+    const safeBase = String(base || "cleaned-data")
+      .replace(/\.[^.]+$/, "")
+      .replace(/[^\p{L}\p{N}._-]+/gu, "-")
+      .replace(/-+/g, "-")
+      .replace(/^[.-]+|[.-]+$/g, "")
+      .slice(0, 90);
+
+    return `${safeBase || "cleaned-data"}.${extension}`;
+  }
+
+  function resetResultState() {
+    lastResult = null;
+    resultsSection.hidden = true;
+    previewSection.hidden = true;
+    $("downloadCsvBtn").disabled = true;
+    $("copyCsvBtn").disabled = true;
+    $("downloadReportBtn").disabled = true;
+  }
+
+  function markDirty() {
+    inputRevision++;
+    resetResultState();
+
+    if (csvInput.value.trim()) {
+      setStatus("Input or settings changed. Run the cleaner again to refresh the results.");
+    } else {
+      setStatus("");
+    }
+  }
+
+  function getStringCell(value) {
+    if (value === null || value === undefined) return "";
+    return String(value);
+  }
+
+  function rowIsBlank(row) {
+    return row.every(value => getStringCell(value).trim() === "");
+  }
+
+  function normalizeHeader(header, index) {
+    let result = getStringCell(header)
+      .trim()
+      .toLowerCase();
+
+    // Use Unicode letter/number matching so non-English column labels are not
+    // unnecessarily removed during normalization.
+    result = result
+      .replace(/[^\p{L}\p{N}]+/gu, "_")
+      .replace(/^_+|_+$/g, "");
+
+    return result || `column_${index + 1}`;
+  }
+
+  function makeUniqueHeaders(headers) {
+    const seen = new Map();
+
+    return headers.map((header, index) => {
+      const base = normalizeHeader(header, index);
+      const count = (seen.get(base) || 0) + 1;
+      seen.set(base, count);
+
+      return count === 1 ? base : `${base}_${count}`;
+    });
+  }
+
+  function findDuplicateHeaders(headers) {
+    const positions = new Map();
+
+    headers.forEach((header, index) => {
+      const value = getStringCell(header).trim().toLowerCase();
+      if (!value) return;
+
+      if (!positions.has(value)) positions.set(value, []);
+      positions.get(value).push(index + 1);
+    });
+
+    return Array.from(positions.entries())
+      .filter(([, indexes]) => indexes.length > 1)
+      .map(([name, indexes]) => ({
+        name,
+        indexes
+      }));
+  }
+
+  function rowsToText(rows, delimiter) {
+    return Papa.unparse(rows, {
+      delimiter,
+      newline: "\r\n",
+      quotes: false,
+      skipEmptyLines: false
+    });
+  }
+
+  function makeIssue(severity, message) {
+    return { severity, message };
+  }
+
+  function addIssue(issues, severity, message) {
+    if (issues.length < MAX_REPORT_ISSUES) {
+      issues.push(makeIssue(severity, message));
+    }
+  }
+
+  function analyzeAndClean() {
+    if (!window.Papa || typeof window.Papa.parse !== "function") {
+      setStatus(
+        "The CSV parser did not load. Check your internet connection, reload the page and try again.",
+        "error"
+      );
+      return;
+    }
+
+    let sourceText = csvInput.value;
+
+    // Remove a UTF-8 BOM only at the very start of the input text.
+    if (sourceText.charCodeAt(0) === 0xFEFF) {
+      sourceText = sourceText.slice(1);
+    }
+
+    if (!sourceText.trim()) {
+      resetResultState();
+      setStatus("Enter CSV data or choose a CSV file first.", "error");
+      return;
+    }
+
+    const revisionAtStart = inputRevision;
+    setStatus("Analyzing CSV structure and applying selected cleaning rules…");
+
+    try {
+      const delimiterChoice = $("inputDelimiter").value;
+      const parseDelimiter = delimiterMap[delimiterChoice] ?? "";
+
+      const parsed = Papa.parse(sourceText, {
+        delimiter: parseDelimiter,
+        dynamicTyping: false,
+        skipEmptyLines: false,
+        quoteChar: '"',
+        escapeChar: '"',
+        comments: false
+      });
+
+      if (revisionAtStart !== inputRevision) return;
+
+      if (!parsed.data || !parsed.data.length) {
+        resetResultState();
+        setStatus("No CSV rows could be read from this input.", "error");
+        return;
+      }
+
+      let inputRows = parsed.data.map(row => {
+        if (!Array.isArray(row)) row = [row];
+        return row.map(getStringCell);
+      });
+
+      const hasHeader = $("hasHeader").checked;
+      const trimCells = $("trimCells").checked;
+      const removeBlankRows = $("removeBlankRows").checked;
+      const removeDuplicates = $("removeDuplicates").checked;
+      const ignoreCase = $("ignoreCase").checked;
+      const normalizeHeaders = $("normalizeHeaders").checked;
+
+      const originalRowWidths = inputRows.map(row => row.length);
+      const widestRow = Math.max(0, ...originalRowWidths);
+      const expectedColumns = Math.max(1, widestRow);
+
+      const irregularRows = [];
+      originalRowWidths.forEach((width, index) => {
+        if (width !== expectedColumns) {
+          irregularRows.push({
+            rowNumber: index + 1,
+            expectedColumns,
+            actualColumns: width
+          });
+        }
+      });
+
+      const originalBodyRows = hasHeader
+        ? inputRows.slice(1)
+        : inputRows.slice();
+
+      const rowsBefore = originalBodyRows.length;
+      const blankRowsBefore = originalBodyRows.filter(rowIsBlank).length;
+
+      // Preserve all actual field values and pad shorter records to the widest
+      // observed row; no existing fields are truncated.
+      inputRows = inputRows.map(row => {
+        const next = row.slice(0, expectedColumns);
+        while (next.length < expectedColumns) next.push("");
+        return next;
+      });
+
+      const originalHeader = hasHeader
+        ? inputRows[0].slice()
+        : [];
+
+      const duplicateHeadersBefore = hasHeader
+        ? findDuplicateHeaders(originalHeader)
+        : [];
+
+      const blankHeadersBefore = hasHeader
+        ? originalHeader.filter(value => value.trim() === "").length
+        : 0;
+
+      let bodyRows = hasHeader
+        ? inputRows.slice(1)
+        : inputRows.slice();
+
+      if (trimCells) {
+        bodyRows = bodyRows.map(row => row.map(value => value.trim()));
+      }
+
+      const blankRowsRemoved = removeBlankRows
+        ? bodyRows.filter(rowIsBlank).length
+        : 0;
+
+      if (removeBlankRows) {
+        bodyRows = bodyRows.filter(row => !rowIsBlank(row));
+      }
+
+      let duplicatesRemoved = 0;
+
+      if (removeDuplicates) {
+        const seen = new Set();
+        const uniqueRows = [];
+
+        bodyRows.forEach(row => {
+          const comparisonRow = ignoreCase
+            ? row.map(value => value.toLowerCase())
+            : row;
+
+          const key = JSON.stringify(comparisonRow);
+
+          if (seen.has(key)) {
+            duplicatesRemoved++;
+          } else {
+            seen.add(key);
+            uniqueRows.push(row);
+          }
+        });
+
+        bodyRows = uniqueRows;
+      }
+
+      let headers = originalHeader.slice();
+
+      if (normalizeHeaders && hasHeader) {
+        headers = makeUniqueHeaders(headers);
+      }
+
+      const duplicateHeadersAfter = hasHeader
+        ? findDuplicateHeaders(headers)
+        : [];
+
+      const blankHeadersAfter = hasHeader
+        ? headers.filter(value => value.trim() === "").length
+        : 0;
+
+      const outputRows = hasHeader
+        ? [headers, ...bodyRows]
+        : bodyRows;
+
+      const dataRowsWithEmptyCells = bodyRows.filter(row =>
+        row.some(value => getStringCell(value).trim() === "")
+      ).length;
+
+      const outputDelimiterChoice = $("outputDelimiter").value;
+      const detectedDelimiter = parsed.meta && parsed.meta.delimiter
+        ? parsed.meta.delimiter
+        : ",";
+
+      const outputDelimiter = outputDelimiterChoice === "same"
+        ? detectedDelimiter
+        : (delimiterMap[outputDelimiterChoice] ?? ",");
+
+      const parserErrors = (parsed.errors || []).map(error => ({
+        row: Number.isFinite(error.row) ? error.row + 1 : null,
+        code: getStringCell(error.code || "ParseWarning"),
+        message: getStringCell(error.message || "CSV parser warning")
+      }));
+
+      const issues = [];
+
+      if (parserErrors.length) {
+        addIssue(
+          issues,
+          "warning",
+          `${formatNumber(parserErrors.length)} CSV parser warning(s) were reported. Review the report before relying on the output.`
+        );
+      }
+
+      if (irregularRows.length) {
+        addIssue(
+          issues,
+          "warning",
+          `${formatNumber(irregularRows.length)} row(s) have a different number of fields from the widest row. Short rows are padded with empty fields; existing field values are preserved.`
+        );
+      }
+
+      if (blankHeadersBefore) {
+        addIssue(
+          issues,
+          "warning",
+          `${formatNumber(blankHeadersBefore)} blank header cell(s) were found in the original header row.`
+        );
+      }
+
+      if (duplicateHeadersBefore.length) {
+        addIssue(
+          issues,
+          "warning",
+          `${formatNumber(duplicateHeadersBefore.length)} repeated header name(s) were found before cleaning.`
+        );
+      }
+
+      if (normalizeHeaders && duplicateHeadersAfter.length) {
+        addIssue(
+          issues,
+          "warning",
+          "Some normalized header names still need review."
+        );
+      }
+
+      if (blankHeadersAfter) {
+        addIssue(
+          issues,
+          "warning",
+          `${formatNumber(blankHeadersAfter)} blank header name(s) remain in the cleaned output. Enable header normalization to generate names for blank columns.`
+        );
+      }
+
+      if (dataRowsWithEmptyCells) {
+        addIssue(
+          issues,
+          "info",
+          `${formatNumber(dataRowsWithEmptyCells)} remaining data row(s) contain at least one blank cell. Blank cells are reported, not automatically removed.`
+        );
+      }
+
+      if (blankRowsRemoved) {
+        addIssue(
+          issues,
+          "info",
+          `${formatNumber(blankRowsRemoved)} completely blank data row(s) were removed.`
+        );
+      }
+
+      if (duplicatesRemoved) {
+        addIssue(
+          issues,
+          "info",
+          `${formatNumber(duplicatesRemoved)} duplicate row(s) were removed. The first occurrence of each matching row was kept.`
+        );
+      }
+
+      if (
+        !issues.length &&
+        !parserErrors.length &&
+        !irregularRows.length &&
+        !duplicateHeadersBefore.length &&
+        !blankHeadersBefore &&
+        !dataRowsWithEmptyCells
+      ) {
+        addIssue(
+          issues,
+          "info",
+          "No issues were detected by the enabled checks. This is not a guarantee of business-rule or factual correctness."
+        );
+      }
+
+      const summary = {
+        sourceFilename,
+        processedAt: new Date().toISOString(),
+        rowsBefore,
+        rowsAfter: bodyRows.length,
+        duplicatesRemoved,
+        blankRowsRemoved,
+        irregularRowCount: irregularRows.length,
+        irregularRows: irregularRows.slice(0, MAX_REPORT_ISSUES),
+        blankHeadersBefore,
+        blankHeadersAfter,
+        duplicateHeadersBefore,
+        duplicateHeadersAfter,
+        dataRowsWithEmptyCells,
+        parserErrors: parserErrors.slice(0, MAX_REPORT_ISSUES),
+        parseWarningCount: parserErrors.length,
+        inputDelimiter: detectedDelimiter,
+        outputDelimiter,
+        hasHeader,
+        options: {
+          trimCells,
+          removeBlankRows,
+          removeDuplicates,
+          ignoreCase,
+          normalizeHeaders
+        },
+        cleanedRowCount: bodyRows.length,
+        cleanedColumnCount: expectedColumns,
+        issues
+      };
+
+      lastResult = {
+        sourceText,
+        rows: outputRows,
+        headers,
+        bodyRows,
+        hasHeader,
+        outputDelimiter,
+        summary,
+        generatedCsv: null
+      };
+
+      renderResults(lastResult);
+      setStatus(
+        `Done. Processed ${formatNumber(rowsBefore)} data row(s); ${formatNumber(bodyRows.length)} remain after cleaning.`,
+        "success"
+      );
+
+      $("downloadCsvBtn").disabled = false;
+      $("copyCsvBtn").disabled = false;
+      $("downloadReportBtn").disabled = false;
+    } catch (error) {
+      resetResultState();
+      setStatus(
+        error && error.message
+          ? `Could not process this CSV: ${error.message}`
+          : "Could not process this CSV. Check the file format and try again.",
+        "error"
+      );
+    }
+  }
+
+  function renderResults(result) {
+    const summary = result.summary;
+
+    resultsSection.hidden = false;
+    previewSection.hidden = false;
+
+    $("resultsLabel").textContent =
+      `${formatNumber(summary.cleanedRowCount)} cleaned data row(s)`;
+
+    $("statBefore").textContent = formatNumber(summary.rowsBefore);
+    $("statAfter").textContent = formatNumber(summary.rowsAfter);
+    $("statDuplicates").textContent = formatNumber(summary.duplicatesRemoved);
+    $("statBlanks").textContent = formatNumber(summary.blankRowsRemoved);
+    $("statIrregular").textContent = formatNumber(summary.irregularRowCount);
+
+    $("inputStats").textContent =
+      `${formatNumber(summary.rowsBefore)} data row(s) before cleaning`;
+
+    const headerText = summary.hasHeader ? "Header row included" : "No header row";
+    $("resultsNote").textContent =
+      `${headerText}. Detected input separator: ${delimiterLabel(summary.inputDelimiter)}. ` +
+      `Output separator: ${delimiterLabel(summary.outputDelimiter)}. ` +
+      `No data rows were deleted except those removed by the selected blank-row and duplicate-row settings.`;
+
+    issueList.replaceChildren();
+
+    summary.issues.forEach(issue => {
+      const li = document.createElement("li");
+      li.dataset.severity = issue.severity;
+      li.textContent = issue.message;
+      issueList.appendChild(li);
+    });
+
+    if (summary.issues.length === 0) {
+      const li = document.createElement("li");
+      li.textContent = "No findings.";
+      issueList.appendChild(li);
+    }
+
+    renderPreview(result);
+  }
+
+  function renderPreview(result) {
+    const head = $("previewHead");
+    const body = $("previewBody");
+    head.replaceChildren();
+    body.replaceChildren();
+
+    const allRows = result.rows;
+    const allColumns = Math.max(0, ...allRows.map(row => row.length));
+    const shownColumns = Math.min(allColumns, MAX_PREVIEW_COLUMNS);
+
+    const headers = result.hasHeader
+      ? (result.headers || [])
+      : Array.from({ length: allColumns }, (_, index) => `Column ${index + 1}`);
+
+    const headRow = document.createElement("tr");
+
+    for (let column = 0; column < shownColumns; column++) {
+      const th = document.createElement("th");
+      th.scope = "col";
+      th.textContent = getStringCell(headers[column]) || `Column ${column + 1}`;
+      headRow.appendChild(th);
+    }
+
+    head.appendChild(headRow);
+
+    const dataRows = result.hasHeader
+      ? allRows.slice(1)
+      : allRows.slice();
+
+    const visibleRows = dataRows.slice(0, MAX_PREVIEW_ROWS);
+
+    visibleRows.forEach(row => {
+      const tr = document.createElement("tr");
+
+      for (let column = 0; column < shownColumns; column++) {
+        const td = document.createElement("td");
+        let value = getStringCell(row[column]);
+
+        // Bound the displayed text length to keep very large cells from
+        // making the preview unmanageably tall. Exports remain untruncated.
+        if (value.length > 600) value = value.slice(0, 600) + "…";
+
+        td.textContent = value;
+        tr.appendChild(td);
+      }
+
+      body.appendChild(tr);
+    });
+
+    $("previewLabel").textContent =
+      `${formatNumber(dataRows.length)} data row(s), ${formatNumber(allColumns)} column(s)`;
+
+    const notes = [];
+    if (dataRows.length > MAX_PREVIEW_ROWS) {
+      notes.push(`Showing the first ${MAX_PREVIEW_ROWS} rows.`);
+    }
+    if (allColumns > MAX_PREVIEW_COLUMNS) {
+      notes.push(`Showing the first ${MAX_PREVIEW_COLUMNS} columns.`);
+    }
+    if (!notes.length) {
+      notes.push("All rows and columns are included in the preview.");
+    }
+
+    $("previewNote").textContent = notes.join(" ");
+  }
+
+  function getCleanedCsv() {
+    if (!lastResult) return "";
+    if (lastResult.generatedCsv !== null) return lastResult.generatedCsv;
+
+    try {
+      lastResult.generatedCsv = rowsToText(
+        lastResult.rows,
+        lastResult.outputDelimiter
+      );
+      return lastResult.generatedCsv;
+    } catch (error) {
+      setStatus("Could not generate the cleaned CSV output.", "error");
+      return "";
+    }
+  }
+
+  function downloadBlob(filename, content, mimeType) {
+    const blob = content instanceof Blob
+      ? content
+      : new Blob([content], { type: mimeType });
+
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1200);
+  }
+
+  function downloadCleanedCsv() {
+    if (!lastResult) return;
+
+    const csv = getCleanedCsv();
+    if (!csv && lastResult.rows.length) {
+      setStatus("The CSV output could not be generated.", "error");
+      return;
+    }
+
+    // Add a UTF-8 BOM on export for improved recognition of UTF-8 in some
+    // spreadsheet applications. This does not change the internal CSV data.
+    const output = "\uFEFF" + csv;
+    const filename = outputFilename(sourceFilename, "csv");
+
+    downloadBlob(
+      filename,
+      output,
+      "text/csv;charset=utf-8"
+    );
+
+    setStatus(`Download started: ${filename}`, "success");
+  }
+
+  function downloadQualityReport() {
+    if (!lastResult) return;
+
+    const report = {
+      tool: "ConvertToToolsOnline CSV Cleaner & Validator",
+      ...lastResult.summary,
+      notes: [
+        "Validation checks are structural and do not guarantee factual correctness.",
+        "Rows with different field counts are padded with empty cells; existing values are not truncated.",
+        "Duplicate matching compares complete rows, not a selected unique-ID column.",
+        "CSV output uses the selected delimiter."
+      ]
+    };
+
+    const filename = outputFilename(sourceFilename, "quality-report.json");
+
+    downloadBlob(
+      filename,
+      JSON.stringify(report, null, 2),
+      "application/json;charset=utf-8"
+    );
+
+    setStatus("Data-quality report prepared for download.", "success");
+  }
+
+  async function copyCleanedCsv() {
+    if (!lastResult) return;
+
+    const csv = getCleanedCsv();
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(csv);
+      } else {
+        fallbackCopy(csv);
+      }
+
+      setStatus("Cleaned CSV copied to the clipboard.", "success");
+    } catch (error) {
+      try {
+        fallbackCopy(csv);
+        setStatus("Cleaned CSV copied to the clipboard.", "success");
+      } catch (fallbackError) {
+        setStatus("Copy failed. Please download the cleaned CSV instead.", "error");
+      }
+    }
+  }
+
+  function fallbackCopy(value) {
+    const textarea = document.createElement("textarea");
+
+    textarea.value = value;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    textarea.style.pointerEvents = "none";
+
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const success = document.execCommand("copy");
+    textarea.remove();
+
+    if (!success) {
+      throw new Error("Clipboard copy failed.");
+    }
+  }
+
+  async function readFile(file) {
+    if (!file) return;
+
+    if (file.size > MAX_FILE_BYTES) {
+      setStatus("This file is larger than the 15 MB limit.", "error");
+      return;
+    }
+
+    const isAllowedType =
+      !file.type ||
+      file.type === "text/plain" ||
+      file.type === "text/csv" ||
+      file.type === "application/vnd.ms-excel" ||
+      file.type === "text/tab-separated-values" ||
+      /\.(csv|tsv|txt)$/i.test(file.name);
+
+    if (!isAllowedType) {
+      setStatus("Choose a CSV, TSV or plain-text delimited file.", "error");
+      return;
+    }
+
+    try {
+      const text = await file.text();
+
+      if (text.length > 0 && text.includes("\u0000")) {
+        setStatus(
+          "The file appears to contain binary data instead of ordinary CSV text.",
+          "error"
+        );
+        return;
+      }
+
+      csvInput.value = text;
+      sourceFilename = file.name || "cleaned-data.csv";
+      fileLabel.textContent =
+        `${sourceFilename} · ${file.size.toLocaleString()} bytes loaded into the input box`;
+
+      markDirty();
+      setStatus("File loaded. Review your settings and run the cleaner.", "success");
+    } catch (error) {
+      setStatus("Could not read this file. Try another CSV or TSV file.", "error");
+    }
+  }
+
+  function loadSample() {
+    csvInput.value = [
+      "Name,Email,City",
+      '" Alice ","alice@example.com","Kathmandu "',
+      "Bob,bob@example.com,Pokhara",
+      "Bob,bob@example.com,Pokhara",
+      "Carol,carol@example.com,Lalitpur",
+      ",,",
+      "Dinesh,dinesh@example.com",
+      '"Eva, Rai",eva@example.com,Bhaktapur'
+    ].join("\n");
+
+    sourceFilename = "sample-data.csv";
+    fileLabel.textContent = "Example CSV data loaded.";
+    markDirty();
+    setStatus("Sample loaded. Select “Analyze and clean CSV” to try the tool.");
+  }
+
+  function clearInput() {
+    csvInput.value = "";
+    fileInput.value = "";
+    sourceFilename = "cleaned-data.csv";
+    fileLabel.textContent = "You can also paste CSV text into the box below.";
+    $("inputStats").textContent = "No data processed yet.";
+
+    resetResultState();
+    inputRevision++;
+
+    setStatus("");
+  }
+
+  $("chooseFileBtn").addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) readFile(file);
+    fileInput.value = "";
+  });
+
+  $("sampleBtn").addEventListener("click", loadSample);
+  $("clearInputBtn").addEventListener("click", clearInput);
+  $("cleanBtn").addEventListener("click", analyzeAndClean);
+
+  $("downloadCsvBtn").addEventListener("click", downloadCleanedCsv);
+  $("copyCsvBtn").addEventListener("click", copyCleanedCsv);
+  $("downloadReportBtn").addEventListener("click", downloadQualityReport);
+
+  csvInput.addEventListener("input", markDirty);
+
+  [
+    "inputDelimiter",
+    "outputDelimiter",
+    "trimCells",
+    "removeBlankRows",
+    "removeDuplicates",
+    "ignoreCase",
+    "hasHeader",
+    "normalizeHeaders"
+  ].forEach(id => {
+    $(id).addEventListener("change", markDirty);
+  });
+
+  ["dragenter", "dragover"].forEach(name => {
+    uploadZone.addEventListener(name, event => {
+      event.preventDefault();
+      uploadZone.classList.add("is-dragging");
+    });
+  });
+
+  ["dragleave", "drop"].forEach(name => {
+    uploadZone.addEventListener(name, event => {
+      event.preventDefault();
+      uploadZone.classList.remove("is-dragging");
+    });
+  });
+
+  uploadZone.addEventListener("drop", event => {
+    const file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+
+    if (file) readFile(file);
+  });
+
+  // Stop the browser navigating away if a file is dropped elsewhere on the page.
+  window.addEventListener("dragover", event => event.preventDefault());
+
+  window.addEventListener("drop", event => {
+    if (!uploadZone.contains(event.target)) {
+      event.preventDefault();
+    }
+  });
+
+  $("downloadCsvBtn").disabled = true;
+  $("copyCsvBtn").disabled = true;
+  $("downloadReportBtn").disabled = true;
+})();
+</script>
+</body>
+</html>

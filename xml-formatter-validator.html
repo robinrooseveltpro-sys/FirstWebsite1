@@ -1,0 +1,1475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>XML Formatter &amp; Validator Online – Beautify XML</title>
+  <meta name="description" content="Format, beautify, minify and validate XML online. Choose indentation, inspect XML structure and document statistics, and copy or download formatted XML directly from your browser.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/xml-formatter-validator.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="XML Formatter &amp; Validator Online">
+  <meta property="og:description" content="Beautify, minify and check XML for well-formedness with browser-based processing.">
+  <meta property="og:url" content="https://converttotoolsonline.com/xml-formatter-validator.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="XML Formatter &amp; Validator Online">
+  <meta name="twitter:description" content="Format XML, check syntax and download clean output.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "XML Formatter and Validator Online",
+    "url": "https://converttotoolsonline.com/xml-formatter-validator.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based XML formatter, minifier and well-formedness checker with configurable indentation, document statistics and file export.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    .xmlf-page {
+      --xmlf-border: #dfe4eb;
+      --xmlf-muted: #5b6878;
+      --xmlf-accent: #245bcc;
+      --xmlf-soft: #f6f8fb;
+      --xmlf-radius: 14px;
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      color: #17202c;
+      line-height: 1.6;
+    }
+
+    .xmlf-page,
+    .xmlf-page * {
+      box-sizing: border-box;
+    }
+
+    .xmlf-page [hidden] {
+      display: none !important;
+    }
+
+    .xmlf-page input,
+    .xmlf-page select,
+    .xmlf-page textarea,
+    .xmlf-page button {
+      font: inherit;
+    }
+
+    .xmlf-page button {
+      cursor: pointer;
+    }
+
+    .xmlf-page :is(input, select, textarea, button, a):focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .xmlf-page a {
+      color: var(--xmlf-accent);
+    }
+
+    .xmlf-breadcrumb {
+      margin-bottom: 12px;
+      color: var(--xmlf-muted);
+      font-size: .92rem;
+    }
+
+    .xmlf-header {
+      margin-bottom: 22px;
+    }
+
+    .xmlf-header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.55rem);
+      line-height: 1.17;
+      letter-spacing: -.035em;
+    }
+
+    .xmlf-header p {
+      max-width: 840px;
+      margin: 0;
+      color: var(--xmlf-muted);
+    }
+
+    .xmlf-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .xmlf-pill {
+      padding: 5px 10px;
+      border: 1px solid #d0e7d6;
+      border-radius: 999px;
+      background: #eef8f0;
+      color: #285b38;
+      font-size: .84rem;
+    }
+
+    .xmlf-card {
+      min-width: 0;
+      padding: clamp(14px, 2.4vw, 22px);
+      border: 1px solid var(--xmlf-border);
+      border-radius: var(--xmlf-radius);
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .xmlf-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .xmlf-card h3 {
+      margin: 0 0 9px;
+      font-size: 1rem;
+    }
+
+    .xmlf-muted {
+      color: var(--xmlf-muted);
+      font-size: .9rem;
+    }
+
+    .xmlf-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 41px;
+      padding: 9px 14px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #192536;
+      font-weight: 650;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .xmlf-button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .xmlf-button-primary {
+      border-color: var(--xmlf-accent);
+      background: var(--xmlf-accent);
+      color: #fff;
+    }
+
+    .xmlf-button-primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: #fff;
+    }
+
+    .xmlf-button:disabled {
+      cursor: not-allowed;
+      opacity: .48;
+    }
+
+    .xmlf-button-small {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: .85rem;
+    }
+
+    .xmlf-field {
+      min-width: 0;
+    }
+
+    .xmlf-field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 750;
+    }
+
+    .xmlf-field input,
+    .xmlf-field select,
+    .xmlf-field textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 10px 11px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .xmlf-field textarea {
+      min-height: 340px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .85rem;
+      line-height: 1.6;
+      tab-size: 2;
+      overflow-wrap: anywhere;
+      white-space: pre;
+    }
+
+    .xmlf-output {
+      background: #fbfcfe !important;
+    }
+
+    .xmlf-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .xmlf-spacer {
+      flex: 1 1 auto;
+    }
+
+    .xmlf-upload {
+      padding: 17px 13px;
+      border: 2px dashed #b8c6d8;
+      border-radius: 11px;
+      background: #fafcff;
+      text-align: center;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .xmlf-upload.is-dragging {
+      border-color: var(--xmlf-accent);
+      background: #edf4ff;
+    }
+
+    .xmlf-upload strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .xmlf-upload p {
+      margin: 0 0 10px;
+      color: var(--xmlf-muted);
+      font-size: .89rem;
+    }
+
+    .xmlf-options {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 15px;
+    }
+
+    .xmlf-status {
+      min-height: 25px;
+      margin: 11px 0 0;
+      font-size: .91rem;
+      overflow-wrap: anywhere;
+    }
+
+    .xmlf-status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .xmlf-status[data-kind="success"] {
+      color: #24623b;
+    }
+
+    .xmlf-warning {
+      padding: 12px 14px;
+      border: 1px solid #ecd5a6;
+      border-radius: 10px;
+      background: #fff9ed;
+      color: #745016;
+      font-size: .9rem;
+    }
+
+    .xmlf-result {
+      padding: 13px;
+      border: 1px solid var(--xmlf-border);
+      border-radius: 10px;
+      background: var(--xmlf-soft);
+    }
+
+    .xmlf-result[data-kind="valid"] {
+      border-color: #c7e3ce;
+      background: #f0f9f2;
+    }
+
+    .xmlf-result[data-kind="error"] {
+      border-color: #edcaca;
+      background: #fff4f4;
+    }
+
+    .xmlf-result-title {
+      font-weight: 800;
+    }
+
+    .xmlf-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 13px;
+    }
+
+    .xmlf-stat {
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid var(--xmlf-border);
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .xmlf-stat-label {
+      display: block;
+      color: var(--xmlf-muted);
+      font-size: .8rem;
+    }
+
+    .xmlf-stat-value {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.3rem;
+      line-height: 1.2;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .xmlf-section {
+      margin-top: 20px;
+    }
+
+    .xmlf-section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .xmlf-section-head h2 {
+      margin: 0;
+    }
+
+    .xmlf-article p,
+    .xmlf-article li {
+      color: #354252;
+    }
+
+    .xmlf-article li + li {
+      margin-top: 7px;
+    }
+
+    .xmlf-faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--xmlf-border);
+    }
+
+    .xmlf-faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .xmlf-faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .xmlf-faq details p {
+      margin: 9px 0 0;
+      color: var(--xmlf-muted);
+    }
+
+    .xmlf-divider {
+      height: 1px;
+      margin: 18px 0;
+      border: 0;
+      background: var(--xmlf-border);
+    }
+
+    @media (max-width: 820px) {
+      .xmlf-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .xmlf-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 500px) {
+      .xmlf-page {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .xmlf-options {
+        grid-template-columns: 1fr;
+      }
+
+      .xmlf-toolbar > .xmlf-button {
+        flex: 1 1 100%;
+      }
+
+      .xmlf-field textarea {
+        min-height: 260px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .xmlf-page *,
+      .xmlf-page *::before,
+      .xmlf-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="xmlf-page">
+  <nav class="xmlf-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>XML Formatter &amp; Validator</span>
+  </nav>
+
+  <header class="xmlf-header">
+    <h1>XML Formatter &amp; Validator Online</h1>
+    <p>
+      Beautify messy XML, minify formatted documents, and check whether XML is
+      well-formed. Adjust indentation, inspect document statistics, and copy or
+      download your result directly from your browser.
+    </p>
+    <div class="xmlf-pills">
+      <span class="xmlf-pill">Format and minify</span>
+      <span class="xmlf-pill">XML syntax checking</span>
+      <span class="xmlf-pill">No conversion server</span>
+    </div>
+  </header>
+
+  <section class="xmlf-card" aria-labelledby="inputHeading">
+    <h2 id="inputHeading">XML input</h2>
+
+    <div class="xmlf-warning">
+      <strong>Scope:</strong> this tool checks XML well-formedness, not validity against
+      an XSD or DTD schema. For security and predictable browser processing, documents
+      containing a DOCTYPE declaration are not processed by this lightweight formatter.
+      XML syntax, namespaces and document semantics should still be reviewed after formatting.
+    </div>
+
+    <div class="xmlf-field" style="margin-top:15px">
+      <label for="xmlInput">Paste XML</label>
+      <textarea
+        id="xmlInput"
+        spellcheck="false"
+        autocomplete="off"
+        autocapitalize="off"
+        placeholder="Paste your XML document here…"
+      ></textarea>
+    </div>
+
+    <div class="xmlf-upload" id="uploadZone" style="margin-top:12px">
+      <strong>Drop an XML file here</strong>
+      <p>Or choose an .xml, .svg, .rss, .atom or .txt file. Maximum size: 2 MB.</p>
+      <input type="file" id="fileInput" accept=".xml,.svg,.rss,.atom,.txt,application/xml,text/xml,image/svg+xml,text/plain" hidden>
+      <button class="xmlf-button" type="button" id="chooseFileBtn">Choose XML file</button>
+      <div class="xmlf-muted" id="fileLabel" style="margin-top:8px">
+        Input is processed locally in your browser.
+      </div>
+    </div>
+
+    <div class="xmlf-toolbar">
+      <button class="xmlf-button" type="button" id="sampleBtn">Load example</button>
+      <button class="xmlf-button" type="button" id="clearBtn">Clear</button>
+      <span class="xmlf-spacer"></span>
+      <span class="xmlf-muted" id="inputStats">0 characters</span>
+    </div>
+
+    <hr class="xmlf-divider">
+
+    <h3>Formatting options</h3>
+
+    <div class="xmlf-options">
+      <div class="xmlf-field">
+        <label for="indentStyle">Indentation</label>
+        <select id="indentStyle">
+          <option value="2">2 spaces</option>
+          <option value="4" selected>4 spaces</option>
+          <option value="tab">Tab character</option>
+        </select>
+      </div>
+
+      <div class="xmlf-field">
+        <label for="emptyElements">Empty elements</label>
+        <select id="emptyElements">
+          <option value="self" selected>Self-closing tags</option>
+          <option value="pair">Opening and closing tags</option>
+        </select>
+      </div>
+
+      <div class="xmlf-field">
+        <label for="lineEnding">Line endings</label>
+        <select id="lineEnding">
+          <option value="lf" selected>LF (Unix)</option>
+          <option value="crlf">CRLF (Windows)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="xmlf-toolbar">
+      <button type="button" class="xmlf-button xmlf-button-primary" id="formatBtn">Format XML</button>
+      <button type="button" class="xmlf-button" id="minifyBtn">Minify XML</button>
+      <button type="button" class="xmlf-button" id="validateBtn">Validate XML</button>
+      <button type="button" class="xmlf-button" id="useOutputBtn" disabled>Use output as input</button>
+    </div>
+
+    <p class="xmlf-status" id="statusMessage" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="xmlf-card xmlf-section" id="resultSection" hidden>
+    <div class="xmlf-section-head">
+      <h2>XML result</h2>
+      <span class="xmlf-muted" id="resultAction"></span>
+    </div>
+
+    <div class="xmlf-result" id="resultBanner" data-kind="valid">
+      <div class="xmlf-result-title" id="resultTitle">XML is well-formed</div>
+      <div class="xmlf-muted" id="resultDescription" style="margin-top:5px"></div>
+    </div>
+
+    <div class="xmlf-stats">
+      <div class="xmlf-stat">
+        <span class="xmlf-stat-label">Elements</span>
+        <span class="xmlf-stat-value" id="elementCount">0</span>
+      </div>
+      <div class="xmlf-stat">
+        <span class="xmlf-stat-label">Attributes</span>
+        <span class="xmlf-stat-value" id="attributeCount">0</span>
+      </div>
+      <div class="xmlf-stat">
+        <span class="xmlf-stat-label">Input size</span>
+        <span class="xmlf-stat-value" id="inputBytes">0 B</span>
+      </div>
+      <div class="xmlf-stat">
+        <span class="xmlf-stat-label">Output size</span>
+        <span class="xmlf-stat-value" id="outputBytes">0 B</span>
+      </div>
+    </div>
+
+    <div class="xmlf-field" style="margin-top:15px">
+      <div class="xmlf-section-head">
+        <label for="xmlOutput">XML output</label>
+        <span class="xmlf-muted" id="outputStats"></span>
+      </div>
+      <textarea class="xmlf-output" id="xmlOutput" readonly spellcheck="false" aria-label="XML output"></textarea>
+    </div>
+
+    <div class="xmlf-toolbar">
+      <button type="button" class="xmlf-button xmlf-button-primary" id="copyBtn">Copy XML</button>
+      <button type="button" class="xmlf-button" id="downloadBtn">Download XML file</button>
+    </div>
+
+    <p class="xmlf-muted" style="margin-top:10px">
+      The browser parser checks syntax and document well-formedness. It does not prove
+      compliance with an external application schema or validate application-specific rules.
+    </p>
+  </section>
+
+  <section class="xmlf-card xmlf-section xmlf-article">
+    <h2>What is an XML formatter?</h2>
+    <p>
+      An XML formatter, also called an XML beautifier, rearranges indentation and line breaks
+      so nested elements are easier to read. XML is commonly used for application configuration,
+      RSS and Atom feeds, SOAP messages, SVG files and data exchange.
+    </p>
+
+    <h3>Format, minify and validate</h3>
+    <ul>
+      <li><strong>Format:</strong> adds readable indentation and line breaks where the document structure permits it.</li>
+      <li><strong>Minify:</strong> removes inter-element formatting whitespace where it appears ignorable, while retaining significant text and mixed content.</li>
+      <li><strong>Validate:</strong> checks whether the document is well-formed XML using the browser's XML parser.</li>
+    </ul>
+
+    <h3>What does well-formed XML mean?</h3>
+    <p>
+      Well-formed XML follows basic XML syntax requirements, such as correctly nested elements,
+      closed tags, quoted attribute values and valid XML characters. A well-formed document
+      can still violate an XSD schema, an application contract or a business rule.
+    </p>
+
+    <h3>Why does mixed content matter?</h3>
+    <p>
+      Consider an element that contains both text and child elements, such as
+      <code>&lt;p&gt;Hello &lt;em&gt;world&lt;/em&gt;!&lt;/p&gt;</code>. Adding line breaks
+      and indentation inside it can change the text content. This formatter keeps mixed
+      content compact instead of inserting formatting whitespace into it. XML element-only
+      content can be harder to identify perfectly without knowing the document's schema.
+    </p>
+
+    <h3>Why aren't all XML documents supported?</h3>
+    <p>
+      This page deliberately rejects documents with DOCTYPE declarations. Some XML files use
+      DTDs and entity declarations; this simplified browser utility avoids handling them rather
+      than claim to provide comprehensive DTD processing. If your document relies on a DTD,
+      use a trusted XML tool designed for that format.
+    </p>
+
+    <h3>How to use this XML formatter</h3>
+    <ol>
+      <li>Paste XML into the input box or choose a supported text file.</li>
+      <li>Select your preferred indentation, empty-element style and line endings.</li>
+      <li>Choose Format XML, Minify XML or Validate XML.</li>
+      <li>Review the status and document statistics.</li>
+      <li>Copy or download the output if it is suitable for your workflow.</li>
+    </ol>
+
+    <p>
+      All XML processing is performed in the browser. The page does not upload the XML to a
+      formatting service. This does not replace testing with the application that consumes
+      your document, especially for signed XML, schema-dependent documents or systems that
+      are sensitive to byte-level serialization.
+    </p>
+  </section>
+
+  <section class="xmlf-card xmlf-section xmlf-faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>How do I format XML online?</summary>
+      <p>
+        Paste XML or choose a file, select your indentation style, and click Format XML.
+        Copy or download the result after reviewing it.
+      </p>
+    </details>
+
+    <details>
+      <summary>What is the difference between XML formatting and validation?</summary>
+      <p>
+        Formatting improves readability. Validation in this tool means checking XML
+        well-formedness. It does not validate the document against an XSD, DTD or business schema.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I minify XML?</summary>
+      <p>
+        Yes. Minify XML removes whitespace used between structural elements when it appears
+        ignorable. It retains text in mixed-content sections instead of blindly deleting all spaces.
+      </p>
+    </details>
+
+    <details>
+      <summary>Will this tool process SVG and RSS files?</summary>
+      <p>
+        It can process well-formed text-based SVG and RSS documents that the browser's XML
+        parser accepts. Documents with DOCTYPE declarations are intentionally unsupported.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does this tool validate XML against an XSD?</summary>
+      <p>
+        No. It checks well-formedness only. An XSD validator needs the relevant schema and a
+        validation engine with schema support.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does formatting preserve XML content exactly?</summary>
+      <p>
+        The formatter aims to preserve element structure, attributes and significant text,
+        but serialization may normalize quotes, empty-element syntax, entities and line endings.
+        XML signatures and byte-for-byte comparisons may no longer be valid after reserialization.
+      </p>
+    </details>
+
+    <details>
+      <summary>Are my XML files uploaded?</summary>
+      <p>
+        No upload endpoint is used. XML is parsed and formatted locally in your browser.
+      </p>
+    </details>
+  </section>
+
+  <p class="xmlf-muted xmlf-section">
+    Explore more developer utilities on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_XML_BYTES = 2 * 1024 * 1024;
+  const MAX_OUTPUT_BYTES = 4 * 1024 * 1024;
+
+  const $ = id => document.getElementById(id);
+
+  const xmlInput = $("xmlInput");
+  const xmlOutput = $("xmlOutput");
+  const fileInput = $("fileInput");
+  const uploadZone = $("uploadZone");
+  const statusMessage = $("statusMessage");
+
+  let sourceFilename = "document.xml";
+  let lastOutput = "";
+  let lastAction = "";
+
+  function setStatus(message, kind = "") {
+    statusMessage.textContent = message;
+    statusMessage.dataset.kind = kind;
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  function lineCount(text) {
+    return text.length ? text.split(/\r\n|\r|\n/).length : 0;
+  }
+
+  function updateInputStats() {
+    const text = xmlInput.value;
+    $("inputStats").textContent =
+      `${text.length.toLocaleString()} characters · ${formatBytes(new Blob([text]).size)}`;
+  }
+
+  function clearResults() {
+    lastOutput = "";
+    lastAction = "";
+    xmlOutput.value = "";
+    $("resultSection").hidden = true;
+    $("copyBtn").disabled = true;
+    $("downloadBtn").disabled = true;
+    $("useOutputBtn").disabled = true;
+  }
+
+  function inputChanged() {
+    clearResults();
+    updateInputStats();
+
+    if (xmlInput.value.trim()) {
+      setStatus("Input changed. Run a formatting or validation action again.");
+    } else {
+      setStatus("");
+    }
+  }
+
+  /*
+   * Detect a real markup-level DOCTYPE outside comments, CDATA and processing
+   * instructions. DOCTYPE is intentionally unsupported by this tool.
+   */
+  function containsDoctypeDeclaration(source) {
+    let index = 0;
+
+    while (index < source.length) {
+      if (source.startsWith("<!--", index)) {
+        const end = source.indexOf("-->", index + 4);
+        if (end === -1) return false;
+        index = end + 3;
+        continue;
+      }
+
+      if (source.startsWith("<![CDATA[", index)) {
+        const end = source.indexOf("]]>", index + 9);
+        if (end === -1) return false;
+        index = end + 3;
+        continue;
+      }
+
+      if (source.startsWith("<?", index)) {
+        const end = source.indexOf("?>", index + 2);
+        if (end === -1) return false;
+        index = end + 2;
+        continue;
+      }
+
+      if (source.startsWith("<!DOCTYPE", index)) {
+        const next = source[index + 9];
+        if (next && /\s/.test(next)) return true;
+      }
+
+      index++;
+    }
+
+    return false;
+  }
+
+  function parseXml(source) {
+    if (!source.trim()) {
+      throw new Error("Enter XML data first.");
+    }
+
+    const inputBytes = new Blob([source]).size;
+
+    if (inputBytes > MAX_XML_BYTES) {
+      throw new Error("The XML input exceeds the 2 MB limit.");
+    }
+
+    if (containsDoctypeDeclaration(source)) {
+      throw new Error(
+        "DOCTYPE declarations are not supported by this browser tool. Use a trusted XML processor designed for documents that require DTD handling."
+      );
+    }
+
+    const cleanSource = source.charCodeAt(0) === 0xFEFF
+      ? source.slice(1)
+      : source;
+
+    let documentNode;
+
+    try {
+      documentNode = new DOMParser().parseFromString(
+        cleanSource,
+        "application/xml"
+      );
+    } catch (error) {
+      throw new Error("The browser could not parse this XML document.");
+    }
+
+    if (!documentNode || !documentNode.documentElement) {
+      throw new Error("No XML document element was found.");
+    }
+
+    const root = documentNode.documentElement;
+    const rootName = String(root.localName || root.nodeName).toLowerCase();
+    const rootNamespace = String(root.namespaceURI || "").toLowerCase();
+
+    const looksLikeParserError = rootName === "parsererror" &&
+      (
+        rootNamespace.includes("parsererror") ||
+        /xml parsing error|error on line|not well-formed|invalid xml/i.test(root.textContent || "")
+      );
+
+    if (looksLikeParserError) {
+      const detail = (root.textContent || "Malformed XML.")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 900);
+
+      throw new Error(`XML syntax error: ${detail}`);
+    }
+
+    // A standards-compliant XML document has exactly one root element.
+    const topLevelElements = Array.from(documentNode.childNodes)
+      .filter(node => node.nodeType === Node.ELEMENT_NODE);
+
+    if (topLevelElements.length !== 1) {
+      throw new Error("The XML document must contain exactly one root element.");
+    }
+
+    if (documentNode.doctype) {
+      throw new Error("DOCTYPE declarations are not supported.");
+    }
+
+    return {
+      documentNode,
+      inputBytes,
+      source: cleanSource
+    };
+  }
+
+  function escapeText(text) {
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function escapeAttribute(text) {
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/\t/g, "&#9;")
+      .replace(/\n/g, "&#10;")
+      .replace(/\r/g, "&#13;")
+      .replace(/</g, "&lt;");
+  }
+
+  function getDeclaration(source) {
+    const match = source.match(/^(<\?xml\s+[\s\S]*?\?>)/i);
+    if (!match) return "";
+
+    // Downloads are encoded as UTF-8; avoid retaining an obsolete encoding label.
+    return match[1].replace(
+      /\sencoding\s*=\s*(["'])[\s\S]*?\1/i,
+      ' encoding="UTF-8"'
+    );
+  }
+
+  function getIndent(depth, options) {
+    const unit = options.indentStyle === "tab"
+      ? "\t"
+      : " ".repeat(Number(options.indentStyle));
+
+    return unit.repeat(depth);
+  }
+
+  function useSelfClosing(node, options) {
+    if (options.emptyElements === "pair") return false;
+
+    return node.childNodes.length === 0;
+  }
+
+  function serializeNode(node, options, depth, inheritedPreserve, compact) {
+    const mode = options.mode;
+    const pretty = mode === "format" && !compact;
+    const indent = pretty ? getIndent(depth, options) : "";
+
+    switch (node.nodeType) {
+      case Node.DOCUMENT_NODE: {
+        const pieces = [];
+
+        for (const child of Array.from(node.childNodes)) {
+          if (
+            child.nodeType === Node.TEXT_NODE &&
+            !String(child.nodeValue || "").trim()
+          ) {
+            continue;
+          }
+
+          if (child.nodeType === Node.DOCUMENT_TYPE_NODE) {
+            throw new Error("DOCTYPE declarations are not supported.");
+          }
+
+          const rendered = serializeNode(
+            child,
+            options,
+            0,
+            false,
+            !pretty
+          );
+
+          if (rendered) pieces.push(rendered);
+        }
+
+        return pretty ? pieces.join("\n") : pieces.join("");
+      }
+
+      case Node.ELEMENT_NODE: {
+        const element = node;
+        const ownSpace = element.getAttribute("xml:space");
+
+        const preserveSpace = ownSpace === "preserve"
+          ? true
+          : ownSpace === "default"
+            ? false
+            : inheritedPreserve;
+
+        const attributes = Array.from(element.attributes)
+          .map(attribute =>
+            ` ${attribute.name}="${escapeAttribute(attribute.value)}"`
+          )
+          .join("");
+
+        const opening = `<${element.nodeName}${attributes}`;
+
+        if (useSelfClosing(element, options)) {
+          return options.emptyElements === "pair"
+            ? `${indent}${opening}></${element.nodeName}>`
+            : `${indent}${opening}/>`;
+        }
+
+        const children = Array.from(element.childNodes);
+
+        const hasChildElement = children.some(
+          child => child.nodeType === Node.ELEMENT_NODE
+        );
+
+        const hasNonWhitespaceText = children.some(child =>
+          (
+            child.nodeType === Node.TEXT_NODE &&
+            String(child.nodeValue || "").trim().length > 0
+          ) ||
+          child.nodeType === Node.CDATA_SECTION_NODE
+        );
+
+        /*
+         * Indent only element-only content. Mixed text, CDATA and descendants
+         * are kept compact so the formatter does not insert spaces/newlines
+         * into meaningful text.
+         *
+         * In element-only sections, whitespace-only text between elements is
+         * treated as formatting whitespace. Without a schema, this remains an
+         * inference, not a universal guarantee about the application's meaning.
+         */
+        const elementOnlyContent = hasChildElement &&
+          !hasNonWhitespaceText &&
+          !preserveSpace;
+
+        let meaningfulChildren = children;
+
+        if (elementOnlyContent) {
+          meaningfulChildren = children.filter(child =>
+            !(
+              child.nodeType === Node.TEXT_NODE &&
+              !String(child.nodeValue || "").trim()
+            )
+          );
+        }
+
+        if (!pretty || !elementOnlyContent) {
+          const inside = meaningfulChildren.map(child =>
+            serializeNode(
+              child,
+              options,
+              depth + 1,
+              preserveSpace,
+              true
+            )
+          ).join("");
+
+          return `${indent}${opening}>${inside}</${element.nodeName}>`;
+        }
+
+        const inside = meaningfulChildren.map(child =>
+          serializeNode(
+            child,
+            options,
+            depth + 1,
+            preserveSpace,
+            false
+          )
+        ).join("\n");
+
+        return `${indent}${opening}>\n${inside}\n${indent}</${element.nodeName}>`;
+      }
+
+      case Node.TEXT_NODE:
+        return `${indent}${escapeText(node.nodeValue || "")}`;
+
+      case Node.CDATA_SECTION_NODE:
+        return `${indent}<![CDATA[${node.nodeValue || ""}]]>`;
+
+      case Node.COMMENT_NODE:
+        return `${indent}<!--${node.nodeValue || ""}-->`;
+
+      case Node.PROCESSING_INSTRUCTION_NODE: {
+        const data = node.data ? ` ${node.data}` : "";
+        return `${indent}<?${node.target}${data}?>`;
+      }
+
+      case Node.DOCUMENT_TYPE_NODE:
+        throw new Error("DOCTYPE declarations are not supported.");
+
+      default:
+        // Ignore unsupported node kinds rather than invent an XML representation.
+        return "";
+    }
+  }
+
+  function convertXml(documentInfo, mode) {
+    const options = {
+      mode,
+      indentStyle: $("indentStyle").value,
+      emptyElements: $("emptyElements").value
+    };
+
+    const documentText = serializeNode(
+      documentInfo.documentNode,
+      options,
+      0,
+      false,
+      mode !== "format"
+    );
+
+    const declaration = getDeclaration(documentInfo.source);
+    const combined = declaration
+      ? `${declaration}\n${documentText}`
+      : documentText;
+
+    const lineEnding = $("lineEnding").value === "crlf"
+      ? "\r\n"
+      : "\n";
+
+    const output = combined.replace(/\r\n|\r|\n/g, lineEnding);
+
+    const outputBytes = new Blob([output]).size;
+
+    if (outputBytes > MAX_OUTPUT_BYTES) {
+      throw new Error("The output exceeds the 4 MB limit.");
+    }
+
+    return output;
+  }
+
+  function collectStats(documentNode) {
+    const allElements = Array.from(
+      documentNode.getElementsByTagName("*")
+    );
+
+    let attributeCount = 0;
+    let commentCount = 0;
+    let textNodeCount = 0;
+
+    function walk(node) {
+      for (const child of Array.from(node.childNodes)) {
+        if (child.nodeType === Node.COMMENT_NODE) commentCount++;
+        if (child.nodeType === Node.TEXT_NODE) textNodeCount++;
+        walk(child);
+      }
+    }
+
+    allElements.forEach(element => {
+      attributeCount += element.attributes.length;
+    });
+
+    walk(documentNode);
+
+    return {
+      elements: allElements.length,
+      attributes: attributeCount,
+      comments: commentCount,
+      textNodes: textNodeCount
+    };
+  }
+
+  function renderResult(documentInfo, output, action) {
+    const stats = collectStats(documentInfo.documentNode);
+
+    $("resultSection").hidden = false;
+    $("resultBanner").dataset.kind = "valid";
+    $("resultTitle").textContent = "XML is well-formed";
+    $("resultDescription").textContent =
+      action === "validate"
+        ? "The document passed browser-parser well-formedness checks. No schema validation was performed."
+        : `XML was ${action === "format" ? "formatted" : "minified"} successfully. Review the output before using it.`;
+
+    $("resultAction").textContent =
+      action === "format" ? "Formatted" :
+      action === "minify" ? "Minified" : "Validated";
+
+    $("elementCount").textContent = stats.elements.toLocaleString();
+    $("attributeCount").textContent = stats.attributes.toLocaleString();
+    $("inputBytes").textContent = formatBytes(documentInfo.inputBytes);
+    $("outputBytes").textContent = formatBytes(new Blob([output]).size);
+    $("outputStats").textContent =
+      `${lineCount(output).toLocaleString()} lines · ${output.length.toLocaleString()} characters`;
+
+    xmlOutput.value = output;
+    lastOutput = output;
+    lastAction = action;
+
+    $("copyBtn").disabled = false;
+    $("downloadBtn").disabled = false;
+    $("useOutputBtn").disabled = false;
+
+    const statusText = action === "validate"
+      ? "XML is well-formed. This does not mean it conforms to an XSD or application schema."
+      : `XML ${action === "format" ? "formatted" : "minified"} successfully.`;
+
+    setStatus(statusText, "success");
+  }
+
+  function runAction(action) {
+    clearResults();
+
+    const source = xmlInput.value;
+
+    if (!source.trim()) {
+      setStatus("Paste or load XML before running this action.", "error");
+      return;
+    }
+
+    try {
+      const documentInfo = parseXml(source);
+
+      // Validation deliberately outputs the original text, rather than
+      // serializing it and implying no formatting changes occurred.
+      const output = action === "validate"
+        ? documentInfo.source
+        : convertXml(documentInfo, action);
+
+      renderResult(documentInfo, output, action);
+    } catch (error) {
+      $("resultSection").hidden = false;
+      $("resultBanner").dataset.kind = "error";
+      $("resultTitle").textContent = "XML could not be processed";
+      $("resultDescription").textContent = error && error.message
+        ? error.message
+        : "An unknown XML processing error occurred.";
+
+      $("resultAction").textContent = "Error";
+      $("elementCount").textContent = "—";
+      $("attributeCount").textContent = "—";
+      $("inputBytes").textContent = formatBytes(new Blob([source]).size);
+      $("outputBytes").textContent = "—";
+      $("outputStats").textContent = "No output available";
+
+      xmlOutput.value = "";
+      lastOutput = "";
+      lastAction = "";
+
+      $("copyBtn").disabled = true;
+      $("downloadBtn").disabled = true;
+      $("useOutputBtn").disabled = true;
+
+      setStatus(
+        error && error.message
+          ? `Could not process XML: ${error.message}`
+          : "Could not process XML. Check the document syntax.",
+        "error"
+      );
+    }
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    textarea.style.pointerEvents = "none";
+
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const copied = document.execCommand("copy");
+    textarea.remove();
+
+    if (!copied) throw new Error("Clipboard copy failed.");
+  }
+
+  async function copyOutput() {
+    if (!lastOutput || xmlOutput.value !== lastOutput) {
+      setStatus("Run an XML action again before copying the output.", "error");
+      return;
+    }
+
+    try {
+      await copyText(lastOutput);
+      setStatus("XML copied to the clipboard.", "success");
+    } catch (error) {
+      setStatus("Copy failed. Select the output text and copy it manually.", "error");
+    }
+  }
+
+  function safeFilename(filename) {
+    const base = String(filename || "document.xml")
+      .replace(/\.[^.]+$/, "")
+      .replace(/[^A-Za-z0-9._-]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^[.-]+|[.-]+$/g, "")
+      .slice(0, 80);
+
+    const finalBase = base || "document";
+    const isSvg = /\.svg$/i.test(sourceFilename);
+
+    return finalBase + (isSvg ? ".svg" : ".xml");
+  }
+
+  function downloadOutput() {
+    if (!lastOutput || xmlOutput.value !== lastOutput) {
+      setStatus("Run an XML action again before downloading.", "error");
+      return;
+    }
+
+    const blob = new Blob(
+      [lastOutput],
+      { type: "application/xml;charset=utf-8" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = safeFilename(sourceFilename);
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1200);
+
+    setStatus("XML download started. Check the saved document before using it.", "success");
+  }
+
+  function useOutputAsInput() {
+    if (!lastOutput) {
+      setStatus("There is no current output to use.", "error");
+      return;
+    }
+
+    xmlInput.value = lastOutput;
+    clearResults();
+    updateInputStats();
+
+    setStatus(
+      "Output moved to input. You can now format, minify or validate it again.",
+      "success"
+    );
+
+    xmlInput.focus();
+  }
+
+  function loadSample() {
+    xmlInput.value = `<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+  <book id="bk101">
+    <author>Gambardella, Matthew</author>
+    <title>XML Developer's Guide</title>
+    <genre>Computer</genre>
+    <price currency="USD">44.95</price>
+    <available>true</available>
+  </book>
+  <book id="bk102">
+    <author>Ralls, Kim</author>
+    <title>Midnight Rain</title>
+    <genre>Fantasy</genre>
+    <price currency="USD">5.95</price>
+    <available>false</available>
+  </book>
+  <note><![CDATA[Example text that should not be treated as markup: <tag>sample</tag>]]></note>
+  <message>Hello <emphasis>XML</emphasis> world!</message>
+</catalog>`;
+
+    sourceFilename = "sample.xml";
+    $("fileLabel").textContent = "Example XML loaded.";
+    updateInputStats();
+    clearResults();
+    setStatus("Example loaded. Try Format XML, Minify XML and Validate XML.");
+  }
+
+  function clearInput() {
+    xmlInput.value = "";
+    xmlOutput.value = "";
+    sourceFilename = "document.xml";
+    $("fileLabel").textContent = "Input is processed locally in your browser.";
+    updateInputStats();
+    clearResults();
+    setStatus("");
+  }
+
+  async function readFile(file) {
+    if (!file) return;
+
+    if (file.size > MAX_XML_BYTES) {
+      setStatus("The selected file exceeds the 2 MB limit.", "error");
+      return;
+    }
+
+    if (!/\.(xml|svg|rss|atom|txt)$/i.test(file.name)) {
+      setStatus("Choose an XML, SVG, RSS, Atom or text file.", "error");
+      return;
+    }
+
+    try {
+      const text = await file.text();
+
+      if (new Blob([text]).size > MAX_XML_BYTES) {
+        setStatus("The decoded text exceeds the 2 MB limit.", "error");
+        return;
+      }
+
+      xmlInput.value = text;
+      sourceFilename = file.name || "document.xml";
+      $("fileLabel").textContent =
+        `${sourceFilename} · ${formatBytes(file.size)} loaded`;
+
+      updateInputStats();
+      clearResults();
+
+      setStatus("File loaded. Choose Format XML, Minify XML or Validate XML.", "success");
+    } catch (error) {
+      setStatus("Could not read this file. Try another XML text file.", "error");
+    }
+  }
+
+  $("formatBtn").addEventListener("click", () => runAction("format"));
+  $("minifyBtn").addEventListener("click", () => runAction("minify"));
+  $("validateBtn").addEventListener("click", () => runAction("validate"));
+
+  $("sampleBtn").addEventListener("click", loadSample);
+  $("clearBtn").addEventListener("click", clearInput);
+  $("chooseFileBtn").addEventListener("click", () => fileInput.click());
+  $("copyBtn").addEventListener("click", copyOutput);
+  $("downloadBtn").addEventListener("click", downloadOutput);
+  $("useOutputBtn").addEventListener("click", useOutputAsInput);
+
+  xmlInput.addEventListener("input", () => {
+    updateInputStats();
+    clearResults();
+
+    if (xmlInput.value.trim()) {
+      setStatus("Input changed. Run an XML action again to update the output.");
+    } else {
+      setStatus("");
+    }
+  });
+
+  [
+    "indentStyle",
+    "emptyElements",
+    "lineEnding"
+  ].forEach(id => {
+    $(id).addEventListener("change", () => {
+      clearResults();
+
+      if (xmlInput.value.trim()) {
+        setStatus("Formatting options changed. Run Format XML again.");
+      }
+    });
+  });
+
+  fileInput.addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) readFile(file);
+    fileInput.value = "";
+  });
+
+  ["dragenter", "dragover"].forEach(name => {
+    uploadZone.addEventListener(name, event => {
+      event.preventDefault();
+      uploadZone.classList.add("is-dragging");
+    });
+  });
+
+  ["dragleave", "drop"].forEach(name => {
+    uploadZone.addEventListener(name, event => {
+      event.preventDefault();
+      uploadZone.classList.remove("is-dragging");
+    });
+  });
+
+  uploadZone.addEventListener("drop", event => {
+    const file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+
+    if (file) readFile(file);
+  });
+
+  window.addEventListener("dragover", event => event.preventDefault());
+
+  window.addEventListener("drop", event => {
+    if (!uploadZone.contains(event.target)) {
+      event.preventDefault();
+    }
+  });
+
+  updateInputStats();
+  clearResults();
+})();
+</script>
+</body>
+</html>

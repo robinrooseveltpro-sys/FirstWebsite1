@@ -1,0 +1,2003 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HTML Entity Encoder & Decoder Online - Free Tool</title>
+  <meta name="description" content="Encode and decode HTML entities online for free. Convert special characters to named, decimal, or hexadecimal entities, handle Unicode, and copy or download results.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="https://converttotoolsonline.com/html-entity-encoder-decoder.html">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HTML Entity Encoder & Decoder Online">
+  <meta property="og:description" content="Convert HTML special characters to entities and decode named, decimal, and hexadecimal references. Free, browser-based, and easy to use.">
+  <meta property="og:url" content="https://converttotoolsonline.com/html-entity-encoder-decoder.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free HTML Entity Encoder & Decoder">
+  <meta name="twitter:description" content="Encode and decode HTML entities, escape special characters, and handle Unicode directly in your browser.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "HTML Entity Encoder and Decoder",
+    "url": "https://converttotoolsonline.com/html-entity-encoder-decoder.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based HTML entity encoder and decoder supporting HTML-special-character escaping, common named entities, decimal and hexadecimal Unicode references, file input, and text export.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Encode HTML special characters",
+      "Use common named HTML entities",
+      "Use decimal numeric references",
+      "Use hexadecimal numeric references",
+      "Decode named and numeric HTML entities",
+      "Handle Unicode characters and emoji",
+      "Copy and download converted output",
+      "Load text and HTML files",
+      "Process input in the browser"
+    ]
+  }
+  </script>
+
+  <style>
+    .hec-page {
+      margin: 0;
+      background: #f7f8fc;
+      color: #182237;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    .hec-page *,
+    .hec-page *::before,
+    .hec-page *::after {
+      box-sizing: border-box;
+    }
+
+    .hec-page a {
+      color: #2459c4;
+    }
+
+    .hec-shell {
+      width: min(100% - 30px, 1120px);
+      margin-inline: auto;
+    }
+
+    .hec-header {
+      border-bottom: 1px solid #e4e8f0;
+      background: #fff;
+    }
+
+    .hec-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      min-height: 72px;
+      padding-block: 12px;
+    }
+
+    .hec-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #182237 !important;
+      font-weight: 800;
+      letter-spacing: -.025em;
+      text-decoration: none;
+    }
+
+    .hec-brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: #2459c4;
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 850;
+    }
+
+    .hec-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      font-size: .9rem;
+    }
+
+    .hec-nav a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .hec-nav a:hover {
+      color: #2459c4;
+      text-decoration: underline;
+    }
+
+    .hec-main {
+      padding-block: 36px 64px;
+    }
+
+    .hec-hero {
+      max-width: 790px;
+      margin: 0 auto 25px;
+      text-align: center;
+    }
+
+    .hec-eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #2459c4;
+      font-size: .81rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .hec-hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.05rem);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+    }
+
+    .hec-hero p {
+      max-width: 710px;
+      margin: 0 auto;
+      color: #59667c;
+      font-size: 1.03rem;
+    }
+
+    .hec-privacy {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
+      color: #247448;
+      font-size: .87rem;
+      font-weight: 700;
+    }
+
+    .hec-card {
+      padding: clamp(17px, 3vw, 28px);
+      border: 1px solid #e2e7f0;
+      border-radius: 19px;
+      background: #fff;
+      box-shadow: 0 12px 36px rgba(26, 41, 77, .055);
+    }
+
+    .hec-card-heading {
+      margin-bottom: 18px;
+    }
+
+    .hec-card-heading h2 {
+      margin: 0 0 5px;
+      font-size: 1.27rem;
+      letter-spacing: -.02em;
+    }
+
+    .hec-muted {
+      color: #69758b;
+      font-size: .89rem;
+    }
+
+    .hec-mode-switch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 17px;
+      padding: 5px;
+      border: 1px solid #e0e6ef;
+      border-radius: 12px;
+      background: #f6f8fc;
+    }
+
+    .hec-mode-btn {
+      flex: 1 1 130px;
+      min-height: 42px;
+      padding: 9px 12px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: transparent;
+      color: #526078;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .hec-mode-btn[aria-pressed="true"] {
+      border-color: #dbe4fb;
+      background: #fff;
+      color: #2459c4;
+      box-shadow: 0 2px 7px rgba(26, 41, 77, .055);
+    }
+
+    .hec-mode-btn:focus-visible,
+    .hec-btn:focus-visible,
+    .hec-page input:focus-visible,
+    .hec-page select:focus-visible,
+    .hec-page textarea:focus-visible,
+    .hec-page a:focus-visible {
+      outline: 3px solid #91b4ff;
+      outline-offset: 3px;
+    }
+
+    .hec-examples {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .hec-examples-label {
+      margin-right: 2px;
+      color: #536078;
+      font-size: .85rem;
+      font-weight: 750;
+    }
+
+    .hec-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 10px 15px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: #2459c4;
+      color: #fff !important;
+      font: inherit;
+      font-size: .91rem;
+      font-weight: 750;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none !important;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+
+    .hec-btn:hover {
+      background: #1949a8;
+    }
+
+    .hec-btn:disabled {
+      cursor: not-allowed;
+      opacity: .5;
+    }
+
+    .hec-btn-secondary {
+      border-color: #d9e0eb;
+      background: #fff;
+      color: #34415b !important;
+    }
+
+    .hec-btn-secondary:hover {
+      background: #f4f7fc;
+    }
+
+    .hec-btn-small {
+      min-height: 33px;
+      padding: 6px 10px;
+      font-size: .81rem;
+    }
+
+    .hec-editors {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+      align-items: stretch;
+    }
+
+    .hec-editor-panel {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #dde4ef;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .hec-editor-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 53px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e1e6ef;
+      background: #f8faff;
+    }
+
+    .hec-editor-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .94rem;
+      font-weight: 800;
+    }
+
+    .hec-file-type {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #dce3ef;
+      border-radius: 6px;
+      padding: 2px 7px;
+      background: #fff;
+      color: #536078;
+      font-size: .72rem;
+      font-weight: 800;
+    }
+
+    .hec-editor-head-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .hec-textarea {
+      display: block;
+      width: 100%;
+      min-height: 300px;
+      flex: 1 1 auto;
+      padding: 15px;
+      border: 0;
+      border-radius: 0;
+      resize: vertical;
+      background: #fff;
+      color: #22314a;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.75;
+      tab-size: 2;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .hec-output {
+      background: #fbfcff;
+    }
+
+    .hec-editor-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 12px;
+      border-top: 1px solid #e6eaf1;
+      color: #738097;
+      font-size: .77rem;
+    }
+
+    .hec-options {
+      margin-top: 20px;
+      padding: 17px;
+      border: 1px solid #e0e6ef;
+      border-radius: 13px;
+      background: #fafbfe;
+    }
+
+    .hec-options h3 {
+      margin: 0 0 11px;
+      font-size: 1rem;
+    }
+
+    .hec-options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .hec-field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .hec-field label {
+      color: #35435c;
+      font-size: .87rem;
+      font-weight: 750;
+    }
+
+    .hec-field select,
+    .hec-field input[type="text"],
+    .hec-field input[type="number"] {
+      display: block;
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid #d5deeb;
+      border-radius: 9px;
+      background: #fff;
+      color: #1d2b43;
+      font: inherit;
+      font-size: .9rem;
+    }
+
+    .hec-option-toggle {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 13px;
+      color: #526078;
+      font-size: .87rem;
+    }
+
+    .hec-option-toggle input {
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: #2459c4;
+    }
+
+    .hec-option-help {
+      margin-top: 5px;
+      color: #788398;
+      font-size: .79rem;
+    }
+
+    .hec-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 17px;
+    }
+
+    .hec-status {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border: 1px solid #dce3ef;
+      border-radius: 10px;
+      background: #f7f9ff;
+      color: #35435c;
+      font-size: .89rem;
+      overflow-wrap: anywhere;
+    }
+
+    .hec-status--success {
+      border-color: #c7e7d1;
+      background: #f0fbf4;
+      color: #21663d;
+    }
+
+    .hec-status--warning {
+      border-color: #efdfb8;
+      background: #fffbef;
+      color: #795e1b;
+    }
+
+    .hec-status--error {
+      border-color: #edc7c7;
+      background: #fff4f4;
+      color: #982c2c;
+    }
+
+    .hec-entity-section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e9f1;
+    }
+
+    .hec-entity-heading {
+      margin-bottom: 13px;
+    }
+
+    .hec-entity-heading h3 {
+      margin: 0 0 5px;
+      font-size: 1.1rem;
+    }
+
+    .hec-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid #e0e6ef;
+      border-radius: 11px;
+    }
+
+    .hec-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      font-size: .84rem;
+    }
+
+    .hec-table th,
+    .hec-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e7ebf2;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .hec-table th {
+      background: #f8faff;
+      color: #46536b;
+      font-weight: 800;
+    }
+
+    .hec-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .hec-table code {
+      color: #253751;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      overflow-wrap: anywhere;
+    }
+
+    .hec-content {
+      width: min(100%, 850px);
+      margin: 44px auto 0;
+    }
+
+    .hec-content section {
+      margin-top: 32px;
+    }
+
+    .hec-content h2 {
+      margin: 0 0 12px;
+      color: #182237;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+    }
+
+    .hec-content h3 {
+      margin: 21px 0 7px;
+      font-size: 1.08rem;
+    }
+
+    .hec-content p,
+    .hec-content li {
+      color: #536078;
+    }
+
+    .hec-content p {
+      margin: 0 0 12px;
+    }
+
+    .hec-content li {
+      margin-bottom: 7px;
+    }
+
+    .hec-content ol,
+    .hec-content ul {
+      padding-left: 24px;
+    }
+
+    .hec-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .hec-step {
+      padding: 16px;
+      border: 1px solid #e2e7f0;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .hec-step-number {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin-bottom: 9px;
+      border-radius: 9px;
+      background: #edf3ff;
+      color: #2459c4;
+      font-weight: 850;
+    }
+
+    .hec-step strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .hec-step p {
+      margin: 0;
+      font-size: .9rem;
+    }
+
+    .hec-code-block {
+      overflow-x: auto;
+      padding: 14px;
+      border: 1px solid #e0e6f0;
+      border-radius: 12px;
+      background: #fff;
+      color: #2b3a54;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .85rem;
+      line-height: 1.7;
+      white-space: pre;
+    }
+
+    .hec-related {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .hec-related a {
+      padding: 8px 12px;
+      border: 1px solid #dce2ed;
+      border-radius: 999px;
+      background: #fff;
+      text-decoration: none;
+      font-size: .9rem;
+    }
+
+    .hec-related a:hover {
+      border-color: #aac0f3;
+      background: #f4f7ff;
+    }
+
+    .hec-faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .hec-faq-list details {
+      padding: 15px 17px;
+      border: 1px solid #e1e6ef;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .hec-faq-list summary {
+      color: #26334b;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .hec-faq-list details p {
+      margin: 10px 0 0;
+    }
+
+    .hec-footer {
+      padding-block: 24px;
+      border-top: 1px solid #e4e8f0;
+      background: #fff;
+      color: #69758a;
+      font-size: .87rem;
+    }
+
+    .hec-footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .hec-footer a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .hec-footer a:hover {
+      text-decoration: underline;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 800px) {
+      .hec-editors {
+        grid-template-columns: 1fr;
+      }
+
+      .hec-textarea {
+        min-height: 240px;
+      }
+
+      .hec-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hec-shell {
+        width: min(100% - 22px, 1120px);
+      }
+
+      .hec-main {
+        padding-top: 25px;
+      }
+
+      .hec-header-inner {
+        align-items: flex-start;
+      }
+
+      .hec-nav {
+        gap: 12px;
+        font-size: .83rem;
+      }
+
+      .hec-options-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hec-actions .hec-btn {
+        flex: 1 1 100%;
+      }
+
+      .hec-mode-btn {
+        flex-basis: 100%;
+      }
+
+      .hec-table {
+        min-width: 560px;
+      }
+
+      .hec-textarea {
+        min-height: 220px;
+        padding: 12px;
+        font-size: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hec-page *,
+      .hec-page *::before,
+      .hec-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="hec-page">
+  <header class="hec-header">
+    <div class="hec-shell hec-header-inner">
+      <a class="hec-brand" href="/index.html" aria-label="ConvertToToolsOnline home">
+        <span class="hec-brand-mark" aria-hidden="true">CT</span>
+        <span>ConvertToToolsOnline</span>
+      </a>
+
+      <nav class="hec-nav" aria-label="Main navigation">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#all-tools">All tools</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hec-shell hec-main">
+    <section class="hec-hero" aria-labelledby="page-title">
+      <div class="hec-eyebrow">Free developer utility</div>
+      <h1 id="page-title">HTML Entity Encoder &amp; Decoder</h1>
+      <p>
+        Encode HTML special characters into character references or decode
+        named, decimal, and hexadecimal HTML entities back into readable text.
+        Handle Unicode, copy results, and download the converted output.
+      </p>
+      <div class="hec-privacy">
+        <span aria-hidden="true">●</span>
+        Browser-based processing — your input is not uploaded to our server
+      </div>
+    </section>
+
+    <section class="hec-card" aria-labelledby="tool-title">
+      <div class="hec-card-heading">
+        <h2 id="tool-title">Encode or decode HTML entities</h2>
+        <p class="hec-muted">
+          Enter text or an HTML snippet, choose a conversion mode, and get your result.
+        </p>
+      </div>
+
+      <div class="hec-mode-switch" role="group" aria-label="Conversion direction">
+        <button id="encodeModeBtn" class="hec-mode-btn" type="button"
+          data-mode="encode" aria-pressed="true">
+          Encode HTML entities
+        </button>
+        <button id="decodeModeBtn" class="hec-mode-btn" type="button"
+          data-mode="decode" aria-pressed="false">
+          Decode HTML entities
+        </button>
+      </div>
+
+      <div class="hec-examples">
+        <span class="hec-examples-label">Try an example:</span>
+        <button class="hec-btn hec-btn-secondary hec-btn-small"
+          type="button" data-example="html">HTML snippet</button>
+        <button class="hec-btn hec-btn-secondary hec-btn-small"
+          type="button" data-example="unicode">Unicode &amp; symbols</button>
+        <button class="hec-btn hec-btn-secondary hec-btn-small"
+          type="button" data-example="quotes">Quotes &amp; attributes</button>
+      </div>
+
+      <input
+        id="hecFileInput"
+        type="file"
+        accept=".txt,.html,.htm,.xml,.md,text/plain,text/html,application/xml"
+        hidden
+        aria-label="Choose a text or HTML file"
+      >
+
+      <div class="hec-editors">
+        <section class="hec-editor-panel" aria-labelledby="input-title">
+          <div class="hec-editor-head">
+            <div class="hec-editor-title">
+              <span id="input-title">Input</span>
+              <span class="hec-file-type">TEXT / HTML</span>
+            </div>
+            <div class="hec-editor-head-actions">
+              <button id="uploadBtn"
+                class="hec-btn hec-btn-secondary hec-btn-small"
+                type="button">Upload file</button>
+              <button id="clearInputBtn"
+                class="hec-btn hec-btn-secondary hec-btn-small"
+                type="button">Clear</button>
+            </div>
+          </div>
+
+          <label class="hec-sr-only" for="hecInput">
+            Text or HTML content to convert
+          </label>
+          <textarea
+            id="hecInput"
+            class="hec-textarea"
+            maxlength="2097152"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            aria-describedby="inputHint"
+            placeholder="Paste text or HTML here..."
+          ></textarea>
+
+          <div class="hec-editor-meta">
+            <span id="inputHint">Maximum input size: 2 MB</span>
+            <span id="inputStats">0 characters</span>
+          </div>
+        </section>
+
+        <section class="hec-editor-panel" aria-labelledby="output-title">
+          <div class="hec-editor-head">
+            <div class="hec-editor-title">
+              <span id="output-title">Output</span>
+              <span class="hec-file-type">RESULT</span>
+            </div>
+            <div class="hec-editor-head-actions">
+              <button id="copyBtn"
+                class="hec-btn hec-btn-secondary hec-btn-small"
+                type="button">Copy</button>
+              <button id="downloadBtn"
+                class="hec-btn hec-btn-secondary hec-btn-small"
+                type="button">Download</button>
+            </div>
+          </div>
+
+          <label class="hec-sr-only" for="hecOutput">
+            Converted output text
+          </label>
+          <textarea
+            id="hecOutput"
+            class="hec-textarea hec-output"
+            readonly
+            spellcheck="false"
+            aria-describedby="outputHint"
+            placeholder="Your converted result appears here..."
+          ></textarea>
+
+          <div class="hec-editor-meta">
+            <span id="outputHint">Plain-text output; never rendered as live HTML</span>
+            <span id="outputStats">0 characters</span>
+          </div>
+        </section>
+      </div>
+
+      <section class="hec-options" aria-labelledby="options-title">
+        <h3 id="options-title">Encoding options</h3>
+
+        <div class="hec-options-grid">
+          <div class="hec-field">
+            <label for="entityStyle">Entity style</label>
+            <select id="entityStyle">
+              <option value="minimal" selected>HTML-safe — essential characters</option>
+              <option value="named">Named entities where available</option>
+              <option value="decimal">Decimal numeric — every character</option>
+              <option value="hex">Hexadecimal numeric — every character</option>
+            </select>
+            <div class="hec-option-help">
+              Numeric modes encode each Unicode code point, including ordinary letters and spaces.
+            </div>
+          </div>
+
+          <div class="hec-field">
+            <label for="decodeDepth">Decode behavior</label>
+            <select id="decodeDepth">
+              <option value="once" selected>Decode once — recommended</option>
+              <option value="repeated">Decode repeatedly (up to 5 passes)</option>
+            </select>
+            <div class="hec-option-help">
+              Repeated decoding can expose nested markup. Review the result before using it.
+            </div>
+          </div>
+        </div>
+
+        <label class="hec-option-toggle">
+          <input id="encodeQuotes" type="checkbox" checked>
+          <span>Encode double and single quotes in named or HTML-safe mode.</span>
+        </label>
+
+        <label class="hec-option-toggle">
+          <input id="encodeAllUnicode" type="checkbox">
+          <span>Also encode non-ASCII characters that do not have a mapped named entity.</span>
+        </label>
+
+        <label class="hec-option-toggle">
+          <input id="liveConversion" type="checkbox" checked>
+          <span>Update output automatically while typing.</span>
+        </label>
+
+        <p id="optionsHelp" class="hec-option-help">
+          HTML-safe mode escapes ampersands and angle brackets, and quotes when enabled.
+        </p>
+      </section>
+
+      <div class="hec-actions">
+        <button id="convertBtn" class="hec-btn" type="button">
+          Encode HTML entities
+        </button>
+        <button id="swapBtn" class="hec-btn hec-btn-secondary"
+          type="button">Swap output and input</button>
+        <button id="copyAllBtn" class="hec-btn hec-btn-secondary"
+          type="button">Copy output</button>
+        <button id="resetBtn" class="hec-btn hec-btn-secondary"
+          type="button">Reset tool</button>
+      </div>
+
+      <div id="status" class="hec-status" role="status"
+        aria-live="polite" hidden></div>
+
+      <section class="hec-entity-section" aria-labelledby="reference-title">
+        <div class="hec-entity-heading">
+          <h3 id="reference-title">Common HTML entity reference</h3>
+          <p class="hec-muted">
+            Select an example to load it into the input. These are common
+            references, not a complete list of every named HTML character reference.
+          </p>
+        </div>
+
+        <div class="hec-table-wrap">
+          <table class="hec-table">
+            <thead>
+              <tr>
+                <th scope="col">Character</th>
+                <th scope="col">Named / common form</th>
+                <th scope="col">Decimal</th>
+                <th scope="col">Hexadecimal</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="entityReferenceRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <div class="hec-content">
+      <section aria-labelledby="how-title">
+        <h2 id="how-title">How to encode and decode HTML entities</h2>
+        <p>
+          HTML character references represent characters using named or
+          numeric sequences. They are particularly useful for representing
+          reserved HTML syntax characters, displaying code samples, and
+          preserving text where literal characters might be interpreted
+          as markup.
+        </p>
+
+        <div class="hec-steps">
+          <div class="hec-step">
+            <div class="hec-step-number">1</div>
+            <strong>Enter your text</strong>
+            <p>Paste an HTML snippet, ordinary text, or entity-encoded content into the input.</p>
+          </div>
+          <div class="hec-step">
+            <div class="hec-step-number">2</div>
+            <strong>Choose the direction</strong>
+            <p>Use Encode to escape characters or Decode to turn references back into text.</p>
+          </div>
+          <div class="hec-step">
+            <div class="hec-step-number">3</div>
+            <strong>Copy or download</strong>
+            <p>Review the result, copy it to your clipboard, or download a text file.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="reserved-title">
+        <h2 id="reserved-title">Which HTML characters should be encoded?</h2>
+        <p>
+          In HTML text, the ampersand and less-than sign are especially
+          important because they participate in HTML parsing. Greater-than
+          signs and quotation marks are commonly escaped too, particularly
+          when preparing snippets for reuse.
+        </p>
+
+        <pre class="hec-code-block">Original:
+<p>Tom & Jerry</p>
+
+Encoded:
+&lt;p&gt;Tom &amp; Jerry&lt;/p&gt;
+
+Decoded:
+<p>Tom & Jerry</p></pre>
+
+        <p>
+          In a quoted HTML attribute, the quote character that surrounds
+          the attribute value needs proper escaping. The safest approach
+          depends on where and how the value will be inserted.
+        </p>
+      </section>
+
+      <section aria-labelledby="styles-title">
+        <h2 id="styles-title">Named vs. decimal vs. hexadecimal entities</h2>
+
+        <h3>Named HTML entities</h3>
+        <p>
+          Named references use a name between an ampersand and a semicolon.
+          For example, <code>&amp;copy;</code> represents © and
+          <code>&amp;euro;</code> represents €. They are usually easier
+          for people to recognize, but not every Unicode character has a
+          named entity.
+        </p>
+
+        <h3>Decimal numeric references</h3>
+        <p>
+          Decimal references represent a Unicode code point using a base-ten
+          number. For example, <code>&amp;#169;</code> represents ©.
+          This tool's decimal mode encodes every code point in the input.
+        </p>
+
+        <h3>Hexadecimal numeric references</h3>
+        <p>
+          Hexadecimal references use a number in base sixteen, usually
+          introduced by <code>&amp;#x</code>. For example,
+          <code>&amp;#xA9;</code> represents ©. Hexadecimal references
+          can be convenient when working with Unicode code points.
+        </p>
+
+        <h3>Non-ASCII characters and emoji</h3>
+        <p>
+          Modern HTML documents can contain Unicode text directly when
+          the document's character encoding is configured correctly.
+          Numeric references can still be useful when a workflow specifically
+          requires encoded output. This tool iterates Unicode code points,
+          so characters represented by surrogate pairs, such as many emoji,
+          are not incorrectly split into separate entities.
+        </p>
+      </section>
+
+      <section aria-labelledby="safety-title">
+        <h2 id="safety-title">Does HTML entity encoding prevent XSS?</h2>
+        <p>
+          Encoding important HTML characters can help prevent text from
+          being interpreted as markup in the appropriate HTML text context.
+          However, this utility is not an HTML sanitizer, security scanner,
+          or universal XSS protection system.
+        </p>
+        <p>
+          Different contexts require different handling. HTML text, quoted
+          attributes, URLs, JavaScript, and CSS each have distinct parsing
+          rules. Do not assume that encoded output is automatically safe to
+          insert into every context, and do not treat decoding as sanitization.
+          Use context-appropriate escaping and established security practices
+          in production applications.
+        </p>
+      </section>
+
+      <section aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Is this HTML entity converter private?</h2>
+        <p>
+          The input and output processing run in your browser. The selected
+          text file is read locally, and conversion does not upload its
+          contents to our server. The page does load its HTML and JavaScript
+          assets from the website, so a browser with JavaScript enabled is
+          required for conversion.
+        </p>
+        <p>
+          This page does not save your conversion history for later sessions.
+          However, browser extensions, device monitoring software, or other
+          software running on your device may have their own access to browser
+          content. Avoid processing highly sensitive material on an untrusted
+          device.
+        </p>
+      </section>
+
+      <section aria-labelledby="limits-title">
+        <h2 id="limits-title">What this tool does not do</h2>
+        <ul>
+          <li>
+            It does not sanitize arbitrary HTML or guarantee protection from
+            cross-site scripting vulnerabilities.
+          </li>
+          <li>
+            It does not validate an HTML document's complete structure or
+            repair broken tags.
+          </li>
+          <li>
+            It does not convert HTML tags into plain text automatically.
+            Encoding markup turns its syntax characters into references so
+            the markup can be displayed as text.
+          </li>
+          <li>
+            Its named-entity encoding mode uses a curated set of common
+            mappings. Decoding supports the named character references
+            recognized by the browser's HTML parser.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="related-title">
+        <h2 id="related-title">Explore more developer tools</h2>
+        <p>
+          Continue working with data and text using other utilities.
+        </p>
+        <div class="hec-related">
+          <a href="/json-formatter.html">JSON Formatter</a>
+          <a href="/yaml-to-json-converter.html">YAML to JSON Converter</a>
+          <a href="/index.html#all-tools">Browse all tools</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="faq-title">
+        <h2 id="faq-title">Frequently asked questions</h2>
+
+        <div class="hec-faq-list">
+          <details>
+            <summary>What is an HTML entity encoder?</summary>
+            <p>
+              An HTML entity encoder converts selected characters into
+              character references such as &amp;lt;, &amp;gt;, and &amp;amp;.
+              These references allow reserved characters to be represented
+              in an HTML document without using their literal parsing
+              significance in the same way.
+            </p>
+          </details>
+
+          <details>
+            <summary>How do I decode HTML entities into normal text?</summary>
+            <p>
+              Select Decode HTML entities, paste the encoded string, and
+              run the conversion. The tool decodes supported named, decimal,
+              and hexadecimal references, then displays the result as
+              plain text.
+            </p>
+          </details>
+
+          <details>
+            <summary>What is the difference between &amp;lt; and &amp;#60;?</summary>
+            <p>
+              Both represent the less-than character. &amp;lt; is a named
+              reference, while &amp;#60; is a decimal numeric reference.
+              A hexadecimal form is &amp;#x3C;.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I encode emoji and Unicode characters?</summary>
+            <p>
+              Yes. Enable the non-ASCII option to convert characters without
+              a mapped named entity into decimal references, or choose a
+              numeric mode to encode every character. Emoji are handled by
+              Unicode code point.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I encode HTML tags so they display as text?</summary>
+            <p>
+              Yes. For example, an opening less-than sign becomes &amp;lt;
+              and a closing greater-than sign becomes &amp;gt;. This lets
+              an HTML code sample be displayed as text rather than used as
+              the actual element markup.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is this HTML entity encoder and decoder free?</summary>
+            <p>
+              Yes. The conversion, copy, and download features on this page
+              are available without an account or a tool usage fee.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does this tool upload my text?</summary>
+            <p>
+              No. The conversion runs in your browser, and selected files
+              are read locally. The text you enter is not uploaded to our
+              server by this tool.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does decoding HTML entities make HTML safe?</summary>
+            <p>
+              No. Decoding turns references back into their corresponding
+              characters, which may include markup syntax. The resulting
+              text is not sanitized. Keep it in a text field when you only
+              need to inspect it, and use appropriate security practices
+              before inserting untrusted data into a webpage.
+            </p>
+          </details>
+
+          <details>
+            <summary>Why is my encoded output longer than the original?</summary>
+            <p>
+              An entity uses several characters to represent one original
+              character. For instance, a less-than sign becomes &amp;lt;.
+              Numeric modes may make the output much longer because every
+              input code point is replaced with a numeric reference.
+            </p>
+          </details>
+
+          <details>
+            <summary>What if I decode an already decoded string?</summary>
+            <p>
+              The default mode decodes once to avoid unexpectedly transforming
+              nested references multiple times. Repeated decoding can be
+              enabled when you specifically need it, but always check the
+              result before using it in another application.
+            </p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="hec-footer">
+    <div class="hec-shell hec-footer-inner">
+      <span>© <span id="footerYear">2026</span> ConvertToToolsOnline</span>
+      <span>
+        <a href="/about.html">About</a>
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        &nbsp;·&nbsp;
+        <a href="/terms.html">Terms</a>
+        &nbsp;·&nbsp;
+        <a href="/contact.html">Contact</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const MAX_INPUT_BYTES = 2 * 1024 * 1024;
+      const MAX_DECODE_PASSES = 5;
+
+      const $ = function (id) {
+        return document.getElementById(id);
+      };
+
+      const input = $("hecInput");
+      const output = $("hecOutput");
+      const fileInput = $("hecFileInput");
+      const styleSelect = $("entityStyle");
+      const decodeDepth = $("decodeDepth");
+      const quoteOption = $("encodeQuotes");
+      const unicodeOption = $("encodeAllUnicode");
+      const liveOption = $("liveConversion");
+      const convertBtn = $("convertBtn");
+      const encodeModeBtn = $("encodeModeBtn");
+      const decodeModeBtn = $("decodeModeBtn");
+      const status = $("status");
+
+      let mode = "encode";
+      let lastInput = "";
+      let lastOutput = "";
+      let lastConvertedMode = "encode";
+
+      $("footerYear").textContent = String(new Date().getFullYear());
+
+      const namedEntities = new Map([
+        ["&", "&amp;"],
+        ["<", "&lt;"],
+        [">", "&gt;"],
+        ['"', "&quot;"],
+        ["'", "&#39;"],
+        [" ", "&nbsp;"],
+        ["©", "&copy;"],
+        ["®", "&reg;"],
+        ["™", "&trade;"],
+        ["€", "&euro;"],
+        ["£", "&pound;"],
+        ["¥", "&yen;"],
+        ["¢", "&cent;"],
+        ["°", "&deg;"],
+        ["±", "&plusmn;"],
+        ["×", "&times;"],
+        ["÷", "&divide;"],
+        ["µ", "&micro;"],
+        ["§", "&sect;"],
+        ["¶", "&para;"],
+        ["–", "&ndash;"],
+        ["—", "&mdash;"],
+        ["…", "&hellip;"],
+        ["“", "&ldquo;"],
+        ["”", "&rdquo;"],
+        ["‘", "&lsquo;"],
+        ["’", "&rsquo;"],
+        ["«", "&laquo;"],
+        ["»", "&raquo;"],
+        ["•", "&bull;"],
+        ["·", "&middot;"],
+        ["←", "&larr;"],
+        ["→", "&rarr;"],
+        ["↑", "&uarr;"],
+        ["↓", "&darr;"],
+        ["≠", "&ne;"],
+        ["≤", "&le;"],
+        ["≥", "&ge;"],
+        ["≈", "&asymp;"],
+        ["∞", "&infin;"]
+      ]);
+
+      const entityReferenceData = [
+        ["&", "&amp;", "&#38;", "&#x26;"],
+        ["<", "&lt;", "&#60;", "&#x3C;"],
+        [">", "&gt;", "&#62;", "&#x3E;"],
+        ['"', "&quot;", "&#34;", "&#x22;"],
+        ["'", "&#39;", "&#39;", "&#x27;"],
+        [" ", "&nbsp;", "&#160;", "&#xA0;"],
+        ["©", "&copy;", "&#169;", "&#xA9;"],
+        ["®", "&reg;", "&#174;", "&#xAE;"],
+        ["™", "&trade;", "&#8482;", "&#x2122;"],
+        ["€", "&euro;", "&#8364;", "&#x20AC;"],
+        ["£", "&pound;", "&#163;", "&#xA3;"],
+        ["¥", "&yen;", "&#165;", "&#xA5;"],
+        ["°", "&deg;", "&#176;", "&#xB0;"],
+        ["±", "&plusmn;", "&#177;", "&#xB1;"],
+        ["×", "&times;", "&#215;", "&#xD7;"],
+        ["÷", "&divide;", "&#247;", "&#xF7;"],
+        ["–", "&ndash;", "&#8211;", "&#x2013;"],
+        ["—", "&mdash;", "&#8212;", "&#x2014;"],
+        ["…", "&hellip;", "&#8230;", "&#x2026;"],
+        ["•", "&bull;", "&#8226;", "&#x2022;"]
+      ];
+
+      function setStatus(message, type) {
+        status.textContent = message;
+        status.className = "hec-status";
+
+        if (type) {
+          status.classList.add("hec-status--" + type);
+        }
+
+        status.hidden = false;
+      }
+
+      function clearStatus() {
+        status.textContent = "";
+        status.className = "hec-status";
+        status.hidden = true;
+      }
+
+      function byteLength(text) {
+        if (window.TextEncoder) {
+          return new TextEncoder().encode(text).length;
+        }
+
+        return new Blob([text]).size;
+      }
+
+      function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) {
+          return (bytes / 1024).toFixed(1) + " KB";
+        }
+
+        return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+      }
+
+      function countCharacters(text) {
+        return Array.from(text).length;
+      }
+
+      function countEntities(text) {
+        const matches = text.match(
+          /&(?:#[0-9]+|#[xX][0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]+);/g
+        );
+
+        return matches ? matches.length : 0;
+      }
+
+      function updateStats() {
+        const inputText = input.value;
+        const outputText = output.value;
+
+        $("inputStats").textContent =
+          countCharacters(inputText).toLocaleString() + " characters · " +
+          formatBytes(byteLength(inputText));
+
+        $("outputStats").textContent =
+          countCharacters(outputText).toLocaleString() + " characters · " +
+          countEntities(outputText).toLocaleString() + " entity references";
+      }
+
+      function updateDirectionUI() {
+        encodeModeBtn.setAttribute(
+          "aria-pressed",
+          mode === "encode" ? "true" : "false"
+        );
+
+        decodeModeBtn.setAttribute(
+          "aria-pressed",
+          mode === "decode" ? "true" : "false"
+        );
+
+        convertBtn.textContent =
+          mode === "encode" ? "Encode HTML entities" : "Decode HTML entities";
+
+        $("options-title").textContent =
+          mode === "encode" ? "Encoding options" : "Decoding options";
+
+        $("input-title").textContent =
+          mode === "encode" ? "Text or HTML input" : "Encoded input";
+
+        $("output-title").textContent =
+          mode === "encode" ? "Encoded output" : "Decoded text";
+
+        quoteOption.parentElement.hidden = mode !== "encode";
+        unicodeOption.parentElement.hidden = mode !== "encode";
+
+        styleSelect.disabled = mode !== "encode";
+        decodeDepth.disabled = mode !== "decode";
+
+        if (mode === "decode") {
+          $("optionsHelp").textContent =
+            "Decode named and numeric references. One pass is recommended for predictable results.";
+        } else {
+          updateEncodingOptionHelp();
+        }
+      }
+
+      function updateEncodingOptionHelp() {
+        const style = styleSelect.value;
+
+        const descriptions = {
+          minimal:
+            "HTML-safe mode escapes ampersands and angle brackets, and quotes when enabled.",
+          named:
+            "Named mode uses readable references for common symbols. Unmapped Unicode can stay literal or be encoded numerically.",
+          decimal:
+            "Decimal numeric mode converts every Unicode code point into a decimal numeric character reference.",
+          hex:
+            "Hexadecimal numeric mode converts every Unicode code point into a hexadecimal numeric character reference."
+        };
+
+        $("optionsHelp").textContent = descriptions[style] || descriptions.minimal;
+      }
+
+      function encodeCharacter(character) {
+        const codePoint = character.codePointAt(0);
+        const style = styleSelect.value;
+        const encodeQuotes = quoteOption.checked;
+        const encodeAllUnicode = unicodeOption.checked;
+
+        if (style === "decimal") {
+          return "&#" + codePoint + ";";
+        }
+
+        if (style === "hex") {
+          return "&#x" + codePoint.toString(16).toUpperCase() + ";";
+        }
+
+        if (character === "&") return "&amp;";
+        if (character === "<") return "&lt;";
+        if (character === ">") return "&gt;";
+
+        if (character === '"' || character === "'") {
+          if (!encodeQuotes) return character;
+
+          return character === '"' ? "&quot;" : "&#39;";
+        }
+
+        if (style === "named" && namedEntities.has(character)) {
+          return namedEntities.get(character);
+        }
+
+        if (codePoint > 127 && encodeAllUnicode) {
+          return "&#" + codePoint + ";";
+        }
+
+        return character;
+      }
+
+      function encodeText(text) {
+        let result = "";
+
+        // Iterating with for...of preserves complete Unicode code points.
+        for (const character of text) {
+          result += encodeCharacter(character);
+        }
+
+        return result;
+      }
+
+      function decodeOnePass(text) {
+        // Decode one reference at a time in a detached textarea. The original
+        // input is never assigned to an HTML container in the live document.
+        const decoder = document.createElement("textarea");
+
+        return text.replace(
+          /&(?:#[0-9]+|#[xX][0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]+);/g,
+          function (reference) {
+            decoder.innerHTML = reference;
+
+            // A single matched character reference should produce no actual
+            // child elements. Use the textarea's text value, never render it.
+            return decoder.value;
+          }
+        );
+      }
+
+      function decodeText(text) {
+        const requestedPasses =
+          decodeDepth.value === "repeated" ? MAX_DECODE_PASSES : 1;
+
+        let result = text;
+        let passesUsed = 0;
+
+        for (let pass = 0; pass < requestedPasses; pass += 1) {
+          const next = decodeOnePass(result);
+          passesUsed += 1;
+
+          if (next === result) break;
+
+          result = next;
+        }
+
+        return {
+          text: result,
+          passes: passesUsed
+        };
+      }
+
+      function clearOutput() {
+        output.value = "";
+        lastOutput = "";
+        lastInput = "";
+        updateStats();
+      }
+
+      function runConversion(announce) {
+        const source = input.value;
+        const size = byteLength(source);
+
+        if (size > MAX_INPUT_BYTES) {
+          output.value = "";
+          updateStats();
+
+          if (announce) {
+            setStatus(
+              "The input is " + formatBytes(size) +
+              ". The maximum supported input size is 2 MB.",
+              "error"
+            );
+          }
+
+          return;
+        }
+
+        if (!source) {
+          output.value = "";
+          lastInput = "";
+          lastOutput = "";
+          updateStats();
+
+          if (announce) {
+            setStatus("Enter text before converting.", "warning");
+          }
+
+          return;
+        }
+
+        try {
+          if (mode === "encode") {
+            output.value = encodeText(source);
+          } else {
+            const decoded = decodeText(source);
+            output.value = decoded.text;
+          }
+
+          lastInput = source;
+          lastOutput = output.value;
+          lastConvertedMode = mode;
+
+          updateStats();
+
+          if (announce) {
+            if (mode === "encode") {
+              setStatus(
+                "Encoding complete. " + countEntities(output.value) +
+                " entity references appear in the output.",
+                "success"
+              );
+            } else {
+              setStatus(
+                "Decoding complete. The decoded result is displayed as plain text.",
+                "success"
+              );
+            }
+          }
+        } catch (error) {
+          output.value = "";
+          updateStats();
+
+          if (announce) {
+            setStatus(
+              "Conversion failed: " +
+              (error && error.message ? error.message : "Unexpected error."),
+              "error"
+            );
+          }
+        }
+      }
+
+      function setMode(nextMode, announce) {
+        if (nextMode !== "encode" && nextMode !== "decode") return;
+
+        mode = nextMode;
+        clearStatus();
+        updateDirectionUI();
+
+        if (liveOption.checked) {
+          runConversion(Boolean(announce));
+        } else {
+          clearOutput();
+        }
+      }
+
+      function loadExample(name) {
+        const examples = {
+          html: '<h1>Hello & welcome!</h1>\n<p>Use "quotes" and <tags>.</p>',
+          unicode: "Copyright © 2026 — Price: €25 • Smile: 😀",
+          quotes: '<a href="https://example.com/?a=1&b=2" title="A & B">Link</a>'
+        };
+
+        if (!Object.prototype.hasOwnProperty.call(examples, name)) return;
+
+        input.value = examples[name];
+        mode = "encode";
+        clearStatus();
+        updateDirectionUI();
+        runConversion(true);
+        input.focus();
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const temporary = document.createElement("textarea");
+        temporary.value = text;
+        temporary.setAttribute("readonly", "");
+        temporary.style.position = "fixed";
+        temporary.style.left = "-9999px";
+        temporary.style.top = "0";
+
+        document.body.appendChild(temporary);
+        temporary.select();
+
+        const success = document.execCommand("copy");
+        temporary.remove();
+
+        if (!success) {
+          throw new Error("Automatic copying failed.");
+        }
+      }
+
+      async function copyOutput() {
+        if (!output.value) {
+          setStatus("There is no output to copy yet.", "warning");
+          return;
+        }
+
+        try {
+          await copyText(output.value);
+          setStatus("Converted output copied to your clipboard.", "success");
+        } catch (error) {
+          output.focus();
+          output.select();
+
+          setStatus(
+            "Automatic copying failed. The output is selected so you can copy it manually.",
+            "warning"
+          );
+        }
+      }
+
+      function downloadOutput() {
+        if (!output.value) {
+          setStatus("There is no output to download yet.", "warning");
+          return;
+        }
+
+        const blob = new Blob([output.value], {
+          type: "text/plain;charset=utf-8"
+        });
+
+        const objectUrl = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = objectUrl;
+        link.download = mode === "encode"
+          ? "html-entities-encoded.txt"
+          : "html-entities-decoded.txt";
+
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(function () {
+          URL.revokeObjectURL(objectUrl);
+        }, 1000);
+
+        setStatus("Download started: " + link.download, "success");
+      }
+
+      async function loadFile(file) {
+        if (!file) return;
+
+        if (file.size > MAX_INPUT_BYTES) {
+          setStatus(
+            "This file is " + formatBytes(file.size) +
+            ". The maximum file size is 2 MB.",
+            "error"
+          );
+          fileInput.value = "";
+          return;
+        }
+
+        try {
+          const text = await file.text();
+
+          if (byteLength(text) > MAX_INPUT_BYTES) {
+            throw new Error("The decoded text exceeds the 2 MB limit.");
+          }
+
+          input.value = text;
+          clearStatus();
+
+          if (liveOption.checked) {
+            runConversion(false);
+          } else {
+            clearOutput();
+          }
+
+          setStatus(
+            "Loaded " + file.name + " (" + formatBytes(file.size) + ").",
+            "success"
+          );
+        } catch (error) {
+          setStatus(
+            error.message || "The selected file could not be read.",
+            "error"
+          );
+        } finally {
+          fileInput.value = "";
+        }
+      }
+
+      function swapInputAndOutput() {
+        if (!output.value) {
+          setStatus(
+            "Convert some content before swapping the input and output.",
+            "warning"
+          );
+          return;
+        }
+
+        const converted = output.value;
+
+        input.value = converted;
+        mode = mode === "encode" ? "decode" : "encode";
+
+        clearStatus();
+        updateDirectionUI();
+        runConversion(true);
+        input.focus();
+      }
+
+      function resetTool() {
+        input.value = "";
+        output.value = "";
+        mode = "encode";
+
+        styleSelect.value = "minimal";
+        decodeDepth.value = "once";
+        quoteOption.checked = true;
+        unicodeOption.checked = false;
+        liveOption.checked = true;
+
+        clearStatus();
+        updateDirectionUI();
+        updateStats();
+        input.focus();
+      }
+
+      function renderEntityReference() {
+        const tbody = $("entityReferenceRows");
+        tbody.replaceChildren();
+
+        const fragment = document.createDocumentFragment();
+
+        entityReferenceData.forEach(function (item) {
+          const tr = document.createElement("tr");
+
+          const characterCell = document.createElement("td");
+          characterCell.textContent = item[0];
+
+          const namedCell = document.createElement("td");
+          const namedCode = document.createElement("code");
+          namedCode.textContent = item[1];
+          namedCell.appendChild(namedCode);
+
+          const decimalCell = document.createElement("td");
+          const decimalCode = document.createElement("code");
+          decimalCode.textContent = item[2];
+          decimalCell.appendChild(decimalCode);
+
+          const hexCell = document.createElement("td");
+          const hexCode = document.createElement("code");
+          hexCode.textContent = item[3];
+          hexCell.appendChild(hexCode);
+
+          const actionCell = document.createElement("td");
+          const button = document.createElement("button");
+
+          button.type = "button";
+          button.className = "hec-btn hec-btn-secondary hec-btn-small";
+          button.textContent = "Load character";
+          button.setAttribute(
+            "aria-label",
+            "Load character " + item[0] + " into the input"
+          );
+
+          button.addEventListener("click", function () {
+            input.value = item[0];
+            mode = "encode";
+            clearStatus();
+            updateDirectionUI();
+            runConversion(true);
+            input.focus();
+          });
+
+          actionCell.appendChild(button);
+          tr.append(
+            characterCell,
+            namedCell,
+            decimalCell,
+            hexCell,
+            actionCell
+          );
+
+          fragment.appendChild(tr);
+        });
+
+        tbody.appendChild(fragment);
+      }
+
+      encodeModeBtn.addEventListener("click", function () {
+        setMode("encode", true);
+      });
+
+      decodeModeBtn.addEventListener("click", function () {
+        setMode("decode", true);
+      });
+
+      convertBtn.addEventListener("click", function () {
+        runConversion(true);
+      });
+
+      input.addEventListener("input", function () {
+        clearStatus();
+
+        if (liveOption.checked) {
+          runConversion(false);
+        } else {
+          clearOutput();
+        }
+      });
+
+      styleSelect.addEventListener("change", function () {
+        updateEncodingOptionHelp();
+
+        if (liveOption.checked && mode === "encode") {
+          runConversion(false);
+        }
+      });
+
+      decodeDepth.addEventListener("change", function () {
+        if (liveOption.checked && mode === "decode") {
+          runConversion(false);
+        }
+      });
+
+      quoteOption.addEventListener("change", function () {
+        if (liveOption.checked && mode === "encode") {
+          runConversion(false);
+        }
+      });
+
+      unicodeOption.addEventListener("change", function () {
+        if (liveOption.checked && mode === "encode") {
+          runConversion(false);
+        }
+      });
+
+      liveOption.addEventListener("change", function () {
+        if (liveOption.checked) {
+          runConversion(false);
+        }
+      });
+
+      $("uploadBtn").addEventListener("click", function () {
+        fileInput.click();
+      });
+
+      fileInput.addEventListener("change", function () {
+        if (fileInput.files && fileInput.files[0]) {
+          loadFile(fileInput.files[0]);
+        }
+      });
+
+      $("clearInputBtn").addEventListener("click", function () {
+        input.value = "";
+        clearOutput();
+        clearStatus();
+        input.focus();
+      });
+
+      $("copyBtn").addEventListener("click", copyOutput);
+      $("copyAllBtn").addEventListener("click", copyOutput);
+      $("downloadBtn").addEventListener("click", downloadOutput);
+      $("swapBtn").addEventListener("click", swapInputAndOutput);
+      $("resetBtn").addEventListener("click", resetTool);
+
+      document.querySelectorAll("[data-example]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          loadExample(button.dataset.example);
+        });
+      });
+
+      // Keep the page usable immediately with a clear, harmless example.
+      renderEntityReference();
+      updateDirectionUI();
+      loadExample("html");
+    })();
+  </script>
+</body>
+</html>

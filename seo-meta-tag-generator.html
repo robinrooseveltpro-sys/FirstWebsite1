@@ -1,0 +1,1949 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>SEO Meta Tag Generator & SERP Preview Online</title>
+  <meta name="description" content="Generate SEO title tags, meta descriptions, canonical URLs, Open Graph and Twitter tags. Preview search snippets and copy ready-to-use HTML for free.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://converttotoolsonline.com/seo-meta-tag-generator.html">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SEO Meta Tag Generator & SERP Preview">
+  <meta property="og:description" content="Generate SEO metadata, preview search snippets, and create Open Graph and Twitter tags with this free browser-based tool.">
+  <meta property="og:url" content="https://converttotoolsonline.com/seo-meta-tag-generator.html">
+  <meta name="twitter:card" content="summary">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SEO Meta Tag Generator & SERP Preview",
+    "url": "https://converttotoolsonline.com/seo-meta-tag-generator.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based SEO metadata generator with search-result previews, title and description checks, canonical URL validation, and social sharing tags.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Generate title and meta description tags",
+      "Preview search-result-style snippets",
+      "Generate canonical URL tags",
+      "Generate Open Graph and Twitter metadata",
+      "Validate absolute URLs",
+      "Copy and download HTML metadata"
+    ]
+  }
+  </script>
+
+  <style>
+    .smt-page {
+      margin: 0;
+      background: #f7f8fc;
+      color: #182237;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    .smt-page *,
+    .smt-page *::before,
+    .smt-page *::after {
+      box-sizing: border-box;
+    }
+
+    .smt-page a {
+      color: #2459c4;
+    }
+
+    .smt-shell {
+      width: min(100% - 30px, 1100px);
+      margin-inline: auto;
+    }
+
+    .smt-header {
+      border-bottom: 1px solid #e4e8f0;
+      background: #fff;
+    }
+
+    .smt-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      min-height: 72px;
+      padding-block: 12px;
+    }
+
+    .smt-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #182237 !important;
+      font-weight: 800;
+      letter-spacing: -.025em;
+      text-decoration: none;
+    }
+
+    .smt-brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: #2459c4;
+      color: white;
+      font-size: .82rem;
+      font-weight: 850;
+    }
+
+    .smt-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      font-size: .9rem;
+    }
+
+    .smt-nav a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .smt-nav a:hover {
+      color: #2459c4;
+      text-decoration: underline;
+    }
+
+    .smt-main {
+      padding-block: 36px 64px;
+    }
+
+    .smt-hero {
+      max-width: 790px;
+      margin: 0 auto 26px;
+      text-align: center;
+    }
+
+    .smt-eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #2459c4;
+      font-size: .81rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .smt-hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.05rem);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+    }
+
+    .smt-hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #59667c;
+      font-size: 1.03rem;
+    }
+
+    .smt-free-note {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
+      color: #247448;
+      font-size: .87rem;
+      font-weight: 700;
+    }
+
+    .smt-card {
+      padding: clamp(17px, 3vw, 28px);
+      border: 1px solid #e2e7f0;
+      border-radius: 19px;
+      background: #fff;
+      box-shadow: 0 12px 36px rgba(26, 41, 77, .055);
+    }
+
+    .smt-card-heading {
+      margin-bottom: 19px;
+    }
+
+    .smt-card-heading h2 {
+      margin: 0 0 5px;
+      font-size: 1.27rem;
+      letter-spacing: -.02em;
+    }
+
+    .smt-muted {
+      color: #69758b;
+      font-size: .89rem;
+    }
+
+    .smt-section-label {
+      margin: 25px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e4e8f0;
+      font-size: 1.02rem;
+      font-weight: 800;
+    }
+
+    .smt-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .smt-field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .smt-field-wide {
+      grid-column: 1 / -1;
+    }
+
+    .smt-field label {
+      color: #35435c;
+      font-size: .88rem;
+      font-weight: 750;
+    }
+
+    .smt-field input,
+    .smt-field textarea,
+    .smt-field select {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      min-height: 43px;
+      padding: 10px 12px;
+      border: 1px solid #d5deeb;
+      border-radius: 10px;
+      background: #fff;
+      color: #1d2b43;
+      font: inherit;
+      font-size: .92rem;
+    }
+
+    .smt-field textarea {
+      min-height: 92px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .smt-field input:disabled {
+      color: #7b8598;
+      background: #f2f4f8;
+      cursor: not-allowed;
+    }
+
+    .smt-field input:focus-visible,
+    .smt-field textarea:focus-visible,
+    .smt-field select:focus-visible,
+    .smt-page button:focus-visible,
+    .smt-page a:focus-visible {
+      outline: 3px solid #91b4ff;
+      outline-offset: 3px;
+    }
+
+    .smt-field-hint {
+      color: #788398;
+      font-size: .79rem;
+    }
+
+    .smt-counter-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      color: #69758b;
+      font-size: .79rem;
+    }
+
+    .smt-counter {
+      font-weight: 750;
+    }
+
+    .smt-counter-warning {
+      color: #a36612;
+    }
+
+    .smt-counter-good {
+      color: #267448;
+    }
+
+    .smt-check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 10px;
+      color: #526078;
+      font-size: .86rem;
+    }
+
+    .smt-check-row input {
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: #2459c4;
+    }
+
+    .smt-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 10px 15px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: #2459c4;
+      color: #fff !important;
+      font: inherit;
+      font-size: .91rem;
+      font-weight: 750;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none !important;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+
+    .smt-btn:hover {
+      background: #1949a8;
+    }
+
+    .smt-btn-secondary {
+      border-color: #d9e0eb;
+      background: #fff;
+      color: #34415b !important;
+    }
+
+    .smt-btn-secondary:hover {
+      background: #f4f7fc;
+    }
+
+    .smt-btn-small {
+      min-height: 34px;
+      padding: 7px 11px;
+      font-size: .82rem;
+    }
+
+    .smt-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .smt-preview-section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e9f1;
+    }
+
+    .smt-preview-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .smt-preview-head h3 {
+      margin: 0 0 3px;
+      font-size: 1.1rem;
+    }
+
+    .smt-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+      align-items: stretch;
+    }
+
+    .smt-preview-box {
+      min-width: 0;
+      padding: 17px;
+      border: 1px solid #e1e6ef;
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .smt-preview-box h4 {
+      margin: 0 0 12px;
+      color: #46536b;
+      font-size: .83rem;
+      font-weight: 800;
+    }
+
+    .smt-search-result {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .smt-search-domain-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+
+    .smt-site-icon {
+      display: grid;
+      place-items: center;
+      flex: 0 0 28px;
+      width: 28px;
+      height: 28px;
+      border: 1px solid #e1e5eb;
+      border-radius: 50%;
+      background: #f3f6fc;
+      color: #2459c4;
+      font-size: .75rem;
+      font-weight: 800;
+    }
+
+    .smt-site-domain {
+      overflow: hidden;
+      color: #202124;
+      font-size: 14px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .smt-site-path {
+      overflow: hidden;
+      color: #5f6368;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .smt-search-title {
+      display: -webkit-box;
+      overflow: hidden;
+      margin: 5px 0;
+      color: #1a0dab;
+      font-size: 20px;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .smt-search-description {
+      display: -webkit-box;
+      overflow: hidden;
+      margin: 0;
+      color: #4d5156;
+      font-size: 14px;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+    }
+
+    .smt-social-card {
+      overflow: hidden;
+      border: 1px solid #e1e5ea;
+      border-radius: 9px;
+      background: #f3f5f7;
+    }
+
+    .smt-social-image {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      aspect-ratio: 1.91 / 1;
+      overflow: hidden;
+      background: #e8edf6;
+      color: #69758b;
+      font-size: .88rem;
+      text-align: center;
+    }
+
+    .smt-social-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .smt-social-copy {
+      padding: 13px;
+      border-top: 1px solid #e0e5ec;
+      background: #fff;
+    }
+
+    .smt-social-domain {
+      margin-bottom: 4px;
+      color: #6b7788;
+      font-size: .73rem;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .smt-social-title {
+      display: -webkit-box;
+      overflow: hidden;
+      margin-bottom: 4px;
+      color: #1d2b43;
+      font-size: .98rem;
+      font-weight: 800;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .smt-social-description {
+      display: -webkit-box;
+      overflow: hidden;
+      color: #59667c;
+      font-size: .84rem;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .smt-preview-caption {
+      margin-top: 10px;
+      color: #778297;
+      font-size: .79rem;
+    }
+
+    .smt-validation {
+      margin-top: 20px;
+      padding: 16px;
+      border: 1px solid #e0e6ef;
+      border-radius: 13px;
+      background: #fafbfe;
+    }
+
+    .smt-validation h3 {
+      margin: 0 0 9px;
+      font-size: 1rem;
+    }
+
+    .smt-validation-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .smt-validation-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      color: #536078;
+      font-size: .87rem;
+    }
+
+    .smt-validation-icon {
+      flex: 0 0 21px;
+      font-weight: 850;
+    }
+
+    .smt-validation-item.is-good .smt-validation-icon {
+      color: #247448;
+    }
+
+    .smt-validation-item.is-warning .smt-validation-icon {
+      color: #a36612;
+    }
+
+    .smt-validation-item.is-error .smt-validation-icon {
+      color: #ae3030;
+    }
+
+    .smt-output-section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e9f1;
+    }
+
+    .smt-output-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .smt-output-head h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .smt-output {
+      display: block;
+      width: 100%;
+      min-height: 310px;
+      padding: 15px;
+      border: 1px solid #dbe2ed;
+      border-radius: 11px;
+      background: #f9faff;
+      color: #21314a;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12.5px;
+      line-height: 1.75;
+      resize: vertical;
+      white-space: pre;
+      overflow: auto;
+    }
+
+    .smt-output:focus-visible {
+      outline: 3px solid #91b4ff;
+      outline-offset: 3px;
+    }
+
+    .smt-status {
+      margin-top: 13px;
+      padding: 12px 14px;
+      border: 1px solid #dce3ef;
+      border-radius: 10px;
+      background: #f7f9ff;
+      color: #35435c;
+      font-size: .89rem;
+      overflow-wrap: anywhere;
+    }
+
+    .smt-status--success {
+      border-color: #c7e7d1;
+      background: #f0fbf4;
+      color: #21663d;
+    }
+
+    .smt-status--error {
+      border-color: #edc7c7;
+      background: #fff4f4;
+      color: #982c2c;
+    }
+
+    .smt-content {
+      width: min(100%, 850px);
+      margin: 44px auto 0;
+    }
+
+    .smt-content section {
+      margin-top: 32px;
+    }
+
+    .smt-content h2 {
+      margin: 0 0 12px;
+      color: #182237;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+    }
+
+    .smt-content h3 {
+      margin: 21px 0 7px;
+      font-size: 1.08rem;
+    }
+
+    .smt-content p,
+    .smt-content li {
+      color: #536078;
+    }
+
+    .smt-content p {
+      margin: 0 0 12px;
+    }
+
+    .smt-content li {
+      margin-bottom: 7px;
+    }
+
+    .smt-content ul,
+    .smt-content ol {
+      padding-left: 24px;
+    }
+
+    .smt-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .smt-step {
+      padding: 16px;
+      border: 1px solid #e2e7f0;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .smt-step-number {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin-bottom: 9px;
+      border-radius: 9px;
+      background: #edf3ff;
+      color: #2459c4;
+      font-weight: 850;
+    }
+
+    .smt-step strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .smt-step p {
+      margin: 0;
+      font-size: .9rem;
+    }
+
+    .smt-code-block {
+      overflow-x: auto;
+      padding: 14px;
+      border: 1px solid #e0e6f0;
+      border-radius: 12px;
+      background: #fff;
+      color: #2b3a54;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .84rem;
+      line-height: 1.7;
+      white-space: pre;
+    }
+
+    .smt-related {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .smt-related a {
+      padding: 8px 12px;
+      border: 1px solid #dce2ed;
+      border-radius: 999px;
+      background: #fff;
+      text-decoration: none;
+      font-size: .9rem;
+    }
+
+    .smt-related a:hover {
+      border-color: #aac0f3;
+      background: #f4f7ff;
+    }
+
+    .smt-faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .smt-faq-list details {
+      padding: 15px 17px;
+      border: 1px solid #e1e6ef;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .smt-faq-list summary {
+      color: #26334b;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .smt-faq-list details p {
+      margin: 10px 0 0;
+    }
+
+    .smt-footer {
+      padding-block: 24px;
+      border-top: 1px solid #e4e8f0;
+      background: #fff;
+      color: #69758a;
+      font-size: .87rem;
+    }
+
+    .smt-footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .smt-footer a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .smt-footer a:hover {
+      text-decoration: underline;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 760px) {
+      .smt-preview-grid,
+      .smt-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .smt-shell {
+        width: min(100% - 22px, 1100px);
+      }
+
+      .smt-main {
+        padding-top: 25px;
+      }
+
+      .smt-header-inner {
+        align-items: flex-start;
+      }
+
+      .smt-nav {
+        gap: 12px;
+        font-size: .83rem;
+      }
+
+      .smt-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .smt-field-wide {
+        grid-column: auto;
+      }
+
+      .smt-actions .smt-btn {
+        flex: 1 1 100%;
+      }
+
+      .smt-output {
+        min-height: 270px;
+        font-size: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .smt-page *,
+      .smt-page *::before,
+      .smt-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="smt-page">
+  <header class="smt-header">
+    <div class="smt-shell smt-header-inner">
+      <a class="smt-brand" href="/index.html" aria-label="ConvertToToolsOnline home">
+        <span class="smt-brand-mark" aria-hidden="true">CT</span>
+        <span>ConvertToToolsOnline</span>
+      </a>
+
+      <nav class="smt-nav" aria-label="Main navigation">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#all-tools">All tools</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="smt-shell smt-main">
+    <section class="smt-hero" aria-labelledby="page-title">
+      <div class="smt-eyebrow">Free website SEO tool</div>
+      <h1 id="page-title">SEO Meta Tag Generator</h1>
+      <p>
+        Create title tags, meta descriptions, canonical links, Open Graph
+        metadata, and Twitter cards. Preview your search-result-style snippet,
+        check common issues, and copy the HTML for your website.
+      </p>
+      <div class="smt-free-note">
+        <span aria-hidden="true">●</span>
+        Generate metadata in your browser — no account required
+      </div>
+    </section>
+
+    <section class="smt-card" aria-labelledby="generator-title">
+      <div class="smt-card-heading">
+        <h2 id="generator-title">Generate SEO meta tags</h2>
+        <div class="smt-muted">
+          Edit the fields below. Your previews and generated HTML update as you type.
+        </div>
+      </div>
+
+      <div class="smt-section-label">1. Page information</div>
+
+      <div class="smt-fields">
+        <div class="smt-field smt-field-wide">
+          <label for="pageTitle">SEO title tag</label>
+          <input id="pageTitle" type="text" maxlength="300"
+            placeholder="Example: Free Image Compressor Online">
+          <div class="smt-counter-row">
+            <span>A unique, descriptive title for this specific page.</span>
+            <span id="titleCount" class="smt-counter">0 characters</span>
+          </div>
+        </div>
+
+        <div class="smt-field smt-field-wide">
+          <label for="metaDescription">Meta description</label>
+          <textarea id="metaDescription" maxlength="1000"
+            placeholder="Describe the page clearly and explain what visitors can do."></textarea>
+          <div class="smt-counter-row">
+            <span>Useful guidance: roughly 140–160 characters, not a fixed limit.</span>
+            <span id="descriptionCount" class="smt-counter">0 characters</span>
+          </div>
+        </div>
+
+        <div class="smt-field smt-field-wide">
+          <label for="pageUrl">Page URL</label>
+          <input id="pageUrl" type="url" inputmode="url"
+            placeholder="https://example.com/your-page/">
+          <span class="smt-field-hint">
+            Enter the final public URL, including https://.
+          </span>
+        </div>
+
+        <div class="smt-field smt-field-wide">
+          <label for="canonicalUrl">Canonical URL</label>
+          <input id="canonicalUrl" type="url" inputmode="url"
+            placeholder="https://example.com/your-page/">
+          <label class="smt-check-row">
+            <input id="sameCanonical" type="checkbox" checked>
+            <span>Use the page URL as the canonical URL automatically.</span>
+          </label>
+          <span class="smt-field-hint">
+            Use a canonical URL only when it correctly represents the preferred version of the page.
+          </span>
+        </div>
+
+        <div class="smt-field">
+          <label for="robotsValue">Robots directive</label>
+          <select id="robotsValue">
+            <option value="index, follow" selected>index, follow</option>
+            <option value="noindex, follow">noindex, follow</option>
+            <option value="index, nofollow">index, nofollow</option>
+            <option value="noindex, nofollow">noindex, nofollow</option>
+          </select>
+          <span class="smt-field-hint">Choose according to your indexing requirements.</span>
+        </div>
+
+        <div class="smt-field">
+          <label for="authorName">Author (optional)</label>
+          <input id="authorName" type="text" maxlength="150"
+            placeholder="Author or publisher name">
+        </div>
+      </div>
+
+      <div class="smt-section-label">2. Social sharing metadata</div>
+
+      <div class="smt-fields">
+        <div class="smt-field">
+          <label for="ogTitle">Open Graph title</label>
+          <input id="ogTitle" type="text" maxlength="300"
+            placeholder="Title for social previews">
+          <span class="smt-field-hint">Defaults to the SEO title when blank.</span>
+        </div>
+
+        <div class="smt-field">
+          <label for="ogType">Open Graph type</label>
+          <select id="ogType">
+            <option value="website" selected>Website</option>
+            <option value="article">Article</option>
+            <option value="product">Product</option>
+            <option value="profile">Profile</option>
+            <option value="book">Book</option>
+          </select>
+        </div>
+
+        <div class="smt-field smt-field-wide">
+          <label for="ogDescription">Open Graph description</label>
+          <textarea id="ogDescription" maxlength="1000"
+            placeholder="Short description for social sharing"></textarea>
+          <span class="smt-field-hint">Defaults to the meta description when blank.</span>
+        </div>
+
+        <div class="smt-field smt-field-wide">
+          <label for="ogImage">Social preview image URL (optional)</label>
+          <input id="ogImage" type="url" inputmode="url"
+            placeholder="https://example.com/images/social-preview.jpg">
+          <span class="smt-field-hint">
+            Use an accessible absolute image URL on the published page. A local file path will not work for social crawlers.
+          </span>
+        </div>
+
+        <div class="smt-field">
+          <label for="twitterCard">Twitter card type</label>
+          <select id="twitterCard">
+            <option value="summary_large_image" selected>Large image summary</option>
+            <option value="summary">Summary</option>
+          </select>
+        </div>
+
+        <div class="smt-field">
+          <label for="ogLocale">Locale (optional)</label>
+          <input id="ogLocale" type="text" maxlength="20"
+            placeholder="en_US">
+        </div>
+      </div>
+
+      <div class="smt-actions">
+        <button id="copyHtmlBtn" class="smt-btn" type="button">
+          Copy generated HTML
+        </button>
+        <button id="downloadHtmlBtn" class="smt-btn smt-btn-secondary"
+          type="button">Download metadata</button>
+        <button id="resetBtn" class="smt-btn smt-btn-secondary"
+          type="button">Reset example</button>
+      </div>
+
+      <div id="status" class="smt-status" role="status"
+        aria-live="polite" hidden></div>
+
+      <section class="smt-preview-section" aria-labelledby="preview-title">
+        <div class="smt-preview-head">
+          <div>
+            <h3 id="preview-title">Live previews</h3>
+            <div class="smt-muted">
+              Illustrative previews, not an exact reproduction of search engines or social apps.
+            </div>
+          </div>
+        </div>
+
+        <div class="smt-preview-grid">
+          <div class="smt-preview-box">
+            <h4>Search result preview</h4>
+            <div class="smt-search-result">
+              <div class="smt-search-domain-row">
+                <div class="smt-site-icon" aria-hidden="true">W</div>
+                <div style="min-width:0;">
+                  <div id="previewDomain" class="smt-site-domain">example.com</div>
+                  <div id="previewPath" class="smt-site-path">https://example.com/your-page/</div>
+                </div>
+              </div>
+              <div id="previewTitle" class="smt-search-title">
+                Your SEO title appears here
+              </div>
+              <p id="previewDescription" class="smt-search-description">
+                Your meta description preview appears here.
+              </p>
+            </div>
+            <p class="smt-preview-caption">
+              Actual titles and snippets may differ based on the search query, page content, device, and search engine.
+            </p>
+          </div>
+
+          <div class="smt-preview-box">
+            <h4>Social sharing preview</h4>
+            <div class="smt-social-card">
+              <div id="socialImageBox" class="smt-social-image">
+                Add a public image URL to preview your social image
+              </div>
+              <div class="smt-social-copy">
+                <div id="socialDomain" class="smt-social-domain">example.com</div>
+                <div id="socialTitle" class="smt-social-title">
+                  Your social title appears here
+                </div>
+                <div id="socialDescription" class="smt-social-description">
+                  Your social description appears here.
+                </div>
+              </div>
+            </div>
+            <p class="smt-preview-caption">
+              Social platforms may cache metadata and use platform-specific preview rules.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="smt-validation" aria-labelledby="validation-title">
+        <h3 id="validation-title">Metadata checks</h3>
+        <ul id="validationList" class="smt-validation-list">
+          <li class="smt-validation-item">
+            <span class="smt-validation-icon">•</span>
+            <span>Checks update as you edit your metadata.</span>
+          </li>
+        </ul>
+        <p class="smt-field-hint" style="margin-top:12px;">
+          These checks are practical reminders, not a Google ranking score or an SEO audit of your full website.
+        </p>
+      </section>
+
+      <section class="smt-output-section" aria-labelledby="output-title">
+        <div class="smt-output-head">
+          <div>
+            <h3 id="output-title">Generated HTML metadata</h3>
+            <div class="smt-muted">
+              Copy this code into the head section of the matching webpage.
+            </div>
+          </div>
+          <button id="selectOutputBtn" class="smt-btn smt-btn-secondary smt-btn-small"
+            type="button">Select code</button>
+        </div>
+
+        <label for="generatedCode" class="smt-field-hint">
+          Review the URLs and metadata before publishing.
+        </label>
+        <textarea id="generatedCode" class="smt-output"
+          readonly spellcheck="false"
+          aria-label="Generated HTML meta tags"></textarea>
+      </section>
+    </section>
+
+    <div class="smt-content">
+      <section aria-labelledby="how-title">
+        <h2 id="how-title">How to use the SEO meta tag generator</h2>
+        <p>
+          Meta tags provide information about a webpage. This free online
+          SEO meta tag generator helps you create the HTML for a page title,
+          meta description, canonical URL, indexing directive, and social
+          sharing metadata without manually writing every tag.
+        </p>
+
+        <div class="smt-steps">
+          <div class="smt-step">
+            <div class="smt-step-number">1</div>
+            <strong>Enter page details</strong>
+            <p>Add a descriptive title, meta description, public URL, and canonical URL if needed.</p>
+          </div>
+          <div class="smt-step">
+            <div class="smt-step-number">2</div>
+            <strong>Check your previews</strong>
+            <p>Review the search-result-style and social-sharing previews and correct common issues.</p>
+          </div>
+          <div class="smt-step">
+            <div class="smt-step-number">3</div>
+            <strong>Copy the HTML</strong>
+            <p>Copy or download the generated tags and add them to the intended webpage's head section.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="title-description-title">
+        <h2 id="title-description-title">SEO title tags and meta descriptions</h2>
+
+        <h3>What is an SEO title tag?</h3>
+        <p>
+          A title tag provides a page title in the document's HTML head.
+          Search engines can use it when forming a search-result title link,
+          but they may choose other information from the page or links to it.
+          Write titles that are descriptive, distinctive, and consistent with
+          the visible page heading.
+        </p>
+
+        <h3>What is a meta description?</h3>
+        <p>
+          A meta description summarizes what a webpage contains. Search
+          engines may use it in a result snippet when it helps describe the
+          page, but they can also generate a snippet from the page's visible
+          content. A useful description should explain the page clearly and
+          give a person a genuine reason to visit.
+        </p>
+
+        <h3>Are character limits fixed?</h3>
+        <p>
+          No universal character count guarantees that a title or description
+          will be displayed in full. Search-result layouts can truncate text
+          according to device width, query, and other factors. The counters
+          here are editing aids, not hard ranking requirements.
+        </p>
+      </section>
+
+      <section aria-labelledby="canonical-title">
+        <h2 id="canonical-title">Canonical URLs and indexing directives</h2>
+
+        <h3>What is a canonical URL?</h3>
+        <p>
+          A canonical link identifies the preferred URL for substantially
+          duplicate or similar pages. It should point to a real, appropriate
+          page URL. It is not a general way to force a page into Google's
+          index, and it should not be set to an unrelated destination.
+        </p>
+
+        <h3>What do index and noindex mean?</h3>
+        <p>
+          Indexing directives communicate whether a page should be eligible
+          for indexing and whether links on it should be followed. Do not
+          apply noindex accidentally to a page intended to appear in search
+          results. Directives work only when crawlers can access and process
+          the page; they cannot compensate for blocking the page from crawling.
+        </p>
+      </section>
+
+      <section aria-labelledby="social-title">
+        <h2 id="social-title">Open Graph and Twitter metadata</h2>
+        <p>
+          Open Graph tags describe a webpage for social-sharing previews.
+          Common fields include the social title, description, page URL, type,
+          and image. Twitter card metadata provides corresponding hints for
+          compatible X/Twitter previews. The final appearance depends on each
+          platform's crawler, rules, image requirements, and cache.
+        </p>
+        <p>
+          Use a publicly accessible absolute image URL for a social preview
+          image. An image that exists only on your computer cannot be fetched
+          by a social platform when it crawls the published webpage.
+        </p>
+      </section>
+
+      <section aria-labelledby="implementation-title">
+        <h2 id="implementation-title">Where do you put the generated meta tags?</h2>
+        <p>
+          Add the generated metadata inside the appropriate webpage's
+          <code>&lt;head&gt;</code> element. Do not paste a second complete
+          HTML document or create duplicate conflicting canonical and title
+          tags. If the page already has metadata, update or replace the
+          existing tags as appropriate.
+        </p>
+        <pre class="smt-code-block">&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Your page title&lt;/title&gt;
+  &lt;meta name="description" content="A clear page summary."&gt;
+  &lt;link rel="canonical" href="https://example.com/page/"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Your visible page heading&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </section>
+
+      <section aria-labelledby="limitations-title">
+        <h2 id="limitations-title">What this tool does not guarantee</h2>
+        <ul>
+          <li>
+            It does not guarantee Google rankings or force a search engine to
+            display your title or description exactly as previewed.
+          </li>
+          <li>
+            It does not crawl your full website or verify that generated URLs
+            return the correct HTTP status.
+          </li>
+          <li>
+            It does not test a published page with Google's live systems or
+            fetch social platform previews.
+          </li>
+          <li>
+            It does not generate a complete technical SEO audit, backlink
+            report, keyword research report, or performance score.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="related-title">
+        <h2 id="related-title">Explore more free tools</h2>
+        <p>Continue with another utility on ConvertToToolsOnline.</p>
+        <div class="smt-related">
+          <a href="/yaml-to-json-converter.html">YAML to JSON Converter</a>
+          <a href="/json-formatter.html">JSON Formatter</a>
+          <a href="/index.html#all-tools">Browse all tools</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="faq-title">
+        <h2 id="faq-title">Frequently asked questions</h2>
+
+        <div class="smt-faq-list">
+          <details>
+            <summary>Is this SEO meta tag generator free?</summary>
+            <p>
+              Yes. You can generate, preview, copy, and download the metadata
+              on this page without an account or a tool usage fee.
+            </p>
+          </details>
+
+          <details>
+            <summary>Will these meta tags improve my Google rankings?</summary>
+            <p>
+              Correct metadata can help describe a webpage, and good titles
+              can help people understand a search result. However, generating
+              tags does not guarantee rankings, indexing, clicks, or traffic.
+              Overall page usefulness, technical accessibility, content
+              quality, competition, and many other factors matter.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does Google always show my meta description?</summary>
+            <p>
+              No. Google may create a snippet from the page's visible content
+              when it considers that content more useful for a particular
+              search. A meta description is a suggestion, not a guaranteed
+              search-result snippet.
+            </p>
+          </details>
+
+          <details>
+            <summary>How long should an SEO title be?</summary>
+            <p>
+              Write a concise title that accurately describes the page.
+              There is no fixed character limit that guarantees full display;
+              title links may be truncated or rewritten depending on the
+              search result and device.
+            </p>
+          </details>
+
+          <details>
+            <summary>What is a canonical URL used for?</summary>
+            <p>
+              A canonical URL indicates the preferred URL among duplicate
+              or substantially similar pages. Choose a valid URL that
+              represents the intended primary version of the page.
+            </p>
+          </details>
+
+          <details>
+            <summary>What are Open Graph tags?</summary>
+            <p>
+              Open Graph tags provide information such as title, description,
+              URL, type, and image to help compatible platforms build a
+              social-sharing preview.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I use this tool on a phone?</summary>
+            <p>
+              Yes. The form, previews, and HTML output are designed to adapt
+              to smaller screens. You can edit the fields and copy the code
+              using a supported mobile browser.
+            </p>
+          </details>
+
+          <details>
+            <summary>Do I need to add the metadata to every page?</summary>
+            <p>
+              Each important page should have metadata that accurately
+              describes that specific page. Avoid using identical titles
+              and descriptions across unrelated pages.
+            </p>
+          </details>
+
+          <details>
+            <summary>Where do I paste the generated code?</summary>
+            <p>
+              Place the relevant generated tags inside the head section of
+              the webpage they describe. Review the existing HTML first to
+              prevent duplicate or conflicting metadata.
+            </p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="smt-footer">
+    <div class="smt-shell smt-footer-inner">
+      <span>© <span id="footerYear">2026</span> ConvertToToolsOnline</span>
+      <span>
+        <a href="/about.html">About</a>
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        &nbsp;·&nbsp;
+        <a href="/terms.html">Terms</a>
+        &nbsp;·&nbsp;
+        <a href="/contact.html">Contact</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const $ = function (id) {
+        return document.getElementById(id);
+      };
+
+      const fields = [
+        "pageTitle",
+        "metaDescription",
+        "pageUrl",
+        "canonicalUrl",
+        "sameCanonical",
+        "robotsValue",
+        "authorName",
+        "ogTitle",
+        "ogType",
+        "ogDescription",
+        "ogImage",
+        "twitterCard",
+        "ogLocale"
+      ];
+
+      const status = $("status");
+      const generatedCode = $("generatedCode");
+
+      const DEFAULTS = {
+        pageTitle: "Free Online Tool - Example Brand",
+        metaDescription:
+          "Use this free online tool to complete your task quickly. Simple, useful, and easy to use on desktop or mobile.",
+        pageUrl: "https://example.com/free-online-tool/",
+        canonicalUrl: "https://example.com/free-online-tool/",
+        sameCanonical: true,
+        robotsValue: "index, follow",
+        authorName: "",
+        ogTitle: "",
+        ogType: "website",
+        ogDescription: "",
+        ogImage: "",
+        twitterCard: "summary_large_image",
+        ogLocale: "en_US"
+      };
+
+      $("footerYear").textContent = String(new Date().getFullYear());
+
+      function getValue(id) {
+        return $(id).value.trim();
+      }
+
+      function escapeAttribute(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      function safeHttpUrl(value) {
+        if (!value) return null;
+
+        try {
+          const parsed = new URL(value);
+
+          if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
+            return null;
+          }
+
+          if (!parsed.hostname || !parsed.hostname.includes(".")) {
+            return null;
+          }
+
+          return parsed;
+        } catch (error) {
+          return null;
+        }
+      }
+
+      function urlPath(value) {
+        const parsed = safeHttpUrl(value);
+
+        if (!parsed) return "";
+
+        const path = parsed.pathname || "/";
+
+        return path + parsed.search + parsed.hash;
+      }
+
+      function domainName(value) {
+        const parsed = safeHttpUrl(value);
+        return parsed ? parsed.hostname : "example.com";
+      }
+
+      function displayUrl(value) {
+        const parsed = safeHttpUrl(value);
+        if (!parsed) return "Enter a valid absolute URL";
+
+        return parsed.hostname + urlPath(value);
+      }
+
+      function setStatus(message, type) {
+        status.textContent = message;
+        status.className = "smt-status";
+
+        if (type) {
+          status.classList.add("smt-status--" + type);
+        }
+
+        status.hidden = false;
+      }
+
+      function clearStatus() {
+        status.textContent = "";
+        status.hidden = true;
+        status.className = "smt-status";
+      }
+
+      function setCounter(id, value, recommendedMin, recommendedMax) {
+        const element = $(id);
+        element.classList.remove("smt-counter-warning", "smt-counter-good");
+
+        element.textContent = value.length + " characters";
+
+        if (!value) {
+          element.classList.add("smt-counter-warning");
+        } else if (value.length >= recommendedMin && value.length <= recommendedMax) {
+          element.classList.add("smt-counter-good");
+        } else {
+          element.classList.add("smt-counter-warning");
+        }
+      }
+
+      function escapeText(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      function addMeta(name, content) {
+        if (!content) return "";
+
+        return '<meta name="' + escapeAttribute(name) +
+          '" content="' + escapeAttribute(content) + '">';
+      }
+
+      function addProperty(property, content) {
+        if (!content) return "";
+
+        return '<meta property="' + escapeAttribute(property) +
+          '" content="' + escapeAttribute(content) + '">';
+      }
+
+      function addLink(rel, href) {
+        if (!href) return "";
+
+        return '<link rel="' + escapeAttribute(rel) +
+          '" href="' + escapeAttribute(href) + '">';
+      }
+
+      function readFields() {
+        const title = getValue("pageTitle");
+        const description = getValue("metaDescription");
+        const pageUrlRaw = getValue("pageUrl");
+        const canonicalRaw = $("sameCanonical").checked
+          ? pageUrlRaw
+          : getValue("canonicalUrl");
+
+        const pageUrl = safeHttpUrl(pageUrlRaw);
+        const canonicalUrl = safeHttpUrl(canonicalRaw);
+        const imageUrl = safeHttpUrl(getValue("ogImage"));
+
+        const ogTitle = getValue("ogTitle") || title;
+        const ogDescription = getValue("ogDescription") || description;
+
+        const author = getValue("authorName");
+        const robots = getValue("robotsValue");
+        const ogType = getValue("ogType");
+        const twitterCard = getValue("twitterCard");
+        const locale = getValue("ogLocale");
+
+        return {
+          title: title,
+          description: description,
+          pageUrl: pageUrl ? pageUrl.href : "",
+          canonicalUrl: canonicalUrl ? canonicalUrl.href : "",
+          pageUrlRaw: pageUrlRaw,
+          canonicalRaw: canonicalRaw,
+          robots: robots,
+          author: author,
+          ogTitle: ogTitle,
+          ogDescription: ogDescription,
+          ogType: ogType,
+          ogImage: imageUrl ? imageUrl.href : "",
+          ogImageRaw: getValue("ogImage"),
+          twitterCard: twitterCard,
+          locale: locale,
+          pageUrlValid: !!pageUrl,
+          canonicalValid: !!canonicalUrl,
+          imageUrlValid: !getValue("ogImage") || !!imageUrl
+        };
+      }
+
+      function makeMetadata(data) {
+        const lines = [
+          "<!-- Generated by ConvertToToolsOnline SEO Meta Tag Generator -->"
+        ];
+
+        lines.push("<title>" + escapeText(data.title) + "</title>");
+        lines.push(addMeta("description", data.description));
+        lines.push(addMeta("robots", data.robots));
+
+        if (data.canonicalUrl) {
+          lines.push(addLink("canonical", data.canonicalUrl));
+        }
+
+        if (data.author) {
+          lines.push(addMeta("author", data.author));
+        }
+
+        lines.push("");
+        lines.push("<!-- Open Graph / Social Sharing -->");
+        lines.push(addProperty("og:type", data.ogType));
+        lines.push(addProperty("og:title", data.ogTitle));
+        lines.push(addProperty("og:description", data.ogDescription));
+
+        if (data.pageUrl) {
+          lines.push(addProperty("og:url", data.pageUrl));
+        }
+
+        if (data.ogImage) {
+          lines.push(addProperty("og:image", data.ogImage));
+        }
+
+        if (data.locale) {
+          lines.push(addProperty("og:locale", data.locale));
+        }
+
+        lines.push("");
+        lines.push("<!-- X / Twitter Card -->");
+        lines.push(addMeta("twitter:card", data.twitterCard));
+        lines.push(addMeta("twitter:title", data.ogTitle));
+        lines.push(addMeta("twitter:description", data.ogDescription));
+
+        if (data.ogImage) {
+          lines.push(addMeta("twitter:image", data.ogImage));
+        }
+
+        return lines.filter(function (line) {
+          return line !== null;
+        }).join("\n");
+      }
+
+      function addCheck(list, kind, message) {
+        const li = document.createElement("li");
+        li.className = "smt-validation-item is-" + kind;
+
+        const symbol = document.createElement("span");
+        symbol.className = "smt-validation-icon";
+        symbol.textContent = kind === "good" ? "✓" : (kind === "error" ? "!" : "•");
+
+        const text = document.createElement("span");
+        text.textContent = message;
+
+        li.append(symbol, text);
+        list.appendChild(li);
+      }
+
+      function checkMetadata(data) {
+        const list = $("validationList");
+        list.replaceChildren();
+
+        if (data.title) {
+          if (data.title.length > 60) {
+            addCheck(
+              list,
+              "warning",
+              "Title is " + data.title.length +
+              " characters. Review it for concision; actual display depends on width and search engine."
+            );
+          } else {
+            addCheck(
+              list,
+              "good",
+              "Title is present (" + data.title.length +
+              " characters). Check that it accurately describes this page."
+            );
+          }
+        } else {
+          addCheck(list, "error", "Title is missing. Add a distinctive page title.");
+        }
+
+        if (data.description) {
+          if (data.description.length > 160) {
+            addCheck(
+              list,
+              "warning",
+              "Meta description is " + data.description.length +
+              " characters. Consider making the summary more concise; this is guidance, not a fixed limit."
+            );
+          } else {
+            addCheck(
+              list,
+              "good",
+              "Meta description is present (" + data.description.length +
+              " characters). Ensure the text is useful and page-specific."
+            );
+          }
+        } else {
+          addCheck(
+            list,
+            "warning",
+            "Meta description is empty. Search engines may generate snippets from page content."
+          );
+        }
+
+        if (data.pageUrlValid) {
+          addCheck(list, "good", "Page URL is an absolute HTTP or HTTPS URL.");
+        } else {
+          addCheck(
+            list,
+            "error",
+            "Page URL is missing or invalid. Use a full URL such as https://example.com/page/."
+          );
+        }
+
+        if (data.canonicalUrl) {
+          addCheck(
+            list,
+            "good",
+            "Canonical URL is syntactically valid. Confirm it is the correct preferred URL."
+          );
+        } else {
+          addCheck(
+            list,
+            "warning",
+            "Canonical URL is missing or invalid. Check whether this page needs a canonical link."
+          );
+        }
+
+        if (data.robots === "noindex, follow" ||
+            data.robots === "noindex, nofollow") {
+          addCheck(
+            list,
+            "warning",
+            "The selected directive includes noindex. Confirm that you do not want this page indexed."
+          );
+        } else {
+          addCheck(
+            list,
+            "good",
+            "The robots directive does not request noindex."
+          );
+        }
+
+        if (data.ogImageRaw && !data.ogImageValid) {
+          addCheck(
+            list,
+            "error",
+            "Social image URL is invalid. Use an absolute HTTP or HTTPS URL."
+          );
+        } else if (data.ogImage) {
+          addCheck(
+            list,
+            "good",
+            "Social image URL is syntactically valid. This tool cannot confirm that the image is publicly accessible."
+          );
+        } else {
+          addCheck(
+            list,
+            "warning",
+            "No social preview image is provided. Add an image if you want a visual social-sharing card."
+          );
+        }
+
+        if (data.ogTitle && data.ogDescription) {
+          addCheck(
+            list,
+            "good",
+            "Open Graph title and description are available."
+          );
+        } else {
+          addCheck(
+            list,
+            "warning",
+            "Social title and description use the primary title and description as fallbacks."
+          );
+        }
+
+        addCheck(
+          list,
+          "good",
+          "This is a metadata check only—not a live crawl, ranking test, or complete technical SEO audit."
+        );
+      }
+
+      function updatePreviews(data) {
+        const validUrl = safeHttpUrl(data.pageUrl);
+
+        $("previewDomain").textContent = validUrl
+          ? validUrl.hostname
+          : "example.com";
+
+        $("previewPath").textContent = validUrl
+          ? validUrl.origin + validUrl.pathname
+          : "Enter a valid page URL";
+
+        $("previewTitle").textContent =
+          data.title || "Your SEO title appears here";
+
+        $("previewDescription").textContent =
+          data.description || "Your meta description preview appears here.";
+
+        const host = validUrl ? validUrl.hostname : "example.com";
+        $("socialDomain").textContent = host;
+
+        $("socialTitle").textContent =
+          data.ogTitle || "Your social title appears here";
+
+        $("socialDescription").textContent =
+          data.ogDescription || "Your social description appears here.";
+
+        const imageBox = $("socialImageBox");
+        imageBox.replaceChildren();
+
+        if (data.ogImage) {
+          const img = document.createElement("img");
+          img.alt = "Social sharing image preview";
+          img.loading = "lazy";
+
+          img.addEventListener("error", function () {
+            imageBox.replaceChildren();
+            imageBox.textContent =
+              "The image could not be loaded. Check the public image URL.";
+          });
+
+          img.src = data.ogImage;
+          imageBox.appendChild(img);
+        } else {
+          imageBox.textContent =
+            "Add a public image URL to preview your social image";
+        }
+      }
+
+      function render() {
+        const data = readFields();
+
+        if ($("sameCanonical").checked) {
+          $("canonicalUrl").value = data.pageUrlRaw;
+        }
+
+        $("canonicalUrl").disabled = $("sameCanonical").checked;
+
+        setCounter("titleCount", data.title, 20, 60);
+        setCounter("descriptionCount", data.description, 120, 160);
+
+        updatePreviews(data);
+        checkMetadata(data);
+        generatedCode.value = makeMetadata(data);
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        area.style.top = "0";
+
+        document.body.appendChild(area);
+        area.select();
+
+        const success = document.execCommand("copy");
+        area.remove();
+
+        if (!success) {
+          throw new Error("Copy failed");
+        }
+      }
+
+      function copyCode() {
+        if (!generatedCode.value.trim()) {
+          setStatus("There is no generated metadata to copy.", "error");
+          return;
+        }
+
+        copyText(generatedCode.value).then(function () {
+          setStatus("Generated HTML metadata copied to your clipboard.", "success");
+        }).catch(function () {
+          generatedCode.focus();
+          generatedCode.select();
+          setStatus(
+            "Automatic copying failed. The code is selected so you can copy it manually.",
+            "error"
+          );
+        });
+      }
+
+      function downloadCode() {
+        if (!generatedCode.value.trim()) {
+          setStatus("There is no generated metadata to download.", "error");
+          return;
+        }
+
+        const blob = new Blob(
+          [generatedCode.value + "\n"],
+          { type: "text/plain;charset=utf-8" }
+        );
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "seo-meta-tags.txt";
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 1000);
+
+        setStatus("Metadata download started: seo-meta-tags.txt", "success");
+      }
+
+      function resetExample() {
+        fields.forEach(function (id) {
+          if (id === "sameCanonical") {
+            $(id).checked = DEFAULTS[id];
+          } else {
+            $(id).value = DEFAULTS[id];
+          }
+        });
+
+        clearStatus();
+        render();
+
+        setStatus(
+          "Example values restored. Replace them with details for your own webpage.",
+          "success"
+        );
+      }
+
+      fields.forEach(function (id) {
+        const element = $(id);
+
+        element.addEventListener("input", function () {
+          clearStatus();
+          render();
+        });
+
+        element.addEventListener("change", function () {
+          clearStatus();
+          render();
+        });
+      });
+
+      $("copyHtmlBtn").addEventListener("click", copyCode);
+      $("downloadHtmlBtn").addEventListener("click", downloadCode);
+      $("resetBtn").addEventListener("click", resetExample);
+
+      $("selectOutputBtn").addEventListener("click", function () {
+        generatedCode.focus();
+        generatedCode.select();
+        setStatus(
+          "Generated code selected. Copy it and paste it into the correct webpage head section.",
+          "success"
+        );
+      });
+
+      resetExample();
+      clearStatus();
+    })();
+  </script>
+</body>
+</html>

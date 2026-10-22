@@ -1,0 +1,1535 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JSONPath Tester Online – Query & Extract JSON Data</title>
+  <meta name="description" content="Test JSONPath expressions online against JSON data. Query nested objects and arrays, filter records, inspect matching paths, copy results and download extracted JSON in your browser.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/jsonpath-tester.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JSONPath Tester Online">
+  <meta property="og:description" content="Query nested JSON, test JSONPath filters, inspect matching paths and export selected values.">
+  <meta property="og:url" content="https://converttotoolsonline.com/jsonpath-tester.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JSONPath Tester Online">
+  <meta name="twitter:description" content="Test JSONPath queries against JSON data in your browser.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSONPath Tester Online",
+    "url": "https://converttotoolsonline.com/jsonpath-tester.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based JSONPath tester for querying nested JSON data, filtering objects and arrays, viewing match paths and exporting extracted results.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    .jpt-page {
+      --jpt-border: #dfe4eb;
+      --jpt-muted: #5b6878;
+      --jpt-accent: #245bcc;
+      --jpt-soft: #f6f8fb;
+      --jpt-radius: 14px;
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      color: #17202c;
+      line-height: 1.6;
+    }
+
+    .jpt-page,
+    .jpt-page * {
+      box-sizing: border-box;
+    }
+
+    .jpt-page [hidden] {
+      display: none !important;
+    }
+
+    .jpt-page input,
+    .jpt-page select,
+    .jpt-page textarea,
+    .jpt-page button {
+      font: inherit;
+    }
+
+    .jpt-page button {
+      cursor: pointer;
+    }
+
+    .jpt-page :is(input, select, textarea, button, a):focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .jpt-page a {
+      color: var(--jpt-accent);
+    }
+
+    .jpt-breadcrumb {
+      margin-bottom: 12px;
+      color: var(--jpt-muted);
+      font-size: .92rem;
+    }
+
+    .jpt-header {
+      margin-bottom: 22px;
+    }
+
+    .jpt-header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.55rem);
+      line-height: 1.17;
+      letter-spacing: -.035em;
+    }
+
+    .jpt-header p {
+      max-width: 830px;
+      margin: 0;
+      color: var(--jpt-muted);
+    }
+
+    .jpt-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .jpt-pill {
+      padding: 5px 10px;
+      border: 1px solid #d0e7d6;
+      border-radius: 999px;
+      background: #eef8f0;
+      color: #285b38;
+      font-size: .84rem;
+    }
+
+    .jpt-card {
+      min-width: 0;
+      padding: clamp(14px, 2.4vw, 22px);
+      border: 1px solid var(--jpt-border);
+      border-radius: var(--jpt-radius);
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .jpt-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .jpt-card h3 {
+      margin: 0 0 9px;
+      font-size: 1rem;
+    }
+
+    .jpt-muted {
+      color: var(--jpt-muted);
+      font-size: .9rem;
+    }
+
+    .jpt-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 8px 13px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #192536;
+      font-weight: 650;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .jpt-button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .jpt-button-primary {
+      border-color: var(--jpt-accent);
+      background: var(--jpt-accent);
+      color: #fff;
+    }
+
+    .jpt-button-primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: #fff;
+    }
+
+    .jpt-button:disabled {
+      cursor: not-allowed;
+      opacity: .48;
+    }
+
+    .jpt-button-small {
+      min-height: 33px;
+      padding: 6px 9px;
+      font-size: .83rem;
+    }
+
+    .jpt-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .jpt-spacer {
+      flex: 1 1 auto;
+    }
+
+    .jpt-field {
+      min-width: 0;
+    }
+
+    .jpt-field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 750;
+    }
+
+    .jpt-field textarea,
+    .jpt-field input,
+    .jpt-field select {
+      width: 100%;
+      min-width: 0;
+      padding: 10px 11px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .jpt-field textarea {
+      min-height: 280px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .85rem;
+      line-height: 1.55;
+      tab-size: 2;
+      overflow-wrap: anywhere;
+    }
+
+    .jpt-query {
+      min-height: 47px !important;
+    }
+
+    .jpt-input-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .jpt-panel {
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid var(--jpt-border);
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .jpt-panel-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+    }
+
+    .jpt-panel-head h3 {
+      margin: 0;
+    }
+
+    .jpt-upload {
+      padding: 14px;
+      border: 2px dashed #b8c6d8;
+      border-radius: 11px;
+      background: #fafcff;
+      text-align: center;
+      transition: border-color .15s ease, background .15s ease;
+    }
+
+    .jpt-upload.is-dragging {
+      border-color: var(--jpt-accent);
+      background: #edf4ff;
+    }
+
+    .jpt-upload strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .jpt-upload p {
+      margin: 0 0 10px;
+      color: var(--jpt-muted);
+      font-size: .89rem;
+    }
+
+    .jpt-status {
+      min-height: 25px;
+      margin: 11px 0 0;
+      font-size: .91rem;
+      overflow-wrap: anywhere;
+    }
+
+    .jpt-status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .jpt-status[data-kind="success"] {
+      color: #24623b;
+    }
+
+    .jpt-warning {
+      padding: 12px 14px;
+      border: 1px solid #ecd5a6;
+      border-radius: 10px;
+      background: #fff9ed;
+      color: #745016;
+      font-size: .9rem;
+    }
+
+    .jpt-result-banner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 13px;
+      border: 1px solid var(--jpt-border);
+      border-radius: 10px;
+      background: var(--jpt-soft);
+    }
+
+    .jpt-result-banner[data-kind="good"] {
+      border-color: #c7e3ce;
+      background: #f0f9f2;
+    }
+
+    .jpt-result-banner[data-kind="bad"] {
+      border-color: #edcaca;
+      background: #fff4f4;
+    }
+
+    .jpt-result-title {
+      font-size: 1.06rem;
+      font-weight: 800;
+    }
+
+    .jpt-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .jpt-stat {
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid var(--jpt-border);
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .jpt-stat-label {
+      display: block;
+      color: var(--jpt-muted);
+      font-size: .8rem;
+    }
+
+    .jpt-stat-value {
+      display: block;
+      margin-top: 3px;
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .jpt-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 11px;
+    }
+
+    .jpt-preset {
+      padding: 6px 9px;
+      border: 1px solid #cad6e8;
+      border-radius: 8px;
+      background: #f7faff;
+      color: #254a82;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .81rem;
+      overflow-wrap: anywhere;
+    }
+
+    .jpt-preset:hover {
+      background: #eaf1ff;
+    }
+
+    .jpt-section {
+      margin-top: 20px;
+    }
+
+    .jpt-section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .jpt-section-head h2 {
+      margin: 0;
+    }
+
+    .jpt-match-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .jpt-match {
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid var(--jpt-border);
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .jpt-match-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 9px;
+    }
+
+    .jpt-match-path {
+      flex: 1 1 230px;
+      min-width: 0;
+      color: #254a82;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .83rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .jpt-code {
+      display: block;
+      max-width: 100%;
+      margin: 0;
+      padding: 11px;
+      border-radius: 8px;
+      background: #f4f6fa;
+      color: #223047;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .84rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .jpt-match-type {
+      display: inline-block;
+      padding: 2px 7px;
+      border: 1px solid var(--jpt-border);
+      border-radius: 999px;
+      background: #f6f7f9;
+      color: #4f5d6f;
+      font-size: .74rem;
+      font-weight: 750;
+    }
+
+    .jpt-empty {
+      padding: 16px;
+      border: 1px dashed var(--jpt-border);
+      border-radius: 10px;
+      color: var(--jpt-muted);
+      font-size: .91rem;
+    }
+
+    .jpt-check {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      margin-top: 13px;
+      padding: 10px;
+      border: 1px solid var(--jpt-border);
+      border-radius: 9px;
+    }
+
+    .jpt-check input {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: var(--jpt-accent);
+    }
+
+    .jpt-article p,
+    .jpt-article li {
+      color: #354252;
+    }
+
+    .jpt-article li + li {
+      margin-top: 7px;
+    }
+
+    .jpt-faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--jpt-border);
+    }
+
+    .jpt-faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .jpt-faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .jpt-faq details p {
+      margin: 9px 0 0;
+      color: var(--jpt-muted);
+    }
+
+    .jpt-divider {
+      height: 1px;
+      margin: 18px 0;
+      border: 0;
+      background: var(--jpt-border);
+    }
+
+    @media (max-width: 760px) {
+      .jpt-input-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .jpt-page {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .jpt-toolbar > .jpt-button {
+        flex: 1 1 100%;
+      }
+
+      .jpt-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .jpt-page *,
+      .jpt-page *::before,
+      .jpt-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="jpt-page">
+  <nav class="jpt-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>JSONPath Tester</span>
+  </nav>
+
+  <header class="jpt-header">
+    <h1>JSONPath Tester Online</h1>
+    <p>
+      Query nested JSON objects and arrays using JSONPath expressions. Test filters,
+      inspect matching values and their paths, then copy or download the selected data.
+      Useful for API response debugging, configuration files and structured datasets.
+    </p>
+    <div class="jpt-pills">
+      <span class="jpt-pill">Nested JSON queries</span>
+      <span class="jpt-pill">Filters and wildcards</span>
+      <span class="jpt-pill">Path-aware results</span>
+    </div>
+  </header>
+
+  <section class="jpt-card" aria-labelledby="queryHeading">
+    <h2 id="queryHeading">1. Enter a JSONPath expression</h2>
+
+    <div class="jpt-field">
+      <label for="queryInput">JSONPath query</label>
+      <input
+        id="queryInput"
+        class="jpt-query"
+        type="text"
+        spellcheck="false"
+        autocomplete="off"
+        autocapitalize="off"
+        value="$.store.book[*].title"
+        placeholder="Example: $.users[?(@.active == true)].email"
+      >
+    </div>
+
+    <div class="jpt-presets" aria-label="Example JSONPath expressions">
+      <button type="button" class="jpt-preset" data-query="$.store.book[*].title">All book titles</button>
+      <button type="button" class="jpt-preset" data-query="$..price">All prices</button>
+      <button type="button" class="jpt-preset" data-query="$.store.book[?(@.price < 10)]">Books under 10</button>
+      <button type="button" class="jpt-preset" data-query="$.users[*].email">User emails</button>
+      <button type="button" class="jpt-preset" data-query="$.users[?(@.active == true)]">Active users</button>
+      <button type="button" class="jpt-preset" data-query="$.users[0:2]">First two users</button>
+    </div>
+
+    <hr class="jpt-divider">
+
+    <div class="jpt-input-grid">
+      <section class="jpt-panel">
+        <div class="jpt-panel-head">
+          <h3>2. JSON input</h3>
+          <button class="jpt-button jpt-button-small" type="button" id="formatJsonBtn">
+            Format JSON
+          </button>
+        </div>
+
+        <div class="jpt-field">
+          <label for="jsonInput">JSON document</label>
+          <textarea
+            id="jsonInput"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off"
+            placeholder="Paste your JSON document here…"
+          ></textarea>
+        </div>
+
+        <div class="jpt-toolbar">
+          <button class="jpt-button" type="button" id="loadSampleBtn">Load sample</button>
+          <button class="jpt-button" type="button" id="loadFileBtn">Upload JSON</button>
+          <button class="jpt-button" type="button" id="clearJsonBtn">Clear JSON</button>
+          <input type="file" id="jsonFileInput" accept=".json,.txt,application/json,text/plain" hidden>
+        </div>
+        <p class="jpt-muted" id="jsonStats" style="margin:8px 0 0">No JSON loaded.</p>
+      </section>
+
+      <section class="jpt-panel">
+        <div class="jpt-panel-head">
+          <h3>3. Match settings</h3>
+        </div>
+
+        <div class="jpt-field">
+          <label for="resultMode">Display matching results as</label>
+          <select id="resultMode">
+            <option value="all">Value and path</option>
+            <option value="values">Values only</option>
+            <option value="paths">Paths only</option>
+          </select>
+        </div>
+
+        <label class="jpt-check">
+          <input type="checkbox" id="autoRun">
+          <span>
+            <strong>Run automatically while editing</strong>
+            <span class="jpt-muted" style="display:block">
+              Re-run after a short pause when the query or JSON changes.
+            </span>
+          </span>
+        </label>
+
+        <div class="jpt-warning" style="margin-top:13px">
+          JSONPath has several dialects. This page uses JSONPath-Plus syntax, including
+          common legacy filter expressions. Results can differ from strict RFC 9535
+          implementations for some expressions.
+        </div>
+
+        <div class="jpt-toolbar">
+          <button class="jpt-button jpt-button-primary" type="button" id="runQueryBtn">
+            Run JSONPath
+          </button>
+          <button class="jpt-button" type="button" id="clearResultsBtn">
+            Clear results
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <p class="jpt-status" id="statusMessage" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="jpt-card jpt-section" id="resultsSection" hidden>
+    <div class="jpt-section-head">
+      <h2>Query results</h2>
+      <span class="jpt-muted" id="resultDialect">JSONPath-Plus</span>
+    </div>
+
+    <div class="jpt-result-banner" id="resultBanner" data-kind="good">
+      <div>
+        <div class="jpt-result-title" id="resultTitle">Query completed</div>
+        <div class="jpt-muted" id="resultDescription">Inspect the selected values below.</div>
+      </div>
+      <span class="jpt-match-type" id="resultCountBadge">0 matches</span>
+    </div>
+
+    <div class="jpt-stats">
+      <div class="jpt-stat">
+        <span class="jpt-stat-label">Matches</span>
+        <span class="jpt-stat-value" id="matchCount">0</span>
+      </div>
+      <div class="jpt-stat">
+        <span class="jpt-stat-label">JSON size</span>
+        <span class="jpt-stat-value" id="jsonSize">0 B</span>
+      </div>
+      <div class="jpt-stat">
+        <span class="jpt-stat-label">Visible matches</span>
+        <span class="jpt-stat-value" id="visibleCount">0</span>
+      </div>
+    </div>
+
+    <div class="jpt-toolbar">
+      <button class="jpt-button jpt-button-primary" type="button" id="copyValuesBtn" disabled>
+        Copy values as JSON
+      </button>
+      <button class="jpt-button" type="button" id="downloadValuesBtn" disabled>
+        Download values
+      </button>
+      <button class="jpt-button" type="button" id="downloadPathsBtn" disabled>
+        Download paths
+      </button>
+      <button class="jpt-button" type="button" id="copyPathsBtn" disabled>
+        Copy paths
+      </button>
+    </div>
+
+    <hr class="jpt-divider">
+
+    <div class="jpt-section-head">
+      <h2>Matched nodes</h2>
+      <span class="jpt-muted">Maximum 500 matches displayed</span>
+    </div>
+
+    <div class="jpt-empty" id="noMatchesMessage" hidden>
+      The query returned no matches. If the expression is valid, this is a normal result:
+      the requested key or filter may simply not match any node in the JSON document.
+    </div>
+
+    <div class="jpt-match-list" id="matchList"></div>
+
+    <div class="jpt-toolbar" id="moreResultsRow" hidden>
+      <span class="jpt-muted" id="moreResultsText"></span>
+      <button class="jpt-button" type="button" id="showAllResultsBtn">Show all displayed matches</button>
+    </div>
+  </section>
+
+  <section class="jpt-card jpt-section jpt-article">
+    <h2>What is JSONPath?</h2>
+    <p>
+      JSONPath is a query language for selecting values from JSON documents. It is often
+      compared with XPath, which selects nodes from XML. JSONPath is especially useful when
+      a response contains deeply nested properties or arrays and you need a smaller selection
+      without manually navigating every object.
+    </p>
+
+    <h3>Common JSONPath expressions</h3>
+    <ul>
+      <li><code>$</code> selects the root document.</li>
+      <li><code>$.user.name</code> selects the name property inside user.</li>
+      <li><code>$.users[*].email</code> selects the email property of each user.</li>
+      <li><code>$..id</code> searches recursively for properties named id.</li>
+      <li><code>$.items[0]</code> selects the first array item.</li>
+      <li><code>$.items[?(@.price &lt; 10)]</code> selects items whose price is below 10 in the supported filter dialect.</li>
+      <li><code>$.items[0:3]</code> selects a range of array elements supported by the implementation.</li>
+    </ul>
+
+    <h3>How to test a JSONPath query</h3>
+    <ol>
+      <li>Paste your JSON data or upload a JSON file.</li>
+      <li>Enter an expression or choose one of the example queries.</li>
+      <li>Run the query to see each match, its path and its value.</li>
+      <li>Use the path to identify where the value lives in the original document.</li>
+      <li>Copy the matched values or export results for another development workflow.</li>
+    </ol>
+
+    <h3>What does recursive descent mean?</h3>
+    <p>
+      The <code>..</code> operator searches at deeper levels of the document. For example,
+      <code>$..price</code> can find price properties inside several different objects,
+      not just at the root or one fixed nesting depth. By contrast, <code>$.*</code>
+      selects only direct children of the root.
+    </p>
+
+    <h3>Why does a query return zero matches?</h3>
+    <p>
+      A query can be syntactically valid while selecting nothing. The property may not exist,
+      an array index may be out of range, or a filter may exclude all records. A malformed
+      expression usually produces a query error instead.
+    </p>
+
+    <h3>JSONPath compatibility</h3>
+    <p>
+      JSONPath was standardized in RFC 9535, but popular implementations retain different
+      historical features and filter syntax. This page uses JSONPath-Plus and its supported
+      extensions. Do not assume that every query behaves identically in every programming
+      language or strict RFC 9535 implementation.
+    </p>
+
+    <h3>Privacy and performance</h3>
+    <p>
+      The JSON document is parsed and queried in your browser; the page does not send your
+      JSON to a query endpoint. The JSONPath library is loaded from a CDN. Large documents
+      and recursive or broad queries can use substantial memory or processing time, so this
+      page limits input size and the number of results shown.
+    </p>
+  </section>
+
+  <section class="jpt-card jpt-section jpt-faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>How do I test a JSONPath expression online?</summary>
+      <p>
+        Paste a JSON document, enter an expression such as <code>$.users[*].email</code>,
+        and select Run JSONPath. The tool displays matching values and their paths.
+      </p>
+    </details>
+
+    <details>
+      <summary>What is the difference between JSONPath and JSON Pointer?</summary>
+      <p>
+        JSONPath is a query language that can select multiple values using wildcards and
+        filters. JSON Pointer identifies a single location through a sequence of path
+        segments. This tool displays JSONPath-style matched locations.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can JSONPath filter array elements?</summary>
+      <p>
+        Yes. JSONPath-Plus supports filter expressions such as
+        <code>$.users[?(@.active == true)]</code>. Filter syntax and semantics can differ
+        between implementations.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why is the result empty instead of showing an error?</summary>
+      <p>
+        An empty result can mean a valid query did not find the requested property or did
+        not find any values satisfying the filter. The tool distinguishes this from many
+        syntax and parsing errors.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does this tool support the official JSONPath standard?</summary>
+      <p>
+        The page uses JSONPath-Plus, which implements the original JSONPath style and adds
+        extensions. Some syntax differs from strict RFC 9535 semantics, so confirm
+        compatibility with your target runtime.
+      </p>
+    </details>
+
+    <details>
+      <summary>Are my JSON files uploaded?</summary>
+      <p>
+        The page reads the JSON locally and evaluates the query inside your browser. It does
+        not include a JSON upload endpoint. The JavaScript library is loaded from a CDN.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I download just the matching values?</summary>
+      <p>
+        Yes. Use Copy values as JSON or Download values to export the matched values as a
+        JSON array. You can also export the path for each match as a separate text file.
+      </p>
+    </details>
+  </section>
+
+  <p class="jpt-muted jpt-section">
+    Explore more utilities on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/jsonpath-plus@11.2.1/dist/index-browser-umd.cjs"></script>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_JSON_BYTES = 2 * 1024 * 1024;
+  const MAX_QUERY_LENGTH = 10000;
+  const MAX_MATCHES_TO_SHOW = 500;
+  const INITIAL_MATCHES_TO_SHOW = 50;
+
+  const $ = id => document.getElementById(id);
+
+  const jsonInput = $("jsonInput");
+  const queryInput = $("queryInput");
+  const fileInput = $("jsonFileInput");
+  const statusMessage = $("statusMessage");
+
+  let lastRun = null;
+  let inputRevision = 0;
+  let autoRunTimer = null;
+  let visibleLimit = INITIAL_MATCHES_TO_SHOW;
+
+  function setStatus(message, kind = "") {
+    statusMessage.textContent = message;
+    statusMessage.dataset.kind = kind;
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  function resetResults() {
+    lastRun = null;
+    $("resultsSection").hidden = true;
+    $("matchList").replaceChildren();
+    $("noMatchesMessage").hidden = true;
+    $("moreResultsRow").hidden = true;
+
+    [
+      "copyValuesBtn",
+      "downloadValuesBtn",
+      "downloadPathsBtn",
+      "copyPathsBtn"
+    ].forEach(id => {
+      $(id).disabled = true;
+    });
+  }
+
+  function updateJsonStats() {
+    const text = jsonInput.value;
+    $("jsonStats").textContent = text.trim()
+      ? `${text.length.toLocaleString()} characters · ${formatBytes(new Blob([text]).size)}`
+      : "No JSON loaded.";
+  }
+
+  function markChanged() {
+    inputRevision++;
+    resetResults();
+    updateJsonStats();
+
+    if (queryInput.value.trim() && jsonInput.value.trim()) {
+      setStatus("Input changed. Run the query again to refresh the results.");
+    } else {
+      setStatus("");
+    }
+
+    scheduleAutoRun();
+  }
+
+  function getJsonPathPlus() {
+    const namespace = window.JSONPath;
+
+    if (
+      !namespace ||
+      typeof namespace.JSONPath !== "function"
+    ) {
+      throw new Error(
+        "The JSONPath library did not load. Check your internet connection and reload this page."
+      );
+    }
+
+    return namespace.JSONPath;
+  }
+
+  function valueType(value) {
+    if (value === null) return "null";
+    if (Array.isArray(value)) return "array";
+    return typeof value;
+  }
+
+  function safeJsonStringify(value) {
+    try {
+      const result = JSON.stringify(value, null, 2);
+      return result === undefined ? "undefined" : result;
+    } catch (error) {
+      return String(value);
+    }
+  }
+
+  function limitDisplayValue(value, maxLength = 12000) {
+    const text = safeJsonStringify(value);
+
+    if (text.length <= maxLength) return text;
+    return text.slice(0, maxLength) + "\n… [display truncated]";
+  }
+
+  function normalizeMatch(item) {
+    const match = item && typeof item === "object" &&
+      Object.prototype.hasOwnProperty.call(item, "value")
+      ? item
+      : { value: item };
+
+    let path = typeof match.path === "string" ? match.path : "$";
+    let pointer = typeof match.pointer === "string" ? match.pointer : "";
+
+    return {
+      path,
+      pointer,
+      value: match.value,
+      type: valueType(match.value),
+      parentProperty: match.parentProperty
+    };
+  }
+
+  function runQuery() {
+    resetResults();
+
+    const sourceText = jsonInput.value;
+    const expression = queryInput.value.trim();
+    const runRevision = inputRevision;
+
+    if (!sourceText.trim()) {
+      setStatus("Paste or load a JSON document first.", "error");
+      return;
+    }
+
+    if (!expression) {
+      setStatus("Enter a JSONPath expression first.", "error");
+      return;
+    }
+
+    if (expression.length > MAX_QUERY_LENGTH) {
+      setStatus("The JSONPath expression exceeds the 10,000-character limit.", "error");
+      return;
+    }
+
+    const sourceBytes = new Blob([sourceText]).size;
+
+    if (sourceBytes > MAX_JSON_BYTES) {
+      setStatus("The JSON document exceeds the 2 MB input limit.", "error");
+      return;
+    }
+
+    let documentValue;
+
+    try {
+      documentValue = JSON.parse(sourceText);
+    } catch (error) {
+      setStatus(`Invalid JSON: ${error.message}`, "error");
+      return;
+    }
+
+    try {
+      const JSONPath = getJsonPathPlus();
+
+      /*
+       * Explicit safe evaluation avoids JSONPath-Plus's native eval/Function
+       * mode for query expressions. It does not make every query cost-free, so
+       * input bytes, query length and displayed results are separately limited.
+       */
+      const raw = JSONPath({
+        path: expression,
+        json: documentValue,
+        resultType: "all",
+        wrap: true,
+        eval: "safe",
+        ignoreEvalErrors: false
+      });
+
+      if (runRevision !== inputRevision) return;
+
+      if (!Array.isArray(raw)) {
+        throw new Error("The query returned an unexpected result shape.");
+      }
+
+      const matches = raw.map(normalizeMatch);
+
+      lastRun = {
+        expression,
+        sourceBytes,
+        totalMatches: matches.length,
+        matches,
+        ranAt: new Date().toISOString()
+      };
+
+      visibleLimit = INITIAL_MATCHES_TO_SHOW;
+      renderResults();
+      setStatus(
+        matches.length
+          ? `Query completed: ${matches.length.toLocaleString()} match(es) found.`
+          : "Query completed with zero matches. The expression may be valid but select no values.",
+        "success"
+      );
+    } catch (error) {
+      resetResults();
+      setStatus(
+        error && error.message
+          ? `Could not run the JSONPath query: ${error.message}`
+          : "Could not run the query. Check the expression syntax and your JSON.",
+        "error"
+      );
+    }
+  }
+
+  function renderResults() {
+    if (!lastRun) return;
+
+    const matches = lastRun.matches;
+    const mode = $("resultMode").value;
+    const matchList = $("matchList");
+
+    matchList.replaceChildren();
+    $("resultsSection").hidden = false;
+
+    $("resultBanner").dataset.kind = matches.length ? "good" : "bad";
+    $("resultTitle").textContent = matches.length
+      ? "Query completed"
+      : "No matching values";
+
+    $("resultDescription").textContent = matches.length
+      ? `The expression returned ${matches.length.toLocaleString()} result(s).`
+      : "A valid expression can return no matches when no node satisfies it.";
+
+    $("resultCountBadge").textContent =
+      `${matches.length.toLocaleString()} match${matches.length === 1 ? "" : "es"}`;
+
+    $("matchCount").textContent = matches.length.toLocaleString();
+    $("jsonSize").textContent = formatBytes(lastRun.sourceBytes);
+
+    const visibleMatches = matches.slice(0, Math.min(visibleLimit, MAX_MATCHES_TO_SHOW));
+    $("visibleCount").textContent = visibleMatches.length.toLocaleString();
+
+    $("noMatchesMessage").hidden = matches.length !== 0;
+
+    visibleMatches.forEach((match, index) => {
+      const card = document.createElement("article");
+      card.className = "jpt-match";
+
+      const head = document.createElement("div");
+      head.className = "jpt-match-head";
+
+      const path = document.createElement("div");
+      path.className = "jpt-match-path";
+      path.textContent = mode === "values" ? `Match ${index + 1}` : match.path;
+
+      const type = document.createElement("span");
+      type.className = "jpt-match-type";
+      type.textContent = match.type;
+
+      head.append(path, type);
+
+      const actions = document.createElement("div");
+      actions.className = "jpt-toolbar";
+      actions.style.marginTop = "0";
+
+      const copyValueBtn = document.createElement("button");
+      copyValueBtn.type = "button";
+      copyValueBtn.className = "jpt-button jpt-button-small";
+      copyValueBtn.textContent = "Copy value";
+
+      copyValueBtn.addEventListener("click", async () => {
+        try {
+          await copyText(safeJsonStringify(match.value));
+          setStatus(`Match ${index + 1} copied.`, "success");
+        } catch (error) {
+          setStatus("Could not copy this value. Select it manually instead.", "error");
+        }
+      });
+
+      actions.appendChild(copyValueBtn);
+
+      if (mode !== "paths") {
+        const pre = document.createElement("pre");
+        pre.className = "jpt-code";
+        pre.textContent = limitDisplayValue(match.value);
+
+        card.append(head, pre);
+      } else {
+        const pre = document.createElement("pre");
+        pre.className = "jpt-code";
+        pre.textContent = match.path;
+
+        card.append(head, pre);
+      }
+
+      if (mode !== "values") {
+        const pointerText = document.createElement("div");
+        pointerText.className = "jpt-muted";
+        pointerText.style.marginTop = "8px";
+        pointerText.textContent = match.pointer
+          ? `JSON Pointer: ${match.pointer}`
+          : "JSON Pointer: (root or unavailable)";
+
+        card.appendChild(pointerText);
+      }
+
+      card.appendChild(actions);
+      matchList.appendChild(card);
+    });
+
+    const moreResults = matches.length > visibleMatches.length;
+
+    $("moreResultsRow").hidden = !moreResults;
+    $("moreResultsText").textContent = moreResults
+      ? `${matches.length - visibleMatches.length} more match(es) available. The page displays at most ${MAX_MATCHES_TO_SHOW}.`
+      : "";
+
+    $("showAllResultsBtn").hidden =
+      visibleLimit >= MAX_MATCHES_TO_SHOW ||
+      matches.length <= visibleLimit;
+
+    const enabled = matches.length > 0;
+
+    [
+      "copyValuesBtn",
+      "downloadValuesBtn",
+      "downloadPathsBtn",
+      "copyPathsBtn"
+    ].forEach(id => {
+      $(id).disabled = !enabled;
+    });
+  }
+
+  function valuesJson() {
+    if (!lastRun) return "[]";
+    return JSON.stringify(lastRun.matches.map(match => match.value), null, 2);
+  }
+
+  function pathsText() {
+    if (!lastRun) return "";
+    return lastRun.matches.map(match => match.path).join("\n");
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    textarea.style.pointerEvents = "none";
+
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const copied = document.execCommand("copy");
+    textarea.remove();
+
+    if (!copied) throw new Error("Clipboard copy failed.");
+  }
+
+  function downloadText(filename, text, mimeType) {
+    const blob = new Blob([text], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1200);
+  }
+
+  async function copyValues() {
+    if (!lastRun || !lastRun.matches.length) return;
+
+    try {
+      await copyText(valuesJson());
+      setStatus("Matching values copied as a JSON array.", "success");
+    } catch (error) {
+      setStatus("Copy failed. Use Download values instead.", "error");
+    }
+  }
+
+  async function copyPaths() {
+    if (!lastRun || !lastRun.matches.length) return;
+
+    try {
+      await copyText(pathsText());
+      setStatus("Matching paths copied.", "success");
+    } catch (error) {
+      setStatus("Copy failed. Use Download paths instead.", "error");
+    }
+  }
+
+  function downloadValues() {
+    if (!lastRun) return;
+
+    downloadText(
+      "jsonpath-results.json",
+      valuesJson(),
+      "application/json;charset=utf-8"
+    );
+
+    setStatus("Matching values prepared for download.", "success");
+  }
+
+  function downloadPaths() {
+    if (!lastRun) return;
+
+    downloadText(
+      "jsonpath-results.txt",
+      pathsText(),
+      "text/plain;charset=utf-8"
+    );
+
+    setStatus("Matching paths prepared for download.", "success");
+  }
+
+  function sampleDocument() {
+    return {
+      store: {
+        book: [
+          {
+            category: "reference",
+            author: "Nigel Rees",
+            title: "Sayings of the Century",
+            price: 8.95
+          },
+          {
+            category: "fiction",
+            author: "Evelyn Waugh",
+            title: "Sword of Honour",
+            price: 12.99
+          },
+          {
+            category: "fiction",
+            author: "Herman Melville",
+            title: "Moby Dick",
+            isbn: "0-553-21311-3",
+            price: 8.99
+          },
+          {
+            category: "fiction",
+            author: "J. R. R. Tolkien",
+            title: "The Lord of the Rings",
+            isbn: "0-395-19395-8",
+            price: 22.99
+          }
+        ],
+        bicycle: {
+          color: "red",
+          price: 19.95
+        }
+      },
+      users: [
+        {
+          id: 101,
+          name: "Alice",
+          email: "alice@example.com",
+          active: true,
+          age: 29
+        },
+        {
+          id: 102,
+          name: "Bob",
+          email: "bob@example.com",
+          active: false,
+          age: 34
+        },
+        {
+          id: 103,
+          name: "Carol",
+          email: "carol@example.com",
+          active: true,
+          age: 25
+        }
+      ]
+    };
+  }
+
+  function loadSample() {
+    jsonInput.value = JSON.stringify(sampleDocument(), null, 2);
+    queryInput.value = "$.store.book[*].title";
+
+    markChanged();
+    setStatus("Sample JSON loaded. Run JSONPath to inspect matching book titles.");
+  }
+
+  function clearJson() {
+    jsonInput.value = "";
+    markChanged();
+    setStatus("");
+  }
+
+  function clearResultsOnly() {
+    resetResults();
+    setStatus("Results cleared. Your JSON and expression remain unchanged.");
+  }
+
+  function scheduleAutoRun() {
+    window.clearTimeout(autoRunTimer);
+
+    if (!$("autoRun").checked) return;
+
+    autoRunTimer = window.setTimeout(() => {
+      runQuery();
+    }, 600);
+  }
+
+  function formatJsonInput() {
+    if (!jsonInput.value.trim()) {
+      setStatus("Enter a JSON document first.", "error");
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(jsonInput.value);
+      jsonInput.value = JSON.stringify(parsed, null, 2);
+      markChanged();
+      setStatus("JSON formatted successfully.", "success");
+    } catch (error) {
+      setStatus(`Cannot format invalid JSON: ${error.message}`, "error");
+    }
+  }
+
+  async function readJsonFile(file) {
+    if (!file) return;
+
+    if (file.size > MAX_JSON_BYTES) {
+      setStatus("The selected file exceeds the 2 MB limit.", "error");
+      return;
+    }
+
+    try {
+      const text = await file.text();
+
+      if (text.includes("\u0000")) {
+        setStatus("The selected file appears to contain binary data, not JSON text.", "error");
+        return;
+      }
+
+      jsonInput.value = text;
+      markChanged();
+      setStatus("JSON file loaded. Run JSONPath to inspect it.", "success");
+    } catch (error) {
+      setStatus("Could not read this file. Try another JSON file.", "error");
+    }
+  }
+
+  $("runQueryBtn").addEventListener("click", runQuery);
+  $("loadSampleBtn").addEventListener("click", loadSample);
+  $("clearJsonBtn").addEventListener("click", clearJson);
+  $("clearResultsBtn").addEventListener("click", clearResultsOnly);
+  $("formatJsonBtn").addEventListener("click", formatJsonInput);
+  $("loadFileBtn").addEventListener("click", () => fileInput.click());
+
+  jsonInput.addEventListener("input", markChanged);
+
+  queryInput.addEventListener("input", () => {
+    inputRevision++;
+    resetResults();
+
+    if (queryInput.value.trim() && jsonInput.value.trim()) {
+      setStatus("Expression changed. Run the query again to refresh results.");
+    } else {
+      setStatus("");
+    }
+
+    scheduleAutoRun();
+  });
+
+  $("resultMode").addEventListener("change", () => {
+    if (lastRun) renderResults();
+  });
+
+  $("autoRun").addEventListener("change", () => {
+    window.clearTimeout(autoRunTimer);
+
+    if ($("autoRun").checked) scheduleAutoRun();
+  });
+
+  document.querySelectorAll("[data-query]").forEach(button => {
+    button.addEventListener("click", () => {
+      queryInput.value = button.dataset.query;
+      inputRevision++;
+      resetResults();
+
+      setStatus(`Expression selected: ${button.dataset.query}`);
+
+      if ($("autoRun").checked) {
+        scheduleAutoRun();
+      } else {
+        runQuery();
+      }
+    });
+  });
+
+  $("copyValuesBtn").addEventListener("click", copyValues);
+  $("copyPathsBtn").addEventListener("click", copyPaths);
+  $("downloadValuesBtn").addEventListener("click", downloadValues);
+  $("downloadPathsBtn").addEventListener("click", downloadPaths);
+
+  $("showAllResultsBtn").addEventListener("click", () => {
+    visibleLimit = MAX_MATCHES_TO_SHOW;
+    renderResults();
+  });
+
+  fileInput.addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) readJsonFile(file);
+    fileInput.value = "";
+  });
+
+  const dropTarget = document.querySelector(".jpt-upload");
+
+  ["dragenter", "dragover"].forEach(type => {
+    dropTarget.addEventListener(type, event => {
+      event.preventDefault();
+      dropTarget.classList.add("is-dragging");
+    });
+  });
+
+  ["dragleave", "drop"].forEach(type => {
+    dropTarget.addEventListener(type, event => {
+      event.preventDefault();
+      dropTarget.classList.remove("is-dragging");
+    });
+  });
+
+  dropTarget.addEventListener("drop", event => {
+    const file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+
+    if (file) readJsonFile(file);
+  });
+
+  updateJsonStats();
+  resetResults();
+})();
+</script>
+</body>
+</html>

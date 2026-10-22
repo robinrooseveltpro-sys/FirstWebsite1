@@ -1,0 +1,1600 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JSON Schema Validator Online – Validate JSON Data</title>
+  <meta name="description" content="Validate JSON against a JSON Schema online. Check required fields, data types, formats, patterns, arrays and object properties, and inspect detailed validation errors in your browser.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/json-schema-validator.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JSON Schema Validator Online">
+  <meta property="og:description" content="Check JSON data against a schema with detailed errors, common format validation and browser-side processing.">
+  <meta property="og:url" content="https://converttotoolsonline.com/json-schema-validator.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JSON Schema Validator Online">
+  <meta name="twitter:description" content="Validate JSON structure, required fields, data types and common formats.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON Schema Validator Online",
+    "url": "https://converttotoolsonline.com/json-schema-validator.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based JSON Schema Draft-07 validator for checking JSON data types, required fields, properties, arrays, patterns, common formats and validation errors.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    .jsv-page {
+      --jsv-border: #dfe4eb;
+      --jsv-muted: #5b6878;
+      --jsv-accent: #245bcc;
+      --jsv-soft: #f6f8fb;
+      --jsv-radius: 14px;
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      color: #17202c;
+      line-height: 1.6;
+    }
+
+    .jsv-page,
+    .jsv-page * {
+      box-sizing: border-box;
+    }
+
+    .jsv-page [hidden] {
+      display: none !important;
+    }
+
+    .jsv-page input,
+    .jsv-page textarea,
+    .jsv-page button {
+      font: inherit;
+    }
+
+    .jsv-page button {
+      cursor: pointer;
+    }
+
+    .jsv-page :is(input, textarea, button, a):focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .jsv-page a {
+      color: var(--jsv-accent);
+    }
+
+    .jsv-breadcrumb {
+      margin-bottom: 12px;
+      color: var(--jsv-muted);
+      font-size: .92rem;
+    }
+
+    .jsv-header {
+      margin-bottom: 22px;
+    }
+
+    .jsv-header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.55rem);
+      line-height: 1.17;
+      letter-spacing: -.035em;
+    }
+
+    .jsv-header p {
+      max-width: 840px;
+      margin: 0;
+      color: var(--jsv-muted);
+    }
+
+    .jsv-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .jsv-pill {
+      padding: 5px 10px;
+      border: 1px solid #d0e7d6;
+      border-radius: 999px;
+      background: #eef8f0;
+      color: #285b38;
+      font-size: .84rem;
+    }
+
+    .jsv-card {
+      min-width: 0;
+      padding: clamp(14px, 2.4vw, 22px);
+      border: 1px solid var(--jsv-border);
+      border-radius: var(--jsv-radius);
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .jsv-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .jsv-card h3 {
+      margin: 0 0 9px;
+      font-size: 1rem;
+    }
+
+    .jsv-muted {
+      color: var(--jsv-muted);
+      font-size: .9rem;
+    }
+
+    .jsv-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 8px 13px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #192536;
+      font-weight: 650;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .jsv-button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .jsv-button-primary {
+      border-color: var(--jsv-accent);
+      background: var(--jsv-accent);
+      color: #fff;
+    }
+
+    .jsv-button-primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: #fff;
+    }
+
+    .jsv-button:disabled {
+      cursor: not-allowed;
+      opacity: .48;
+    }
+
+    .jsv-button-small {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: .84rem;
+    }
+
+    .jsv-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .jsv-spacer {
+      flex: 1 1 auto;
+    }
+
+    .jsv-field {
+      min-width: 0;
+    }
+
+    .jsv-field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 750;
+    }
+
+    .jsv-field textarea,
+    .jsv-field input {
+      width: 100%;
+      min-width: 0;
+      padding: 10px 11px;
+      border: 1px solid #cad3df;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .jsv-field textarea {
+      min-height: 265px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .85rem;
+      line-height: 1.55;
+      tab-size: 2;
+      overflow-wrap: anywhere;
+    }
+
+    .jsv-field textarea.jsv-output {
+      background: #fbfcfe;
+    }
+
+    .jsv-input-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    .jsv-panel {
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid var(--jsv-border);
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .jsv-panel-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+    }
+
+    .jsv-panel-header h3 {
+      margin: 0;
+    }
+
+    .jsv-panel-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .jsv-status {
+      min-height: 24px;
+      margin: 11px 0 0;
+      font-size: .91rem;
+      overflow-wrap: anywhere;
+    }
+
+    .jsv-status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .jsv-status[data-kind="success"] {
+      color: #24623b;
+    }
+
+    .jsv-warning {
+      padding: 12px 14px;
+      border: 1px solid #ecd5a3;
+      border-radius: 10px;
+      background: #fff9ed;
+      color: #765017;
+      font-size: .9rem;
+    }
+
+    .jsv-result {
+      padding: 14px;
+      border: 1px solid var(--jsv-border);
+      border-radius: 11px;
+      background: var(--jsv-soft);
+    }
+
+    .jsv-result[data-kind="valid"] {
+      border-color: #c7e3ce;
+      background: #f0f9f2;
+    }
+
+    .jsv-result[data-kind="invalid"] {
+      border-color: #efcaca;
+      background: #fff4f4;
+    }
+
+    .jsv-result-title {
+      margin: 0;
+      font-size: 1.13rem;
+      font-weight: 800;
+    }
+
+    .jsv-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 13px;
+    }
+
+    .jsv-stat {
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid var(--jsv-border);
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .jsv-stat-label {
+      display: block;
+      color: var(--jsv-muted);
+      font-size: .8rem;
+    }
+
+    .jsv-stat-value {
+      display: block;
+      margin-top: 3px;
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .jsv-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border: 1px solid var(--jsv-border);
+      border-radius: 999px;
+      background: #fff;
+      font-size: .78rem;
+      font-weight: 750;
+    }
+
+    .jsv-badge[data-kind="valid"] {
+      border-color: #c7e3ce;
+      background: #edf8f0;
+      color: #245d38;
+    }
+
+    .jsv-badge[data-kind="invalid"] {
+      border-color: #edc9c9;
+      background: #fff0f0;
+      color: #932c2c;
+    }
+
+    .jsv-badge[data-kind="info"] {
+      border-color: #cbdcf4;
+      background: #f0f6ff;
+      color: #2a508d;
+    }
+
+    .jsv-table-wrap {
+      max-width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--jsv-border);
+      border-radius: 10px;
+    }
+
+    .jsv-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: .87rem;
+    }
+
+    .jsv-table th,
+    .jsv-table td {
+      min-width: 110px;
+      padding: 10px;
+      border-bottom: 1px solid var(--jsv-border);
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .jsv-table th {
+      background: var(--jsv-soft);
+      font-weight: 750;
+    }
+
+    .jsv-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .jsv-table .jsv-path {
+      min-width: 150px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .82rem;
+    }
+
+    .jsv-table .jsv-keyword {
+      min-width: 100px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .jsv-empty {
+      padding: 15px;
+      border: 1px dashed var(--jsv-border);
+      border-radius: 10px;
+      color: var(--jsv-muted);
+      font-size: .9rem;
+    }
+
+    .jsv-divider {
+      height: 1px;
+      margin: 19px 0;
+      border: 0;
+      background: var(--jsv-border);
+    }
+
+    .jsv-section {
+      margin-top: 20px;
+    }
+
+    .jsv-section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .jsv-section-head h2 {
+      margin: 0;
+    }
+
+    .jsv-article p,
+    .jsv-article li {
+      color: #354252;
+    }
+
+    .jsv-article li + li {
+      margin-top: 7px;
+    }
+
+    .jsv-faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--jsv-border);
+    }
+
+    .jsv-faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .jsv-faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .jsv-faq details p {
+      margin: 9px 0 0;
+      color: var(--jsv-muted);
+    }
+
+    @media (max-width: 760px) {
+      .jsv-input-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 470px) {
+      .jsv-page {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .jsv-stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .jsv-toolbar > .jsv-button {
+        flex: 1 1 100%;
+      }
+
+      .jsv-field textarea {
+        min-height: 220px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .jsv-page *,
+      .jsv-page *::before,
+      .jsv-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="jsv-page">
+  <nav class="jsv-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>JSON Schema Validator</span>
+  </nav>
+
+  <header class="jsv-header">
+    <h1>JSON Schema Validator Online</h1>
+    <p>
+      Validate JSON data against a JSON Schema. Check required properties, value types,
+      number limits, string patterns, array rules and common formats, then inspect
+      detailed validation errors in your browser.
+    </p>
+    <div class="jsv-pills">
+      <span class="jsv-pill">JSON Schema Draft-07</span>
+      <span class="jsv-pill">Browser-side validation</span>
+      <span class="jsv-pill">Detailed errors</span>
+    </div>
+  </header>
+
+  <section class="jsv-card" aria-labelledby="inputsHeading">
+    <h2 id="inputsHeading">1. Add your schema and JSON data</h2>
+
+    <div class="jsv-warning">
+      <strong>Supported schema draft:</strong> Draft-07. This page validates your schema
+      and data in the browser. It does not automatically retrieve remote
+      <code>$ref</code> URLs. External references and schema versions newer than Draft-07
+      need a compatible validator setup.
+    </div>
+
+    <div class="jsv-input-grid" style="margin-top:15px">
+      <section class="jsv-panel">
+        <div class="jsv-panel-header">
+          <h3>JSON Schema</h3>
+          <div class="jsv-panel-actions">
+            <button type="button" class="jsv-button jsv-button-small" id="loadSchemaFileBtn">
+              Load file
+            </button>
+            <button type="button" class="jsv-button jsv-button-small" id="formatSchemaBtn">
+              Format
+            </button>
+          </div>
+        </div>
+        <input type="file" id="schemaFileInput" accept=".json,.schema" hidden>
+        <div class="jsv-field">
+          <label for="schemaInput">Schema definition</label>
+          <textarea id="schemaInput" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Paste your JSON Schema here…"></textarea>
+        </div>
+        <p class="jsv-muted" style="margin:8px 0 0">
+          Define the expected structure, properties, types and constraints.
+        </p>
+      </section>
+
+      <section class="jsv-panel">
+        <div class="jsv-panel-header">
+          <h3>JSON data</h3>
+          <div class="jsv-panel-actions">
+            <button type="button" class="jsv-button jsv-button-small" id="loadDataFileBtn">
+              Load file
+            </button>
+            <button type="button" class="jsv-button jsv-button-small" id="formatDataBtn">
+              Format
+            </button>
+          </div>
+        </div>
+        <input type="file" id="dataFileInput" accept=".json,.txt" hidden>
+        <div class="jsv-field">
+          <label for="dataInput">Data to validate</label>
+          <textarea id="dataInput" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Paste a JSON object, array or value…"></textarea>
+        </div>
+        <p class="jsv-muted" style="margin:8px 0 0">
+          The data must be valid JSON before schema rules can be checked.
+        </p>
+      </section>
+    </div>
+
+    <div class="jsv-toolbar">
+      <button type="button" class="jsv-button jsv-button-primary" id="validateBtn">
+        Validate JSON
+      </button>
+      <button type="button" class="jsv-button" id="sampleBtn">
+        Load example
+      </button>
+      <button type="button" class="jsv-button" id="validSampleBtn">
+        Load valid example
+      </button>
+      <button type="button" class="jsv-button" id="clearBtn">
+        Clear all
+      </button>
+      <span class="jsv-spacer"></span>
+      <span class="jsv-muted" id="inputSizes">0 characters</span>
+    </div>
+
+    <p class="jsv-status" id="statusMessage" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="jsv-card jsv-section" id="resultSection" hidden>
+    <div class="jsv-section-head">
+      <h2>Validation result</h2>
+      <span class="jsv-badge" id="resultBadge" data-kind="info">Not validated</span>
+    </div>
+
+    <div class="jsv-result" id="resultPanel" data-kind="valid">
+      <p class="jsv-result-title" id="resultTitle">Ready to validate</p>
+      <p class="jsv-muted" id="resultDescription" style="margin:5px 0 0"></p>
+    </div>
+
+    <div class="jsv-stat-grid">
+      <div class="jsv-stat">
+        <span class="jsv-stat-label">Validation errors</span>
+        <span class="jsv-stat-value" id="errorCount">0</span>
+      </div>
+      <div class="jsv-stat">
+        <span class="jsv-stat-label">Data size</span>
+        <span class="jsv-stat-value" id="dataSize">0 KB</span>
+      </div>
+      <div class="jsv-stat">
+        <span class="jsv-stat-label">Schema draft</span>
+        <span class="jsv-stat-value">Draft-07</span>
+      </div>
+    </div>
+
+    <div class="jsv-toolbar">
+      <button class="jsv-button" type="button" id="downloadReportBtn" disabled>
+        Download validation report
+      </button>
+      <button class="jsv-button" type="button" id="copyErrorsBtn" disabled>
+        Copy error details
+      </button>
+    </div>
+
+    <hr class="jsv-divider">
+
+    <div class="jsv-section-head">
+      <h2>Validation errors</h2>
+      <span class="jsv-muted" id="errorListSummary"></span>
+    </div>
+
+    <div class="jsv-empty" id="noErrorsMessage" hidden>
+      No schema validation errors were found. This means the data passed the selected schema's
+      checks; it does not guarantee that the values are factually correct or that an application
+      will accept the data for other reasons.
+    </div>
+
+    <div class="jsv-table-wrap" id="errorsTableWrap" hidden>
+      <table class="jsv-table">
+        <thead>
+          <tr>
+            <th scope="col">Data path</th>
+            <th scope="col">Rule</th>
+            <th scope="col">Error message</th>
+          </tr>
+        </thead>
+        <tbody id="errorsTableBody"></tbody>
+      </table>
+    </div>
+
+    <div id="formatWarnings" style="margin-top:12px"></div>
+  </section>
+
+  <section class="jsv-card jsv-section jsv-article">
+    <h2>What is JSON Schema validation?</h2>
+    <p>
+      JSON Schema is a way to describe the structure and constraints expected for JSON data.
+      A schema can require properties, specify data types, limit numbers and string lengths,
+      restrict allowed values, validate array items, and control whether unknown properties
+      are permitted.
+    </p>
+    <p>
+      For example, a user schema might require a string name, a valid-looking email value,
+      and an integer age above a minimum. Validation checks the JSON against those rules
+      and reports where a mismatch occurs.
+    </p>
+
+    <h3>Common JSON Schema rules</h3>
+    <ul>
+      <li><strong>type:</strong> specify string, number, integer, boolean, object, array or null.</li>
+      <li><strong>required:</strong> identify object properties that must be present.</li>
+      <li><strong>properties:</strong> define validation rules for named object fields.</li>
+      <li><strong>additionalProperties:</strong> allow or reject fields not listed in the schema.</li>
+      <li><strong>minimum / maximum:</strong> constrain numeric values.</li>
+      <li><strong>minLength / maxLength:</strong> constrain string length.</li>
+      <li><strong>pattern:</strong> match a string against a regular expression.</li>
+      <li><strong>items:</strong> validate array elements against a schema.</li>
+      <li><strong>enum / const:</strong> limit a value to an allowed list or a single value.</li>
+    </ul>
+
+    <h3>How to use the JSON Schema Validator</h3>
+    <ol>
+      <li>Paste or load your JSON Schema.</li>
+      <li>Paste or load the JSON document you want to validate.</li>
+      <li>Select “Validate JSON.”</li>
+      <li>Review the result and the data path, rule and explanation for each reported error.</li>
+      <li>Edit the input and validate again, or download the report for debugging.</li>
+    </ol>
+
+    <h3>What does a data path mean?</h3>
+    <p>
+      Error paths use JSON Pointer-style paths. The path <code>/user/email</code>
+      identifies the email property inside the user object. Array paths include an
+      index, such as <code>/items/2</code>. An empty path indicates an issue associated
+      with the document root or a whole-object rule.
+    </p>
+
+    <h3>Important limitations</h3>
+    <p>
+      This page targets JSON Schema Draft-07. Some newer keywords belong to later schema
+      drafts and may not be interpreted as intended here. External <code>$ref</code> URLs
+      are not automatically fetched, and unsupported custom formats are not guaranteed to
+      receive format-specific validation.
+    </p>
+    <p>
+      A valid result means the data passed the rules recognized by this validator. It does
+      not establish business correctness, verify external resources, authenticate data,
+      or guarantee that a particular API accepts it.
+    </p>
+    <p>
+      The page processes inputs locally in your browser and does not send the JSON document
+      to this website. The validator library is downloaded from a CDN. Use a trusted device
+      and take care when working with sensitive information in browser tools.
+    </p>
+  </section>
+
+  <section class="jsv-card jsv-section jsv-faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>What is the difference between a JSON formatter and a JSON Schema validator?</summary>
+      <p>
+        A formatter improves the readability of valid JSON. A schema validator checks whether
+        JSON data follows a set of defined requirements, such as required fields, data types
+        and allowed values.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can this tool check required fields and data types?</summary>
+      <p>
+        Yes. Draft-07 rules such as type, required, properties, enum, const, minimum, maximum,
+        pattern, array item schemas and additionalProperties are supported by the validator.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why does my JSON fail validation even though it is valid JSON?</summary>
+      <p>
+        JSON syntax and schema validation are different. Data can be valid JSON but fail a
+        schema because a required property is missing, a value has the wrong type, or a
+        constraint is not satisfied.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does this page support every JSON Schema version?</summary>
+      <p>
+        No. This implementation targets Draft-07. Draft-2019-09, Draft 2020-12 and older
+        draft-specific schemas may need another compatible validator configuration.
+      </p>
+    </details>
+
+    <details>
+      <summary>Are external $ref schemas downloaded?</summary>
+      <p>
+        No. The page does not fetch remote references. Local references to definitions contained
+        in the schema can work, while unresolved external references will produce a compile error.
+      </p>
+    </details>
+
+    <details>
+      <summary>Are my JSON inputs uploaded?</summary>
+      <p>
+        No upload endpoint is implemented for the input. Parsing and validation run in your
+        browser. The library code itself is loaded from a CDN.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does a valid result guarantee correct business data?</summary>
+      <p>
+        No. Validation only checks the configured schema rules. It does not confirm that a
+        customer exists, that a price is commercially correct, or that an application will
+        accept the document for other reasons.
+      </p>
+    </details>
+  </section>
+
+  <p class="jsv-muted jsv-section">
+    Discover more utilities on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<!-- Pinned Ajv browser bundle. Draft-07 is the default bundle. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/8.14.0/ajv7.bundle.min.js"></script>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_SCHEMA_BYTES = 500 * 1024;
+  const MAX_DATA_BYTES = 2 * 1024 * 1024;
+  const MAX_ERRORS_SHOWN = 200;
+
+  const $ = id => document.getElementById(id);
+
+  const schemaInput = $("schemaInput");
+  const dataInput = $("dataInput");
+  const statusMessage = $("statusMessage");
+  const resultSection = $("resultSection");
+
+  const schemaFileInput = $("schemaFileInput");
+  const dataFileInput = $("dataFileInput");
+
+  let lastReport = null;
+  let inputRevision = 0;
+
+  const knownFormats = [
+    "email",
+    "uri",
+    "uri-reference",
+    "date",
+    "time",
+    "date-time",
+    "uuid",
+    "hostname",
+    "ipv4",
+    "ipv6",
+    "regex"
+  ];
+
+  function setStatus(message, kind = "") {
+    statusMessage.textContent = message;
+    statusMessage.dataset.kind = kind;
+  }
+
+  function byteLength(text) {
+    return new Blob([text]).size;
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  function updateInputSizes() {
+    const total = schemaInput.value.length + dataInput.value.length;
+    $("inputSizes").textContent = `${total.toLocaleString()} characters total`;
+  }
+
+  function clearResults() {
+    lastReport = null;
+    resultSection.hidden = true;
+
+    $("resultTitle").textContent = "Ready to validate";
+    $("resultDescription").textContent = "";
+    $("errorCount").textContent = "0";
+    $("dataSize").textContent = "0 KB";
+    $("errorListSummary").textContent = "";
+
+    $("errorsTableBody").replaceChildren();
+    $("errorsTableWrap").hidden = true;
+    $("noErrorsMessage").hidden = true;
+    $("formatWarnings").replaceChildren();
+
+    $("downloadReportBtn").disabled = true;
+    $("copyErrorsBtn").disabled = true;
+  }
+
+  function inputChanged() {
+    inputRevision++;
+    clearResults();
+    updateInputSizes();
+
+    if (schemaInput.value.trim() || dataInput.value.trim()) {
+      setStatus("Input changed. Validate again to refresh the result.");
+    } else {
+      setStatus("");
+    }
+  }
+
+  function formatInput(textarea, label) {
+    const text = textarea.value.trim();
+
+    if (!text) {
+      setStatus(`Enter ${label} before formatting.`, "error");
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(text);
+      textarea.value = JSON.stringify(parsed, null, 2);
+      inputChanged();
+      setStatus(`${label} formatted successfully.`, "success");
+    } catch (error) {
+      setStatus(`Cannot format ${label}: ${error.message}`, "error");
+    }
+  }
+
+  function isValidDate(value) {
+    if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+      return false;
+    }
+
+    const [year, month, day] = value.split("-").map(Number);
+    const date = new Date(Date.UTC(year, month - 1, day));
+
+    return date.getUTCFullYear() === year &&
+      date.getUTCMonth() === month - 1 &&
+      date.getUTCDate() === day;
+  }
+
+  function isValidDateTime(value) {
+    if (typeof value !== "string") return false;
+
+    const pattern =
+      /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
+
+    if (!pattern.test(value)) return false;
+
+    const datePart = value.slice(0, 10);
+
+    return isValidDate(datePart) && !Number.isNaN(Date.parse(value));
+  }
+
+  function isValidTime(value) {
+    if (typeof value !== "string") return false;
+
+    return /^(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|[+-](?:[01]\d|2[0-3]):?[0-5]\d)?$/.test(value);
+  }
+
+  function isValidEmail(value) {
+    if (typeof value !== "string" || value.length > 254) return false;
+    if (/\s/.test(value)) return false;
+
+    const at = value.lastIndexOf("@");
+    if (at <= 0 || at === value.length - 1) return false;
+
+    const local = value.slice(0, at);
+    const domain = value.slice(at + 1);
+
+    return local.length <= 64 &&
+      !local.startsWith(".") &&
+      !local.endsWith(".") &&
+      !local.includes("..") &&
+      /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+$/.test(local) &&
+      domain.includes(".") &&
+      domain.split(".").every(part =>
+        part.length > 0 &&
+        part.length <= 63 &&
+        /^[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?$/.test(part)
+      );
+  }
+
+  function isValidUri(value) {
+    if (typeof value !== "string" || /\s/.test(value)) return false;
+
+    // URI format requires an absolute URI with a scheme.
+    return /^[A-Za-z][A-Za-z0-9+.-]*:[^\s]*$/.test(value);
+  }
+
+  function isValidUriReference(value) {
+    if (typeof value !== "string" || /\s/.test(value)) return false;
+
+    try {
+      new URL(value, "https://example.invalid/base/");
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function isValidHostname(value) {
+    if (
+      typeof value !== "string" ||
+      value.length > 253 ||
+      value.length === 0
+    ) return false;
+
+    const hostname = value.endsWith(".") ? value.slice(0, -1) : value;
+
+    if (!hostname) return false;
+
+    return hostname.split(".").every(label =>
+      label.length > 0 &&
+      label.length <= 63 &&
+      /^[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?$/.test(label)
+    );
+  }
+
+  function isValidIPv4(value) {
+    if (typeof value !== "string") return false;
+
+    const parts = value.split(".");
+    if (parts.length !== 4) return false;
+
+    return parts.every(part => {
+      if (!/^\d{1,3}$/.test(part)) return false;
+      if (part.length > 1 && part.startsWith("0")) return false;
+
+      const number = Number(part);
+      return number >= 0 && number <= 255;
+    });
+  }
+
+  function isValidIPv6(value) {
+    if (typeof value !== "string" || !value.includes(":")) return false;
+
+    try {
+      const parsed = new URL(`http://[${value}]/`);
+      return parsed.hostname === `[${value.toLowerCase()}]` ||
+        parsed.hostname.toLowerCase() === `[${value.toLowerCase()}]`;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function isValidUuid(value) {
+    return typeof value === "string" &&
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+  }
+
+  function createAjv() {
+    const namespace = window.ajv;
+    const AjvConstructor = namespace && (namespace.default || namespace);
+
+    if (typeof AjvConstructor !== "function") {
+      throw new Error(
+        "The JSON Schema validator library did not load. Check your connection and reload the page."
+      );
+    }
+
+    const ajv = new AjvConstructor({
+      allErrors: true,
+      strict: false,
+      validateSchema: true,
+      verbose: true,
+      messages: true,
+      addUsedSchema: false
+    });
+
+    // Ajv v8 separates common format validators from the core package.
+    // These local validators avoid another runtime dependency. Format checks
+    // are useful basic checks, not complete proofs of real-world validity.
+    ajv.addFormat("email", isValidEmail);
+    ajv.addFormat("uri", isValidUri);
+    ajv.addFormat("uri-reference", isValidUriReference);
+    ajv.addFormat("date", isValidDate);
+    ajv.addFormat("date-time", isValidDateTime);
+    ajv.addFormat("time", isValidTime);
+    ajv.addFormat("uuid", isValidUuid);
+    ajv.addFormat("hostname", isValidHostname);
+    ajv.addFormat("ipv4", isValidIPv4);
+    ajv.addFormat("ipv6", isValidIPv6);
+    ajv.addFormat("regex", value => {
+      if (typeof value !== "string") return false;
+
+      try {
+        new RegExp(value);
+        return true;
+      } catch (error) {
+        return false;
+      }
+    });
+
+    return ajv;
+  }
+
+  function inspectFormats(schema) {
+    const found = new Set();
+    const seen = new Set();
+
+    function visit(value, depth) {
+      if (!value || typeof value !== "object" || depth > 80 || seen.has(value)) {
+        return;
+      }
+
+      seen.add(value);
+
+      if (typeof value.format === "string") {
+        found.add(value.format);
+      }
+
+      if (Array.isArray(value)) {
+        value.forEach(item => visit(item, depth + 1));
+        return;
+      }
+
+      Object.keys(value).forEach(key => {
+        // JSON Schema content examples and default values are instance data,
+        // not nested schema definitions. Avoid scanning those as schemas.
+        if (["default", "const", "enum", "examples", "example"].includes(key)) {
+          return;
+        }
+        visit(value[key], depth + 1);
+      });
+    }
+
+    visit(schema, 0);
+    return Array.from(found);
+  }
+
+  function escapePointerSegment(segment) {
+    return String(segment)
+      .replace(/~/g, "~0")
+      .replace(/\//g, "~1");
+  }
+
+  function dataPathFromError(error) {
+    let path = error && error.instancePath ? error.instancePath : "";
+
+    if (
+      error &&
+      error.keyword === "required" &&
+      error.params &&
+      typeof error.params.missingProperty === "string"
+    ) {
+      path += "/" + escapePointerSegment(error.params.missingProperty);
+    }
+
+    if (
+      error &&
+      error.keyword === "additionalProperties" &&
+      error.params &&
+      typeof error.params.additionalProperty === "string"
+    ) {
+      path += "/" + escapePointerSegment(error.params.additionalProperty);
+    }
+
+    return path || "/";
+  }
+
+  function schemaPathFromError(error) {
+    return error && error.schemaPath ? error.schemaPath : "/";
+  }
+
+  function makeSafeError(error) {
+    return {
+      path: dataPathFromError(error),
+      instancePath: error.instancePath || "",
+      schemaPath: schemaPathFromError(error),
+      keyword: error.keyword || "unknown",
+      message: error.message || "Validation failed.",
+      params: error.params || {}
+    };
+  }
+
+  function renderErrors(errors) {
+    const body = $("errorsTableBody");
+    body.replaceChildren();
+
+    const visibleErrors = errors.slice(0, MAX_ERRORS_SHOWN);
+
+    visibleErrors.forEach(error => {
+      const row = document.createElement("tr");
+      const pathCell = document.createElement("td");
+      const keywordCell = document.createElement("td");
+      const messageCell = document.createElement("td");
+
+      pathCell.className = "jsv-path";
+      keywordCell.className = "jsv-keyword";
+
+      pathCell.textContent = error.path;
+      keywordCell.textContent = error.keyword;
+      messageCell.textContent = error.message;
+
+      const details = document.createElement("details");
+      const summary = document.createElement("summary");
+      const pre = document.createElement("pre");
+
+      summary.textContent = "Technical details";
+      pre.className = "jsv-code";
+      pre.textContent = JSON.stringify({
+        schemaPath: error.schemaPath,
+        instancePath: error.instancePath,
+        params: error.params
+      }, null, 2);
+
+      details.append(summary, pre);
+      messageCell.appendChild(document.createElement("br"));
+      messageCell.appendChild(details);
+
+      row.append(pathCell, keywordCell, messageCell);
+      body.appendChild(row);
+    });
+
+    $("errorCount").textContent = errors.length.toLocaleString();
+    $("errorListSummary").textContent =
+      errors.length > MAX_ERRORS_SHOWN
+        ? `Showing first ${MAX_ERRORS_SHOWN} of ${errors.length} errors`
+        : `${errors.length} error(s)`;
+
+    $("errorsTableWrap").hidden = errors.length === 0;
+    $("noErrorsMessage").hidden = errors.length !== 0;
+  }
+
+  function renderFormatWarnings(formats) {
+    const container = $("formatWarnings");
+    container.replaceChildren();
+
+    const unknown = formats.filter(format => !knownFormats.includes(format));
+
+    if (!unknown.length) return;
+
+    const box = document.createElement("div");
+    box.className = "jsv-warning";
+    box.style.marginTop = "12px";
+
+    box.textContent =
+      `The schema uses format value(s) not explicitly checked by this page: ${unknown.join(", ")}. ` +
+      "Unknown formats may be treated as annotations rather than assertions. Add application-specific format validation if these rules are important.";
+
+    container.appendChild(box);
+  }
+
+  function validate() {
+    clearResults();
+
+    if (!schemaInput.value.trim()) {
+      setStatus("Enter a JSON Schema first.", "error");
+      return;
+    }
+
+    if (!dataInput.value.trim()) {
+      setStatus("Enter JSON data to validate.", "error");
+      return;
+    }
+
+    const schemaText = schemaInput.value;
+    const dataText = dataInput.value;
+    const schemaSize = byteLength(schemaText);
+    const dataSize = byteLength(dataText);
+    const runRevision = inputRevision;
+
+    if (schemaSize > MAX_SCHEMA_BYTES) {
+      setStatus("The schema exceeds the 500 KB input limit.", "error");
+      return;
+    }
+
+    if (dataSize > MAX_DATA_BYTES) {
+      setStatus("The JSON data exceeds the 2 MB input limit.", "error");
+      return;
+    }
+
+    let schema;
+    let data;
+
+    try {
+      schema = JSON.parse(schemaText);
+    } catch (error) {
+      setStatus(`Schema JSON syntax error: ${error.message}`, "error");
+      return;
+    }
+
+    try {
+      data = JSON.parse(dataText);
+    } catch (error) {
+      setStatus(`Data JSON syntax error: ${error.message}`, "error");
+      return;
+    }
+
+    if (
+      schema === null ||
+      Array.isArray(schema) ||
+      (typeof schema !== "object" && typeof schema !== "boolean")
+    ) {
+      setStatus(
+        "A JSON Schema must be a JSON object or a boolean schema (true or false).",
+        "error"
+      );
+      return;
+    }
+
+    if (schema && typeof schema === "object" && typeof schema.$schema === "string") {
+      const declaredDraft = schema.$schema;
+
+      if (
+        !declaredDraft.includes("draft-07") &&
+        !declaredDraft.includes("draft/07") &&
+        !declaredDraft.includes("draft-07/schema")
+      ) {
+        setStatus(
+          `This page is configured for JSON Schema Draft-07, but the schema declares "${declaredDraft}". Use a Draft-07 schema or a validator that supports the declared version.`,
+          "error"
+        );
+        return;
+      }
+    }
+
+    try {
+      const ajv = createAjv();
+      const validator = ajv.compile(schema);
+      const isValid = validator(data);
+
+      // Copy the errors immediately; Ajv stores errors on the validator function.
+      const errors = isValid
+        ? []
+        : (validator.errors || []).map(makeSafeError);
+
+      if (runRevision !== inputRevision) return;
+
+      const formats = inspectFormats(schema);
+
+      resultSection.hidden = false;
+      $("dataSize").textContent = formatBytes(dataSize);
+
+      $("resultPanel").dataset.kind = isValid ? "valid" : "invalid";
+      $("resultBadge").dataset.kind = isValid ? "valid" : "invalid";
+      $("resultBadge").textContent = isValid ? "Valid" : "Invalid";
+      $("resultTitle").textContent = isValid
+        ? "JSON matches the schema"
+        : "JSON does not match the schema";
+
+      $("resultDescription").textContent = isValid
+        ? "The data passed all checks performed by this Draft-07 validator."
+        : `Found ${errors.length} validation error(s). Review the details below, update the data or schema, then validate again.`;
+
+      $("downloadReportBtn").disabled = false;
+      $("copyErrorsBtn").disabled = errors.length === 0;
+
+      renderErrors(errors);
+      renderFormatWarnings(formats);
+
+      lastReport = {
+        generatedAt: new Date().toISOString(),
+        schemaDraft: "Draft-07",
+        valid: isValid,
+        dataBytes: dataSize,
+        schemaBytes: schemaSize,
+        errorCount: errors.length,
+        errors,
+        note: "The report does not include the input JSON or full schema. Validation is not a business-rule or authenticity guarantee."
+      };
+
+      setStatus(
+        isValid
+          ? "Validation passed."
+          : `Validation completed with ${errors.length} error(s).`,
+        isValid ? "success" : "error"
+      );
+    } catch (error) {
+      const message = error && error.message
+        ? error.message
+        : "Unknown schema compilation error.";
+
+      const lower = message.toLowerCase();
+      let extra = "";
+
+      if (
+        lower.includes("reference") ||
+        lower.includes("ref")
+      ) {
+        extra = " Check that all referenced schemas are available inside the provided schema; this page does not retrieve remote $ref URLs.";
+      }
+
+      setStatus(
+        `Could not compile or validate this schema: ${message}${extra}`,
+        "error"
+      );
+    }
+  }
+
+  function loadSample(isValid) {
+    const sampleSchema = {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User profile",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "email", "age", "role"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "age": {
+          "type": "integer",
+          "minimum": 18,
+          "maximum": 120
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin", "editor", "user"]
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "website": {
+          "type": "string",
+          "format": "uri"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    };
+
+    const sampleData = isValid
+      ? {
+          name: "Alex Morgan",
+          email: "alex@example.com",
+          age: 29,
+          role: "user",
+          active: true,
+          website: "https://example.com",
+          tags: ["customer", "newsletter"]
+        }
+      : {
+          name: "A",
+          email: "not-an-email",
+          age: 16,
+          role: "superuser",
+          active: "yes",
+          website: "not a uri",
+          tags: ["customer", "customer"],
+          extraField: "not allowed by this schema"
+        };
+
+    schemaInput.value = JSON.stringify(sampleSchema, null, 2);
+    dataInput.value = JSON.stringify(sampleData, null, 2);
+
+    inputChanged();
+
+    setStatus(
+      isValid
+        ? "Valid example loaded. Select “Validate JSON” to check it."
+        : "Example loaded with intentional errors. Validate it to inspect the error report."
+    );
+  }
+
+  function clearAll() {
+    schemaInput.value = "";
+    dataInput.value = "";
+
+    inputRevision++;
+    clearResults();
+    updateInputSizes();
+
+    setStatus("");
+  }
+
+  async function loadJsonFile(file, destination, inputName) {
+    if (!file) return;
+
+    const limit = destination === schemaInput
+      ? MAX_SCHEMA_BYTES
+      : MAX_DATA_BYTES;
+
+    if (file.size > limit) {
+      setStatus(
+        `${inputName} is larger than the allowed ${formatBytes(limit)} limit.`,
+        "error"
+      );
+      return;
+    }
+
+    try {
+      const text = await file.text();
+
+      if (text.includes("\u0000")) {
+        setStatus(`${inputName} appears to contain binary data, not JSON text.`, "error");
+        return;
+      }
+
+      destination.value = text;
+      inputChanged();
+
+      setStatus(
+        `${inputName} loaded. Check the contents and select “Validate JSON.”`,
+        "success"
+      );
+    } catch (error) {
+      setStatus(`Could not read ${inputName}. Try a different file.`, "error");
+    }
+  }
+
+  async function copyErrors() {
+    if (!lastReport || !lastReport.errors.length) return;
+
+    const text = JSON.stringify(lastReport.errors, null, 2);
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        fallbackCopy(text);
+      }
+
+      setStatus("Validation error details copied.", "success");
+    } catch (error) {
+      setStatus("Could not copy errors. Please use the report download.", "error");
+    }
+  }
+
+  function fallbackCopy(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    textarea.style.pointerEvents = "none";
+
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const copied = document.execCommand("copy");
+    textarea.remove();
+
+    if (!copied) throw new Error("Clipboard copy failed.");
+  }
+
+  function downloadReport() {
+    if (!lastReport) return;
+
+    const blob = new Blob(
+      [JSON.stringify(lastReport, null, 2)],
+      { type: "application/json;charset=utf-8" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = "json-schema-validation-report.json";
+    anchor.style.display = "none";
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1200);
+
+    setStatus("Validation report prepared for download. Input data is not included.", "success");
+  }
+
+  $("validateBtn").addEventListener("click", validate);
+
+  $("sampleBtn").addEventListener("click", () => loadSample(false));
+  $("validSampleBtn").addEventListener("click", () => loadSample(true));
+  $("clearBtn").addEventListener("click", clearAll);
+
+  $("formatSchemaBtn").addEventListener("click", () => {
+    formatInput(schemaInput, "schema");
+  });
+
+  $("formatDataBtn").addEventListener("click", () => {
+    formatInput(dataInput, "JSON data");
+  });
+
+  $("loadSchemaFileBtn").addEventListener("click", () => schemaFileInput.click());
+  $("loadDataFileBtn").addEventListener("click", () => dataFileInput.click());
+
+  schemaFileInput.addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) loadJsonFile(file, schemaInput, "Schema file");
+    schemaFileInput.value = "";
+  });
+
+  dataFileInput.addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) loadJsonFile(file, dataInput, "JSON data file");
+    dataFileInput.value = "";
+  });
+
+  $("downloadReportBtn").addEventListener("click", downloadReport);
+  $("copyErrorsBtn").addEventListener("click", copyErrors);
+
+  schemaInput.addEventListener("input", inputChanged);
+  dataInput.addEventListener("input", inputChanged);
+
+  updateInputSizes();
+  clearResults();
+})();
+</script>
+</body>
+</html>

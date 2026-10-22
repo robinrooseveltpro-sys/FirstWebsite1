@@ -1,0 +1,1635 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>YAML to JSON Converter Online - Free & Fast</title>
+  <meta name="description" content="Convert YAML to JSON online for free. Validate YAML syntax, handle multiple documents, format JSON, and copy or download results directly in your browser.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="https://converttotoolsonline.com/yaml-to-json-converter.html">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="YAML to JSON Converter Online">
+  <meta property="og:description" content="Convert YAML configuration files into formatted JSON, validate syntax, and download results in your browser.">
+  <meta property="og:url" content="https://converttotoolsonline.com/yaml-to-json-converter.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free YAML to JSON Converter">
+  <meta name="twitter:description" content="Convert YAML to JSON with syntax errors, multi-document support, and copy and download options.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "YAML to JSON Converter",
+    "url": "https://converttotoolsonline.com/yaml-to-json-converter.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "description": "A browser-based YAML to JSON converter with syntax validation, multi-document processing, JSON formatting, and downloadable output.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "YAML to JSON conversion",
+      "YAML syntax error reporting",
+      "Multi-document YAML support",
+      "JSON formatting and minification",
+      "Copy and download JSON",
+      "Browser-based processing"
+    ]
+  }
+  </script>
+
+  <style>
+    .y2j-page {
+      margin: 0;
+      color: #182237;
+      background: #f7f8fc;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    .y2j-page *,
+    .y2j-page *::before,
+    .y2j-page *::after {
+      box-sizing: border-box;
+    }
+
+    .y2j-page a {
+      color: #2459c4;
+    }
+
+    .y2j-shell {
+      width: min(100% - 30px, 1120px);
+      margin-inline: auto;
+    }
+
+    .y2j-header {
+      background: #fff;
+      border-bottom: 1px solid #e5e9f1;
+    }
+
+    .y2j-header-inner {
+      min-height: 72px;
+      padding-block: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .y2j-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #182237 !important;
+      font-weight: 800;
+      letter-spacing: -.025em;
+      text-decoration: none;
+    }
+
+    .y2j-brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: #2459c4;
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 850;
+    }
+
+    .y2j-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      font-size: .9rem;
+    }
+
+    .y2j-nav a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .y2j-nav a:hover {
+      color: #2459c4;
+      text-decoration: underline;
+    }
+
+    .y2j-main {
+      padding-block: 36px 64px;
+    }
+
+    .y2j-hero {
+      max-width: 780px;
+      margin: 0 auto 25px;
+      text-align: center;
+    }
+
+    .y2j-eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #2459c4;
+      font-size: .81rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .y2j-hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.05rem);
+      letter-spacing: -.045em;
+      line-height: 1.12;
+    }
+
+    .y2j-hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #59667c;
+      font-size: 1.03rem;
+    }
+
+    .y2j-privacy {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
+      color: #247448;
+      font-size: .87rem;
+      font-weight: 700;
+    }
+
+    .y2j-card {
+      padding: clamp(16px, 3vw, 26px);
+      border: 1px solid #e2e7f0;
+      border-radius: 19px;
+      background: #fff;
+      box-shadow: 0 12px 36px rgba(26, 41, 77, .055);
+    }
+
+    .y2j-tool-heading {
+      margin-bottom: 17px;
+    }
+
+    .y2j-tool-heading h2 {
+      margin: 0 0 4px;
+      font-size: 1.26rem;
+      letter-spacing: -.02em;
+    }
+
+    .y2j-muted {
+      color: #6a768b;
+      font-size: .89rem;
+    }
+
+    .y2j-samples {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .y2j-samples-label {
+      margin-right: 2px;
+      color: #536078;
+      font-size: .85rem;
+      font-weight: 750;
+    }
+
+    .y2j-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 10px 15px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: #2459c4;
+      color: #fff !important;
+      font: inherit;
+      font-size: .91rem;
+      font-weight: 750;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none !important;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+
+    .y2j-btn:hover {
+      background: #1949a8;
+    }
+
+    .y2j-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .y2j-btn-secondary {
+      border-color: #d9e0eb;
+      background: #fff;
+      color: #34415b !important;
+    }
+
+    .y2j-btn-secondary:hover {
+      background: #f4f7fc;
+    }
+
+    .y2j-btn-small {
+      min-height: 34px;
+      padding: 7px 11px;
+      font-size: .82rem;
+    }
+
+    .y2j-page button:focus-visible,
+    .y2j-page input:focus-visible,
+    .y2j-page select:focus-visible,
+    .y2j-page textarea:focus-visible {
+      outline: 3px solid #91b4ff;
+      outline-offset: 3px;
+    }
+
+    .y2j-editor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .y2j-editor-panel {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #dde4ef;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .y2j-editor-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 52px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e1e6ef;
+      background: #f8faff;
+    }
+
+    .y2j-editor-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: .94rem;
+      font-weight: 800;
+    }
+
+    .y2j-file-type {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #dce3ef;
+      border-radius: 6px;
+      padding: 2px 7px;
+      background: #fff;
+      color: #536078;
+      font-size: .73rem;
+      font-weight: 800;
+    }
+
+    .y2j-editor-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .y2j-editor {
+      display: block;
+      width: 100%;
+      min-height: 350px;
+      padding: 16px;
+      border: 0;
+      border-radius: 0;
+      outline-offset: -3px;
+      resize: vertical;
+      background: #fff;
+      color: #22314a;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      tab-size: 2;
+      white-space: pre;
+      overflow: auto;
+    }
+
+    .y2j-editor:focus-visible {
+      outline-offset: -4px;
+    }
+
+    .y2j-output-editor {
+      background: #fbfcff;
+    }
+
+    .y2j-editor-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 12px;
+      border-top: 1px solid #e6eaf1;
+      color: #738097;
+      font-size: .77rem;
+    }
+
+    .y2j-options {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: 12px;
+      margin-top: 17px;
+    }
+
+    .y2j-option {
+      display: grid;
+      gap: 5px;
+    }
+
+    .y2j-option label {
+      color: #536078;
+      font-size: .82rem;
+      font-weight: 750;
+    }
+
+    .y2j-option select {
+      min-height: 40px;
+      min-width: 135px;
+      padding: 7px 10px;
+      border: 1px solid #d6deeb;
+      border-radius: 9px;
+      background: #fff;
+      color: #26344d;
+      font: inherit;
+      font-size: .88rem;
+    }
+
+    .y2j-main-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-left: auto;
+    }
+
+    .y2j-status {
+      margin-top: 15px;
+      padding: 12px 14px;
+      border: 1px solid #dce3ef;
+      border-radius: 10px;
+      background: #f7f9ff;
+      color: #35435c;
+      font-size: .89rem;
+      overflow-wrap: anywhere;
+    }
+
+    .y2j-status--success {
+      border-color: #c7e7d1;
+      background: #f0fbf4;
+      color: #21663d;
+    }
+
+    .y2j-status--error {
+      border-color: #edc7c7;
+      background: #fff4f4;
+      color: #982c2c;
+    }
+
+    .y2j-status--warning {
+      border-color: #efdfb8;
+      background: #fffbef;
+      color: #795e1b;
+    }
+
+    .y2j-result-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
+    }
+
+    .y2j-stat {
+      padding: 7px 10px;
+      border: 1px solid #e1e6ef;
+      border-radius: 8px;
+      background: #fafbfe;
+      color: #536078;
+      font-size: .8rem;
+    }
+
+    .y2j-content {
+      width: min(100%, 850px);
+      margin: 44px auto 0;
+    }
+
+    .y2j-content section {
+      margin-top: 32px;
+    }
+
+    .y2j-content h2 {
+      margin: 0 0 12px;
+      color: #182237;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+    }
+
+    .y2j-content h3 {
+      margin: 21px 0 7px;
+      font-size: 1.08rem;
+    }
+
+    .y2j-content p,
+    .y2j-content li {
+      color: #536078;
+    }
+
+    .y2j-content p {
+      margin: 0 0 12px;
+    }
+
+    .y2j-content li {
+      margin-bottom: 7px;
+    }
+
+    .y2j-content ol,
+    .y2j-content ul {
+      padding-left: 24px;
+    }
+
+    .y2j-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .y2j-step {
+      padding: 16px;
+      border: 1px solid #e2e7f0;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .y2j-step-number {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin-bottom: 9px;
+      border-radius: 9px;
+      background: #edf3ff;
+      color: #2459c4;
+      font-weight: 850;
+    }
+
+    .y2j-step strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .y2j-step p {
+      margin: 0;
+      font-size: .9rem;
+    }
+
+    .y2j-code-block {
+      overflow: auto;
+      padding: 15px;
+      border: 1px solid #e0e6f0;
+      border-radius: 12px;
+      background: #fff;
+      color: #2b3a54;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .86rem;
+      line-height: 1.7;
+      white-space: pre;
+    }
+
+    .y2j-related {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .y2j-related a {
+      padding: 8px 12px;
+      border: 1px solid #dce2ed;
+      border-radius: 999px;
+      background: #fff;
+      text-decoration: none;
+      font-size: .9rem;
+    }
+
+    .y2j-related a:hover {
+      border-color: #aac0f3;
+      background: #f4f7ff;
+    }
+
+    .y2j-faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .y2j-faq-list details {
+      padding: 15px 17px;
+      border: 1px solid #e1e6ef;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .y2j-faq-list summary {
+      color: #26334b;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .y2j-faq-list details p {
+      margin: 10px 0 0;
+    }
+
+    .y2j-footer {
+      padding-block: 24px;
+      border-top: 1px solid #e4e8f0;
+      background: #fff;
+      color: #69758a;
+      font-size: .87rem;
+    }
+
+    .y2j-footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .y2j-footer a {
+      color: #526078;
+      text-decoration: none;
+    }
+
+    .y2j-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .y2j-sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 800px) {
+      .y2j-editor-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .y2j-editor {
+        min-height: 280px;
+      }
+
+      .y2j-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .y2j-main-actions {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .y2j-shell {
+        width: min(100% - 22px, 1120px);
+      }
+
+      .y2j-main {
+        padding-top: 25px;
+      }
+
+      .y2j-header-inner {
+        align-items: flex-start;
+      }
+
+      .y2j-nav {
+        gap: 12px;
+        font-size: .83rem;
+      }
+
+      .y2j-main-actions .y2j-btn {
+        flex: 1 1 auto;
+      }
+
+      .y2j-options {
+        align-items: stretch;
+      }
+
+      .y2j-option {
+        flex: 1 1 100%;
+      }
+
+      .y2j-option select {
+        width: 100%;
+      }
+
+      .y2j-editor {
+        min-height: 240px;
+        padding: 12px;
+        font-size: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .y2j-page *,
+      .y2j-page *::before,
+      .y2j-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="y2j-page">
+  <header class="y2j-header">
+    <div class="y2j-shell y2j-header-inner">
+      <a class="y2j-brand" href="/index.html" aria-label="ConvertToToolsOnline home">
+        <span class="y2j-brand-mark" aria-hidden="true">CT</span>
+        <span>ConvertToToolsOnline</span>
+      </a>
+
+      <nav class="y2j-nav" aria-label="Main navigation">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#all-tools">All tools</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="y2j-shell y2j-main">
+    <section class="y2j-hero" aria-labelledby="page-title">
+      <div class="y2j-eyebrow">Free developer tool</div>
+      <h1 id="page-title">YAML to JSON Converter</h1>
+      <p>
+        Convert YAML to JSON online with clear syntax errors, formatted output,
+        and support for multiple YAML documents. Paste your configuration,
+        upload a file, or start with an example.
+      </p>
+      <div class="y2j-privacy">
+        <span aria-hidden="true">●</span>
+        Your YAML is processed in your browser
+      </div>
+    </section>
+
+    <section class="y2j-card" aria-labelledby="tool-title">
+      <div class="y2j-tool-heading">
+        <h2 id="tool-title">Convert YAML to JSON online</h2>
+        <div class="y2j-muted">
+          Edit or upload YAML on the left. Your converted JSON will appear on the right.
+        </div>
+      </div>
+
+      <div class="y2j-samples" aria-label="Load example YAML">
+        <span class="y2j-samples-label">Try an example:</span>
+        <button class="y2j-btn y2j-btn-secondary y2j-btn-small"
+          type="button" data-sample="basic">Basic configuration</button>
+        <button class="y2j-btn y2j-btn-secondary y2j-btn-small"
+          type="button" data-sample="multi">Multiple documents</button>
+        <button class="y2j-btn y2j-btn-secondary y2j-btn-small"
+          type="button" data-sample="anchors">Anchors and aliases</button>
+      </div>
+
+      <input
+        id="yamlFile"
+        type="file"
+        accept=".yaml,.yml,.txt,text/plain,application/yaml,application/x-yaml"
+        hidden
+        aria-label="Choose a YAML file"
+      >
+
+      <div class="y2j-editor-grid">
+        <section class="y2j-editor-panel" aria-labelledby="input-title">
+          <div class="y2j-editor-head">
+            <div class="y2j-editor-title">
+              <span id="input-title">YAML input</span>
+              <span class="y2j-file-type">.yaml / .yml</span>
+            </div>
+            <div class="y2j-editor-actions">
+              <button id="uploadBtn" class="y2j-btn y2j-btn-secondary y2j-btn-small"
+                type="button">Upload file</button>
+              <button id="clearInputBtn" class="y2j-btn y2j-btn-secondary y2j-btn-small"
+                type="button">Clear</button>
+            </div>
+          </div>
+
+          <label class="y2j-sr-only" for="yamlInput">Paste or type YAML here</label>
+          <textarea
+            id="yamlInput"
+            class="y2j-editor"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            placeholder="Paste your YAML here…"
+            aria-describedby="inputHint"
+          ></textarea>
+
+          <div class="y2j-editor-meta">
+            <span id="inputHint">Maximum input size: 2 MB</span>
+            <span id="inputStats">0 characters</span>
+          </div>
+        </section>
+
+        <section class="y2j-editor-panel" aria-labelledby="output-title">
+          <div class="y2j-editor-head">
+            <div class="y2j-editor-title">
+              <span id="output-title">JSON output</span>
+              <span class="y2j-file-type">.json</span>
+            </div>
+            <div class="y2j-editor-actions">
+              <button id="copyBtn" class="y2j-btn y2j-btn-secondary y2j-btn-small"
+                type="button" disabled>Copy</button>
+              <button id="downloadBtn" class="y2j-btn y2j-btn-secondary y2j-btn-small"
+                type="button" disabled>Download</button>
+            </div>
+          </div>
+
+          <label class="y2j-sr-only" for="jsonOutput">Converted JSON output</label>
+          <textarea
+            id="jsonOutput"
+            class="y2j-editor y2j-output-editor"
+            spellcheck="false"
+            readonly
+            placeholder="Your converted JSON will appear here…"
+            aria-describedby="outputHint"
+          ></textarea>
+
+          <div class="y2j-editor-meta">
+            <span id="outputHint">Read-only result</span>
+            <span id="outputStats">No result yet</span>
+          </div>
+        </section>
+      </div>
+
+      <div class="y2j-options">
+        <div class="y2j-option">
+          <label for="indentSelect">JSON formatting</label>
+          <select id="indentSelect">
+            <option value="2" selected>Pretty print — 2 spaces</option>
+            <option value="4">Pretty print — 4 spaces</option>
+            <option value="0">Minified JSON</option>
+          </select>
+        </div>
+
+        <div class="y2j-main-actions">
+          <button id="convertBtn" class="y2j-btn" type="button">
+            Convert YAML to JSON
+          </button>
+          <button id="clearAllBtn" class="y2j-btn y2j-btn-secondary"
+            type="button">Reset tool</button>
+        </div>
+      </div>
+
+      <div id="status" class="y2j-status" role="status"
+        aria-live="polite" hidden></div>
+
+      <div id="resultInfo" class="y2j-result-info" hidden>
+        <span id="documentStat" class="y2j-stat"></span>
+        <span id="nodeStat" class="y2j-stat"></span>
+        <span id="sizeStat" class="y2j-stat"></span>
+      </div>
+    </section>
+
+    <div class="y2j-content">
+      <section aria-labelledby="how-title">
+        <h2 id="how-title">How to convert YAML to JSON</h2>
+        <p>
+          YAML is often used for human-readable configuration files, while
+          JSON is common in APIs, web applications, and data exchange.
+          This free YAML to JSON converter parses your YAML and creates JSON
+          output you can copy or download.
+        </p>
+
+        <div class="y2j-steps">
+          <div class="y2j-step">
+            <div class="y2j-step-number">1</div>
+            <strong>Enter or upload YAML</strong>
+            <p>Paste your configuration into the input editor or select a YAML file.</p>
+          </div>
+          <div class="y2j-step">
+            <div class="y2j-step-number">2</div>
+            <strong>Convert and check errors</strong>
+            <p>Run the converter to parse the YAML and see useful error details if it is invalid.</p>
+          </div>
+          <div class="y2j-step">
+            <div class="y2j-step-number">3</div>
+            <strong>Copy or download JSON</strong>
+            <p>Choose your formatting style, copy the result, or save it as a JSON file.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="example-title">
+        <h2 id="example-title">YAML to JSON example</h2>
+        <p>Here is a simple configuration and the equivalent JSON structure.</p>
+
+        <h3>Input YAML</h3>
+        <pre class="y2j-code-block">app:
+  name: Demo API
+  port: 8080
+  enabled: true
+features:
+  - login
+  - reporting</pre>
+
+        <h3>Output JSON</h3>
+        <pre class="y2j-code-block">{
+  "app": {
+    "name": "Demo API",
+    "port": 8080,
+    "enabled": true
+  },
+  "features": [
+    "login",
+    "reporting"
+  ]
+}</pre>
+
+        <p>
+          YAML indentation defines nested data. JSON represents the resulting
+          mappings as objects and sequences as arrays. The values are parsed
+          according to the YAML parser's type rules, so always review the
+          result when converting production configuration.
+        </p>
+      </section>
+
+      <section aria-labelledby="multidoc-title">
+        <h2 id="multidoc-title">Convert multi-document YAML files</h2>
+        <p>
+          A YAML stream can contain multiple documents separated by a line
+          containing three hyphens (<code>---</code>). This is common in
+          configuration bundles, including some Kubernetes manifest files.
+          When multiple documents are detected, this tool produces a JSON
+          array with one entry per document.
+        </p>
+
+        <pre class="y2j-code-block">---
+name: frontend
+replicas: 2
+---
+name: backend
+replicas: 3</pre>
+
+        <p>
+          The resulting JSON is an array containing both document objects.
+          If the input contains just one YAML document, the result is that
+          document's JSON value rather than a one-item array.
+        </p>
+      </section>
+
+      <section aria-labelledby="features-title">
+        <h2 id="features-title">Features of this YAML to JSON converter</h2>
+
+        <h3>YAML syntax validation</h3>
+        <p>
+          If the parser encounters invalid YAML, the tool displays the
+          parser's explanation and line and column information when available.
+          Duplicate mapping keys and indentation mistakes can cause parse errors.
+        </p>
+
+        <h3>Formatted or minified JSON</h3>
+        <p>
+          Choose two-space indentation for a readable document, four-space
+          indentation for deeper visual separation, or minified JSON when
+          you want fewer whitespace characters.
+        </p>
+
+        <h3>File upload and download</h3>
+        <p>
+          Load a YAML text file without manually copying its contents.
+          After conversion, download the resulting JSON file or copy it
+          to another application.
+        </p>
+
+        <h3>Browser-based processing</h3>
+        <p>
+          The conversion happens in your browser using a JavaScript YAML
+          parsing library. The YAML text you enter and the file you select
+          are not uploaded to our server by this tool. The parser library
+          itself is loaded from a CDN, so an internet connection is needed
+          when the page first loads it.
+        </p>
+      </section>
+
+      <section aria-labelledby="limits-title">
+        <h2 id="limits-title">Important conversion details</h2>
+        <ul>
+          <li>
+            JSON does not support YAML comments, so comments are not preserved
+            in the JSON output.
+          </li>
+          <li>
+            YAML supports types and structures that JSON cannot represent
+            directly. Special values, timestamps, and complex mapping keys
+            deserve extra review after conversion.
+          </li>
+          <li>
+            YAML anchors and aliases may be resolved into repeated JSON
+            structures. Recursive references cannot be represented as
+            ordinary JSON and may cause conversion to fail.
+          </li>
+          <li>
+            When multiple YAML documents are supplied, the converter returns
+            a JSON array. Check whether the application receiving your JSON
+            expects an array or a single object.
+          </li>
+          <li>
+            The maximum input size is 2 MB. Very deeply nested or unusually
+            complex documents may still take longer to process.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="uses-title">
+        <h2 id="uses-title">When should you convert YAML to JSON?</h2>
+        <p>
+          Developers commonly convert YAML when a tool, endpoint, or
+          application expects JSON rather than YAML. Typical examples include
+          inspecting API payloads, adapting configuration files, checking
+          nested data, and preparing structured values for a JSON-based
+          workflow.
+        </p>
+        <p>
+          This browser converter is best suited to one-off or occasional
+          conversion. For automated build pipelines or repeated batch jobs,
+          a local command-line utility or programming library may be more
+          appropriate.
+        </p>
+      </section>
+
+      <section aria-labelledby="related-title">
+        <h2 id="related-title">Explore more developer tools</h2>
+        <p>
+          Use another utility from the ConvertToToolsOnline toolbox.
+        </p>
+        <div class="y2j-related">
+          <a href="/json-formatter.html">JSON Formatter</a>
+          <a href="/index.html#all-tools">Browse all tools</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="faq-title">
+        <h2 id="faq-title">Frequently asked questions</h2>
+
+        <div class="y2j-faq-list">
+          <details>
+            <summary>How do I convert YAML to JSON online?</summary>
+            <p>
+              Paste your YAML into the input editor or upload a YAML file.
+              Select Convert YAML to JSON, check the generated output, and
+              copy it or download it as a JSON file.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is this YAML to JSON converter free?</summary>
+            <p>
+              Yes. The converter on this page can be used without a tool
+              usage fee or an account.
+            </p>
+          </details>
+
+          <details>
+            <summary>Are my YAML files uploaded to a server?</summary>
+            <p>
+              The YAML parsing and JSON generation run in your browser.
+              The selected YAML file and the text you enter are not uploaded
+              to our server by this tool. The page loads its parser library
+              from a CDN.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I convert a YAML file with multiple documents?</summary>
+            <p>
+              Yes. Documents separated by YAML document markers are parsed
+              individually and returned together as a JSON array.
+            </p>
+          </details>
+
+          <details>
+            <summary>Why does my YAML produce a syntax error?</summary>
+            <p>
+              Common causes include incorrect indentation, a missing colon,
+              mismatched quotation marks, malformed lists, or duplicate
+              mapping keys. Read the reported parser message and inspect
+              the indicated line and column.
+            </p>
+          </details>
+
+          <details>
+            <summary>Are YAML comments preserved in JSON?</summary>
+            <p>
+              No. Standard JSON has no comment syntax. YAML comments are
+              therefore omitted during conversion.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does converting YAML to JSON change data types?</summary>
+            <p>
+              It can. YAML and JSON do not have exactly the same type system,
+              and the parser interprets values according to its YAML schema.
+              Inspect dates, special values, keys, and configuration values
+              before using the output in a production application.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I convert JSON back into YAML with this tool?</summary>
+            <p>
+              This page focuses on YAML to JSON conversion. It does not
+              currently provide a JSON to YAML conversion mode.
+            </p>
+          </details>
+
+          <details>
+            <summary>What is the maximum file size?</summary>
+            <p>
+              This version accepts input up to 2 MB. Large or deeply nested
+              files may still be affected by your device's available memory
+              and browser performance.
+            </p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="y2j-footer">
+    <div class="y2j-shell y2j-footer-inner">
+      <span>© <span id="footerYear">2026</span> ConvertToToolsOnline</span>
+      <span>
+        <a href="/about.html">About</a>
+        &nbsp;·&nbsp;
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        &nbsp;·&nbsp;
+        <a href="/terms.html">Terms</a>
+        &nbsp;·&nbsp;
+        <a href="/contact.html">Contact</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const MAX_INPUT_BYTES = 2 * 1024 * 1024;
+      const MAX_DOCUMENTS = 500;
+
+      const $ = function (id) {
+        return document.getElementById(id);
+      };
+
+      const yamlInput = $("yamlInput");
+      const jsonOutput = $("jsonOutput");
+      const yamlFile = $("yamlFile");
+      const indentSelect = $("indentSelect");
+      const status = $("status");
+      const resultInfo = $("resultInfo");
+
+      const inputStats = $("inputStats");
+      const outputStats = $("outputStats");
+      const convertBtn = $("convertBtn");
+      const copyBtn = $("copyBtn");
+      const downloadBtn = $("downloadBtn");
+
+      let lastResult;
+      let lastDocumentCount = 0;
+      let sourceFilename = "";
+      let conversionIsCurrent = false;
+
+      $("footerYear").textContent = String(new Date().getFullYear());
+
+      const examples = {
+        basic: [
+          "app:",
+          "  name: Demo API",
+          "  port: 8080",
+          "  enabled: true",
+          "features:",
+          "  - login",
+          "  - reporting",
+          "metadata:",
+          "  environment: production",
+          "  retries: 3"
+        ].join("\n"),
+
+        multi: [
+          "---",
+          "apiVersion: v1",
+          "kind: ConfigMap",
+          "metadata:",
+          "  name: app-settings",
+          "data:",
+          "  MODE: production",
+          "  LOG_LEVEL: info",
+          "---",
+          "apiVersion: apps/v1",
+          "kind: Deployment",
+          "metadata:",
+          "  name: demo-app",
+          "spec:",
+          "  replicas: 2"
+        ].join("\n"),
+
+        anchors: [
+          "defaults: &defaults",
+          "  retries: 3",
+          "  timeout: 30",
+          "serviceA:",
+          "  <<: *defaults",
+          "  url: https://example.com",
+          "serviceB:",
+          "  <<: *defaults",
+          "  url: https://api.example.com"
+        ].join("\n")
+      };
+
+      function setStatus(message, type) {
+        status.textContent = message;
+        status.className = "y2j-status";
+
+        if (type) {
+          status.classList.add("y2j-status--" + type);
+        }
+
+        status.hidden = false;
+      }
+
+      function clearStatus() {
+        status.hidden = true;
+        status.textContent = "";
+        status.className = "y2j-status";
+      }
+
+      function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) {
+          return (bytes / 1024).toFixed(1) + " KB";
+        }
+        return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+      }
+
+      function inputByteLength(text) {
+        return new Blob([text]).size;
+      }
+
+      function updateInputStats() {
+        const text = yamlInput.value;
+        const bytes = inputByteLength(text);
+        const lines = text ? text.split(/\r\n|\r|\n/).length : 0;
+
+        inputStats.textContent =
+          text.length.toLocaleString() + " characters · " +
+          lines.toLocaleString() + " lines · " + formatBytes(bytes);
+
+        if (bytes > MAX_INPUT_BYTES) {
+          setStatus(
+            "Your input is larger than the 2 MB limit. Reduce the YAML size before converting.",
+            "warning"
+          );
+        }
+      }
+
+      function clearResult() {
+        lastResult = undefined;
+        lastDocumentCount = 0;
+        conversionIsCurrent = false;
+        jsonOutput.value = "";
+        outputStats.textContent = "No result yet";
+        copyBtn.disabled = true;
+        downloadBtn.disabled = true;
+        resultInfo.hidden = true;
+      }
+
+      function countNodes(value, seen) {
+        if (value === null || typeof value !== "object") {
+          return 1;
+        }
+
+        if (seen.has(value)) {
+          return 0;
+        }
+
+        seen.add(value);
+
+        let total = 1;
+
+        if (Array.isArray(value)) {
+          value.forEach(function (item) {
+            total += countNodes(item, seen);
+          });
+        } else {
+          Object.keys(value).forEach(function (key) {
+            total += 1;
+            total += countNodes(value[key], seen);
+          });
+        }
+
+        return total;
+      }
+
+      function renderOutput() {
+        if (!conversionIsCurrent) return;
+
+        const selectedIndent = Number(indentSelect.value);
+        const json = JSON.stringify(lastResult, null, selectedIndent);
+
+        if (typeof json !== "string") {
+          throw new Error("The parsed value cannot be represented as JSON.");
+        }
+
+        jsonOutput.value = json;
+        outputStats.textContent =
+          json.length.toLocaleString() + " characters · " +
+          formatBytes(inputByteLength(json));
+
+        copyBtn.disabled = false;
+        downloadBtn.disabled = false;
+
+        $("documentStat").textContent =
+          lastDocumentCount + (
+            lastDocumentCount === 1 ? " YAML document" : " YAML documents"
+          );
+
+        $("nodeStat").textContent =
+          countNodes(lastResult, new WeakSet()).toLocaleString() + " data nodes";
+
+        $("sizeStat").textContent =
+          formatBytes(inputByteLength(json)) + " JSON output";
+
+        resultInfo.hidden = false;
+      }
+
+      function getParserErrorMessage(error) {
+        const reason = error && error.reason
+          ? error.reason
+          : (error && error.message ? error.message : String(error));
+
+        if (error && error.mark &&
+            Number.isInteger(error.mark.line) &&
+            Number.isInteger(error.mark.column)) {
+          return reason + " (line " + (error.mark.line + 1) +
+            ", column " + (error.mark.column + 1) + ")";
+        }
+
+        const oldStyleMatch = String(reason).match(/\((\d+):(\d+)\)/);
+
+        if (oldStyleMatch) {
+          return reason + " — check line " +
+            oldStyleMatch[1] + ", column " + oldStyleMatch[2] + ".";
+        }
+
+        return reason;
+      }
+
+      function parseYaml(source) {
+        if (!window.jsyaml || typeof window.jsyaml.loadAll !== "function") {
+          throw new Error(
+            "The YAML parser could not be loaded. Check your internet connection and reload the page."
+          );
+        }
+
+        const documents = [];
+
+        window.jsyaml.loadAll(
+          source,
+          function (documentValue) {
+            documents.push(documentValue);
+
+            if (documents.length > MAX_DOCUMENTS) {
+              throw new Error(
+                "This file contains more than " +
+                MAX_DOCUMENTS + " YAML documents. Split it into smaller files."
+              );
+            }
+          },
+          {
+            schema: window.jsyaml.DEFAULT_SCHEMA,
+            filename: sourceFilename || "input.yaml"
+          }
+        );
+
+        if (!documents.length) {
+          throw new Error(
+            "No YAML documents were found. Enter YAML content before converting."
+          );
+        }
+
+        return documents;
+      }
+
+      function convertYaml() {
+        clearStatus();
+        clearResult();
+
+        const source = yamlInput.value;
+        const bytes = inputByteLength(source);
+
+        if (!source.trim()) {
+          setStatus("Enter YAML or load an example before converting.", "warning");
+          yamlInput.focus();
+          return;
+        }
+
+        if (bytes > MAX_INPUT_BYTES) {
+          setStatus(
+            "Input is " + formatBytes(bytes) +
+            ". The maximum supported input size is 2 MB.",
+            "error"
+          );
+          return;
+        }
+
+        if (source.includes("\u0000")) {
+          setStatus(
+            "The input contains null characters and may not be a text YAML file.",
+            "error"
+          );
+          return;
+        }
+
+        try {
+          const documents = parseYaml(source);
+
+          // A single document stays a single JSON value. Multiple YAML
+          // documents are represented as an array in the JSON output.
+          lastResult = documents.length === 1 ? documents[0] : documents;
+          lastDocumentCount = documents.length;
+          conversionIsCurrent = true;
+
+          renderOutput();
+
+          setStatus(
+            "Conversion successful. " + documents.length +
+            (documents.length === 1
+              ? " YAML document converted to JSON."
+              : " YAML documents converted into a JSON array."),
+            "success"
+          );
+        } catch (error) {
+          clearResult();
+
+          const message = getParserErrorMessage(error);
+
+          setStatus(
+            "Conversion failed: " + message,
+            "error"
+          );
+        }
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const temporary = document.createElement("textarea");
+        temporary.value = text;
+        temporary.setAttribute("readonly", "");
+        temporary.style.position = "fixed";
+        temporary.style.left = "-9999px";
+        temporary.style.top = "0";
+        document.body.appendChild(temporary);
+        temporary.select();
+
+        const success = document.execCommand("copy");
+        temporary.remove();
+
+        if (!success) {
+          throw new Error("Copy command failed.");
+        }
+      }
+
+      async function copyOutput() {
+        if (!conversionIsCurrent || !jsonOutput.value) return;
+
+        try {
+          await copyText(jsonOutput.value);
+          setStatus("JSON output copied to your clipboard.", "success");
+        } catch (error) {
+          setStatus(
+            "Automatic copying failed. Select the JSON output and copy it manually.",
+            "error"
+          );
+        }
+      }
+
+      function downloadOutput() {
+        if (!conversionIsCurrent || !jsonOutput.value) return;
+
+        const blob = new Blob([jsonOutput.value], {
+          type: "application/json;charset=utf-8"
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        let filename = "converted.json";
+
+        if (sourceFilename) {
+          const base = sourceFilename
+            .replace(/\.(yaml|yml|txt)$/i, "")
+            .replace(/[<>:"/\\|?*\u0000-\u001F]/g, "-")
+            .trim()
+            .slice(0, 100);
+
+          if (base) filename = base + ".json";
+        }
+
+        link.href = url;
+        link.download = filename;
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 1000);
+
+        setStatus("JSON download started: " + filename, "success");
+      }
+
+      function loadExample(name) {
+        if (!Object.prototype.hasOwnProperty.call(examples, name)) return;
+
+        sourceFilename = "example.yaml";
+        yamlInput.value = examples[name];
+        updateInputStats();
+        convertYaml();
+      }
+
+      function resetTool() {
+        yamlInput.value = "";
+        jsonOutput.value = "";
+        sourceFilename = "";
+        yamlFile.value = "";
+        clearStatus();
+        clearResult();
+        updateInputStats();
+        outputStats.textContent = "No result yet";
+        yamlInput.focus();
+      }
+
+      $("convertBtn").addEventListener("click", convertYaml);
+      $("copyBtn").addEventListener("click", copyOutput);
+      $("downloadBtn").addEventListener("click", downloadOutput);
+
+      $("clearInputBtn").addEventListener("click", function () {
+        yamlInput.value = "";
+        sourceFilename = "";
+        clearStatus();
+        clearResult();
+        updateInputStats();
+        yamlInput.focus();
+      });
+
+      $("clearAllBtn").addEventListener("click", resetTool);
+
+      $("uploadBtn").addEventListener("click", function () {
+        yamlFile.click();
+      });
+
+      yamlFile.addEventListener("change", async function () {
+        const file = yamlFile.files && yamlFile.files[0];
+
+        if (!file) return;
+
+        if (file.size > MAX_INPUT_BYTES) {
+          setStatus("This file is larger than the 2 MB limit.", "error");
+          yamlFile.value = "";
+          return;
+        }
+
+        try {
+          const text = await file.text();
+
+          if (text.includes("\u0000")) {
+            throw new Error("This file does not appear to be plain text YAML.");
+          }
+
+          sourceFilename = file.name;
+          yamlInput.value = text;
+          updateInputStats();
+          convertYaml();
+        } catch (error) {
+          setStatus(
+            error.message || "The selected file could not be read.",
+            "error"
+          );
+        }
+      });
+
+      yamlInput.addEventListener("input", function () {
+        clearResult();
+        updateInputStats();
+
+        if (status.classList.contains("y2j-status--success") ||
+            status.classList.contains("y2j-status--error")) {
+          clearStatus();
+        }
+      });
+
+      indentSelect.addEventListener("change", function () {
+        if (!conversionIsCurrent) return;
+
+        try {
+          renderOutput();
+        } catch (error) {
+          clearResult();
+          setStatus(
+            "The output could not be formatted as JSON: " +
+            (error.message || "unsupported value"),
+            "error"
+          );
+        }
+      });
+
+      yamlInput.addEventListener("keydown", function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+          event.preventDefault();
+          convertYaml();
+        }
+
+        // Add indentation when Tab is pressed inside the YAML editor.
+        if (event.key === "Tab") {
+          event.preventDefault();
+
+          const start = yamlInput.selectionStart;
+          const end = yamlInput.selectionEnd;
+          const current = yamlInput.value;
+
+          yamlInput.value =
+            current.substring(0, start) + "  " + current.substring(end);
+
+          yamlInput.selectionStart = yamlInput.selectionEnd = start + 2;
+
+          clearResult();
+          updateInputStats();
+        }
+      });
+
+      jsonOutput.addEventListener("keydown", function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+          event.preventDefault();
+          copyOutput();
+        }
+      });
+
+      document.querySelectorAll("[data-sample]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          loadExample(button.dataset.sample);
+        });
+      });
+
+      // Start with a useful working example so visitors can try the tool
+      // immediately without having to invent YAML first.
+      loadExample("basic");
+    })();
+  </script>
+</body>
+</html>

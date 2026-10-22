@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Image Color Picker & Palette Extractor Online</title>
+  <meta name="description" content="Use this free image color picker to sample colors from photos and graphics. Find HEX, RGB, and HSL values, extract a color palette, and export colors for CSS or JSON.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/image-color-picker.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Image Color Picker & Palette Extractor">
+  <meta property="og:description" content="Pick colors from an image, copy HEX/RGB/HSL values, and extract a reusable color palette in your browser.">
+  <meta property="og:url" content="https://converttotoolsonline.com/image-color-picker.html">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Image Color Picker & Palette Extractor">
+  <meta name="twitter:description" content="Sample image colors and export palettes for CSS, JSON, and design workflows.">
+
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image Color Picker & Palette Extractor",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Any device with a modern web browser",
+    "url": "https://converttotoolsonline.com/image-color-picker.html",
+    "description": "A browser-based image color picker for sampling image pixels, converting colors to HEX, RGB and HSL, extracting dominant colors, and exporting color palettes.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Sample colors from uploaded images",
+      "Convert colors to HEX, RGB and HSL",
+      "Extract a dominant color palette",
+      "Export palettes as CSS and JSON",
+      "Download a palette preview as PNG",
+      "Process images locally in the browser"
+    ]
+  }
+  </script>
+
+  <style>
+    /* Page-specific styles are scoped to this tool. */
+    .icp-page {
+      --icp-text: #172033;
+      --icp-muted: #637087;
+      --icp-border: #dce2eb;
+      --icp-surface: #ffffff;
+      --icp-soft: #f6f8fb;
+      --icp-primary: #3156d3;
+      --icp-primary-hover: #2445b5;
+      --icp-success: #167447;
+      --icp-danger: #b42318;
+      color: var(--icp-text);
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .icp-page *,
+    .icp-page *::before,
+    .icp-page *::after {
+      box-sizing: border-box;
+    }
+
+    .icp-page button,
+    .icp-page input,
+    .icp-page select {
+      font: inherit;
+    }
+
+    .icp-page button {
+      cursor: pointer;
+    }
+
+    .icp-page button:focus-visible,
+    .icp-page input:focus-visible,
+    .icp-page select:focus-visible,
+    .icp-page canvas:focus-visible {
+      outline: 3px solid rgba(49, 86, 211, 0.35);
+      outline-offset: 3px;
+    }
+
+    .icp-page a {
+      color: var(--icp-primary);
+      text-underline-offset: 3px;
+    }
+
+    .icp-hero {
+      margin: 0 0 24px;
+    }
+
+    .icp-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--icp-primary);
+      background: #edf1ff;
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 0.82rem;
+      font-weight: 750;
+      margin-bottom: 12px;
+    }
+
+    .icp-hero h1 {
+      font-size: clamp(1.85rem, 4vw, 2.8rem);
+      line-height: 1.16;
+      letter-spacing: -0.035em;
+      margin: 0 0 14px;
+    }
+
+    .icp-hero p {
+      margin: 0;
+      max-width: 780px;
+      font-size: 1.05rem;
+      color: var(--icp-muted);
+    }
+
+    .icp-privacy-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: #f0faf5;
+      color: #165d3a;
+      border: 1px solid #caead8;
+      border-radius: 12px;
+      padding: 13px 15px;
+      margin: 22px 0;
+      font-size: 0.93rem;
+    }
+
+    .icp-privacy-note strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .icp-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.65fr) minmax(285px, 0.9fr);
+      align-items: start;
+      gap: 20px;
+    }
+
+    .icp-card {
+      background: var(--icp-surface);
+      border: 1px solid var(--icp-border);
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(25, 35, 60, 0.035);
+      min-width: 0;
+    }
+
+    .icp-card-header {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--icp-border);
+    }
+
+    .icp-card-header h2,
+    .icp-section h2 {
+      margin: 0 0 5px;
+      font-size: 1.15rem;
+      line-height: 1.35;
+    }
+
+    .icp-card-header p {
+      color: var(--icp-muted);
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .icp-card-body {
+      padding: 20px;
+      min-width: 0;
+    }
+
+    .icp-upload-zone {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 190px;
+      border: 2px dashed #b9c6df;
+      background: #f9fbff;
+      border-radius: 13px;
+      padding: 24px 16px;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .icp-upload-zone.icp-dragging {
+      border-color: var(--icp-primary);
+      background: #edf2ff;
+    }
+
+    .icp-upload-icon {
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .icp-upload-zone strong {
+      font-size: 1.03rem;
+    }
+
+    .icp-upload-zone p {
+      color: var(--icp-muted);
+      font-size: 0.87rem;
+      margin: 0;
+    }
+
+    .icp-file-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--icp-primary);
+      color: white;
+      border-radius: 9px;
+      padding: 9px 14px;
+      font-weight: 700;
+      font-size: 0.93rem;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .icp-file-label:hover {
+      background: var(--icp-primary-hover);
+    }
+
+    .icp-file-input-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    .icp-file-info {
+      display: none;
+      margin: 13px 0 0;
+      padding: 10px 12px;
+      border: 1px solid var(--icp-border);
+      background: var(--icp-soft);
+      border-radius: 10px;
+      font-size: 0.85rem;
+    }
+
+    .icp-file-info strong {
+      display: block;
+      margin-bottom: 2px;
+      word-break: break-word;
+    }
+
+    .icp-canvas-card {
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .icp-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--icp-border);
+    }
+
+    .icp-toolbar p {
+      color: var(--icp-muted);
+      font-size: 0.84rem;
+      margin: 0;
+    }
+
+    .icp-stage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 220px;
+      max-height: 620px;
+      overflow: auto;
+      padding: 15px;
+      background-color: #f2f4f8;
+      background-image:
+        linear-gradient(45deg, #e6e9ef 25%, transparent 25%),
+        linear-gradient(-45deg, #e6e9ef 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e6e9ef 75%),
+        linear-gradient(-45deg, transparent 75%, #e6e9ef 75%);
+      background-size: 18px 18px;
+      background-position: 0 0, 0 9px, 9px -9px, -9px 0;
+    }
+
+    .icp-stage-empty {
+      max-width: 340px;
+      text-align: center;
+      color: var(--icp-muted);
+      font-size: 0.92rem;
+      padding: 25px 12px;
+    }
+
+    .icp-stage-empty strong {
+      display: block;
+      color: var(--icp-text);
+      margin-bottom: 5px;
+    }
+
+    .icp-canvas-shell {
+      position: relative;
+      display: none;
+      flex: 0 0 auto;
+      max-width: 100%;
+      line-height: 0;
+    }
+
+    .icp-image-canvas {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 580px;
+      cursor: crosshair;
+      touch-action: manipulation;
+      image-rendering: auto;
+    }
+
+    .icp-marker {
+      display: none;
+      position: absolute;
+      z-index: 2;
+      width: 17px;
+      height: 17px;
+      border: 2px solid #fff;
+      outline: 1px solid #141b2d;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.45);
+    }
+
+    .icp-result-strip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 16px;
+      border-top: 1px solid var(--icp-border);
+      background: #fff;
+    }
+
+    .icp-result-swatch {
+      flex: 0 0 48px;
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #aab3c3;
+    }
+
+    .icp-result-text {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .icp-result-text strong {
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .icp-result-text span {
+      display: block;
+      color: var(--icp-muted);
+      font-size: 0.84rem;
+    }
+
+    .icp-current-values {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .icp-value-box {
+      border: 1px solid var(--icp-border);
+      border-radius: 11px;
+      padding: 11px;
+      min-width: 0;
+      background: #fff;
+    }
+
+    .icp-value-label {
+      display: block;
+      color: var(--icp-muted);
+      font-weight: 700;
+      font-size: 0.76rem;
+      margin-bottom: 4px;
+    }
+
+    .icp-value-code {
+      display: block;
+      font-size: 0.91rem;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+      overflow-wrap: anywhere;
+    }
+
+    .icp-mini-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 9px;
+      color: var(--icp-text);
+      background: #fff;
+      border: 1px solid var(--icp-border);
+      border-radius: 7px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .icp-mini-button:hover {
+      background: #f2f5fa;
+    }
+
+    .icp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 41px;
+      padding: 9px 13px;
+      border-radius: 9px;
+      border: 1px solid var(--icp-border);
+      color: var(--icp-text);
+      background: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .icp-btn:hover {
+      background: #f4f6fa;
+    }
+
+    .icp-btn-primary {
+      color: #fff;
+      background: var(--icp-primary);
+      border-color: var(--icp-primary);
+    }
+
+    .icp-btn-primary:hover {
+      background: var(--icp-primary-hover);
+      border-color: var(--icp-primary-hover);
+    }
+
+    .icp-btn-danger {
+      color: var(--icp-danger);
+    }
+
+    .icp-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .icp-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .icp-side-section + .icp-side-section {
+      margin-top: 22px;
+      padding-top: 21px;
+      border-top: 1px solid var(--icp-border);
+    }
+
+    .icp-side-section h3 {
+      font-size: 1rem;
+      margin: 0 0 7px;
+    }
+
+    .icp-helper-text {
+      margin: 0 0 13px;
+      font-size: 0.86rem;
+      color: var(--icp-muted);
+    }
+
+    .icp-current-preview {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 12px 0;
+      padding: 12px;
+      border: 1px solid var(--icp-border);
+      border-radius: 11px;
+      background: #fbfcfe;
+    }
+
+    .icp-large-swatch {
+      flex: 0 0 62px;
+      width: 62px;
+      height: 62px;
+      border: 1px solid rgba(0, 0, 0, 0.13);
+      border-radius: 10px;
+      background: #aab3c3;
+    }
+
+    .icp-large-value {
+      font-size: 1.08rem;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .icp-small-muted {
+      color: var(--icp-muted);
+      font-size: 0.82rem;
+    }
+
+    .icp-palette-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 13px;
+    }
+
+    .icp-palette-item {
+      padding: 0;
+      min-width: 0;
+      text-align: left;
+      border: 1px solid var(--icp-border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      color: var(--icp-text);
+      transition: transform 0.12s ease, border-color 0.12s ease;
+    }
+
+    .icp-palette-item:hover {
+      transform: translateY(-2px);
+      border-color: #8da4e8;
+    }
+
+    .icp-palette-item:disabled {
+      cursor: default;
+    }
+
+    .icp-palette-swatch {
+      display: block;
+      height: 58px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .icp-palette-meta {
+      display: block;
+      padding: 8px;
+    }
+
+    .icp-palette-hex {
+      display: block;
+      font-weight: 800;
+      font-size: 0.87rem;
+      letter-spacing: 0.01em;
+    }
+
+    .icp-palette-percent {
+      display: block;
+      color: var(--icp-muted);
+      font-size: 0.76rem;
+      margin-top: 1px;
+    }
+
+    .icp-empty-palette {
+      border: 1px dashed var(--icp-border);
+      background: var(--icp-soft);
+      border-radius: 10px;
+      color: var(--icp-muted);
+      font-size: 0.87rem;
+      padding: 15px;
+      margin-top: 12px;
+    }
+
+    .icp-select {
+      display: block;
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid var(--icp-border);
+      border-radius: 9px;
+      background: #fff;
+      padding: 8px 10px;
+      color: var(--icp-text);
+      margin: 8px 0 12px;
+    }
+
+    .icp-status {
+      display: none;
+      margin-top: 13px;
+      padding: 11px 13px;
+      border-radius: 9px;
+      font-size: 0.87rem;
+      overflow-wrap: anywhere;
+    }
+
+    .icp-status[ data-kind="success"] {
+      color: #145a37;
+      background: #edf9f1;
+      border: 1px solid #c5e8d2;
+    }
+
+    .icp-status[data-kind="error"] {
+      color: #8f1d16;
+      background: #fff1f0;
+      border: 1px solid #f4c7c4;
+    }
+
+    .icp-status[data-kind="info"] {
+      color: #24428f;
+      background: #eff3ff;
+      border: 1px solid #d0dbff;
+    }
+
+    .icp-section {
+      margin-top: 30px;
+      padding: 23px;
+      border: 1px solid var(--icp-border);
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .icp-section h2 {
+      font-size: 1.25rem;
+      margin-bottom: 11px;
+    }
+
+    .icp-section p {
+      margin: 0 0 13px;
+      color: #3f4c61;
+    }
+
+    .icp-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .icp-how-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 17px;
+    }
+
+    .icp-how-step {
+      padding: 15px;
+      border: 1px solid var(--icp-border);
+      border-radius: 12px;
+      background: #fbfcff;
+    }
+
+    .icp-step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: #edf1ff;
+      color: var(--icp-primary);
+      border-radius: 9px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      margin-bottom: 9px;
+    }
+
+    .icp-how-step h3 {
+      margin: 0 0 5px;
+      font-size: 0.98rem;
+    }
+
+    .icp-how-step p {
+      font-size: 0.88rem;
+      margin: 0;
+      color: var(--icp-muted);
+    }
+
+    .icp-page details {
+      border-top: 1px solid var(--icp-border);
+      padding: 15px 0;
+    }
+
+    .icp-page details:first-of-type {
+      margin-top: 8px;
+    }
+
+    .icp-page summary {
+      cursor: pointer;
+      font-weight: 750;
+      line-height: 1.5;
+    }
+
+    .icp-page details p {
+      margin: 9px 0 0;
+      color: #4b586b;
+    }
+
+    .icp-page .icp-footnote {
+      margin-top: 16px;
+      color: var(--icp-muted);
+      font-size: 0.85rem;
+    }
+
+    .icp-page .icp-inline-code {
+      background: #f0f3f8;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-size: 0.9em;
+      overflow-wrap: anywhere;
+    }
+
+    .icp-page [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 800px) {
+      .icp-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .icp-how-list {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .icp-image-canvas {
+        max-height: 500px;
+      }
+
+      .icp-side-section + .icp-side-section {
+        margin-top: 19px;
+        padding-top: 18px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .icp-page {
+        width: min(100% - 22px, 1120px);
+        padding-top: 20px;
+      }
+
+      .icp-card-header,
+      .icp-card-body {
+        padding: 15px;
+      }
+
+      .icp-current-values {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .icp-value-box {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 5px 10px;
+      }
+
+      .icp-value-label {
+        grid-column: 1 / -1;
+        margin: 0;
+      }
+
+      .icp-mini-button {
+        grid-column: 2;
+        grid-row: 2;
+        margin: 0;
+      }
+
+      .icp-value-code {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .icp-section {
+        padding: 17px;
+      }
+
+      .icp-stage {
+        min-height: 180px;
+        padding: 8px;
+      }
+
+      .icp-toolbar {
+        padding: 11px;
+      }
+
+      .icp-result-strip {
+        padding: 11px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .icp-page *,
+      .icp-page *::before,
+      .icp-page *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="icp-page">
+    <header class="icp-hero">
+      <div class="icp-eyebrow">Free browser-based design tool</div>
+      <h1>Image Color Picker &amp; Palette Extractor</h1>
+      <p>
+        Pick a color from any supported image, discover its HEX, RGB, and HSL
+        values, and extract a reusable palette for websites, graphics, and
+        design projects.
+      </p>
+    </header>
+
+    <div class="icp-privacy-note">
+      <span aria-hidden="true">🔒</span>
+      <div>
+        <strong>Your image stays on your device</strong>
+        Image processing happens locally in this browser. The selected image
+        is not sent to this tool's server.
+      </div>
+    </div>
+
+    <section class="icp-layout" aria-label="Image color picker workspace">
+      <div class="icp-main-column">
+        <section class="icp-card">
+          <div class="icp-card-header">
+            <h2>1. Upload an image</h2>
+            <p>Choose a photo, screenshot, logo, illustration, or graphic.</p>
+          </div>
+
+          <div class="icp-card-body">
+            <div class="icp-upload-zone" id="icpDropZone">
+              <div class="icp-upload-icon" aria-hidden="true">🎨</div>
+              <strong>Drop an image here</strong>
+              <p>Or select an image from your device.</p>
+              <label class="icp-file-label" for="icpFileInput">
+                Choose image
+              </label>
+              <input
+                class="icp-file-input-hidden"
+                id="icpFileInput"
+                type="file"
+                accept="image/*,.png,.jpg,.jpeg,.webp,.gif,.bmp,.avif,.svg"
+                aria-describedby="icpUploadHelp"
+              >
+              <p id="icpUploadHelp">Maximum file size: 30 MB.</p>
+            </div>
+
+            <div
+              class="icp-file-info"
+              id="icpFileInfo"
+              aria-live="polite"
+            >
+              <strong id="icpFileName"></strong>
+              <span id="icpFileDetails"></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="icp-card icp-canvas-card">
+          <div class="icp-toolbar">
+            <p id="icpCanvasHint">Your image will appear here.</p>
+            <div class="icp-btn-row">
+              <button class="icp-btn" id="icpReplaceButton" type="

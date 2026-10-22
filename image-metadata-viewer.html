@@ -1,0 +1,1790 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Image Metadata Viewer & EXIF Remover Online | ConvertToToolsOnline</title>
+  <meta name="description" content="View image metadata and EXIF details online, including camera model, photo dates, image dimensions and possible GPS coordinates. Create a re-encoded image copy to remove common embedded metadata in your browser.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://converttotoolsonline.com/image-metadata-viewer.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Image Metadata Viewer & EXIF Remover">
+  <meta property="og:description" content="Inspect photo metadata and make a re-encoded image copy in your browser.">
+  <meta property="og:url" content="https://converttotoolsonline.com/image-metadata-viewer.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Image Metadata Viewer & EXIF Remover">
+  <meta name="twitter:description" content="Inspect photo information, check for GPS metadata and download a cleaned copy.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Metadata Viewer and EXIF Remover",
+    "url": "https://converttotoolsonline.com/image-metadata-viewer.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "description": "Inspect supported photo metadata and create a re-encoded image copy locally in a browser.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is image metadata?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Image metadata is information stored with an image file. Depending on the format and source, it can include camera model, photo date, exposure settings, location coordinates, software, copyright and color profile information."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can image metadata reveal my location?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Some photos contain GPS coordinates in their metadata. This tool checks metadata it can parse and warns when it detects supported GPS fields. No detection result guarantees that every possible location field is absent."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the EXIF remover work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tool redraws a supported image on an HTML canvas and exports it as a new image. Re-encoding this way usually removes source EXIF and other embedded metadata, but it is not a forensic guarantee that every type of metadata has been removed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my images uploaded to your server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tool does not upload your selected image to this website. Metadata inspection and image re-encoding run in your browser. The metadata library itself is loaded from a CDN."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does re-encoding preserve image quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PNG is a lossless export format for the rendered pixels, while JPEG and WebP exports can be lossy depending on browser support and quality settings. Large images may be resized to keep browser memory use manageable."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .imv-page {
+      --imv-border: #dfe4eb;
+      --imv-muted: #5c6878;
+      --imv-accent: #245bcc;
+      --imv-soft: #f6f8fb;
+      --imv-radius: 14px;
+      width: min(1100px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      color: #17202c;
+      line-height: 1.6;
+    }
+
+    .imv-page,
+    .imv-page * {
+      box-sizing: border-box;
+    }
+
+    .imv-page [hidden] {
+      display: none !important;
+    }
+
+    .imv-page input,
+    .imv-page select,
+    .imv-page button {
+      font: inherit;
+    }
+
+    .imv-page button {
+      cursor: pointer;
+    }
+
+    .imv-page button:focus-visible,
+    .imv-page input:focus-visible,
+    .imv-page select:focus-visible {
+      outline: 3px solid #8cb1ff;
+      outline-offset: 3px;
+    }
+
+    .imv-breadcrumb {
+      margin-bottom: 12px;
+      color: var(--imv-muted);
+      font-size: .92rem;
+    }
+
+    .imv-page a {
+      color: var(--imv-accent);
+    }
+
+    .imv-header {
+      margin-bottom: 22px;
+    }
+
+    .imv-header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.55rem);
+      letter-spacing: -.035em;
+      line-height: 1.17;
+    }
+
+    .imv-header p {
+      max-width: 820px;
+      margin: 0;
+      color: var(--imv-muted);
+    }
+
+    .imv-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .imv-chip {
+      padding: 5px 10px;
+      border: 1px solid #d2e8d8;
+      border-radius: 999px;
+      background: #eef8f0;
+      color: #255d37;
+      font-size: .84rem;
+    }
+
+    .imv-card {
+      min-width: 0;
+      padding: clamp(14px, 2.5vw, 22px);
+      border: 1px solid var(--imv-border);
+      border-radius: var(--imv-radius);
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(20, 35, 55, .035);
+    }
+
+    .imv-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .imv-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+    }
+
+    .imv-upload {
+      padding: 22px 15px;
+      border: 2px dashed #b8c6d8;
+      border-radius: 12px;
+      background: #fafcff;
+      text-align: center;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .imv-upload.is-dragging {
+      border-color: var(--imv-accent);
+      background: #edf4ff;
+    }
+
+    .imv-upload strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.05rem;
+    }
+
+    .imv-upload p {
+      margin: 0 0 12px;
+      color: var(--imv-muted);
+      font-size: .9rem;
+    }
+
+    .imv-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid #cbd4df;
+      border-radius: 9px;
+      background: #fff;
+      color: #1b2736;
+      font-weight: 650;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .imv-button:hover:not(:disabled) {
+      background: #f1f5f9;
+    }
+
+    .imv-button-primary {
+      border-color: var(--imv-accent);
+      background: var(--imv-accent);
+      color: white;
+    }
+
+    .imv-button-primary:hover:not(:disabled) {
+      border-color: #194aa8;
+      background: #194aa8;
+      color: white;
+    }
+
+    .imv-button-danger {
+      border-color: #e3c5c5;
+      color: #963333;
+    }
+
+    .imv-button-small {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: .86rem;
+    }
+
+    .imv-button:disabled {
+      cursor: not-allowed;
+      opacity: .48;
+    }
+
+    .imv-muted {
+      color: var(--imv-muted);
+      font-size: .9rem;
+    }
+
+    .imv-status {
+      min-height: 25px;
+      margin: 11px 0 0;
+      overflow-wrap: anywhere;
+      font-size: .9rem;
+    }
+
+    .imv-status[data-kind="error"] {
+      color: #a12828;
+    }
+
+    .imv-status[data-kind="success"] {
+      color: #24623a;
+    }
+
+    .imv-warning {
+      padding: 13px 15px;
+      border: 1px solid #ecd39c;
+      border-radius: 10px;
+      background: #fff8e8;
+      color: #76500c;
+      font-size: .92rem;
+    }
+
+    .imv-danger-note {
+      padding: 13px 15px;
+      border: 1px solid #efc8c8;
+      border-radius: 10px;
+      background: #fff4f4;
+      color: #8f2828;
+      font-size: .92rem;
+    }
+
+    .imv-image-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
+
+    .imv-preview {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 220px;
+      max-height: 430px;
+      overflow: hidden;
+      border: 1px solid var(--imv-border);
+      border-radius: 10px;
+      background:
+        linear-gradient(45deg, #eaedf1 25%, transparent 25%),
+        linear-gradient(-45deg, #eaedf1 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #eaedf1 75%),
+        linear-gradient(-45deg, transparent 75%, #eaedf1 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    }
+
+    .imv-preview img {
+      display: block;
+      max-width: 100%;
+      max-height: 430px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .imv-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .imv-fact {
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid var(--imv-border);
+      border-radius: 9px;
+      background: var(--imv-soft);
+    }
+
+    .imv-fact-label {
+      display: block;
+      color: var(--imv-muted);
+      font-size: .8rem;
+    }
+
+    .imv-fact-value {
+      display: block;
+      margin-top: 2px;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+    }
+
+    .imv-section {
+      margin-top: 20px;
+    }
+
+    .imv-section-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .imv-section-head h2 {
+      margin: 0;
+    }
+
+    .imv-meta-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .imv-search {
+      flex: 1 1 220px;
+      min-width: 0;
+    }
+
+    .imv-search input {
+      width: 100%;
+      min-height: 41px;
+      padding: 8px 11px;
+      border: 1px solid #cbd4df;
+      border-radius: 9px;
+      background: #fff;
+      color: #17202c;
+    }
+
+    .imv-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--imv-border);
+      border-radius: 10px;
+    }
+
+    .imv-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: .91rem;
+    }
+
+    .imv-table th,
+    .imv-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--imv-border);
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+
+    .imv-table th {
+      background: var(--imv-soft);
+      font-weight: 750;
+    }
+
+    .imv-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .imv-table td:first-child {
+      width: 34%;
+      font-weight: 650;
+    }
+
+    .imv-table td:nth-child(2) {
+      min-width: 180px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .86rem;
+      white-space: pre-wrap;
+    }
+
+    .imv-empty {
+      padding: 16px;
+      border: 1px dashed var(--imv-border);
+      border-radius: 10px;
+      color: var(--imv-muted);
+      font-size: .92rem;
+    }
+
+    .imv-output-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .imv-field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .imv-field select {
+      width: 100%;
+      min-height: 42px;
+      padding: 8px 10px;
+      border: 1px solid #cbd4df;
+      border-radius: 9px;
+      background: white;
+      color: #17202c;
+    }
+
+    .imv-range-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .imv-range-row input {
+      width: 100%;
+      accent-color: var(--imv-accent);
+    }
+
+    .imv-range-value {
+      min-width: 44px;
+      font-weight: 750;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .imv-output-preview {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+      margin-top: 14px;
+      padding: 13px;
+      border: 1px solid var(--imv-border);
+      border-radius: 10px;
+      background: var(--imv-soft);
+    }
+
+    .imv-output-preview img {
+      display: block;
+      width: 110px;
+      height: 96px;
+      object-fit: contain;
+      border: 1px solid var(--imv-border);
+      border-radius: 8px;
+      background: white;
+    }
+
+    .imv-output-preview strong {
+      display: block;
+      overflow-wrap: anywhere;
+    }
+
+    .imv-output-preview p {
+      margin: 4px 0;
+      color: var(--imv-muted);
+      font-size: .88rem;
+    }
+
+    .imv-divider {
+      height: 1px;
+      margin: 19px 0;
+      border: 0;
+      background: var(--imv-border);
+    }
+
+    .imv-faq details {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--imv-border);
+    }
+
+    .imv-faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .imv-faq summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .imv-faq details p {
+      margin: 9px 0 0;
+      color: var(--imv-muted);
+    }
+
+    .imv-article p,
+    .imv-article li {
+      color: #364252;
+    }
+
+    .imv-article li + li {
+      margin-top: 7px;
+    }
+
+    @media (max-width: 760px) {
+      .imv-image-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .imv-page {
+        width: calc(100% - 20px);
+        padding-top: 15px;
+      }
+
+      .imv-output-options,
+      .imv-facts {
+        grid-template-columns: 1fr;
+      }
+
+      .imv-output-preview {
+        grid-template-columns: 80px minmax(0, 1fr);
+      }
+
+      .imv-output-preview img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .imv-table th,
+      .imv-table td {
+        padding: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .imv-page *,
+      .imv-page *::before,
+      .imv-page *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="imv-page">
+  <nav class="imv-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <span>Image Metadata Viewer</span>
+  </nav>
+
+  <header class="imv-header">
+    <h1>Image Metadata Viewer &amp; EXIF Remover</h1>
+    <p>
+      Inspect the information stored in your photos, check for possible GPS coordinates,
+      view camera and exposure details, and create a re-encoded image copy in your browser.
+    </p>
+    <div class="imv-chips">
+      <span class="imv-chip">Browser-based processing</span>
+      <span class="imv-chip">Metadata inspection</span>
+      <span class="imv-chip">Clean-copy export</span>
+    </div>
+  </header>
+
+  <section class="imv-card" aria-labelledby="uploadHeading">
+    <h2 id="uploadHeading">1. Choose an image</h2>
+
+    <div class="imv-upload" id="uploadZone">
+      <strong>Drop an image here or browse your device</strong>
+      <p>Choose a browser-supported image file up to 25 MB.</p>
+      <input
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        hidden
+      >
+      <button type="button" class="imv-button imv-button-primary" id="chooseBtn">
+        Choose image
+      </button>
+      <div class="imv-muted" style="margin-top:10px" id="fileLabel">
+        Your selected image is processed locally by this page.
+      </div>
+    </div>
+
+    <p class="imv-status" id="statusMessage" role="status" aria-live="polite"></p>
+
+    <div class="imv-image-layout" id="sourceWorkspace" hidden>
+      <div>
+        <h3>Image preview</h3>
+        <div class="imv-preview">
+          <img id="sourcePreview" alt="Selected image preview">
+        </div>
+        <div class="imv-facts">
+          <div class="imv-fact">
+            <span class="imv-fact-label">Dimensions</span>
+            <span class="imv-fact-value" id="sourceDimensions">—</span>
+          </div>
+          <div class="imv-fact">
+            <span class="imv-fact-label">Original file size</span>
+            <span class="imv-fact-value" id="sourceSize">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3>Metadata overview</h3>
+        <div class="imv-facts">
+          <div class="imv-fact">
+            <span class="imv-fact-label">Metadata fields</span>
+            <span class="imv-fact-value" id="metadataFieldCount">—</span>
+          </div>
+          <div class="imv-fact">
+            <span class="imv-fact-label">GPS fields</span>
+            <span class="imv-fact-value" id="gpsSummary">Checking…</span>
+          </div>
+          <div class="imv-fact">
+            <span class="imv-fact-label">Camera / device</span>
+            <span class="imv-fact-value" id="cameraSummary">—</span>
+          </div>
+          <div class="imv-fact">
+            <span class="imv-fact-label">Photo date</span>
+            <span class="imv-fact-value" id="dateSummary">—</span>
+          </div>
+        </div>
+
+        <p class="imv-muted" style="margin-top:12px">
+          Metadata availability depends on the file format, source application and the fields
+          supported by the parser.
+        </p>
+        <button class="imv-button imv-button-danger" type="button" id="removeSourceBtn">
+          Remove selected image
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="imv-card imv-section" id="metadataSection" hidden>
+    <div class="imv-section-head">
+      <h2>2. Detected image metadata</h2>
+      <span class="imv-muted" id="metadataResultsLabel"></span>
+    </div>
+
+    <div class="imv-danger-note" id="gpsWarning" hidden>
+      <strong>Possible location information detected.</strong>
+      <p style="margin:5px 0 0">
+        This image appears to contain GPS-related metadata. Check the fields below before sharing
+        the original publicly. GPS metadata is sensitive location information; this page does not
+        send it to a map service.
+      </p>
+    </div>
+
+    <div class="imv-empty" id="metadataEmpty" hidden>
+      No supported metadata fields were detected. This does not prove that the image contains
+      no metadata of any kind.
+    </div>
+
+    <div class="imv-meta-controls" style="margin-top:12px">
+      <div class="imv-search">
+        <input
+          type="search"
+          id="metadataSearch"
+          placeholder="Search metadata fields…"
+          aria-label="Search metadata fields"
+        >
+      </div>
+      <button type="button" class="imv-button" id="downloadMetadataBtn" disabled>
+        Download metadata JSON
+      </button>
+    </div>
+
+    <div class="imv-table-wrap" id="metadataTableWrap" hidden>
+      <table class="imv-table">
+        <thead>
+          <tr>
+            <th scope="col">Field</th>
+            <th scope="col">Value</th>
+          </tr>
+        </thead>
+        <tbody id="metadataTableBody"></tbody>
+      </table>
+    </div>
+
+    <p class="imv-muted" id="metadataLimitNote" style="margin-top:10px"></p>
+  </section>
+
+  <section class="imv-card imv-section" id="cleanerSection">
+    <h2>3. Create a cleaned image copy</h2>
+    <p class="imv-muted">
+      Choose an image above, select an output format, and re-encode the image using your browser.
+      This creates a new file; it does not change your original.
+    </p>
+
+    <div class="imv-warning">
+      Re-encoding usually removes source EXIF and other embedded metadata from common raster
+      image formats. It is not a forensic guarantee that every metadata block, identifier or
+      image characteristic has been removed. Check the exported file independently if your
+      situation requires strict privacy.
+    </div>
+
+    <div class="imv-output-options" style="margin-top:16px">
+      <div class="imv-field">
+        <label for="outputFormat">Output format</label>
+        <select id="outputFormat">
+          <option value="image/png">PNG — lossless pixel export</option>
+          <option value="image/jpeg">JPEG — smaller photo files</option>
+          <option value="image/webp">WebP — modern web format</option>
+        </select>
+      </div>
+
+      <div class="imv-field">
+        <label for="qualityRange">JPEG / WebP quality</label>
+        <div class="imv-range-row">
+          <input id="qualityRange" type="range" min="60" max="100" step="1" value="92">
+          <span class="imv-range-value" id="qualityValue">92%</span>
+        </div>
+        <p class="imv-muted" style="margin:5px 0 0">
+          Used for JPEG or WebP export. PNG ignores this setting.
+        </p>
+      </div>
+    </div>
+
+    <div class="imv-field" style="margin-top:15px">
+      <label for="filenameInput">Output filename (without extension)</label>
+      <input
+        id="filenameInput"
+        type="text"
+        maxlength="100"
+        placeholder="cleaned-image"
+        style="width:100%;min-height:42px;padding:8px 10px;border:1px solid #cbd4df;border-radius:9px"
+      >
+    </div>
+
+    <p class="imv-muted" style="margin-top:12px">
+      For memory safety, images larger than 25 megapixels may be resized proportionally.
+      Output formats and quality depend on browser support.
+    </p>
+
+    <div class="imv-meta-controls" style="margin-top:14px">
+      <button type="button" class="imv-button imv-button-primary" id="createCleanBtn" disabled>
+        Create cleaned copy
+      </button>
+      <button type="button" class="imv-button" id="resetCleanerBtn">
+        Reset options
+      </button>
+    </div>
+
+    <p class="imv-status" id="cleanStatus" role="status" aria-live="polite"></p>
+
+    <div id="cleanOutput" hidden>
+      <hr class="imv-divider">
+      <h3>Cleaned image ready</h3>
+      <div class="imv-output-preview">
+        <img id="cleanPreview" alt="Preview of the cleaned image">
+        <div>
+          <strong id="cleanFilename">cleaned-image.png</strong>
+          <p id="cleanDetails"></p>
+          <p id="cleanNotice">
+            This is a newly encoded image. It is separate from the original file.
+          </p>
+          <button type="button" class="imv-button imv-button-primary" id="downloadCleanBtn">
+            Download cleaned image
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="imv-card imv-section imv-article">
+    <h2>What is image metadata?</h2>
+    <p>
+      Image metadata is additional information stored inside or alongside a digital image.
+      Depending on the format and how the file was created, it can describe the camera,
+      photo settings, editing software, date, copyright, orientation, color information or
+      geographic location.
+    </p>
+    <p>
+      EXIF is a common metadata format used by digital cameras and phones. Not every image
+      contains EXIF data, and not every file format stores the same types of information.
+      Some files may include other structures such as XMP, IPTC or color-profile information.
+    </p>
+
+    <h2>Why check photo metadata before sharing?</h2>
+    <ul>
+      <li><strong>Location privacy:</strong> Some photos can contain GPS coordinates that may reveal where they were captured.</li>
+      <li><strong>Personal information:</strong> Camera identifiers, timestamps and descriptive fields can expose details you did not intend to publish.</li>
+      <li><strong>Photography workflow:</strong> Exposure, focal length and camera details can help photographers understand how a picture was taken.</li>
+      <li><strong>Digital organization:</strong> Photo dates, software tags and camera fields can help sort or audit image collections.</li>
+    </ul>
+
+    <h2>How this EXIF remover works</h2>
+    <ol>
+      <li>Select an image from your device.</li>
+      <li>Inspect the fields detected by the metadata parser.</li>
+      <li>Choose a supported output format and quality.</li>
+      <li>Create a new image from the browser-rendered pixels.</li>
+      <li>Download the new file and verify it before sharing.</li>
+    </ol>
+
+    <p>
+      Canvas-based re-encoding creates a new image rather than copying the original file byte
+      for byte. That commonly removes source metadata, but output dimensions, quality, transparency
+      and color characteristics may change. PNG is typically a better choice when you need
+      transparency and lossless pixel export; JPEG is often more appropriate for photographs.
+    </p>
+
+    <h2>Important limitations</h2>
+    <ul>
+      <li>This tool only reports metadata the loaded parser can read.</li>
+      <li>A missing GPS field does not prove the photo has no location information in every possible metadata structure.</li>
+      <li>Some formats, including certain HEIC or camera RAW files, might be readable by the metadata parser but not renderable by your browser for cleaning.</li>
+      <li>Re-encoding can change the image's appearance or remove animation, embedded thumbnails and other non-pixel information.</li>
+      <li>This is a convenience privacy tool, not a certified forensic sanitation process.</li>
+    </ul>
+  </section>
+
+  <section class="imv-card imv-section imv-faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>What is image metadata?</summary>
+      <p>
+        It is information associated with an image, such as camera model, date taken,
+        exposure settings, copyright fields, color information and sometimes GPS coordinates.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can my photo reveal my location?</summary>
+      <p>
+        Some photos include GPS coordinates. This tool checks supported metadata fields and
+        highlights detected GPS information. A missing GPS warning is not proof that every
+        possible location marker is absent.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does the tool upload my photo?</summary>
+      <p>
+        The page contains no image-upload feature. It inspects and re-encodes the selected
+        image in your browser. The metadata library is downloaded from a CDN.
+      </p>
+    </details>
+
+    <details>
+      <summary>Will creating a cleaned copy remove all metadata?</summary>
+      <p>
+        Re-encoding through a browser canvas usually strips source EXIF and other embedded
+        metadata from the exported raster image. It is not a universal or forensic guarantee.
+        Recheck the downloaded file if strict metadata removal is essential.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why can the cleaned image have different dimensions or quality?</summary>
+      <p>
+        Large images may be resized to limit memory use. JPEG and WebP are typically lossy
+        formats at most quality settings, while PNG export is lossless for rendered pixels.
+        Browser color handling and transparency can also affect the output.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why is no metadata displayed?</summary>
+      <p>
+        The file may not contain supported metadata, or it may use a format or tag that the
+        parser does not recognize. A file with no displayed fields may still contain other
+        kinds of embedded data.
+      </p>
+    </details>
+  </section>
+
+  <p class="imv-muted imv-section">
+    Explore more browser utilities on the <a href="/">ConvertToToolsOnline homepage</a>.
+  </p>
+</main>
+
+<!-- Pinned browser build of exifr. If the CDN is unavailable, metadata viewing
+     will report an error; the image cleanup workflow can still be attempted. -->
+<script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js"></script>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_FILE_BYTES = 25 * 1024 * 1024;
+  const MAX_OUTPUT_PIXELS = 25_000_000;
+  const MAX_OUTPUT_EDGE = 10_000;
+  const MAX_DISPLAY_FIELDS = 180;
+  const MAX_EXPORT_FIELDS = 500;
+
+  const $ = id => document.getElementById(id);
+
+  const fileInput = $("fileInput");
+  const uploadZone = $("uploadZone");
+  const chooseBtn = $("chooseBtn");
+  const fileLabel = $("fileLabel");
+  const statusMessage = $("statusMessage");
+  const sourceWorkspace = $("sourceWorkspace");
+  const sourcePreview = $("sourcePreview");
+  const createCleanBtn = $("createCleanBtn");
+
+  const metadataSection = $("metadataSection");
+  const metadataTableWrap = $("metadataTableWrap");
+  const metadataTableBody = $("metadataTableBody");
+  const metadataEmpty = $("metadataEmpty");
+  const metadataSearch = $("metadataSearch");
+  const metadataResultsLabel = $("metadataResultsLabel");
+  const metadataLimitNote = $("metadataLimitNote");
+  const metadataFieldCount = $("metadataFieldCount");
+  const gpsSummary = $("gpsSummary");
+  const gpsWarning = $("gpsWarning");
+  const cameraSummary = $("cameraSummary");
+  const dateSummary = $("dateSummary");
+  const downloadMetadataBtn = $("downloadMetadataBtn");
+
+  const outputFormat = $("outputFormat");
+  const qualityRange = $("qualityRange");
+  const qualityValue = $("qualityValue");
+  const filenameInput = $("filenameInput");
+  const cleanStatus = $("cleanStatus");
+  const cleanOutput = $("cleanOutput");
+  const cleanPreview = $("cleanPreview");
+  const cleanFilename = $("cleanFilename");
+  const cleanDetails = $("cleanDetails");
+  const downloadCleanBtn = $("downloadCleanBtn");
+
+  let currentFile = null;
+  let sourceObjectUrl = null;
+  let cleanedObjectUrl = null;
+  let cleanedBlob = null;
+  let cleanedFilename = "";
+  let rawMetadata = null;
+  let displayedFields = [];
+  let activeLoadId = 0;
+  let imageReady = false;
+  let sourceWidth = 0;
+  let sourceHeight = 0;
+
+  const priorityFields = [
+    ["Make", "Camera manufacturer"],
+    ["Model", "Camera / device model"],
+    ["LensMake", "Lens manufacturer"],
+    ["LensModel", "Lens model"],
+    ["Software", "Software"],
+    ["DateTimeOriginal", "Date photo taken"],
+    ["CreateDate", "Date created"],
+    ["ModifyDate", "Date modified"],
+    ["OffsetTimeOriginal", "Original time-zone offset"],
+    ["ExposureTime", "Exposure time"],
+    ["FNumber", "Aperture (f-number)"],
+    ["ISO", "ISO sensitivity"],
+    ["FocalLength", "Focal length"],
+    ["FocalLengthIn35mmFormat", "35 mm-equivalent focal length"],
+    ["ExposureProgram", "Exposure program"],
+    ["ExposureMode", "Exposure mode"],
+    ["Flash", "Flash"],
+    ["WhiteBalance", "White balance"],
+    ["MeteringMode", "Metering mode"],
+    ["Orientation", "EXIF orientation"],
+    ["latitude", "GPS latitude"],
+    ["longitude", "GPS longitude"],
+    ["GPSAltitude", "GPS altitude"],
+    ["GPSDateStamp", "GPS date"],
+    ["Artist", "Artist"],
+    ["Copyright", "Copyright"],
+    ["ImageDescription", "Image description"],
+    ["Title", "Title"],
+    ["XPTitle", "Windows title"],
+    ["XPAuthor", "Windows author"]
+  ];
+
+  function setStatus(message, kind = "") {
+    statusMessage.textContent = message;
+    statusMessage.dataset.kind = kind;
+  }
+
+  function setCleanStatus(message, kind = "") {
+    cleanStatus.textContent = message;
+    cleanStatus.dataset.kind = kind;
+  }
+
+  function formatBytes(bytes) {
+    if (!Number.isFinite(bytes) || bytes < 0) return "Unknown";
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  function safeDate(value) {
+    if (value instanceof Date && !Number.isNaN(value.getTime())) {
+      return value.toLocaleString();
+    }
+    return value == null ? "" : String(value);
+  }
+
+  function safeString(value, maxLength = 500) {
+    let result;
+
+    if (value == null) {
+      result = "";
+    } else if (value instanceof Date) {
+      result = safeDate(value);
+    } else if (
+      value instanceof ArrayBuffer ||
+      ArrayBuffer.isView(value)
+    ) {
+      const length = value.byteLength || value.length || 0;
+      result = `[Binary data: ${length} bytes]`;
+    } else if (Array.isArray(value)) {
+      const parts = value.slice(0, 20).map(item => {
+        if (item == null) return "";
+        if (item instanceof Date) return safeDate(item);
+        if (typeof item === "object") {
+          try {
+            return JSON.stringify(item);
+          } catch (error) {
+            return "[Object]";
+          }
+        }
+        return String(item);
+      });
+      result = parts.join(", ");
+      if (value.length > 20) {
+        result += ` … (${value.length} total items)`;
+      }
+    } else if (typeof value === "object") {
+      try {
+        result = JSON.stringify(value);
+      } catch (error) {
+        result = "[Structured value]";
+      }
+    } else {
+      result = String(value);
+    }
+
+    if (result.length > maxLength) {
+      result = result.slice(0, maxLength) + "…";
+    }
+
+    return result;
+  }
+
+  function isBinaryValue(value) {
+    return value instanceof ArrayBuffer ||
+      ArrayBuffer.isView(value);
+  }
+
+  function skipMetadataField(key, value) {
+    if (/^(?:MakerNote|Thumbnail|ThumbnailImage|PreviewImageData)$/i.test(key)) {
+      return true;
+    }
+
+    if (isBinaryValue(value)) return true;
+
+    // Avoid displaying large opaque arrays or embedded binary segments.
+    if (Array.isArray(value) && value.length > 500) return true;
+
+    return false;
+  }
+
+  function humanLabel(key) {
+    const known = priorityFields.find(([candidate]) => candidate === key);
+    if (known) return known[1];
+
+    return key
+      .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+      .replace(/[_-]+/g, " ")
+      .replace(/\bGPS\b/g, "GPS")
+      .replace(/\bEXIF\b/g, "EXIF")
+      .replace(/\bXMP\b/g, "XMP")
+      .replace(/\bIPTC\b/g, "IPTC");
+  }
+
+  function hasGps(metadata) {
+    if (!metadata || typeof metadata !== "object") return false;
+
+    const keySet = new Set(Object.keys(metadata));
+    const normalizedKeys = Array.from(keySet).map(key => key.toLowerCase());
+
+    return (
+      metadata.latitude != null ||
+      metadata.longitude != null ||
+      normalizedKeys.some(key =>
+        /gpslatitude|gpslongitude|gpsposition|gpscoordinates/.test(key)
+      )
+    );
+  }
+
+  function buildMetadataRows(metadata) {
+    if (!metadata || typeof metadata !== "object") return [];
+
+    const keys = Object.keys(metadata).filter(key => {
+      return !skipMetadataField(key, metadata[key]);
+    });
+
+    const orderedKeys = [];
+    const seen = new Set();
+
+    priorityFields.forEach(([key]) => {
+      if (keys.includes(key) && !seen.has(key)) {
+        orderedKeys.push(key);
+        seen.add(key);
+      }
+    });
+
+    keys
+      .filter(key => !seen.has(key))
+      .sort((a, b) => a.localeCompare(b))
+      .forEach(key => orderedKeys.push(key));
+
+    return orderedKeys.map(key => ({
+      key,
+      label: humanLabel(key),
+      value: safeString(metadata[key]),
+      exportValue: metadata[key]
+    }));
+  }
+
+  function renderSummary(metadata) {
+    const data = metadata || {};
+
+    metadataFieldCount.textContent = rawMetadata
+      ? Object.keys(rawMetadata).length.toLocaleString()
+      : "0";
+
+    if (hasGps(data)) {
+      gpsSummary.textContent = "Detected";
+      gpsWarning.hidden = false;
+    } else {
+      gpsSummary.textContent = "Not detected";
+      gpsWarning.hidden = true;
+    }
+
+    const model = [data.Make, data.Model]
+      .map(value => safeString(value, 100))
+      .filter(Boolean)
+      .join(" ");
+
+    cameraSummary.textContent = model || "Not detected";
+
+    const photoDate = data.DateTimeOriginal ||
+      data.CreateDate ||
+      data.ModifyDate;
+
+    dateSummary.textContent = photoDate
+      ? safeString(photoDate, 100)
+      : "Not detected";
+  }
+
+  function renderMetadata(filterText = "") {
+    metadataTableBody.replaceChildren();
+
+    const query = filterText.trim().toLowerCase();
+
+    const filtered = displayedFields.filter(field => {
+      return (
+        field.key.toLowerCase().includes(query) ||
+        field.label.toLowerCase().includes(query) ||
+        field.value.toLowerCase().includes(query)
+      );
+    });
+
+    metadataResultsLabel.textContent =
+      `${filtered.length.toLocaleString()} shown`;
+
+    metadataTableWrap.hidden = filtered.length === 0;
+    metadataEmpty.hidden = displayedFields.length > 0;
+
+    filtered.forEach(field => {
+      const row = document.createElement("tr");
+      const keyCell = document.createElement("td");
+      const valueCell = document.createElement("td");
+
+      keyCell.textContent = field.label;
+      keyCell.title = field.key;
+      valueCell.textContent = field.value || "(empty)";
+
+      row.append(keyCell, valueCell);
+      metadataTableBody.appendChild(row);
+    });
+  }
+
+  function normalizeForJson(value, depth = 0) {
+    if (depth > 8) return "[Maximum nesting depth reached]";
+    if (value == null) return value;
+
+    if (value instanceof Date) {
+      return Number.isNaN(value.getTime())
+        ? String(value)
+        : value.toISOString();
+    }
+
+    if (
+      value instanceof ArrayBuffer ||
+      ArrayBuffer.isView(value)
+    ) {
+      return `[Binary data omitted: ${value.byteLength || value.length || 0} bytes]`;
+    }
+
+    if (Array.isArray(value)) {
+      return value.slice(0, 500).map(item => normalizeForJson(item, depth + 1));
+    }
+
+    if (typeof value === "object") {
+      const output = {};
+      Object.keys(value).slice(0, 500).forEach(key => {
+        if (skipMetadataField(key, value[key])) return;
+        output[key] = normalizeForJson(value[key], depth + 1);
+      });
+      return output;
+    }
+
+    if (typeof value === "bigint") return value.toString();
+    if (typeof value === "number" && !Number.isFinite(value)) return String(value);
+
+    return value;
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = "none";
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+  }
+
+  function downloadMetadataJson() {
+    if (!rawMetadata || typeof rawMetadata !== "object") {
+      setStatus("No parsed metadata is available to export.", "error");
+      return;
+    }
+
+    try {
+      const safeMetadata = normalizeForJson(rawMetadata);
+
+      const payload = {
+        tool: "ConvertToToolsOnline Image Metadata Viewer",
+        originalFileName: currentFile ? currentFile.name : null,
+        exportedAt: new Date().toISOString(),
+        note: "Metadata that was parsed by the browser library. Binary thumbnail and large opaque fields are omitted.",
+        metadata: safeMetadata
+      };
+
+      const blob = new Blob(
+        [JSON.stringify(payload, null, 2)],
+        { type: "application/json;charset=utf-8" }
+      );
+
+      downloadBlob(blob, "image-metadata.json");
+      setStatus("Metadata JSON prepared for download.", "success");
+    } catch (error) {
+      setStatus("Could not export the metadata as JSON.", "error");
+    }
+  }
+
+  function resetOutput() {
+    if (cleanedObjectUrl) {
+      URL.revokeObjectURL(cleanedObjectUrl);
+    }
+
+    cleanedObjectUrl = null;
+    cleanedBlob = null;
+    cleanedFilename = "";
+    cleanOutput.hidden = true;
+    cleanPreview.removeAttribute("src");
+    cleanFilename.textContent = "";
+    cleanDetails.textContent = "";
+    downloadCleanBtn.disabled = true;
+    setCleanStatus("");
+  }
+
+  function resetMetadata() {
+    rawMetadata = null;
+    displayedFields = [];
+    metadataTableBody.replaceChildren();
+    metadataTableWrap.hidden = true;
+    metadataSection.hidden = true;
+    metadataEmpty.hidden = true;
+    metadataSearch.value = "";
+    metadataResultsLabel.textContent = "";
+    metadataLimitNote.textContent = "";
+    metadataFieldCount.textContent = "—";
+    gpsSummary.textContent = "—";
+    gpsWarning.hidden = true;
+    cameraSummary.textContent = "—";
+    dateSummary.textContent = "—";
+    downloadMetadataBtn.disabled = true;
+  }
+
+  async function readMetadata(file, loadId) {
+    if (!window.exifr || typeof window.exifr.parse !== "function") {
+      if (loadId === activeLoadId) {
+        resetMetadata();
+        metadataSection.hidden = false;
+        metadataEmpty.hidden = false;
+        metadataEmpty.textContent =
+          "The metadata parser could not load. Check your connection and reload this page. Image re-encoding may still work.";
+        setStatus("Metadata library unavailable. You can still try image cleanup.", "error");
+      }
+      return;
+    }
+
+    try {
+      // `true` asks exifr to parse the additional supported metadata segments.
+      // The UI omits large binary fields rather than displaying their raw contents.
+      const result = await window.exifr.parse(file, true);
+
+      if (loadId !== activeLoadId) return;
+
+      rawMetadata = result && typeof result === "object" ? result : {};
+      displayedFields = buildMetadataRows(rawMetadata);
+
+      metadataSection.hidden = false;
+      renderSummary(rawMetadata);
+      renderMetadata(metadataSearch.value);
+
+      metadataLimitNote.textContent = displayedFields.length > MAX_DISPLAY_FIELDS
+        ? `For readability, only the first ${MAX_DISPLAY_FIELDS} fields are displayed. The JSON export is limited to ${MAX_EXPORT_FIELDS} top-level metadata fields and excludes binary data.`
+        : "Binary thumbnails and certain large opaque fields are omitted from this table.";
+
+      downloadMetadataBtn.disabled = Object.keys(rawMetadata).length === 0;
+      $("metadataTableWrap").hidden = displayedFields.length === 0;
+      metadataEmpty.hidden = displayedFields.length > 0;
+
+      setStatus(
+        displayedFields.length
+          ? `Metadata inspection complete. ${displayedFields.length} readable fields found.`
+          : "No supported displayable metadata fields were found. The image may still contain other metadata.",
+        "success"
+      );
+    } catch (error) {
+      if (loadId !== activeLoadId) return;
+
+      resetMetadata();
+      metadataSection.hidden = false;
+      metadataEmpty.hidden = false;
+      metadataEmpty.textContent =
+        "The metadata parser could not read supported metadata from this file. The file may contain no supported tags, use an unsupported format, or have damaged metadata.";
+
+      setStatus("Metadata inspection could not complete for this file.", "error");
+    }
+  }
+
+  function cleanBaseName(filename) {
+    const base = filename.replace(/\.[^.]+$/, "");
+    const cleaned = base
+      .replace(/[^\p{L}\p{N}._ -]+/gu, "-")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^[.-]+|[.-]+$/g, "")
+      .slice(0, 80);
+
+    return cleaned || "cleaned-image";
+  }
+
+  function selectedOutputName(mimeType) {
+    const fallbackBase = currentFile
+      ? cleanBaseName(currentFile.name)
+      : "cleaned-image";
+
+    let base = filenameInput.value.trim();
+    if (!base) base = fallbackBase + "-cleaned";
+
+    base = cleanBaseName(base);
+
+    const extensionByMime = {
+      "image/png": "png",
+      "image/jpeg": "jpg",
+      "image/webp": "webp"
+    };
+
+    const extension = extensionByMime[mimeType] || "png";
+    return `${base}.${extension}`;
+  }
+
+  function canvasToBlob(canvas, mimeType, quality) {
+    return new Promise((resolve, reject) => {
+      try {
+        canvas.toBlob(blob => {
+          if (!blob) {
+            reject(new Error("The browser could not encode this image."));
+            return;
+          }
+          resolve(blob);
+        }, mimeType, quality);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  function resetCleanerOptions() {
+    outputFormat.value = "image/png";
+    qualityRange.value = "92";
+    qualityValue.textContent = "92%";
+    updateQualityAvailability();
+    filenameInput.value = currentFile
+      ? cleanBaseName(currentFile.name) + "-cleaned"
+      : "";
+    resetOutput();
+  }
+
+  function updateQualityAvailability() {
+    const isLossy = outputFormat.value === "image/jpeg" ||
+      outputFormat.value === "image/webp";
+
+    qualityRange.disabled = !isLossy;
+    qualityValue.textContent = `${qualityRange.value}%`;
+  }
+
+  async function createCleanCopy() {
+    if (!currentFile || !imageReady || !sourcePreview.naturalWidth) {
+      setCleanStatus("Choose an image that your browser can display first.", "error");
+      return;
+    }
+
+    const originalWidth = sourcePreview.naturalWidth;
+    const originalHeight = sourcePreview.naturalHeight;
+    const totalPixels = originalWidth * originalHeight;
+
+    if (!Number.isFinite(totalPixels) || totalPixels <= 0) {
+      setCleanStatus("The image dimensions are invalid.", "error");
+      return;
+    }
+
+    /*
+     * Keep images at or below the memory-conscious limits at their displayed
+     * dimensions; larger images are resized proportionally to protect browser
+     * memory. The chosen output dimensions are reported below.
+     */
+    const scale = Math.min(
+      1,
+      Math.sqrt(MAX_OUTPUT_PIXELS / totalPixels),
+      MAX_OUTPUT_EDGE / originalWidth,
+      MAX_OUTPUT_EDGE / originalHeight
+    );
+
+    const targetWidth = Math.max(1, Math.floor(originalWidth * scale));
+    const targetHeight = Math.max(1, Math.floor(originalHeight * scale));
+
+    createCleanBtn.disabled = true;
+    setCleanStatus("Re-encoding the image in your browser…");
+    resetOutput();
+
+    try {
+      const canvas = document.createElement("canvas");
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+
+      const context = canvas.getContext("2d", { alpha: true });
+
+      if (!context) {
+        throw new Error("Your browser could not create a canvas.");
+      }
+
+      const requestedMime = outputFormat.value;
+
+      if (requestedMime === "image/jpeg") {
+        // JPEG cannot represent transparency. Composite transparent regions on white.
+        context.fillStyle = "#FFFFFF";
+        context.fillRect(0, 0, targetWidth, targetHeight);
+      }
+
+      context.drawImage(
+        sourcePreview,
+        0,
+        0,
+        targetWidth,
+        targetHeight
+      );
+
+      const quality = Number(qualityRange.value) / 100;
+      const blob = await canvasToBlob(
+        canvas,
+        requestedMime,
+        quality
+      );
+
+      if (!blob.type.startsWith("image/")) {
+        throw new Error("The browser returned an unexpected output type.");
+      }
+
+      cleanedBlob = blob;
+      cleanedFilename = selectedOutputName(blob.type);
+      cleanedObjectUrl = URL.createObjectURL(blob);
+
+      cleanPreview.src = cleanedObjectUrl;
+      cleanFilename.textContent = cleanedFilename;
+
+      const actualDimensions = `${targetWidth.toLocaleString()} × ${targetHeight.toLocaleString()}`;
+      const resizingNote = scale < 1
+        ? " The output was resized for memory safety."
+        : "";
+
+      const formatNote = blob.type !== requestedMime
+        ? ` The browser exported ${blob.type} instead of ${requestedMime}.`
+        : "";
+
+      cleanDetails.textContent =
+        `${actualDimensions} pixels · ${formatBytes(blob.size)}.${resizingNote}${formatNote}`;
+
+      cleanOutput.hidden = false;
+      downloadCleanBtn.disabled = false;
+
+      setCleanStatus(
+        "Cleaned copy ready. Download it and check it before sharing.",
+        "success"
+      );
+
+      if (blob.type !== requestedMime) {
+        setCleanStatus(
+          `The browser did not support ${requestedMime} export and returned ${blob.type}. Check the output format before using the file.`,
+          "error"
+        );
+      }
+    } catch (error) {
+      setCleanStatus(
+        error && error.message
+          ? `Could not create the cleaned image: ${error.message}`
+          : "Could not create the cleaned image. Try another image or output format.",
+        "error"
+      );
+    } finally {
+      createCleanBtn.disabled = !currentFile || !imageReady;
+    }
+  }
+
+  async function handleFile(file) {
+    if (!file) return;
+
+    if (file.type && !file.type.startsWith("image/")) {
+      setStatus("Please choose an image file.", "error");
+      return;
+    }
+
+    if (file.size > MAX_FILE_BYTES) {
+      setStatus("This file is larger than the 25 MB limit.", "error");
+      return;
+    }
+
+    const loadId = ++activeLoadId;
+    currentFile = file;
+    imageReady = false;
+    sourceWidth = 0;
+    sourceHeight = 0;
+
+    resetMetadata();
+    resetOutput();
+    createCleanBtn.disabled = true;
+    sourceWorkspace.hidden = true;
+    $("sourceDimensions").textContent = "Loading…";
+    $("sourceSize").textContent = formatBytes(file.size);
+    fileLabel.textContent = `${file.name} · ${formatBytes(file.size)}`;
+    filenameInput.value = cleanBaseName(file.name) + "-cleaned";
+    setStatus("Opening the image and inspecting its metadata…");
+
+    if (sourceObjectUrl) {
+      URL.revokeObjectURL(sourceObjectUrl);
+      sourceObjectUrl = null;
+    }
+
+    const objectUrl = URL.createObjectURL(file);
+    sourceObjectUrl = objectUrl;
+
+    const imageReadyPromise = new Promise((resolve, reject) => {
+      sourcePreview.onload = () => resolve(true);
+      sourcePreview.onerror = () => reject(
+        new Error("Your browser could not display this image.")
+      );
+      sourcePreview.src = objectUrl;
+    });
+
+    // Metadata parsing works on the File object; it does not upload it.
+    const metadataPromise = readMetadata(file, loadId);
+
+    try {
+      await imageReadyPromise;
+
+      if (loadId !== activeLoadId) return;
+
+      sourceWidth = sourcePreview.naturalWidth;
+      sourceHeight = sourcePreview.naturalHeight;
+
+      if (!sourceWidth || !sourceHeight) {
+        throw new Error("This image has no readable dimensions.");
+      }
+
+      imageReady = true;
+      sourceWorkspace.hidden = false;
+      $("sourceDimensions").textContent =
+        `${sourceWidth.toLocaleString()} × ${sourceHeight.toLocaleString()}`;
+      createCleanBtn.disabled = false;
+
+      setStatus("Image loaded. Inspect the metadata below or create a cleaned copy.", "success");
+    } catch (error) {
+      if (loadId !== activeLoadId) return;
+
+      imageReady = false;
+      sourceWorkspace.hidden = true;
+      createCleanBtn.disabled = true;
+      setStatus(
+        "The browser could not display this image. Its metadata may still be readable, but the cleaning workflow requires a renderable image format.",
+        "error"
+      );
+    }
+
+    // Wait for the parser to settle, without allowing a stale file to update
+    // the status after a newer file has been selected.
+    await metadataPromise;
+  }
+
+  function removeSource() {
+    activeLoadId++;
+    currentFile = null;
+    imageReady = false;
+    sourceWidth = 0;
+    sourceHeight = 0;
+    rawMetadata = null;
+    displayedFields = [];
+
+    if (sourceObjectUrl) URL.revokeObjectURL(sourceObjectUrl);
+    sourceObjectUrl = null;
+
+    if (sourcePreview.src) sourcePreview.removeAttribute("src");
+
+    resetMetadata();
+    resetOutput();
+    sourceWorkspace.hidden = true;
+    fileInput.value = "";
+    fileLabel.textContent = "Your selected image is processed locally by this page.";
+    createCleanBtn.disabled = true;
+    filenameInput.value = "";
+
+    setStatus("Selected image removed.");
+    setCleanStatus("");
+  }
+
+  chooseBtn.addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) handleFile(file);
+    fileInput.value = "";
+  });
+
+  $("removeSourceBtn").addEventListener("click", removeSource);
+
+  metadataSearch.addEventListener("input", () => {
+    renderMetadata(metadataSearch.value);
+  });
+
+  downloadMetadataBtn.addEventListener("click", downloadMetadataJson);
+
+  outputFormat.addEventListener("change", () => {
+    updateQualityAvailability();
+    resetOutput();
+  });
+
+  qualityRange.addEventListener("input", () => {
+    qualityValue.textContent = `${qualityRange.value}%`;
+    resetOutput();
+  });
+
+  filenameInput.addEventListener("input", () => {
+    resetOutput();
+  });
+
+  createCleanBtn.addEventListener("click", createCleanCopy);
+
+  $("resetCleanerBtn").addEventListener("click", resetCleanerOptions);
+
+  downloadCleanBtn.addEventListener("click", () => {
+    if (!cleanedBlob || !cleanedFilename) {
+      setCleanStatus("Create a cleaned image before downloading.", "error");
+      return;
+    }
+
+    downloadBlob(cleanedBlob, cleanedFilename);
+    setCleanStatus("Download started. Verify the exported file before sharing.", "success");
+  });
+
+  ["dragenter", "dragover"].forEach(eventName => {
+    uploadZone.addEventListener(eventName, event => {
+      event.preventDefault();
+      uploadZone.classList.add("is-dragging");
+    });
+  });
+
+  ["dragleave", "drop"].forEach(eventName => {
+    uploadZone.addEventListener(eventName, event => {
+      event.preventDefault();
+      uploadZone.classList.remove("is-dragging");
+    });
+  });
+
+  uploadZone.addEventListener("drop", event => {
+    const file = event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files[0];
+
+    if (file) handleFile(file);
+  });
+
+  // Don't let an image dropped elsewhere on the page navigate the browser.
+  window.addEventListener("dragover", event => event.preventDefault());
+  window.addEventListener("drop", event => {
+    if (!uploadZone.contains(event.target)) {
+      event.preventDefault();
+    }
+  });
+
+  window.addEventListener("beforeunload", () => {
+    if (sourceObjectUrl) URL.revokeObjectURL(sourceObjectUrl);
+    if (cleanedObjectUrl) URL.revokeObjectURL(cleanedObjectUrl);
+  });
+
+  updateQualityAvailability();
+})();
+</script>
+</body>
+</html>
