@@ -1,1554 +1,1234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cron Expression Generator - Plain English and Reverse</title>
+<meta name="description" content="Generate a cron expression from plain English or field inputs. Paste any expression to see what it means and when it runs next in your time zone.">
+<link rel="canonical" href="https://converttotoolsonline.com/cron-expression-generator.html">
+<meta property="og:title" content="Cron Expression Generator - Plain English and Reverse">
+<meta property="og:description" content="Type a schedule in English, get the cron. Paste a cron, see what it means. Next five run times in your time zone.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://converttotoolsonline.com/cron-expression-generator.html">
+<meta name="robots" content="index, follow">
+<style>
+:root{
+  --ink:#0f172a;--muted:#475569;--blue:#2563eb;--blue2:#1d4ed8;
+  --line:#e2e8f0;--bg:#f8fafc;--shadow:0 1px 3px rgba(0,0,0,.08);
+  --green:#059669;--red:#dc2626;--amber:#b45309;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+button,input,textarea,select{font-family:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 1.25rem}
 
-  <title>Cron Expression Generator Online Free | Crontab Builder</title>
+.header{background:#fff;border-bottom:1px solid var(--line);padding:.85rem 0;position:sticky;top:0;z-index:40}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+.logo span{color:var(--blue)}
+.nav-links{display:flex;gap:1.25rem}
+.nav-links a{font-size:.875rem;color:var(--muted);font-weight:500}
 
-  <meta name="description"
-    content="Generate cron expressions online for free. Build Linux crontab schedules visually, understand cron syntax in plain English, and preview upcoming execution times.">
+.hero{background:linear-gradient(135deg,#eff6ff 0%,#f8fafc 100%);padding:2.25rem 0 3.25rem;text-align:center;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(1.5rem,3.6vw,2.05rem);letter-spacing:-.025em;margin-bottom:.5rem;line-height:1.2}
+.hero p{color:var(--muted);max-width:620px;margin:0 auto;font-size:1rem}
 
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="author" content="ConvertToToolsOnline">
-  <meta name="theme-color" content="#2563eb">
+.tool{max-width:1100px;margin:-1.75rem auto 0;padding:0 1.25rem;position:relative;z-index:2}
+.tool-card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px -12px rgba(15,23,42,.15);padding:1.5rem}
 
-  <link rel="canonical"
-    href="https://converttotoolsonline.com/cron-expression-generator.html">
+/* tabs */
+.tabs{display:flex;gap:.25rem;background:var(--bg);padding:.25rem;border-radius:9px;border:1px solid var(--line);margin-bottom:1.25rem}
+.tab{flex:1;border:none;background:transparent;font-family:inherit;font-size:.85rem;font-weight:700;color:var(--muted);padding:.6rem 1rem;border-radius:7px;cursor:pointer;transition:background .15s,color .15s}
+.tab:hover{color:var(--ink)}
+.tab.active{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+.tab:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
 
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Free Cron Expression Generator">
-  <meta property="og:description"
-    content="Build cron schedules visually, copy your expression, understand its meaning, and preview upcoming runs.">
-  <meta property="og:url"
-    content="https://converttotoolsonline.com/cron-expression-generator.html">
-  <meta property="og:site_name" content="ConvertToToolsOnline">
+/* section labels */
+.panel-label{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.5rem}
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Cron Expression Generator Online">
-  <meta name="twitter:description"
-    content="Generate cron expressions, understand schedules, and preview upcoming execution times for free.">
+/* english input */
+.english-wrap{margin-bottom:1.5rem}
+.english-input{
+  width:100%;padding:.85rem 1rem;border:2px solid var(--line);border-radius:10px;
+  font-size:1rem;font-family:inherit;color:var(--ink);background:#fff;line-height:1.4;
+}
+.english-input:focus{outline:none;border-color:var(--blue)}
+.english-input::placeholder{color:#94a3b8}
+.english-suggestions{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem}
+.suggestion{
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:.3rem .75rem;font-size:.75rem;color:var(--muted);cursor:pointer;
+  font-family:inherit;font-weight:600;transition:border-color .15s,color .15s;
+}
+.suggestion:hover{border-color:var(--blue);color:var(--blue)}
+.english-status{margin-top:.5rem;font-size:.82rem;line-height:1.5;min-height:1.2em}
+.english-status.ok{color:var(--green)}
+.english-status.err{color:var(--red)}
+.english-status code{background:#eef2f7;padding:.1rem .35rem;border-radius:4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em}
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Cron Expression Generator",
-    "url": "https://converttotoolsonline.com/cron-expression-generator.html",
-    "description": "A free browser-based tool for generating standard five-field Unix cron expressions and previewing schedules.",
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Any",
-    "isAccessibleForFree": true,
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+/* field grid */
+.divider{display:flex;align-items:center;gap:.75rem;margin:1.5rem 0 1rem;color:var(--muted);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.field-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem}
+@media(max-width:760px){.field-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.field-grid{grid-template-columns:1fr}}
+.field-cell{display:flex;flex-direction:column;gap:.25rem}
+.field-cell label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);text-align:center}
+.field-cell input{
+  width:100%;padding:.55rem .5rem;border:1px solid var(--line);border-radius:7px;
+  font-size:.9rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  text-align:center;background:#fff;color:var(--ink);
+}
+.field-cell input:focus{outline:2px solid var(--blue);border-color:transparent}
+.field-cell input.err{border-color:var(--red);background:#fef2f2}
+.field-cell .hint{font-size:.65rem;color:var(--muted);text-align:center;line-height:1.3}
+
+/* generated display */
+.generated{
+  display:flex;align-items:center;gap:.6rem;margin-top:1rem;
+  padding:.85rem 1rem;background:#0f172a;border-radius:10px;
+}
+.generated code{
+  flex:1;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:1.15rem;font-weight:700;color:#fff;letter-spacing:.04em;
+  word-break:break-all;
+}
+.generated code.err{color:#fca5a5;font-size:.9rem;font-weight:500}
+.copy-btn{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:#fff;padding:.4rem .75rem;border-radius:6px;font-size:.75rem;
+  font-weight:700;cursor:pointer;flex-shrink:0;transition:background .15s;
+}
+.copy-btn:hover{background:rgba(255,255,255,.2)}
+.copy-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+/* description */
+.description-block{margin-top:1rem;padding:.85rem 1rem;background:var(--bg);border-radius:8px;border:1px solid var(--line);font-size:.88rem;line-height:1.55;color:var(--ink)}
+.description-block .desc-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.3rem}
+
+/* explain input */
+.explain-input{
+  width:100%;padding:.85rem 1rem;border:2px solid var(--line);border-radius:10px;
+  font-size:1.15rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--ink);background:#fff;letter-spacing:.05em;
+}
+.explain-input:focus{outline:none;border-color:var(--blue)}
+.explain-input.err{border-color:var(--red)}
+.explain-status{margin-top:.5rem;font-size:.82rem;line-height:1.5;min-height:1.2em}
+.explain-status.err{color:var(--red)}
+.explain-status.ok{color:var(--green)}
+
+.breakdown{margin-top:1.25rem}
+.breakdown-row{
+  display:grid;grid-template-columns:100px 120px 1fr;gap:.75rem;align-items:center;
+  padding:.65rem .85rem;border-bottom:1px solid #f1f5f9;font-size:.85rem;
+}
+@media(max-width:560px){.breakdown-row{grid-template-columns:80px 1fr;gap:.5rem}}
+.breakdown-row:last-child{border-bottom:none}
+.breakdown-field{font-weight:800;color:var(--muted);text-transform:uppercase;font-size:.7rem;letter-spacing:.05em}
+.breakdown-value{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:700;color:var(--ink);font-size:.95rem}
+.breakdown-desc{color:var(--ink);font-size:.85rem;line-height:1.45}
+
+/* next runs */
+.next-runs{margin-top:1.5rem;border-top:1px solid var(--line);padding-top:1.25rem}
+.next-runs-head{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;flex-wrap:wrap;margin-bottom:.75rem}
+.next-runs-title{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.next-runs-tz{font-size:.75rem;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.runs-list{display:flex;flex-direction:column;gap:.35rem}
+.run-row{
+  display:flex;align-items:center;gap:.75rem;padding:.6rem .85rem;
+  background:var(--bg);border-radius:7px;font-size:.88rem;
+  border-left:3px solid var(--blue);
+}
+.run-row .run-num{font-weight:800;color:var(--blue);font-size:.75rem;flex-shrink:0;min-width:24px}
+.run-row .run-date{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ink);flex:1}
+.run-row .run-relative{font-size:.75rem;color:var(--muted);flex-shrink:0}
+.runs-empty{color:var(--muted);font-size:.85rem;padding:.5rem 0}
+
+/* toast */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:.55rem 1.05rem;border-radius:999px;font-size:.8rem;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:100}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* reference card (print only) */
+.reference-card{display:none}
+
+/* sections */
+.section{max-width:800px;margin:0 auto;padding:2.5rem 1.25rem 0}
+.section h2{font-size:1.35rem;letter-spacing:-.015em;margin-bottom:.7rem;line-height:1.3}
+.section h2:not(:first-child){margin-top:1.8rem}
+.section h3{font-size:1rem;margin:1.4rem 0 .35rem}
+.section p{color:var(--muted);font-size:.95rem;margin-bottom:.8rem}
+.section strong{color:var(--ink)}
+.section ul,.section ol{padding-left:1.2rem;margin-bottom:.85rem}
+.section li{color:var(--muted);font-size:.95rem;margin-bottom:.3rem}
+.section code{background:#eef2f7;padding:.1rem .35rem;border-radius:4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;color:#334155}
+
+.ref-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.75rem 0 1.25rem;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.ref-table th{background:var(--bg);padding:.55rem .7rem;text-align:left;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-bottom:1px solid var(--line)}
+.ref-table td{padding:.5rem .7rem;border-bottom:1px solid #f1f5f9;color:#334155;font-size:.82rem}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-table td code{background:#f1f5f9;padding:.1rem .35rem;border-radius:3px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;color:#1e293b;font-weight:600}
+
+.callout{border-left:3px solid var(--blue);background:#f0f7ff;padding:.85rem 1rem;border-radius:0 8px 8px 0;margin:1rem 0;font-size:.88rem;color:#1e3a5f;line-height:1.55}
+
+.faq-nav{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
+.faq-nav a{background:#fff;border:1px solid var(--line);border-radius:999px;padding:.3rem .78rem;font-size:.74rem;font-weight:600;color:var(--muted)}
+.faq-nav a:hover{border-color:var(--blue);color:var(--blue);text-decoration:none}
+.faq-group{margin-bottom:1.5rem;scroll-margin-top:80px}
+.faq-group h3{font-size:1rem;margin-bottom:.55rem;padding-bottom:.35rem;border-bottom:1px solid var(--line)}
+.faq-item{padding:.7rem 0;border-bottom:1px solid #f1f5f9}
+.faq-item:last-child{border-bottom:none}
+.faq-item h4{font-size:.9rem;font-weight:700;margin-bottom:.22rem;line-height:1.4}
+.faq-item p{font-size:.88rem;margin-bottom:0}
+
+.footer{background:#0f172a;color:#cbd5e1;padding:1.85rem 0;font-size:.85rem;margin-top:2.5rem}
+.footer .wrap{display:flex;flex-direction:column;gap:.45rem;align-items:center;text-align:center}
+.footer a{color:#93c5fd}
+.footer .fine{font-size:.74rem;color:#94a3b8;max-width:620px}
+
+@media print{
+  @page{margin:1.2cm}
+  body{background:#fff;color:#000}
+  .header,.hero,.tool-card,.section,.footer,.toast,.tabs{display:none!important}
+  .reference-card{display:block;padding:0}
+  .reference-card h1{font-size:1.4rem;margin-bottom:.5rem}
+  .reference-card p{font-size:.85rem;margin-bottom:1rem;color:#333}
+  .reference-card .ref-table{page-break-inside:avoid}
+  .reference-card .ref-table th{background:#eee;color:#000}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap header-inner">
+    <div class="logo">Convert<span>ToTools</span>Online</div>
+    <nav class="nav-links">
+      <a href="/index.html">All tools</a>
+      <a href="/Contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Cron Expression Generator</h1>
+    <p>Type a schedule in English and get the cron expression. Or paste an expression and see exactly what it does. Next five run times shown in your time zone.</p>
+  </div>
+</section>
+
+<main>
+
+<div class="tool">
+  <div class="tool-card">
+
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab active" role="tab" id="tabBuild" aria-selected="true" aria-controls="panelBuild">Build</button>
+      <button type="button" class="tab" role="tab" id="tabExplain" aria-selected="false" aria-controls="panelExplain">Explain</button>
+    </div>
+
+    <!-- ============ BUILD ============ -->
+    <div class="tab-panel active" id="panelBuild" role="tabpanel" aria-labelledby="tabBuild">
+
+      <div class="english-wrap">
+        <div class="panel-label">Describe the schedule in plain English</div>
+        <input type="text" class="english-input" id="englishInput"
+          placeholder="every weekday at 9am, every 5 minutes, daily at midnight..."
+          autocomplete="off" spellcheck="false">
+        <div class="english-suggestions" id="suggestions">
+          <button type="button" class="suggestion" data-example="every weekday at 9am">every weekday at 9am</button>
+          <button type="button" class="suggestion" data-example="every 5 minutes">every 5 minutes</button>
+          <button type="button" class="suggestion" data-example="every day at midnight">every day at midnight</button>
+          <button type="button" class="suggestion" data-example="every hour">every hour</button>
+          <button type="button" class="suggestion" data-example="every monday at noon">every monday at noon</button>
+          <button type="button" class="suggestion" data-example="every month on the 1st at midnight">monthly on the 1st</button>
+        </div>
+        <div class="english-status" id="englishStatus"></div>
+      </div>
+
+      <div class="divider">or use field inputs</div>
+
+      <div class="panel-label">Cron fields, in order</div>
+      <div class="field-grid">
+        <div class="field-cell">
+          <label for="fMinute">Minute</label>
+          <input type="text" id="fMinute" value="*" autocomplete="off" spellcheck="false">
+          <div class="hint">0 to 59</div>
+        </div>
+        <div class="field-cell">
+          <label for="fHour">Hour</label>
+          <input type="text" id="fHour" value="*" autocomplete="off" spellcheck="false">
+          <div class="hint">0 to 23</div>
+        </div>
+        <div class="field-cell">
+          <label for="fDom">Day of month</label>
+          <input type="text" id="fDom" value="*" autocomplete="off" spellcheck="false">
+          <div class="hint">1 to 31</div>
+        </div>
+        <div class="field-cell">
+          <label for="fMonth">Month</label>
+          <input type="text" id="fMonth" value="*" autocomplete="off" spellcheck="false">
+          <div class="hint">1 to 12</div>
+        </div>
+        <div class="field-cell">
+          <label for="fDow">Day of week</label>
+          <input type="text" id="fDow" value="*" autocomplete="off" spellcheck="false">
+          <div class="hint">0 to 7</div>
+        </div>
+      </div>
+
+      <div class="generated">
+        <code id="generatedExpr">* * * * *</code>
+        <button type="button" class="copy-btn" id="copyBuildBtn">Copy</button>
+      </div>
+
+      <div class="description-block" id="buildDescription" style="display:none;">
+        <div class="desc-label">What this means</div>
+        <div id="buildDescriptionText"></div>
+      </div>
+
+    </div>
+
+    <!-- ============ EXPLAIN ============ -->
+    <div class="tab-panel" id="panelExplain" role="tabpanel" aria-labelledby="tabExplain">
+
+      <div class="panel-label">Paste a cron expression</div>
+      <input type="text" class="explain-input" id="explainInput"
+        placeholder="0 9 * * 1-5" autocomplete="off" spellcheck="false">
+      <div class="explain-status" id="explainStatus"></div>
+
+      <div class="breakdown" id="breakdown" style="display:none;"></div>
+
+    </div>
+
+    <!-- ============ NEXT RUNS (shared) ============ -->
+    <div class="next-runs">
+      <div class="next-runs-head">
+        <span class="next-runs-title">Next 5 run times</span>
+        <span class="next-runs-tz" id="tzLabel">-</span>
+      </div>
+      <div class="runs-list" id="runsList">
+        <div class="runs-empty">Enter a valid cron expression to see the run times.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- print-only reference card -->
+<div class="reference-card" id="referenceCard">
+  <h1>Cron Quick Reference</h1>
+  <p>Five fields, in order: minute, hour, day of month, month, day of week.</p>
+  <table class="ref-table">
+    <thead><tr><th>Expression</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>* * * * *</code></td><td>Every minute</td></tr>
+      <tr><td><code>0 * * * *</code></td><td>Every hour, on the hour</td></tr>
+      <tr><td><code>*/5 * * * *</code></td><td>Every 5 minutes</td></tr>
+      <tr><td><code>0 0 * * *</code></td><td>Every day at midnight</td></tr>
+      <tr><td><code>0 9 * * *</code></td><td>Every day at 9am</td></tr>
+      <tr><td><code>0 9 * * 1-5</code></td><td>Weekdays at 9am</td></tr>
+      <tr><td><code>0 0 * * 0</code></td><td>Every Sunday at midnight</td></tr>
+      <tr><td><code>0 0 1 * *</code></td><td>First day of every month</td></tr>
+      <tr><td><code>0 0 1 1 *</code></td><td>January 1st, every year</td></tr>
+      <tr><td><code>*/15 9-17 * * 1-5</code></td><td>Every 15 min, 9am to 5pm, weekdays</td></tr>
+      <tr><td><code>0 22 * * 1-5</code></td><td>Weekdays at 10pm</td></tr>
+      <tr><td><code>30 4 1,15 * *</code></td><td>1st and 15th, at 4:30am</td></tr>
+    </tbody>
+  </table>
+  <table class="ref-table">
+    <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>*</code></td><td>Any value</td></tr>
+      <tr><td><code>,</code></td><td>List, for example <code>1,3,5</code></td></tr>
+      <tr><td><code>-</code></td><td>Range, for example <code>1-5</code></td></tr>
+      <tr><td><code>/</code></td><td>Step, for example <code>*/15</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<section class="section">
+  <h2>The five fields, in order</h2>
+  <p>A cron expression has five fields separated by spaces. The order is fixed and does not change between Unix, Linux, macOS, GitHub Actions, or Kubernetes. Reading left to right:</p>
+  <ol>
+    <li><strong>Minute</strong>, 0 to 59</li>
+    <li><strong>Hour</strong>, 0 to 23 (not 1 to 24)</li>
+    <li><strong>Day of month</strong>, 1 to 31</li>
+    <li><strong>Month</strong>, 1 to 12</li>
+    <li><strong>Day of week</strong>, 0 to 7 (0 and 7 are both Sunday)</li>
+  </ol>
+  <p>The expression <code>0 9 * * 1-5</code> means "minute zero, hour nine, any day of month, any month, Monday through Friday". In plain English, weekdays at 9am.</p>
+
+  <h2>The two mistakes that break most cron jobs</h2>
+  <p><strong>Midnight is <code>0 0</code>, not <code>0 24</code>.</strong> The hour field runs from 0 to 23. There is no hour 24. An expression that says <code>0 24 * * *</code> is rejected by most cron implementations because 24 is out of range, and the ones that accept it treat it in ways that are inconsistent between platforms. If you want midnight, use 0. If you want one minute past midnight, use <code>1 0</code>. If you want 11pm, use 23.</p>
+
+  <p><strong>Day of month and day of week are not combined the way you think.</strong> When both fields are restricted (neither is <code>*</code>), cron matches if <em>either</em> one matches, not both. So <code>0 0 1 * 1</code> fires on the first of the month AND on every Monday, because the DOM matches on the 1st and the DOW matches on Mondays. If you want "the first Monday of the month", cron cannot do it with a single expression, and you need to write the logic in the script itself. This is the single most common reason a cron job fires on a day the author did not expect.</p>
+
+  <div class="callout">
+    <strong>On ranges and steps.</strong> A range is written <code>1-5</code> and means every value from 1 to 5 inclusive. A step is written <code>*/15</code> and means every 15th value starting from the minimum. A range with a step is written <code>0-30/5</code> and means every 5th value from 0 to 30. A list is written <code>1,3,5</code> and means exactly those values. These combine, so <code>0-30/5,45</code> means every 5 minutes from 0 to 30, plus minute 45.</div>
+
+  <h2>Where cron runs, and where it differs</h2>
+  <p>The classic Unix cron runs on a server and reads from the user's crontab. It runs in the server's local time zone, which matters because a cron expression that says "9am" fires at 9am in whatever time zone the server is set to, not in yours. If you write a cron on your laptop for a server in UTC, the job fires at 9am UTC, not 9am local.</p>
+  <p>GitHub Actions uses cron syntax but runs in UTC only. There is no way to set the time zone. So a job that you want to run at 9am New York time is <code>0 13 * * *</code> during daylight saving and <code>0 14 * * *</code> during standard time. The tool on this page shows the next run times in your browser's local time zone, which is why the "next runs" panel and the "run time" line on the reference card can disagree if you are in a non-UTC time zone.</p>
+  <p>Kubernetes CronJob uses the same five fields, runs in UTC by default, and lets you set the time zone with the <code>timeZone</code> field in the manifest on newer versions. Systemd timers do not use cron syntax at all; they use a calendar-style syntax that is similar but not identical. If you are scheduling a systemd timer, a cron expression is not the right tool.</p>
+
+  <h2>Special strings</h2>
+  <table class="ref-table">
+    <thead><tr><th>String</th><th>Equivalent</th></tr></thead>
+    <tbody>
+      <tr><td><code>@hourly</code></td><td><code>0 * * * *</code></td></tr>
+      <tr><td><code>@daily</code></td><td><code>0 0 * * *</code></td></tr>
+      <tr><td><code>@midnight</code></td><td><code>0 0 * * *</code></td></tr>
+      <tr><td><code>@weekly</code></td><td><code>0 0 * * 0</code></td></tr>
+      <tr><td><code>@monthly</code></td><td><code>0 0 1 * *</code></td></tr>
+      <tr><td><code>@yearly</code> or <code>@annually</code></td><td><code>0 0 1 1 *</code></td></tr>
+      <tr><td><code>@reboot</code></td><td>Runs once, at startup (cannot be scheduled)</td></tr>
+    </tbody>
+  </table>
+  <p>The tool accepts all of these in the Explain tab and shows what each one expands to. <code>@reboot</code> is listed for reference only; it cannot be turned into a schedule because it does not have a fixed time.</p>
+
+  <h2>Printing a reference card</h2>
+  <p>File, then Print, and the stylesheet outputs a one-page reference card with the common expressions and the special symbols. It is designed to sit on a monitor or taped inside a notebook. The card is not the same as the tool; it does not show next run times, because those depend on the current clock. It is a quick lookup for the expressions you write most often.</p>
+</section>
+
+<section class="section" id="faq">
+  <h2>Cron questions people actually ask</h2>
+
+  <div class="faq-nav">
+    <a href="#faq-basics">Basics</a>
+    <a href="#faq-mistakes">Common mistakes</a>
+    <a href="#faq-platform">Platforms</a>
+    <a href="#faq-tz">Time zones</a>
+    <a href="#faq-limits">Limits</a>
+  </div>
+
+  <div class="faq-group" id="faq-basics">
+    <h3>Basics</h3>
+
+    <div class="faq-item">
+      <h4>What does * * * * * mean?</h4>
+      <p>Every minute of every hour of every day of every month. It is the most frequent schedule cron can express, and it is almost never what you actually want on a production system. Running every minute on a shared server is a fast way to fill a log file or hit an API rate limit.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>What does 0 0 * * * mean?</h4>
+      <p>Midnight every day. Minute 0 of hour 0, any day of month, any month, any day of week. If you see an expression with 24 in the hour field, that is wrong on most implementations; midnight is 0, not 24.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>What is the difference between 0 and 7 for Sunday?</h4>
+      <p>Both mean Sunday in standard cron. The day-of-week field runs from 0 to 7, where 0 is Sunday, 1 is Monday, and so on to 6 is Saturday, and 7 wraps back to Sunday. Some systems accept 7, some reject it. If you want Sunday, use 0; it works everywhere.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>How do I run something every 5 minutes?</h4>
+      <p><code>*/5 * * * *</code>. The <code>*/5</code> in the minute field means "every 5th value starting from 0", which gives 0, 5, 10, 15, up to 55. If you want every 5 minutes starting from a specific offset, use <code>2-59/5</code> and the runs will be at 2, 7, 12, and so on.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Does cron support seconds?</h4>
+      <p>Standard Unix cron does not. The five-field format has a resolution of one minute. Some implementations (Quartz in Java, some AWS services) accept a six-field format with seconds at the front, and some accept <code>*/10</code> in a seconds field to run every 10 seconds. If you are using a system that supports seconds, this tool will not generate the six-field format; you would need to add the seconds field yourself. The five-field format is the most portable and is what this tool targets.</p>
+    </div>
+  </div>
+
+  <div class="faq-group" id="faq-mistakes">
+    <h3>Common mistakes</h3>
+
+    <div class="faq-item">
+      <h4>Why does my cron job run on days I did not expect?</h4>
+      <p>Almost certainly because both the day-of-month and day-of-week fields are restricted. When both are restricted, cron matches if either one matches, not both. So <code>0 0 1 * 1</code> fires on the first of the month AND on every Monday, not on "the first Monday". If you want a combined condition, you cannot do it with the expression alone; the script has to check the current date and exit if it is not the right day.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Why does my cron job run at the wrong time?</h4>
+      <p>The most common reason is that the server's time zone is not your time zone. Cron runs in the local time of whatever system the crontab is on, and servers are usually set to UTC. A job that says <code>0 9 * * *</code> fires at 9am UTC, which is 4am or 5am on the US east coast. If you want 9am local, either set the server's time zone or adjust the hour in the expression to match UTC.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Why is my cron job not running at all?</h4>
+      <p>Three common causes. First, the crontab was edited but not saved, or the cron daemon was not reloaded. Second, the script does not have the execute permission or the shebang line is wrong. Third, the script relies on environment variables (PATH is the usual culprit) that cron does not set the same way your interactive shell does. Cron runs with a minimal environment; if your script uses <code>node</code> or <code>python</code> without an absolute path, it may fail silently because cron's PATH does not include the directory where those binaries live.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Can I use names instead of numbers for months and days?</h4>
+      <p>Yes on most implementations. <code>0 0 * jan *</code> and <code>0 0 * * mon</code> both work in the standard Vixie cron and its descendants. The names are case-insensitive and the first three letters are enough. This tool accepts the aliases in the Explain tab and normalises them; the Build tab produces the numeric form because it is more portable.</p>
+    </div>
+  </div>
+
+  <div class="faq-group" id="faq-platform">
+    <h3>Platforms</h3>
+
+    <div class="faq-item">
+      <h4>Does this work for GitHub Actions?</h4>
+      <p>The syntax is the same five fields, but GitHub Actions always runs in UTC and does not accept a time zone. A cron you write for 9am local time has to be adjusted to 9am UTC, which is a different hour depending on the season. If you want a job that fires at a fixed local time regardless of daylight saving, you cannot do it with the <code>schedule</code> trigger alone; you need to either trigger on a broader window and check the time inside the job, or use an external scheduler.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Does this work for Kubernetes CronJob?</h4>
+      <p>Yes, the five-field syntax is the same. Kubernetes runs in UTC by default. On newer versions (1.27+), you can set <code>timeZone</code> in the CronJob spec to use a named time zone. If your cluster is older, you cannot set the time zone, and the schedule fires in UTC.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Does this work for systemd timers?</h4>
+      <p>No. Systemd uses a different calendar syntax called <code>OnCalendar</code>, which looks similar but is not compatible. A systemd timer expression like <code>Mon..Fri 09:00</code> means weekdays at 9am, and it does not use the five-field format at all. If you are scheduling a systemd unit, this tool is not the right fit.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>What about Windows Task Scheduler?</h4>
+      <p>Windows Task Scheduler does not use cron syntax. It uses a graphical interface and XML task definitions. There are cron-to-Task-Scheduler translators online, but this tool does not produce that format.</p>
+    </div>
+  </div>
+
+  <div class="faq-group" id="faq-tz">
+    <h3>Time zones</h3>
+
+    <div class="faq-item">
+      <h4>What time zone does the next-runs panel use?</h4>
+      <p>Your browser's local time zone. The tool reads the current time and shows the next five matches in that zone. If you want to see the runs in UTC, set your browser's time zone to UTC temporarily, or check the server that will actually run the job; that server's time zone is what matters, not yours.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>How do I make cron use a specific time zone?</h4>
+      <p>On a Unix server, you set the system time zone (usually via <code>/etc/timezone</code> or <code>timedatectl</code>), and cron inherits it. There is no per-crontab time zone in standard cron. If you need per-job time zones, you cannot get them from cron alone; you either adjust the expression or move the job to a scheduler that supports time zones (Kubernetes 1.27+, or a managed scheduler like EventBridge Scheduler or Cloud Scheduler).</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Does cron handle daylight saving time?</h4>
+      <p>Yes and no. Cron runs on the system clock, so when the system clock changes for daylight saving, the schedule follows. This can cause surprising behaviour: a job scheduled at 2:30am local time on the day the clocks go forward does not run, because 2:30am does not exist that day. A job scheduled at 1:30am on the day the clocks go back runs twice, because 1:30am happens twice. If the job has side effects, it needs to be idempotent or the script needs to check whether it has already run.</p>
+    </div>
+  </div>
+
+  <div class="faq-group" id="faq-limits">
+    <h3>Limits</h3>
+
+    <div class="faq-item">
+      <h4>Does the plain-English input handle everything?</h4>
+      <p>No. It handles the common patterns: "every N minutes", "every N hours", "every weekday at TIME", "every DAYNAME at TIME", "monthly on the Nth", "daily at TIME", and the special strings (@daily, @hourly, etc.). For anything more complex, use the field inputs, which accept the full cron syntax including ranges, lists, and steps.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Does the tool validate against a real cron daemon?</h4>
+      <p>It parses the expression against the standard five-field rules and shows next run times computed from those rules. That is the same logic a cron daemon uses, but it is not a daemon itself. Some implementations have small differences (for example, whether 7 is accepted as Sunday, or whether a step on a range is inclusive). If your expression works in this tool and the schedule looks correct, it will work on the standard cron, but if it is failing on a specific server, the difference is in the implementation, not the expression.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Does the tool store my expression anywhere?</h4>
+      <p>No. Everything happens in the browser. There is no local storage, no server call, no analytics event tied to what you typed. When you close the tab, the expression is gone. The Copy button puts it on the clipboard; that is the only place it goes.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>How do I get the reference card?</h4>
+      <p>File, then Print (or Ctrl+P / Cmd+P). The print stylesheet hides the tool and the guide, and outputs a one-page reference card with the common expressions and the symbol legend. It is designed to be printed on A4 or Letter and pinned up near the terminal.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Related tools</h2>
+  <p>If you are scheduling a job that runs in a specific time zone, the <a href="/time-zone-overlap-calculator.html">time zone overlap calculator</a> helps you pick a window that works for everyone involved. For parsing the output of a cron job, the <a href="/json-formatter.html">JSON formatter</a> is the closest fit. The <a href="/index.html">full tool library</a> has everything else.</p>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p><strong>ConvertToToolsOnline</strong> - free tools that run in your browser.</p>
+    <p><a href="/index.html">All tools</a> | <a href="/Contact.html">Contact</a></p>
+    <p class="fine">Nothing you type is uploaded or stored. The expression exists only in the browser until you close the tab.</p>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Cron Expression Generator",
+  "url": "https://converttotoolsonline.com/cron-expression-generator.html",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "Plain-English description to cron expression",
+    "Field-by-field cron builder with validation",
+    "Reverse explainer for existing expressions",
+    "Next five run times in the browser's local time zone",
+    "Special string support (@daily, @hourly, @weekly, @monthly, @yearly)",
+    "Named month and day aliases",
+    "Print-ready reference card",
+    "Fully client-side with no uploads"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does * * * * * mean in cron?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Every minute of every hour of every day of every month. It is the most frequent schedule cron can express and is almost never what you want on a production system." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between 0 and 7 for Sunday in cron?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Both mean Sunday. The day-of-week field runs from 0 to 7 where 0 is Sunday and 7 wraps back to Sunday. Some systems accept 7 and some reject it. Use 0 for portability." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my cron job run on days I did not expect?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Almost always because both the day-of-month and day-of-week fields are restricted. When both are restricted, cron matches if either one matches, not both. So 0 0 1 * 1 fires on the 1st of the month and on every Monday. You cannot express the first Monday of the month in cron; the script has to check the date." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does cron handle daylight saving time?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Cron runs on the system clock, so it follows the clock change. This causes surprising behaviour: a job at 2:30am on the day clocks go forward does not run, and a job at 1:30am on the day clocks go back runs twice. If the job has side effects, it needs to be idempotent." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work for GitHub Actions?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The syntax is the same five fields, but GitHub Actions always runs in UTC and does not accept a time zone. A cron for 9am local time has to be adjusted to 9am UTC, which is a different hour depending on the season." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work for systemd timers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Systemd uses a different calendar syntax called OnCalendar that is not compatible with the five-field cron format. If you are scheduling a systemd unit, this tool is not the right fit." }
+    }
+  ]
+}
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+
+  var MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var DAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var MONTH_ALIASES = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+  var DAY_ALIASES = {sun:0,mon:1,tue:2,wed:3,thu:4,fri:5,sat:6};
+
+  var SPECAILS = {
+    "@hourly":"0 * * * *",
+    "@daily":"0 0 * * *",
+    "@midnight":"0 0 * * *",
+    "@weekly":"0 0 * * 0",
+    "@monthly":"0 0 1 * *",
+    "@yearly":"0 0 1 1 *",
+    "@annually":"0 0 1 1 *"
+  };
+
+  /* ---------- parse helpers ---------- */
+  function normalizeAliases(str, type){
+    var s = String(str).toLowerCase().trim();
+    if (type === "month"){
+      Object.keys(MONTH_ALIASES).forEach(function(a){
+        s = s.replace(new RegExp("\\b"+a+"\\b","g"), MONTH_ALIASES[a]);
+      });
+    }
+    if (type === "dow"){
+      Object.keys(DAY_ALIASES).forEach(function(a){
+        s = s.replace(new RegExp("\\b"+a+"\\b","g"), DAY_ALIASES[a]);
+      });
+    }
+    return s;
+  }
+
+  function parseField(str, min, max, type){
+    if (str == null) return null;
+    str = normalizeAliases(str, type);
+    if (str === "") return null;
+    var set = new Set();
+    var parts = str.split(",");
+    for (var i = 0; i < parts.length; i++){
+      var part = parts[i].trim();
+      if (part === "" ) return null;
+      if (part === "*" || part === "?"){
+        for (var v = min; v <= max; v++) set.add(v);
+      } else if (part.indexOf("/") >= 0){
+        var seg = part.split("/");
+        if (seg.length !== 2) return null;
+        var range = seg[0];
+        var step = parseInt(seg[1], 10);
+        if (isNaN(step) || step < 1) return null;
+        var start = min, end = max;
+        if (range !== "*" && range !== ""){
+          if (range.indexOf("-") >= 0){
+            var r = range.split("-");
+            start = parseInt(r[0], 10);
+            end = parseInt(r[1], 10);
+            if (isNaN(start) || isNaN(end)) return null;
+          } else {
+            start = parseInt(range, 10);
+            if (isNaN(start)) return null;
+          }
+        }
+        for (var v2 = start; v2 <= end; v2 += step) set.add(v2);
+      } else if (part.indexOf("-") >= 0){
+        var r2 = part.split("-");
+        if (r2.length !== 2) return null;
+        var a = parseInt(r2[0], 10);
+        var b = parseInt(r2[1], 10);
+        if (isNaN(a) || isNaN(b)) return null;
+        for (var v3 = a; v3 <= b; v3++) set.add(v3);
+      } else {
+        var n = parseInt(part, 10);
+        if (isNaN(n)) return null;
+        set.add(n);
+      }
+    }
+    // validate range
+    var valid = true;
+    set.forEach(function(val){
+      if (val < min || val > max) {
+        // for DOW allow 7 (Sunday duplicate)
+        if (!(type === "dow" && val === 7)) valid = false;
+      }
+    });
+    if (!valid) return null;
+    return set;
+  }
+
+  function parseCron(expr){
+    expr = String(expr || "").trim();
+    if (expr === "") return { error: "Enter a cron expression." };
+
+    var lowered = expr.toLowerCase();
+    if (lowered === "@reboot") return { error: "@reboot cannot be scheduled; it runs once at system start." };
+    if (SPECAILS[lowered]) expr = SPECAILS[lowered];
+
+    var parts = expr.split(/\s+/);
+    if (parts.length !== 5) return { error: "A cron expression has 5 fields. You have " + parts.length + "." };
+
+    var minute = parseField(parts[0], 0, 59, null);
+    var hour = parseField(parts[1], 0, 23, null);
+    var dom = parseField(parts[2], 1, 31, null);
+    var month = parseField(parts[3], 1, 12, "month");
+    var dow = parseField(parts[4], 0, 7, "dow");
+
+    if (!minute) return { error: "Minute field '" + parts[0] + "' is invalid. Use 0 to 59." };
+    if (!hour) return { error: "Hour field '" + parts[1] + "' is invalid. Use 0 to 23." };
+    if (!dom) return { error: "Day of month field '" + parts[2] + "' is invalid. Use 1 to 31." };
+    if (!month) return { error: "Month field '" + parts[3] + "' is invalid. Use 1 to 12." };
+    if (!dow) return { error: "Day of week field '" + parts[4] + "' is invalid. Use 0 to 7." };
+
+    // normalize DOW 7 to 0
+    if (dow.has(7)) { dow.delete(7); dow.add(0); }
+
+    var domStar = parts[2] === "*" || parts[2] === "?";
+    var dowStar = parts[4] === "*" || parts[4] === "?";
+
+    return {
+      raw: { minute: parts[0], hour: parts[1], dom: parts[2], month: parts[3], dow: parts[4] },
+      minute: minute, hour: hour, dom: dom, month: month, dow: dow,
+      domStar: domStar, dowStar: dowStar
+    };
+  }
+
+  /* ---------- next runs ---------- */
+  function nextRuns(cron, from, count){
+    var results = [];
+    var current = new Date(from.getTime());
+    current.setSeconds(0, 0);
+    current.setMinutes(current.getMinutes() + 1);
+
+    var iterations = 0;
+    var maxIterations = 500000;
+
+    while (results.length < count && iterations < maxIterations){
+      iterations++;
+
+      // Month check
+      if (!cron.month.has(current.getMonth() + 1)){
+        current.setDate(1);
+        current.setMonth(current.getMonth() + 1);
+        current.setHours(0);
+        current.setMinutes(0);
+        continue;
+      }
+
+      // Day check
+      var domMatch = cron.dom.has(current.getDate());
+      var dowMatch = cron.dow.has(current.getDay());
+      var dayOk;
+      if (cron.domStar && cron.dowStar) dayOk = true;
+      else if (cron.domStar) dayOk = dowMatch;
+      else if (cron.dowStar) dayOk = domMatch;
+      else dayOk = domMatch || dowMatch;
+
+      if (!dayOk){
+        current.setDate(current.getDate() + 1);
+        current.setHours(0);
+        current.setMinutes(0);
+        continue;
+      }
+
+      // Hour check
+      if (!cron.hour.has(current.getHours())){
+        current.setHours(current.getHours() + 1);
+        current.setMinutes(0);
+        continue;
+      }
+
+      // Minute check
+      if (!cron.minute.has(current.getMinutes())){
+        current.setMinutes(current.getMinutes() + 1);
+        continue;
+      }
+
+      results.push(new Date(current.getTime()));
+      current.setMinutes(current.getMinutes() + 1);
+    }
+
+    return results;
+  }
+
+  /* ---------- format ---------- */
+  function pad(n){ return n < 10 ? "0" + n : "" + n; }
+
+  function formatRun(date){
+    var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    return days[date.getDay()] + " " + months[date.getMonth()] + " " + pad(date.getDate()) + " " + date.getFullYear() + "  " + pad(date.getHours()) + ":" + pad(date.getMinutes());
+  }
+
+  function relativeTime(date, now){
+    var diff = Math.round((date.getTime() - now.getTime()) / 60000);
+    if (diff < 1) return "now";
+    if (diff < 60) return "in " + diff + " min";
+    if (diff < 1440) return "in " + Math.round(diff / 60) + " hr";
+    if (diff < 10080) return "in " + Math.round(diff / 1440) + " day" + (Math.round(diff/1440) === 1 ? "" : "s");
+    return "in " + Math.round(diff / 10080) + " week" + (Math.round(diff/10080) === 1 ? "" : "s");
+  }
+
+  /* ---------- description ---------- */
+  function describeField(value, type){
+    var v = value.trim();
+    if (v === "*" || v === "?") {
+      if (type === "minute") return "every minute";
+      if (type === "hour") return "every hour";
+      if (type === "dom") return "every day of the month";
+      if (type === "month") return "every month";
+      if (type === "dow") return "every day of the week";
+    }
+    if (v.indexOf("/") >= 0){
+      var seg = v.split("/");
+      if (seg[0] === "*"){
+        return "every " + seg[1] + " " + typePlural(type);
+      }
+    }
+    if (v.indexOf(",") >= 0){
+      return v.split(",").map(function(x){ return describeSingle(x.trim(), type); }).join(", ");
+    }
+    if (v.indexOf("-") >= 0){
+      var r = v.split("-");
+      return describeSingle(r[0].trim(), type) + " through " + describeSingle(r[1].trim(), type);
+    }
+    return describeSingle(v, type);
+  }
+
+  function describeSingle(val, type){
+    var n = parseInt(val, 10);
+    if (isNaN(n)) return val;
+    if (type === "month") return MONTH_NAMES[n - 1] || val;
+    if (type === "dow") return DAY_NAMES[n % 7] || val;
+    if (type === "hour") return pad(n) + ":00";
+    if (type === "minute") return pad(n) + " past";
+    if (type === "dom") return "day " + n;
+    return val;
+  }
+
+  function typePlural(type){
+    if (type === "minute") return "minutes";
+    if (type === "hour") return "hours";
+    if (type === "dom") return "days";
+    if (type === "month") return "months";
+    if (type === "dow") return "days of the week";
+    return type;
+  }
+
+  function humanSummary(cron){
+    var parts = [];
+
+    var minRaw = cron.raw.minute;
+    var hourRaw = cron.raw.hour;
+
+    // simple time
+    var minIsNum = /^\d+$/.test(minRaw);
+    var hourIsNum = /^\d+$/.test(hourRaw);
+
+    if (minIsNum && hourIsNum){
+      parts.push("At " + pad(parseInt(hourRaw, 10)) + ":" + pad(parseInt(minRaw, 10)));
+    } else if (minRaw === "*" && hourRaw === "*"){
+      parts.push("Every minute");
+    } else if (minRaw === "0" && hourRaw === "*"){
+      parts.push("Every hour on the hour");
+    } else if (minRaw.indexOf("*/") === 0 && hourRaw === "*"){
+      parts.push("Every " + minRaw.split("/")[1] + " minutes");
+    } else if (hourRaw.indexOf("*/") === 0 && minRaw === "0"){
+      parts.push("Every " + hourRaw.split("/")[1] + " hours");
+    } else {
+      parts.push("At minute " + minRaw + " of hour " + hourRaw);
+    }
+
+    if (!cron.domStar){
+      parts.push("on " + describeField(cron.raw.dom, "dom"));
+    }
+
+    if (!cron.dowStar){
+      parts.push("on " + describeField(cron.raw.dow, "dow"));
+    }
+
+    if (cron.raw.month !== "*"){
+      parts.push("in " + describeField(cron.raw.month, "month"));
+    }
+
+    return parts.join(" ") + ".";
+  }
+
+  /* ---------- english to cron ---------- */
+  function parseTimeText(s){
+    s = s.toLowerCase();
+    if (/\bnoon\b/.test(s)) return { h: 12, m: 0 };
+    if (/\bmidnight\b/.test(s)) return { h: 0, m: 0 };
+    var m = s.match(/\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/);
+    if (m){
+      var h = parseInt(m[1], 10);
+      var min = m[2] ? parseInt(m[2], 10) : 0;
+      if (m[3] === "pm" && h < 12) h += 12;
+      if (m[3] === "am" && h === 12) h = 0;
+      if (h > 23 || min > 59) return null;
+      return { h: h, m: min };
+    }
+    var m24 = s.match(/\b(\d{1,2}):(\d{2})\b/);
+    if (m24){
+      var h24 = parseInt(m24[1], 10);
+      var min24 = parseInt(m24[2], 10);
+      if (h24 > 23 || min24 > 59) return null;
+      return { h: h24, m: min24 };
+    }
+    return null;
+  }
+
+  function englishToCron(text){
+    var s = String(text || "").toLowerCase().trim();
+    if (!s) return null;
+
+    if (SPECAILS["@" + s.replace(/^@/, "")]) return SPECAILS["@" + s.replace(/^@/, "")];
+
+    var time = parseTimeText(s);
+
+    // every N minutes
+    var m = s.match(/every\s+(\d+)\s+min/);
+    if (m) return "*/" + m[1] + " * * * *";
+
+    if (/^(every minute|each minute)$/.test(s) || /\bevery\s+minute\b/.test(s)) return "* * * * *";
+
+    // every N hours
+    m = s.match(/every\s+(\d+)\s+hour/);
+    if (m) return "0 */" + m[1] + " * * *";
+
+    if (/\bevery\s+hour\b/.test(s) && !time) return "0 * * * *";
+
+    // weekday
+    if (/\bweekday|week day\b/.test(s)){
+      if (time) return time.m + " " + time.h + " * * 1-5";
+      return "0 0 * * 1-5";
+    }
+
+    // specific day
+    var dayMatch = s.match(/\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/);
+    if (dayMatch && time){
+      return time.m + " " + time.h + " * * " + DAY_ALIASES[dayMatch[1].slice(0,3)];
+    }
+
+    // monthly Nth
+    if (/\bmonth/.test(s)){
+      var nth = s.match(/(\d+)(?:st|nd|rd|th)?/);
+      if (nth && time) return time.m + " " + time.h + " " + nth[1] + " * *";
+    }
+
+    // daily at time
+    if (/\b(every day|daily|each day)\b/.test(s) && time){
+      return time.m + " " + time.h + " * * *";
+    }
+
+    // at TIME
+    if (time && !/\bevery\b/.test(s)){
+      return time.m + " " + time.h + " * * *";
+    }
+
+    return null;
+  }
+
+  /* ---------- render ---------- */
+  function getFieldValues(){
+    return {
+      minute: $("fMinute").value.trim() || "*",
+      hour: $("fHour").value.trim() || "*",
+      dom: $("fDom").value.trim() || "*",
+      month: $("fMonth").value.trim() || "*",
+      dow: $("fDow").value.trim() || "*"
+    };
+  }
+
+  function setFieldValues(v){
+    $("fMinute").value = v.minute;
+    $("fHour").value = v.hour;
+    $("fDom").value = v.dom;
+    $("fMonth").value = v.month;
+    $("fDow").value = v.dow;
+  }
+
+  function renderBuild(){
+    var v = getFieldValues();
+    var expr = v.minute + " " + v.hour + " " + v.dom + " " + v.month + " " + v.dow;
+    var exprEl = $("generatedExpr");
+    var parsed = parseCron(expr);
+
+    if (parsed.error){
+      exprEl.textContent = parsed.error;
+      exprEl.classList.add("err");
+      $("buildDescription").style.display = "none";
+      renderRuns(null);
+      // mark invalid fields
+      ["fMinute","fHour","fDom","fMonth","fDow"].forEach(function(id){ $(id).classList.remove("err"); });
+      return;
+    }
+
+    exprEl.classList.remove("err");
+    exprEl.textContent = expr;
+
+    // description
+    $("buildDescription").style.display = "";
+    $("buildDescriptionText").textContent = humanSummary(parsed);
+
+    renderRuns(parsed);
+  }
+
+  function renderExplain(){
+    var expr = $("explainInput").value.trim();
+    var statusEl = $("explainStatus");
+    var breakdownEl = $("breakdown");
+
+    if (!expr){
+      statusEl.textContent = "";
+      statusEl.className = "explain-status";
+      breakdownEl.style.display = "none";
+      $("explainInput").classList.remove("err");
+      renderRuns(null);
+      return;
+    }
+
+    var parsed = parseCron(expr);
+    if (parsed.error){
+      statusEl.textContent = parsed.error;
+      statusEl.className = "explain-status err";
+      breakdownEl.style.display = "none";
+      $("explainInput").classList.add("err");
+      renderRuns(null);
+      return;
+    }
+
+    statusEl.textContent = "Valid expression.";
+    statusEl.className = "explain-status ok";
+    $("explainInput").classList.remove("err");
+
+    var fields = [
+      { label: "Minute", raw: parsed.raw.minute, desc: describeField(parsed.raw.minute, "minute") },
+      { label: "Hour", raw: parsed.raw.hour, desc: describeField(parsed.raw.hour, "hour") },
+      { label: "Day of month", raw: parsed.raw.dom, desc: describeField(parsed.raw.dom, "dom") },
+      { label: "Month", raw: parsed.raw.month, desc: describeField(parsed.raw.month, "month") },
+      { label: "Day of week", raw: parsed.raw.dow, desc: describeField(parsed.raw.dow, "dow") }
+    ];
+
+    breakdownEl.innerHTML = "";
+    fields.forEach(function(f){
+      var row = document.createElement("div");
+      row.className = "breakdown-row";
+      row.innerHTML =
+        '<div class="breakdown-field">' + f.label + '</div>' +
+        '<div class="breakdown-value">' + escapeHtml(f.raw) + '</div>' +
+        '<div class="breakdown-desc">' + escapeHtml(f.desc) + '</div>';
+      breakdownEl.appendChild(row);
+    });
+
+    // summary
+    var summaryRow = document.createElement("div");
+    summaryRow.className = "breakdown-row";
+    summaryRow.style.background = "#f0f7ff";
+    summaryRow.innerHTML =
+      '<div class="breakdown-field" style="color:#1e40af;">Summary</div>' +
+      '<div class="breakdown-value" style="grid-column:span 2;font-family:inherit;font-weight:600;color:#1e3a5f;">' + escapeHtml(humanSummary(parsed)) + '</div>';
+    breakdownEl.appendChild(summaryRow);
+
+    breakdownEl.style.display = "";
+
+    renderRuns(parsed);
+  }
+
+  function renderRuns(parsed){
+    var list = $("runsList");
+    list.innerHTML = "";
+
+    if (!parsed || parsed.error){
+      list.innerHTML = '<div class="runs-empty">Enter a valid cron expression to see the run times.</div>';
+      return;
+    }
+
+    var now = new Date();
+    var runs = nextRuns(parsed, now, 5);
+
+    if (!runs.length){
+      list.innerHTML = '<div class="runs-empty">No run times found in the next several years.</div>';
+      return;
+    }
+
+    runs.forEach(function(date, i){
+      var row = document.createElement("div");
+      row.className = "run-row";
+      row.innerHTML =
+        '<span class="run-num">' + (i + 1) + '</span>' +
+        '<span class="run-date">' + escapeHtml(formatRun(date)) + '</span>' +
+        '<span class="run-relative">' + escapeHtml(relativeTime(date, now)) + '</span>';
+      list.appendChild(row);
+    });
+  }
+
+  function escapeHtml(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  /* ---------- tab switching ---------- */
+  function setTab(name){
+    var isBuild = name === "build";
+    $("tabBuild").classList.toggle("active", isBuild);
+    $("tabExplain").classList.toggle("active", !isBuild);
+    $("tabBuild").setAttribute("aria-selected", isBuild ? "true" : "false");
+    $("tabExplain").setAttribute("aria-selected", isBuild ? "false" : "true");
+    $("panelBuild").classList.toggle("active", isBuild);
+    $("panelExplain").classList.toggle("active", !isBuild);
+
+    if (isBuild) renderBuild();
+    else renderExplain();
+  }
+
+  /* ---------- events ---------- */
+  $("tabBuild").addEventListener("click", function(){ setTab("build"); });
+  $("tabExplain").addEventListener("click", function(){ setTab("explain"); });
+
+  // field inputs
+  ["fMinute","fHour","fDom","fMonth","fDow"].forEach(function(id){
+    $(id).addEventListener("input", function(){
+      // clear inline english because fields now drive it
+      if ($("englishInput").value) {
+        // check if the field change matches what english set; if so don't clear
+        // simpler: clear the english input so it doesn't overwrite
+        $("englishInput").value = "";
+        $("englishStatus").textContent = "";
+        $("englishStatus").className = "english-status";
+      }
+      renderBuild();
+    });
+  });
+
+  // english input
+  $("englishInput").addEventListener("input", function(){
+    var val = this.value;
+    if (!val.trim()){
+      $("englishStatus").textContent = "";
+      $("englishStatus").className = "english-status";
+      return;
+    }
+    var expr = englishToCron(val);
+    var status = $("englishStatus");
+    if (expr){
+      var parts = expr.split(" ");
+      if (parts.length === 5){
+        setFieldValues({ minute: parts[0], hour: parts[1], dom: parts[2], month: parts[3], dow: parts[4] });
+        status.innerHTML = 'Parsed as <code>' + escapeHtml(expr) + '</code>';
+        status.className = "english-status ok";
+        renderBuild();
+      } else {
+        status.textContent = 'Could not parse. Try a simpler phrasing or use the fields below.';
+        status.className = "english-status err";
+      }
+    } else {
+      status.textContent = 'Could not parse. Try "every weekday at 9am", "every 5 minutes", or use the fields below.';
+      status.className = "english-status err";
+    }
+  });
+
+  // suggestion chips
+  document.querySelectorAll(".suggestion").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      $("englishInput").value = btn.getAttribute("data-example");
+      $("englishInput").dispatchEvent(new Event("input"));
+      $("englishInput").focus();
+    });
+  });
+
+  // explain input
+  $("explainInput").addEventListener("input", function(){
+    renderExplain();
+  });
+
+  // copy
+  $("copyBuildBtn").addEventListener("click", function(){
+    var text = $("generatedExpr").textContent;
+    if (!text || text.length > 60) { showToast("Nothing to copy"); return; }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ showToast("Copied " + text); }).catch(function(){ fallbackCopy(text); });
+    } else fallbackCopy(text);
+  });
+
+  function fallbackCopy(text){
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); showToast("Copied"); } catch(e){ showToast("Copy failed"); }
+    document.body.removeChild(ta);
+  }
+
+  var toastTimer = null;
+  function showToast(msg){
+    var t = $("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 1600);
+  }
+
+  /* ---------- timezone label ---------- */
+  function initTz(){
+    try {
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      $("tzLabel").textContent = "in " + tz;
+    } catch(e){
+      $("tzLabel").textContent = "in local time";
     }
   }
-  </script>
 
-  <style>
-    :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --text: #172033;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --background: #f5f8ff;
-      --white: #ffffff;
-      --green: #15803d;
-      --red: #dc2626;
-      --radius: 17px;
-      --shadow: 0 12px 35px rgba(15, 23, 42, .06);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      color: var(--text);
-      background: var(--background);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-      line-height: 1.65;
-    }
-
-    a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    button,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    button:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-    }
-
-    .container {
-      width: min(100% - 30px, 980px);
-      margin-inline: auto;
-    }
-
-    .header {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav {
-      min-height: 66px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .brand {
-      color: var(--text);
-      font-size: 18px;
-      font-weight: 850;
-      letter-spacing: -.5px;
-    }
-
-    .brand span {
-      color: var(--primary);
-    }
-
-    .nav-link {
-      font-size: 14px;
-      font-weight: 750;
-    }
-
-    .hero {
-      padding: 40px 0 24px;
-      text-align: center;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 5px 12px;
-      color: #1d4ed8;
-      background: #dbeafe;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 850;
-      letter-spacing: .4px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 15px 0 10px;
-      font-size: clamp(29px, 5vw, 43px);
-      line-height: 1.16;
-      letter-spacing: -1.4px;
-    }
-
-    .hero p {
-      max-width: 680px;
-      margin: auto;
-      color: var(--muted);
-      font-size: 16px;
-    }
-
-    .tool-card {
-      padding: clamp(15px, 3vw, 27px);
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 0 0 14px;
-    }
-
-    .section-heading h2 {
-      margin: 0;
-      font-size: 19px;
-    }
-
-    .muted {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .presets {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 9px;
-      margin-bottom: 25px;
-    }
-
-    .preset {
-      min-height: 42px;
-      padding: 9px 10px;
-      color: #1d4ed8;
-      background: #eff6ff;
-      border: 1px solid #dbeafe;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 750;
-      text-align: center;
-      transition: background .2s, border-color .2s;
-    }
-
-    .preset:hover {
-      background: #dbeafe;
-      border-color: #93c5fd;
-    }
-
-    .preset.active {
-      color: #ffffff;
-      background: var(--primary);
-      border-color: var(--primary);
-    }
-
-    .field-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .field {
-      min-width: 0;
-      padding: 12px;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .field select {
-      width: 100%;
-      min-height: 42px;
-      padding: 7px 8px;
-      color: var(--text);
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 9px;
-      font-size: 13px;
-    }
-
-    .field-help {
-      display: block;
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .expression-card {
-      margin-top: 22px;
-      padding: 18px;
-      background: #111827;
-      border-radius: 14px;
-      color: #ffffff;
-    }
-
-    .expression-label {
-      display: block;
-      margin-bottom: 9px;
-      color: #cbd5e1;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-    }
-
-    .expression {
-      display: block;
-      width: 100%;
-      min-width: 0;
-      padding: 8px 0;
-      color: #93c5fd;
-      background: transparent;
-      border: 0;
-      outline: 0;
-      font-family: ui-monospace, SFMono-Regular, Menlo,
-        Consolas, monospace;
-      font-size: clamp(21px, 4vw, 30px);
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
-
-    .expression:focus {
-      outline: 2px solid #93c5fd;
-      outline-offset: 4px;
-    }
-
-    .expression-actions {
-      display: flex;
-      gap: 9px;
-      flex-wrap: wrap;
-      margin-top: 13px;
-    }
-
-    .button {
-      min-height: 43px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 9px 15px;
-      border: 0;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 800;
-      transition: background .2s;
-    }
-
-    .button-primary {
-      color: #ffffff;
-      background: var(--primary);
-    }
-
-    .button-primary:hover:not(:disabled) {
-      background: var(--primary-dark);
-    }
-
-    .button-light {
-      color: #ffffff;
-      background: #334155;
-      border: 1px solid #475569;
-    }
-
-    .button-light:hover:not(:disabled) {
-      background: #475569;
-    }
-
-    .description-card {
-      margin-top: 19px;
-      padding: 17px;
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 13px;
-    }
-
-    .description-card h2 {
-      margin: 0 0 7px;
-      color: #166534;
-      font-size: 17px;
-    }
-
-    .description-card p {
-      margin: 0;
-      color: #166534;
-      font-size: 14px;
-    }
-
-    .field-breakdown {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 13px;
-    }
-
-    .breakdown-item {
-      padding: 10px;
-      background: #ffffff;
-      border: 1px solid #dcfce7;
-      border-radius: 9px;
-      font-size: 12px;
-      overflow-wrap: anywhere;
-    }
-
-    .breakdown-item strong {
-      display: block;
-      color: #166534;
-      margin-bottom: 3px;
-    }
-
-    .runs-card {
-      margin-top: 19px;
-      padding: 17px;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-    }
-
-    .runs-card h2 {
-      margin: 0 0 6px;
-      font-size: 17px;
-    }
-
-    .runs-note {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .runs-list {
-      display: grid;
-      gap: 8px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      counter-reset: runs;
-    }
-
-    .runs-list li {
-      position: relative;
-      padding: 10px 10px 10px 43px;
-      color: #334155;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      font-size: 13px;
-      counter-increment: runs;
-      overflow-wrap: anywhere;
-    }
-
-    .runs-list li::before {
-      content: counter(runs);
-      position: absolute;
-      left: 11px;
-      top: 9px;
-      display: grid;
-      place-items: center;
-      width: 22px;
-      height: 22px;
-      color: #1d4ed8;
-      background: #dbeafe;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 900;
-    }
-
-    .status {
-      min-height: 23px;
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 13px;
-      overflow-wrap: anywhere;
-    }
-
-    .status.success {
-      color: var(--green);
-    }
-
-    .status.error {
-      color: var(--red);
-    }
-
-    .content-section {
-      padding: 34px 0;
-    }
-
-    .info-card {
-      margin-bottom: 17px;
-      padding: 22px;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
-
-    .info-card h2 {
-      margin: 0 0 12px;
-      font-size: 23px;
-      letter-spacing: -.5px;
-    }
-
-    .info-card h3 {
-      margin: 19px 0 5px;
-      font-size: 17px;
-    }
-
-    .info-card p,
-    .info-card li {
-      color: #475569;
-    }
-
-    .info-card code {
-      padding: 2px 5px;
-      color: #1d4ed8;
-      background: #eff6ff;
-      border-radius: 4px;
-      overflow-wrap: anywhere;
-    }
-
-    .steps {
-      padding-left: 22px;
-    }
-
-    .steps li {
-      padding: 4px 0;
-    }
-
-    .related-tools {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .related-tools a {
-      padding: 8px 12px;
-      color: #1d4ed8;
-      background: #eff6ff;
-      border-radius: 9px;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .footer {
-      padding: 22px 0;
-      text-align: center;
-      color: var(--muted);
-      background: #ffffff;
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-    }
-
-    @media (max-width: 760px) {
-      .field-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .field:last-child {
-        grid-column: span 2;
-      }
-
-      .presets {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        width: min(100% - 22px, 980px);
-      }
-
-      .brand {
-        font-size: 16px;
-      }
-
-      .hero {
-        padding-top: 32px;
-      }
-
-      .presets {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .field {
-        padding: 10px;
-      }
-
-      .field-breakdown {
-        grid-template-columns: 1fr;
-      }
-
-      .expression-card {
-        padding: 14px;
-      }
-
-      .expression-actions {
-        flex-direction: column;
-      }
-
-      .expression-actions .button {
-        width: 100%;
-      }
-
-      .info-card {
-        padding: 17px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <header class="header">
-    <nav class="nav container" aria-label="Main navigation">
-      <a class="brand" href="index.html">
-        ConvertTo<span>ToolsOnline</span>
-      </a>
-
-      <a class="nav-link" href="index.html">← All Tools</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero container">
-      <span class="badge">Free Developer Tool</span>
-
-      <h1>Cron Expression Generator</h1>
-
-      <p>
-        Build cron schedules visually, understand cron syntax in
-        plain English, and preview upcoming execution times.
-        Create a standard five-field Unix cron expression without
-        memorizing the syntax.
-      </p>
-    </section>
-
-    <section class="tool-card container"
-      aria-label="Cron expression generator">
-
-      <div class="section-heading">
-        <h2>Choose a Schedule</h2>
-        <span class="muted">Standard Unix cron · 5 fields</span>
-      </div>
-
-      <div class="presets" aria-label="Common schedule presets">
-        <button type="button" class="preset" data-preset="minute">
-          Every minute
-        </button>
-
-        <button type="button" class="preset" data-preset="five">
-          Every 5 minutes
-        </button>
-
-        <button type="button" class="preset" data-preset="fifteen">
-          Every 15 minutes
-        </button>
-
-        <button type="button" class="preset" data-preset="hourly">
-          Every hour
-        </button>
-
-        <button type="button" class="preset" data-preset="daily">
-          Daily at midnight
-        </button>
-
-        <button type="button" class="preset" data-preset="weekdays">
-          Weekdays at 9 AM
-        </button>
-
-        <button type="button" class="preset" data-preset="sunday">
-          Sunday at 2:30 AM
-        </button>
-
-        <button type="button" class="preset" data-preset="monthly">
-          First day of month
-        </button>
-
-        <button type="button" class="preset" data-preset="yearly">
-          January 1 every year
-        </button>
-      </div>
-
-      <div class="section-heading">
-        <h2>Customize Your Cron Expression</h2>
-        <span class="muted">Changes update automatically</span>
-      </div>
-
-      <div class="field-grid">
-        <div class="field">
-          <label for="minute">Minute</label>
-
-          <select id="minute">
-            <option value="*">Every minute (*)</option>
-            <option value="*/2">Every 2 minutes</option>
-            <option value="*/5">Every 5 minutes</option>
-            <option value="*/10">Every 10 minutes</option>
-            <option value="*/15">Every 15 minutes</option>
-            <option value="*/30">Every 30 minutes</option>
-            <option value="0">At minute 0</option>
-            <option value="5">At minute 5</option>
-            <option value="10">At minute 10</option>
-            <option value="15">At minute 15</option>
-            <option value="30">At minute 30</option>
-            <option value="45">At minute 45</option>
-          </select>
-
-          <span class="field-help">0–59</span>
-        </div>
-
-        <div class="field">
-          <label for="hour">Hour</label>
-
-          <select id="hour">
-            <option value="*">Every hour (*)</option>
-            <option value="*/2">Every 2 hours</option>
-            <option value="*/3">Every 3 hours</option>
-            <option value="*/6">Every 6 hours</option>
-            <option value="0">12 AM</option>
-            <option value="1">1 AM</option>
-            <option value="2">2 AM</option>
-            <option value="3">3 AM</option>
-            <option value="4">4 AM</option>
-            <option value="5">5 AM</option>
-            <option value="6">6 AM</option>
-            <option value="7">7 AM</option>
-            <option value="8">8 AM</option>
-            <option value="9" selected>9 AM</option>
-            <option value="10">10 AM</option>
-            <option value="11">11 AM</option>
-            <option value="12">12 PM</option>
-            <option value="13">1 PM</option>
-            <option value="14">2 PM</option>
-            <option value="15">3 PM</option>
-            <option value="16">4 PM</option>
-            <option value="17">5 PM</option>
-            <option value="18">6 PM</option>
-            <option value="19">7 PM</option>
-            <option value="20">8 PM</option>
-            <option value="21">9 PM</option>
-            <option value="22">10 PM</option>
-            <option value="23">11 PM</option>
-          </select>
-
-          <span class="field-help">0–23</span>
-        </div>
-
-        <div class="field">
-          <label for="day">Day of Month</label>
-
-          <select id="day">
-            <option value="*">Every day (*)</option>
-            <option value="1">1st day</option>
-            <option value="2">2nd day</option>
-            <option value="3">3rd day</option>
-            <option value="5">5th day</option>
-            <option value="10">10th day</option>
-            <option value="15">15th day</option>
-            <option value="20">20th day</option>
-            <option value="25">25th day</option>
-            <option value="28">28th day</option>
-            <option value="29">29th day</option>
-            <option value="30">30th day</option>
-            <option value="31">31st day</option>
-          </select>
-
-          <span class="field-help">1–31</span>
-        </div>
-
-        <div class="field">
-          <label for="month">Month</label>
-
-          <select id="month">
-            <option value="*">Every month (*)</option>
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-
-          <span class="field-help">1–12</span>
-        </div>
-
-        <div class="field">
-          <label for="weekday">Day of Week</label>
-
-          <select id="weekday">
-            <option value="*">Every day (*)</option>
-            <option value="1-5">Monday–Friday</option>
-            <option value="0,6">Saturday–Sunday</option>
-            <option value="0">Sunday</option>
-            <option value="1">Monday</option>
-            <option value="2">Tuesday</option>
-            <option value="3">Wednesday</option>
-            <option value="4">Thursday</option>
-            <option value="5">Friday</option>
-            <option value="6">Saturday</option>
-          </select>
-
-          <span class="field-help">0–6, Sunday = 0</span>
-        </div>
-      </div>
-
-      <section class="expression-card" aria-label="Generated expression">
-        <span class="expression-label">Your Cron Expression</span>
-
-        <input
-          type="text"
-          class="expression"
-          id="expression"
-          value="0 9 * * 1-5"
-          readonly
-          aria-label="Generated cron expression">
-
-        <div class="expression-actions">
-          <button
-            type="button"
-            class="button button-primary"
-            id="copyButton">
-            Copy Expression
-          </button>
-
-          <button
-            type="button"
-            class="button button-light"
-            id="downloadButton">
-            Download .txt
-          </button>
-        </div>
-      </section>
-
-      <section class="description-card"
-        aria-label="Schedule explanation">
-
-        <h2>What Does This Cron Expression Mean?</h2>
-
-        <p id="description">
-          Runs Monday through Friday at 9:00 AM.
-        </p>
-
-        <div class="field-breakdown" id="breakdown">
-          <div class="breakdown-item">
-            <strong>Minute</strong>
-            At minute 0
-          </div>
-        </div>
-      </section>
-
-      <section class="runs-card" aria-label="Upcoming schedule preview">
-        <h2>Next 5 Scheduled Runs</h2>
-
-        <p class="runs-note" id="timezoneNote">
-          Times use your device's local timezone.
-        </p>
-
-        <ol class="runs-list" id="runsList" aria-live="polite">
-          <li>Calculating the schedule...</li>
-        </ol>
-
-        <p class="muted" id="runsMessage"></p>
-      </section>
-
-      <div class="status" id="status" role="status" aria-live="polite">
-        Your schedule is ready.
-      </div>
-    </section>
-
-    <section class="content-section container">
-      <article class="info-card">
-        <h2>How to Generate a Cron Expression</h2>
-
-        <p>
-          A cron expression defines when a recurring task should run.
-          It is commonly used to schedule scripts, system maintenance,
-          database backups, and automated jobs on Unix-like systems.
-        </p>
-
-        <ol class="steps">
-          <li>Choose a common schedule or customize individual fields.</li>
-          <li>Copy the generated five-field cron expression.</li>
-          <li>Read the plain-English explanation to check the schedule.</li>
-          <li>Review the upcoming execution times in your local timezone.</li>
-          <li>Paste the expression into a compatible scheduler.</li>
-        </ol>
-      </article>
-
-      <article class="info-card">
-        <h2>Understanding the Five Cron Fields</h2>
-
-        <p>
-          A standard Unix cron schedule normally contains five fields
-          separated by spaces. Each field describes a part of the schedule.
-        </p>
-
-        <h3>Minute</h3>
-        <p>
-          Controls the minute of each eligible hour. For example,
-          <code>*/15</code> means every 15 minutes.
-        </p>
-
-        <h3>Hour</h3>
-        <p>
-          Uses a 24-hour clock from 0 to 23. The value <code>9</code>
-          represents the 9 AM hour.
-        </p>
-
-        <h3>Day of month</h3>
-        <p>
-          Specifies which day of the month a task should run on.
-          The value <code>1</code> means the first day of the month.
-        </p>
-
-        <h3>Month</h3>
-        <p>
-          Values range from 1 to 12, starting with January.
-          An asterisk means every month.
-        </p>
-
-        <h3>Day of week</h3>
-        <p>
-          In this tool, Sunday is 0, Monday is 1, and Saturday is 6.
-          The expression <code>1-5</code> represents Monday through Friday.
-        </p>
-
-        <h3>What does the asterisk mean?</h3>
-        <p>
-          The asterisk means all allowed values for that field.
-          For example, <code>* * * * *</code> runs once every minute.
-        </p>
-
-        <h3>Important scheduling note</h3>
-        <p>
-          In standard Unix cron, when both day-of-month and day-of-week
-          are restricted, matching either field can trigger a run.
-          Scheduler implementations can differ, so always check the
-          documentation for your target system.
-        </p>
-      </article>
-
-      <article class="info-card">
-        <h2>Frequently Asked Questions</h2>
-
-        <h3>1. Is this cron expression generator free?</h3>
-        <p>
-          Yes. You can generate and copy cron expressions without
-          creating an account.
-        </p>
-
-        <h3>2. What is a cron expression?</h3>
-        <p>
-          A cron expression is a compact schedule used by supported
-          schedulers to specify when recurring tasks should run.
-        </p>
-
-        <h3>3. What does */5 * * * * mean?</h3>
-        <p>
-          In standard Unix cron, this expression runs every five
-          minutes, beginning at minute zero of each hour.
-        </p>
-
-        <h3>4. What does 0 9 * * 1-5 mean?</h3>
-        <p>
-          This expression runs at minute zero of the 9 AM hour,
-          Monday through Friday.
-        </p>
-
-        <h3>5. Does the upcoming-run preview use my timezone?</h3>
-        <p>
-          Yes. The preview uses your browser's local timezone.
-          Your actual server may use UTC or a configured timezone,
-          so confirm the timezone in your scheduler before deploying.
-        </p>
-
-        <h3>6. Does this tool support Quartz cron?</h3>
-        <p>
-          This tool generates standard five-field Unix cron expressions.
-          Quartz and other scheduling systems may use different field
-          counts and syntax, so their expressions require a compatible tool.
-        </p>
-      </article>
-
-      <article class="info-card">
-        <h2>Explore More Free Developer Tools</h2>
-
-        <div class="related-tools">
-          <a href="json-to-csv.html">JSON to CSV</a>
-          <a href="merge-json.html">Merge JSON Files</a>
-          <a href="word-counter.html">Word Counter</a>
-          <a href="qr-code-generator.html">QR Code Generator</a>
-        </div>
-      </article>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      © <span id="year"></span> ConvertToToolsOnline.
-      Free online tools.
-
-      <a href="index.html">Home</a>
-    </div>
-  </footer>
-
-  <script>
-    "use strict";
-
-    const fieldIds = [
-      "minute",
-      "hour",
-      "day",
-      "month",
-      "weekday"
-    ];
-
-    const fieldLabels = [
-      "Minute",
-      "Hour",
-      "Day of month",
-      "Month",
-      "Day of week"
-    ];
-
-    const expressionInput = document.getElementById("expression");
-    const description = document.getElementById("description");
-    const breakdown = document.getElementById("breakdown");
-    const runsList = document.getElementById("runsList");
-    const runsMessage = document.getElementById("runsMessage");
-    const timezoneNote = document.getElementById("timezoneNote");
-    const statusBox = document.getElementById("status");
-
-    const copyButton = document.getElementById("copyButton");
-    const downloadButton = document.getElementById("downloadButton");
-
-    const presetButtons = document.querySelectorAll("[data-preset]");
-
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-
-    const monthNames = [
-      "January", "February", "March", "April",
-      "May", "June", "July", "August",
-      "September", "October", "November", "December"
-    ];
-
-    const weekdayNames = [
-      "Sunday", "Monday", "Tuesday", "Wednesday",
-      "Thursday", "Friday", "Saturday"
-    ];
-
-    const presets = {
-      minute: {
-        minute: "*",
-        hour: "*",
-        day: "*",
-        month: "*",
-        weekday: "*"
-      },
-
-      five: {
-        minute: "*/5",
-        hour: "*",
-        day: "*",
-        month: "*",
-        weekday: "*"
-      },
-
-      fifteen: {
-        minute: "*/15",
-        hour: "*",
-        day: "*",
-        month: "*",
-        weekday: "*"
-      },
-
-      hourly: {
-        minute: "0",
-        hour: "*",
-        day: "*",
-        month: "*",
-        weekday: "*"
-      },
-
-      daily: {
-        minute: "0",
-        hour: "0",
-        day: "*",
-        month: "*",
-        weekday: "*"
-      },
-
-      weekdays: {
-        minute: "0",
-        hour: "9",
-        day: "*",
-        month: "*",
-        weekday: "1-5"
-      },
-
-      sunday: {
-        minute: "30",
-        hour: "2",
-        day: "*",
-        month: "*",
-        weekday: "0"
-      },
-
-      monthly: {
-        minute: "0",
-        hour: "0",
-        day: "1",
-        month: "*",
-        weekday: "*"
-      },
-
-      yearly: {
-        minute: "0",
-        hour: "0",
-        day: "1",
-        month: "1",
-        weekday: "*"
-      }
-    };
-
-    const presetDescriptions = {
-      "* * * * *":
-        "Runs every minute.",
-
-      "*/5 * * * *":
-        "Runs every five minutes, at minutes 0, 5, 10, 15, and so on.",
-
-      "*/15 * * * *":
-        "Runs every 15 minutes, at minutes 0, 15, 30, and 45.",
-
-      "0 * * * *":
-        "Runs at minute zero of every hour.",
-
-      "0 0 * * *":
-        "Runs every day at midnight.",
-
-      "0 9 * * 1-5":
-        "Runs Monday through Friday at 9:00 AM.",
-
-      "30 2 * * 0":
-        "Runs every Sunday at 2:30 AM.",
-
-      "0 0 1 * *":
-        "Runs at midnight on the first day of every month.",
-
-      "0 0 1 1 *":
-        "Runs at midnight on January 1 every year."
-    };
-
-    function setStatus(message, type = "") {
-      statusBox.textContent = message;
-      statusBox.className =
-        "status" + (type ? " " + type : "");
-    }
-
-    function getFields() {
-      return fieldIds.map(id =>
-        document.getElementById(id).value
-      );
-    }
-
-    function getExpression(fields = getFields()) {
-      return fields.join(" ");
-    }
-
-    function formatHour(hour, minute) {
-      const h = Number(hour);
-      const m = Number(minute);
-
-      if (!Number.isInteger(h) || h < 0 || h > 23) {
-        return null;
-      }
-
-      const suffix = h < 12 ? "AM" : "PM";
-      const displayHour = h % 12 || 12;
-
-      return displayHour + ":" +
-        String(m).padStart(2, "0") + " " + suffix;
-    }
-
-    function describeField(value, type) {
-      if (type === "minute") {
-        if (value === "*") return "Every minute";
-
-        if (value.startsWith("*/")) {
-          return "Every " + value.slice(2) + " minutes";
-        }
-
-        return "At minute " + value;
-      }
-
-      if (type === "hour") {
-        if (value === "*") return "Every hour";
-
-        if (value.startsWith("*/")) {
-          return "Every " + value.slice(2) + " hours";
-        }
-
-        const h = Number(value);
-        const suffix = h < 12 ? "AM" : "PM";
-        const display = h % 12 || 12;
-
-        return "At " + display + ":00 " + suffix;
-      }
-
-      if (type === "day") {
-        if (value === "*") {
-          return "Every day of the month";
-        }
-
-        return "On day " + value + " of the month";
-      }
-
-      if (type === "month") {
-        if (value === "*") {
-          return "Every month";
-        }
-
-        return "In " + monthNames[Number(value) - 1];
-      }
-
-      if (type === "weekday") {
-        if (value === "*") {
-          return "Every day of the week";
-        }
-
-        if (value === "1-5") {
-          return "Monday through Friday";
-        }
-
-        if (value === "0,6") {
-          return "Saturday and Sunday";
-        }
-
-        const day = Number(value);
-
-        if (Number.isInteger(day) && day >= 0 && day <= 6) {
-          return weekdayNames[day];
-        }
-      }
-
-      return value;
-    }
-
-    function updateDescription(fields, expression) {
-      description.textContent =
-        presetDescriptions[expression] ||
-        "Review the individual field meanings below. " +
-        "When both day-of-month and day-of-week are restricted, " +
-        "standard Unix cron generally treats either matching field " +
-        "as sufficient to trigger a run.";
-
-      breakdown.replaceChildren();
-
-      fields.forEach((value, index) => {
-        const item = document.createElement("div");
-        item.className = "breakdown-item";
-
-        const title = document.createElement("strong");
-        title.textContent =
-          fieldLabels[index] + " · " + value;
-
-        const detail = document.createElement("span");
-        detail.textContent = describeField(
-          value,
-          fieldIds[index]
-        );
-
-        item.append(title, detail);
-        breakdown.appendChild(item);
-      });
-    }
-
-    /*
-      Expand the supported five-field cron syntax into sets of values.
-      This tool generates only known-valid field options.
-    */
-    function expandField(field, min, max) {
-      const values = new Set();
-
-      for (const part of field.split(",")) {
-        const pieces = part.split("/");
-
-        if (pieces.length > 2) {
-          throw new Error("Invalid step syntax in " + field);
-        }
-
-        const base = pieces[0];
-        const step = pieces.length === 2
-          ? Number(pieces[1])
-          : 1;
-
-        if (!Number.isInteger(step) || step < 1) {
-          throw new Error("Invalid step value in " + field);
-        }
-
-        let start;
-        let end;
-
-        if (base === "*") {
-          start = min;
-          end = max;
-        } else if (/^\d+$/.test(base)) {
-          start = Number(base);
-
-          if (pieces.length === 2) {
-            end = max;
-          } else {
-            end = start;
-          }
-        } else {
-          const rangeMatch = base.match(/^(\d+)-(\d+)$/);
-
-          if (!rangeMatch) {
-            throw new Error("Invalid cron field: " + field);
-          }
-
-          start = Number(rangeMatch[1]);
-          end = Number(rangeMatch[2]);
-        }
-
-        if (
-          start < min ||
-          end > max ||
-          start > end
-        ) {
-          throw new Error("Cron value is out of range: " + field);
-        }
-
-        for (let number = start; number <= end; number += step) {
-          values.add(number);
-        }
-      }
-
-      return values;
-    }
-
-    function nextRuns(fields, limit = 5) {
-      const minuteSet = expandField(fields[0], 0, 59);
-      const hourSet = expandField(fields[1], 0, 23);
-      const daySet = expandField(fields[2], 1, 31);
-      const monthSet = expandField(fields[3], 1, 12);
-      const weekdaySet = expandField(fields[4], 0, 6);
-
-      const dayIsAny = fields[2] === "*";
-      const weekdayIsAny = fields[4] === "*";
-
-      const now = new Date();
-      const cursor = new Date(now.getTime());
-
-      cursor.setSeconds(0, 0);
-      cursor.setMinutes(cursor.getMinutes() + 1);
-
-      const end = new Date(cursor.getTime());
-      end.setDate(end.getDate() + 370);
-
-      const found = [];
-
-      while (cursor < end && found.length < limit) {
-        const minuteMatches = minuteSet.has(cursor.getMinutes());
-        const hourMatches = hourSet.has(cursor.getHours());
-        const monthMatches = monthSet.has(cursor.getMonth() + 1);
-
-        if (minuteMatches && hourMatches && monthMatches) {
-          const dayMatches = daySet.has(cursor.getDate());
-          const weekdayMatches = weekdaySet.has(cursor.getDay());
-
-          let calendarMatches;
-
-          if (dayIsAny && weekdayIsAny) {
-            calendarMatches = true;
-          } else if (dayIsAny) {
-            calendarMatches = weekdayMatches;
-          } else if (weekdayIsAny) {
-            calendarMatches = dayMatches;
-          } else {
-            calendarMatches = dayMatches || weekdayMatches;
-          }
-
-          if (calendarMatches) {
-            found.push(new Date(cursor.getTime()));
-          }
-        }
-
-        cursor.setMinutes(cursor.getMinutes() + 1);
-      }
-
-      return found;
-    }
-
-    function renderRuns(fields) {
-      runsList.replaceChildren();
-      runsMessage.textContent = "";
-
-      const timezone =
-        Intl.DateTimeFormat().resolvedOptions().timeZone ||
-        "local timezone";
-
-      timezoneNote.textContent =
-        "Times use your browser's local timezone: " + timezone +
-        ". Your target scheduler may use a different timezone.";
-
-      const runs = nextRuns(fields);
-
-      if (runs.length === 0) {
-        const item = document.createElement("li");
-
-        item.textContent =
-          "No matching execution time found in the next 370 days.";
-
-        runsList.appendChild(item);
-
-        runsMessage.textContent =
-          "Check the selected day, month, and weekday. " +
-          "The schedule may have no matches in this period.";
-
-        return;
-      }
-
-      const formatter = new Intl.DateTimeFormat(undefined, {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-
-      for (const run of runs) {
-        const item = document.createElement("li");
-
-        item.textContent = formatter.format(run);
-        runsList.appendChild(item);
-      }
-
-      if (runs.length < 5) {
-        runsMessage.textContent =
-          "Only " + runs.length +
-          " matching time(s) were found in the next 370 days.";
-      }
-    }
-
-    function updateSchedule() {
-      const fields = getFields();
-      const expression = getExpression(fields);
-
-      expressionInput.value = expression;
-
-      updateDescription(fields, expression);
-      renderRuns(fields);
-
-      for (const button of presetButtons) {
-        const key = button.dataset.preset;
-        const preset = presets[key];
-
-        const presetExpression = fieldIds
-          .map(id => preset[id])
-          .join(" ");
-
-        button.classList.toggle(
-          "active",
-          presetExpression === expression
-        );
-      }
-
-      setStatus("Cron expression generated successfully.", "success");
-    }
-
-    function applyPreset(name) {
-      const preset = presets[name];
-
-      if (!preset) {
-        return;
-      }
-
-      for (const id of fieldIds) {
-        document.getElementById(id).value = preset[id];
-      }
-
-      updateSchedule();
-    }
-
-    async function copyExpression() {
-      const value = expressionInput.value;
-
-      try {
-        await navigator.clipboard.writeText(value);
-
-        setStatus("Cron expression copied to your clipboard.", "success");
-      } catch (error) {
-        expressionInput.focus();
-        expressionInput.select();
-
-        let copied = false;
-
-        try {
-          copied = document.execCommand("copy");
-        } catch (copyError) {
-          copied = false;
-        }
-
-        if (copied) {
-          setStatus("Cron expression copied to your clipboard.", "success");
-        } else {
-          setStatus(
-            "Automatic copy failed. Select the expression and copy it manually.",
-            "error"
-          );
-        }
-      }
-    }
-
-    function downloadExpression() {
-      const content =
-        "# Standard Unix cron expression\n" +
-        "# Schedule: " + description.textContent + "\n" +
-        "# Expression: " + expressionInput.value + "\n" +
-        "# Verify the timezone used by your scheduler.\n";
-
-      const blob = new Blob(
-        [content],
-        { type: "text/plain;charset=utf-8" }
-      );
-
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-
-      link.href = url;
-      link.download = "cron-expression.txt";
-
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-
-      setStatus("Cron expression downloaded as a text file.", "success");
-    }
-
-    fieldIds.forEach(id => {
-      document.getElementById(id).addEventListener(
-        "change",
-        updateSchedule
-      );
-    });
-
-    presetButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        applyPreset(button.dataset.preset);
-      });
-    });
-
-    copyButton.addEventListener("click", copyExpression);
-    downloadButton.addEventListener("click", downloadExpression);
-
-    updateSchedule();
-  </script>
+  /* ---------- boot ---------- */
+  initTz();
+  renderBuild();
+})();
+</script>
 </body>
 </html>

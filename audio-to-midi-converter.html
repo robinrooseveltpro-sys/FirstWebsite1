@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f8ff">
+<title>Audio to MIDI Converter — Hum or Whistle to MIDI</title>
+<meta name="description" content="Convert a hummed or whistled melody to a MIDI file in your browser. YIN pitch detection, piano-roll preview, no upload, no signup.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://converttotoolsonline.com/audio-to-midi-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ConvertToToolsOnline">
+<meta property="og:title" content="Audio to MIDI Converter — Hum or Whistle to MIDI">
+<meta property="og:description" content="Convert a hummed or whistled melody to a MIDI file. YIN pitch detection, piano-roll preview, fully client-side.">
+<meta property="og:url" content="https://converttotoolsonline.com/audio-to-midi-converter.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Audio to MIDI Converter">
+<meta name="twitter:description" content="Hum or whistle a melody and download a MIDI file. No upload.">
+<link rel="stylesheet" href="/style.css">
+
+<style>
+/* ============================================================
+   Design tokens — matching index.html exactly
+   ============================================================ */
+:root {
+  color-scheme: light;
+  --ct-ink: #172033;
+  --ct-muted: #607087;
+  --ct-blue: #245bcc;
+  --ct-blue-dark: #194aa8;
+  --ct-line: #dfe6ef;
+  --ct-bg: #f5f8ff;
+  --ct-white: #fff;
+  --ct-radius: 16px;
+  --ct-shadow: 0 6px 24px rgba(20, 35, 60, .055);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+
+body {
+  margin: 0;
+  background: var(--ct-bg);
+  color: var(--ct-ink);
+  font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a { color: var(--ct-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #9dbbff;
+  outline-offset: 3px;
+}
+
+.ct-container {
+  width: min(1200px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.ct-skip {
+  position: absolute; top: 8px; left: -9999px; z-index: 100;
+  padding: 10px 14px; border-radius: 8px;
+  background: white; color: var(--ct-ink);
+}
+.ct-skip:focus { left: 10px; }
+
+/* Header */
+.ct-header {
+  position: relative; z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid var(--ct-line);
+}
+.ct-header-inner {
+  min-height: 72px;
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+}
+.ct-brand {
+  display: inline-flex; align-items: center; gap: 11px;
+  color: var(--ct-ink); font-weight: 850; letter-spacing: -.4px;
+}
+.ct-brand:hover { text-decoration: none; }
+.ct-brand-mark {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; flex: 0 0 auto;
+  border-radius: 12px; background: var(--ct-blue); color: #fff;
+  font-size: .95rem; font-weight: 900;
+}
+.ct-brand-name span { color: var(--ct-blue); }
+.ct-nav { display: flex; align-items: center; gap: 22px; }
+.ct-nav a { color: #475569; font-size: .93rem; font-weight: 700; }
+.ct-nav a:hover { color: var(--ct-blue); }
+.ct-menu-button {
+  display: none; min-height: 40px; padding: 8px 12px;
+  border: 1px solid var(--ct-line); border-radius: 9px;
+  background: white; color: var(--ct-ink); font-weight: 750;
+}
+
+/* Hero */
+.ct-hero {
+  padding: 52px 0 42px;
+  border-bottom: 1px solid var(--ct-line);
+  background: linear-gradient(130deg, #f8fbff 0%, #eaf1ff 56%, #f6f2ff 100%);
+}
+.ct-eyebrow {
+  margin: 0 0 10px; color: var(--ct-blue);
+  font-size: .76rem; font-weight: 850;
+  letter-spacing: .13em; text-transform: uppercase;
+}
+.ct-hero h1 {
+  max-width: 920px; margin: 0 0 15px;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+  line-height: 1.08; letter-spacing: -.05em;
+}
+.ct-hero h1 span { display: block; color: var(--ct-blue); }
+.ct-lead {
+  max-width: 840px; margin: 0;
+  color: #475569; font-size: clamp(1rem, 1.7vw, 1.12rem); line-height: 1.8;
+}
+.ct-privacy-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 18px; padding: 6px 12px;
+  background: #fff; border: 1px solid #cfe0ff;
+  border-radius: 999px; color: #194aa8;
+  font-size: .84rem; font-weight: 700;
+}
+
+/* Sections */
+.ct-section { padding: 40px 0; }
+.ct-section-heading { margin-bottom: 21px; }
+.ct-section-heading h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -.035em; line-height: 1.25;
+}
+.ct-section-heading p:last-child {
+  max-width: 820px; margin: 0; color: var(--ct-muted);
+}
+
+.ct-button {
+  display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+  min-height: 43px; padding: 10px 15px;
+  border: 1px solid #cbd5e1; border-radius: 10px;
+  background: #fff; color: var(--ct-ink);
+  font-weight: 750; text-align: center;
+  transition: border-color .15s ease, background .15s ease;
+}
+.ct-button:hover { border-color: #a9bce4; text-decoration: none; }
+.ct-button-primary {
+  border-color: var(--ct-blue);
+  background: var(--ct-blue); color: #fff;
+}
+.ct-button-primary:hover {
+  border-color: var(--ct-blue-dark);
+  background: var(--ct-blue-dark);
+  color: #fff;
+}
+.ct-button.small { min-height: 36px; padding: 7px 12px; font-size: .85rem; }
+.ct-button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ============================================================
+   Audio to MIDI tool
+   ============================================================ */
+.am-panel {
+  padding: 22px;
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  background: var(--ct-white);
+  box-shadow: var(--ct-shadow);
+}
+.am-panel + .am-panel { margin-top: 20px; }
+
+.am-panel-heading {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.am-panel-heading h2 {
+  margin: 0; font-size: 1.02rem; letter-spacing: -.01em;
+}
+.am-panel-heading p {
+  margin: 0; color: var(--ct-muted); font-size: .85rem;
+}
+
+/* Mode tabs */
+.am-modes {
+  display: inline-flex;
+  border: 1px solid var(--ct-line);
+  border-radius: 9px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.am-mode-btn {
+  padding: 8px 16px;
+  border: 0;
+  background: #fff;
+  color: var(--ct-muted);
+  font-weight: 750;
+  font-size: .85rem;
+  cursor: pointer;
+}
+.am-mode-btn[aria-pressed="true"] {
+  background: var(--ct-blue);
+  color: #fff;
+}
+
+/* Drop zone */
+.am-drop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 100%;
+  min-height: 180px;
+  padding: 28px 20px;
+  border: 2px dashed #c3d0e4;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fafcff 0%, #f2f6ff 100%);
+  color: var(--ct-ink);
+  text-align: center;
+  transition: border-color .18s ease, background .18s ease;
+}
+.am-drop:hover, .am-drop:focus-visible, .am-drop.is-dragover {
+  border-color: var(--ct-blue);
+  background: linear-gradient(180deg, #f2f7ff 0%, #e6efff 100%);
+  outline: none;
+}
+.am-drop-icon {
+  display: grid; place-items: center;
+  width: 52px; height: 52px; margin-bottom: 10px;
+  border-radius: 14px;
+  background: #fff; border: 1px solid #dbe7ff;
+  color: var(--ct-blue); font-size: 1.5rem;
+}
+.am-drop strong { font-size: 1rem; margin-bottom: 5px; }
+.am-drop small { color: var(--ct-muted); line-height: 1.5; max-width: 340px; }
+
+.am-file-input { display: none; }
+
+/* Record */
+.am-record-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 20px;
+  border: 1px solid var(--ct-line);
+  border-radius: 12px;
+  background: #fafcff;
+}
+.am-record-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: 2px solid #dc2626;
+  border-radius: 999px;
+  background: #fff;
+  color: #dc2626;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.am-record-btn:hover { background: #fef2f2; }
+.am-record-btn.is-recording {
+  background: #dc2626;
+  color: #fff;
+  animation: am-pulse 1.2s ease-in-out infinite;
+}
+@keyframes am-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,.4); }
+  50% { box-shadow: 0 0 0 12px rgba(220,38,38,0); }
+}
+.am-record-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: currentColor;
+}
+.am-record-timer {
+  font-family: ui-monospace, monospace;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--ct-ink);
+}
+.am-record-hint {
+  font-size: .84rem;
+  color: var(--ct-muted);
+  text-align: center;
+  max-width: 340px;
+  line-height: 1.55;
+}
+
+/* Settings */
+.am-settings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+@media (max-width: 620px) {
+  .am-settings { grid-template-columns: 1fr; }
+}
+.am-field { display: flex; flex-direction: column; gap: 5px; }
+.am-field label {
+  font-size: .84rem; font-weight: 650; color: #34405a;
+}
+.am-field input, .am-field select {
+  padding: 9px 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ct-ink);
+  font-size: .92rem;
+}
+.am-field input[type="range"] { padding: 0; }
+.am-field .am-hint {
+  font-size: .76rem; color: var(--ct-muted); line-height: 1.4;
+}
+.am-range-value {
+  font-family: ui-monospace, monospace;
+  font-weight: 750;
+  color: var(--ct-blue);
+  font-size: .84rem;
+}
+
+/* Progress */
+.am-progress-wrap {
+  margin-top: 16px;
+}
+.am-progress-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+.am-progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #245bcc, #194aa8);
+  transition: width .15s ease;
+}
+.am-progress-label {
+  margin-top: 6px;
+  font-size: .8rem;
+  color: var(--ct-muted);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Piano roll */
+.am-pianoroll-wrap {
+  margin-top: 16px;
+  border: 1px solid var(--ct-line);
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+.am-pianoroll {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Note list */
+.am-notes {
+  margin-top: 14px;
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid var(--ct-line);
+  border-radius: 10px;
+  background: #fbfdff;
+}
+.am-note-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 12px;
+  border-bottom: 1px solid #eef2f7;
+  font-size: .84rem;
+}
+.am-note-row:last-child { border-bottom: 0; }
+.am-note-index {
+  min-width: 26px;
+  color: #94a3b8;
+  font-family: ui-monospace, monospace;
+  font-size: .74rem;
+  text-align: right;
+}
+.am-note-name {
+  min-width: 60px;
+  font-weight: 800;
+  color: var(--ct-blue);
+  font-family: ui-monospace, monospace;
+}
+.am-note-detail {
+  flex: 1;
+  color: var(--ct-muted);
+  font-family: ui-monospace, monospace;
+  font-size: .78rem;
+}
+.am-note-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: #cfe0ff;
+  flex: 0 0 auto;
+}
+
+/* Actions */
+.am-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* Warning */
+.am-warn {
+  margin-top: 12px;
+  padding: 10px 13px;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  background: #fffbeb;
+  font-size: .84rem;
+  color: #7a5200;
+  line-height: 1.55;
+}
+.am-warn strong { color: #6b4500; }
+
+.am-empty {
+  padding: 30px 16px;
+  text-align: center;
+  color: var(--ct-muted);
+  font-size: .92rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #fafcff;
+}
+.am-empty strong { color: var(--ct-ink); display: block; margin-bottom: 4px; }
+
+.am-hidden { display: none !important; }
+
+/* Guide */
+.ct-guide {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 0 16px;
+}
+.ct-guide h2 { margin-top: 32px; font-size: 1.25rem; letter-spacing: -.02em; }
+.ct-guide h3 { margin-top: 22px; font-size: 1.03rem; }
+.ct-guide p, .ct-guide li { line-height: 1.7; color: #34405a; }
+.ct-guide code {
+  background: #eef2f8; padding: 1px 6px; border-radius: 5px;
+  font-size: .88em; color: #172033;
+}
+.ct-guide table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: .86rem;
+}
+.ct-guide th, .ct-guide td {
+  padding: 8px 12px;
+  border: 1px solid var(--ct-line);
+  text-align: left;
+}
+.ct-guide th { background: #f8faff; font-weight: 750; }
+
+.ct-faq details {
+  border-bottom: 1px solid var(--ct-line); padding: 12px 0;
+}
+.ct-faq summary {
+  cursor: pointer; font-weight: 700; color: var(--ct-ink);
+}
+.ct-faq summary::marker { color: var(--ct-blue); }
+.ct-faq p { margin: 9px 0 0; color: #34405a; }
+
+.ct-related-links {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin: 12px 0 0; padding: 0; list-style: none;
+}
+.ct-related-links a {
+  display: inline-block;
+  padding: 7px 13px;
+  border: 1px solid var(--ct-line);
+  border-radius: 999px;
+  background: #fff;
+  color: #34405a;
+  font-size: .88rem; font-weight: 650;
+}
+.ct-related-links a:hover {
+  border-color: #a9bce4; color: var(--ct-blue); text-decoration: none;
+}
+
+/* Footer */
+.ct-footer {
+  margin-top: 40px; padding: 35px 0 17px;
+  background: #111c32; color: #d5deed;
+}
+.ct-footer-grid {
+  display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 28px;
+}
+.ct-footer-brand {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; color: #fff; font-weight: 850;
+}
+.ct-footer-brand:hover { text-decoration: none; }
+.ct-footer-grid p { max-width: 390px; color: #bdc8db; font-size: .91rem; }
+.ct-footer-links { display: grid; align-content: start; gap: 7px; }
+.ct-footer-links strong { margin-bottom: 4px; color: #fff; }
+.ct-footer-links a { color: #cbd5e1; font-size: .92rem; }
+.ct-footer-links a:hover { color: #fff; }
+.ct-footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+  margin-top: 25px; padding-top: 15px;
+  border-top: 1px solid #32405a; color: #aebbd0; font-size: .84rem;
+}
+.ct-footer-bottom p { margin: 0; }
+
+/* Responsive */
+@media (max-width: 700px) {
+  .ct-header-inner { min-height: 65px; }
+  .ct-menu-button { display: inline-flex; }
+  .ct-nav {
+    display: none; position: absolute;
+    top: 65px; left: 0; right: 0;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ct-line);
+    background: #fff;
+  }
+  .ct-nav.is-open { display: block; }
+  .ct-nav-inner {
+    display: grid; gap: 0;
+    width: min(1200px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+  .ct-nav-inner a { padding: 10px 0; }
+  .ct-hero { padding: 40px 0 32px; }
+  .ct-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .ct-container { width: calc(100% - 22px); }
+  .ct-footer-grid { grid-template-columns: 1fr; }
+  .am-panel { padding: 16px; }
+  .am-drop { min-height: 150px; padding: 22px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media print {
+  .ct-header, .ct-footer, .ct-hero, .am-actions, .ct-nav,
+  .ct-related-links, .am-panel-heading p, .am-drop, .am-record-area,
+  .am-progress-wrap, .am-settings {
+    display: none !important;
+  }
+  body { background: #fff; }
+  .am-panel { box-shadow: none; border-color: #ccc; }
+  .ct-section { padding: 10px 0; }
+  .ct-guide { padding-top: 10px; }
+}
+</style>
+</head>
+
+<body>
+<a class="ct-skip" href="#main-content">Skip to content</a>
+
+<header class="ct-header">
+  <div class="ct-container ct-header-inner">
+    <a class="ct-brand" href="/" aria-label="ConvertToToolsOnline home">
+      <span class="ct-brand-mark" aria-hidden="true">CT</span>
+      <span class="ct-brand-name">Convert<span>ToToolsOnline</span></span>
+    </a>
+
+    <button class="ct-menu-button" id="ct-menu-button" type="button"
+            aria-controls="ct-main-nav" aria-expanded="false">Menu</button>
+
+    <nav class="ct-nav" id="ct-main-nav" aria-label="Main navigation">
+      <div class="ct-nav-inner">
+        <a href="/">Home</a>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/Contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <!-- Hero -->
+  <section class="ct-hero">
+    <div class="ct-container">
+      <p class="ct-eyebrow">Free online music tool</p>
+      <h1>Audio to MIDI Converter <span>hum or whistle a melody, download a .mid file</span></h1>
+      <p class="ct-lead">
+        Record a melody by humming or whistling, or upload a single-instrument clip, and
+        get a downloadable <strong>Standard MIDI File</strong> you can open in any DAW.
+        The tool detects pitch with the <strong>YIN algorithm</strong> — the reference
+        method for monophonic pitch estimation — and shows a <strong>piano-roll preview</strong>
+        so you can see what was detected before you download. Every parameter is exposed:
+        sensitivity, minimum note length, tempo, and quantisation grid. Your audio
+        never leaves your device.
+      </p>
+      <span class="ct-privacy-badge">
+        <span aria-hidden="true">🔒</span>
+        100% in your browser — your audio never leaves your device
+      </span>
+    </div>
+  </section>
+
+  <!-- Tool -->
+  <section class="ct-section">
+    <div class="ct-container">
+
+      <!-- INPUT -->
+      <section class="am-panel" aria-labelledby="am-input-heading">
+        <div class="am-panel-heading">
+          <h2 id="am-input-heading">1. Add audio</h2>
+          <p>Monophonic sources only — a hum, a whistle, or one instrument.</p>
+        </div>
+
+        <div class="am-modes" role="group" aria-label="Audio source">
+          <button type="button" class="am-mode-btn" data-mode="upload" aria-pressed="true">Upload file</button>
+          <button type="button" class="am-mode-btn" data-mode="record" aria-pressed="false">Record</button>
+        </div>
+
+        <!-- Upload -->
+        <div id="am-upload-area">
+          <button type="button" id="am-drop" class="am-drop" aria-describedby="am-drop-help">
+            <span class="am-drop-icon" aria-hidden="true">🎵</span>
+            <strong>Drop an audio file here or click to browse</strong>
+            <small id="am-drop-help">MP3, WAV, OGG, or M4A. Keep it short — 5 to 30 seconds of clean melody works best.</small>
+          </button>
+          <input id="am-file" type="file" accept="audio/*,.mp3,.wav,.ogg,.m4a" class="am-file-input">
+        </div>
+
+        <!-- Record -->
+        <div id="am-record-area" class="am-record-area am-hidden">
+          <button id="am-record-btn" type="button" class="am-record-btn">
+            <span class="am-record-dot" aria-hidden="true"></span>
+            <span id="am-record-label">Start recording</span>
+          </button>
+          <div id="am-record-timer" class="am-record-timer">00:00.0</div>
+          <p class="am-record-hint">
+            Hum or whistle a clear melody. Keep it steady and avoid silence at the start.
+            The microphone is used locally and the audio is not uploaded.
+          </p>
+        </div>
+
+        <div id="am-warn" class="am-warn am-hidden" role="status"></div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="am-panel" aria-labelledby="am-settings-heading">
+        <div class="am-panel-heading">
+          <h2 id="am-settings-heading">2. Settings</h2>
+          <p>Defaults work for most hummed melodies.</p>
+        </div>
+
+        <div class="am-settings">
+          <div class="am-field">
+            <label for="am-sensitivity">Pitch sensitivity</label>
+            <input id="am-sensitivity" type="range" min="0.05" max="0.35" step="0.01" value="0.15">
+            <div class="am-range-value"><span id="am-sensitivity-val">0.15</span> threshold</div>
+            <span class="am-hint">Lower = stricter (fewer false notes). Higher = catches quieter notes but may add noise.</span>
+          </div>
+
+          <div class="am-field">
+            <label for="am-min-duration">Minimum note length</label>
+            <input id="am-min-duration" type="range" min="0.05" max="0.5" step="0.01" value="0.12">
+            <div class="am-range-value"><span id="am-min-duration-val">0.12</span> s</div>
+            <span class="am-hint">Notes shorter than this are discarded as noise.</span>
+          </div>
+
+          <div class="am-field">
+            <label for="am-bpm">Tempo (BPM)</label>
+            <input id="am-bpm" type="number" min="40" max="240" step="1" value="120">
+            <span class="am-hint">Used for quantisation and the MIDI tempo event.</span>
+          </div>
+
+          <div class="am-field">
+            <label for="am-grid">Quantise grid</label>
+            <select id="am-grid">
+              <option value="0">No quantisation</option>
+              <option value="4">1/4 note</option>
+              <option value="8">1/8 note</option>
+              <option value="16" selected>1/16 note</option>
+              <option value="32">1/32 note</option>
+            </select>
+            <span class="am-hint">Snap note starts to the grid. 1/16 is a good default.</span>
+          </div>
+        </div>
+
+        <div class="am-actions">
+          <button id="am-analyze" type="button" class="ct-button ct-button-primary" disabled>Analyze audio</button>
+          <button id="am-clear" type="button" class="ct-button">Clear</button>
+        </div>
+
+        <div id="am-progress-wrap" class="am-progress-wrap am-hidden">
+          <div class="am-progress-bar">
+            <div id="am-progress-fill" class="am-progress-fill"></div>
+          </div>
+          <div class="am-progress-label">
+            <span id="am-progress-text">Analyzing…</span>
+            <span id="am-progress-pct">0%</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESULTS -->
+      <section class="am-panel" aria-labelledby="am-results-heading">
+        <div class="am-panel-heading">
+          <h2 id="am-results-heading">3. Result</h2>
+          <p id="am-result-sub">Piano roll, note list, and MIDI download.</p>
+        </div>
+
+        <div id="am-empty" class="am-empty">
+          <strong>No analysis yet.</strong>
+          Add a hummed or whistled melody and click Analyze audio.
+        </div>
+
+        <div id="am-results" class="am-hidden">
+          <div class="am-pianoroll-wrap">
+            <canvas id="am-pianoroll" class="am-pianoroll" width="900" height="280"
+                    aria-label="Piano roll preview of detected notes"></canvas>
+          </div>
+
+          <div id="am-notes" class="am-notes"></div>
+
+          <div class="am-actions">
+            <button id="am-download" type="button" class="ct-button ct-button-primary">Download .mid file</button>
+            <button id="am-play" type="button" class="ct-button">Preview (beep)</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- SEO CONTENT -->
+  <section class="ct-section">
+    <div class="ct-container">
+      <div class="ct-guide">
+
+        <h2>How to turn audio into MIDI</h2>
+        <p>
+          Converting audio to MIDI means answering one question repeatedly: <strong>what
+          pitch is sounding right now, and when does it change?</strong> The output is not
+          a recording — it is a sequence of note events with a pitch and a duration, which
+          is exactly what a MIDI file stores.
+        </p>
+        <p>
+          This tool handles the <strong>monophonic</strong> case: one melody at a time. That
+          is the right scope for humming, whistling, singing a single line, or recording one
+          instrument. Polyphonic transcription — separating a chord into its notes — is a
+          much harder research problem, and the honest thing to say is that this tool does
+          not do it.
+        </p>
+
+        <h2>Why YIN and not FFT</h2>
+        <p>
+          The most common way to analyse audio in the browser is an FFT, which converts a
+          window of samples into a frequency spectrum. It is fast, but it has a resolution
+          limit: at the usual Web Audio settings, each frequency bin is about 23 Hz wide.
+          Two low notes that are only 5 Hz apart cannot be told apart.
+        </p>
+        <p>
+          YIN works in the time domain instead. It looks for the period at which the
+          waveform repeats — the fundamental period — and with parabolic interpolation
+          around that peak it gets sub-sample resolution. That is why it is the reference
+          algorithm for monophonic pitch estimation, and why it handles low hummed notes
+          better than an FFT.
+        </p>
+
+        <h2>The pipeline</h2>
+        <ol>
+          <li><strong>Decode</strong> — the audio file is decoded with the Web Audio API into a raw sample buffer.</li>
+          <li><strong>Frame</strong> — the buffer is split into overlapping windows (1024 samples with a 512-sample hop).</li>
+          <li><strong>Detect</strong> — YIN returns a frequency for each frame, or nothing if the frame is silent or unpitched.</li>
+          <li><strong>Segment</strong> — consecutive frames with the same MIDI note are merged into a single note; notes shorter than the minimum duration are discarded.</li>
+          <li><strong>Quantise</strong> — note start times are snapped to the chosen grid at the chosen tempo.</li>
+          <li><strong>Write</strong> — the notes are encoded as MIDI note-on and note-off events inside a Standard MIDI File.</li>
+        </ol>
+
+        <h2>What the MIDI file contains</h2>
+        <p>
+          The generated file is a <strong>Format 0 Standard MIDI File</strong> — a single
+          track containing a tempo meta event and then the note events. It follows the
+          published specification: an <code>MThd</code> header chunk with the format,
+          track count, and division (ticks per beat), followed by an <code>MTrk</code>
+          track chunk containing variable-length delta times and MIDI channel messages.
+        </p>
+        <table>
+          <thead>
+            <tr><th>Element</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Format</td><td>0 (single track)</td></tr>
+            <tr><td>Division</td><td>480 ticks per beat</td></tr>
+            <tr><td>Tempo event</td><td>Derived from the BPM setting</td></tr>
+            <tr><td>Note on</td><td><code>0x90</code>, MIDI note number, velocity 100</td></tr>
+            <tr><td>Note off</td><td><code>0x80</code>, MIDI note number, velocity 0</td></tr>
+            <tr><td>End of track</td><td><code>0xFF 0x2F 0x00</code></td></tr>
+          </tbody>
+        </table>
+
+        <h2>Getting a clean result</h2>
+        <ul>
+          <li><strong>Use a clear, steady pitch.</strong> Humming works better than singing lyrics, because consonants break the periodic signal.</li>
+          <li><strong>Keep it short.</strong> Five to thirty seconds of melody is the sweet spot. Longer recordings take longer to analyse and tend to accumulate errors.</li>
+          <li><strong>Avoid background noise.</strong> A fan, a TV, or traffic adds frequencies that confuse the detector.</li>
+          <li><strong>Leave a little silence between notes.</strong> The segmentation relies on pitch changes; blurring notes together makes the boundaries ambiguous.</li>
+          <li><strong>Adjust sensitivity if needed.</strong> If the tool is missing quiet notes, raise it slightly. If it is inventing notes in silence, lower it.</li>
+        </ul>
+
+        <h2>How to use this tool</h2>
+        <ol>
+          <li>Upload an audio file, or switch to Record and capture a hum or whistle.</li>
+          <li>Adjust sensitivity and minimum note length if the defaults do not fit.</li>
+          <li>Set the tempo and quantisation grid to match your project.</li>
+          <li>Click <strong>Analyze audio</strong> and wait for the progress bar to finish.</li>
+          <li>Check the piano roll and the note list to confirm the melody looks right.</li>
+          <li>Click <strong>Download .mid file</strong> and drag it into your DAW.</li>
+        </ol>
+
+        <h2>Limitations — read before relying on the output</h2>
+        <ul>
+          <li><strong>Monophonic only.</strong> A chord, a full mix, or overlapping voices will return the strongest pitch, not a transcription. This is a limitation of the algorithm, not a bug.</li>
+          <li><strong>Pitch detection is an estimate.</strong> Background noise, vibrato, and breathy singing can cause octave errors or missed notes. Review the piano roll before using the result.</li>
+          <li><strong>Rhythm is quantised, not transcribed.</strong> The tool snaps note starts to a grid. It does not detect swing, rubato, or expressive timing.</li>
+          <li><strong>No velocity, articulation, or instrument.</strong> Every note is written at a fixed velocity on the default MIDI channel. The point is to capture the melody, not the performance.</li>
+          <li><strong>Long or noisy files will be slow and less accurate.</strong> The analysis runs in the browser and is O(n²) per frame; a 30-second clip is a reasonable upper bound.</li>
+          <li><strong>Browser support.</strong> Requires Web Audio API and <code>decodeAudioData</code>, which are available in all modern browsers. Microphone recording requires HTTPS or localhost.</li>
+        </ul>
+
+        <h2 id="faq">Frequently asked questions</h2>
+        <div class="ct-faq">
+          <details>
+            <summary>How do I convert audio to MIDI?</summary>
+            <p>Upload a hummed or whistled recording, or record one directly in the tool. Click Analyze audio. The tool detects the pitch over time, groups it into notes, and generates a Standard MIDI File you can download and open in any DAW.</p>
+          </details>
+          <details>
+            <summary>Does this work for full songs or chords?</summary>
+            <p>No. It is designed for monophonic sources — one melody at a time. Polyphonic transcription, which separates a chord or a full mix into individual notes, is a different and much harder problem. The tool will return the strongest pitch in a chord rather than all of them.</p>
+          </details>
+          <details>
+            <summary>Is my audio uploaded to a server?</summary>
+            <p>No. The file is decoded and analysed entirely in your browser using the Web Audio API. Nothing is sent anywhere, and the tool works offline after the page loads.</p>
+          </details>
+          <details>
+            <summary>Why does it use YIN instead of FFT?</summary>
+            <p>FFT has a fixed frequency resolution that is too coarse for low notes. YIN works in the time domain and uses parabolic interpolation to achieve sub-sample resolution, which makes it more accurate for hummed melodies and low pitches.</p>
+          </details>
+          <details>
+            <summary>What format is the downloaded file?</summary>
+            <p>A Standard MIDI File (`.mid`), Format 0, with 480 ticks per beat. It contains a tempo event and note on/off events, and opens in Ableton, Logic, FL Studio, GarageBand, Reaper, and any other DAW.</p>
+          </details>
+          <details>
+            <summary>Why are some notes missing or wrong?</summary>
+            <p>Pitch detection depends on a clean periodic signal. Background noise, breathy singing, vibrato, and notes that blur together can cause missed or incorrect notes. Try raising the sensitivity, shortening the recording, or humming more steadily.</p>
+          </details>
+          <details>
+            <summary>Can I record directly in the browser?</summary>
+            <p>Yes. Switch to the Record tab and click Start recording. The microphone is used locally, and the recording is analysed in the same way as an uploaded file. Microphone access requires HTTPS or localhost.</p>
+          </details>
+          <details>
+            <summary>Does it detect rhythm and timing?</summary>
+            <p>It detects note start times from the pitch changes, then snaps them to the quantisation grid you select. It does not detect swing, rubato, or expressive timing — those are deliberately discarded so the output aligns to a DAW grid.</p>
+          </details>
+          <details>
+            <summary>Is my data stored anywhere?</summary>
+            <p>No. The audio and the generated notes exist only in the page’s memory for the current session. Nothing is written to localStorage, cookies, or a server.</p>
+          </details>
+        </div>
+
+        <h2>Related tools</h2>
+        <ul class="ct-related-links">
+          <li><a href="/">All ConvertToToolsOnline tools</a></li>
+          <li><a href="/text-contact-extractor.html">Text &amp; Contact Extractor</a></li>
+          <li><a href="/exif-metadata-remover.html">EXIF Metadata Remover</a></li>
+          <li><a href="/word-counter.html">Word Counter</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-grid">
+      <div>
+        <a class="ct-footer-brand" href="/">
+          <span class="ct-brand-mark" aria-hidden="true">CT</span>
+          <span>ConvertToToolsOnline</span>
+        </a>
+        <p>Practical online tools for documents, images, data, development and everyday work.</p>
+      </div>
+
+      <nav class="ct-footer-links" aria-label="Tool navigation">
+        <strong>Explore</strong>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/sitemap.xml">XML sitemap</a>
+      </nav>
+
+      <nav class="ct-footer-links" aria-label="Site information">
+        <strong>Contact &amp; information</strong>
+        <a href="/Contact.html">Contact</a>
+        <a href="/#about">About the toolbox</a>
+        <a href="#main-content">Back to top ↑</a>
+      </nav>
+    </div>
+
+    <div class="ct-footer-bottom">
+      <p>© <span id="am-year">2026</span> ConvertToToolsOnline. All rights reserved.</p>
+      <p>Free utilities for practical tasks.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Audio to MIDI Converter",
+      "url": "https://converttotoolsonline.com/audio-to-midi-converter.html",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern browser",
+      "browserRequirements": "Requires JavaScript, Web Audio API, and AudioContext.decodeAudioData",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Convert a hummed, whistled, or single-instrument melody to a Standard MIDI File in the browser. Uses YIN pitch detection with parabolic interpolation, shows a piano-roll preview, and generates a downloadable .mid file. No upload, no signup.",
+      "featureList": [
+        "YIN monophonic pitch detection",
+        "Upload or record audio",
+        "Piano-roll preview",
+        "Tunable sensitivity and minimum note length",
+        "Tempo and quantisation grid",
+        "Standard MIDI File generation",
+        "Download .mid for any DAW",
+        "100% client-side, no upload"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"How do I convert audio to MIDI?","acceptedAnswer":{"@type":"Answer","text":"Upload a hummed or whistled recording, or record one directly in the tool. Click Analyze audio. The tool detects the pitch over time, groups it into notes, and generates a Standard MIDI File you can download and open in any DAW."}},
+        {"@type":"Question","name":"Does this work for full songs or chords?","acceptedAnswer":{"@type":"Answer","text":"No. It is designed for monophonic sources, one melody at a time. Polyphonic transcription is a different and much harder problem. The tool will return the strongest pitch in a chord rather than all of them."}},
+        {"@type":"Question","name":"Is my audio uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. The file is decoded and analysed entirely in your browser using the Web Audio API. Nothing is sent anywhere, and the tool works offline after the page loads."}},
+        {"@type":"Question","name":"Why does it use YIN instead of FFT?","acceptedAnswer":{"@type":"Answer","text":"FFT has a fixed frequency resolution that is too coarse for low notes. YIN works in the time domain and uses parabolic interpolation to achieve sub-sample resolution, which makes it more accurate for hummed melodies and low pitches."}},
+        {"@type":"Question","name":"What format is the downloaded file?","acceptedAnswer":{"@type":"Answer","text":"A Standard MIDI File (.mid), Format 0, with 480 ticks per beat. It contains a tempo event and note on/off events, and opens in Ableton, Logic, FL Studio, GarageBand, Reaper, and any other DAW."}},
+        {"@type":"Question","name":"Why are some notes missing or wrong?","acceptedAnswer":{"@type":"Answer","text":"Pitch detection depends on a clean periodic signal. Background noise, breathy singing, vibrato, and notes that blur together can cause missed or incorrect notes. Try raising the sensitivity, shortening the recording, or humming more steadily."}},
+        {"@type":"Question","name":"Can I record directly in the browser?","acceptedAnswer":{"@type":"Answer","text":"Yes. Switch to the Record tab and click Start recording. The microphone is used locally, and the recording is analysed in the same way as an uploaded file. Microphone access requires HTTPS or localhost."}},
+        {"@type":"Question","name":"Does it detect rhythm and timing?","acceptedAnswer":{"@type":"Answer","text":"It detects note start times from the pitch changes, then snaps them to the quantisation grid you select. It does not detect swing, rubato, or expressive timing; those are deliberately discarded so the output aligns to a DAW grid."}},
+        {"@type":"Question","name":"Is my data stored anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The audio and the generated notes exist only in the page's memory for the current session. Nothing is written to localStorage, cookies, or a server."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- Menu toggle -->
+<script>
+(function () {
+  'use strict';
+  var btn = document.getElementById('ct-menu-button');
+  var nav = document.getElementById('ct-main-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 700) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>
+
+<!-- Tool logic -->
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  var yearEl = $('am-year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  // ============================================================
+  // State
+  // ============================================================
+  var audioBuffer = null;      // decoded AudioBuffer
+  var audioFileName = 'audio';
+  var detectedNotes = [];       // [{ midi, startSec, durationSec, velocity }]
+  var sourceMode = 'upload';    // upload | record
+  var mediaRecorder = null;
+  var recordedChunks = [];
+  var recordStartTime = 0;
+  var recordTimerInterval = null;
+  var isRecording = false;
+  var micStream = null;
+  var audioCtx = null;
+
+  // ============================================================
+  // Elements
+  // ============================================================
+  var dropEl = $('am-drop');
+  var fileInput = $('am-file');
+  var uploadArea = $('am-upload-area');
+  var recordArea = $('am-record-area');
+  var recordBtn = $('am-record-btn');
+  var recordLabel = $('am-record-label');
+  var recordTimer = $('am-record-timer');
+  var warnEl = $('am-warn');
+
+  var sensitivityEl = $('am-sensitivity');
+  var sensitivityVal = $('am-sensitivity-val');
+  var minDurationEl = $('am-min-duration');
+  var minDurationVal = $('am-min-duration-val');
+  var bpmEl = $('am-bpm');
+  var gridEl = $('am-grid');
+
+  var analyzeBtn = $('am-analyze');
+  var clearBtn = $('am-clear');
+  var progressWrap = $('am-progress-wrap');
+  var progressFill = $('am-progress-fill');
+  var progressText = $('am-progress-text');
+  var progressPct = $('am-progress-pct');
+
+  var emptyEl = $('am-empty');
+  var resultsEl = $('am-results');
+  var resultSubEl = $('am-result-sub');
+  var notesEl = $('am-notes');
+  var canvasEl = $('am-pianoroll');
+  var downloadBtn = $('am-download');
+  var playBtn = $('am-play');
+
+  // ============================================================
+  // Helpers
+  // ============================================================
+  function showWarn(msg) {
+    warnEl.classList.remove('am-hidden');
+    warnEl.innerHTML = '<strong>' + escapeHtml(msg) + '</strong>';
+  }
+  function hideWarn() {
+    warnEl.classList.add('am-hidden');
+    warnEl.innerHTML = '';
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c];
+    });
+  }
+
+  function getAudioContext() {
+    if (!audioCtx) {
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new Ctx();
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+
+  // ============================================================
+  // Mode switching
+  // ============================================================
+  document.querySelectorAll('.am-mode-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      sourceMode = btn.getAttribute('data-mode');
+      document.querySelectorAll('.am-mode-btn').forEach(function (b) {
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+      uploadArea.classList.toggle('am-hidden', sourceMode !== 'upload');
+      recordArea.classList.toggle('am-hidden', sourceMode !== 'record');
+      if (sourceMode !== 'record' && isRecording) {
+        stopRecording();
+      }
+    });
+  });
+
+  // ============================================================
+  // File upload
+  // ============================================================
+  dropEl.addEventListener('click', function () { fileInput.click(); });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropEl.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropEl.classList.add('is-dragover');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropEl.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropEl.classList.remove('is-dragover');
+    });
+  });
+  dropEl.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+      handleFile(e.dataTransfer.files[0]);
+    }
+  });
+
+  fileInput.addEventListener('change', function (e) {
+    if (e.target.files && e.target.files.length) {
+      handleFile(e.target.files[0]);
+    }
+  });
+
+  function handleFile(file) {
+    hideWarn();
+    if (!file) return;
+    if (file.size > 20 * 1024 * 1024) {
+      showWarn('That file is over 20 MB. Use a shorter clip — 5 to 30 seconds is ideal.');
+      return;
+    }
+    audioFileName = file.name.replace(/\.[^.]+$/, '') || 'audio';
+
+    var reader = new FileReader();
+    reader.onload = function () {
+      var ctx = getAudioContext();
+      ctx.decodeAudioData(reader.result, function (buffer) {
+        audioBuffer = buffer;
+        analyzeBtn.disabled = false;
+        resultSubEl.textContent = 'Ready: ' + file.name + ' (' + formatDuration(buffer.duration) + ')';
+        emptyEl.innerHTML = '<strong>Audio loaded.</strong>Click Analyze audio to detect the melody.';
+      }, function () {
+        showWarn('Could not decode that audio file. Try a different format or a shorter clip.');
+      });
+    };
+    reader.onerror = function () {
+      showWarn('Could not read that file.');
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  function formatDuration(sec) {
+    var m = Math.floor(sec / 60);
+    var s = Math.floor(sec % 60);
+    var tenths = Math.floor((sec % 1) * 10);
+    if (m > 0) return m + 'm ' + s + 's';
+    return s + '.' + tenths + 's';
+  }
+
+  // ============================================================
+  // Recording
+  // ============================================================
+  recordBtn.addEventListener('click', function () {
+    if (isRecording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
+  });
+
+  async function startRecording() {
+    hideWarn();
+    try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        showWarn('Microphone access is not available in this browser.');
+        return;
+      }
+      micStream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: false,
+          noiseSuppression: false,
+          autoGainControl: false
+        }
+      });
+
+      recordedChunks = [];
+      mediaRecorder = new MediaRecorder(micStream);
+      mediaRecorder.ondataavailable = function (e) {
+        if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+      };
+      mediaRecorder.onstop = async function () {
+        var blob = new Blob(recordedChunks, { type: mediaRecorder.mimeType || 'audio/webm' });
+        var arrayBuffer = await blob.arrayBuffer();
+        var ctx = getAudioContext();
+        ctx.decodeAudioData(arrayBuffer, function (buffer) {
+          audioBuffer = buffer;
+          audioFileName = 'recording';
+          analyzeBtn.disabled = false;
+          resultSubEl.textContent = 'Recording ready (' + formatDuration(buffer.duration) + '). Click Analyze audio.';
+          emptyEl.innerHTML = '<strong>Recording captured.</strong>Click Analyze audio to detect the melody.';
+        }, function () {
+          showWarn('Could not decode the recording. Try again with a shorter clip.');
+        });
+        micStream.getTracks().forEach(function (t) { t.stop(); });
+        micStream = null;
+      };
+
+      mediaRecorder.start();
+      isRecording = true;
+      recordBtn.classList.add('is-recording');
+      recordLabel.textContent = 'Stop recording';
+      recordStartTime = Date.now();
+      recordTimerInterval = setInterval(updateRecordTimer, 100);
+    } catch (e) {
+      showWarn('Could not access the microphone. Check the browser permission and try again.');
+    }
+  }
+
+  function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+      mediaRecorder.stop();
+    }
+    isRecording = false;
+    recordBtn.classList.remove('is-recording');
+    recordLabel.textContent = 'Start recording';
+    clearInterval(recordTimerInterval);
+    recordTimerInterval = null;
+  }
+
+  function updateRecordTimer() {
+    var elapsed = (Date.now() - recordStartTime) / 1000;
+    var m = Math.floor(elapsed / 60);
+    var s = Math.floor(elapsed % 60);
+    var tenths = Math.floor((elapsed % 1) * 10);
+    recordTimer.textContent =
+      String(m).padStart(2, '0') + ':' +
+      String(s).padStart(2, '0') + '.' + tenths;
+    if (elapsed > 30) {
+      stopRecording();
+      showWarn('Recording stopped at 30 seconds to keep analysis fast.');
+    }
+  }
+
+  // ============================================================
+  // YIN pitch detection
+  // ============================================================
+  function yinDetect(buffer, sampleRate, threshold, minFreq, maxFreq) {
+    var halfLen = Math.floor(buffer.length / 2);
+    var minTau = Math.max(2, Math.floor(sampleRate / maxFreq));
+    var maxTau = Math.min(halfLen - 1, Math.ceil(sampleRate / minFreq));
+    if (maxTau <= minTau) return null;
+
+    // Difference function
+    var diff = new Float32Array(maxTau + 1);
+    for (var tau = minTau; tau <= maxTau; tau++) {
+      var sum = 0;
+      for (var i = 0; i < halfLen; i++) {
+        var delta = buffer[i] - buffer[i + tau];
+        sum += delta * delta;
+      }
+      diff[tau] = sum;
+    }
+
+    // Cumulative mean normalized difference
+    var cmnd = new Float32Array(maxTau + 1);
+    cmnd[0] = 1;
+    var runningSum = 0;
+    for (var t = 1; t <= maxTau; t++) {
+      runningSum += diff[t];
+      if (runningSum === 0) {
+        cmnd[t] = 1;
+      } else {
+        cmnd[t] = diff[t] * t / runningSum;
+      }
+    }
+
+    // Find first tau below threshold
+    var tauEstimate = -1;
+    for (var tau2 = minTau; tau2 <= maxTau; tau2++) {
+      if (cmnd[tau2] < threshold) {
+        while (tau2 + 1 <= maxTau && cmnd[tau2 + 1] < cmnd[tau2]) tau2++;
+        tauEstimate = tau2;
+        break;
+      }
+    }
+
+    if (tauEstimate === -1) return null;
+
+    // Parabolic interpolation
+    var betterTau = tauEstimate;
+    if (tauEstimate > 0 && tauEstimate < maxTau) {
+      var s0 = cmnd[tauEstimate - 1];
+      var s1 = cmnd[tauEstimate];
+      var s2 = cmnd[tauEstimate + 1];
+      var denom = 2 * (2 * s1 - s2 - s0);
+      if (denom !== 0) {
+        betterTau = tauEstimate + (s2 - s0) / denom;
+      }
+    }
+
+    if (betterTau <= 0) return null;
+    var freq = sampleRate / betterTau;
+    if (!isFinite(freq) || freq < minFreq || freq > maxFreq) return null;
+    return freq;
+  }
+
+  function freqToMidi(freq) {
+    return 69 + 12 * Math.log2(freq / 440);
+  }
+
+  function midiToNoteName(midi) {
+    var names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    var m = Math.round(midi);
+    var octave = Math.floor(m / 12) - 1;
+    return names[((m % 12) + 12) % 12] + octave;
+  }
+
+  // ============================================================
+  // Analysis
+  // ============================================================
+  analyzeBtn.addEventListener('click', async function () {
+    if (!audioBuffer) {
+      showWarn('Load an audio file or make a recording first.');
+      return;
+    }
+
+    hideWarn();
+    analyzeBtn.disabled = true;
+    progressWrap.classList.remove('am-hidden');
+    setProgress(0, 'Analyzing…');
+    resultsEl.classList.add('am-hidden');
+    emptyEl.classList.remove('am-hidden');
+    emptyEl.innerHTML = '<strong>Analyzing.</strong>This can take a few seconds.';
+
+    // Yield so the UI updates
+    await new Promise(function (r) { setTimeout(r, 50); });
+
+    try {
+      var notes = await analyzeAudioBuffer(audioBuffer, {
+        threshold: parseFloat(sensitivityEl.value) || 0.15,
+        minDuration: parseFloat(minDurationEl.value) || 0.12,
+        minFreq: 80,
+        maxFreq: 1000
+      });
+      detectedNotes = notes;
+      renderResults(notes);
+    } catch (e) {
+      showWarn('Analysis failed: ' + (e && e.message ? e.message : 'unknown error'));
+      emptyEl.innerHTML = '<strong>Analysis failed.</strong>Try a shorter or cleaner clip.';
+    } finally {
+      analyzeBtn.disabled = false;
+      progressWrap.classList.add('am-hidden');
+    }
+  });
+
+  async function analyzeAudioBuffer(buffer, opts) {
+    var sampleRate = buffer.sampleRate;
+    // Mix down to mono
+    var channels = buffer.numberOfChannels;
+    var mono;
+    if (channels === 1) {
+      mono = buffer.getChannelData(0);
+    } else {
+      var len = buffer.length;
+      mono = new Float32Array(len);
+      for (var c = 0; c < channels; c++) {
+        var ch = buffer.getChannelData(c);
+        for (var i = 0; i < len; i++) {
+          mono[i] += ch[i] / channels;
+        }
+      }
+    }
+
+    // Limit analysis duration to 30 seconds
+    var maxSamples = Math.min(mono.length, Math.floor(sampleRate * 30));
+    var windowSize = 1024;
+    var hopSize = 512;
+    var totalFrames = Math.max(1, Math.floor((maxSamples - windowSize) / hopSize));
+
+    var notes = [];
+    var currentMidi = null;
+    var currentStart = 0;
+    var currentCount = 0;
+
+    for (var frame = 0; frame < totalFrames; frame++) {
+      var start = frame * hopSize;
+      var window = mono.subarray(start, start + windowSize);
+      var freq = yinDetect(window, sampleRate, opts.threshold, opts.minFreq, opts.maxFreq);
+      var timeSec = start / sampleRate;
+
+      if (freq !== null) {
+        var midiFloat = freqToMidi(freq);
+        var midi = Math.round(midiFloat);
+
+        if (currentMidi === null) {
+          currentMidi = midi;
+          currentStart = timeSec;
+          currentCount = 1;
+        } else if (Math.abs(midi - currentMidi) <= 0) {
+          currentCount++;
+        } else {
+          var dur = currentCount * hopSize / sampleRate;
+          if (dur >= opts.minDuration) {
+            notes.push({ midi: currentMidi, startSec: currentStart, durationSec: dur, velocity: 100 });
+          }
+          currentMidi = midi;
+          currentStart = timeSec;
+          currentCount = 1;
+        }
+      } else {
+        if (currentMidi !== null) {
+          var dur2 = currentCount * hopSize / sampleRate;
+          if (dur2 >= opts.minDuration) {
+            notes.push({ midi: currentMidi, startSec: currentStart, durationSec: dur2, velocity: 100 });
+          }
+          currentMidi = null;
+          currentCount = 0;
+        }
+      }
+
+      if (frame % 80 === 0) {
+        setProgress(frame / totalFrames, 'Analyzing…');
+        await new Promise(function (r) { setTimeout(r, 0); });
+      }
+    }
+
+    if (currentMidi !== null) {
+      var dur3 = currentCount * hopSize / sampleRate;
+      if (dur3 >= opts.minDuration) {
+        notes.push({ midi: currentMidi, startSec: currentStart, durationSec: dur3, velocity: 100 });
+      }
+    }
+
+    setProgress(1, 'Done');
+    return notes;
+  }
+
+  function setProgress(frac, text) {
+    var pct = Math.max(0, Math.min(100, Math.round(frac * 100)));
+    progressFill.style.width = pct + '%';
+    progressPct.textContent = pct + '%';
+    if (text) progressText.textContent = text;
+  }
+
+  // ============================================================
+  // Results rendering
+  // ============================================================
+  function renderResults(notes) {
+    if (!notes.length) {
+      resultsEl.classList.add('am-hidden');
+      emptyEl.classList.remove('am-hidden');
+      emptyEl.innerHTML = '<strong>No notes detected.</strong>Try raising the sensitivity, using a cleaner recording, or humming more steadily.';
+      return;
+    }
+
+    emptyEl.classList.add('am-hidden');
+    resultsEl.classList.remove('am-hidden');
+    resultSubEl.textContent = notes.length + ' note' + (notes.length === 1 ? '' : 's') + ' detected.';
+
+    renderPianoRoll(notes);
+    renderNoteList(notes);
+    downloadBtn.disabled = false;
+  }
+
+  function renderPianoRoll(notes) {
+    var ctx = canvasEl.getContext('2d');
+    var W = canvasEl.width;
+    var H = canvasEl.height;
+    var padL = 46;
+    var padR = 16;
+    var padT = 16;
+    var padB = 26;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, W, H);
+
+    if (!notes.length) return;
+
+    var minMidi = Math.min.apply(null, notes.map(function (n) { return n.midi; }));
+    var maxMidi = Math.max.apply(null, notes.map(function (n) { return n.midi; }));
+    // Pad the range
+    minMidi = Math.max(0, minMidi - 2);
+    maxMidi = Math.min(127, maxMidi + 2);
+    if (maxMidi === minMidi) maxMidi = minMidi + 1;
+
+    var maxTime = 0;
+    notes.forEach(function (n) {
+      maxTime = Math.max(maxTime, n.startSec + n.durationSec);
+    });
+    if (maxTime <= 0) maxTime = 1;
+
+    function xFor(time) {
+      return padL + (time / maxTime) * (W - padL - padR);
+    }
+    function yFor(midi) {
+      return padT + (1 - (midi - minMidi) / (maxMidi - minMidi)) * (H - padT - padB);
+    }
+
+    // Grid lines (octaves)
+    ctx.strokeStyle = '#eef2f7';
+    ctx.lineWidth = 1;
+    for (var m = Math.ceil(minMidi / 12) * 12; m <= maxMidi; m += 12) {
+      var y = yFor(m);
+      ctx.beginPath();
+      ctx.moveTo(padL, y);
+      ctx.lineTo(W - padR, y);
+      ctx.stroke();
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '10px ui-monospace, monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText('C' + (Math.floor(m / 12) - 1), padL - 6, y + 3);
+    }
+
+    // Notes
+    var noteHeight = Math.max(4, (H - padT - padB) / (maxMidi - minMidi + 1) * 0.8);
+    notes.forEach(function (n) {
+      var x1 = xFor(n.startSec);
+      var x2 = xFor(n.startSec + n.durationSec);
+      var y = yFor(n.midi) - noteHeight / 2;
+      var w = Math.max(3, x2 - x1 - 1);
+
+      ctx.fillStyle = '#245bcc';
+      ctx.beginPath();
+      if (ctx.roundRect) {
+        ctx.roundRect(x1, y, w, noteHeight, 3);
+      } else {
+        ctx.rect(x1, y, w, noteHeight);
+      }
+      ctx.fill();
+    });
+
+    // Time axis
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '10px ui-monospace, monospace';
+    ctx.textAlign = 'center';
+    var steps = 4;
+    for (var s = 0; s <= steps; s++) {
+      var t = (maxTime / steps) * s;
+      var x = xFor(t);
+      ctx.fillText(t.toFixed(1) + 's', x, H - 8);
+    }
+  }
+
+  function renderNoteList(notes) {
+    var html = '';
+    var maxDur = 0;
+    notes.forEach(function (n) { maxDur = Math.max(maxDur, n.durationSec); });
+
+    notes.forEach(function (n, i) {
+      var barW = maxDur > 0 ? Math.max(8, (n.durationSec / maxDur) * 80) : 8;
+      html += '<div class="am-note-row">' +
+        '<span class="am-note-index">' + (i + 1) + '</span>' +
+        '<span class="am-note-name">' + midiToNoteName(n.midi) + '</span>' +
+        '<span class="am-note-detail">' + n.startSec.toFixed(2) + 's · ' +
+          n.durationSec.toFixed(2) + 's · MIDI ' + n.midi + '</span>' +
+        '<span class="am-note-bar" style="width:' + barW + 'px"></span>' +
+        '</div>';
+    });
+    notesEl.innerHTML = html;
+  }
+
+  // ============================================================
+  // Quantisation
+  // ============================================================
+  function quantiseNotes(notes, bpm, gridDiv) {
+    if (!gridDiv || gridDiv <= 0) {
+      // No quantisation: return as-is, but convert to ticks
+      var ticksPerBeat = 480;
+      var secPerBeat = 60 / bpm;
+      return notes.map(function (n) {
+        return {
+          midi: n.midi,
+          startTick: Math.round((n.startSec / secPerBeat) * ticksPerBeat),
+          durationTicks: Math.max(1, Math.round((n.durationSec / secPerBeat) * ticksPerBeat)),
+          velocity: n.velocity || 100
+        };
+      });
+    }
+
+    var ticksPerBeat = 480;
+    var secPerBeat = 60 / bpm;
+    var tickGrid = ticksPerBeat / gridDiv; // e.g., 480/16 = 30 ticks for 1/16
+
+    var converted = notes.map(function (n) {
+      var startTick = (n.startSec / secPerBeat) * ticksPerBeat;
+      var durationTicks = (n.durationSec / secPerBeat) * ticksPerBeat;
+
+      var qStart = Math.round(startTick / tickGrid) * tickGrid;
+      var qDur = Math.max(tickGrid, Math.round(durationTicks / tickGrid) * tickGrid);
+
+      return {
+        midi: n.midi,
+        startTick: qStart,
+        durationTicks: qDur,
+        velocity: n.velocity || 100
+      };
+    });
+
+    // Ensure no overlapping notes after quantisation
+    converted.sort(function (a, b) { return a.startTick - b.startTick; });
+    for (var i = 0; i < converted.length; i++) {
+      var cur = converted[i];
+      var nextStart = i + 1 < converted.length ? converted[i + 1].startTick : Infinity;
+      if (cur.startTick + cur.durationTicks > nextStart) {
+        cur.durationTicks = Math.max(tickGrid, nextStart - cur.startTick);
+      }
+    }
+
+    return converted;
+  }
+
+  // ============================================================
+  // MIDI file writer
+  // ============================================================
+  function writeVLQ(arr, value) {
+    if (!isFinite(value) || value < 0) value = 0;
+    var bytes = [];
+    bytes.push(value & 0x7F);
+    value = Math.floor(value / 128);
+    while (value > 0) {
+      bytes.unshift((value & 0x7F) | 0x80);
+      value = Math.floor(value / 128);
+    }
+    for (var i = 0; i < bytes.length; i++) arr.push(bytes[i]);
+  }
+
+  function buildMidiFile(ticksNotes, bpm, ticksPerBeat) {
+    // Header chunk
+    var header = [
+      0x4D, 0x54, 0x68, 0x64,             // MThd
+      0x00, 0x00, 0x00, 0x06,             // length 6
+      0x00, 0x00,                         // format 0
+      0x00, 0x01,                         // 1 track
+      (ticksPerBeat >> 8) & 0xFF, ticksPerBeat & 0xFF
+    ];
+
+    // Build events
+    var events = [];
+
+    // Tempo meta event
+    var microsPerBeat = Math.round(60000000 / bpm);
+    events.push({
+      tick: 0,
+      bytes: [0xFF, 0x51, 0x03,
+        (microsPerBeat >> 16) & 0xFF,
+        (microsPerBeat >> 8) & 0xFF,
+        microsPerBeat & 0xFF]
+    });
+
+    // Note on/off
+    ticksNotes.forEach(function (n) {
+      events.push({
+        tick: n.startTick,
+        bytes: [0x90, n.midi & 0x7F, Math.max(1, Math.min(127, n.velocity || 100))]
+      });
+      events.push({
+        tick: n.startTick + n.durationTicks,
+        bytes: [0x80, n.midi & 0x7F, 0x00]
+      });
+    });
+
+    // Sort: by tick, note-offs before note-ons at the same tick
+    events.sort(function (a, b) {
+      if (a.tick !== b.tick) return a.tick - b.tick;
+      var aIsOff = a.bytes[0] === 0x80;
+      var bIsOff = b.bytes[0] === 0x80;
+      if (aIsOff && !bIsOff) return -1;
+      if (!aIsOff && bIsOff) return 1;
+      return 0;
+    });
+
+    // Encode with delta times
+    var trackData = [];
+    var lastTick = 0;
+    events.forEach(function (ev) {
+      var delta = Math.max(0, ev.tick - lastTick);
+      lastTick = ev.tick;
+      writeVLQ(trackData, delta);
+      for (var i = 0; i < ev.bytes.length; i++) trackData.push(ev.bytes[i]);
+    });
+
+    // End of track
+    writeVLQ(trackData, 0);
+    trackData.push(0xFF, 0x2F, 0x00);
+
+    // Track chunk
+    var trackLen = trackData.length;
+    var trackHeader = [
+      0x4D, 0x54, 0x72, 0x6B,             // MTrk
+      (trackLen >> 24) & 0xFF,
+      (trackLen >> 16) & 0xFF,
+      (trackLen >> 8) & 0xFF,
+      trackLen & 0xFF
+    ];
+
+    var out = new Uint8Array(header.length + trackHeader.length + trackData.length);
+    out.set(header, 0);
+    out.set(trackHeader, header.length);
+    out.set(trackData, header.length + trackHeader.length);
+    return out;
+  }
+
+  // ============================================================
+  // Download
+  // ============================================================
+  downloadBtn.addEventListener('click', function () {
+    if (!detectedNotes.length) return;
+    var bpm = Math.max(40, Math.min(240, parseInt(bpmEl.value, 10) || 120));
+    var gridDiv = parseInt(gridEl.value, 10) || 0;
+    var ticks = quantiseNotes(detectedNotes, bpm, gridDiv);
+    var bytes = buildMidiFile(ticks, bpm, 480);
+
+    var blob = new Blob([bytes], { type: 'audio/midi' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = (audioFileName || 'melody') + '.mid';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+  });
+
+  // ============================================================
+  // Preview (simple beep playback)
+  // ============================================================
+  playBtn.addEventListener('click', async function () {
+    if (!detectedNotes.length) return;
+    var ctx = getAudioContext();
+    var bpm = Math.max(40, Math.min(240, parseInt(bpmEl.value, 10) || 120));
+    var secPerBeat = 60 / bpm;
+
+    // Schedule oscillator beeps
+    var now = ctx.currentTime + 0.05;
+    detectedNotes.forEach(function (n) {
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.value = 440 * Math.pow(2, (n.midi - 69) / 12);
+      var start = now + n.startSec;
+      var end = start + Math.max(0.05, n.durationSec * 0.9);
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.12, start + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, end);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(start);
+      osc.stop(end + 0.02);
+    });
+  });
+
+  // ============================================================
+  // Clear
+  // ============================================================
+  clearBtn.addEventListener('click', function () {
+    audioBuffer = null;
+    detectedNotes = [];
+    audioFileName = 'audio';
+    analyzeBtn.disabled = true;
+    resultsEl.classList.add('am-hidden');
+    emptyEl.classList.remove('am-hidden');
+    emptyEl.innerHTML = '<strong>No analysis yet.</strong>Add a hummed or whistled melody and click Analyze audio.';
+    resultSubEl.textContent = 'Piano roll, note list, and MIDI download.';
+    notesEl.innerHTML = '';
+    hideWarn();
+    progressWrap.classList.add('am-hidden');
+    var c = canvasEl.getContext('2d');
+    c.clearRect(0, 0, canvasEl.width, canvasEl.height);
+    fileInput.value = '';
+    recordTimer.textContent = '00:00.0';
+    if (isRecording) stopRecording();
+  });
+
+  // ============================================================
+  // Slider labels
+  // ============================================================
+  sensitivityEl.addEventListener('input', function () {
+    sensitivityVal.textContent = parseFloat(sensitivityEl.value).toFixed(2);
+  });
+  minDurationEl.addEventListener('input', function () {
+    minDurationVal.textContent = parseFloat(minDurationEl.value).toFixed(2);
+  });
+
+  // ============================================================
+  // Init
+  // ============================================================
+  analyzeBtn.disabled = true;
+})();
+</script>
+</body>
+</html>

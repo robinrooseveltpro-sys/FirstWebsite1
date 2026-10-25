@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f8ff">
+<title>CMYK to HSL — Convert Print Colors Online</title>
+<meta name="description" content="Convert CMYK to HSL instantly. Get HSL, RGB, and HEX for print-spec colors, plus batch conversion and copy-ready CSS. Free and private.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://converttotoolsonline.com/cmyk-to-hsl.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ConvertToToolsOnline">
+<meta property="og:title" content="CMYK to HSL — Convert Print Colors Online">
+<meta property="og:description" content="Convert CMYK to HSL, RGB, and HEX instantly. Batch mode, copy-ready CSS, and honest print-vs-screen warnings. Runs entirely in your browser.">
+<meta property="og:url" content="https://converttotoolsonline.com/cmyk-to-hsl.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CMYK to HSL">
+<meta name="twitter:description" content="Convert CMYK print colors to HSL, RGB, and HEX in your browser. Batch mode and CSS export. No upload.">
+<link rel="stylesheet" href="/style.css">
+
+<style>
+/* ============================================================
+   Design tokens — matching index.html exactly
+   ============================================================ */
+:root {
+  color-scheme: light;
+  --ct-ink: #172033;
+  --ct-muted: #607087;
+  --ct-blue: #245bcc;
+  --ct-blue-dark: #194aa8;
+  --ct-line: #dfe6ef;
+  --ct-bg: #f5f8ff;
+  --ct-white: #fff;
+  --ct-radius: 16px;
+  --ct-shadow: 0 6px 24px rgba(20, 35, 60, .055);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+
+body {
+  margin: 0;
+  background: var(--ct-bg);
+  color: var(--ct-ink);
+  font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a { color: var(--ct-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #9dbbff;
+  outline-offset: 3px;
+}
+
+.ct-container {
+  width: min(1200px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.ct-skip {
+  position: absolute; top: 8px; left: -9999px; z-index: 100;
+  padding: 10px 14px; border-radius: 8px;
+  background: white; color: var(--ct-ink);
+}
+.ct-skip:focus { left: 10px; }
+
+/* ============================================================
+   Header
+   ============================================================ */
+.ct-header {
+  position: relative; z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid var(--ct-line);
+}
+.ct-header-inner {
+  min-height: 72px;
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+}
+.ct-brand {
+  display: inline-flex; align-items: center; gap: 11px;
+  color: var(--ct-ink); font-weight: 850; letter-spacing: -.4px;
+}
+.ct-brand:hover { text-decoration: none; }
+.ct-brand-mark {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; flex: 0 0 auto;
+  border-radius: 12px; background: var(--ct-blue); color: #fff;
+  font-size: .95rem; font-weight: 900;
+}
+.ct-brand-name span { color: var(--ct-blue); }
+.ct-nav { display: flex; align-items: center; gap: 22px; }
+.ct-nav a { color: #475569; font-size: .93rem; font-weight: 700; }
+.ct-nav a:hover { color: var(--ct-blue); }
+.ct-menu-button {
+  display: none; min-height: 40px; padding: 8px 12px;
+  border: 1px solid var(--ct-line); border-radius: 9px;
+  background: white; color: var(--ct-ink); font-weight: 750;
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.ct-hero {
+  padding: 52px 0 42px;
+  border-bottom: 1px solid var(--ct-line);
+  background: linear-gradient(130deg, #f8fbff 0%, #eaf1ff 56%, #f6f2ff 100%);
+}
+.ct-eyebrow {
+  margin: 0 0 10px; color: var(--ct-blue);
+  font-size: .76rem; font-weight: 850;
+  letter-spacing: .13em; text-transform: uppercase;
+}
+.ct-hero h1 {
+  max-width: 900px; margin: 0 0 15px;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+  line-height: 1.08; letter-spacing: -.05em;
+}
+.ct-hero h1 span { display: block; color: var(--ct-blue); }
+.ct-lead {
+  max-width: 800px; margin: 0;
+  color: #475569; font-size: clamp(1rem, 1.7vw, 1.12rem); line-height: 1.8;
+}
+.ct-privacy-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 18px; padding: 6px 12px;
+  background: #fff; border: 1px solid #cfe0ff;
+  border-radius: 999px; color: #194aa8;
+  font-size: .84rem; font-weight: 700;
+}
+
+/* ============================================================
+   Section + button
+   ============================================================ */
+.ct-section { padding: 40px 0; }
+.ct-section-heading { margin-bottom: 21px; }
+.ct-section-heading h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -.035em; line-height: 1.25;
+}
+.ct-section-heading p:last-child {
+  max-width: 820px; margin: 0; color: var(--ct-muted);
+}
+
+.ct-button {
+  display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+  min-height: 43px; padding: 10px 15px;
+  border: 1px solid #cbd5e1; border-radius: 10px;
+  background: #fff; color: var(--ct-ink);
+  font-weight: 750; text-align: center;
+  transition: border-color .15s ease, background .15s ease;
+}
+.ct-button:hover { border-color: #a9bce4; text-decoration: none; }
+.ct-button-primary {
+  border-color: var(--ct-blue);
+  background: var(--ct-blue); color: #fff;
+}
+.ct-button-primary:hover {
+  border-color: var(--ct-blue-dark);
+  background: var(--ct-blue-dark);
+  color: #fff;
+}
+.ct-button:disabled { opacity: .5; cursor: not-allowed; }
+.ct-button.small { min-height: 38px; padding: 8px 13px; font-size: .88rem; }
+
+/* ============================================================
+   Tabs
+   ============================================================ */
+.c2h-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--ct-line);
+  padding-bottom: 1px;
+}
+.c2h-tab {
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  background: transparent;
+  color: var(--ct-muted);
+  font-weight: 750;
+  font-size: .92rem;
+  cursor: pointer;
+  transition: color .12s ease, background .12s ease;
+  margin-bottom: -1px;
+}
+.c2h-tab:hover { color: var(--ct-blue); }
+.c2h-tab[aria-selected="true"] {
+  background: #fff;
+  color: var(--ct-blue);
+  border-color: var(--ct-line);
+  border-bottom-color: #fff;
+}
+
+/* ============================================================
+   Tool panels
+   ============================================================ */
+.c2h-panel {
+  padding: 22px;
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  background: var(--ct-white);
+  box-shadow: var(--ct-shadow);
+}
+.c2h-panel + .c2h-panel { margin-top: 20px; }
+
+.c2h-panel-heading {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.c2h-panel-heading h2 {
+  margin: 0; font-size: 1.02rem; letter-spacing: -.01em;
+}
+.c2h-panel-heading p {
+  margin: 0; color: var(--ct-muted); font-size: .85rem;
+}
+
+/* Single-color inputs */
+.c2h-channels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.c2h-channel {
+  padding: 14px;
+  border: 1px solid var(--ct-line);
+  border-radius: 11px;
+  background: #f8faff;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.c2h-channel-label {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: .78rem; font-weight: 850;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ct-muted);
+}
+.c2h-channel-label .c2h-channel-key {
+  display: inline-grid; place-items: center;
+  width: 22px; height: 22px; border-radius: 6px;
+  background: #fff; border: 1px solid #dbe7ff; color: var(--ct-blue);
+  font-size: .78rem; font-weight: 900;
+}
+.c2h-channel input[type="number"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ct-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1.05rem;
+  font-weight: 650;
+  text-align: center;
+}
+.c2h-channel input[type="number"]:focus { border-color: var(--ct-blue); }
+.c2h-channel input[type="range"] {
+  width: 100%; margin: 0;
+}
+
+.c2h-presets {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 14px;
+}
+.c2h-preset {
+  padding: 6px 12px;
+  border: 1px solid var(--ct-line);
+  border-radius: 999px;
+  background: #fff;
+  color: #34405a;
+  font-size: .82rem;
+  font-weight: 650;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: border-color .12s ease, background .12s ease;
+}
+.c2h-preset:hover { border-color: #a9bce4; background: #f5f9ff; }
+.c2h-preset-swatch {
+  width: 14px; height: 14px; border-radius: 4px;
+  border: 1px solid rgba(0,0,0,.12);
+  flex: 0 0 auto;
+}
+
+/* Result swatch and codes (single mode) */
+.c2h-result-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+@media (max-width: 640px) {
+  .c2h-result-card { grid-template-columns: 1fr; }
+}
+.c2h-swatch-big {
+  border-radius: 14px;
+  border: 1px solid var(--ct-line);
+  min-height: 220px;
+  display: flex; align-items: flex-end; justify-content: flex-start;
+  padding: 14px;
+  color: #fff;
+  font-weight: 750;
+  font-size: .78rem;
+  letter-spacing: .03em;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
+  background-clip: padding-box;
+  transition: background .18s ease;
+}
+.c2h-swatch-big.is-light {
+  color: #172033;
+  text-shadow: none;
+}
+
+.c2h-codes {
+  display: flex; flex-direction: column; gap: 12px;
+  justify-content: center;
+}
+.c2h-code-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--ct-line);
+  border-radius: 10px;
+  background: #f8faff;
+}
+.c2h-code-label {
+  width: 44px;
+  font-size: .72rem; font-weight: 850;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ct-muted);
+  flex: 0 0 auto;
+}
+.c2h-code-value {
+  flex: 1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: .95rem;
+  color: var(--ct-ink);
+  word-break: break-all;
+}
+.c2h-code-value.is-hsl {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.c2h-copy {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 7px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: .78rem;
+  color: #475569;
+  font-weight: 650;
+  transition: border-color .12s ease, color .12s ease, background .12s ease;
+  flex: 0 0 auto;
+}
+.c2h-copy:hover {
+  border-color: var(--ct-blue);
+  color: var(--ct-blue);
+  background: #f5f9ff;
+}
+
+/* Batch mode */
+.c2h-batch-input {
+  width: 100%;
+  min-height: 200px;
+  padding: 14px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #fbfdff;
+  color: var(--ct-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: .9rem;
+  line-height: 1.65;
+  resize: vertical;
+}
+.c2h-batch-input:focus { border-color: var(--ct-blue); background: #fff; }
+.c2h-batch-hint {
+  margin: 10px 0 14px;
+  font-size: .84rem;
+  color: var(--ct-muted);
+}
+.c2h-batch-hint code {
+  background: #eef2f8;
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-size: .88em;
+  color: var(--ct-ink);
+}
+.c2h-batch-actions {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 12px;
+}
+.c2h-batch-results {
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+}
+.c2h-batch-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--ct-line);
+  border-radius: 10px;
+  background: #fff;
+  flex-wrap: wrap;
+}
+.c2h-batch-swatch {
+  width: 44px; height: 44px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,.1);
+  flex: 0 0 auto;
+}
+.c2h-batch-input-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: .8rem;
+  color: var(--ct-muted);
+  flex: 0 0 auto;
+  min-width: 110px;
+}
+.c2h-batch-codes {
+  flex: 1;
+  display: flex; gap: 14px; flex-wrap: wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: .85rem;
+  color: var(--ct-ink);
+  min-width: 0;
+}
+.c2h-batch-codes span { white-space: nowrap; }
+.c2h-batch-codes .is-hsl { font-weight: 700; color: var(--ct-blue-dark); }
+.c2h-batch-copy {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 7px;
+  padding: 5px 11px;
+  cursor: pointer;
+  font-size: .76rem;
+  color: #475569;
+  font-weight: 650;
+  flex: 0 0 auto;
+}
+.c2h-batch-copy:hover {
+  border-color: var(--ct-blue);
+  color: var(--ct-blue);
+  background: #f5f9ff;
+}
+
+.c2h-batch-error {
+  padding: 10px 14px;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  border-radius: 10px;
+  color: #7f1d1d;
+  font-size: .86rem;
+}
+.c2h-batch-error code {
+  background: #fff;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid #fecaca;
+  font-size: .88em;
+}
+
+.c2h-empty {
+  padding: 34px 16px;
+  text-align: center;
+  color: var(--ct-muted);
+  font-size: .92rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #fafcff;
+}
+.c2h-empty strong { color: var(--ct-ink); display: block; margin-bottom: 4px; }
+
+/* Warning box */
+.c2h-warn {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  background: #fffbeb;
+  font-size: .85rem;
+  color: #7a5200;
+  line-height: 1.6;
+}
+.c2h-warn strong { color: #6b4500; }
+
+.c2h-hidden { display: none !important; }
+
+/* ============================================================
+   Guide + FAQ
+   ============================================================ */
+.ct-guide {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 48px 0 16px;
+}
+.ct-guide h2 { margin-top: 32px; font-size: 1.25rem; letter-spacing: -.02em; }
+.ct-guide h3 { margin-top: 22px; font-size: 1.03rem; }
+.ct-guide p, .ct-guide li { line-height: 1.7; color: #34405a; }
+.ct-guide code {
+  background: #eef2f8; padding: 1px 6px; border-radius: 5px;
+  font-size: .88em; color: #172033;
+}
+.ct-faq details {
+  border-bottom: 1px solid var(--ct-line); padding: 12px 0;
+}
+.ct-faq summary {
+  cursor: pointer; font-weight: 700; color: var(--ct-ink);
+}
+.ct-faq summary::marker { color: var(--ct-blue); }
+.ct-faq p { margin: 9px 0 0; color: #34405a; }
+
+.ct-related-links {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin: 12px 0 0; padding: 0; list-style: none;
+}
+.ct-related-links a {
+  display: inline-block;
+  padding: 7px 13px;
+  border: 1px solid var(--ct-line);
+  border-radius: 999px;
+  background: #fff;
+  color: #34405a;
+  font-size: .88rem; font-weight: 650;
+}
+.ct-related-links a:hover {
+  border-color: #a9bce4; color: var(--ct-blue); text-decoration: none;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.ct-footer {
+  margin-top: 40px; padding: 35px 0 17px;
+  background: #111c32; color: #d5deed;
+}
+.ct-footer-grid {
+  display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 28px;
+}
+.ct-footer-brand {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; color: #fff; font-weight: 850;
+}
+.ct-footer-brand:hover { text-decoration: none; }
+.ct-footer-grid p { max-width: 390px; color: #bdc8db; font-size: .91rem; }
+.ct-footer-links { display: grid; align-content: start; gap: 7px; }
+.ct-footer-links strong { margin-bottom: 4px; color: #fff; }
+.ct-footer-links a { color: #cbd5e1; font-size: .92rem; }
+.ct-footer-links a:hover { color: #fff; }
+.ct-footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+  margin-top: 25px; padding-top: 15px;
+  border-top: 1px solid #32405a; color: #aebbd0; font-size: .84rem;
+}
+.ct-footer-bottom p { margin: 0; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 700px) {
+  .ct-header-inner { min-height: 65px; }
+  .ct-menu-button { display: inline-flex; }
+  .ct-nav {
+    display: none; position: absolute;
+    top: 65px; left: 0; right: 0;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ct-line);
+    background: #fff;
+  }
+  .ct-nav.is-open { display: block; }
+  .ct-nav-inner {
+    display: grid; gap: 0;
+    width: min(1200px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+  .ct-nav-inner a { padding: 10px 0; }
+  .ct-hero { padding: 40px 0 32px; }
+  .ct-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .ct-container { width: calc(100% - 22px); }
+  .ct-footer-grid { grid-template-columns: 1fr; }
+  .c2h-panel { padding: 16px; }
+  .c2h-channels { grid-template-columns: repeat(2, 1fr); }
+  .c2h-batch-input-label { min-width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<a class="ct-skip" href="#main-content">Skip to content</a>
+
+<!-- Header -->
+<header class="ct-header">
+  <div class="ct-container ct-header-inner">
+    <a class="ct-brand" href="/" aria-label="ConvertToToolsOnline home">
+      <span class="ct-brand-mark" aria-hidden="true">CT</span>
+      <span class="ct-brand-name">Convert<span>ToToolsOnline</span></span>
+    </a>
+
+    <button class="ct-menu-button" id="ct-menu-button" type="button"
+            aria-controls="ct-main-nav" aria-expanded="false">Menu</button>
+
+    <nav class="ct-nav" id="ct-main-nav" aria-label="Main navigation">
+      <div class="ct-nav-inner">
+        <a href="/">Home</a>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/Contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <!-- Hero -->
+  <section class="ct-hero">
+    <div class="ct-container">
+      <p class="ct-eyebrow">Free online utility</p>
+      <h1>CMYK to HSL <span>convert print colors to screen-ready CSS</span></h1>
+      <p class="ct-lead">
+        Paste CMYK values from a print spec and instantly get the HSL, RGB, and HEX
+        equivalents you need for CSS, Figma tokens, or a digital design system.
+        Single color or batch conversion. Copy each format with one click, or
+        export a ready-to-paste <code>--color-*</code> CSS block. All in your browser.
+      </p>
+      <span class="ct-privacy-badge">
+        <span aria-hidden="true">🔒</span>
+        100% in your browser — nothing is uploaded
+      </span>
+    </div>
+  </section>
+
+  <!-- Tool -->
+  <section class="ct-section">
+    <div class="ct-container">
+
+      <div class="c2h-tabs" role="tablist" aria-label="Conversion mode">
+        <button id="c2h-tab-single" class="c2h-tab" role="tab"
+                aria-selected="true" aria-controls="c2h-panel-single"
+                type="button">Single color</button>
+        <button id="c2h-tab-batch" class="c2h-tab" role="tab"
+                aria-selected="false" aria-controls="c2h-panel-batch"
+                type="button">Batch conversion</button>
+      </div>
+
+      <!-- SINGLE MODE -->
+      <div id="c2h-panel-single" role="tabpanel" aria-labelledby="c2h-tab-single">
+        <section class="c2h-panel" aria-labelledby="c2h-input-heading">
+          <div class="c2h-panel-heading">
+            <h2 id="c2h-input-heading">CMYK input</h2>
+            <p>Values in 0–100. Updates live.</p>
+          </div>
+
+          <div class="c2h-channels">
+            <div class="c2h-channel">
+              <div class="c2h-channel-label">
+                <span class="c2h-channel-key">C</span>
+                <span>Cyan</span>
+              </div>
+              <input id="c2h-c" type="number" min="0" max="100" step="1" value="60"
+                     aria-label="Cyan value 0 to 100">
+              <input id="c2h-c-range" type="range" min="0" max="100" step="1" value="60"
+                     aria-label="Cyan slider">
+            </div>
+            <div class="c2h-channel">
+              <div class="c2h-channel-label">
+                <span class="c2h-channel-key">M</span>
+                <span>Magenta</span>
+              </div>
+              <input id="c2h-m" type="number" min="0" max="100" step="1" value="40"
+                     aria-label="Magenta value 0 to 100">
+              <input id="c2h-m-range" type="range" min="0" max="100" step="1" value="40"
+                     aria-label="Magenta slider">
+            </div>
+            <div class="c2h-channel">
+              <div class="c2h-channel-label">
+                <span class="c2h-channel-key">Y</span>
+                <span>Yellow</span>
+              </div>
+              <input id="c2h-y" type="number" min="0" max="100" step="1" value="40"
+                     aria-label="Yellow value 0 to 100">
+              <input id="c2h-y-range" type="range" min="0" max="100" step="1" value="40"
+                     aria-label="Yellow slider">
+            </div>
+            <div class="c2h-channel">
+              <div class="c2h-channel-label">
+                <span class="c2h-channel-key">K</span>
+                <span>Black</span>
+              </div>
+              <input id="c2h-k" type="number" min="0" max="100" step="1" value="100"
+                     aria-label="Black value 0 to 100">
+              <input id="c2h-k-range" type="range" min="0" max="100" step="1" value="100"
+                     aria-label="Black slider">
+            </div>
+          </div>
+
+          <div class="c2h-presets" id="c2h-presets" aria-label="Color presets"></div>
+        </section>
+
+        <section class="c2h-panel" aria-labelledby="c2h-result-heading">
+          <div class="c2h-panel-heading">
+            <h2 id="c2h-result-heading">Result</h2>
+            <p>HSL is the primary output. RGB and HEX included for context.</p>
+          </div>
+
+          <div class="c2h-result-card">
+            <div id="c2h-swatch" class="c2h-swatch-big" aria-hidden="true"></div>
+            <div class="c2h-codes">
+              <div class="c2h-code-row">
+                <span class="c2h-code-label">HSL</span>
+                <span id="c2h-out-hsl" class="c2h-code-value is-hsl">—</span>
+                <button type="button" class="c2h-copy" data-copy="hsl">Copy</button>
+              </div>
+              <div class="c2h-code-row">
+                <span class="c2h-code-label">RGB</span>
+                <span id="c2h-out-rgb" class="c2h-code-value">—</span>
+                <button type="button" class="c2h-copy" data-copy="rgb">Copy</button>
+              </div>
+              <div class="c2h-code-row">
+                <span class="c2h-code-label">HEX</span>
+                <span id="c2h-out-hex" class="c2h-code-value">—</span>
+                <button type="button" class="c2h-copy" data-copy="hex">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="c2h-warn">
+            <strong>Screen is not print.</strong>
+            CMYK values are converted to sRGB using the standard formula, then to HSL.
+            The result approximates the color on a calibrated sRGB monitor. Real printed
+            color depends on the ICC profile, paper stock, ink coverage, and press
+            conditions — always check a physical proof before final printing.
+          </div>
+        </section>
+      </div>
+
+      <!-- BATCH MODE -->
+      <div id="c2h-panel-batch" role="tabpanel" aria-labelledby="c2h-tab-batch" class="c2h-hidden">
+        <section class="c2h-panel" aria-labelledby="c2h-batch-heading">
+          <div class="c2h-panel-heading">
+            <h2 id="c2h-batch-heading">Batch CMYK input</h2>
+            <p>One color per line. Up to 100 colors.</p>
+          </div>
+
+          <textarea id="c2h-batch-input" class="c2h-batch-input"
+                    spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"
+                    aria-label="Batch CMYK input, one color per line"
+                    placeholder="60 40 40 100&#10;0 100 100 0&#10;100 100 0 0&#10;C0 M0 Y0 K0"></textarea>
+
+          <p class="c2h-batch-hint">
+            Accepted formats per line:
+            <code>60 40 40 100</code>,
+            <code>60,40,40,100</code>,
+            <code>C60 M40 Y40 K100</code>,
+            <code>c=60 m=40 y=40 k=100</code>.
+          </p>
+
+          <div class="c2h-batch-actions">
+            <button id="c2h-batch-run" type="button" class="ct-button ct-button-primary small">Convert</button>
+            <button id="c2h-batch-example" type="button" class="ct-button small">Load example</button>
+            <button id="c2h-batch-clear" type="button" class="ct-button small">Clear</button>
+            <button id="c2h-batch-css" type="button" class="ct-button small" disabled>Copy as CSS variables</button>
+          </div>
+
+          <div id="c2h-batch-results" class="c2h-batch-results"></div>
+
+          <div class="c2h-warn">
+            <strong>Screen is not print.</strong>
+            Each result uses the standard generic CMYK → sRGB → HSL formula. The
+            swatch approximates the color on a calibrated sRGB monitor. For print-critical
+            work, verify against a physical proof.
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEO content -->
+  <section class="ct-section">
+    <div class="ct-container">
+      <div class="ct-guide">
+
+        <h2>What is CMYK?</h2>
+        <p>
+          CMYK is a <strong>subtractive</strong> color model used in commercial printing.
+          It describes color as four ink amounts — <strong>Cyan</strong>,
+          <strong>Magenta</strong>, <strong>Yellow</strong>, and <strong>Black</strong>
+          (K) — measured as percentages from 0% (no ink) to 100% (full coverage).
+          Printers layer these inks on paper, and the paper’s reflected light produces
+          the perceived color.
+        </p>
+
+        <h2>What is HSL?</h2>
+        <p>
+          HSL is an <strong>additive</strong> color model designed for screens. It
+          describes color as <strong>Hue</strong> (0–360° on the color wheel),
+          <strong>Saturation</strong> (0–100%), and <strong>Lightness</strong> (0–100%).
+          Because it separates the color (hue) from its intensity (saturation) and
+          brightness (lightness), HSL is much easier to adjust by hand than RGB — which
+          is why designers use it for CSS variables, hover states, and dark-mode variants.
+        </p>
+
+        <h2>Why convert CMYK to HSL?</h2>
+        <ul>
+          <li>A brand manual gives you <strong>CMYK print values</strong>, but your website uses CSS — you need HSL.</li>
+          <li>You want to <strong>adjust lightness or saturation</strong> of a print-derived color for UI states (hover, focus, dark mode), which is straightforward in HSL and painful in CMYK.</li>
+          <li>You are building a <strong>design-system token set</strong> and need HSL values that map cleanly to CSS custom properties.</li>
+          <li>You have a <strong>list of CMYK values</strong> and need them all as HSL for a component library.</li>
+        </ul>
+
+        <h2>How this converter works</h2>
+        <p>
+          The conversion follows the same path almost every online tool uses:
+        </p>
+        <ol>
+          <li><strong>CMYK → RGB</strong> using the standard formula:
+            <code>R = 255 × (1 − C) × (1 − K)</code>,
+            <code>G = 255 × (1 − M) × (1 − K)</code>,
+            <code>B = 255 × (1 − Y) × (1 − K)</code>,
+            where each CMYK channel is in the 0–1 range.</li>
+          <li><strong>RGB → HSL</strong> using the standard max/min formula for hue, saturation, and lightness.</li>
+          <li><strong>RGB → HEX</strong> by converting each channel to a two-digit hexadecimal number.</li>
+        </ol>
+        <p>
+          The input is clamped to 0–100 for each channel, so values outside that range
+          are corrected rather than silently producing wrong colors.
+        </p>
+
+        <h2>Print vs screen — an honest limitation</h2>
+        <p>
+          <strong>There is no single “correct” CMYK to HSL conversion.</strong> A true
+          conversion requires the ICC profile of the specific press and paper stock
+          (e.g., U.S. Web Coated SWOP, FOGRA39, Japan Color), plus a color-managed
+          rendering pipeline. Browsers do not do ICC-profile-aware CMYK conversion
+          in plain JavaScript.
+        </p>
+        <p>
+          This tool therefore uses the <strong>generic formula</strong> — the same one
+          used by every general-purpose CMYK converter on the web. It is mathematically
+          correct for a hypothetical ideal CMYK space and <strong>close enough</strong>
+          for UI tokens, quick color adjustments, and cross-checking a print spec.
+          For color-critical work, use Adobe InDesign, Illustrator, or a color-managed
+          proofing workflow.
+        </p>
+
+        <h2>Batch conversion</h2>
+        <p>
+          Switch to <strong>Batch conversion</strong> to paste up to 100 CMYK values at
+          once. Each line must contain four numbers (0–100) separated by spaces, commas,
+          or <code>C/M/Y/K</code> labels. Invalid lines are skipped and reported with their
+          line number, so you can fix them and re-run. When the batch succeeds, the
+          <strong>Copy as CSS variables</strong> button generates a ready-to-paste
+          <code>:root { ... }</code> block with one <code>--color-N</code> per color.
+        </p>
+
+        <h2>Privacy</h2>
+        <p>
+          Everything runs locally in your browser. Nothing is uploaded, logged, or sent
+          anywhere. There is no signup, no API call, and no third-party script loaded
+          by the tool itself.
+        </p>
+
+        <h2 id="faq">Frequently asked questions</h2>
+        <div class="ct-faq">
+          <details>
+            <summary>Is this CMYK to HSL conversion accurate for print?</summary>
+            <p>The formula is mathematically correct for a generic CMYK space, but real printed color depends on the ICC profile, paper, ink, and press conditions. This tool is accurate enough for UI tokens and quick color work, not a substitute for a color-managed proofing workflow.</p>
+          </details>
+          <details>
+            <summary>Why does the swatch look different from what I expected?</summary>
+            <p>Print and screen use fundamentally different color models. A “rich black” such as C60 M40 Y40 K100 often looks like a deep blue-black in print, but converts to a mid-dark blue on screen. Always compare against a physical proof for print-critical work.</p>
+          </details>
+          <details>
+            <summary>Can I convert HSL back to CMYK?</summary>
+            <p>This page converts CMYK to HSL only. For the reverse direction, use a dedicated HSL-to-CMYK tool or a design application with color management.</p>
+          </details>
+          <details>
+            <summary>What does K mean in CMYK?</summary>
+            <p>K stands for “Key,” which is the black plate in commercial printing. Using a separate black ink produces deeper, sharper blacks and saves colored ink compared with mixing C, M, and Y at full saturation.</p>
+          </details>
+          <details>
+            <summary>Does batch conversion have a limit?</summary>
+            <p>The batch mode accepts up to 100 colors per run. Each line must contain exactly four numbers between 0 and 100. Invalid lines are reported with their line number.</p>
+          </details>
+          <details>
+            <summary>Why does the CSS export use --color-1, --color-2, etc.?</summary>
+            <p>The generated block is a starting point. Rename the variables to match your design tokens (for example <code>--brand-primary</code>) before pasting into production CSS.</p>
+          </details>
+          <details>
+            <summary>Is my data uploaded?</summary>
+            <p>No. All conversion happens in your browser using JavaScript. Nothing is sent to any server.</p>
+          </details>
+        </div>
+
+        <h2>Related tools</h2>
+        <ul class="ct-related-links">
+          <li><a href="/">All ConvertToToolsOnline tools</a></li>
+          <!-- Verify filenames before enabling:
+          <li><a href="/css-gradient-generator.html">CSS Gradient Generator</a></li>
+          <li><a href="/image-color-picker.html">Image Color Picker</a></li>
+          -->
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-grid">
+      <div>
+        <a class="ct-footer-brand" href="/">
+          <span class="ct-brand-mark" aria-hidden="true">CT</span>
+          <span>ConvertToToolsOnline</span>
+        </a>
+        <p>Practical online tools for documents, images, data, development and everyday work.</p>
+      </div>
+
+      <nav class="ct-footer-links" aria-label="Tool navigation">
+        <strong>Explore</strong>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/sitemap.xml">XML sitemap</a>
+      </nav>
+
+      <nav class="ct-footer-links" aria-label="Site information">
+        <strong>Contact &amp; information</strong>
+        <a href="/Contact.html">Contact</a>
+        <a href="/#about">About the toolbox</a>
+        <a href="#main-content">Back to top ↑</a>
+      </nav>
+    </div>
+
+    <div class="ct-footer-bottom">
+      <p>© <span id="c2h-year">2026</span> ConvertToToolsOnline. All rights reserved.</p>
+      <p>Free utilities for practical tasks.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "CMYK to HSL Converter",
+      "url": "https://converttotoolsonline.com/cmyk-to-hsl.html",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Any modern browser",
+      "browserRequirements": "Requires JavaScript",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Convert CMYK print colors to HSL, RGB, and HEX instantly. Single or batch conversion, copy-ready CSS export, and honest print-vs-screen warnings. Runs entirely in the browser.",
+      "featureList": [
+        "CMYK to HSL conversion",
+        "Also outputs RGB and HEX",
+        "Batch conversion up to 100 colors",
+        "CSS custom property export",
+        "Live single-color conversion",
+        "Copy buttons for every format",
+        "100% client-side"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Is this CMYK to HSL conversion accurate for print?","acceptedAnswer":{"@type":"Answer","text":"The formula is mathematically correct for a generic CMYK space, but real printed color depends on the ICC profile, paper, ink, and press conditions. This tool is accurate enough for UI tokens and quick color work, not a substitute for a color-managed proofing workflow."}},
+        {"@type":"Question","name":"Why does the swatch look different from what I expected?","acceptedAnswer":{"@type":"Answer","text":"Print and screen use fundamentally different color models. A rich black such as C60 M40 Y40 K100 often looks like a deep blue-black in print, but converts to a mid-dark blue on screen."}},
+        {"@type":"Question","name":"Can I convert HSL back to CMYK?","acceptedAnswer":{"@type":"Answer","text":"This page converts CMYK to HSL only. For the reverse direction, use a dedicated HSL-to-CMYK tool or a design application with color management."}},
+        {"@type":"Question","name":"What does K mean in CMYK?","acceptedAnswer":{"@type":"Answer","text":"K stands for Key, which is the black plate in commercial printing. Using a separate black ink produces deeper, sharper blacks and saves colored ink."}},
+        {"@type":"Question","name":"Does batch conversion have a limit?","acceptedAnswer":{"@type":"Answer","text":"The batch mode accepts up to 100 colors per run. Each line must contain exactly four numbers between 0 and 100. Invalid lines are reported with their line number."}},
+        {"@type":"Question","name":"Why does the CSS export use --color-1, --color-2, etc.?","acceptedAnswer":{"@type":"Answer","text":"The generated block is a starting point. Rename the variables to match your design tokens before pasting into production CSS."}},
+        {"@type":"Question","name":"Is my data uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. All conversion happens in your browser using JavaScript. Nothing is sent to any server."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- Menu toggle -->
+<script>
+(function () {
+  'use strict';
+  var btn = document.getElementById('ct-menu-button');
+  var nav = document.getElementById('ct-main-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 700) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>
+
+<!-- Tool logic -->
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  var yearEl = $('c2h-year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  // ---------- color math ----------
+  function cmykToRgb(c, m, y, k) {
+    c = clamp(c) / 100;
+    m = clamp(m) / 100;
+    y = clamp(y) / 100;
+    k = clamp(k) / 100;
+    return {
+      r: Math.round(255 * (1 - c) * (1 - k)),
+      g: Math.round(255 * (1 - m) * (1 - k)),
+      b: Math.round(255 * (1 - y) * (1 - k))
+    };
+  }
+
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h = 0, s = 0;
+    var l = (max + min) / 2;
+    var d = max - min;
+    if (d !== 0) {
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = ((g - b) / d + (g < b ? 6 : 0)); break;
+        case g: h = ((b - r) / d + 2); break;
+        case b: h = ((r - g) / d + 4); break;
+      }
+      h *= 60;
+    }
+    return {
+      h: Math.round(h),
+      s: Math.round(s * 100),
+      l: Math.round(l * 100)
+    };
+  }
+
+  function rgbToHex(r, g, b) {
+    function p(n) { var s = clamp(n).toString(16); return s.length === 1 ? '0' + s : s; }
+    return '#' + p(r) + p(g) + p(b);
+  }
+
+  function clamp(n) {
+    n = Number(n);
+    if (!isFinite(n)) return 0;
+    return Math.max(0, Math.min(100, Math.round(n)));
+  }
+  function clamp255(n) {
+    return Math.max(0, Math.min(255, Math.round(n)));
+  }
+
+  function isLight(rgb) {
+    // Perceived luminance
+    return (0.2126 * rgb.r + 0.7152 * rgb.g + 0.0722 * rgb.b) > 140;
+  }
+
+  function convert(c, m, y, k) {
+    var rgb = cmykToRgb(c, m, y, k);
+    var hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+    var hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+    return {
+      cmyk: { c: clamp(c), m: clamp(m), y: clamp(y), k: clamp(k) },
+      rgb: rgb,
+      hsl: hsl,
+      hex: hex,
+      hslStr: 'hsl(' + hsl.h + ', ' + hsl.s + '%, ' + hsl.l + '%)',
+      rgbStr: 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')'
+    };
+  }
+
+  // ---------- copy ----------
+  function copyText(text, btn) {
+    var orig = btn.textContent;
+    function done() {
+      btn.textContent = 'Copied ✓';
+      setTimeout(function () { btn.textContent = orig; }, 1300);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else {
+      fallback(text, done);
+    }
+  }
+  function fallback(text, cb) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    if (cb) cb();
+  }
+
+  // ============================================================
+  // SINGLE MODE
+  // ============================================================
+  var cInput = $('c2h-c'), mInput = $('c2h-m'), yInput = $('c2h-y'), kInput = $('c2h-k');
+  var cRange = $('c2h-c-range'), mRange = $('c2h-m-range'), yRange = $('c2h-y-range'), kRange = $('c2h-k-range');
+  var swatch = $('c2h-swatch');
+  var outHsl = $('c2h-out-hsl');
+  var outRgb = $('c2h-out-rgb');
+  var outHex = $('c2h-out-hex');
+
+  var currentSingle = null;
+
+  function syncFromNumbers() {
+    cRange.value = cInput.value;
+    mRange.value = mInput.value;
+    yRange.value = yInput.value;
+    kRange.value = kInput.value;
+    updateSingle();
+  }
+  function syncFromRanges() {
+    cInput.value = cRange.value;
+    mInput.value = mRange.value;
+    yInput.value = yRange.value;
+    kInput.value = kRange.value;
+    updateSingle();
+  }
+
+  [cInput, mInput, yInput, kInput].forEach(function (el) {
+    el.addEventListener('input', syncFromNumbers);
+  });
+  [cRange, mRange, yRange, kRange].forEach(function (el) {
+    el.addEventListener('input', syncFromRanges);
+  });
+
+  function updateSingle() {
+    var c = clamp(cInput.value);
+    var m = clamp(mInput.value);
+    var y = clamp(yInput.value);
+    var k = clamp(kInput.value);
+
+    currentSingle = convert(c, m, y, k);
+
+    swatch.style.background = currentSingle.hex;
+    swatch.classList.toggle('is-light', isLight(currentSingle.rgb));
+    swatch.textContent = 'CMYK ' + currentSingle.cmyk.c + '/' + currentSingle.cmyk.m + '/' +
+      currentSingle.cmyk.y + '/' + currentSingle.cmyk.k;
+
+    outHsl.textContent = currentSingle.hslStr;
+    outRgb.textContent = currentSingle.rgbStr;
+    outHex.textContent = currentSingle.hex.toUpperCase();
+  }
+
+  document.querySelectorAll('.c2h-copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (!currentSingle) return;
+      var which = btn.getAttribute('data-copy');
+      var text = which === 'hsl' ? currentSingle.hslStr
+               : which === 'rgb' ? currentSingle.rgbStr
+               : currentSingle.hex.toUpperCase();
+      copyText(text, btn);
+    });
+  });
+
+  // Presets
+  var PRESETS = [
+    { label: 'Plain black',  c: 0,   m: 0,   y: 0,   k: 100 },
+    { label: 'Rich black',   c: 60,  m: 40,  y: 40,  k: 100 },
+    { label: 'White',        c: 0,   m: 0,   y: 0,   k: 0   },
+    { label: 'CMYK red',     c: 0,   m: 100, y: 100, k: 0   },
+    { label: 'CMYK blue',    c: 100, m: 100, y: 0,   k: 0   },
+    { label: 'CMYK yellow',  c: 0,   m: 0,   y: 100, k: 0   },
+    { label: 'Brand teal',   c: 80,  m: 20,  y: 30,  k: 10  }
+  ];
+
+  var presetsEl = $('c2h-presets');
+  PRESETS.forEach(function (p) {
+    var rgb = cmykToRgb(p.c, p.m, p.y, p.k);
+    var hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'c2h-preset';
+    btn.innerHTML = '<span class="c2h-preset-swatch" style="background:' + hex + '"></span>' +
+                    '<span>' + p.label + '</span>';
+    btn.addEventListener('click', function () {
+      cInput.value = p.c; mInput.value = p.m; yInput.value = p.y; kInput.value = p.k;
+      cRange.value = p.c; mRange.value = p.m; yRange.value = p.y; kRange.value = p.k;
+      updateSingle();
+    });
+    presetsEl.appendChild(btn);
+  });
+
+  // ============================================================
+  // BATCH MODE
+  // ============================================================
+  var batchInput = $('c2h-batch-input');
+  var batchResults = $('c2h-batch-results');
+  var batchRun = $('c2h-batch-run');
+  var batchExample = $('c2h-batch-example');
+  var batchClear = $('c2h-batch-clear');
+  var batchCss = $('c2h-batch-css');
+
+  var currentBatch = []; // array of { input: string, result: {...} }
+
+  function parseBatchLine(line) {
+    // Normalise: remove C/M/Y/K labels and separators
+    var cleaned = line
+      .replace(/[cmyk]/gi, ' ')
+      .replace(/[=:,;|\/]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (!cleaned) return null;
+    var parts = cleaned.split(' ');
+    if (parts.length !== 4) return null;
+    var nums = parts.map(Number);
+    if (nums.some(function (n) { return !isFinite(n) || n < 0 || n > 100; })) return null;
+    return { c: nums[0], m: nums[1], y: nums[2], k: nums[3] };
+  }
+
+  function runBatch() {
+    batchResults.innerHTML = '';
+    currentBatch = [];
+    batchCss.disabled = true;
+
+    var raw = batchInput.value;
+    if (!raw.trim()) {
+      batchResults.innerHTML = '<div class="c2h-empty"><strong>No input.</strong>Paste one CMYK value per line to convert.</div>';
+      return;
+    }
+
+    var lines = raw.split(/\r?\n/);
+    var validCount = 0;
+    var errorLines = [];
+
+    if (lines.length > 100) {
+      // Truncate; keep first 100 lines
+      lines = lines.slice(0, 100);
+    }
+
+    lines.forEach(function (line, index) {
+      var lineNo = index + 1;
+      var trimmed = line.trim();
+      if (!trimmed) return; // skip blank lines
+
+      var parsed = parseBatchLine(trimmed);
+      if (!parsed) {
+        errorLines.push(lineNo);
+        return;
+      }
+
+      var result = convert(parsed.c, parsed.m, parsed.y, parsed.k);
+      currentBatch.push({ input: trimmed, result: result });
+      validCount++;
+
+      var row = document.createElement('div');
+      row.className = 'c2h-batch-row';
+
+      var sw = document.createElement('div');
+      sw.className = 'c2h-batch-swatch';
+      sw.style.background = result.hex;
+
+      var lbl = document.createElement('span');
+      lbl.className = 'c2h-batch-input-label';
+      lbl.textContent = 'CMYK ' + result.cmyk.c + '/' + result.cmyk.m + '/' +
+        result.cmyk.y + '/' + result.cmyk.k;
+
+      var codes = document.createElement('div');
+      codes.className = 'c2h-batch-codes';
+      codes.innerHTML =
+        '<span class="is-hsl">' + result.hslStr + '</span>' +
+        '<span>' + result.hex.toUpperCase() + '</span>' +
+        '<span>rgb(' + result.rgb.r + ', ' + result.rgb.g + ', ' + result.rgb.b + ')</span>';
+
+      var copy = document.createElement('button');
+      copy.type = 'button';
+      copy.className = 'c2h-batch-copy';
+      copy.textContent = 'Copy HSL';
+      copy.addEventListener('click', function () { copyText(result.hslStr, copy); });
+
+      row.appendChild(sw);
+      row.appendChild(lbl);
+      row.appendChild(codes);
+      row.appendChild(copy);
+      batchResults.appendChild(row);
+    });
+
+    if (errorLines.length) {
+      var err = document.createElement('div');
+      err.className = 'c2h-batch-error';
+      err.innerHTML = '<strong>' + errorLines.length + ' line' +
+        (errorLines.length === 1 ? '' : 's') + ' could not be parsed:</strong> ' +
+        errorLines.map(function (n) { return 'line ' + n; }).join(', ') +
+        '. Each line must contain exactly four numbers between 0 and 100.';
+      batchResults.appendChild(err);
+    }
+
+    if (validCount === 0 && errorLines.length === 0) {
+      batchResults.innerHTML = '<div class="c2h-empty"><strong>No lines to convert.</strong>Paste one CMYK value per line.</div>';
+      return;
+    }
+
+    if (validCount > 0) {
+      batchCss.disabled = false;
+    }
+  }
+
+  batchRun.addEventListener('click', runBatch);
+
+  batchExample.addEventListener('click', function () {
+    batchInput.value =
+      '60 40 40 100\n' +
+      '0 100 100 0\n' +
+      '100 100 0 0\n' +
+      'C0 M0 Y0 K0\n';
+    batchInput.focus();
+    runBatch();
+  });
+
+  batchClear.addEventListener('click', function () {
+    batchInput.value = '';
+    batchInput.focus();
+    batchResults.innerHTML = '';
+    currentBatch = [];
+    batchCss.disabled = true;
+  });
+
+  batchCss.addEventListener('click', function () {
+    if (!currentBatch.length) return;
+    var lines = [':root {'];
+    currentBatch.forEach(function (item, i) {
+      lines.push('  --color-' + (i + 1) + ': ' + item.result.hslStr + '; /* ' + item.result.hex.toUpperCase() + ' */');
+    });
+    lines.push('}');
+    copyText(lines.join('\n'), batchCss);
+  });
+
+  // ============================================================
+  // TABS
+  // ============================================================
+  var tabSingle = $('c2h-tab-single');
+  var tabBatch = $('c2h-tab-batch');
+  var panelSingle = $('c2h-panel-single');
+  var panelBatch = $('c2h-panel-batch');
+
+  function selectTab(which) {
+    var isSingle = which === 'single';
+    tabSingle.setAttribute('aria-selected', isSingle ? 'true' : 'false');
+    tabBatch.setAttribute('aria-selected', isSingle ? 'false' : 'true');
+    panelSingle.classList.toggle('c2h-hidden', !isSingle);
+    panelBatch.classList.toggle('c2h-hidden', isSingle);
+  }
+
+  tabSingle.addEventListener('click', function () { selectTab('single'); });
+  tabBatch.addEventListener('click', function () { selectTab('batch'); });
+
+  // Keyboard navigation for tabs
+  [tabSingle, tabBatch].forEach(function (tab) {
+    tab.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        var target = tab === tabSingle ? tabBatch : tabSingle;
+        target.focus();
+        selectTab(target === tabSingle ? 'single' : 'batch');
+      }
+    });
+  });
+
+  // Init
+  updateSingle();
+})();
+</script>
+</body>
+</html>

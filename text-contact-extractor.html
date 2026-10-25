@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f8ff">
+<title>Extract Emails from Text — Emails, Phones &amp; URLs</title>
+<meta name="description" content="Extract emails, phone numbers, URLs, IPs, dates, and hashtags from any text in one pass. Deduplicated, copyable, no upload.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://converttotoolsonline.com/text-contact-extractor.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ConvertToToolsOnline">
+<meta property="og:title" content="Extract Emails from Text — Emails, Phones &amp; URLs">
+<meta property="og:description" content="Extract emails, phone numbers, URLs, IPs, dates, and hashtags from any text. Deduplicated, per-category copy and download.">
+<meta property="og:url" content="https://converttotoolsonline.com/text-contact-extractor.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Extract Emails &amp; Contacts from Text">
+<meta name="twitter:description" content="Emails, phones, URLs, IPs, dates, and hashtags from any text. Runs in your browser.">
+<link rel="stylesheet" href="/style.css">
+
+<style>
+/* ============================================================
+   Design tokens — matching index.html exactly
+   ============================================================ */
+:root {
+  color-scheme: light;
+  --ct-ink: #172033;
+  --ct-muted: #607087;
+  --ct-blue: #245bcc;
+  --ct-blue-dark: #194aa8;
+  --ct-line: #dfe6ef;
+  --ct-bg: #f5f8ff;
+  --ct-white: #fff;
+  --ct-radius: 16px;
+  --ct-shadow: 0 6px 24px rgba(20, 35, 60, .055);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+
+body {
+  margin: 0;
+  background: var(--ct-bg);
+  color: var(--ct-ink);
+  font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a { color: var(--ct-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #9dbbff;
+  outline-offset: 3px;
+}
+
+.ct-container {
+  width: min(1200px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.ct-skip {
+  position: absolute; top: 8px; left: -9999px; z-index: 100;
+  padding: 10px 14px; border-radius: 8px;
+  background: white; color: var(--ct-ink);
+}
+.ct-skip:focus { left: 10px; }
+
+/* Header */
+.ct-header {
+  position: relative; z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid var(--ct-line);
+}
+.ct-header-inner {
+  min-height: 72px;
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+}
+.ct-brand {
+  display: inline-flex; align-items: center; gap: 11px;
+  color: var(--ct-ink); font-weight: 850; letter-spacing: -.4px;
+}
+.ct-brand:hover { text-decoration: none; }
+.ct-brand-mark {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; flex: 0 0 auto;
+  border-radius: 12px; background: var(--ct-blue); color: #fff;
+  font-size: .95rem; font-weight: 900;
+}
+.ct-brand-name span { color: var(--ct-blue); }
+.ct-nav { display: flex; align-items: center; gap: 22px; }
+.ct-nav a { color: #475569; font-size: .93rem; font-weight: 700; }
+.ct-nav a:hover { color: var(--ct-blue); }
+.ct-menu-button {
+  display: none; min-height: 40px; padding: 8px 12px;
+  border: 1px solid var(--ct-line); border-radius: 9px;
+  background: white; color: var(--ct-ink); font-weight: 750;
+}
+
+/* Hero */
+.ct-hero {
+  padding: 52px 0 42px;
+  border-bottom: 1px solid var(--ct-line);
+  background: linear-gradient(130deg, #f8fbff 0%, #eaf1ff 56%, #f6f2ff 100%);
+}
+.ct-eyebrow {
+  margin: 0 0 10px; color: var(--ct-blue);
+  font-size: .76rem; font-weight: 850;
+  letter-spacing: .13em; text-transform: uppercase;
+}
+.ct-hero h1 {
+  max-width: 920px; margin: 0 0 15px;
+  font-size: clamp(1.85rem, 4.2vw, 3rem);
+  line-height: 1.1; letter-spacing: -.05em;
+}
+.ct-hero h1 span { display: block; color: var(--ct-blue); }
+.ct-lead {
+  max-width: 840px; margin: 0;
+  color: #475569; font-size: clamp(1rem, 1.7vw, 1.12rem); line-height: 1.8;
+}
+.ct-privacy-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 18px; padding: 6px 12px;
+  background: #fff; border: 1px solid #cfe0ff;
+  border-radius: 999px; color: #194aa8;
+  font-size: .84rem; font-weight: 700;
+}
+
+/* Sections */
+.ct-section { padding: 40px 0; }
+.ct-section-heading { margin-bottom: 21px; }
+.ct-section-heading h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -.035em; line-height: 1.25;
+}
+.ct-section-heading p:last-child {
+  max-width: 820px; margin: 0; color: var(--ct-muted);
+}
+
+.ct-button {
+  display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+  min-height: 43px; padding: 10px 15px;
+  border: 1px solid #cbd5e1; border-radius: 10px;
+  background: #fff; color: var(--ct-ink);
+  font-weight: 750; text-align: center;
+  transition: border-color .15s ease, background .15s ease;
+}
+.ct-button:hover { border-color: #a9bce4; text-decoration: none; }
+.ct-button-primary {
+  border-color: var(--ct-blue);
+  background: var(--ct-blue); color: #fff;
+}
+.ct-button-primary:hover {
+  border-color: var(--ct-blue-dark);
+  background: var(--ct-blue-dark);
+  color: #fff;
+}
+.ct-button.small { min-height: 36px; padding: 7px 12px; font-size: .85rem; }
+.ct-button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ============================================================
+   Extractor tool
+   ============================================================ */
+.tx-panel {
+  padding: 22px;
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  background: var(--ct-white);
+  box-shadow: var(--ct-shadow);
+}
+.tx-panel + .tx-panel { margin-top: 20px; }
+
+.tx-panel-heading {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 14px; flex-wrap: wrap;
+}
+.tx-panel-heading h2 {
+  margin: 0; font-size: 1.02rem; letter-spacing: -.01em;
+}
+.tx-panel-heading p {
+  margin: 0; color: var(--ct-muted); font-size: .85rem;
+}
+
+/* Input */
+.tx-input {
+  width: 100%;
+  min-height: 180px;
+  padding: 14px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #fbfdff;
+  color: var(--ct-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: .88rem;
+  line-height: 1.6;
+  resize: vertical;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.tx-input:focus { border-color: var(--ct-blue); background: #fff; }
+.tx-input::placeholder { color: #94a3b8; font-family: system-ui, sans-serif; }
+
+.tx-input-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: .78rem;
+  color: var(--ct-muted);
+}
+
+.tx-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* Category tabs */
+.tx-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ct-line);
+}
+.tx-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border: 1px solid var(--ct-line);
+  border-radius: 999px;
+  background: #fff;
+  color: #475569;
+  font-weight: 700;
+  font-size: .84rem;
+  cursor: pointer;
+  transition: border-color .12s ease, background .12s ease, color .12s ease;
+}
+.tx-tab:hover { border-color: #a9bce4; background: #f5f9ff; }
+.tx-tab[aria-selected="true"] {
+  background: var(--ct-blue);
+  border-color: var(--ct-blue);
+  color: #fff;
+}
+.tx-tab-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: .72rem;
+  font-weight: 850;
+  font-family: ui-monospace, monospace;
+}
+.tx-tab[aria-selected="true"] .tx-tab-count {
+  background: rgba(255,255,255,.28);
+  color: #fff;
+}
+
+/* Result area */
+.tx-result-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.tx-result-title {
+  font-size: .92rem;
+  font-weight: 850;
+  color: var(--ct-ink);
+}
+.tx-result-title span {
+  font-weight: 600;
+  color: var(--ct-muted);
+  font-size: .84rem;
+  margin-left: 6px;
+}
+.tx-result-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.tx-copy-btn {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 7px;
+  padding: 5px 11px;
+  font-size: .78rem;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  transition: border-color .12s ease, background .12s ease, color .12s ease;
+}
+.tx-copy-btn:hover { border-color: var(--ct-blue); color: var(--ct-blue); background: #f5f9ff; }
+
+.tx-result-list {
+  max-height: 360px;
+  overflow-y: auto;
+  border: 1px solid var(--ct-line);
+  border-radius: 10px;
+  background: #fbfdff;
+}
+.tx-result-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eef2f7;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: .84rem;
+  color: var(--ct-ink);
+  word-break: break-all;
+}
+.tx-result-row:last-child { border-bottom: 0; }
+.tx-result-row:hover { background: #f5f9ff; }
+.tx-result-index {
+  flex: 0 0 auto;
+  min-width: 28px;
+  font-size: .72rem;
+  font-weight: 750;
+  color: #94a3b8;
+  text-align: right;
+}
+.tx-result-value { flex: 1; }
+.tx-result-open {
+  flex: 0 0 auto;
+  font-size: .72rem;
+  font-weight: 750;
+  color: var(--ct-blue);
+  border: 1px solid #cfe0ff;
+  border-radius: 5px;
+  padding: 2px 7px;
+  background: #f0f6ff;
+  text-decoration: none;
+}
+.tx-result-open:hover { background: #e3eeff; text-decoration: none; }
+
+.tx-empty {
+  padding: 28px 16px;
+  text-align: center;
+  color: var(--ct-muted);
+  font-size: .9rem;
+}
+.tx-empty strong { color: var(--ct-ink); display: block; margin-bottom: 4px; }
+
+.tx-warn {
+  margin-top: 12px;
+  padding: 10px 13px;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  background: #fffbeb;
+  font-size: .84rem;
+  color: #7a5200;
+  line-height: 1.55;
+}
+.tx-warn strong { color: #6b4500; }
+
+.tx-hidden { display: none !important; }
+
+/* Guide */
+.ct-guide {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 0 16px;
+}
+.ct-guide h2 { margin-top: 32px; font-size: 1.25rem; letter-spacing: -.02em; }
+.ct-guide h3 { margin-top: 22px; font-size: 1.03rem; }
+.ct-guide p, .ct-guide li { line-height: 1.7; color: #34405a; }
+.ct-guide code {
+  background: #eef2f8; padding: 1px 6px; border-radius: 5px;
+  font-size: .86em; color: #172033;
+  word-break: break-all;
+}
+.ct-guide table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: .86rem;
+}
+.ct-guide th, .ct-guide td {
+  padding: 8px 12px;
+  border: 1px solid var(--ct-line);
+  text-align: left;
+}
+.ct-guide th { background: #f8faff; font-weight: 750; }
+
+.ct-faq details {
+  border-bottom: 1px solid var(--ct-line); padding: 12px 0;
+}
+.ct-faq summary {
+  cursor: pointer; font-weight: 700; color: var(--ct-ink);
+}
+.ct-faq summary::marker { color: var(--ct-blue); }
+.ct-faq p { margin: 9px 0 0; color: #34405a; }
+
+.ct-related-links {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin: 12px 0 0; padding: 0; list-style: none;
+}
+.ct-related-links a {
+  display: inline-block;
+  padding: 7px 13px;
+  border: 1px solid var(--ct-line);
+  border-radius: 999px;
+  background: #fff;
+  color: #34405a;
+  font-size: .88rem; font-weight: 650;
+}
+.ct-related-links a:hover {
+  border-color: #a9bce4; color: var(--ct-blue); text-decoration: none;
+}
+
+/* Footer */
+.ct-footer {
+  margin-top: 40px; padding: 35px 0 17px;
+  background: #111c32; color: #d5deed;
+}
+.ct-footer-grid {
+  display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 28px;
+}
+.ct-footer-brand {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; color: #fff; font-weight: 850;
+}
+.ct-footer-brand:hover { text-decoration: none; }
+.ct-footer-grid p { max-width: 390px; color: #bdc8db; font-size: .91rem; }
+.ct-footer-links { display: grid; align-content: start; gap: 7px; }
+.ct-footer-links strong { margin-bottom: 4px; color: #fff; }
+.ct-footer-links a { color: #cbd5e1; font-size: .92rem; }
+.ct-footer-links a:hover { color: #fff; }
+.ct-footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+  margin-top: 25px; padding-top: 15px;
+  border-top: 1px solid #32405a; color: #aebbd0; font-size: .84rem;
+}
+.ct-footer-bottom p { margin: 0; }
+
+/* Responsive */
+@media (max-width: 700px) {
+  .ct-header-inner { min-height: 65px; }
+  .ct-menu-button { display: inline-flex; }
+  .ct-nav {
+    display: none; position: absolute;
+    top: 65px; left: 0; right: 0;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ct-line);
+    background: #fff;
+  }
+  .ct-nav.is-open { display: block; }
+  .ct-nav-inner {
+    display: grid; gap: 0;
+    width: min(1200px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+  .ct-nav-inner a { padding: 10px 0; }
+  .ct-hero { padding: 40px 0 32px; }
+  .ct-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .ct-container { width: calc(100% - 22px); }
+  .ct-footer-grid { grid-template-columns: 1fr; }
+  .tx-panel { padding: 16px; }
+  .tx-input { min-height: 140px; font-size: .84rem; }
+  .tx-tabs { gap: 5px; }
+  .tx-tab { padding: 7px 11px; font-size: .8rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media print {
+  .ct-header, .ct-footer, .ct-hero, .tx-actions, .ct-nav,
+  .ct-related-links, .tx-panel-heading p, .tx-tabs,
+  .tx-copy-btn, .tx-result-open {
+    display: none !important;
+  }
+  body { background: #fff; }
+  .tx-panel { box-shadow: none; border-color: #ccc; }
+  .ct-section { padding: 10px 0; }
+  .ct-guide { padding-top: 10px; }
+  .tx-result-list { max-height: none; border: 0; }
+  .tx-result-row { break-inside: avoid; }
+}
+</style>
+</head>
+
+<body>
+<a class="ct-skip" href="#main-content">Skip to content</a>
+
+<header class="ct-header">
+  <div class="ct-container ct-header-inner">
+    <a class="ct-brand" href="/" aria-label="ConvertToToolsOnline home">
+      <span class="ct-brand-mark" aria-hidden="true">CT</span>
+      <span class="ct-brand-name">Convert<span>ToToolsOnline</span></span>
+    </a>
+
+    <button class="ct-menu-button" id="ct-menu-button" type="button"
+            aria-controls="ct-main-nav" aria-expanded="false">Menu</button>
+
+    <nav class="ct-nav" id="ct-main-nav" aria-label="Main navigation">
+      <div class="ct-nav-inner">
+        <a href="/">Home</a>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/Contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <!-- Hero -->
+  <section class="ct-hero">
+    <div class="ct-container">
+      <p class="ct-eyebrow">Free online data extraction tool</p>
+      <h1>Extract Emails, Phone Numbers &amp; URLs <span>from any block of text, in one pass</span></h1>
+      <p class="ct-lead">
+        Paste a document, a log file, an email thread, or a page of HTML and get back
+        clean, deduplicated lists of <strong>email addresses, URLs, phone numbers,
+        IPv4 addresses, dates, hashtags, and @mentions</strong>. Every category is
+        extracted in a single click, counted, and exportable as a text file.
+        Nothing is uploaded — the entire extraction runs in your browser and keeps
+        working offline after the page loads. No signup, no ads, no tracking.
+      </p>
+      <span class="ct-privacy-badge">
+        <span aria-hidden="true">🔒</span>
+        100% in your browser — your text never leaves your device
+      </span>
+    </div>
+  </section>
+
+  <!-- Tool -->
+  <section class="ct-section">
+    <div class="ct-container">
+
+      <!-- INPUT -->
+      <section class="tx-panel" aria-labelledby="tx-input-heading">
+        <div class="tx-panel-heading">
+          <h2 id="tx-input-heading">Paste your text</h2>
+          <p>Extraction runs automatically as you type.</p>
+        </div>
+
+        <textarea id="tx-input" class="tx-input"
+                  spellcheck="false"
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  aria-label="Text to extract data from"
+                  placeholder="Paste an email thread, a CSV dump, a log file, or any block of text here.&#10;&#10;Example: Contact john.doe@example.com or call +1 (555) 123-4567.&#10;Visit https://example.com/pricing or follow @examplehq #buildinpublic"></textarea>
+
+        <div class="tx-input-meta">
+          <span id="tx-char-count">0 characters</span>
+          <span id="tx-line-count">0 lines</span>
+        </div>
+
+        <div class="tx-actions">
+          <button id="tx-sample" type="button" class="ct-button small">Load sample text</button>
+          <button id="tx-file" type="button" class="ct-button small">Load .txt file</button>
+          <input id="tx-file-input" type="file" accept=".txt,text/plain" class="tx-hidden">
+          <button id="tx-clear" type="button" class="ct-button small">Clear</button>
+          <button id="tx-print" type="button" class="ct-button small">Print results</button>
+        </div>
+
+        <div id="tx-warn" class="tx-warn tx-hidden" role="status"></div>
+      </section>
+
+      <!-- RESULTS -->
+      <section class="tx-panel" aria-labelledby="tx-result-heading">
+        <div class="tx-panel-heading">
+          <h2 id="tx-result-heading">Extracted data</h2>
+          <p id="tx-result-sub">Choose a category to view and export.</p>
+        </div>
+
+        <div class="tx-tabs" role="tablist" aria-label="Extraction category">
+          <button class="tx-tab" type="button" role="tab" data-cat="email" aria-selected="true">
+            Emails <span class="tx-tab-count" id="tx-count-email">0</span>
+          </button>
+          <button class="tx-tab" type="button" role="tab" data-cat="url" aria-selected="false">
+            URLs <span class="tx-tab-count" id="tx-count-url">0</span>
+          </button>
+          <button class="tx-tab" type="button" role="tab" data-cat="phone" aria-selected="false">
+            Phones <span class="tx-tab-count" id="tx-count-phone">0</span>
+          </button>
+          <button class="tx-tab" type="button" role="tab" data-cat="ip" aria-selected="false">
+            IPs <span class="tx-tab-count" id="tx-count-ip">0</span>
+          </button>
+          <button class="tx-tab" type="button" role="tab" data-cat="date" aria-selected="false">
+            Dates <span class="tx-tab-count" id="tx-count-date">0</span>
+          </button>
+          <button class="tx-tab" type="button" role="tab" data-cat="hashtag" aria-selected="false">
+            Hashtags <span class="tx-tab-count" id="tx-count-hashtag">0</span>
+          </button>
+          <button class="tx-tab" type="button" role="tab" data-cat="mention" aria-selected="false">
+            Mentions <span class="tx-tab-count" id="tx-count-mention">0</span>
+          </button>
+        </div>
+
+        <div id="tx-empty" class="tx-empty">
+          <strong>No data yet.</strong>
+          Paste text above to extract emails, URLs, phone numbers, and more.
+        </div>
+
+        <div id="tx-result-content" class="tx-hidden">
+          <div class="tx-result-head">
+            <div class="tx-result-title" id="tx-result-title">Emails<span id="tx-result-count"></span></div>
+            <div class="tx-result-actions">
+              <button id="tx-copy" type="button" class="tx-copy-btn">Copy list</button>
+              <button id="tx-copy-mailto" type="button" class="tx-copy-btn tx-hidden">Copy mailto:</button>
+              <button id="tx-download" type="button" class="tx-copy-btn">Download .txt</button>
+            </div>
+          </div>
+          <div id="tx-result-list" class="tx-result-list"></div>
+        </div>
+
+      </section>
+
+    </div>
+  </section>
+
+  <!-- SEO CONTENT -->
+  <section class="ct-section">
+    <div class="ct-container">
+      <div class="ct-guide">
+
+        <h2>What does this tool extract?</h2>
+        <p>
+          It runs seven independent pattern matchers over the pasted text in a single
+          pass. Each one is designed for a different kind of structured data, and each
+          result set is deduplicated so you get a clean list rather than a wall of
+          repeats.
+        </p>
+        <table>
+          <thead>
+            <tr><th>Category</th><th>What it matches</th><th>Typical use</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Emails</strong></td><td><code>name@domain.tld</code>, including <code>+</code> tags and subdomains</td><td>Contact list cleanup, CRM imports, outreach</td></tr>
+            <tr><td><strong>URLs</strong></td><td><code>http(s)://</code> links, <code>www.</code> links, and bare domains with common TLDs</td><td>Link audits, citation lists, content research</td></tr>
+            <tr><td><strong>Phones</strong></td><td>International and local formats with spaces, dashes, dots, or parentheses; at least 7 digits</td><td>Call lists, lead extraction, support threads</td></tr>
+            <tr><td><strong>IPv4</strong></td><td>Four octets, each 0–255, with optional port</td><td>Log analysis, incident response, server audits</td></tr>
+            <tr><td><strong>Dates</strong></td><td><code>YYYY-MM-DD</code>, <code>MM/DD/YYYY</code>, <code>DD-MM-YYYY</code>, and <code>Month DD, YYYY</code></td><td>Timeline extraction, invoice processing</td></tr>
+            <tr><td><strong>Hashtags</strong></td><td><code>#word</code> with letters, digits, and underscores</td><td>Social media research, campaign analysis</td></tr>
+            <tr><td><strong>Mentions</strong></td><td><code>@handle</code> with letters, digits, underscores, and dots</td><td>Social listening, influencer identification</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Why extract emails from text?</h2>
+        <p>
+          Copying addresses out of a document by hand is slow and error-prone. It is
+          also the most common reason people reach for an extractor: a spreadsheet
+          export, an email thread, a scraped page, or a PDF that has been converted to
+          text, and somewhere inside it are the contacts they actually need.
+        </p>
+        <p>
+          The regex for an email address is simple enough to write by hand, but real
+          text is messy. Addresses appear inside quotes, followed by punctuation, split
+          across lines, or written with “at” and “dot” to dodge scrapers. This tool
+          handles the common cases — standard <code>name@domain.tld</code> addresses,
+          including <code>+</code> tags and multi-level domains — and strips the
+          trailing punctuation that a naive matcher would leave attached.
+        </p>
+
+        <h2>How the extraction works</h2>
+        <p>
+          Each category uses a regular expression tuned to that data type, run against
+          the full text in JavaScript. Matches are then normalised — emails are
+          lowercased for deduplication, URLs have trailing punctuation trimmed, phone
+          numbers are preserved as written — and stored in a set so duplicates collapse.
+        </p>
+        <p>
+          The patterns are deliberately <strong>permissive rather than strict</strong>.
+          A strict email regex will reject valid addresses like
+          <code>first.last+tag@sub.example.co.uk</code>; a permissive one accepts
+          them and lets you review the list. That is the right trade-off for this task:
+          false positives are visible and easy to delete, false negatives are invisible
+          and cost you contacts.
+        </p>
+
+        <h2>The regex patterns, in plain terms</h2>
+        <ul>
+          <li><strong>Email:</strong> <code>[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}</code> — the standard pattern, case-insensitive, with a boundary check to avoid matching inside a URL path.</li>
+          <li><strong>URL:</strong> <code>https?://…</code> and <code>www\.…</code> with a TLD check, plus a trailing-punctuation trim so a link at the end of a sentence does not capture the period.</li>
+          <li><strong>Phone:</strong> a permissive pattern requiring at least seven digits, allowing <code>+</code>, spaces, dashes, dots, and parentheses, with optional country code.</li>
+          <li><strong>IPv4:</strong> four groups of 1–3 digits, each validated to 0–255, with an optional <code>:port</code>.</li>
+          <li><strong>Date:</strong> four common formats — ISO, US slash, European dash, and spelled-month — matched separately and reported as written.</li>
+          <li><strong>Hashtag:</strong> <code>#</code> followed by letters, digits, or underscores, not preceded by a word character.</li>
+          <li><strong>Mention:</strong> <code>@</code> followed by letters, digits, underscores, or dots, not preceded by a word character — which is why it does not match the <code>@</code> inside an email.</li>
+        </ul>
+
+        <h2>How to use this extractor</h2>
+        <ol>
+          <li>Paste text into the box, or click <strong>Load .txt file</strong> to read a text file from your device.</li>
+          <li>Extraction runs automatically. The tab counts update as you type.</li>
+          <li>Click a category tab to see the deduplicated list for that type.</li>
+          <li>Use <strong>Copy list</strong> for a plain newline-separated list, <strong>Copy mailto:</strong> for an email batch, or <strong>Download .txt</strong> for a file.</li>
+          <li>Click <strong>Print results</strong> for a clean printout of the current category.</li>
+        </ol>
+
+        <h2>Limitations — read before relying on the output</h2>
+        <ul>
+          <li>This is a <strong>pattern-matching tool</strong>, not a parser. It does not validate that an email address actually exists, that a URL resolves, or that a phone number is in service.</li>
+          <li>Addresses written to evade scrapers — “name at domain dot com” — will <strong>not</strong> be extracted. That is deliberate: matching them reliably would require a language model, not a regex.</li>
+          <li>Very short or ambiguous digit strings can be matched as phone numbers when they are not. Review the phone list before using it for outreach.</li>
+          <li>The URL matcher accepts bare domains with common TLDs, which means a sentence ending in a file extension like <code>report.pdf</code> can occasionally be captured. Review the URL list.</li>
+          <li>Dates are reported as written and are not normalised to a single format. A <code>03/04/2026</code> match is ambiguous between US and European order and is left as-is.</li>
+          <li>The tool processes text in memory in the browser. Extremely large inputs (hundreds of thousands of characters) may be slow on low-end devices; the character counter shows the current size.</li>
+          <li>This tool does not bypass any website’s terms of service. Use it on text you have the right to process.</li>
+        </ul>
+
+        <h2>Privacy: why this runs in the browser</h2>
+        <p>
+          Text you paste into an online tool can contain client names, personal email
+          addresses, internal URLs, or credentials. Uploading that to a server is a
+          privacy decision, and for many people it is the wrong one.
+        </p>
+        <p>
+          This tool never sends the text anywhere. The extraction is pure JavaScript
+          running in the page, so it works with the network disconnected after the
+          page loads. You can verify that in your browser’s network tab: there is no
+          request carrying your input.
+        </p>
+
+        <h2 id="faq">Frequently asked questions</h2>
+        <div class="ct-faq">
+          <details>
+            <summary>How do I extract emails from text?</summary>
+            <p>Paste the text into the box above. The email extractor runs automatically and lists every address it finds, deduplicated and lowercased. Click the Emails tab to see the list, then use Copy list or Download .txt to take it with you.</p>
+          </details>
+          <details>
+            <summary>Does this tool upload my text to a server?</summary>
+            <p>No. Everything runs in your browser. The text is never sent anywhere, and the tool keeps working if you disconnect from the network after the page loads.</p>
+          </details>
+          <details>
+            <summary>Can it extract phone numbers in international format?</summary>
+            <p>Yes. The phone matcher accepts a leading + and country code, and allows spaces, dashes, dots, and parentheses as separators. It requires at least seven digits, which is why it does not match short numbers like ZIP codes.</p>
+          </details>
+          <details>
+            <summary>Why does the mention extractor not match the @ in an email address?</summary>
+            <p>The mention pattern requires that the @ is not preceded by a word character. In an email like name@domain.com, the @ follows a letter, so it is skipped. In a tweet like “thanks @examplehq”, the @ follows a space, so it matches.</p>
+          </details>
+          <details>
+            <summary>Does it remove duplicates?</summary>
+            <p>Yes. Each category is deduplicated. Emails are lowercased before comparison, so Name@Example.com and name@example.com count once. URLs have trailing punctuation trimmed before comparison.</p>
+          </details>
+          <details>
+            <summary>What is the mailto: button for?</summary>
+            <p>It builds a mailto: link with all extracted emails in the To field, so you can open your email client with the recipients already populated. It is useful for a small batch; for large lists, use the CSV-friendly copy or download instead.</p>
+          </details>
+          <details>
+            <summary>Can I extract data from a PDF or an image?</summary>
+            <p>This tool accepts text, not PDF or image files. Convert a PDF to text first, or use an OCR tool to extract text from an image, then paste the result here.</p>
+          </details>
+          <details>
+            <summary>Does it work offline?</summary>
+            <p>Yes, once the page has loaded. The extraction logic is entirely client-side, so it continues to work without a network connection.</p>
+          </details>
+          <details>
+            <summary>Is my data stored anywhere?</summary>
+            <p>No. The tool does not write your input to localStorage, cookies, or any server. It exists only in the page’s memory for the current session.</p>
+          </details>
+        </div>
+
+        <h2>Related tools</h2>
+        <ul class="ct-related-links">
+          <li><a href="/">All ConvertToToolsOnline tools</a></li>
+          <li><a href="/word-counter.html">Word Counter</a></li>
+          <li><a href="/text-diff-checker.html">Text Diff Checker</a></li>
+          <li><a href="/html-entity-encoder-decoder.html">HTML Entity Encoder / Decoder</a></li>
+          <li><a href="/exif-metadata-remover.html">EXIF Metadata Remover</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-grid">
+      <div>
+        <a class="ct-footer-brand" href="/">
+          <span class="ct-brand-mark" aria-hidden="true">CT</span>
+          <span>ConvertToToolsOnline</span>
+        </a>
+        <p>Practical online tools for documents, images, data, development and everyday work.</p>
+      </div>
+
+      <nav class="ct-footer-links" aria-label="Tool navigation">
+        <strong>Explore</strong>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/sitemap.xml">XML sitemap</a>
+      </nav>
+
+      <nav class="ct-footer-links" aria-label="Site information">
+        <strong>Contact &amp; information</strong>
+        <a href="/Contact.html">Contact</a>
+        <a href="/#about">About the toolbox</a>
+        <a href="#main-content">Back to top ↑</a>
+      </nav>
+    </div>
+
+    <div class="ct-footer-bottom">
+      <p>© <span id="tx-year">2026</span> ConvertToToolsOnline. All rights reserved.</p>
+      <p>Free utilities for practical tasks.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Text & Contact Extractor",
+      "url": "https://converttotoolsonline.com/text-contact-extractor.html",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any modern browser",
+      "browserRequirements": "Requires JavaScript",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Extract emails, URLs, phone numbers, IPv4 addresses, dates, hashtags, and @mentions from any text in one pass. Deduplicated, copyable, and downloadable per category. Runs entirely in the browser with no upload.",
+      "featureList": [
+        "Email extraction with deduplication",
+        "URL extraction with trailing punctuation trimming",
+        "Phone number extraction across formats",
+        "IPv4 address extraction",
+        "Date extraction across four formats",
+        "Hashtag and mention extraction",
+        "Per-category copy and download",
+        "mailto: batch for emails",
+        "100% client-side, works offline",
+        "No signup, no ads, no tracking"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"How do I extract emails from text?","acceptedAnswer":{"@type":"Answer","text":"Paste the text into the box above. The email extractor runs automatically and lists every address it finds, deduplicated and lowercased. Click the Emails tab to see the list, then use Copy list or Download .txt to take it with you."}},
+        {"@type":"Question","name":"Does this tool upload my text to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs in your browser. The text is never sent anywhere, and the tool keeps working if you disconnect from the network after the page loads."}},
+        {"@type":"Question","name":"Can it extract phone numbers in international format?","acceptedAnswer":{"@type":"Answer","text":"Yes. The phone matcher accepts a leading plus sign and country code, and allows spaces, dashes, dots, and parentheses as separators. It requires at least seven digits, which is why it does not match short numbers like ZIP codes."}},
+        {"@type":"Question","name":"Why does the mention extractor not match the @ in an email address?","acceptedAnswer":{"@type":"Answer","text":"The mention pattern requires that the @ is not preceded by a word character. In an email like name@domain.com, the @ follows a letter, so it is skipped. In a tweet like thanks @examplehq, the @ follows a space, so it matches."}},
+        {"@type":"Question","name":"Does it remove duplicates?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each category is deduplicated. Emails are lowercased before comparison, so Name@Example.com and name@example.com count once. URLs have trailing punctuation trimmed before comparison."}},
+        {"@type":"Question","name":"What is the mailto: button for?","acceptedAnswer":{"@type":"Answer","text":"It builds a mailto: link with all extracted emails in the To field, so you can open your email client with the recipients already populated. It is useful for a small batch; for large lists, use the copy or download instead."}},
+        {"@type":"Question","name":"Can I extract data from a PDF or an image?","acceptedAnswer":{"@type":"Answer","text":"This tool accepts text, not PDF or image files. Convert a PDF to text first, or use an OCR tool to extract text from an image, then paste the result here."}},
+        {"@type":"Question","name":"Does it work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes, once the page has loaded. The extraction logic is entirely client-side, so it continues to work without a network connection."}},
+        {"@type":"Question","name":"Is my data stored anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The tool does not write your input to localStorage, cookies, or any server. It exists only in the page's memory for the current session."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- Menu toggle -->
+<script>
+(function () {
+  'use strict';
+  var btn = document.getElementById('ct-menu-button');
+  var nav = document.getElementById('ct-main-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 700) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>
+
+<!-- Tool logic -->
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  var yearEl = $('tx-year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  // ============================================================
+  // State
+  // ============================================================
+  var currentCat = 'email';
+  var results = {
+    email: [],
+    url: [],
+    phone: [],
+    ip: [],
+    date: [],
+    hashtag: [],
+    mention: []
+  };
+
+  var CAT_META = {
+    email:   { label: 'Emails',    unit: 'email address' },
+    url:     { label: 'URLs',      unit: 'URL' },
+    phone:   { label: 'Phones',    unit: 'phone number' },
+    ip:      { label: 'IPs',       unit: 'IPv4 address' },
+    date:    { label: 'Dates',     unit: 'date' },
+    hashtag: { label: 'Hashtags',  unit: 'hashtag' },
+    mention: { label: 'Mentions',  unit: 'mention' }
+  };
+
+  // ============================================================
+  // Elements
+  // ============================================================
+  var inputEl = $('tx-input');
+  var charCountEl = $('tx-char-count');
+  var lineCountEl = $('tx-line-count');
+  var emptyEl = $('tx-empty');
+  var contentEl = $('tx-result-content');
+  var resultTitleEl = $('tx-result-title');
+  var resultCountEl = $('tx-result-count');
+  var resultListEl = $('tx-result-list');
+  var resultSubEl = $('tx-result-sub');
+  var warnEl = $('tx-warn');
+  var copyMailtoBtn = $('tx-copy-mailto');
+
+  // ============================================================
+  // Regex patterns
+  // ============================================================
+
+  // Email: standard pattern, boundary-safe
+  // Matches name@domain.tld with + tags, dots, hyphens, subdomains
+  var RE_EMAIL = /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/g;
+
+  // URL: http(s):// and www., with trailing punctuation trimmed
+  var RE_URL = /\b(?:https?:\/\/|www\.)[^\s<>"'`]+/gi;
+
+  // Phone: at least 7 digits, optional +, separators allowed
+  // Uses a lookahead to require a minimum digit count
+  var RE_PHONE = /(?:\+?\d{1,3}[\s.\-]?)?(?:\(?\d{2,4}\)?[\s.\-]?)?\d{3,4}[\s.\-]?\d{3,4}(?:\s?(?:ext|x|ext\.)\s?\d{1,5})?/gi;
+
+  // IPv4: four octets 0-255, optional port
+  var RE_IP = /\b(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(?::\d{1,5})?\b/g;
+
+  // Dates: four formats
+  var RE_DATE_ISO = /\b\d{4}-\d{2}-\d{2}\b/g;
+  var RE_DATE_US = /\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/g;
+  var RE_DATE_EU = /\b\d{1,2}-\d{1,2}-\d{4}\b/g;
+  var RE_DATE_NAMED = /\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{1,2}(?:st|nd|rd|th)?,?\s+\d{4}\b/gi;
+
+  // Hashtag: #word not preceded by a word character
+  var RE_HASHTAG = /(?<![A-Za-z0-9_])#[A-Za-z0-9_]{1,50}/g;
+
+  // Mention: @handle not preceded by a word character (so not the @ in an email)
+  var RE_MENTION = /(?<![A-Za-z0-9_.])@[A-Za-z0-9_.]{1,50}/g;
+
+  // ============================================================
+  // Extraction
+  // ============================================================
+  function extractAll(text) {
+    var out = {
+      email: [],
+      url: [],
+      phone: [],
+      ip: [],
+      date: [],
+      hashtag: [],
+      mention: []
+    };
+
+    if (!text) return out;
+
+    // ----- Emails -----
+    var emails = text.match(RE_EMAIL) || [];
+    var emailSet = new Set();
+    emails.forEach(function (raw) {
+      var e = raw.replace(/[.,;:]+$/, '').trim();
+      if (e && e.indexOf('@') > 0 && e.indexOf('.') > e.indexOf('@')) {
+        emailSet.add(e.toLowerCase());
+      }
+    });
+    out.email = Array.from(emailSet);
+
+    // ----- URLs -----
+    var urls = text.match(RE_URL) || [];
+    var urlSet = new Set();
+    urls.forEach(function (raw) {
+      var u = raw.replace(/[.,;:!?)\]}'"`]+$/, '').trim();
+      if (u.length > 4) urlSet.add(u);
+    });
+    out.url = Array.from(urlSet);
+
+    // ----- Phones -----
+    // Reset lastIndex because RE_PHONE is global and may be reused
+    RE_PHONE.lastIndex = 0;
+    var phones = text.match(RE_PHONE) || [];
+    var phoneSet = new Set();
+    phones.forEach(function (raw) {
+      var digits = (raw.match(/\d/g) || []).length;
+      if (digits < 7 || digits > 15) return; // too short or implausible
+      var cleaned = raw.replace(/\s+/g, ' ').trim();
+      // Reject if it looks like a year range or a plain decimal
+      if (/^\d{4}$/.test(cleaned)) return;
+      phoneSet.add(cleaned);
+    });
+    out.phone = Array.from(phoneSet);
+
+    // ----- IPv4 -----
+    var ips = text.match(RE_IP) || [];
+    var ipSet = new Set();
+    ips.forEach(function (raw) {
+      ipSet.add(raw);
+    });
+    out.ip = Array.from(ipSet);
+
+    // ----- Dates -----
+    var dateSet = new Set();
+    var allDates = []
+      .concat(text.match(RE_DATE_ISO) || [])
+      .concat(text.match(RE_DATE_US) || [])
+      .concat(text.match(RE_DATE_EU) || [])
+      .concat(text.match(RE_DATE_NAMED) || []);
+    allDates.forEach(function (d) {
+      dateSet.add(d.trim());
+    });
+    out.date = Array.from(dateSet);
+
+    // ----- Hashtags -----
+    var tags = text.match(RE_HASHTAG) || [];
+    var tagSet = new Set();
+    tags.forEach(function (t) {
+      var clean = t.replace(/[.,;:!?)\]}'"`]+$/, '');
+      if (clean.length > 1) tagSet.add(clean);
+    });
+    out.hashtag = Array.from(tagSet);
+
+    // ----- Mentions -----
+    var mentions = text.match(RE_MENTION) || [];
+    var mentionSet = new Set();
+    mentions.forEach(function (m) {
+      var clean = m.replace(/[.,;:!?)\]}'"`]+$/, '');
+      if (clean.length > 1) mentionSet.add(clean);
+    });
+    out.mention = Array.from(mentionSet);
+
+    return out;
+  }
+
+  // ============================================================
+  // UI updates
+  // ============================================================
+  function updateCounts() {
+    var total = 0;
+    Object.keys(results).forEach(function (cat) {
+      var n = results[cat].length;
+      total += n;
+      var el = $('tx-count-' + cat);
+      if (el) el.textContent = String(n);
+    });
+    return total;
+  }
+
+  function renderCategory(cat) {
+    currentCat = cat;
+
+    // Tabs
+    document.querySelectorAll('.tx-tab').forEach(function (t) {
+      t.setAttribute('aria-selected', t.getAttribute('data-cat') === cat ? 'true' : 'false');
+    });
+
+    var list = results[cat] || [];
+    var meta = CAT_META[cat];
+
+    if (!list.length) {
+      emptyEl.classList.remove('tx-hidden');
+      contentEl.classList.add('tx-hidden');
+      resultSubEl.textContent = 'No ' + meta.unit + 's found in the current text.';
+      return;
+    }
+
+    emptyEl.classList.add('tx-hidden');
+    contentEl.classList.remove('tx-hidden');
+
+    resultTitleEl.textContent = meta.label;
+    resultCountEl.textContent = ' · ' + list.length + ' unique ' + (list.length === 1 ? meta.unit : meta.unit + 's');
+    resultSubEl.textContent = list.length + ' unique ' + (list.length === 1 ? meta.unit : meta.unit + 's') + ' found.';
+
+    // Show mailto button only for emails
+    copyMailtoBtn.classList.toggle('tx-hidden', cat !== 'email');
+
+    // Build list
+    var html = '';
+    list.forEach(function (value, i) {
+      var openLink = '';
+      if (cat === 'email') {
+        openLink = '<a class="tx-result-open" href="mailto:' + escapeAttr(value) + '">Mail</a>';
+      } else if (cat === 'url') {
+        var href = value;
+        if (!/^https?:\/\//i.test(href)) {
+          href = 'https://' + href;
+        }
+        openLink = '<a class="tx-result-open" href="' + escapeAttr(href) + '" target="_blank" rel="noopener noreferrer">Open</a>';
+      }
+      html += '<div class="tx-result-row">' +
+        '<span class="tx-result-index">' + (i + 1) + '</span>' +
+        '<span class="tx-result-value">' + escapeHtml(value) + '</span>' +
+        openLink +
+        '</div>';
+    });
+    resultListEl.innerHTML = html;
+  }
+
+  function runExtraction() {
+    var text = inputEl.value || '';
+    results = extractAll(text);
+    var total = updateCounts();
+
+    // Character and line counts
+    charCountEl.textContent = text.length.toLocaleString('en-US') + ' character' + (text.length === 1 ? '' : 's');
+    var lines = text ? text.split(/\r?\n/).length : 0;
+    lineCountEl.textContent = lines.toLocaleString('en-US') + ' line' + (lines === 1 ? '' : 's');
+
+    if (total === 0) {
+      emptyEl.classList.remove('tx-hidden');
+      contentEl.classList.add('tx-hidden');
+      resultSubEl.textContent = 'Choose a category to view and export.';
+    } else {
+      renderCategory(currentCat);
+    }
+  }
+
+  // ============================================================
+  // Helpers
+  // ============================================================
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c];
+    });
+  }
+  function escapeAttr(s) {
+    return escapeHtml(s).replace(/"/g, '&quot;');
+  }
+  function showWarn(msg) {
+    warnEl.classList.remove('tx-hidden');
+    warnEl.innerHTML = '<strong>' + escapeHtml(msg) + '</strong>';
+  }
+  function hideWarn() {
+    warnEl.classList.add('tx-hidden');
+    warnEl.innerHTML = '';
+  }
+
+  function fallbackCopy(text, cb) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    if (cb) cb();
+  }
+
+  function copyWithFeedback(text, btn) {
+    if (!text) return;
+    var orig = btn.textContent;
+    function done() {
+      btn.textContent = 'Copied ✓';
+      setTimeout(function () { btn.textContent = orig; }, 1400);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done); });
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+
+  // ============================================================
+  // Events
+  // ============================================================
+  inputEl.addEventListener('input', runExtraction);
+
+  document.querySelectorAll('.tx-tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      renderCategory(tab.getAttribute('data-cat'));
+    });
+  });
+
+  // Copy list
+  $('tx-copy').addEventListener('click', function () {
+    var list = results[currentCat] || [];
+    if (!list.length) return;
+    copyWithFeedback(list.join('\n'), this);
+  });
+
+  // Copy mailto
+  copyMailtoBtn.addEventListener('click', function () {
+    var list = results.email || [];
+    if (!list.length) return;
+    var mailto = 'mailto:' + list.join(',');
+    copyWithFeedback(mailto, this);
+  });
+
+  // Download .txt
+  $('tx-download').addEventListener('click', function () {
+    var list = results[currentCat] || [];
+    if (!list.length) return;
+    var blob = new Blob([list.join('\n') + '\n'], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'extracted-' + currentCat + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+  });
+
+  // Sample text
+  var SAMPLE = [
+    'Hi team,',
+    '',
+    'Please follow up with the following contacts before Friday:',
+    '  - john.doe@example.com (London office, +44 20 7946 0958)',
+    '  - maria.garcia+events@example.co.uk (Madrid, +34 91 123 45 67)',
+    '  - support@acme.io and billing@acme.io',
+    '',
+    'Relevant links:',
+    '  https://example.com/pricing',
+    '  www.acme.io/case-studies',
+    '  http://docs.example.org/guide.html.',
+    '',
+    'Server notes: primary 192.168.1.10, backup 10.0.0.42:8080.',
+    'Deploy window: 2026-11-03 and 11/05/2026.',
+    '',
+    'Thanks @ops_team — tracking #release and #buildinpublic.'
+  ].join('\n');
+
+  $('tx-sample').addEventListener('click', function () {
+    inputEl.value = SAMPLE;
+    hideWarn();
+    runExtraction();
+    inputEl.focus();
+  });
+
+  // File loader
+  $('tx-file').addEventListener('click', function () {
+    $('tx-file-input').click();
+  });
+
+  $('tx-file-input').addEventListener('change', function (e) {
+    var f = e.target.files && e.target.files[0];
+    if (!f) return;
+    if (f.size > 10 * 1024 * 1024) {
+      showWarn('That file is over 10 MB. Large files may be slow to process — consider pasting a smaller portion.');
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function () {
+      inputEl.value = String(reader.result || '');
+      hideWarn();
+      runExtraction();
+    };
+    reader.onerror = function () {
+      showWarn('Could not read that file.');
+    };
+    reader.readAsText(f);
+    e.target.value = '';
+  });
+
+  // Clear
+  $('tx-clear').addEventListener('click', function () {
+    inputEl.value = '';
+    hideWarn();
+    results = { email: [], url: [], phone: [], ip: [], date: [], hashtag: [], mention: [] };
+    updateCounts();
+    emptyEl.classList.remove('tx-hidden');
+    contentEl.classList.add('tx-hidden');
+    charCountEl.textContent = '0 characters';
+    lineCountEl.textContent = '0 lines';
+    resultSubEl.textContent = 'Choose a category to view and export.';
+    inputEl.focus();
+  });
+
+  // Print
+  $('tx-print').addEventListener('click', function () { window.print(); });
+
+  // ============================================================
+  // Init
+  // ============================================================
+  runExtraction();
+})();
+</script>
+</body>
+</html>

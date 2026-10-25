@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f8ff">
+<title>Compress GIF — Target Size, Animation Kept Intact</title>
+<meta name="description" content="Compress an animated GIF to a target size (256 KB, 512 KB, 10 MB). Keeps the animation and its original speed. No upload, no signup.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://converttotoolsonline.com/compress-gif.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ConvertToToolsOnline">
+<meta property="og:title" content="Compress GIF — Target Size, Animation Kept Intact">
+<meta property="og:description" content="Shrink an animated GIF to fit Discord, Slack, WhatsApp, or any size limit — without losing the animation or its speed.">
+<meta property="og:url" content="https://converttotoolsonline.com/compress-gif.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Compress GIF">
+<meta name="twitter:description" content="Compress an animated GIF to a target size. Animation and playback speed preserved.">
+<link rel="stylesheet" href="/style.css">
+
+<style>
+:root {
+  color-scheme: light;
+  --ct-ink: #172033;
+  --ct-muted: #607087;
+  --ct-blue: #245bcc;
+  --ct-blue-dark: #194aa8;
+  --ct-line: #dfe6ef;
+  --ct-bg: #f5f8ff;
+  --ct-white: #fff;
+  --ct-radius: 16px;
+  --ct-shadow: 0 6px 24px rgba(20, 35, 60, .055);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+
+body {
+  margin: 0;
+  background: var(--ct-bg);
+  color: var(--ct-ink);
+  font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a { color: var(--ct-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible { outline: 3px solid #9dbbff; outline-offset: 3px; }
+
+.ct-container { width: min(1200px, calc(100% - 32px)); margin-inline: auto; }
+
+.ct-skip {
+  position: absolute; top: 8px; left: -9999px; z-index: 100;
+  padding: 10px 14px; border-radius: 8px;
+  background: white; color: var(--ct-ink);
+}
+.ct-skip:focus { left: 10px; }
+
+.ct-header {
+  position: relative; z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid var(--ct-line);
+}
+.ct-header-inner {
+  min-height: 72px;
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+}
+.ct-brand {
+  display: inline-flex; align-items: center; gap: 11px;
+  color: var(--ct-ink); font-weight: 850; letter-spacing: -.4px;
+}
+.ct-brand:hover { text-decoration: none; }
+.ct-brand-mark {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; flex: 0 0 auto;
+  border-radius: 12px; background: var(--ct-blue); color: #fff;
+  font-size: .95rem; font-weight: 900;
+}
+.ct-brand-name span { color: var(--ct-blue); }
+.ct-nav { display: flex; align-items: center; gap: 22px; }
+.ct-nav a { color: #475569; font-size: .93rem; font-weight: 700; }
+.ct-nav a:hover { color: var(--ct-blue); }
+.ct-menu-button {
+  display: none; min-height: 40px; padding: 8px 12px;
+  border: 1px solid var(--ct-line); border-radius: 9px;
+  background: white; color: var(--ct-ink); font-weight: 750;
+}
+
+.ct-hero {
+  padding: 52px 0 42px;
+  border-bottom: 1px solid var(--ct-line);
+  background: linear-gradient(130deg, #f8fbff 0%, #eaf1ff 56%, #f6f2ff 100%);
+}
+.ct-eyebrow {
+  margin: 0 0 10px; color: var(--ct-blue);
+  font-size: .76rem; font-weight: 850;
+  letter-spacing: .13em; text-transform: uppercase;
+}
+.ct-hero h1 {
+  max-width: 920px; margin: 0 0 15px;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+  line-height: 1.08; letter-spacing: -.05em;
+}
+.ct-hero h1 span { display: block; color: var(--ct-blue); }
+.ct-lead {
+  max-width: 840px; margin: 0;
+  color: #475569; font-size: clamp(1rem, 1.7vw, 1.12rem); line-height: 1.8;
+}
+.ct-privacy-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 18px; padding: 6px 12px;
+  background: #fff; border: 1px solid #cfe0ff;
+  border-radius: 999px; color: #194aa8;
+  font-size: .84rem; font-weight: 700;
+}
+
+.ct-section { padding: 40px 0; }
+.ct-section-heading { margin-bottom: 21px; }
+.ct-section-heading h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -.035em; line-height: 1.25;
+}
+.ct-section-heading p:last-child { max-width: 820px; margin: 0; color: var(--ct-muted); }
+
+.ct-button {
+  display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+  min-height: 43px; padding: 10px 15px;
+  border: 1px solid #cbd5e1; border-radius: 10px;
+  background: #fff; color: var(--ct-ink);
+  font-weight: 750; text-align: center;
+  transition: border-color .15s ease, background .15s ease;
+}
+.ct-button:hover { border-color: #a9bce4; text-decoration: none; }
+.ct-button-primary {
+  border-color: var(--ct-blue);
+  background: var(--ct-blue); color: #fff;
+}
+.ct-button-primary:hover {
+  border-color: var(--ct-blue-dark);
+  background: var(--ct-blue-dark);
+  color: #fff;
+}
+.ct-button.small { min-height: 36px; padding: 7px 12px; font-size: .85rem; }
+.ct-button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ============ Tool ============ */
+.gf-panel {
+  padding: 22px;
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  background: var(--ct-white);
+  box-shadow: var(--ct-shadow);
+}
+.gf-panel + .gf-panel { margin-top: 20px; }
+
+.gf-panel-heading {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.gf-panel-heading h2 {
+  margin: 0; font-size: 1.02rem; letter-spacing: -.01em;
+}
+.gf-panel-heading p { margin: 0; color: var(--ct-muted); font-size: .85rem; }
+
+.gf-drop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 100%; min-height: 150px;
+  padding: 26px 20px;
+  border: 2px dashed #c3d0e4;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fafcff 0%, #f2f6ff 100%);
+  color: var(--ct-ink);
+  text-align: center;
+  transition: border-color .18s ease, background .18s ease;
+}
+.gf-drop:hover, .gf-drop:focus-visible, .gf-drop.is-dragover {
+  border-color: var(--ct-blue);
+  background: linear-gradient(180deg, #f2f7ff 0%, #e6efff 100%);
+  outline: none;
+}
+.gf-drop-icon {
+  display: grid; place-items: center;
+  width: 48px; height: 48px; margin-bottom: 10px;
+  border-radius: 12px;
+  background: #fff; border: 1px solid #dbe7ff;
+  color: var(--ct-blue); font-size: 1.4rem;
+}
+.gf-drop strong { font-size: .98rem; margin-bottom: 5px; }
+.gf-drop small { color: var(--ct-muted); line-height: 1.5; max-width: 360px; }
+
+.gf-file-input { display: none; }
+
+.gf-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+@media (max-width: 720px) { .gf-grid { grid-template-columns: 1fr; } }
+.gf-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 900px) { .gf-grid.three { grid-template-columns: 1fr; } }
+
+.gf-field { display: flex; flex-direction: column; gap: 5px; }
+.gf-field label { font-size: .84rem; font-weight: 650; color: #34405a; }
+.gf-field input, .gf-field select {
+  padding: 9px 11px;
+  border: 1px solid #cbd5e1; border-radius: 8px;
+  background: #fff; color: var(--ct-ink);
+  font-size: .92rem; width: 100%;
+}
+.gf-field input:focus, .gf-field select:focus { border-color: var(--ct-blue); }
+.gf-field input[type="number"] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+.gf-hint { font-size: .76rem; color: var(--ct-muted); line-height: 1.4; }
+
+.gf-inline { display: flex; gap: 8px; align-items: center; }
+.gf-inline input { flex: 1; }
+.gf-inline .gf-unit {
+  font-size: .82rem; color: var(--ct-muted);
+  font-weight: 650; white-space: nowrap;
+}
+
+/* Presets */
+.gf-presets {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 4px;
+}
+.gf-preset {
+  display: inline-flex; flex-direction: column;
+  padding: 8px 12px;
+  border: 1px solid var(--ct-line);
+  border-radius: 9px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .12s ease, background .12s ease;
+}
+.gf-preset:hover { border-color: #a9bce4; background: #f5f9ff; }
+.gf-preset strong {
+  font-size: .84rem; color: var(--ct-ink);
+  display: block; margin-bottom: 2px;
+}
+.gf-preset span {
+  font-size: .74rem; color: var(--ct-muted);
+  font-family: ui-monospace, monospace;
+}
+.gf-preset.is-primary {
+  border-color: #cfe0ff;
+  background: #eef4ff;
+}
+
+.gf-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.gf-chip {
+  padding: 5px 11px;
+  border: 1px solid var(--ct-line);
+  border-radius: 999px;
+  background: #fff;
+  color: #34405a;
+  font-size: .8rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+.gf-chip:hover { border-color: #a9bce4; background: #f5f9ff; }
+.gf-chip.is-primary {
+  background: #eef4ff;
+  border-color: #cfe0ff;
+  color: #194aa8;
+}
+
+/* Advanced */
+.gf-advanced {
+  margin-top: 16px;
+  border: 1px solid var(--ct-line);
+  border-radius: 10px;
+  background: #fbfdff;
+}
+.gf-advanced summary {
+  padding: 11px 14px;
+  cursor: pointer;
+  font-weight: 750;
+  font-size: .88rem;
+  color: var(--ct-ink);
+}
+.gf-advanced summary::marker { color: var(--ct-blue); }
+.gf-advanced-body {
+  padding: 4px 14px 14px;
+  border-top: 1px solid var(--ct-line);
+}
+
+.gf-check {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: .84rem; color: #34405a;
+  cursor: pointer;
+  margin-top: 12px;
+}
+.gf-check input[type="checkbox"] {
+  width: 16px; height: 16px; margin-top: 2px; flex: 0 0 auto;
+  accent-color: var(--ct-blue);
+}
+.gf-check .gf-check-note {
+  display: block;
+  font-size: .75rem;
+  color: var(--ct-muted);
+  line-height: 1.45;
+  margin-top: 2px;
+}
+
+.gf-actions {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 16px;
+}
+
+.gf-status {
+  min-height: 1.3em;
+  font-size: .84rem;
+  margin-top: 10px;
+}
+.gf-status[data-tone="error"] { color: #b00020; }
+.gf-status[data-tone="ok"] { color: #166534; }
+.gf-status[data-tone="busy"] { color: var(--ct-muted); }
+.gf-status[data-tone="warn"] { color: #8a5a00; }
+
+/* Progress */
+.gf-progress {
+  margin-top: 12px;
+  height: 8px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+.gf-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #245bcc, #194aa8);
+  border-radius: 999px;
+  transition: width .2s ease;
+}
+
+/* Preview */
+.gf-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 720px) { .gf-preview-grid { grid-template-columns: 1fr; } }
+.gf-preview-card {
+  padding: 12px;
+  border: 1px solid var(--ct-line);
+  border-radius: 12px;
+  background: #f8faff;
+  display: flex; flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.gf-preview-card.is-final {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+}
+.gf-preview-label {
+  font-size: .72rem; font-weight: 850;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ct-muted);
+  margin-bottom: 8px;
+}
+.gf-preview-card.is-final .gf-preview-label { color: #166534; }
+.gf-preview-img {
+  max-width: 100%;
+  max-height: 260px;
+  width: auto;
+  border-radius: 6px;
+  border: 1px solid var(--ct-line);
+  background:
+    linear-gradient(45deg, #eee 25%, transparent 25%) 0 0/16px 16px,
+    linear-gradient(-45deg, #eee 25%, transparent 25%) 0 8px/16px 16px,
+    linear-gradient(45deg, transparent 75%, #eee 75%) 8px -8px/16px 16px,
+    linear-gradient(-45deg, transparent 75%, #eee 75%) -8px 0/16px 16px,
+    #fff;
+  display: block;
+}
+.gf-preview-meta {
+  margin-top: 10px;
+  font-size: .84rem;
+  color: var(--ct-ink);
+  font-weight: 650;
+}
+.gf-preview-sub {
+  font-size: .76rem;
+  color: var(--ct-muted);
+  font-family: ui-monospace, monospace;
+  margin-top: 3px;
+}
+
+/* Info table */
+.gf-info {
+  border: 1px solid var(--ct-line);
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.gf-info-table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+.gf-info-table th, .gf-info-table td {
+  padding: 9px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eef2f7;
+}
+.gf-info-table th {
+  font-size: .74rem;
+  font-weight: 850;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--ct-muted);
+  background: #f8faff;
+  width: 42%;
+}
+.gf-info-table td {
+  font-family: ui-monospace, monospace;
+  color: var(--ct-ink);
+  font-weight: 650;
+}
+.gf-info-table tr:last-child th,
+.gf-info-table tr:last-child td { border-bottom: 0; }
+.gf-info-table td.is-good { color: #166534; }
+.gf-info-table td.is-warn { color: #8a5a00; }
+.gf-info-table td.is-bad { color: #b00020; }
+
+/* Warn */
+.gf-warn {
+  margin-top: 12px;
+  padding: 10px 13px;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  background: #fffbeb;
+  font-size: .84rem;
+  color: #7a5200;
+  line-height: 1.55;
+}
+.gf-warn strong { color: #6b4500; }
+.gf-warn.is-error {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #7f1d1d;
+}
+.gf-warn.is-error strong { color: #991b1b; }
+.gf-warn.is-info {
+  background: #f0f6ff;
+  border-color: #cfe0ff;
+  color: #194aa8;
+}
+.gf-warn.is-info strong { color: #172033; }
+.gf-warn.is-good {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+.gf-warn.is-good strong { color: #14532d; }
+
+.gf-empty {
+  padding: 34px 16px;
+  text-align: center;
+  color: var(--ct-muted);
+  font-size: .92rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #fafcff;
+}
+.gf-empty strong { color: var(--ct-ink); display: block; margin-bottom: 4px; }
+
+.gf-hidden { display: none !important; }
+
+.gf-algo {
+  margin-top: 12px;
+  padding: 10px 13px;
+  border: 1px solid #cfe0ff;
+  border-radius: 10px;
+  background: #f5f9ff;
+  font-size: .8rem;
+  color: #194aa8;
+  line-height: 1.6;
+}
+.gf-algo strong { color: #172033; }
+.gf-algo ol { margin: 6px 0 0; padding-left: 20px; }
+.gf-algo li { margin-bottom: 3px; }
+
+/* ============ FAQ ============ */
+.gf-faq-nav {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--ct-line);
+  border-radius: 10px;
+  background: #f8faff;
+  margin: 16px 0 24px;
+}
+.gf-faq-nav strong {
+  font-size: .78rem; font-weight: 850;
+  letter-spacing: .05em; text-transform: uppercase;
+  color: var(--ct-muted);
+  margin-right: 4px;
+  align-self: center;
+}
+.gf-faq-nav a {
+  padding: 5px 11px;
+  border: 1px solid var(--ct-line);
+  border-radius: 999px;
+  background: #fff;
+  color: #34405a;
+  font-size: .84rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: border-color .12s ease, background .12s ease, color .12s ease;
+}
+.gf-faq-nav a:hover {
+  border-color: var(--ct-blue);
+  color: var(--ct-blue);
+  background: #f5f9ff;
+  text-decoration: none;
+}
+
+.gf-faq-group {
+  margin: 32px 0;
+  scroll-margin-top: 24px;
+}
+.gf-faq-group h3 {
+  margin: 0 0 14px;
+  font-size: 1.1rem;
+  letter-spacing: -.02em;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ct-blue);
+  display: inline-block;
+}
+
+/* Guide */
+.ct-guide { max-width: 900px; margin: 0 auto; padding: 48px 0 16px; }
+.ct-guide h2 { margin-top: 32px; font-size: 1.25rem; letter-spacing: -.02em; }
+.ct-guide h3 { margin-top: 22px; font-size: 1.03rem; }
+.ct-guide p, .ct-guide li { line-height: 1.7; color: #34405a; }
+.ct-guide code {
+  background: #eef2f8; padding: 1px 6px; border-radius: 5px;
+  font-size: .88em; color: #172033;
+}
+.ct-guide table {
+  width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .86rem;
+}
+.ct-guide th, .ct-guide td {
+  padding: 8px 12px; border: 1px solid var(--ct-line); text-align: left;
+}
+.ct-guide th { background: #f8faff; font-weight: 750; }
+
+.ct-faq details { border-bottom: 1px solid var(--ct-line); padding: 12px 0; }
+.ct-faq summary { cursor: pointer; font-weight: 700; color: var(--ct-ink); }
+.ct-faq summary::marker { color: var(--ct-blue); }
+.ct-faq p { margin: 9px 0 0; color: #34405a; }
+
+.ct-related-links {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin: 12px 0 0; padding: 0; list-style: none;
+}
+.ct-related-links a {
+  display: inline-block; padding: 7px 13px;
+  border: 1px solid var(--ct-line); border-radius: 999px;
+  background: #fff; color: #34405a;
+  font-size: .88rem; font-weight: 650;
+}
+.ct-related-links a:hover {
+  border-color: #a9bce4; color: var(--ct-blue); text-decoration: none;
+}
+
+.ct-footer {
+  margin-top: 40px; padding: 35px 0 17px;
+  background: #111c32; color: #d5deed;
+}
+.ct-footer-grid {
+  display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 28px;
+}
+.ct-footer-brand {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; color: #fff; font-weight: 850;
+}
+.ct-footer-brand:hover { text-decoration: none; }
+.ct-footer-grid p { max-width: 390px; color: #bdc8db; font-size: .91rem; }
+.ct-footer-links { display: grid; align-content: start; gap: 7px; }
+.ct-footer-links strong { margin-bottom: 4px; color: #fff; }
+.ct-footer-links a { color: #cbd5e1; font-size: .92rem; }
+.ct-footer-links a:hover { color: #fff; }
+.ct-footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+  margin-top: 25px; padding-top: 15px;
+  border-top: 1px solid #32405a; color: #aebbd0; font-size: .84rem;
+}
+.ct-footer-bottom p { margin: 0; }
+
+@media (max-width: 700px) {
+  .ct-header-inner { min-height: 65px; }
+  .ct-menu-button { display: inline-flex; }
+  .ct-nav {
+    display: none; position: absolute;
+    top: 65px; left: 0; right: 0;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ct-line);
+    background: #fff;
+  }
+  .ct-nav.is-open { display: block; }
+  .ct-nav-inner {
+    display: grid; gap: 0;
+    width: min(1200px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+  .ct-nav-inner a { padding: 10px 0; }
+  .ct-hero { padding: 40px 0 32px; }
+  .ct-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .ct-container { width: calc(100% - 22px); }
+  .ct-footer-grid { grid-template-columns: 1fr; }
+  .gf-panel { padding: 16px; }
+  .gf-drop { min-height: 130px; padding: 22px 14px; }
+  .gf-preview-img { max-height: 190px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+@media print {
+  .ct-header, .ct-footer, .ct-hero, .ct-nav, .gf-drop, .gf-actions,
+  .gf-panel-heading p, .ct-related-links, .gf-algo, .gf-faq-nav,
+  .gf-advanced, .gf-progress {
+    display: none !important;
+  }
+  body { background: #fff; }
+  .gf-panel { box-shadow: none; border-color: #ccc; }
+  .ct-section { padding: 10px 0; }
+  .ct-guide { padding-top: 10px; }
+}
+</style>
+</head>
+
+<body>
+<a class="ct-skip" href="#main-content">Skip to content</a>
+
+<header class="ct-header">
+  <div class="ct-container ct-header-inner">
+    <a class="ct-brand" href="/" aria-label="ConvertToToolsOnline home">
+      <span class="ct-brand-mark" aria-hidden="true">CT</span>
+      <span class="ct-brand-name">Convert<span>ToToolsOnline</span></span>
+    </a>
+    <button class="ct-menu-button" id="ct-menu-button" type="button"
+            aria-controls="ct-main-nav" aria-expanded="false">Menu</button>
+    <nav class="ct-nav" id="ct-main-nav" aria-label="Main navigation">
+      <div class="ct-nav-inner">
+        <a href="/">Home</a>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/Contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="ct-hero">
+    <div class="ct-container">
+      <p class="ct-eyebrow">Free online GIF tool</p>
+      <h1>Compress GIF to a Target Size <span>animation kept, playback speed preserved</span></h1>
+      <p class="ct-lead">
+        Shrink an animated GIF until it fits — <strong>10 MB for Discord</strong>,
+        <strong>256 KB for a forum</strong>, or any limit you type. The compression engine is
+        <strong>gifsicle compiled to WebAssembly</strong>, running entirely in your browser,
+        so your file never leaves your device. Unlike most GIF compressors, this tool
+        <strong>rescales frame delays when it drops frames</strong>, so the animation does not
+        suddenly play at double speed. No upload, no signup, no watermark.
+      </p>
+      <span class="ct-privacy-badge">
+        <span aria-hidden="true">🔒</span>
+        100% in your browser — your GIF never leaves your device
+      </span>
+    </div>
+  </section>
+
+  <section class="ct-section">
+    <div class="ct-container">
+
+      <!-- UPLOAD -->
+      <section class="gf-panel" aria-labelledby="gf-upload-heading">
+        <div class="gf-panel-heading">
+          <h2 id="gf-upload-heading">1. Upload a GIF</h2>
+          <p id="gf-original-info">Animated or static GIF · up to 50 MB</p>
+        </div>
+
+        <button type="button" id="gf-drop" class="gf-drop" aria-describedby="gf-drop-help">
+          <span class="gf-drop-icon" aria-hidden="true">🎞️</span>
+          <strong>Drop a GIF here or click to browse</strong>
+          <small id="gf-drop-help">Animated GIFs are supported. The file is processed locally with gifsicle WASM.</small>
+        </button>
+        <input id="gf-file" type="file" accept="image/gif" class="gf-file-input">
+
+        <div id="gf-upload-warn" class="gf-warn gf-hidden" role="status"></div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="gf-panel" aria-labelledby="gf-settings-heading">
+        <div class="gf-panel-heading">
+          <h2 id="gf-settings-heading">2. Choose how to compress</h2>
+          <p>Presets fill in the target in one click.</p>
+        </div>
+
+        <div class="gf-presets">
+          <button type="button" class="gf-preset" data-preset="discord">
+            <strong>Discord</strong>
+            <span>10 MB limit</span>
+          </button>
+          <button type="button" class="gf-preset" data-preset="slack">
+            <strong>Slack</strong>
+            <span>5 MB limit</span>
+          </button>
+          <button type="button" class="gf-preset" data-preset="whatsapp">
+            <strong>WhatsApp</strong>
+            <span>16 MB limit</span>
+          </button>
+          <button type="button" class="gf-preset" data-preset="email">
+            <strong>Email</strong>
+            <span>5 MB attachment</span>
+          </button>
+        </div>
+
+        <div class="gf-grid three" style="margin-top:16px;">
+          <div class="gf-field">
+            <label for="gf-target-kb">Target file size</label>
+            <div class="gf-inline">
+              <input id="gf-target-kb" type="number" min="10" max="51200" step="10" value="256">
+              <span class="gf-unit" id="gf-target-unit">KB</span>
+            </div>
+            <div class="gf-chips">
+              <button type="button" class="gf-chip" data-kb="100">100 KB</button>
+              <button type="button" class="gf-chip" data-kb="256">256 KB</button>
+              <button type="button" class="gf-chip" data-kb="512">512 KB</button>
+              <button type="button" class="gf-chip" data-kb="1024">1 MB</button>
+              <button type="button" class="gf-chip" data-kb="5120">5 MB</button>
+              <button type="button" class="gf-chip" data-kb="10240">10 MB</button>
+            </div>
+          </div>
+
+          <div class="gf-field">
+            <label for="gf-mode">Compression mode</label>
+            <select id="gf-mode">
+              <option value="target" selected>Target size — find settings that fit</option>
+              <option value="quality">Quality first — gentlest settings, ignore target</option>
+              <option value="size">Size first — smallest file, accept quality loss</option>
+            </select>
+            <span class="gf-hint" id="gf-mode-hint">Target mode walks a priority ladder: quality loss first, then palette, then dimensions, then frames.</span>
+          </div>
+
+          <div class="gf-field">
+            <label for="gf-lossy">Lossy strength</label>
+            <select id="gf-lossy">
+              <option value="0">Off — lossless optimisation only</option>
+              <option value="30">Light (30)</option>
+              <option value="60" selected>Balanced (60)</option>
+              <option value="80">Strong (80)</option>
+              <option value="120">Aggressive (120)</option>
+            </select>
+            <span class="gf-hint">Ignored in Target mode, which sets lossy itself.</span>
+          </div>
+        </div>
+
+        <details class="gf-advanced">
+          <summary>Advanced options</summary>
+          <div class="gf-advanced-body">
+            <div class="gf-grid three" style="margin-top:8px;">
+              <div class="gf-field">
+                <label for="gf-colors">Colour palette</label>
+                <select id="gf-colors">
+                  <option value="0">Keep original palette</option>
+                  <option value="128">128 colours</option>
+                  <option value="64">64 colours</option>
+                  <option value="32">32 colours</option>
+                  <option value="16">16 colours</option>
+                </select>
+                <span class="gf-hint">Fewer colours can sometimes make a file <em>larger</em>. The tool re-measures after every step.</span>
+              </div>
+              <div class="gf-field">
+                <label for="gf-scale">Scale</label>
+                <select id="gf-scale">
+                  <option value="1">100% — original dimensions</option>
+                  <option value="0.85">85%</option>
+                  <option value="0.75">75%</option>
+                  <option value="0.6">60%</option>
+                  <option value="0.5">50%</option>
+                </select>
+                <span class="gf-hint">Resizing is usually the single biggest lever on file size.</span>
+              </div>
+              <div class="gf-field">
+                <label for="gf-frame-step">Frame interval</label>
+                <select id="gf-frame-step">
+                  <option value="1" selected>Keep every frame</option>
+                  <option value="2">Keep every 2nd frame</option>
+                  <option value="3">Keep every 3rd frame</option>
+                </select>
+                <span class="gf-hint">Dropping frames makes motion jerkier — never faster, because delays are rescaled.</span>
+              </div>
+            </div>
+
+            <label class="gf-check">
+              <input type="checkbox" id="gf-compensate-delay" checked>
+              <span>
+                <strong>Preserve playback speed when frames are dropped</strong>
+                <span class="gf-check-note">
+                  Most GIF compressors remove frames but leave the delays untouched, so a
+                  17-second loop plays in 8 seconds. This option rescales the delays to keep
+                  the original duration. Leave it on unless you specifically want a faster loop.
+                </span>
+              </span>
+            </label>
+
+            <label class="gf-check">
+              <input type="checkbox" id="gf-preserve-loop" checked>
+              <span>
+                <strong>Preserve loop count</strong>
+                <span class="gf-check-note">
+                  Keeps infinite loops infinite instead of flattening to a single play.
+                </span>
+              </span>
+            </label>
+          </div>
+        </details>
+
+        <div class="gf-actions">
+          <button id="gf-process" class="ct-button ct-button-primary" type="button" disabled>Compress GIF</button>
+          <button id="gf-reset" class="ct-button" type="button">Reset</button>
+        </div>
+
+        <div class="gf-progress gf-hidden" id="gf-progress-wrap">
+          <div class="gf-progress-fill" id="gf-progress-fill"></div>
+        </div>
+
+        <div id="gf-status" class="gf-status" role="status" aria-live="polite"></div>
+
+        <div class="gf-algo">
+          <strong>Target-size priority ladder.</strong> The tool tries each step in order and
+          stops at the first one that fits. Least visible damage comes first:
+          <ol>
+            <li><code>-O1 --lossy=30</code> — gentle lossy</li>
+            <li><code>-O1 --lossy=60</code> — balanced lossy</li>
+            <li><code>-O1 --lossy=80</code> — strong lossy</li>
+            <li><code>-O1 --lossy=80 --colors=64</code> — reduced palette</li>
+            <li><code>-O1 --lossy=80 --colors=32</code> — smaller palette</li>
+            <li><code>-O1 --lossy=100 --colors=32 --scale=0.85</code> — slight resize</li>
+            <li><code>-O1 --lossy=120 --colors=16 --scale=0.75</code> — smaller + fewer colours</li>
+            <li><code>-O1 --lossy=150 --colors=16 --scale=0.6</code> — with frame dropping</li>
+            <li><code>-O1 --lossy=200 --colors=8 --scale=0.5</code> — last resort</li>
+          </ol>
+          <code>-O1</code> is used deliberately: gifsicle's own maintainer warns that
+          <code>-O2</code> and <code>-O3</code> cost exponentially more time on files above
+          10 MB for almost no extra compression.
+        </div>
+      </section>
+
+      <!-- RESULT -->
+      <section class="gf-panel" aria-labelledby="gf-result-heading">
+        <div class="gf-panel-heading">
+          <h2 id="gf-result-heading">3. Result</h2>
+          <p id="gf-result-sub">Upload a GIF and press Compress GIF.</p>
+        </div>
+
+        <div id="gf-empty" class="gf-empty">
+          <strong>No result yet.</strong>
+          Upload an animated GIF, choose a target, and click Compress GIF.
+        </div>
+
+        <div id="gf-result-content" class="gf-hidden">
+          <div class="gf-preview-grid">
+            <div class="gf-preview-card">
+              <div class="gf-preview-label">Original</div>
+              <img id="gf-preview-original" class="gf-preview-img" alt="Original animated GIF preview">
+              <div class="gf-preview-meta" id="gf-preview-original-size">—</div>
+              <div class="gf-preview-sub" id="gf-preview-original-dims">—</div>
+            </div>
+            <div class="gf-preview-card is-final">
+              <div class="gf-preview-label">Compressed</div>
+              <img id="gf-preview-result" class="gf-preview-img" alt="Compressed animated GIF preview">
+              <div class="gf-preview-meta" id="gf-preview-result-size">—</div>
+              <div class="gf-preview-sub" id="gf-preview-result-dims">—</div>
+            </div>
+          </div>
+
+          <div id="gf-warn" class="gf-warn gf-hidden" role="status"></div>
+
+          <div class="gf-info">
+            <table class="gf-info-table">
+              <tbody id="gf-info-body"></tbody>
+            </table>
+          </div>
+
+          <div class="gf-actions">
+            <button id="gf-download" class="ct-button ct-button-primary" type="button" disabled>Download compressed GIF</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- SEO CONTENT -->
+  <section class="ct-section">
+    <div class="ct-container">
+      <div class="ct-guide">
+
+        <h2>How to compress a GIF without losing the animation</h2>
+        <p>
+          A GIF is not a video. It is a stack of full images, each with its own colour table
+          and its own delay. That structure gives you four independent levers, and the order
+          you apply them determines whether the result still looks like the original.
+        </p>
+        <p>
+          Applied in the wrong order, compression produces a jerky, colour-banded mess. Applied
+          in the right order, most GIFs shrink by 50–80% with barely any visible change.
+        </p>
+
+        <h3>The four levers, in order of least visible damage</h3>
+        <table>
+          <thead>
+            <tr><th>Lever</th><th>What it does</th><th>Visible cost</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Lossy matching</strong></td><td>Pixels that barely changed since the last frame are written as transparent, so they compress as one long run</td><td>Very low at light settings; subtle smearing at strong settings</td></tr>
+            <tr><td><strong>Palette reduction</strong></td><td>256 colours → 128 → 64 → 32 → 16 per frame</td><td>Bandng in gradients and photos; fine for flat-colour animations</td></tr>
+            <tr><td><strong>Resizing</strong></td><td>Halving width and height keeps a quarter of the pixels</td><td>Softer edges; usually the biggest size win</td></tr>
+            <tr><td><strong>Frame dropping</strong></td><td>Every 2nd or 3rd frame removed, delays merged</td><td>Jerkier motion — and <em>faster playback</em> if delays are not rescaled</td></tr>
+          </tbody>
+        </table>
+
+        <h2>The bug that most GIF compressors ship</h2>
+        <p>
+          When gifsicle drops frames, it removes them from the stream but <strong>leaves the
+          remaining delays untouched</strong>. A 17.4-second loop that keeps every second frame
+          then plays in 8.75 seconds — the animation runs at double speed. This is documented
+          behaviour, not a rare edge case: a 2026 write-up on gifsicle's knobs noted that
+          &ldquo;the 17.41 s loop played in 8.75 s and the cat wagged at double speed.&rdquo;
+        </p>
+        <p>
+          This tool fixes it. When frames are dropped, it computes the original total duration
+          from the GIF's own graphic-control blocks, divides by the new frame count, and passes
+          a uniform delay so playback time is preserved. The animation gets <em>jerkier</em>,
+          never <em>faster</em>. The toggle is on by default; turn it off only if you
+          specifically want a faster loop.
+        </p>
+
+        <h2>Why fewer colours can make a GIF bigger</h2>
+        <p>
+          It sounds counter-intuitive, but reducing the palette does not always reduce the
+          file. If a GIF was already optimised with a tuned palette and lossy frame matching,
+          forcing it down to 32 or 16 colours can <strong>destroy the inter-frame similarity</strong>
+          that lossy matching relies on, so more pixels change between frames and the file
+          grows. A 2026 test documented exactly that: fewer colours made an already-optimised
+          GIF <strong>91% bigger</strong>.
+        </p>
+        <p>
+          This tool re-measures after every ladder step rather than assuming a step helped. If
+          a palette reduction produces a larger file, that result is discarded.
+        </p>
+
+        <h2>GIF vs MP4 vs WebP — when to stop using GIF</h2>
+        <p>
+          GIF is a 1987 format with a hard 256-colour limit and no inter-frame motion
+          compensation. A modern MP4 or WebP version of the same animation is typically
+          <strong>5–20× smaller</strong> at higher visual quality. If your destination supports
+          video or WebP — and most modern platforms do — compressing the GIF is treating the
+          symptom, not the cause. Use this tool when the destination <em>requires</em> GIF:
+          forums, older chat clients, documentation, and sites that reject video embeds.
+        </p>
+
+        <nav class="gf-faq-nav" aria-label="Jump to FAQ section">
+          <strong>Jump to:</strong>
+          <a href="#faq-sizes">Size targets</a>
+          <a href="#faq-animation">Animation &amp; speed</a>
+          <a href="#faq-quality">Quality &amp; palette</a>
+          <a href="#faq-formats">GIF vs MP4</a>
+          <a href="#faq-failures">Failures &amp; limits</a>
+          <a href="#faq-privacy">Privacy &amp; how it works</a>
+        </nav>
+
+        <!-- FAQ: SIZE TARGETS -->
+        <section id="faq-sizes" class="gf-faq-group" aria-labelledby="faq-sizes-h">
+          <h3 id="faq-sizes-h">Size targets</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>How do I compress a GIF to 256 KB?</summary>
+              <p>Type 256 in the target field — or click the 256 KB chip — and press Compress GIF. The tool walks the priority ladder from gentle lossy compression up to palette reduction, resizing, and frame dropping, stopping at the first step whose output is under 256 KB. The result keeps the animation; only the last two ladder steps touch frame count.</p>
+            </details>
+
+            <details>
+              <summary>What is Discord's GIF size limit, and how do I fit under it?</summary>
+              <p>Discord's standard upload limit is 10 MB for non-Nitro accounts, though some servers set it lower. Click the <strong>Discord</strong> preset to set a 10 MB target. Most GIFs under a minute long will fit at the first or second ladder step, so you keep full frame rate and the original palette.</p>
+            </details>
+
+            <details>
+              <summary>What limits do Slack and WhatsApp use for GIFs?</summary>
+              <p>Slack's free plan caps uploads at 5 MB. WhatsApp's media limit is 16 MB, but large GIFs are often recompressed or converted to short video on send, so a 16 MB GIF may not arrive intact. The Slack and WhatsApp presets set 5 MB and 16 MB respectively.</p>
+            </details>
+
+            <details>
+              <summary>Can I compress a GIF to 512 KB or 1 MB?</summary>
+              <p>Yes — the chips cover 100 KB, 256 KB, 512 KB, 1 MB, 5 MB, and 10 MB, and the numeric field accepts anything from 10 KB to 50 MB. The ladder is the same regardless of the number; only the stopping point changes. A 1 MB target usually resolves at step 3 or 4, leaving the palette and frame rate intact.</p>
+            </details>
+
+            <details>
+              <summary>Why does the result land slightly under my target instead of exactly on it?</summary>
+              <p>The target is a ceiling, not a fixed size. The tool stops at the first ladder step that fits, so the result is always at or below your number — sometimes by a wide margin if one step overshoots. Chasing the exact byte count would require many more encode passes for a difference you cannot see.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <!-- FAQ: ANIMATION -->
+        <section id="faq-animation" class="gf-faq-group" aria-labelledby="faq-animation-h">
+          <h3 id="faq-animation-h">Animation &amp; playback speed</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>Does compressing a GIF remove the animation?</summary>
+              <p>No. The animation is preserved at every ladder step. Only the last two steps — used when gentler options cannot reach your target — reduce the frame count, and even then the remaining frames still animate. A static GIF stays static; an animated GIF never becomes a single frame.</p>
+            </details>
+
+            <details>
+              <summary>Why do some compressed GIFs play at double speed?</summary>
+              <p>Because gifsicle removes frames but leaves the delays on the remaining ones unchanged. Keep every second frame and the total playback time halves, so the animation appears to run at 2×. It is a real, documented behaviour of the tool, not a rendering quirk. This compressor rescales the delays whenever it drops frames, so the loop keeps its original duration.</p>
+            </details>
+
+            <details>
+              <summary>What does the "Preserve playback speed" toggle actually do?</summary>
+              <p>When frame dropping is used, the tool reads the original GIF's total duration from its graphic-control blocks, divides by the new frame count, and writes a uniform delay. The animation becomes jerkier because there are fewer frames, but a 10-second loop still takes 10 seconds. Turn the toggle off only if you deliberately want a faster loop.</p>
+            </details>
+
+            <details>
+              <summary>Will frame dropping make the animation play backwards or stutter?</summary>
+              <p>It cannot play backwards — frames are removed in order, not reordered. Stutter is the correct expectation: keeping every second frame halves the frame rate, so motion looks steppier. That is the visible cost of the largest size saving available, which is why it sits near the bottom of the ladder.</p>
+            </details>
+
+            <details>
+              <summary>Does the compressed GIF keep its original loop count?</summary>
+              <p>Yes, by default. The "Preserve loop count" option is on, so an infinitely looping GIF keeps looping instead of being flattened to a single play. Turn it off only if you want a one-shot version.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <!-- FAQ: QUALITY -->
+        <section id="faq-quality" class="gf-faq-group" aria-labelledby="faq-quality-h">
+          <h3 id="faq-quality-h">Quality &amp; palette</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>What is lossy GIF compression?</summary>
+              <p>GIF itself is lossless, but gifsicle supports a lossy extension: pixels that barely changed since the previous frame are written as transparent instead of being re-encoded. Because a run of identical transparent pixels compresses to almost nothing, the file shrinks — at the cost of slight smearing in detailed areas. Light settings are often invisible; strong settings are not.</p>
+            </details>
+
+            <details>
+              <summary>Why did reducing colours make my GIF bigger?</summary>
+              <p>Palette reduction can destroy the inter-frame similarity that lossy matching depends on. If a file was already optimised with a tuned palette, forcing it to 32 or 16 colours makes more pixels change between frames, so the file grows. A documented 2026 test saw a 91% increase. This tool measures after every step and discards a step that made the file larger.</p>
+            </details>
+
+            <details>
+              <summary>How many colours should I keep?</summary>
+              <p>Start by leaving the palette alone. Flat-colour animations — cartoons, UI recordings, text — survive 32 or even 16 colours well. Photographic GIFs and anything with gradients will band visibly below 128 colours. The automatic ladder handles this; in manual mode, try one step at a time and compare the preview.</p>
+            </details>
+
+            <details>
+              <summary>Is resizing better than palette reduction?</summary>
+              <p>Usually yes, for photographic content. Halving width and height removes three-quarters of the pixels, which shrinks the file dramatically while producing softness rather than banding. For flat-colour art, palette reduction is often less noticeable than a resize. The ladder tries palette reduction before resizing because it is less destructive on the common case.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <!-- FAQ: FORMATS -->
+        <section id="faq-formats" class="gf-faq-group" aria-labelledby="faq-formats-h">
+          <h3 id="faq-formats-h">GIF vs MP4 vs WebP</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>Should I convert my GIF to MP4 instead?</summary>
+              <p>If your destination accepts video, almost always yes. MP4 uses inter-frame motion compensation and a modern codec, so the same animation is typically 5–20× smaller at higher quality. Discord, Slack, and most social platforms accept MP4. Use this compressor when the destination requires GIF specifically.</p>
+            </details>
+
+            <details>
+              <summary>Is WebP a better format than GIF for animations?</summary>
+              <p>Yes for size and quality — animated WebP supports 24-bit colour and alpha, and files are usually far smaller. Support is now broad in browsers, but some older chat clients and forums still reject WebP. If your destination is modern, animated WebP is the better target; if it is not, GIF is the safe choice.</p>
+            </details>
+
+            <details>
+              <summary>Why does a GIF have a 256-colour limit?</summary>
+              <p>The format stores each pixel as an 8-bit index into a palette, which allows exactly 256 entries per frame. That was generous in 1987 and is very restrictive today. It is the main reason GIF files are large relative to their visual quality — the format cannot use colour similarity as efficiently as a modern codec.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <!-- FAQ: FAILURES -->
+        <section id="faq-failures" class="gf-faq-group" aria-labelledby="faq-failures-h">
+          <h3 id="faq-failures-h">Failures &amp; limits</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>What happens if my target size cannot be reached?</summary>
+              <p>The tool reports the smallest result it achieved and shows it in the preview, rather than pretending to succeed. You then have three options: raise the target, accept the smallest result, or convert to MP4 or WebP, which will usually reach the target easily. The message states which step produced the result.</p>
+            </details>
+
+            <details>
+              <summary>Why does compression take longer on large GIFs?</summary>
+              <p>gifsicle's optimisation passes scale with frame count and pixel count. On files above roughly 10 MB, higher optimisation levels become exponentially slower for almost no additional saving — which is why this tool uses <code>-O1</code> deliberately and warns you above 10 MB rather than silently hanging.</p>
+            </details>
+
+            <details>
+              <summary>Does this work offline?</summary>
+              <p>After the first load, yes. The gifsicle WASM module is cached by the browser, and all compression happens locally. You can disconnect from the network and compress further files in the same session.</p>
+            </details>
+
+            <details>
+              <summary>Why is there a loading delay the first time?</summary>
+              <p>The gifsicle WebAssembly module is around a megabyte and is fetched only when you press Compress GIF, not on page load. That keeps the page fast for visitors who are only reading. After the first use it is cached and subsequent compressions start immediately.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <!-- FAQ: PRIVACY -->
+        <section id="faq-privacy" class="gf-faq-group" aria-labelledby="faq-privacy-h">
+          <h3 id="faq-privacy-h">Privacy &amp; how it works</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>Is my GIF uploaded to a server?</summary>
+              <p>No. gifsicle is compiled to WebAssembly and runs inside your browser tab. The file is read with the File API, processed in memory, and offered back as a download. Nothing is transmitted. You can verify this in your browser's network tab — the only request is for the WASM module itself, not your file.</p>
+            </details>
+
+            <details>
+              <summary>Is there a watermark or a file-count limit?</summary>
+              <p>No watermark, no signup, no daily cap, no subscription. The downloaded GIF is a normal GIF with no added branding.</p>
+            </details>
+
+            <details>
+              <summary>Does this tool store my GIF anywhere?</summary>
+              <p>No. The file exists only in the page's memory for the current session. Nothing is written to localStorage, cookies, or a server. Closing the tab discards everything.</p>
+            </details>
+
+            <details>
+              <summary>Is my GIF safe to process here?</summary>
+              <p>Processing is local, so the file never leaves your device. The only external resource the page loads is the gifsicle WebAssembly module from a public CDN, which contains no user data. If you need to process files in an air-gapped environment, the module can be self-hosted alongside the page.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <h2>Related tools</h2>
+        <ul class="ct-related-links">
+          <li><a href="/">All ConvertToToolsOnline tools</a></li>
+          <li><a href="/compress-image-to-kb.html">Compress Image to Exact KB</a></li>
+          <li><a href="/image-compressor.html">Image Compressor</a></li>
+          <li><a href="/image-resizer.html">Image Resizer</a></li>
+          <li><a href="/webp-to-jpg-converter.html">WebP to JPG Converter</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-grid">
+      <div>
+        <a class="ct-footer-brand" href="/">
+          <span class="ct-brand-mark" aria-hidden="true">CT</span>
+          <span>ConvertToToolsOnline</span>
+        </a>
+        <p>Practical online tools for documents, images, data, development and everyday work.</p>
+      </div>
+      <nav class="ct-footer-links" aria-label="Tool navigation">
+        <strong>Explore</strong>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/sitemap.xml">XML sitemap</a>
+      </nav>
+      <nav class="ct-footer-links" aria-label="Site information">
+        <strong>Contact &amp; information</strong>
+        <a href="/Contact.html">Contact</a>
+        <a href="/#about">About the toolbox</a>
+        <a href="#main-content">Back to top ↑</a>
+      </nav>
+    </div>
+    <div class="ct-footer-bottom">
+      <p>© <span id="gf-year">2026</span> ConvertToToolsOnline. All rights reserved.</p>
+      <p>Free utilities for practical tasks.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Compress GIF",
+      "url": "https://converttotoolsonline.com/compress-gif.html",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern browser",
+      "browserRequirements": "Requires JavaScript and WebAssembly",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Compress an animated GIF to a target file size using a priority ladder of lossy compression, palette reduction, resizing, and frame dropping. Frame delays are rescaled when frames are dropped, so playback speed is preserved. Runs entirely in the browser with no upload.",
+      "featureList": [
+        "Target size compression for animated GIFs",
+        "Discord, Slack, WhatsApp, and email presets",
+        "Priority ladder from gentle lossy to frame dropping",
+        "Playback speed preserved when frames are dropped",
+        "Palette-backfire detection",
+        "Animated before/after preview",
+        "gifsicle WebAssembly, no upload",
+        "No signup, no watermark, no file limit"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"How do I compress a GIF to 256 KB?","acceptedAnswer":{"@type":"Answer","text":"Type 256 in the target field, or click the 256 KB chip, and press Compress GIF. The tool walks a priority ladder from gentle lossy compression up to palette reduction, resizing, and frame dropping, stopping at the first step whose output is under 256 KB."}},
+        {"@type":"Question","name":"What is Discord's GIF size limit, and how do I fit under it?","acceptedAnswer":{"@type":"Answer","text":"Discord's standard upload limit is 10 MB for non-Nitro accounts, though some servers set it lower. Click the Discord preset to set a 10 MB target. Most GIFs under a minute long will fit at the first or second ladder step."}},
+        {"@type":"Question","name":"What limits do Slack and WhatsApp use for GIFs?","acceptedAnswer":{"@type":"Answer","text":"Slack's free plan caps uploads at 5 MB. WhatsApp's media limit is 16 MB, but large GIFs are often recompressed on send. The Slack and WhatsApp presets set 5 MB and 16 MB respectively."}},
+        {"@type":"Question","name":"Can I compress a GIF to 512 KB or 1 MB?","acceptedAnswer":{"@type":"Answer","text":"Yes. The chips cover 100 KB, 256 KB, 512 KB, 1 MB, 5 MB, and 10 MB, and the numeric field accepts anything from 10 KB to 50 MB. A 1 MB target usually resolves at step 3 or 4, leaving the palette and frame rate intact."}},
+        {"@type":"Question","name":"Why does the result land slightly under my target instead of exactly on it?","acceptedAnswer":{"@type":"Answer","text":"The target is a ceiling, not a fixed size. The tool stops at the first ladder step that fits, so the result is always at or below your number. Chasing the exact byte count would require many more encode passes for a difference you cannot see."}},
+        {"@type":"Question","name":"Does compressing a GIF remove the animation?","acceptedAnswer":{"@type":"Answer","text":"No. The animation is preserved at every ladder step. Only the last two steps, used when gentler options cannot reach your target, reduce the frame count, and even then the remaining frames still animate."}},
+        {"@type":"Question","name":"Why do some compressed GIFs play at double speed?","acceptedAnswer":{"@type":"Answer","text":"Because gifsicle removes frames but leaves the delays on the remaining ones unchanged. Keep every second frame and the total playback time halves. This compressor rescales the delays whenever it drops frames, so the loop keeps its original duration."}},
+        {"@type":"Question","name":"What does the Preserve playback speed toggle actually do?","acceptedAnswer":{"@type":"Answer","text":"When frame dropping is used, the tool reads the original GIF's total duration from its graphic-control blocks, divides by the new frame count, and writes a uniform delay. The animation becomes jerkier but keeps its original duration."}},
+        {"@type":"Question","name":"Will frame dropping make the animation play backwards or stutter?","acceptedAnswer":{"@type":"Answer","text":"It cannot play backwards. Stutter is the correct expectation: keeping every second frame halves the frame rate, so motion looks steppier. That is the visible cost of the largest size saving available."}},
+        {"@type":"Question","name":"Does the compressed GIF keep its original loop count?","acceptedAnswer":{"@type":"Answer","text":"Yes, by default. The Preserve loop count option is on, so an infinitely looping GIF keeps looping instead of being flattened to a single play."}},
+        {"@type":"Question","name":"What is lossy GIF compression?","acceptedAnswer":{"@type":"Answer","text":"GIF itself is lossless, but gifsicle supports a lossy extension: pixels that barely changed since the previous frame are written as transparent instead of being re-encoded. A run of identical transparent pixels compresses to almost nothing, shrinking the file at the cost of slight smearing."}},
+        {"@type":"Question","name":"Why did reducing colours make my GIF bigger?","acceptedAnswer":{"@type":"Answer","text":"Palette reduction can destroy the inter-frame similarity that lossy matching depends on. If a file was already optimised with a tuned palette, forcing it to 32 or 16 colours makes more pixels change between frames, so the file grows. This tool measures after every step and discards a step that made the file larger."}},
+        {"@type":"Question","name":"How many colours should I keep?","acceptedAnswer":{"@type":"Answer","text":"Start by leaving the palette alone. Flat-colour animations survive 32 or even 16 colours well. Photographic GIFs and anything with gradients will band visibly below 128 colours."}},
+        {"@type":"Question","name":"Is resizing better than palette reduction?","acceptedAnswer":{"@type":"Answer","text":"Usually yes, for photographic content. Halving width and height removes three-quarters of the pixels, which shrinks the file dramatically while producing softness rather than banding. For flat-colour art, palette reduction is often less noticeable."}},
+        {"@type":"Question","name":"Should I convert my GIF to MP4 instead?","acceptedAnswer":{"@type":"Answer","text":"If your destination accepts video, almost always yes. MP4 uses inter-frame motion compensation, so the same animation is typically 5 to 20 times smaller at higher quality. Use this compressor when the destination requires GIF specifically."}},
+        {"@type":"Question","name":"Is WebP a better format than GIF for animations?","acceptedAnswer":{"@type":"Answer","text":"Yes for size and quality. Animated WebP supports 24-bit colour and alpha, and files are usually far smaller. Support is now broad in browsers, but some older chat clients and forums still reject WebP."}},
+        {"@type":"Question","name":"Why does a GIF have a 256-colour limit?","acceptedAnswer":{"@type":"Answer","text":"The format stores each pixel as an 8-bit index into a palette, which allows exactly 256 entries per frame. That was generous in 1987 and is very restrictive today, and it is the main reason GIF files are large relative to their visual quality."}},
+        {"@type":"Question","name":"What happens if my target size cannot be reached?","acceptedAnswer":{"@type":"Answer","text":"The tool reports the smallest result it achieved and shows it in the preview, rather than pretending to succeed. You can then raise the target, accept the smallest result, or convert to MP4 or WebP, which will usually reach the target easily."}},
+        {"@type":"Question","name":"Why does compression take longer on large GIFs?","acceptedAnswer":{"@type":"Answer","text":"gifsicle's optimisation passes scale with frame count and pixel count. On files above roughly 10 MB, higher optimisation levels become exponentially slower for almost no additional saving, which is why this tool uses -O1 deliberately and warns you above 10 MB."}},
+        {"@type":"Question","name":"Is my GIF uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. gifsicle is compiled to WebAssembly and runs inside your browser tab. The file is read with the File API, processed in memory, and offered back as a download. Nothing is transmitted."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var btn = document.getElementById('ct-menu-button');
+  var nav = document.getElementById('ct-main-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 700) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var yearEl = $('gf-year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  // ============================================================
+  // Constants
+  // ============================================================
+  var MAX_FILE_SIZE = 50 * 1024 * 1024;
+  var LARGE_FILE_WARN = 10 * 1024 * 1024;
+  var MAX_LADDER_STEPS = 10;
+
+  // CDN candidates, tried in order. esm.sh bundles worker deps.
+  var GIFSICLE_CDNS = [
+    'https://esm.sh/gifsicle-wasm-browser',
+    'https://cdn.jsdelivr.net/npm/gifsicle-wasm-browser/+esm',
+    'https://unpkg.com/gifsicle-wasm-browser/dist/index.js'
+  ];
+
+  // ============================================================
+  // State
+  // ============================================================
+  var currentFile = null;
+  var currentInfo = null;
+  var originalUrl = null;
+  var resultUrl = null;
+  var resultBlob = null;
+  var originalName = 'animation';
+  var gifsicleModule = null;
+  var gifsicleLoading = null;
+  var processing = false;
+
+  // ============================================================
+  // Elements
+  // ============================================================
+  var dropEl = $('gf-drop');
+  var fileInput = $('gf-file');
+  var originalInfoEl = $('gf-original-info');
+  var uploadWarnEl = $('gf-upload-warn');
+
+  var targetKbEl = $('gf-target-kb');
+  var targetUnitEl = $('gf-target-unit');
+  var modeEl = $('gf-mode');
+  var modeHintEl = $('gf-mode-hint');
+  var lossyEl = $('gf-lossy');
+  var colorsEl = $('gf-colors');
+  var scaleEl = $('gf-scale');
+  var frameStepEl = $('gf-frame-step');
+  var compensateEl = $('gf-compensate-delay');
+  var preserveLoopEl = $('gf-preserve-loop');
+
+  var processBtn = $('gf-process');
+  var resetBtn = $('gf-reset');
+  var statusEl = $('gf-status');
+  var progressWrap = $('gf-progress-wrap');
+  var progressFill = $('gf-progress-fill');
+
+  var emptyEl = $('gf-empty');
+  var resultContentEl = $('gf-result-content');
+  var resultSubEl = $('gf-result-sub');
+  var previewOriginalEl = $('gf-preview-original');
+  var previewOriginalSizeEl = $('gf-preview-original-size');
+  var previewOriginalDimsEl = $('gf-preview-original-dims');
+  var previewResultEl = $('gf-preview-result');
+  var previewResultSizeEl = $('gf-preview-result-size');
+  var previewResultDimsEl = $('gf-preview-result-dims');
+  var warnEl = $('gf-warn');
+  var infoBodyEl = $('gf-info-body');
+  var downloadBtn = $('gf-download');
+
+  // ============================================================
+  // Helpers
+  // ============================================================
+  function setStatus(text, tone) {
+    statusEl.textContent = text || '';
+    if (tone) statusEl.setAttribute('data-tone', tone);
+    else statusEl.removeAttribute('data-tone');
+  }
+
+  function setProgress(frac) {
+    if (frac <= 0) { progressWrap.classList.add('gf-hidden'); progressFill.style.width = '0%'; return; }
+    progressWrap.classList.remove('gf-hidden');
+    progressFill.style.width = Math.round(Math.max(0, Math.min(1, frac)) * 100) + '%';
+  }
+
+  function showUploadWarn(msg, kind) {
+    uploadWarnEl.classList.remove('gf-hidden');
+    uploadWarnEl.className = 'gf-warn' + (kind ? ' is-' + kind : '');
+    uploadWarnEl.innerHTML = '<strong>' + escapeHtml(msg) + '</strong>';
+  }
+  function hideUploadWarn() {
+    uploadWarnEl.classList.add('gf-hidden');
+    uploadWarnEl.textContent = '';
+  }
+
+  function showResultWarn(msg, kind) {
+    warnEl.classList.remove('gf-hidden');
+    warnEl.className = 'gf-warn' + (kind ? ' is-' + kind : '');
+    warnEl.innerHTML = '<strong>' + escapeHtml(msg) + '</strong>';
+  }
+  function hideResultWarn() {
+    warnEl.classList.add('gf-hidden');
+    warnEl.textContent = '';
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c];
+    });
+  }
+
+  function formatBytes(bytes) {
+    if (!isFinite(bytes) || bytes < 0) return '—';
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function sleep(ms) {
+    return new Promise(function (r) { setTimeout(r, ms); });
+  }
+
+  // ============================================================
+  // Lightweight GIF parser: frame count, total duration, dimensions
+  // Follows GIF89a block structure. Verified against the spec:
+  //   header 6 bytes, LSD 7 bytes, optional GCT,
+  //   then blocks: 0x21 ext | 0x2C image | 0x3B trailer
+  // ============================================================
+  function parseGifInfo(bytes) {
+    var info = { frames: 0, totalDelayMs: 0, width: 0, height: 0, loop: 0, version: '' };
+    if (!bytes || bytes.length < 13) return info;
+
+    var sig = String.fromCharCode(bytes[0], bytes[1], bytes[2]);
+    if (sig !== 'GIF') return info;
+    info.version = String.fromCharCode(bytes[3], bytes[4], bytes[5]);
+
+    info.width = bytes[6] | (bytes[7] << 8);
+    info.height = bytes[8] | (bytes[9] << 8);
+
+    var packed = bytes[10];
+    var pos = 13;
+    if (packed & 0x80) {
+      var gctSize = 2 << (packed & 0x07); // 2^(N+1) entries
+      pos += gctSize * 3;
+    }
+
+    var pendingDelayMs = 0;
+
+    function skipSubBlocks(p) {
+      while (p < bytes.length) {
+        var n = bytes[p];
+        p += 1;
+        if (n === 0) break;
+        p += n;
+      }
+      return p;
+    }
+
+    while (pos < bytes.length) {
+      var b = bytes[pos];
+
+      if (b === 0x3B) break; // trailer
+
+      if (b === 0x21) {
+        // Extension: 0x21, label, then sub-blocks
+        var label = bytes[pos + 1];
+        pos += 2;
+
+        // Graphic Control Extension = 0xF9, block size 4
+        if (label === 0xF9 && bytes[pos] === 4) {
+          var delayCs = bytes[pos + 2] | (bytes[pos + 3] << 8);
+          // GIF delay is hundredths of a second; 0 is treated as 10cs by most viewers
+          pendingDelayMs = (delayCs === 0 ? 10 : delayCs) * 10;
+        } else if (label === 0xFF) {
+          // Application extension. Check for NETSCAPE2.0 loop block.
+          var appLen = bytes[pos];
+          if (appLen === 11) {
+            var appId = String.fromCharCode(
+              bytes[pos+1], bytes[pos+2], bytes[pos+3], bytes[pos+4],
+              bytes[pos+5], bytes[pos+6], bytes[pos+7], bytes[pos+8]
+            );
+            if (appId === 'NETSCAPE') {
+              var subStart = pos + 1 + 11;
+              if (bytes[subStart] === 3 && bytes[subStart+1] === 1) {
+                info.loop = bytes[subStart+2] | (bytes[subStart+3] << 8);
+              }
+            }
+          }
+        }
+
+        pos = skipSubBlocks(pos);
+        continue;
+      }
+
+      if (b === 0x2C) {
+        // Image descriptor
+        pos += 1;
+        if (pos + 9 > bytes.length) break;
+        var imgPacked = bytes[pos + 8];
+        pos += 9;
+
+        if (imgPacked & 0x80) {
+          var lctSize = 2 << (imgPacked & 0x07);
+          pos += lctSize * 3;
+        }
+
+        // LZW minimum code size
+        pos += 1;
+        // Image data sub-blocks
+        pos = skipSubBlocks(pos);
+
+        info.frames += 1;
+        info.totalDelayMs += pendingDelayMs;
+        pendingDelayMs = 0;
+        continue;
+      }
+
+      // Unknown byte: bail out rather than loop forever
+      break;
+    }
+
+    return info;
+  }
+
+  // ============================================================
+  // gifsicle loading
+  // ============================================================
+  async function loadGifsicle() {
+    if (gifsicleModule) return gifsicleModule;
+    if (gifsicleLoading) return gifsicleLoading;
+
+    gifsicleLoading = (async function () {
+      var lastErr = null;
+      for (var i = 0; i < GIFSICLE_CDNS.length; i++) {
+        try {
+          var mod = await import(/* @vite-ignore */ GIFSICLE_CDNS[i]);
+          var api = mod && (mod.default || mod);
+          if (api && typeof api.run === 'function') {
+            gifsicleModule = api;
+            return api;
+          }
+          lastError = new Error('Module did not expose run()');
+        } catch (e) {
+          lastErr = e;
+        }
+      }
+      throw new Error(
+        'Could not load the compression engine (gifsicle WASM). ' +
+        'Check your connection and try again. ' +
+        (lastErr && lastErr.message ? '(' + lastErr.message + ')' : '')
+      );
+    })();
+
+    try {
+      return await gifsicleLoading;
+    } catch (e) {
+      gifsicleLoading = null;
+      throw e;
+    }
+  }
+
+  // ============================================================
+  // gifsicle wrapper
+  // ============================================================
+  async function runGifsicle(file, args) {
+    var gifsicle = await loadGifsicle();
+    var inputName = 'in.gif';
+    var outputName = 'out.gif';
+
+    var command = args.concat([
+      inputName,
+      '-o', '/out/' + outputName
+    ]).join(' ');
+
+    var res = await gifsicle.run({
+      input: [{ file: file, name: inputName }],
+      command: [command]
+    });
+
+    if (!res || !res.length) throw new Error('Compression produced no output.');
+
+    var entry = res[0];
+    var out = entry && (entry.file || entry);
+    if (!out || typeof out.size !== 'number') {
+      throw new Error('Compression returned an unexpected result.');
+    }
+    return out;
+  }
+
+  // ============================================================
+  // Build gifsicle args for a ladder step
+  // ============================================================
+  function buildArgs(step, info) {
+    var args = ['-O1'];
+
+    if (step.lossy > 0) args.push('--lossy=' + step.lossy);
+    if (step.colors > 0) args.push('--colors=' + step.colors);
+    if (step.scale < 1) args.push('--resize-fit=' + Math.round(step.scale * 100) + '%');
+
+    // Frame dropping: keep every Nth frame.
+    // gifsicle's frame selection is 1-indexed: "#0-.." uses 0-index in some
+    // builds, so use the explicit --selective? No: use `#` selection syntax.
+    if (step.frameStep > 1 && info && info.frames > 2) {
+      var frames = [];
+      for (var i = 0; i < info.frames; i += step.frameStep) frames.push(i);
+      // gifsicle frame selection uses "#<start>-<end>" or "#<n>".
+      // Passing multiple "#n" tokens selects those frames.
+      frames.forEach(function (f) { args.push('#' + f); });
+    }
+
+    // Delay compensation: if frames are dropped, write a uniform delay
+    // that preserves total playback duration.
+    if (step.frameStep > 1 && compensateEl.checked && info && info.frames > 1) {
+      var keptCount = Math.ceil(info.frames / step.frameStep);
+      if (keptCount > 0 && info.totalDelayMs > 0) {
+        var newDelayCs = Math.round(info.totalDelayMs / keptCount / 10);
+        // Most viewers clamp delays below 2cs to 10cs, so never go under 2
+        if (newDelayCs < 2) newDelayCs = 2;
+        args.push('--delay=' + newDelayCs);
+      }
+    }
+
+    if (preserveLoopEl.checked && info && info.loop === 0) {
+      args.push('--loopcount=0');
+    }
+
+    return args;
+  }
+
+  // ============================================================
+  // Ladder
+  // ============================================================
+  var TARGET_LADDER = [
+    { label: 'Gentle lossy',                 lossy: 30,  colors: 0,   scale: 1,    frameStep: 1 },
+    { label: 'Balanced lossy',               lossy: 60,  colors: 0,   scale: 1,    frameStep: 1 },
+    { label: 'Strong lossy',                 lossy: 80,  colors: 0,   scale: 1,    frameStep: 1 },
+    { label: 'Strong lossy + 64 colours',    lossy: 80,  colors: 64,  scale: 1,    frameStep: 1 },
+    { label: 'Strong lossy + 32 colours',    lossy: 80,  colors: 32,  scale: 1,    frameStep: 1 },
+    { label: '32 colours + 85% size',        lossy: 100, colors: 32,  scale: 0.85, frameStep: 1 },
+    { label: '16 colours + 75% size',        lossy: 120, colors: 16,  scale: 0.75, frameStep: 1 },
+    { label: '16 colours + 60% + 2nd frames',lossy: 150, colors: 16,  scale: 0.6,  frameStep: 2 },
+    { label: '8 colours + 50% + 2nd frames', lossy: 200, colors: 8,   scale: 0.5,  frameStep: 2 },
+    { label: '8 colours + 50% + 3rd frames', lossy: 200, colors: 8,   scale: 0.5,  frameStep: 3 }
+  ];
+
+  // ============================================================
+  // File handling
+  // ============================================================
+  async function handleFile(file) {
+    if (!file) return;
+    hideUploadWarn();
+    hideResultWarn();
+
+    var type = (file.type || '').toLowerCase();
+    var name = (file.name || '').toLowerCase();
+    var isGif = type === 'image/gif' || /\.gif$/i.test(name);
+    if (!isGif) {
+      showUploadWarn('This tool compresses GIF files only. For JPEG, PNG, or WebP, use the image compressor instead.', 'error');
+      return;
+    }
+    if (file.size > MAX_FILE_SIZE) {
+      showUploadWarn('That file is over 50 MB. GIF compression at that size will be extremely slow — try a smaller file.', 'error');
+      return;
+    }
+
+    if (originalUrl) URL.revokeObjectURL(originalUrl);
+
+    originalName = (file.name || 'animation').replace(/\.[^.]+$/, '');
+    currentFile = file;
+
+    try {
+      var buf = await file.arrayBuffer();
+      currentInfo = parseGifInfo(new Uint8Array(buf));
+    } catch (e) {
+      currentInfo = null;
+    }
+
+    if (!currentInfo || currentInfo.frames === 0) {
+      showUploadWarn('Could not read that GIF. It may be malformed or not a real GIF file.', 'error');
+      currentFile = null;
+      return;
+    }
+
+    originalUrl = URL.createObjectURL(file);
+    previewOriginalEl.src = originalUrl;
+    previewOriginalSizeEl.textContent = formatBytes(file.size);
+    previewOriginalDimsEl.textContent =
+      currentInfo.width + ' × ' + currentInfo.height + ' px · ' +
+      currentInfo.frames + ' frame' + (currentInfo.frames === 1 ? '' : 's') +
+      (currentInfo.frames > 1 ? ' · ' + (currentInfo.totalDelayMs / 1000).toFixed(1) + ' s' : '');
+
+    originalInfoEl.textContent =
+      formatBytes(file.size) + ' · ' +
+      currentInfo.width + ' × ' + currentInfo.height + ' px · ' +
+      currentInfo.frames + ' frame' + (currentInfo.frames === 1 ? '' : 's');
+
+    emptyEl.classList.add('gf-hidden');
+    resultContentEl.classList.remove('gf-hidden');
+    resultSubEl.textContent = 'Ready. Press Compress GIF.';
+    downloadBtn.disabled = true;
+    if (resultUrl) { URL.revokeObjectURL(resultUrl); resultUrl = null; }
+    resultBlob = null;
+    previewResultEl.removeAttribute('src');
+    previewResultSizeEl.textContent = '—';
+    previewResultDimsEl.textContent = '—';
+    infoBodyEl.innerHTML = '';
+    processBtn.disabled = false;
+    setStatus('GIF loaded: ' + currentInfo.frames + ' frames, ' + formatBytes(file.size) + '.', 'ok');
+
+    if (file.size > LARGE_FILE_WARN) {
+      showUploadWarn(
+        'This GIF is over 10 MB. Compression may take a while — gifsicle optimises frames individually, ' +
+        'and higher optimisation levels get exponentially slower at this size. The tool uses -O1 to keep it usable.',
+        'info'
+      );
+    }
+  }
+
+  // ============================================================
+  // Manual-mode args
+  // ============================================================
+  function buildManualArgs() {
+    var lossy = parseInt(lossyEl.value, 10) || 0;
+    var colors = parseInt(colorsEl.value, 10) || 0;
+    var scale = parseFloat(scaleEl.value) || 1;
+    var frameStep = parseInt(frameStepEl.value, 10) || 1;
+    return {
+      label: 'Manual',
+      lossy: lossy,
+      colors: colors,
+      scale: scale,
+      frameStep: frameStep
+    };
+  }
+
+  // ============================================================
+  // Process
+  // ============================================================
+  async function process() {
+    if (!currentFile || processing) return;
+
+    var mode = modeEl.value;
+    var targetBytes = 0;
+    if (mode === 'target') {
+      var kb = parseInt(targetKbEl.value, 10) || 0;
+      if (kb < 10) { setStatus('Target must be at least 10 KB.', 'error'); return; }
+      if (kb > 51200) { setStatus('Target is over 50 MB — is that what you meant?', 'error'); return; }
+      targetBytes = kb * 1024;
+
+      // Instant win: already under target
+      if (currentFile.size <= targetBytes) {
+        setStatus('This GIF is already under ' + kb + ' KB (' + formatBytes(currentFile.size) +
+          '). No compression needed.', 'ok');
+        showResultWarn('The file already fits your target of ' + kb + ' KB. ' +
+          'Lower the target if you want to shrink it anyway.', 'good');
+        downloadBtn.disabled = true;
+        return;
+      }
+    }
+
+    processing = true;
+    processBtn.disabled = true;
+    downloadBtn.disabled = true;
+    hideResultWarn();
+    setProgress(0);
+    setStatus('Loading compression engine…', 'busy');
+
+    try {
+      await loadGifsicle();
+    } catch (e) {
+      setStatus(e.message, 'error');
+      showResultWarn(e.message, 'error');
+      processing = false;
+      processBtn.disabled = false;
+      return;
+    }
+
+    var steps;
+    if (mode === 'target') {
+      steps = TARGET_LADDER;
+    } else if (mode === 'quality') {
+      steps = [{ label: 'Quality first', lossy: 30, colors: 0, scale: 1, frameStep: 1 }];
+    } else {
+      steps = [Object.assign({ label: 'Size first' }, buildManualArgs(), { lossy: 200, colors: 8, scale: 0.5, frameStep: 3 })];
+    }
+
+    if (mode !== 'target') {
+      // Manual modes use their own values, not the ladder
+      steps = [buildManualArgs()];
+    }
+
+    var attempts = [];
+    var best = null;
+    var bestStep = null;
+    var t0 = performance.now();
+
+    for (var i = 0; i < steps.length; i++) {
+      var step = steps[i];
+      var args = buildArgs(step, currentInfo);
+
+      setStatus('Step ' + (i + 1) + ' of ' + steps.length + ': ' + step.label + '…', 'busy');
+      setProgress((i + 0.15) / steps.length);
+
+      var blob = null;
+      try {
+        blob = await runGifsicle(currentFile, args);
+      } catch (e) {
+        attempts.push({ label: step.label, size: -1, error: e.message });
+        continue;
+      }
+
+      attempts.push({ label: step.label, size: blob.size, error: null });
+
+      // Palette-backfire guard: track the best result regardless of order
+      if (!best || blob.size < best.size) {
+        best = blob;
+        bestStep = step;
+      }
+
+      setProgress((i + 1) / steps.length);
+
+      if (mode === 'target') {
+        if (blob.size <= targetBytes) break; // ladder stops at first fit
+      } else if (mode === 'quality') {
+        break; // single step
+      } else {
+        break; // size-first is a single aggressive step
+      }
+    }
+
+    var elapsed = Math.max(1, Math.round(performance.now() - t0));
+
+    if (!best) {
+      var lastErr = attempts.length ? attempts[attempts.length - 1].error : 'unknown error';
+      setStatus('Compression failed: ' + lastErr, 'error');
+      showResultWarn('Compression failed: ' + lastErr +
+        '. This can happen with malformed GIFs or when the CDN is blocked.', 'error');
+      processing = false;
+      processBtn.disabled = false;
+      setProgress(0);
+      return;
+    }
+
+    // Display
+    if (resultUrl) URL.revokeObjectURL(resultUrl);
+    resultUrl = URL.createObjectURL(best);
+    resultBlob = best;
+    previewResultEl.src = resultUrl;
+
+    var outInfo = null;
+    try {
+      var outBuf = await best.arrayBuffer();
+      outInfo = parseGifInfo(new Uint8Array(outBuf));
+    } catch (e) { outInfo = null; }
+
+    previewResultSizeEl.textContent = formatBytes(best.size);
+    previewResultDimsEl.textContent = (outInfo ? outInfo.width + ' × ' + outInfo.height + ' px · ' : '') +
+      (outInfo ? outInfo.frames + ' frame' + (outInfo.frames === 1 ? '' : 's') : '—');
+
+    downloadBtn.disabled = false;
+
+    // Info table
+    var savings = currentFile.size - best.size;
+    var savingsPct = currentFile.size > 0 ? (savings / currentFile.size) * 100 : 0;
+
+    var html = '';
+    if (mode === 'target') {
+      html += row('Target', (targetBytes / 1024) + ' KB (' + formatBytes(targetBytes) + ')');
+      html += row('Achieved', formatBytes(best.size),
+        best.size <= targetBytes ? 'good' : 'bad');
+      html += row('Under target by', formatBytes(Math.max(0, targetBytes - best.size)));
+    }
+    html += row('Original size', formatBytes(currentFile.size));
+    html += row('Compressed size', formatBytes(best.size));
+    html += row('Saved', formatBytes(savings) + ' (' + savingsPct.toFixed(1) + '%)',
+      savings > 0 ? 'good' : 'warn');
+    html += row('Settings used', bestStep.label);
+    html += row('Lossy level', String(bestStep.lossy || 0));
+    html += row('Palette', bestStep.colors > 0 ? bestStep.colors + ' colours' : 'unchanged');
+    html += row('Scale', bestStep.scale < 1 ? Math.round(bestStep.scale * 100) + '%' : '100%');
+    html += row('Frame interval', bestStep.frameStep > 1 ? 'every ' + bestStep.frameStep + 'nd/th frame' : 'all frames kept');
+    if (outInfo) {
+      html += row('Frames', currentInfo.frames + ' → ' + outInfo.frames +
+        (outInfo.frames < currentInfo.frames ? ' (reduced)' : ''),
+        outInfo.frames < currentInfo.frames ? 'warn' : null);
+      if (currentInfo.totalDelayMs > 0 && outInfo.totalDelayMs > 0) {
+        var origSec = (currentInfo.totalDelayMs / 1000).toFixed(2);
+        var newSec = (outInfo.totalDelayMs / 1000).toFixed(2);
+        var drift = Math.abs(currentInfo.totalDelayMs - outInfo.totalDelayMs) / currentInfo.totalDelayMs;
+        html += row('Duration', origSec + ' s → ' + newSec + ' s',
+          drift < 0.1 ? 'good' : 'warn');
+      }
+    }
+    html += row('Attempts', String(attempts.length));
+    html += row('Time', elapsed + ' ms');
+    infoBodyEl.innerHTML = html;
+
+    // Warnings
+    if (mode === 'target' && best.size > targetBytes) {
+      showResultWarn(
+        'The target of ' + (targetBytes / 1024) + ' KB could not be reached. ' +
+        'The smallest result is ' + formatBytes(best.size) + ' using "' + bestStep.label + '". ' +
+        'Options: raise the target, accept this result, or convert to MP4 or WebP — ' +
+        'both formats usually reach the same target easily.',
+        'error'
+      );
+      setStatus('Target not reached. Best result: ' + formatBytes(best.size) + '.', 'warn');
+    } else if (bestStep.frameStep > 1 && outInfo && currentInfo.totalDelayMs > 0) {
+      var driftPct = Math.abs(currentInfo.totalDelayMs - outInfo.totalDelayMs) / currentInfo.totalDelayMs * 100;
+      if (driftPct > 5 && compensateEl.checked) {
+        showResultWarn(
+          'Frames were dropped and the duration shifted by ' + driftPct.toFixed(0) + '%. ' +
+          'The delay compensation could not fully preserve the original timing — ' +
+          'compare the two previews above to confirm the motion looks right.',
+          'warn'
+        );
+      } else if (compensateEl.checked) {
+        showResultWarn(
+          'Frames were dropped to reach the target, but the playback duration was preserved. ' +
+          'The animation will look a little steppier, not faster.',
+          'info'
+        );
+      }
+    } else if (best.size < currentFile.size) {
+      showResultWarn(
+        'Compressed from ' + formatBytes(currentFile.size) + ' to ' + formatBytes(best.size) +
+        ' — a ' + savingsPct.toFixed(0) + '% reduction. Animation and original palette preserved.',
+        'good'
+      );
+    }
+
+    if (mode === 'target' && best.size <= targetBytes) {
+      setStatus('Done. ' + formatBytes(best.size) + ' — under your ' +
+        (targetBytes / 1024) + ' KB target.', 'ok');
+    } else if (mode !== 'target') {
+      setStatus('Done. ' + formatBytes(best.size) + ' (' + savingsPct.toFixed(0) + '% smaller).', 'ok');
+    }
+
+    resultSubEl.textContent = 'Compressed to ' + formatBytes(best.size) +
+      ' using "' + bestStep.label + '".';
+
+    processing = false;
+    processBtn.disabled = false;
+    setProgress(0);
+  }
+
+  function row(label, value, tone) {
+    return '<tr><th>' + escapeHtml(label) + '</th>' +
+      '<td' + (tone ? ' class="is-' + tone + '"' : '') + '>' +
+      escapeHtml(value) + '</td></tr>';
+  }
+
+  // ============================================================
+  // Download
+  // ============================================================
+  function download() {
+    if (!resultBlob) return;
+    var a = document.createElement('a');
+    a.href = resultUrl;
+    a.download = originalName + '-compressed.gif';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  // ============================================================
+  // Reset
+  // ============================================================
+  function reset() {
+    currentFile = null;
+    currentInfo = null;
+    if (originalUrl) { URL.revokeObjectURL(originalUrl); originalUrl = null; }
+    if (resultUrl) { URL.revokeObjectURL(resultUrl); resultUrl = null; }
+    resultBlob = null;
+    fileInput.value = '';
+    processBtn.disabled = true;
+    downloadBtn.disabled = true;
+    originalInfoEl.textContent = 'Animated or static GIF · up to 50 MB';
+    previewOriginalEl.removeAttribute('src');
+    previewResultEl.removeAttribute('src');
+    previewOriginalSizeEl.textContent = '—';
+    previewOriginalDimsEl.textContent = '—';
+    previewResultSizeEl.textContent = '—';
+    previewResultDimsEl.textContent = '—';
+    infoBodyEl.innerHTML = '';
+    emptyEl.classList.remove('gf-hidden');
+    resultContentEl.classList.add('gf-hidden');
+    resultSubEl.textContent = 'Upload a GIF and press Compress GIF.';
+    hideUploadWarn();
+    hideResultWarn();
+    setProgress(0);
+    setStatus('', '');
+  }
+
+  // ============================================================
+  // Presets
+  // ============================================================
+  var PRESETS = {
+    discord:  { kb: 10240, unit: 'KB', label: 'Discord (10 MB)' },
+    slack:    { kb: 5120,  unit: 'KB', label: 'Slack (5 MB)' },
+    whatsapp: { kb: 16384, unit: 'KB', label: 'WhatsApp (16 MB)' },
+    email:    { kb: 5120,  unit: 'KB', label: 'Email (5 MB)' }
+  };
+
+  function applyPreset(name) {
+    var p = PRESETS[name];
+    if (!p) return;
+    targetKbEl.value = p.kb;
+    targetUnitEl.textContent = p.unit;
+    modeEl.value = 'target';
+    modeHintEl.textContent = 'Target mode walks a priority ladder: quality loss first, then palette, then dimensions, then frames.';
+    document.querySelectorAll('.gf-preset').forEach(function (b) {
+      b.classList.toggle('is-primary', b.getAttribute('data-preset') === name);
+    });
+    document.querySelectorAll('.gf-chip').forEach(function (c) {
+      c.classList.toggle('is-primary', parseInt(c.getAttribute('data-kb'), 10) === p.kb);
+    });
+    setStatus('Preset applied: ' + p.label + ' target.', 'ok');
+  }
+
+  // ============================================================
+  // Events
+  // ============================================================
+  dropEl.addEventListener('click', function () { fileInput.click(); });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropEl.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropEl.classList.add('is-dragover');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropEl.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropEl.classList.remove('is-dragover');
+    });
+  });
+  dropEl.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+      handleFile(e.dataTransfer.files[0]);
+    }
+  });
+
+  fileInput.addEventListener('change', function (e) {
+    if (e.target.files && e.target.files.length) handleFile(e.target.files[0]);
+  });
+
+  document.querySelectorAll('.gf-preset').forEach(function (btn) {
+    btn.addEventListener('click', function () { applyPreset(btn.getAttribute('data-preset')); });
+  });
+
+  document.querySelectorAll('.gf-chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      targetKbEl.value = chip.getAttribute('data-kb');
+      targetUnitEl.textContent = 'KB';
+      document.querySelectorAll('.gf-chip').forEach(function (c) {
+        c.classList.toggle('is-primary', c === chip);
+      });
+    });
+  });
+
+  modeEl.addEventListener('change', function () {
+    var m = modeEl.value;
+    var hints = {
+      target: 'Target mode walks a priority ladder: quality loss first, then palette, then dimensions, then frames.',
+      quality: 'Quality-first applies one gentle lossy pass and ignores the target size.',
+      size: 'Size-first applies the most aggressive settings and ignores the target size.'
+    };
+    modeHintEl.textContent = hints[m] || '';
+    // Disable target-specific UI in manual modes
+    targetKbEl.disabled = (m !== 'target');
+  });
+
+  processBtn.addEventListener('click', process);
+  downloadBtn.addEventListener('click', download);
+  resetBtn.addEventListener('click', reset);
+
+  // Init
+  setStatus('Waiting for a GIF…', 'busy');
+})();
+</script>
+</body>
+</html>

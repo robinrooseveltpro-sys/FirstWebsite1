@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extract Emails From Text - Free Online Tool</title>
+<meta name="description" content="Paste text, get a clean list of emails, URLs, phone numbers and IP addresses. Duplicates removed, suspicious emails flagged. Runs in your browser.">
+<link rel="canonical" href="https://converttotoolsonline.com/extract-emails-from-text.html">
+<meta property="og:title" content="Extract Emails From Text - Free Online Tool">
+<meta property="og:description" content="Pull emails, URLs, phone numbers and IPs out of any block of text. Deduplicated, validated, no upload.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://converttotoolsonline.com/extract-emails-from-text.html">
+<meta name="robots" content="index, follow">
+<style>
+:root{
+  --ct-ink:#0f172a;
+  --ct-muted:#475569;
+  --ct-blue:#2563eb;
+  --ct-blue-dark:#1d4ed8;
+  --ct-line:#e2e8f0;
+  --ct-bg:#f8fafc;
+  --ct-radius:12px;
+  --ct-shadow:0 1px 3px rgba(0,0,0,.08);
+  --ct-brand-mark:#2563eb;
+  --ct-nav:#ffffff;
+  --ct-hero:linear-gradient(135deg,#eff6ff 0%,#f8fafc 100%);
+  --ct-footer:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color:var(--ct-ink);background:var(--ct-bg);line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--ct-blue);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit}
+.ct-wrap{max-width:1200px;margin:0 auto;padding:0 1.25rem}
+
+/* header */
+.ct-header{background:var(--ct-nav);border-bottom:1px solid var(--ct-line);padding:.85rem 0;position:sticky;top:0;z-index:40}
+.ct-nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.ct-logo{font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+.ct-logo span{color:var(--ct-brand-mark)}
+.ct-nav-links{display:flex;align-items:center;gap:1.25rem}
+.ct-nav-links a{font-size:.875rem;color:var(--ct-muted);font-weight:500}
+
+/* hero */
+.ct-hero{background:var(--ct-hero);padding:2.5rem 0 3.5rem;text-align:center;border-bottom:1px solid var(--ct-line)}
+.ct-hero h1{font-size:clamp(1.6rem,3.8vw,2.2rem);letter-spacing:-.025em;margin-bottom:.55rem;line-height:1.2}
+.ct-hero p{color:var(--ct-muted);max-width:640px;margin:0 auto;font-size:1rem}
+
+/* shell */
+.ct-tool{max-width:1200px;margin:-2rem auto 0;padding:0 1.25rem;position:relative;z-index:2}
+.ct-tool-card{background:#fff;border:1px solid var(--ct-line);border-radius:16px;box-shadow:0 10px 30px -12px rgba(15,23,42,.15);padding:1.5rem}
+.ct-tool-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,480px);gap:1.5rem;align-items:start}
+@media(max-width:1040px){.ct-tool-grid{grid-template-columns:1fr}}
+
+/* input pane */
+.input-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;gap:.5rem;flex-wrap:wrap}
+.input-head h2{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ct-muted)}
+.char-count{font-size:.72rem;color:var(--ct-muted);font-variant-numeric:tabular-nums}
+.paste-area{
+  width:100%;min-height:220px;max-height:420px;resize:vertical;
+  padding:.85rem 1rem;border:1px solid var(--ct-line);border-radius:10px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.82rem;line-height:1.65;color:var(--ct-ink);background:#fff;
+}
+.paste-area:focus{outline:2px solid var(--ct-blue);border-color:transparent}
+
+.action-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.6rem}
+.btn{
+  border:1px solid var(--ct-line);background:#fff;color:var(--ct-muted);
+  border-radius:7px;padding:.5rem .85rem;font-size:.8rem;font-weight:600;
+  cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.btn:hover{background:var(--ct-bg);color:var(--ct-ink)}
+.btn:focus-visible{outline:2px solid var(--ct-blue);outline-offset:2px}
+.btn.primary{background:var(--ct-blue);color:#fff;border-color:var(--ct-blue)}
+.btn.primary:hover{background:var(--ct-blue-dark)}
+.btn.danger{color:#dc2626;border-color:#fecaca}
+.btn.danger:hover{background:#fef2f2}
+
+.type-toggles{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.85rem}
+.type-pill{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.35rem .7rem;border:1px solid var(--ct-line);border-radius:999px;
+  background:#fff;font-size:.78rem;font-weight:600;color:var(--ct-muted);
+  cursor:pointer;user-select:none;
+}
+.type-pill input{position:absolute;opacity:0;pointer-events:none}
+.type-pill:has(input:checked){background:#eff6ff;border-color:#bfdbfe;color:#1e40af}
+.type-pill:has(input:focus-visible){outline:2px solid var(--ct-blue);outline-offset:2px}
+.type-pill .dot{width:7px;height:7px;border-radius:50%;background:#cbd5e1}
+.type-pill input:checked ~ .dot{background:#2563eb}
+
+.stats-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;
+  margin-top:.85rem;padding:.6rem .7rem;background:var(--ct-bg);
+  border-radius:8px;border:1px solid var(--ct-line);
+}
+@media(max-width:520px){.stats-bar{grid-template-columns:repeat(2,1fr)}}
+.stat{text-align:center}
+.stat-num{font-size:1.1rem;font-weight:800;color:var(--ct-ink);line-height:1.1;font-variant-numeric:tabular-nums}
+.stat-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ct-muted);font-weight:700;margin-top:.15rem}
+
+/* results pane */
+.results-card{background:#fff;border:1px solid var(--ct-line);border-radius:12px;box-shadow:var(--ct-shadow);overflow:hidden}
+.results-tabs{display:flex;background:var(--ct-bg);border-bottom:1px solid var(--ct-line);overflow-x:auto;scrollbar-width:none}
+.results-tabs::-webkit-scrollbar{display:none}
+.result-tab{
+  border:none;background:transparent;font-family:inherit;
+  font-size:.78rem;font-weight:600;color:var(--ct-muted);
+  padding:.65rem .95rem;border-bottom:2px solid transparent;
+  cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:.35rem;
+}
+.result-tab:hover{color:var(--ct-ink)}
+.result-tab[aria-selected="true"]{color:var(--ct-ink);border-bottom-color:var(--ct-blue);background:#fff}
+.result-tab:focus-visible{outline:2px solid var(--ct-blue);outline-offset:-2px}
+.tab-count{
+  font-size:.68rem;font-weight:700;background:#e2e8f0;color:#475569;
+  border-radius:999px;padding:.02rem .4rem;min-width:1.2rem;text-align:center;
+}
+.result-tab[aria-selected="true"] .tab-count{background:#dbeafe;color:#1e40af}
+
+.results-toolbar{display:flex;align-items:center;gap:.35rem;padding:.5rem .75rem;border-bottom:1px solid var(--ct-line);flex-wrap:wrap}
+.filter-input{
+  flex:1;min-width:120px;padding:.4rem .6rem;border:1px solid var(--ct-line);
+  border-radius:6px;font-size:.8rem;font-family:inherit;background:#fff;color:var(--ct-ink);
+}
+.filter-input:focus{outline:2px solid var(--ct-blue);border-color:transparent}
+.results-toolbar .btn{padding:.35rem .6rem;font-size:.72rem}
+
+.results-list{max-height:380px;overflow-y:auto;padding:.35rem .35rem}
+.results-empty{padding:2.5rem 1.25rem;text-align:center;color:var(--ct-muted);font-size:.85rem}
+.results-empty strong{display:block;color:var(--ct-ink);font-weight:600;margin-bottom:.25rem}
+.result-row{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.4rem .55rem;border-radius:6px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.78rem;color:var(--ct-ink);line-height:1.4;
+}
+.result-row:hover{background:var(--ct-bg)}
+.result-value{flex:1;word-break:break-all;min-width:0}
+.result-badge{
+  font-size:.62rem;font-weight:800;padding:.08rem .4rem;
+  border-radius:4px;text-transform:uppercase;letter-spacing:.04em;
+  flex-shrink:0;
+}
+.badge-warn{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
+.row-copy{
+  border:none;background:transparent;color:#94a3b8;
+  width:24px;height:24px;border-radius:5px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-size:.8rem;
+}
+.row-copy:hover{background:#dbeafe;color:var(--ct-blue)}
+
+/* toast */
+.toast{
+  position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--ct-ink);color:#fff;padding:.55rem 1.05rem;border-radius:999px;
+  font-size:.8rem;font-weight:600;opacity:0;pointer-events:none;
+  transition:opacity .2s,transform .2s;z-index:100;
+  max-width:90vw;text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* content */
+.ct-section{max-width:820px;margin:0 auto;padding:2.75rem 1.25rem 0}
+.ct-section h2{font-size:1.4rem;letter-spacing:-.015em;margin-bottom:.75rem;line-height:1.3}
+.ct-section h2:not(:first-child){margin-top:2rem}
+.ct-section p{color:var(--ct-muted);font-size:.95rem;margin-bottom:.85rem}
+.ct-section strong{color:#0f172a}
+.ct-section ul,.ct-section ol{padding-left:1.2rem;margin-bottom:.9rem}
+.ct-section li{color:var(--ct-muted);font-size:.95rem;margin-bottom:.35rem}
+.ct-section code{background:#eef2f7;padding:.08rem .35rem;border-radius:4px;font-size:.85em;color:#334155;font-family:ui-monospace,Menlo,Consolas,monospace}
+
+.ct-callout{
+  border-left:3px solid var(--ct-blue);background:#f0f7ff;
+  padding:.9rem 1.1rem;border-radius:0 8px 8px 0;margin:1.25rem 0;
+  font-size:.9rem;color:#1e3a5f;line-height:1.55;
+}
+
+.ct-faq-nav{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+.ct-faq-nav a{
+  background:#fff;border:1px solid var(--ct-line);border-radius:999px;
+  padding:.35rem .85rem;font-size:.78rem;font-weight:600;color:var(--ct-muted);
+}
+.ct-faq-nav a:hover{border-color:var(--ct-blue);color:var(--ct-blue);text-decoration:none}
+.ct-faq-group{margin-bottom:1.75rem;scroll-margin-top:80px}
+.ct-faq-group h3{font-size:1.05rem;margin-bottom:.7rem}
+.ct-faq-item{border-bottom:1px solid var(--ct-line);padding:.85rem 0}
+.ct-faq-item:last-child{border-bottom:none}
+.ct-faq-item h4{font-size:.925rem;font-weight:700;margin-bottom:.3rem;line-height:1.4}
+.ct-faq-item p{font-size:.9rem;margin-bottom:0}
+
+/* footer */
+.ct-footer{background:var(--ct-footer);color:#cbd5e1;padding:2rem 0;font-size:.85rem;margin-top:3rem}
+.ct-footer .ct-wrap{display:flex;flex-direction:column;gap:.5rem;align-items:center;text-align:center}
+.ct-footer a{color:#93c5fd}
+.ct-footer .fine{font-size:.75rem;color:#94a3b8;max-width:640px}
+
+@media(max-width:560px){
+  .ct-tool-card{padding:1rem}
+  .paste-area{min-height:160px;font-size:.78rem}
+  .results-list{max-height:300px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+@media print{
+  @page{margin:1.4cm}
+  body{background:#fff;color:#000}
+  .ct-header,.ct-hero,.input-pane,.ct-section,.ct-footer,.toast,.results-toolbar,.results-tabs,.row-copy{display:none!important}
+  .ct-tool{margin:0;padding:0;max-width:100%}
+  .ct-tool-card{box-shadow:none;border:none;padding:0;border-radius:0}
+  .ct-tool-grid{display:block}
+  .results-card{border:none;box-shadow:none;padding:0}
+  .results-card::before{
+    content:"Extracted contacts";
+    display:block;font-size:1.4rem;font-weight:800;margin-bottom:.85rem;color:#000;
+  }
+  .results-list{max-height:none;overflow:visible;padding:0}
+  .result-row{font-size:10pt;padding:.25rem 0;border-bottom:.5pt solid #eee}
+  .result-badge{border:.5pt solid #b91c1c}
+}
+</style>
+</head>
+<body>
+
+<header class="ct-header">
+  <div class="ct-wrap ct-nav-inner">
+    <div class="ct-logo">Convert<span>ToTools</span>Online</div>
+    <nav class="ct-nav-links">
+      <a href="/index.html">All tools</a>
+      <a href="/Contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="ct-hero">
+  <div class="ct-wrap">
+    <h1>Extract Emails From Text</h1>
+    <p>Paste any block of text and get back a clean list of emails, URLs, phone numbers and IP addresses. Duplicates removed, suspicious emails flagged, nothing uploaded.</p>
+  </div>
+</section>
+
+<main>
+
+<div class="ct-tool">
+  <div class="ct-tool-card">
+    <div class="ct-tool-grid">
+
+      <!-- ================= INPUT ================= -->
+      <div class="input-pane">
+
+        <div class="input-head">
+          <h2>Your text</h2>
+          <span class="char-count" id="charCount">0 characters</span>
+        </div>
+
+        <textarea class="paste-area" id="pasteArea" spellcheck="false"
+          placeholder="Paste anything here. Email threads, spreadsheet exports, log files, scraped HTML, meeting notes with phone numbers buried in them. The tool works out what is what."></textarea>
+
+        <div class="action-row">
+          <button type="button" class="btn primary" id="processBtn">Extract now</button>
+          <button type="button" class="btn" id="pasteBtn">Paste from clipboard</button>
+          <button type="button" class="btn" id="sampleBtn">Try sample text</button>
+          <button type="button" class="btn danger" id="clearBtn">Clear</button>
+        </div>
+
+        <div class="type-toggles" role="group" aria-label="Extraction types">
+          <label class="type-pill">
+            <input type="checkbox" id="typeEmail" checked>
+            <span class="dot"></span>
+            <span>Emails</span>
+          </label>
+          <label class="type-pill">
+            <input type="checkbox" id="typeUrl" checked>
+            <span class="dot"></span>
+            <span>URLs</span>
+          </label>
+          <label class="type-pill">
+            <input type="checkbox" id="typePhone" checked>
+            <span class="dot"></span>
+            <span>Phones</span>
+          </label>
+          <label class="type-pill">
+            <input type="checkbox" id="typeIp" checked>
+            <span class="dot"></span>
+            <span>IPs</span>
+          </label>
+        </div>
+
+        <div class="stats-bar">
+          <div class="stat">
+            <div class="stat-num" id="statEmail">0</div>
+            <div class="stat-label">Emails</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" id="statUrl">0</div>
+            <div class="stat-label">URLs</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" id="statPhone">0</div>
+            <div class="stat-label">Phones</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" id="statIp">0</div>
+            <div class="stat-label">IPs</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= RESULTS ================= -->
+      <div class="results-pane">
+        <div class="results-card">
+
+          <div class="results-tabs" role="tablist" aria-label="Result type">
+            <button type="button" class="result-tab" role="tab" data-tab="email" aria-selected="true">
+              Emails <span class="tab-count" id="tabCountEmail">0</span>
+            </button>
+            <button type="button" class="result-tab" role="tab" data-tab="url" aria-selected="false">
+              URLs <span class="tab-count" id="tabCountUrl">0</span>
+            </button>
+            <button type="button" class="result-tab" role="tab" data-tab="phone" aria-selected="false">
+              Phones <span class="tab-count" id="tabCountPhone">0</span>
+            </button>
+            <button type="button" class="result-tab" role="tab" data-tab="ip" aria-selected="false">
+              IPs <span class="tab-count" id="tabCountIp">0</span>
+            </button>
+          </div>
+
+          <div class="results-toolbar">
+            <input type="search" class="filter-input" id="filterInput"
+              placeholder="Filter results" aria-label="Filter current results">
+            <button type="button" class="btn" id="copyTypeBtn">Copy tab</button>
+            <button type="button" class="btn" id="copyAllBtn">Copy all</button>
+            <button type="button" class="btn" id="downloadBtn">CSV</button>
+          </div>
+
+          <div class="results-list" id="resultsList">
+            <div class="results-empty">
+              <strong>Nothing extracted yet</strong>
+              Paste text on the left and the results show up here.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- AD SLOT 1: below tool, above guide. Paste ad code here. -->
+
+<!-- ================= GUIDE ================= -->
+<section class="ct-section">
+  <h2>Why paste text instead of using a spreadsheet</h2>
+  <p>If you have ever copied a block of messy text into a spreadsheet hoping Excel would find the emails, you already know why this exists. Excel does not see an email. It sees a string. You end up writing a regular expression in a cell, or splitting by at signs and commas, and it works fine until the text has an email with a plus sign or a domain with two dots in it. Then you are debugging a formula at 11pm.</p>
+  <p>Copying text into a tool that already understands the patterns is faster. It also handles the edge cases that trip up spreadsheet formulas. Addresses like <code>john.smith+newsletters@example.co.uk</code> come out in one piece. Phone numbers formatted as <code>(202) 555-0180</code>, <code>202-555-0180</code>, and <code>+1 202 555 0180</code> all get normalized. IPv4 addresses do not get mangled into phone numbers.</p>
+
+  <h2>What the extraction actually catches</h2>
+  <p><strong>Emails.</strong> Standard pattern: local part, at sign, domain, dot, top-level domain. Local parts can include dots, plus signs, underscores, and hyphens. Domains can have subdomains. The top-level domain has to be at least two letters, so <code>test@example.c</code> will not match. <code>test@example.co</code> will.</p>
+  <p><strong>URLs.</strong> Anything starting with <code>http://</code>, <code>https://</code>, or <code>www.</code>. Trailing punctuation is stripped so a URL at the end of a sentence does not include the period.</p>
+  <p><strong>Phone numbers.</strong> US format in the common layouts: with parens, with dots, with dashes, with spaces, with or without the +1 country code. Ten digits in 3-3-4 grouping. International numbers work if they start with a plus and a country code, because the plus is a clear signal.</p>
+  <p><strong>IPv4 addresses.</strong> Four octets, each 0 to 255, separated by dots. Extracted before phone numbers so a server log line does not produce five false phone matches.</p>
+
+  <h2>The validation pass, and what gets flagged</h2>
+  <p>The extractor grabs anything that looks like an email. Then a separate check runs on each one. Not to remove it, but to flag it if something is off. The pattern is broad enough to catch malformed addresses; the validation is narrow enough to notice when they are malformed.</p>
+  <p>An address gets flagged when the domain has no dot, when it ends with a dot, when it has two dots in a row, when the local part is over 64 characters, when the whole address is over 254 characters, or when the top-level domain is shorter than two letters. These are not absolute rules. Some intranet systems use addresses without a top-level domain, for example. But for 99 percent of cases, a flagged address is one you want to look at before you use it.</p>
+
+  <div class="ct-callout">
+    <strong>What the tool does not do.</strong> It does not verify that an email address actually exists. That requires a network lookup and a live mail server, which this tool deliberately does not do because it would break the privacy guarantee. It checks the format. Whether the mailbox is real is a different question.
+  </div>
+
+  <h2>What deduplication means here</h2>
+  <p>If <code>john@example.com</code> appears four times in your text, you get it once. Emails and URLs are compared case-insensitively, so <code>JOHN@EXAMPLE.COM</code> and <code>john@example.com</code> count as duplicates. Phone numbers are compared by digits only, so <code>(202) 555-0180</code> and <code>202-555-0180</code> count as the same number.</p>
+  <p>What you see in the results is the first occurrence as written in your text. So if the first mention used the parenthesized format, that is the format shown. This matters for email lists where you want to preserve the display format.</p>
+</section>
+
+<!-- AD SLOT 2: between guide sections. Paste ad code here. -->
+
+<section class="ct-section">
+  <h2>Common places people use this</h2>
+  <p><strong>Recruiters and sales teams.</strong> A pasted block of LinkedIn profile text often hides three or four addresses in the body. Instead of reading every line, paste the whole block and copy the list. The privacy guarantee matters most here, because profile text often contains personal information that should not leave the browser.</p>
+  <p><strong>Developers parsing logs.</strong> Log files contain emails, IPs, URLs, and phone numbers mixed with timestamps and stack traces. Extracting the IPs is usually the goal, but once you are in the tool you will often want the URLs too. Running both at once saves pasting twice.</p>
+  <p><strong>Freelancers cleaning client notes.</strong> Meeting notes and email threads have phone numbers buried mid-paragraph. The tool pulls them out without disturbing the surrounding text, which matters if you want to keep the notes intact for reference.</p>
+  <p><strong>Anyone who received a shared document.</strong> PDFs converted to text often lose their formatting. Emails that were hyperlinks become plain strings. The extractor does not care about formatting. It finds the patterns regardless.</p>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="ct-section" id="faq">
+  <h2>Questions about the extractor</h2>
+
+  <div class="ct-faq-nav">
+    <a href="#faq-basics">Basics</a>
+    <a href="#faq-extraction">What gets found</a>
+    <a href="#faq-validation">Validation</a>
+    <a href="#faq-privacy">Privacy</a>
+    <a href="#faq-export">Export</a>
+  </div>
+
+  <div class="ct-faq-group" id="faq-basics">
+    <h3>Basics</h3>
+
+    <div class="ct-faq-item">
+      <h4>What happens to my text when I paste it here?</h4>
+      <p>Nothing. The text stays in your browser. It is not sent to a server, not stored in local storage, not logged anywhere. When you close the tab, the text is gone. This is a deliberate design choice, because the tool often processes text that contains personal contact information.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>How large a block of text can I paste?</h4>
+      <p>There is no hard limit in the tool itself. Practical limits are your browser's memory and your patience. Blocks of 100,000 characters work fine. Blocks of 2 million characters will work but may feel sluggish while typing.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Does it work on mobile?</h4>
+      <p>Yes. The layout stacks vertically on narrow screens. Pasting from the clipboard works on iOS Safari and Android Chrome, though some mobile browsers restrict clipboard reads without a user gesture. If the paste button does not work, tap the textarea and use your device's built-in paste gesture.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Why do I need to press extract when other tools are automatic?</h4>
+      <p>There is a debounce that runs extraction automatically a moment after you stop typing, so pressing the button is rarely necessary. The button exists because some people paste a large block and want to know exactly when extraction starts, or want to re-run after a filter change. It is a control, not a requirement.</p>
+    </div>
+  </div>
+
+  <div class="ct-faq-group" id="faq-extraction">
+    <h3>What gets found</h3>
+
+    <div class="ct-faq-item">
+      <h4>Will it find emails with plus signs or dots in the local part?</h4>
+      <p>Yes. The pattern supports <code>+</code>, <code>.</code>, <code>_</code>, and <code>-</code> in the local part, which covers every practical email address format in use. Addresses like <code>sarah.chen+newsletter@example.co.uk</code> come out in one piece.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Why did it find a URL that is only part of the real one?</h4>
+      <p>Some URLs have characters that are valid in a URL but ambiguous in prose, like trailing periods or closing parens after a link. The extractor strips trailing punctuation to avoid including sentence-ending periods, which means a URL ending in an unusual punctuation character might get cut short. This is rare in practice. If it happens, the URL in the results is still the working base of the address.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Why does the phone extraction sometimes pick up a date or ZIP code?</h4>
+      <p>Phone numbers and other numeric strings share structure. A string like <code>20005-1234</code> looks like a phone number to a regex because it has the right digit counts separated by a hyphen. In practice, if your text has ZIP+4 codes and phone numbers mixed, a few false positives will slip through. Delete them from the results after copying, or paste ZIP codes into a separate block.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Does it find international phone numbers?</h4>
+      <p>Reliably, only when they start with a plus and a country code. A UK number written as <code>020 7946 0958</code> without the +44 prefix will not match, because the extractor's phone pattern is built around US groupings and international numbers that signal themselves with a plus. If you need to extract international numbers written in their local format, the US-focused pattern will miss them.</p>
+    </div>
+  </div>
+
+  <div class="ct-faq-group" id="faq-validation">
+    <h3>Validation</h3>
+
+    <div class="ct-faq-item">
+      <h4>What does "flagged" mean on an email?</h4>
+      <p>The extractor found an address but the format check noticed something unusual. Common reasons include a domain with no top-level extension like <code>support@internal</code>, two dots in a row, or an overlong local part. The address still appears in the results. The flag just tells you to look at it before you use it in a mailing list.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Does the tool check if an email actually exists?</h4>
+      <p>No. Verifying that an address has a working mailbox requires a network request to a mail server, which this tool does not do because it would break the privacy guarantee. Format validation is local. Deliverability is a different question and requires a different tool.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Can I turn off the flagging?</h4>
+      <p>Not currently. The flag is informational and does not remove anything from the results, so if you do not want it, ignore the badge and copy the address. If the flagging becomes annoying on a specific batch of text, paste the addresses one per line into a text editor and clean them there.</p>
+    </div>
+  </div>
+
+  <div class="ct-faq-group" id="faq-privacy">
+    <h3>Privacy</h3>
+
+    <div class="ct-faq-item">
+      <h4>Why does the privacy guarantee matter here specifically?</h4>
+      <p>Because the text people paste into an email extractor almost always contains personal information. Names, addresses, phone numbers, email addresses tied to specific people. If the tool uploaded that text to a server to do the extraction, the operator of that server would have a database of personal contact information. This tool does the extraction in the browser, so the text never leaves the device.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Does the tool use analytics or third-party scripts?</h4>
+      <p>The page loads no external scripts beyond the tool's own code. There is no Google Analytics, no tracking pixel, no font CDN, no third-party library. Ad slots are marked in the source but the ad code itself, if you add it, is the only external dependency. If ad scripts are added, they may set cookies, which is a separate concern from whether the text you paste is uploaded.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Can I verify the tool does not upload anything?</h4>
+      <p>Yes. Open the browser's developer tools, go to the Network tab, clear the log, then paste text and press Extract. If the tool uploaded the text, you would see a network request. You will not see one, because there is no code that makes one. This is the kind of claim that is worth verifying rather than trusting.</p>
+    </div>
+  </div>
+
+  <div class="ct-faq-group" id="faq-export">
+    <h3>Export</h3>
+
+    <div class="ct-faq-item">
+      <h4>What does the CSV look like?</h4>
+      <p>Three columns: type, value, and flag. Type is one of email, url, phone, or ip. Value is the extracted string. Flag is empty for clean results and contains the validation reason for flagged emails. This format imports into Excel, Google Sheets, and every CRM without adjustment.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Can I copy just one type?</h4>
+      <p>Yes. Switch to that tab and use the "Copy tab" button. It copies only the currently filtered list, so if you have used the filter box to narrow down the results, only the visible items get copied. This is useful when you want the emails but not the phone numbers from a mixed block.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Does "Copy all" include everything or just the current tab?</h4>
+      <p>"Copy all" copies every result from every type, grouped by type with a header line for each. So the copied text will show "Emails" then a blank line then the email list, then "URLs" and so on. This is useful when you want a single clipboard payload that documents what was extracted.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Why does the download give a .csv instead of .txt?</h4>
+      <p>Because CSVs open directly in spreadsheet apps with the type column preserved. A text file would work too, but the CSV format is more useful when you are about to sort or filter the results. The file is a plain UTF-8 CSV, so if you would rather have a text file, rename the download from .csv to .txt after it saves.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AD SLOT 3: after FAQ, before related tools. Paste ad code here. -->
+
+<section class="ct-section">
+  <h2>Related tools</h2>
+  <p>If you work with text and data regularly, the <a href="/json-formatter.html">JSON formatter</a> handles parsing and pretty-printing, the <a href="/csv-cleaner-validator.html">CSV cleaner and validator</a> handles tabular data, and the <a href="/word-counter.html">word counter</a> gives you character and word counts for content. The <a href="/index.html">full tool library</a> has everything else.</p>
+</section>
+
+</main>
+
+<footer class="ct-footer">
+  <div class="ct-wrap">
+    <p><strong>ConvertToToolsOnline</strong> - free tools that run in your browser.</p>
+    <p><a href="/index.html">All tools</a> | <a href="/Contact.html">Contact</a></p>
+    <p class="fine">Your text never leaves your device. No upload, no storage, no logging.</p>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Email and Contact Extractor",
+  "url": "https://converttotoolsonline.com/extract-emails-from-text.html",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "Extract emails, URLs, phone numbers and IPv4 addresses from text",
+    "Case-insensitive deduplication",
+    "Format validation with flags for suspicious emails",
+    "Filter results in real time",
+    "Copy individual types or everything at once",
+    "Export results as CSV",
+    "Fully client-side with no uploads or logging"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What happens to my text when I paste it here?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nothing. The text stays in your browser. It is not sent to a server, not stored in local storage, not logged anywhere. When you close the tab, the text is gone. This is deliberate, because the tool often processes text that contains personal contact information."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the tool check if an email actually exists?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Verifying that an address has a working mailbox requires a network request to a mail server, which this tool does not do because it would break the privacy guarantee. Format validation is local. Deliverability is a different question."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it find international phone numbers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Reliably, only when they start with a plus and a country code. A number written in its local format without the international prefix will not match, because the phone pattern is built around US groupings and numbers that signal themselves with a plus."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does the phone extraction sometimes pick up a date or ZIP code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Phone numbers and other numeric strings share structure. A string like 20005-1234 looks like a phone number to a regex because it has the right digit counts separated by a hyphen. If your text mixes phone numbers with other numeric codes, a few false positives will slip through. Delete them after copying or paste those codes separately."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the CSV look like?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Three columns: type, value, and flag. Type is one of email, url, phone, or ip. Value is the extracted string. Flag is empty for clean results and contains the validation reason for flagged emails. The format imports into Excel, Google Sheets, and most CRMs without adjustment."
+      }
+    }
+  ]
+}
+</script>
+
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  var state = {
+    text: "",
+    activeTab: "email",
+    filter: "",
+    enabled: { email: true, url: true, phone: true, ip: true },
+    results: { email: [], url: [], phone: [], ip: [] }
+  };
+
+  var PATTERNS = {
+    email: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}/g,
+    url: /\b(?:https?:\/\/|www\.)[^\s<>"'()\[\]]+/gi,
+    ip: /\b(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\b/g,
+    phone: /\b(?:\+\d{1,3}[\s.\-]?)?(?:\(\d{2,4}\)|\d{2,4})[\s.\-]?\d{3,4}[\s.\-]?\d{3,4}\b/g
+  };
+
+  var TAB_LABELS = {
+    email: "Emails",
+    url: "URLs",
+    phone: "Phones",
+    ip: "IPs"
+  };
+
+  /* ---------- extraction ---------- */
+
+  function extractAll(text, enabled) {
+    var out = { email: [], url: [], phone: [], ip: [] };
+
+    if (enabled.ip) {
+      out.ip = extractIp(text);
+    }
+
+    if (enabled.email) {
+      out.email = extractEmail(text);
+    }
+
+    if (enabled.url) {
+      out.url = extractUrl(text);
+    }
+
+    if (enabled.phone) {
+      // remove ip matches first so phone regex does not see them
+      var phoneSource = text;
+      out.ip.forEach(function (ip) {
+        phoneSource = phoneSource.split(ip.value).join(" ");
+      });
+      out.phone = extractPhone(phoneSource);
+    }
+
+    return out;
+  }
+
+  function extractEmail(text) {
+    var seen = {};
+    var results = [];
+    var re = new RegExp(PATTERNS.email.source, "g");
+    var match;
+    while ((match = re.exec(text)) !== null) {
+      var raw = match[0];
+      var clean = raw.replace(/[.,;:]+$/, "");
+      var key = clean.toLowerCase();
+      if (seen[key]) continue;
+      seen[key] = true;
+      var validation = validateEmail(clean);
+      results.push({
+        value: clean,
+        flag: validation.ok ? "" : validation.reason
+      });
+    }
+    return results;
+  }
+
+  function extractUrl(text) {
+    var seen = {};
+    var results = [];
+    var re = new RegExp(PATTERNS.url.source, "gi");
+    var match;
+    while ((match = re.exec(text)) !== null) {
+      var raw = match[0];
+      // strip trailing punctuation that common prose attaches
+      var clean = raw.replace(/[.,;:!?)]+$/, "");
+      // if it starts with www., keep it as-is (no auto protocol)
+      var key = clean.toLowerCase();
+      if (seen[key]) continue;
+      seen[key] = true;
+      results.push({ value: clean, flag: "" });
+    }
+    return results;
+  }
+
+  function extractIp(text) {
+    var seen = {};
+    var results = [];
+    var re = new RegExp(PATTERNS.ip.source, "g");
+    var match;
+    while ((match = re.exec(text)) !== null) {
+      var clean = match[0];
+      if (seen[clean]) continue;
+      seen[clean] = true;
+      results.push({ value: clean, flag: "" });
+    }
+    return results;
+  }
+
+  function extractPhone(text) {
+    var seen = {};
+    var results = [];
+    var re = new RegExp(PATTERNS.phone.source, "g");
+    var match;
+    while ((match = re.exec(text)) !== null) {
+      var raw = match[0];
+      var digits = raw.replace(/\D/g, "");
+      // filter out obvious noise: too short or too long
+      if (digits.length < 7 || digits.length > 15) continue;
+      // skip if it looks like a 4-octet IP (already extracted elsewhere)
+      if (/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(raw)) continue;
+      var key = digits;
+      if (seen[key]) continue;
+      seen[key] = true;
+      results.push({ value: raw.trim(), flag: "" });
+    }
+    return results;
+  }
+
+  /* ---------- email validation ---------- */
+
+  function validateEmail(email) {
+    if (email.length > 254) return { ok: false, reason: "too long" };
+    var atIdx = email.lastIndexOf("@");
+    if (atIdx < 1) return { ok: false, reason: "missing @" };
+    var local = email.slice(0, atIdx);
+    var domain = email.slice(atIdx + 1);
+    if (local.length > 64) return { ok: false, reason: "local part over 64 chars" };
+    if (local.indexOf("..") >= 0) return { ok: false, reason: "consecutive dots" };
+    if (local.charAt(0) === "." || local.charAt(local.length - 1) === ".") {
+      return { ok: false, reason: "leading or trailing dot" };
+    }
+    if (domain.indexOf("..") >= 0) return { ok: false, reason: "consecutive dots in domain" };
+    if (domain.charAt(0) === "." || domain.charAt(domain.length - 1) === ".") {
+      return { ok: false, reason: "leading or trailing dot in domain" };
+    }
+    var dotIdx = domain.lastIndexOf(".");
+    if (dotIdx < 1) return { ok: false, reason: "missing top-level domain" };
+    var tld = domain.slice(dotIdx + 1);
+    if (tld.length < 2) return { ok: false, reason: "top-level domain too short" };
+    if (!/^[a-zA-Z]+$/.test(tld)) return { ok: false, reason: "unusual top-level domain" };
+    return { ok: true, reason: "" };
+  }
+
+  /* ---------- render ---------- */
+
+  function updateStats() {
+    $("statEmail").textContent = state.results.email.length;
+    $("statUrl").textContent = state.results.url.length;
+    $("statPhone").textContent = state.results.phone.length;
+    $("statIp").textContent = state.results.ip.length;
+
+    $("tabCountEmail").textContent = state.results.email.length;
+    $("tabCountUrl").textContent = state.results.url.length;
+    $("tabCountPhone").textContent = state.results.phone.length;
+    $("tabCountIp").textContent = state.results.ip.length;
+  }
+
+  function updateCharCount() {
+    var n = state.text.length;
+    $("charCount").textContent = n.toLocaleString() + (n === 1 ? " character" : " characters");
+  }
+
+  function renderResults() {
+    var list = $("resultsList");
+    list.innerHTML = "";
+
+    var items = state.results[state.activeTab] || [];
+    var filter = state.filter.trim().toLowerCase();
+
+    if (filter) {
+      items = items.filter(function (item) {
+        return item.value.toLowerCase().indexOf(filter) >= 0;
+      });
+    }
+
+    if (!items.length) {
+      var empty = document.createElement("div");
+      empty.className = "results-empty";
+      if (!state.text.trim()) {
+        empty.innerHTML = "<strong>Nothing extracted yet</strong>Paste text on the left and the results show up here.";
+      } else if (filter) {
+        empty.innerHTML = "<strong>No matches for that filter</strong>Try a shorter search or clear the filter.";
+      } else if (!state.enabled[state.activeTab]) {
+        empty.innerHTML = "<strong>" + TAB_LABELS[state.activeTab] + " extraction is off</strong>Turn it on in the toggles on the left.";
+      } else {
+        empty.innerHTML = "<strong>No " + TAB_LABELS[state.activeTab].toLowerCase() + " found</strong>The text you pasted does not contain any " + TAB_LABELS[state.activeTab].toLowerCase() + " that match the pattern.";
+      }
+      list.appendChild(empty);
+      return;
+    }
+
+    var frag = document.createDocumentFragment();
+    items.forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "result-row";
+
+      var val = document.createElement("span");
+      val.className = "result-value";
+      val.textContent = item.value;
+      row.appendChild(val);
+
+      if (item.flag) {
+        var badge = document.createElement("span");
+        badge.className = "result-badge badge-warn";
+        badge.textContent = item.flag;
+        badge.title = "This address does not match the expected format. Check it before using.";
+        row.appendChild(badge);
+      }
+
+      var copy = document.createElement("button");
+      copy.type = "button";
+      copy.className = "row-copy";
+      copy.setAttribute("aria-label", "Copy this value");
+      copy.title = "Copy";
+      copy.textContent = "\u29c9";
+      copy.addEventListener("click", function () {
+        copyText(item.value);
+      });
+      row.appendChild(copy);
+
+      frag.appendChild(row);
+    });
+    list.appendChild(frag);
+  }
+
+  function setActiveTab(tab) {
+    state.activeTab = tab;
+    document.querySelectorAll(".result-tab").forEach(function (btn) {
+      var isActive = btn.getAttribute("data-tab") === tab;
+      btn.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+    renderResults();
+  }
+
+  /* ---------- actions ---------- */
+
+  var extractTimer = null;
+  function scheduleExtract() {
+    clearTimeout(extractTimer);
+    extractTimer = setTimeout(runExtract, 280);
+  }
+
+  function runExtract() {
+    state.results = extractAll(state.text, state.enabled);
+    updateStats();
+    renderResults();
+  }
+
+  function copyText(text) {
+    if (!text) return;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        showToast("Copied");
+      }).catch(function () {
+        fallbackCopy(text);
+      });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+      showToast("Copied");
+    } catch (e) {
+      showToast("Copy failed");
+    }
+    document.body.removeChild(ta);
+  }
+
+  function copyCurrentTab() {
+    var items = state.results[state.activeTab] || [];
+    var filter = state.filter.trim().toLowerCase();
+    if (filter) {
+      items = items.filter(function (item) {
+        return item.value.toLowerCase().indexOf(filter) >= 0;
+      });
+    }
+    if (!items.length) {
+      showToast("Nothing to copy");
+      return;
+    }
+    var text = items.map(function (i) { return i.value; }).join("\n");
+    copyText(text);
+    showToast("Copied " + items.length + " item" + (items.length === 1 ? "" : "s"));
+  }
+
+  function copyAll() {
+    var parts = [];
+    var order = ["email", "url", "phone", "ip"];
+    var total = 0;
+    order.forEach(function (type) {
+      var list = state.results[type] || [];
+      if (!list.length) return;
+      parts.push(TAB_LABELS[type]);
+      list.forEach(function (item) {
+        parts.push(item.value);
+        total++;
+      });
+      parts.push("");
+    });
+    if (!total) {
+      showToast("Nothing to copy");
+      return;
+    }
+    copyText(parts.join("\n").replace(/\n+$/, ""));
+    showToast("Copied " + total + " item" + (total === 1 ? "" : "s"));
+  }
+
+  function downloadCsv() {
+    var rows = [["type", "value", "flag"]];
+    ["email", "url", "phone", "ip"].forEach(function (type) {
+      (state.results[type] || []).forEach(function (item) {
+        rows.push([type, item.value, item.flag || ""]);
+      });
+    });
+    if (rows.length === 1) {
+      showToast("Nothing to download");
+      return;
+    }
+    var csv = rows.map(function (r) {
+      return r.map(function (cell) {
+        var s = String(cell);
+        if (s.indexOf(",") >= 0 || s.indexOf('"') >= 0 || s.indexOf("\n") >= 0) {
+          return '"' + s.replace(/"/g, '""') + '"';
+        }
+        return s;
+      }).join(",");
+    }).join("\n");
+    var blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "extracted-contacts.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    showToast("Downloaded extracted-contacts.csv");
+  }
+
+  function clearAll() {
+    if (state.text && !confirm("Clear the text and results?")) return;
+    state.text = "";
+    state.results = { email: [], url: [], phone: [], ip: [] };
+    state.filter = "";
+    $("pasteArea").value = "";
+    $("filterInput").value = "";
+    updateCharCount();
+    updateStats();
+    renderResults();
+    showToast("Cleared");
+  }
+
+  function pasteFromClipboard() {
+    if (!navigator.clipboard || !navigator.clipboard.readText) {
+      showToast("Clipboard not available, paste manually");
+      $("pasteArea").focus();
+      return;
+    }
+    navigator.clipboard.readText().then(function (text) {
+      if (!text) {
+        showToast("Clipboard is empty");
+        return;
+      }
+      var area = $("pasteArea");
+      var start = area.selectionStart || 0;
+      var end = area.selectionEnd || 0;
+      var current = area.value;
+      area.value = current.slice(0, start) + text + current.slice(end);
+      state.text = area.value;
+      updateCharCount();
+      runExtract();
+      showToast("Pasted " + text.length + " characters");
+    }).catch(function () {
+      showToast("Clipboard access blocked, paste manually");
+      $("pasteArea").focus();
+    });
+  }
+
+  function loadSample() {
+    var sample = "Hi team,\n\n" +
+      "Reaching out about the invoice from last week. Please send payment confirmation to billing@acme-supply.com or reach me at 202-555-0180. Our office is at 1400 K St NW, Washington, DC 20005.\n\n" +
+      "For technical support, contact support@acme-supply.com or visit https://acme-supply.com/support. The documentation at www.acme-supply.com/docs has the full API reference.\n\n" +
+      "Our servers: 192.168.1.10 (primary), 10.0.0.42 (backup), 203.0.113.88 (external).\n\n" +
+      "Additional contacts:\n" +
+      "sarah.chen@acme-supply.com\n" +
+      "j.rodriguez@acme-supply.com\n" +
+      "support@invalid (check this one)\n\n" +
+      "Call back at (202) 555-0144 or +1 202 555 0177.";
+    $("pasteArea").value = sample;
+    state.text = sample;
+    updateCharCount();
+    runExtract();
+    showToast("Sample text loaded");
+  }
+
+  var toastTimer = null;
+  function showToast(msg) {
+    var t = $("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove("show"); }, 1800);
+  }
+
+  /* ---------- event wiring ---------- */
+
+  $("pasteArea").addEventListener("input", function (e) {
+    state.text = e.target.value;
+    updateCharCount();
+    scheduleExtract();
+  });
+
+  $("processBtn").addEventListener("click", function () {
+    clearTimeout(extractTimer);
+    runExtract();
+    showToast("Extracted");
+  });
+
+  $("pasteBtn").addEventListener("click", pasteFromClipboard);
+  $("sampleBtn").addEventListener("click", loadSample);
+  $("clearBtn").addEventListener("click", clearAll);
+
+  ["email", "url", "phone", "ip"].forEach(function (type) {
+    var inputId = "type" + type.charAt(0).toUpperCase() + type.slice(1);
+    $(inputId).addEventListener("change", function (e) {
+      state.enabled[type] = e.target.checked;
+      runExtract();
+    });
+  });
+
+  document.querySelectorAll(".result-tab").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      setActiveTab(btn.getAttribute("data-tab"));
+    });
+  });
+
+  $("filterInput").addEventListener("input", function (e) {
+    state.filter = e.target.value;
+    renderResults();
+  });
+
+  $("copyTypeBtn").addEventListener("click", copyCurrentTab);
+  $("copyAllBtn").addEventListener("click", copyAll);
+  $("downloadBtn").addEventListener("click", downloadCsv);
+
+  /* ---------- init ---------- */
+
+  updateCharCount();
+  updateStats();
+  renderResults();
+})();
+</script>
+</body>
+</html>

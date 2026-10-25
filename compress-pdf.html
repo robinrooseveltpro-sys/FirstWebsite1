@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f8ff">
+<title>Compress PDF to 100KB, 200KB or 500KB — Free Online</title>
+<meta name="description" content="Hit a PDF size cap for government, visa, or exam portals. Pick pages, watch it render, download a file that uploads. Nothing leaves your device.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://converttotoolsonline.com/compress-pdf.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ConvertToToolsOnline">
+<meta property="og:title" content="Compress PDF to 100KB, 200KB or 500KB">
+<meta property="og:description" content="Fit a PDF under a portal's size cap. Choose pages, see what shrinks, download.">
+<meta property="og:url" content="https://converttotoolsonline.com/compress-pdf.html">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/style.css">
+
+<style>
+:root{
+  color-scheme:light;
+  --ink:#172033;--muted:#607087;--blue:#245bcc;--blue-dark:#194aa8;
+  --line:#dfe6ef;--bg:#f5f8ff;--white:#fff;--radius:16px;
+  --shadow:0 6px 24px rgba(20,35,60,.055);
+  --green:#166534;--green-bg:#f0fdf4;--green-line:#bbf7d0;
+  --amber:#7a5200;--amber-bg:#fffbeb;--amber-line:#fde68a;
+  --red:#991b1b;--red-bg:#fef2f2;--red-line:#fecaca;
+  --info:#194aa8;--info-bg:#f0f6ff;--info-line:#cfe0ff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #9dbbff;outline-offset:3px}
+
+.ct-container{width:min(1240px,calc(100% - 32px));margin-inline:auto}
+.ct-skip{position:absolute;top:8px;left:-9999px;z-index:100;padding:10px 14px;border-radius:8px;background:#fff;color:var(--ink)}
+.ct-skip:focus{left:10px}
+
+/* header */
+.ct-header{position:relative;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
+.ct-header-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.ct-brand{display:inline-flex;align-items:center;gap:11px;color:var(--ink);font-weight:850;letter-spacing:-.4px}
+.ct-brand:hover{text-decoration:none}
+.ct-brand-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--blue);color:#fff;font-size:.95rem;font-weight:900}
+.ct-brand-name span{color:var(--blue)}
+.ct-nav{display:flex;align-items:center;gap:22px}
+.ct-nav a{color:#475569;font-size:.93rem;font-weight:700}
+.ct-nav a:hover{color:var(--blue)}
+.ct-menu-button{display:none;min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font-weight:750}
+
+/* hero */
+.ct-hero{padding:56px 0 44px;border-bottom:1px solid var(--line);background:linear-gradient(130deg,#f8fbff 0%,#eaf1ff 56%,#f6f2ff 100%)}
+.ct-eyebrow{margin:0 0 10px;color:var(--blue);font-size:.76rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+.ct-hero h1{max-width:900px;margin:0 0 18px;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.1;letter-spacing:-.045em}
+.ct-hero h1 span{display:block;color:var(--blue)}
+.ct-lead{max-width:800px;margin:0;color:#475569;font-size:1.05rem;line-height:1.75}
+.ct-badge{display:inline-flex;align-items:center;gap:7px;margin-top:20px;padding:6px 12px;background:#fff;border:1px solid var(--info-line);border-radius:999px;color:var(--info);font-size:.84rem;font-weight:700}
+
+/* section */
+.ct-section{padding:40px 0}
+.ct-container-narrow{max-width:920px;margin-inline:auto;padding-inline:16px}
+
+/* generic button */
+.ct-button{display:inline-flex;justify-content:center;align-items:center;gap:8px;min-height:43px;padding:10px 16px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:var(--ink);font-weight:750;text-align:center;transition:border-color .15s ease,background .15s ease}
+.ct-button:hover{border-color:#a9bce4;text-decoration:none}
+.ct-button-primary{border-color:var(--blue);background:var(--blue);color:#fff}
+.ct-button-primary:hover{border-color:var(--blue-dark);background:var(--blue-dark);color:#fff}
+.ct-button.small{min-height:36px;padding:7px 13px;font-size:.85rem}
+.ct-button:disabled{opacity:.45;cursor:not-allowed}
+
+/* tool shell */
+.pc-shell{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+@media(max-width:1000px){.pc-shell{grid-template-columns:1fr}}
+.pc-main{min-width:0}
+.pc-side{position:sticky;top:20px}
+@media(max-width:1000px){.pc-side{position:static}}
+
+.pc-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.pc-card + .pc-card{margin-top:20px}
+.pc-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.pc-card-head h2{margin:0;font-size:1rem;letter-spacing:-.01em}
+.pc-card-head p{margin:0;color:var(--muted);font-size:.82rem}
+.pc-card-body{padding:20px}
+
+/* dropzone */
+.pc-drop{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:170px;padding:28px 20px;border:2px dashed #c3d0e4;border-radius:14px;background:linear-gradient(180deg,#fafcff 0%,#f2f6ff 100%);color:var(--ink);text-align:center;transition:border-color .18s,background .18s}
+.pc-drop:hover,.pc-drop:focus-visible,.pc-drop.is-dragover{border-color:var(--blue);background:linear-gradient(180deg,#f2f7ff 0%,#e6efff 100%);outline:none}
+.pc-drop-icon{display:grid;place-items:center;width:52px;height:52px;margin-bottom:12px;border-radius:13px;background:#fff;border:1px solid #dbe7ff;color:var(--blue);font-size:1.4rem}
+.pc-drop strong{font-size:1rem;margin-bottom:6px}
+.pc-drop small{color:var(--muted);line-height:1.55;max-width:380px;font-size:.82rem}
+.pc-file{display:none}
+
+/* file info bar */
+.pc-fileinfo{display:flex;align-items:center;gap:16px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:#f8faff;margin-bottom:16px;flex-wrap:wrap}
+.pc-fileinfo-icon{width:44px;height:52px;border-radius:6px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;color:var(--red);font-size:1.2rem;font-weight:850;flex:0 0 auto;box-shadow:2px 2px 0 #eef2f7}
+.pc-fileinfo-meta{flex:1;min-width:0}
+.pc-fileinfo-name{display:block;font-size:.92rem;font-weight:700;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pc-fileinfo-stats{display:block;font-size:.78rem;color:var(--muted);font-family:ui-monospace,monospace;margin-top:2px}
+.pc-fileinfo-remove{border:1px solid var(--red-line);background:#fff;color:var(--red);border-radius:7px;padding:5px 11px;font-size:.78rem;font-weight:700;cursor:pointer;flex:0 0 auto}
+.pc-fileinfo-remove:hover{background:var(--red-bg)}
+
+/* thumbnails */
+.pc-thumb-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.pc-thumb-toolbar p{margin:0;font-size:.82rem;color:var(--muted)}
+.pc-thumb-actions{display:flex;gap:6px;flex-wrap:wrap}
+.pc-mini-btn{border:1px solid var(--line);background:#fff;color:#475569;border-radius:7px;padding:5px 11px;font-size:.78rem;font-weight:700;cursor:pointer}
+.pc-mini-btn:hover{border-color:#a9bce4;background:#f5f9ff;color:var(--blue)}
+.pc-thumb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;max-height:380px;overflow-y:auto;padding:4px}
+.pc-thumb{position:relative;border:2px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;cursor:pointer;transition:border-color .12s,transform .12s;user-select:none}
+.pc-thumb:hover{border-color:#a9bce4;transform:translateY(-1px)}
+.pc-thumb.is-excluded{border-color:var(--line);opacity:.4}
+.pc-thumb.is-excluded .pc-thumb-img{filter:grayscale(1)}
+.pc-thumb.is-selected{border-color:var(--blue);box-shadow:0 0 0 2px rgba(36,91,204,.15)}
+.pc-thumb-img{display:block;width:100%;height:auto;min-height:80px;background:#f0f4f9}
+.pc-thumb-badge{position:absolute;top:6px;left:6px;background:rgba(23,32,51,.85);color:#fff;font-size:.68rem;font-weight:800;padding:2px 6px;border-radius:4px;letter-spacing:.03em}
+.pc-thumb-check{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--blue);display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.pc-thumb:not(.is-excluded) .pc-thumb-check{background:var(--blue)}
+.pc-thumb.is-excluded .pc-thumb-check{background:#fff;border-color:#94a3b8;color:transparent}
+.pc-thumb-foot{padding:6px 8px;background:#f8faff;border-top:1px solid var(--line);font-size:.68rem;font-family:ui-monospace,monospace;color:var(--muted);text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pc-thumb.is-selected .pc-thumb-foot{background:#eef4ff;color:var(--blue);font-weight:750}
+
+/* preview pane */
+.pc-preview{position:relative;background:#f8faff;border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;place-items:center;min-height:320px;overflow:hidden}
+.pc-preview img{max-width:100%;max-height:420px;border-radius:4px;box-shadow:0 2px 12px rgba(20,35,60,.12)}
+.pc-preview-empty{text-align:center;color:var(--muted);font-size:.86rem;line-height:1.55;padding:20px}
+.pc-preview-empty strong{color:var(--ink);display:block;margin-bottom:4px;font-size:.94rem}
+.pc-preview-tag{position:absolute;top:10px;left:10px;background:var(--ink);color:#fff;font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px}
+.pc-preview-pager{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;font-size:.82rem;color:var(--muted)}
+.pc-preview-pager button{border:1px solid var(--line);background:#fff;width:30px;height:30px;border-radius:6px;cursor:pointer;font-weight:800;color:#475569}
+.pc-preview-pager button:disabled{opacity:.4;cursor:not-allowed}
+.pc-preview-pager button:hover:not(:disabled){border-color:var(--blue);color:var(--blue)}
+.pc-preview-pager strong{color:var(--ink);font-family:ui-monospace,monospace;font-size:.86rem}
+
+/* form controls */
+.pc-field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.pc-field:last-child{margin-bottom:0}
+.pc-field > label{font-size:.82rem;font-weight:650;color:#34405a}
+.pc-field input[type="number"],.pc-field select{padding:9px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:var(--ink);font-size:.9rem;width:100%}
+.pc-field input:focus,.pc-field select:focus{border-color:var(--blue)}
+.pc-field input[type="number"]{font-family:ui-monospace,monospace}
+.pc-field-hint{font-size:.74rem;color:var(--muted);line-height:1.45;margin-top:2px}
+.pc-inline{display:flex;gap:8px;align-items:center}
+.pc-inline input{flex:1}
+.pc-inline .pc-unit{font-size:.82rem;color:var(--muted);font-weight:650;white-space:nowrap}
+
+.pc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.pc-chip{padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#34405a;font-size:.78rem;font-weight:650;cursor:pointer;transition:border-color .12s,background .12s,color .12s}
+.pc-chip:hover{border-color:#a9bce4;background:#f5f9ff}
+.pc-chip.is-primary{background:var(--blue);border-color:var(--blue);color:#fff}
+
+.pc-presets{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px}
+@media(max-width:360px){.pc-presets{grid-template-columns:1fr}}
+.pc-preset{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;text-align:left;cursor:pointer;transition:border-color .12s,background .12s}
+.pc-preset:hover{border-color:#a9bce4;background:#f5f9ff}
+.pc-preset strong{font-size:.82rem;color:var(--ink);display:block}
+.pc-preset span{font-size:.72rem;color:var(--muted);font-family:ui-monospace,monospace}
+.pc-preset.is-primary{border-color:var(--blue);background:#eef4ff}
+.pc-preset.is-primary strong{color:var(--blue-dark)}
+
+.pc-mode-stack{display:flex;flex-direction:column;gap:8px}
+.pc-mode{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:border-color .12s,background .12s}
+.pc-mode:hover{border-color:#a9bce4}
+.pc-mode input{display:none}
+.pc-mode input:checked ~ .pc-mode-body{border:2px solid var(--blue);margin:-2px;padding:10px 12px;border-radius:8px;background:#f5f9ff}
+.pc-mode-body{padding:0;flex:1}
+.pc-mode-title{display:block;font-weight:750;font-size:.88rem;color:var(--ink);margin-bottom:2px}
+.pc-mode-desc{display:block;font-size:.78rem;color:var(--muted);line-height:1.5}
+
+/* estimate card */
+.pc-estimate{padding:14px 16px;border:1px solid var(--info-line);border-radius:10px;background:var(--info-bg);margin-bottom:16px}
+.pc-estimate-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:4px 0;font-size:.82rem}
+.pc-estimate-row + .pc-estimate-row{border-top:1px dashed rgba(25,74,168,.2);padding-top:8px;margin-top:4px}
+.pc-estimate-row span:first-child{color:var(--muted)}
+.pc-estimate-row span:last-child{font-family:ui-monospace,monospace;font-weight:750;color:var(--info)}
+.pc-estimate-row.is-warn span:last-child{color:var(--amber)}
+.pc-estimate-row.is-good span:last-child{color:var(--green)}
+
+/* status/progress */
+.pc-progress{margin:14px 0 4px;height:6px;border-radius:999px;background:#e2e8f0;overflow:hidden}
+.pc-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--blue-dark));border-radius:999px;transition:width .18s ease}
+.pc-progress-label{display:flex;justify-content:space-between;gap:8px;font-size:.76rem;color:var(--muted);font-family:ui-monospace,monospace;margin-bottom:10px}
+.pc-status{font-size:.84rem;color:var(--muted);min-height:1.3em;margin-top:6px}
+.pc-status[data-tone="error"]{color:var(--red)}
+.pc-status[data-tone="ok"]{color:var(--green)}
+.pc-status[data-tone="warn"]{color:var(--amber)}
+
+/* result info table */
+.pc-info-table{width:100%;border-collapse:collapse;font-size:.85rem;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.pc-info-table th,.pc-info-table td{padding:9px 14px;text-align:left;border-bottom:1px solid #eef2f7}
+.pc-info-table th{font-size:.72rem;font-weight:850;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:#f8faff;width:44%}
+.pc-info-table td{font-family:ui-monospace,monospace;color:var(--ink);font-weight:650}
+.pc-info-table tr:last-child th,.pc-info-table tr:last-child td{border-bottom:0}
+.pc-info-table td.is-good{color:var(--green)}
+.pc-info-table td.is-warn{color:var(--amber)}
+.pc-info-table td.is-bad{color:var(--red)}
+
+/* notes / warnings */
+.pc-note{padding:12px 15px;border-radius:10px;font-size:.83rem;line-height:1.6;margin:14px 0}
+.pc-note strong{font-weight:800}
+.pc-note.is-info{background:var(--info-bg);border:1px solid var(--info-line);color:var(--info)}
+.pc-note.is-info strong{color:var(--ink)}
+.pc-note.is-warn{background:var(--amber-bg);border:1px solid var(--amber-line);color:var(--amber)}
+.pc-note.is-warn strong{color:#6b4500}
+.pc-note.is-error{background:var(--red-bg);border:1px solid var(--red-line);color:var(--red)}
+.pc-note.is-error strong{color:#7f1d1d}
+.pc-note.is-good{background:var(--green-bg);border:1px solid var(--green-line);color:var(--green)}
+.pc-note.is-good strong{color:#14532d}
+
+.pc-hidden{display:none!important}
+
+/* guide */
+.ct-guide{max-width:820px;margin:0 auto;padding:56px 16px 20px}
+.ct-guide h2{margin:40px 0 14px;font-size:1.35rem;letter-spacing:-.02em;line-height:1.3}
+.ct-guide h2:first-child{margin-top:0}
+.ct-guide h3{margin:26px 0 10px;font-size:1.05rem}
+.ct-guide p,.ct-guide li{line-height:1.75;color:#34405a;font-size:.98rem}
+.ct-guide li{margin-bottom:6px}
+.ct-guide code{background:#eef2f8;padding:1px 6px;border-radius:4px;font-size:.88em;color:var(--ink)}
+.ct-guide table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.9rem}
+.ct-guide th,.ct-guide td{padding:10px 12px;border:1px solid var(--line);text-align:left;vertical-align:top}
+.ct-guide th{background:#f8faff;font-weight:750}
+.ct-guide blockquote{margin:16px 0;padding:10px 16px;border-left:3px solid var(--blue);background:#f8faff;color:#475569;font-style:italic}
+
+/* faq */
+.pc-faq-nav{display:flex;flex-wrap:wrap;gap:6px;padding:12px;border:1px solid var(--line);border-radius:10px;background:#f8faff;margin:26px 0 30px}
+.pc-faq-nav strong{font-size:.74rem;font-weight:850;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-right:4px;align-self:center}
+.pc-faq-nav a{padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#34405a;font-size:.82rem;font-weight:650;text-decoration:none;transition:border-color .12s,background .12s,color .12s}
+.pc-faq-nav a:hover{border-color:var(--blue);color:var(--blue);background:#f5f9ff;text-decoration:none}
+.pc-faq-group{margin:28px 0;scroll-margin-top:24px}
+.pc-faq-group h3{margin:0 0 12px;font-size:1.05rem;padding-bottom:8px;border-bottom:2px solid var(--blue);display:inline-block}
+.ct-faq details{border-bottom:1px solid var(--line);padding:14px 0}
+.ct-faq details:last-child{border-bottom:0}
+.ct-faq summary{cursor:pointer;font-weight:700;color:var(--ink);font-size:.96rem;line-height:1.45}
+.ct-faq summary::marker{color:var(--blue)}
+.ct-faq details[open] summary{margin-bottom:8px}
+.ct-faq p{margin:0;color:#34405a;font-size:.94rem;line-height:1.7}
+
+.ct-related-links{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;padding:0;list-style:none}
+.ct-related-links a{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#34405a;font-size:.88rem;font-weight:650}
+.ct-related-links a:hover{border-color:#a9bce4;color:var(--blue);text-decoration:none}
+
+/* footer */
+.ct-footer{margin-top:40px;padding:35px 0 17px;background:#111c32;color:#d5deed}
+.ct-footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}
+.ct-footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:10px;color:#fff;font-weight:850}
+.ct-footer-brand:hover{text-decoration:none}
+.ct-footer-grid p{max-width:390px;color:#bdc8db;font-size:.91rem}
+.ct-footer-links{display:grid;align-content:start;gap:7px}
+.ct-footer-links strong{margin-bottom:4px;color:#fff}
+.ct-footer-links a{color:#cbd5e1;font-size:.92rem}
+.ct-footer-links a:hover{color:#fff}
+.ct-footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:25px;padding-top:15px;border-top:1px solid #32405a;color:#aebbd0;font-size:.84rem}
+.ct-footer-bottom p{margin:0}
+
+@media(max-width:700px){
+  .ct-header-inner{min-height:65px}
+  .ct-menu-button{display:inline-flex}
+  .ct-nav{display:none;position:absolute;top:65px;left:0;right:0;padding:12px 16px;border-bottom:1px solid var(--line);background:#fff}
+  .ct-nav.is-open{display:block}
+  .ct-nav-inner{display:grid;gap:0;width:min(1200px,calc(100% - 32px));margin:0 auto}
+  .ct-nav-inner a{padding:10px 0}
+  .ct-hero{padding:42px 0 34px}
+  .ct-footer-grid{grid-template-columns:1fr 1fr}
+  .pc-thumb-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));max-height:300px}
+  .pc-preview{min-height:260px}
+}
+@media(max-width:500px){
+  .ct-container{width:calc(100% - 22px)}
+  .ct-footer-grid{grid-template-columns:1fr}
+  .pc-card-body{padding:16px}
+  .pc-drop{min-height:140px;padding:22px 14px}
+  .pc-preview img{max-height:280px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+@media print{
+  .ct-header,.ct-footer,.ct-hero,.ct-nav,.pc-drop,.pc-actions,.pc-presets,
+  .pc-thumb-grid,.pc-preview-pager,.pc-chips,.pc-faq-nav,.ct-related-links{display:none!important}
+  body{background:#fff}
+  .pc-card,.pc-card-body{box-shadow:none;border:1px solid #ccc}
+  .ct-section{padding:10px 0}
+  .ct-guide{padding-top:10px}
+}
+</style>
+</head>
+
+<body>
+<a class="ct-skip" href="#main-content">Skip to content</a>
+
+<header class="ct-header">
+  <div class="ct-container ct-header-inner">
+    <a class="ct-brand" href="/" aria-label="ConvertToToolsOnline home">
+      <span class="ct-brand-mark" aria-hidden="true">CT</span>
+      <span class="ct-brand-name">Convert<span>ToToolsOnline</span></span>
+    </a>
+    <button class="ct-menu-button" id="ct-menu-button" type="button" aria-controls="ct-main-nav" aria-expanded="false">Menu</button>
+    <nav class="ct-nav" id="ct-main-nav" aria-label="Main navigation">
+      <div class="ct-nav-inner">
+        <a href="/">Home</a>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/Contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <section class="ct-hero">
+    <div class="ct-container">
+      <p class="ct-eyebrow">Free online PDF tool</p>
+      <h1>Compress a PDF down to a size your upload portal will actually accept</h1>
+      <p class="ct-lead">
+        The form says 200 KB. The file is 3.4 MB. You clicked "reduce file size" in your PDF
+        viewer and it came back at 2.1 MB, which the portal also rejected.
+        This one works differently — it renders every page, re-encodes it at whatever quality
+        fits your number, and rebuilds the PDF. The file uploads. You lose the ability to
+        select text, which most portals don't care about anyway.
+      </p>
+      <span class="ct-badge">
+        <span aria-hidden="true">🔒</span>
+        Nothing leaves your device. The file is read and rewritten in your browser.
+      </span>
+    </div>
+  </section>
+
+  <section class="ct-section">
+    <div class="ct-container">
+      <div class="pc-shell">
+
+        <div class="pc-main">
+
+          <!-- UPLOAD -->
+          <section class="pc-card" aria-labelledby="pc-upload-h">
+            <div class="pc-card-head">
+              <h2 id="pc-upload-h">Your PDF</h2>
+              <p id="pc-upload-note">Up to 100 MB</p>
+            </div>
+            <div class="pc-card-body">
+              <button type="button" id="pc-drop" class="pc-drop" aria-describedby="pc-drop-help">
+                <span class="pc-drop-icon" aria-hidden="true">📄</span>
+                <strong>Drop a PDF here, or click to browse</strong>
+                <small id="pc-drop-help">Any page count. Scans, contracts, exam forms — all fine.</small>
+              </button>
+              <input id="pc-file" type="file" accept="application/pdf,.pdf" class="pc-file">
+
+              <div id="pc-fileinfo-wrap" class="pc-hidden" style="margin-top:16px;">
+                <div class="pc-fileinfo">
+                  <div class="pc-fileinfo-icon" aria-hidden="true">PDF</div>
+                  <div class="pc-fileinfo-meta">
+                    <span class="pc-fileinfo-name" id="pc-fileinfo-name">—</span>
+                    <span class="pc-fileinfo-stats" id="pc-fileinfo-stats">—</span>
+                  </div>
+                  <button type="button" class="pc-fileinfo-remove" id="pc-file-remove">Remove</button>
+                </div>
+              </div>
+
+              <div id="pc-upload-warn"></div>
+            </div>
+          </section>
+
+          <!-- PAGE THUMBNAILS -->
+          <section id="pc-thumbs-card" class="pc-card pc-hidden" aria-labelledby="pc-thumbs-h">
+            <div class="pc-card-head">
+              <h2 id="pc-thumbs-h">Pages</h2>
+              <p id="pc-thumbs-note">Click a page to preview it. Uncheck to skip it.</p>
+            </div>
+            <div class="pc-card-body">
+              <div class="pc-thumb-toolbar">
+                <p id="pc-thumb-summary">Reading pages…</p>
+                <div class="pc-thumb-actions">
+                  <button type="button" class="pc-mini-btn" data-thumb-action="all">Include all</button>
+                  <button type="button" class="pc-mini-btn" data-thumb-action="none">Exclude all</button>
+                  <button type="button" class="pc-mini-btn" data-thumb-action="invert">Invert</button>
+                </div>
+              </div>
+              <div id="pc-thumb-grid" class="pc-thumb-grid" role="group" aria-label="PDF pages"></div>
+            </div>
+          </section>
+
+          <!-- PREVIEW -->
+          <section id="pc-preview-card" class="pc-card pc-hidden" aria-labelledby="pc-preview-h">
+            <div class="pc-card-head">
+              <h2 id="pc-preview-h">Preview</h2>
+              <p>The page you selected, rendered as it will look in the output.</p>
+            </div>
+            <div class="pc-card-body">
+              <div class="pc-preview" id="pc-preview">
+                <div class="pc-preview-empty">
+                  <strong>No page selected</strong>
+                  Click a thumbnail above to preview the rendered page here.
+                </div>
+              </div>
+              <div class="pc-preview-pager">
+                <button type="button" id="pc-prev-page" aria-label="Previous page">←</button>
+                <strong id="pc-page-label">— / —</strong>
+                <button type="button" id="pc-next-page" aria-label="Next page">→</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- RESULT -->
+          <section class="pc-card" aria-labelledby="pc-result-h">
+            <div class="pc-card-head">
+              <h2 id="pc-result-h">Result</h2>
+              <p id="pc-result-sub">Set a target on the right, then hit Compress.</p>
+            </div>
+            <div class="pc-card-body">
+              <div id="pc-empty" class="pc-preview-empty">
+                <strong>Nothing compressed yet.</strong>
+                Upload a PDF and set a target.
+              </div>
+              <div id="pc-result-content" class="pc-hidden">
+                <div id="pc-result-warn"></div>
+                <table class="pc-info-table">
+                  <tbody id="pc-info-body"></tbody>
+                </table>
+                <div style="margin-top:16px;">
+                  <a id="pc-download" class="ct-button ct-button-primary" style="display:none;" download>
+                    Download compressed PDF
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="pc-side">
+
+          <section class="pc-card">
+            <div class="pc-card-head">
+              <h2>Target</h2>
+            </div>
+            <div class="pc-card-body">
+
+              <div class="pc-presets">
+                <button type="button" class="pc-preset" data-preset="gov">
+                  <strong>Government portal</strong>
+                  <span>1 MB ceiling</span>
+                </button>
+                <button type="button" class="pc-preset" data-preset="visa">
+                  <strong>Visa upload</strong>
+                  <span>500 KB ceiling</span>
+                </button>
+                <button type="button" class="pc-preset" data-preset="exam">
+                  <strong>Exam application</strong>
+                  <span>200 KB ceiling</span>
+                </button>
+                <button type="button" class="pc-preset" data-preset="email">
+                  <strong>Email attachment</strong>
+                  <span>5 MB ceiling</span>
+                </button>
+              </div>
+
+              <div class="pc-field">
+                <label for="pc-target-kb">File size limit</label>
+                <div class="pc-inline">
+                  <input id="pc-target-kb" type="number" min="10" max="102400" step="10" value="200">
+                  <span class="pc-unit">KB</span>
+                </div>
+                <div class="pc-chips">
+                  <button type="button" class="pc-chip" data-kb="100">100 KB</button>
+                  <button type="button" class="pc-chip" data-kb="200">200 KB</button>
+                  <button type="button" class="pc-chip" data-kb="500">500 KB</button>
+                  <button type="button" class="pc-chip" data-kb="1024">1 MB</button>
+                  <button type="button" class="pc-chip" data-kb="2048">2 MB</button>
+                  <button type="button" class="pc-chip" data-kb="5120">5 MB</button>
+                </div>
+              </div>
+
+              <div class="pc-field">
+                <label>How to compress</label>
+                <div class="pc-mode-stack">
+                  <label class="pc-mode">
+                    <input type="radio" name="pc-mode" value="max" checked>
+                    <div class="pc-mode-body">
+                      <span class="pc-mode-title">Rasterize (gets you there)</span>
+                      <span class="pc-mode-desc">Pages become images. Text is no longer selectable or searchable. Reliably hits small targets.</span>
+                    </div>
+                  </label>
+                  <label class="pc-mode">
+                    <input type="radio" name="pc-mode" value="preserve">
+                    <div class="pc-mode-body">
+                      <span class="pc-mode-title">Keep text selectable</span>
+                      <span class="pc-mode-desc">Compacts the file's structure without touching images. Saves 5–20%. Usually won't reach small targets.</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="pc-field">
+                <label for="pc-dpi">Rendering resolution</label>
+                <select id="pc-dpi">
+                  <option value="150">150 DPI — sharp, larger file</option>
+                  <option value="120">120 DPI — good for printing</option>
+                  <option value="96" selected>96 DPI — screen readable (default)</option>
+                  <option value="72">72 DPI — smallest, softer</option>
+                </select>
+                <span class="pc-field-hint">Higher DPI means cleaner text but a bigger file. Portals usually only care about the byte count, so 96 is fine.</span>
+              </div>
+
+              <div id="pc-estimate" class="pc-estimate pc-hidden">
+                <div class="pc-estimate-row">
+                  <span>Pages included</span>
+                  <span id="pc-est-pages">—</span>
+                </div>
+                <div class="pc-estimate-row">
+                  <span>Estimated output</span>
+                  <span id="pc-est-size">—</span>
+                </div>
+                <div class="pc-estimate-row" id="pc-est-status-row">
+                  <span>Against target</span>
+                  <span id="pc-est-status">—</span>
+                </div>
+              </div>
+
+              <div class="pc-actions" style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+                <button id="pc-process" class="ct-button ct-button-primary" type="button" disabled style="width:100%;">Compress PDF</button>
+                <button id="pc-reset" class="ct-button" type="button" style="width:100%;">Start over</button>
+              </div>
+
+              <div id="pc-progress-wrap" class="pc-hidden">
+                <div class="pc-progress-label">
+                  <span id="pc-progress-page">—</span>
+                  <span id="pc-progress-pct">0%</span>
+                </div>
+                <div class="pc-progress"><div class="pc-progress-fill" id="pc-progress-fill"></div></div>
+              </div>
+
+              <div id="pc-status" class="pc-status" role="status" aria-live="polite"></div>
+            </div>
+          </section>
+
+          <div class="pc-note is-info" style="margin-top:16px;">
+            <strong>What you'll get.</strong> In rasterize mode, each page is rendered at the
+            DPI you chose, encoded as a JPEG, and reassembled into a new PDF. Because a page
+            becomes a single image, its size is fully controllable — that's why the target
+            gets hit. What you give up: selectable text, working hyperlinks, form fields,
+            and search. If the PDF has a signature block or a form you need to fill, do that
+            first, then compress.
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTENT ============ -->
+  <section class="ct-section">
+    <div class="ct-guide">
+
+      <h2>Why the file is bigger than it needs to be</h2>
+      <p>
+        Open a 20 MB PDF and a 40 KB PDF side by side. Both show the same three pages. The
+        pages look identical. So where's the difference?
+      </p>
+      <p>
+        Nine times out of ten it's the images. A page of typed text is tiny — under 10 KB
+        compressed — because text is stored as glyph references and font data, not pixels.
+        A scan of that same page is 300 DPI worth of pixels, and at JPEG quality 85 that's
+        maybe 400 KB per page. Fifty pages of that and you have a 20 MB file.
+      </p>
+      <p>
+        The other one time in ten, someone embedded a high-resolution logo on every single
+        page. Or the PDF has an image that was never compressed at all because it was pasted
+        straight from Photoshop. Or it's a print-ready document with layered vector art that
+        hasn't been flattened. Those exist, they're just less common.
+      </p>
+
+      <h2>What actually happens when you click "reduce file size"</h2>
+      <p>
+        Adobe's "Reduce File Size" works the way you'd hope. It walks the PDF's object tree,
+        finds every embedded image, decodes it, re-encodes at lower quality, and substitutes
+        it back in. Text, fonts, links, form fields all stay intact. If you have Acrobat Pro,
+        use that — it's the right tool.
+      </p>
+      <p>
+        The problem is you probably don't have Acrobat Pro. Free viewers on Windows and macOS
+        mostly don't ship that feature, or they hide it somewhere you can't find, or they
+        quietly re-save the file without compressing anything.
+      </p>
+      <p>
+        Browser-based tools have their own problem. The most popular JavaScript PDF library,
+        <code>pdf-lib</code>, doesn't recompress images — its documentation is upfront about
+        that. It can shuffle the file's internal structure around and save a little space
+        that way, but a scanned PDF that came in at 8 MB goes out at roughly 8 MB. If your
+        portal wants 200 KB, that isn't going to help.
+      </p>
+      <p>
+        So what does work in a browser? Rendering. Each page gets drawn to a canvas at a
+        chosen DPI, encoded as a JPEG, and assembled into a new PDF. Once every page is a
+        single image, its size is completely under your control. Drop the JPEG quality a
+        little, drop the DPI a little, and 200 KB is trivial.
+      </p>
+      <p>
+        The cost is real. Text isn't text anymore — it's pixels that look like text. You
+        can't select it, you can't search it, you can't hand it to a screen reader. Your
+        portal doesn't care about any of this, but if you're keeping a copy of a signed
+        contract for yourself, this matters.
+      </p>
+      <p>
+        That's why there are two modes here. Rasterize hits the target. Keep-text does the
+        structural trick and admits up front it probably won't reach 200 KB.
+      </p>
+
+      <h2>Picking a resolution</h2>
+      <p>
+        96 DPI renders the page at 1.33 pixels per point. A Letter page (612×792 points)
+        becomes 816×1056 pixels. That's screen-readable and produces reasonable file sizes
+        for a portal upload.
+      </p>
+      <p>
+        72 DPI is roughly 1:1 with the PDF's own coordinate system. Smallest files, softest
+        text. Use it when the target is very tight and the document is a scan you only need
+        to be able to identify.
+      </p>
+      <p>
+        120 DPI is what I'd choose for anything that might get printed. Text at 120 looks
+        noticeably sharper than 96, without the file size of 150 or 200.
+      </p>
+      <p>
+        150 DPI is worth the extra bytes when the reviewer might actually print and hold the
+        page — a certificate, a stamped form, an ID card.
+      </p>
+
+      <h2>Dropping pages is the cheapest win</h2>
+      <p>
+        If a form asks for "the signed page" it doesn't want the other forty pages of
+        boilerplate. If a visa application wants your passport bio page, it doesn't want
+        twenty-three other pages of stamps and old visas. Most portals don't require the
+        whole document — just the specific pages they've asked for.
+      </p>
+      <p>
+        Unchecking pages before compressing is the easiest and biggest size saving available.
+        A 40-page scan uncompressed is 40 MB. Ten pages of it at 96 DPI is 200 KB. That's not
+        a compression trick, that's just not sending bytes the recipient doesn't need.
+      </p>
+      <p>
+        Use the include/exclude checkboxes above. Order is preserved — the output keeps the
+        pages you kept, in their original sequence.
+      </p>
+
+      <h2>When 200 KB is impossible</h2>
+      <p>
+        Some PDFs have a floor you can't get below. A 200-page document full of photographs
+        won't fit in 200 KB at any quality that's still legible. Neither will a scan at
+        600 DPI that the scanner saved in a lossless format — the tool can re-encode it
+        aggressively, but the pixels are already there.
+      </p>
+      <p>
+        When that happens the tool tells you. It reports the smallest result it achieved,
+        shows the exact DPI and quality it used, and stops there. Three things you can do
+        next: split the PDF into pieces (portals usually accept multiple uploads), drop
+        pages you don't strictly need, or check whether the portal actually allows a larger
+        file than the number on the form suggests — a surprising number have soft limits.
+      </p>
+
+      <!-- ============ FAQ ============ -->
+      <nav class="pc-faq-nav" aria-label="Jump to FAQ section">
+        <strong>Jump to:</strong>
+        <a href="#faq-sizes">Sizes</a>
+        <a href="#faq-portals">Portals</a>
+        <a href="#faq-text">Text &amp; quality</a>
+        <a href="#faq-pages">Pages</a>
+        <a href="#faq-failures">Failures</a>
+        <a href="#faq-privacy">Privacy</a>
+      </nav>
+
+      <section id="faq-sizes" class="pc-faq-group" aria-labelledby="faq-sizes-h">
+        <h3 id="faq-sizes-h">Sizes</h3>
+        <div class="ct-faq">
+          <details>
+            <summary>How do I compress a PDF to 100 KB?</summary>
+            <p>Set the target to 100 KB, keep rasterize mode selected, and hit Compress. Scans usually hit 100 KB at 96 DPI without looking much worse. Text-only PDFs are usually already under 100 KB — if yours is bigger, there are images in it and the tool will find and recompress them. If 96 DPI can't reach 100 KB, the tool drops to 84, then 72, then 60, then 48 DPI before giving up.</p>
+          </details>
+          <details>
+            <summary>What does 200 KB give me that 100 KB doesn't?</summary>
+            <p>Roughly double the quality budget. At 200 KB the tool usually lands at 96 DPI with JPEG quality around 0.5–0.7, which is legible on screen and printable at a pinch. At 100 KB it's often 0.3–0.4, which starts to show as blockiness on photographic scans. If your portal allows 200 KB, use it.</p>
+          </details>
+          <details>
+            <summary>Why did I ask for 200 KB and get 140 KB?</summary>
+            <p>Because the binary search stops at the first quality setting that fits under 200. If quality 0.6 gives 140 KB and quality 0.62 gives 210 KB, it stays at 0.6. The 60 KB of unused budget isn't wasted — the image just didn't need it. If you want the file closer to the ceiling, raise the DPI or use rasterize's higher-quality end.</p>
+          </details>
+          <details>
+            <summary>Can I compress a PDF to 500 KB or 1 MB?</summary>
+            <p>Easily. At 500 KB the tool usually stops at 120 DPI with quality around 0.8, which is close to the original. At 1 MB it's often 150 DPI with quality 0.85. For anything the recipient might print, these are the targets to aim for.</p>
+          </details>
+        </div>
+      </section>
+
+      <section id="faq-portals" class="pc-faq-group" aria-labelledby="faq-portals-h">
+        <h3 id="faq-portals-h">Portals</h3>
+        <div class="ct-faq">
+          <details>
+            <summary>Why does a government portal reject my PDF for size?</summary>
+            <p>Because they enforce hard caps. Government, visa, and exam portals receive millions of uploads and can't store them at whatever size people send. They publish a ceiling — 100 KB, 200 KB, 500 KB, 1 MB, sometimes 2 MB — and reject anything over. Most don't downscale; they just fail the upload.</p>
+          </details>
+          <details>
+            <summary>What size limits do common portals actually use?</summary>
+            <p>Indian government exams (SSC, UPSC, IBPS) typically want the full application PDF under 200–500 KB, and photo/signature as separate files with their own caps. US DS-160 confirmation pages allow 2 MB. Schengen visa document uploads are usually 1 MB per file. Most job portals accept resumes between 500 KB and 5 MB. The number on the form is what counts — always check it.</p>
+          </details>
+          <details>
+            <summary>Will the compressed PDF still open in the portal's viewer?</summary>
+            <p>Yes. The output is a standard PDF 1.7. Some very old portal viewers might show very low-DPI scans as slightly soft, but the file structure is normal and any viewer that could open the original can open the compressed version.</p>
+          </details>
+          <details>
+            <summary>My portal asks for a minimum DPI. Does this still work?</summary>
+            <p>Yes — pick that DPI from the dropdown and the tool will keep it. If the portal demands 150 DPI and a 200 KB cap, and your scan can't fit both, the tool reports the smallest file it could produce at 150 DPI rather than silently dropping to a lower DPI to force a fit.</p>
+          </details>
+        </div>
+      </section>
+
+      <section id="faq-text" class="pc-faq-group" aria-labelledby="faq-text-h">
+        <h3 id="faq-text-h">Text &amp; quality</h3>
+        <div class="ct-faq">
+          <details>
+            <summary>Does compressing make the text unselectable?</summary>
+            <p>In rasterize mode, yes. Every page becomes an image, so there's no text left to select. In keep-text mode the text stays selectable, but you'll get 5–20% savings at best, and often zero on files that are already structurally tidy.</p>
+          </details>
+          <details>
+            <summary>What about forms, checkboxes, and hyperlinks?</summary>
+            <p>All flattened in rasterize mode. A fillable form becomes a picture of a form. A checkbox becomes a picture of a checkbox. If the PDF has interactive elements you still need to use, fill them out first, print-to-PDF from a viewer to flatten the form fields into the page, and then compress the signed version.</p>
+          </details>
+          <details>
+            <summary>Will it look OK when printed?</summary>
+            <p>At 96 DPI it prints legibly but looks slightly soft, especially on small print. At 120 DPI it's fine for most purposes. At 150 DPI it's hard to distinguish from a normal photocopy. At 72 DPI it looks poor on paper — 72 is a screen-only setting.</p>
+          </details>
+          <details>
+            <summary>Can I compress a scanned PDF without losing legibility?</summary>
+            <p>Yes, if you don't compress too hard. Scans are already images, so the tool is essentially re-encoding them at a lower quality. A 300 DPI scan at 150 DPI is usually perfectly readable. At 72 DPI it starts to look fuzzy, especially on handwriting and stamps. Choose your DPI based on what's actually on the page — printed documents survive compression much better than handwritten notes.</p>
+          </details>
+        </div>
+      </section>
+
+      <section id="faq-pages" class="pc-faq-group" aria-labelledby="faq-pages-h">
+        <h3 id="faq-pages-h">Pages</h3>
+        <div class="ct-faq">
+          <details>
+            <summary>Which pages should I drop?</summary>
+            <p>Whatever the form doesn't ask for. An exam application form usually needs the declaration page with the signature, not the 30 pages of instructions. A visa upload needs the passport bio page and possibly the photo page — not the whole 24-page passport. A court filing needs only the pages being filed, not the case history. Every page you drop saves its share of the bytes.</p>
+          </details>
+          <details>
+            <summary>Does unchecking a page reorder the rest?</summary>
+            <p>No. The output keeps the pages you left checked, in their original sequence. If you need to reorder, use a PDF editor first and bring the reordered file back here.</p>
+          </details>
+          <details>
+            <summary>Can I preview a page before deciding?</summary>
+            <p>Yes — click any thumbnail to see it at a larger size in the Preview panel. The preview shows what the page looks like when rendered at the currently selected DPI. If it looks legible there, that's what your portal will see.</p>
+          </details>
+        </div>
+      </section>
+
+      <section id="faq-failures" class="pc-faq-group" aria-labelledby="faq-failures-h">
+        <h3 id="faq-failures-h">Failures</h3>
+        <div class="ct-faq">
+          <details>
+            <summary>What if it can't reach my target?</summary>
+            <p>The tool reports the smallest result it produced, shows the DPI and quality it used, and stops. It won't hand you a file that's over your target and call it done. Your options at that point: split the PDF into pieces, drop more pages, or check whether the portal really does reject at the number on the form — many have soft limits that accept a bit more.</p>
+          </details>
+          <details>
+            <summary>Why does a 40-page scan take so long?</summary>
+            <p>Every page is rendered and JPEG-encoded multiple times during the binary search. A 40-page document with a tight target might mean 40 pages × 3 passes = 120 render operations. On a fast machine that's a couple of minutes. On an older laptop it can be five. The progress bar shows which page it's currently rendering so you can tell it hasn't frozen.</p>
+          </details>
+          <details>
+            <summary>Compression failed with "encrypted". What now?</summary>
+            <p>The PDF has a password or a permissions password set. pdf.js won't render password-protected files without the password. Open the PDF in a viewer, use "Print to PDF" to save a new copy — that usually strips the encryption — and bring the new copy back here.</p>
+          </details>
+          <details>
+            <summary>What if the output PDF is corrupted?</summary>
+            <p>It shouldn't be — pdf-lib produces well-formed PDF 1.7 output. If your portal rejects the file it's almost certainly for size or for a feature the portal doesn't accept (some portal validators reject any PDF that has embedded JPEGs above a certain resolution, even when the byte count is fine). Try a lower DPI in that case, or check the portal's technical requirements page.</p>
+          </details>
+        </div>
+      </section>
+
+      <section id="faq-privacy" class="pc-faq-group" aria-labelledby="faq-privacy-h">
+        <h3 id="faq-privacy-h">Privacy</h3>
+        <div class="ct-faq">
+          <details>
+            <summary>Does my PDF get uploaded anywhere?</summary>
+            <p>No. The file is read from your disk, rendered, and reassembled entirely inside your browser tab. The only network requests this page makes are for the two libraries it needs — pdf.js and pdf-lib — and neither of those receives your document.</p>
+          </details>
+          <details>
+            <summary>Can I use this offline?</summary>
+            <p>After the libraries have loaded once, yes. Both are cached by the browser. You can disconnect from the network and continue compressing documents in the same session.</p>
+          </details>
+          <details>
+            <summary>Which libraries does it use, and are they safe?</summary>
+            <p>pdf.js is Mozilla's PDF renderer, used inside Firefox. pdf-lib is a well-known MIT-licensed PDF writer. Both are heavily used, actively maintained, and neither sends data anywhere. If you want to be certain, check your browser's network tab while compressing — the only requests will be for the library files themselves.</p>
+          </details>
+          <details>
+            <summary>Is there a watermark, or a hidden file limit?</summary>
+            <p>No watermark, no signup, no daily cap, no subscription. The output PDF has nothing appended. The 100 MB upload limit is a memory guard, not a business limit.</p>
+          </details>
+        </div>
+      </section>
+
+      <h2>Related tools</h2>
+      <ul class="ct-related-links">
+        <li><a href="/">All ConvertToToolsOnline tools</a></li>
+        <li><a href="/compress-image-to-kb.html">Compress Image to Exact KB</a></li>
+        <li><a href="/compress-gif.html">Compress GIF</a></li>
+        <li><a href="/image-compressor.html">Image Compressor</a></li>
+        <li><a href="/exif-metadata-remover.html">EXIF Metadata Remover</a></li>
+      </ul>
+
+    </div>
+  </section>
+</main>
+
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-grid">
+      <div>
+        <a class="ct-footer-brand" href="/">
+          <span class="ct-brand-mark" aria-hidden="true">CT</span>
+          <span>ConvertToToolsOnline</span>
+        </a>
+        <p>Practical online tools for documents, images, data, development and everyday work.</p>
+      </div>
+      <nav class="ct-footer-links" aria-label="Tool navigation">
+        <strong>Explore</strong>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/sitemap.xml">XML sitemap</a>
+      </nav>
+      <nav class="ct-footer-links" aria-label="Site information">
+        <strong>Contact &amp; information</strong>
+        <a href="/Contact.html">Contact</a>
+        <a href="/#about">About the toolbox</a>
+        <a href="#main-content">Back to top ↑</a>
+      </nav>
+    </div>
+    <div class="ct-footer-bottom">
+      <p>© <span id="pc-year">2026</span> ConvertToToolsOnline. All rights reserved.</p>
+      <p>Free utilities for practical tasks.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Compress PDF to Exact KB",
+      "url": "https://converttotoolsonline.com/compress-pdf.html",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "Any modern browser",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Compress a PDF to a specific target size for government, visa, or exam portals. Rasterizes pages to hit tight targets, or keeps text selectable at the cost of weaker savings.",
+      "featureList": [
+        "Target size in KB, with portal presets",
+        "Rasterize mode for reliable compression",
+        "Keep-text mode for selectable text",
+        "Page selection to drop unneeded pages",
+        "Per-page thumbnail previews",
+        "Configurable rendering DPI",
+        "100% client-side, no upload"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"How do I compress a PDF to 100 KB?","acceptedAnswer":{"@type":"Answer","text":"Set the target to 100 KB, keep rasterize mode selected, and hit Compress. Scans usually hit 100 KB at 96 DPI without looking much worse. If 96 DPI cannot reach 100 KB, the tool drops to 84, 72, 60, then 48 DPI before giving up."}},
+        {"@type":"Question","name":"What does 200 KB give me that 100 KB doesn't?","acceptedAnswer":{"@type":"Answer","text":"Roughly double the quality budget. At 200 KB the tool usually lands at 96 DPI with JPEG quality around 0.5 to 0.7, which is legible on screen and printable at a pinch. At 100 KB it is often 0.3 to 0.4, which starts to show blockiness on photographic scans."}},
+        {"@type":"Question","name":"Why did I ask for 200 KB and get 140 KB?","acceptedAnswer":{"@type":"Answer","text":"Because the binary search stops at the first quality setting that fits under 200. If quality 0.6 gives 140 KB and 0.62 gives 210 KB, it stays at 0.6. The unused budget is not wasted. Raise the DPI if you want to use more of the target."}},
+        {"@type":"Question","name":"Why does a government portal reject my PDF for size?","acceptedAnswer":{"@type":"Answer","text":"Government, visa, and exam portals receive millions of uploads and cap each one at a round number. Most do not downscale; they simply reject anything over the cap."}},
+        {"@type":"Question","name":"Does compressing make the text unselectable?","acceptedAnswer":{"@type":"Answer","text":"In rasterize mode, yes. Every page becomes an image, so there is no text left to select. In keep-text mode the text stays selectable, but savings are 5 to 20 percent at best."}},
+        {"@type":"Question","name":"What about forms, checkboxes, and hyperlinks?","acceptedAnswer":{"@type":"Answer","text":"All flattened in rasterize mode. Fill out and flatten any interactive PDFs first, then compress the signed version."}},
+        {"@type":"Question","name":"Which pages should I drop?","acceptedAnswer":{"@type":"Answer","text":"Whatever the form does not ask for. Exam applications usually need only the signed declaration page. Visa uploads need the passport bio and photo pages, not the full passport. Dropping pages is the single biggest size saving available."}},
+        {"@type":"Question","name":"What if it cannot reach my target?","acceptedAnswer":{"@type":"Answer","text":"The tool reports the smallest result it produced and shows the DPI and quality it used. Options: split the PDF, drop more pages, or check whether the portal really rejects at the printed number."}},
+        {"@type":"Question","name":"Compression failed with encrypted. What now?","acceptedAnswer":{"@type":"Answer","text":"The PDF has a password. Open it in a viewer, use Print to PDF to save a new copy that strips the encryption, and bring the new copy back."}},
+        {"@type":"Question","name":"Does my PDF get uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The file is read from disk, rendered, and reassembled entirely in your browser tab. The only network requests are for the two libraries the page needs."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function(){
+  'use strict';
+  var btn = document.getElementById('ct-menu-button');
+  var nav = document.getElementById('ct-main-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function(){
+    var open = nav.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function(e){
+    if (e.target.closest('a')) { nav.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      nav.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); btn.focus();
+    }
+  });
+  window.addEventListener('resize', function(){
+    if (window.innerWidth > 700) { nav.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var yearEl = $('pc-year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  // ---------- constants ----------
+  var PDFJS_URL    = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+  var PDFJS_WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  var PDFLIB_URL   = 'https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js';
+  var MAX_FILE_SIZE = 100 * 1024 * 1024;
+  var DPI_LADDER = [null, 84, 72, 60, 48];
+  var QUAL_MIN = 0.10, QUAL_MAX = 0.92;
+  var BINARY_MAX = 8;
+  var THUMB_DPI = 24;
+
+  // ---------- state ----------
+  var currentFile = null;
+  var pdfDoc = null;
+  var pageStates = [];  // { index, included, thumbDataUrl, selected, renderedForPreview }
+  var selectedPage = 0;
+  var resultBlob = null;
+  var resultUrl = null;
+  var processing = false;
+
+  var pdfjsLib = null;
+  var pdfLibLib = null;
+
+  // ---------- elements ----------
+  var dropEl       = $('pc-drop');
+  var fileInput    = $('pc-file');
+  var fileinfoWrap = $('pc-fileinfo-wrap');
+  var fileinfoName = $('pc-fileinfo-name');
+  var fileinfoStats= $('pc-fileinfo-stats');
+  var fileRemove   = $('pc-file-remove');
+  var uploadWarn   = $('pc-upload-warn');
+  var thumbsCard   = $('pc-thumbs-card');
+  var thumbGrid    = $('pc-thumb-grid');
+  var thumbSummary = $('pc-thumb-summary');
+  var previewCard  = $('pc-preview-card');
+  var previewEl    = $('pc-preview');
+  var pageLabel    = $('pc-page-label');
+  var prevPageBtn  = $('pc-prev-page');
+  var nextPageBtn  = $('pc-next-page');
+  var targetKbEl   = $('pc-target-kb');
+  var dpiEl        = $('pc-dpi');
+  var processBtn   = $('pc-process');
+  var resetBtn     = $('pc-reset');
+  var statusEl     = $('pc-status');
+  var progressWrap = $('pc-progress-wrap');
+  var progressPage = $('pc-progress-page');
+  var progressPct  = $('pc-progress-pct');
+  var progressFill = $('pc-progress-fill');
+  var estimateEl   = $('pc-estimate');
+  var estPages     = $('pc-est-pages');
+  var estSize      = $('pc-est-size');
+  var estStatus    = $('pc-est-status');
+  var estStatusRow = $('pc-est-status-row');
+  var emptyEl      = $('pc-empty');
+  var resultContent= $('pc-result-content');
+  var resultWarn   = $('pc-result-warn');
+  var infoBody     = $('pc-info-body');
+  var downloadBtn  = $('pc-download');
+  var resultSubEl  = $('pc-result-sub');
+
+  // ---------- helpers ----------
+  function setStatus(text, tone){
+    statusEl.textContent = text || '';
+    if (tone) statusEl.setAttribute('data-tone', tone); else statusEl.removeAttribute('data-tone');
+  }
+  function setProgress(pct, label){
+    if (pct <= 0) { progressWrap.classList.add('pc-hidden'); progressFill.style.width = '0%'; progressPage.textContent = ''; progressPct.textContent = '0%'; return; }
+    progressWrap.classList.remove('pc-hidden');
+    var p = Math.round(Math.max(0, Math.min(1, pct)) * 100);
+    progressFill.style.width = p + '%';
+    progressPct.textContent = p + '%';
+    if (label) progressPage.textContent = label;
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c];
+    });
+  }
+  function fmtBytes(b){
+    if (!isFinite(b) || b < 0) return '—';
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(2) + ' MB';
+  }
+  function showUploadWarn(html, cls){
+    uploadWarn.innerHTML = '<div class="pc-note' + (cls ? ' is-' + cls : ' is-error') + '">' + html + '</div>';
+  }
+  function clearUploadWarn(){ uploadWarn.innerHTML = ''; }
+  function showResultWarn(html, cls){
+    resultWarn.innerHTML = '<div class="pc-note' + (cls ? ' is-' + cls : ' is-info') + '">' + html + '</div>';
+  }
+  function clearResultWarn(){ resultWarn.innerHTML = ''; }
+
+  function loadScript(src){
+    return new Promise(function(resolve, reject){
+      if (document.querySelector('script[src="' + src + '"]')) { resolve(); return; }
+      var s = document.createElement('script');
+      s.src = src; s.async = true;
+      s.onload = function(){ resolve(); };
+      s.onerror = function(){ reject(new Error('Could not load ' + src)); };
+      document.head.appendChild(s);
+    });
+  }
+  async function ensurePdfjs(){
+    if (pdfjsLib) return pdfjsLib;
+    await loadScript(PDFJS_URL);
+    if (!window.pdfjsLib) throw new Error('pdf.js did not register.');
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+    pdfjsLib = window.pdfjsLib;
+    return pdfjsLib;
+  }
+  async function ensurePdfLib(){
+    if (pdfLibLib) return pdfLibLib;
+    await loadScript(PDFLIB_URL);
+    if (!window.PDFLib) throw new Error('pdf-lib did not register.');
+    pdfLibLib = window.PDFLib;
+    return pdfLibLib;
+  }
+
+  // ---------- thumbnails and preview ----------
+  async function renderThumb(page){
+    var viewport = page.getViewport({ scale: THUMB_DPI / 72 });
+    var canvas = document.createElement('canvas');
+    canvas.width = Math.round(viewport.width);
+    canvas.height = Math.round(viewport.height);
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+    return canvas.toDataURL('image/jpeg', 0.6);
+  }
+
+  async function renderPreview(page, dpi){
+    var viewport = page.getViewport({ scale: dpi / 72 });
+    var canvas = document.createElement('canvas');
+    canvas.width = Math.round(viewport.width);
+    canvas.height = Math.round(viewport.height);
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+    return canvas.toDataURL('image/jpeg', 0.85);
+  }
+
+  // ---------- file load ----------
+  async function handleFile(file){
+    if (!file) return;
+    clearUploadWarn();
+    clearResultWarn();
+
+    var isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+    if (!isPdf) { showUploadWarn('That isn\'t a PDF. Choose a file ending in <code>.pdf</code>.'); return; }
+    if (file.size > MAX_FILE_SIZE) { showUploadWarn('That file is over 100 MB, which will not fit in memory here.'); return; }
+
+    setStatus('Reading PDF…', 'busy');
+    fileinfoWrap.classList.remove('pc-hidden');
+    fileinfoName.textContent = file.name;
+    fileinfoStats.textContent = fmtBytes(file.size) + ' · reading pages…';
+
+    try {
+      await ensurePdfjs();
+      var buf = await file.arrayBuffer();
+      var doc = await pdfjsLib.getDocument({ data: buf }).promise;
+      currentFile = file;
+      pdfDoc = doc;
+      pageStates = [];
+      selectedPage = 0;
+
+      fileinfoStats.textContent = fmtBytes(file.size) + ' · ' + doc.numPages + ' page' + (doc.numPages === 1 ? '' : 's');
+
+      // Render thumbnails in sequence
+      thumbGrid.innerHTML = '';
+      for (var i = 1; i <= doc.numPages; i++){
+        var page = await doc.getPage(i);
+        var thumbUrl = await renderThumb(page);
+        pageStates.push({ index: i, included: true, thumbUrl: thumbUrl });
+        // Append as we go so the user sees progress
+        appendThumb(pageStates[pageStates.length - 1]);
+        thumbSummary.textContent = 'Rendered ' + i + ' of ' + doc.numPages;
+      }
+
+      thumbsCard.classList.remove('pc-hidden');
+      previewCard.classList.remove('pc-hidden');
+      emptyEl.style.display = 'none';
+      resultContent.classList.add('pc-hidden');
+
+      updateThumbSummary();
+      selectPage(1);
+      processBtn.disabled = false;
+      setStatus('', '');
+      estimate();
+    } catch (e){
+      setStatus('Could not read that PDF: ' + (e && e.message ? e.message : 'unknown error'), 'error');
+      showUploadWarn('Could not open this PDF. If it is password-protected, save an unlocked copy from a PDF viewer first and try again.');
+      currentFile = null;
+      pdfDoc = null;
+    }
+  }
+
+  function appendThumb(state){
+    var div = document.createElement('div');
+    div.className = 'pc-thumb' + (state.included ? '' : ' is-excluded');
+    div.setAttribute('data-page', String(state.index));
+    div.setAttribute('role', 'button');
+    div.setAttribute('tabindex', '0');
+    div.setAttribute('aria-label', 'Page ' + state.index + (state.included ? ' included' : ' excluded'));
+    div.innerHTML =
+      '<div class="pc-thumb-check" aria-hidden="true">✓</div>' +
+      '<div class="pc-thumb-badge">' + state.index + '</div>' +
+      '<img class="pc-thumb-img" src="' + state.thumbUrl + '" alt="Page ' + state.index + ' thumbnail">' +
+      '<div class="pc-thumb-foot">Page ' + state.index + '</div>';
+    thumbGrid.appendChild(div);
+  }
+
+  function renderThumbGrid(){
+    thumbGrid.innerHTML = '';
+    pageStates.forEach(appendThumb);
+    if (selectedPage) markSelectedThumb();
+  }
+
+  function markSelectedThumb(){
+    thumbGrid.querySelectorAll('.pc-thumb').forEach(function(el){
+      el.classList.toggle('is-selected', parseInt(el.getAttribute('data-page'), 10) === selectedPage);
+    });
+  }
+
+  function updateThumbSummary(){
+    var included = pageStates.filter(function(p){ return p.included; }).length;
+    thumbSummary.textContent = included + ' of ' + pageStates.length + ' pages included · ' + (pageStates.length - included) + ' excluded';
+    var actions = document.querySelectorAll('[data-thumb-action]');
+    actions.forEach(function(b){ b.disabled = false; });
+  }
+
+  async function selectPage(idx){
+    if (!pdfDoc) return;
+    selectedPage = idx;
+    markSelectedThumb();
+    pageLabel.textContent = idx + ' / ' + pdfDoc.numPages;
+    prevPageBtn.disabled = idx <= 1;
+    nextPageBtn.disabled = idx >= pdfDoc.numPages;
+
+    previewEl.innerHTML = '<span class="pc-preview-tag">Rendering…</span>';
+    try {
+      var page = await pdfDoc.getPage(idx);
+      var dpi = parseInt(dpiEl.value, 10) || 96;
+      var url = await renderPreview(page, dpi);
+      previewEl.innerHTML =
+        '<span class="pc-preview-tag">Page ' + idx + ' · ' + dpi + ' DPI</span>' +
+        '<img src="' + url + '" alt="Page ' + idx + ' preview at ' + dpi + ' DPI">';
+    } catch (e){
+      previewEl.innerHTML = '<div class="pc-preview-empty"><strong>Preview failed.</strong>Try a different page.</div>';
+    }
+  }
+
+  // ---------- estimate ----------
+  function estimate(){
+    if (!currentFile || !pageStates.length){ estimateEl.classList.add('pc-hidden'); return; }
+    var targetKb = parseInt(targetKbEl.value, 10) || 0;
+    if (targetKb < 10){ estimateEl.classList.add('pc-hidden'); return; }
+    var included = pageStates.filter(function(p){ return p.included; }).length;
+    if (!included){ estimateEl.classList.add('pc-hidden'); return; }
+
+    // Very rough: assume pages scale linearly with count, and DPI scales bytes quadratically.
+    var dpi = parseInt(dpiEl.value, 10) || 96;
+    var scaleDpi = Math.pow(dpi / 96, 2);
+    var estPerPage = Math.max(15, 40 * scaleDpi);  // KB per page at quality 0.5
+    var estTotal = estPerPage * included;
+    var estBytes = estTotal * 1024;
+
+    estPages.textContent = String(included);
+    estSize.textContent = '~' + Math.round(estTotal) + ' KB';
+    if (estBytes <= targetKb * 1024){
+      estStatus.textContent = 'Likely fits';
+      estStatusRow.classList.remove('is-warn');
+      estStatusRow.classList.add('is-good');
+    } else {
+      estStatus.textContent = 'Above target — DPI will step down';
+      estStatusRow.classList.remove('is-good');
+      estStatusRow.classList.add('is-warn');
+    }
+    estimateEl.classList.remove('pc-hidden');
+  }
+
+  // ---------- compression ----------
+  function canvasToJpegBlob(canvas, quality){
+    return new Promise(function(resolve, reject){
+      canvas.toBlob(function(b){
+        if (b) resolve(b); else reject(new Error('JPEG encode failed'));
+      }, 'image/jpeg', quality);
+    });
+  }
+
+  async function rasterize(doc, includedPages, dpi, quality, onProgress){
+    var pdfLib = await ensurePdfLib();
+    var newDoc = await pdfLib.PDFDocument.create();
+    var scale = dpi / 72;
+    var total = includedPages.length;
+
+    for (var i = 0; i < total; i++){
+      var pageNum = includedPages[i];
+      var page = await doc.getPage(pageNum);
+      var viewport = page.getViewport({ scale: scale });
+      var canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(viewport.width));
+      canvas.height = Math.max(1, Math.round(viewport.height));
+      var ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+      var blob = await canvasToJpegBlob(canvas, quality);
+      var bytes = new Uint8Array(await blob.arrayBuffer());
+      var img = await newDoc.embedJpg(bytes);
+      var newPage = newDoc.addPage([viewport.width, viewport.height]);
+      newPage.drawImage(img, { x: 0, y: 0, width: viewport.width, height: viewport.height });
+      canvas.width = 1; canvas.height = 1;
+      if (onProgress) onProgress(i + 1, total, pageNum);
+    }
+
+    var out = await newDoc.save({ useObjectStreams: true });
+    return new Blob([out], { type: 'application/pdf' });
+  }
+
+  async function preserveText(file){
+    var pdfLib = await ensurePdfLib();
+    var ab = await file.arrayBuffer();
+    var doc = await pdfLib.PDFDocument.load(ab, { updateMetadata: false });
+    var out = await doc.save({ useObjectStreams: true, addDefaultPage: false });
+    return new Blob([out], { type: 'application/pdf' });
+  }
+
+  async function compressRasterize(doc, includedPages, targetBytes, startDpi){
+    var ladder = [startDpi].concat(DPI_LADDER.filter(function(d){ return d && d < startDpi; }));
+    var attempts = [];
+    var best = null, bestDpi = startDpi, bestQ = 0;
+
+    for (var d = 0; d < ladder.length; d++){
+      var dpi = ladder[d];
+      setStatus('Rendering at ' + dpi + ' DPI…', 'busy');
+
+      // Max quality probe
+      var maxBlob = await rasterize(doc, includedPages, dpi, QUAL_MAX, function(i, total, pageNum){
+        setProgress((d / ladder.length) + (i / total) / ladder.length,
+          'Page ' + pageNum + ' at ' + dpi + ' DPI');
+      });
+      attempts.push({ dpi: dpi, q: QUAL_MAX, size: maxBlob.size });
+      if (maxBlob.size <= targetBytes){ best = maxBlob; bestDpi = dpi; bestQ = QUAL_MAX; break; }
+
+      // Min quality probe
+      var minBlob = await rasterize(doc, includedPages, dpi, QUAL_MIN, null);
+      attempts.push({ dpi: dpi, q: QUAL_MIN, size: minBlob.size });
+      if (minBlob.size > targetBytes){
+        // Try lower DPI
+        best = minBlob; bestDpi = dpi; bestQ = QUAL_MIN;
+        continue;
+      }
+
+      // Binary search quality
+      var low = QUAL_MIN, high = QUAL_MAX;
+      var lb = minBlob, lq = QUAL_MIN;
+      var iter = 0;
+      while (iter < BINARY_MAX && (high - low) > 0.02){
+        var mid = (low + high) / 2;
+        var blob = await rasterize(doc, includedPages, dpi, mid, null);
+        attempts.push({ dpi: dpi, q: mid, size: blob.size });
+        iter++;
+        if (blob.size <= targetBytes){ lb = blob; lq = mid; low = mid; }
+        else { high = mid; }
+      }
+      best = lb; bestDpi = dpi; bestQ = lq;
+      break;
+    }
+
+    setProgress(1, '');
+    return { blob: best, dpi: bestDpi, quality: bestQ, attempts: attempts };
+  }
+
+  async function process(){
+    if (!currentFile || !pdfDoc || processing) return;
+    var targetKb = parseInt(targetKbEl.value, 10) || 0;
+    if (targetKb < 10){ setStatus('Target must be at least 10 KB.', 'error'); return; }
+    var targetBytes = targetKb * 1024;
+
+    var includedPages = pageStates.filter(function(p){ return p.included; }).map(function(p){ return p.index; });
+    if (!includedPages.length){ setStatus('Include at least one page first.', 'error'); return; }
+
+    var mode = document.querySelector('input[name="pc-mode"]:checked').value;
+    var dpi = parseInt(dpiEl.value, 10) || 96;
+
+    processing = true;
+    processBtn.disabled = true;
+    clearResultWarn();
+    setProgress(0.01, 'Starting');
+
+    try {
+      await ensurePdfLib();
+      var t0 = performance.now();
+      var result;
+
+      if (mode === 'preserve'){
+        setStatus('Compacting structure…', 'busy');
+        setProgress(0.5, 'Compacting');
+        result = { blob: await preserveText(currentFile), dpi: null, quality: null, attempts: [] };
+        setProgress(1, '');
+      } else {
+        result = await compressRasterize(pdfDoc, includedPages, targetBytes, dpi);
+      }
+
+      if (!result.blob){ setStatus('Compression produced no output.', 'error'); return; }
+
+      if (resultUrl){ URL.revokeObjectURL(resultUrl); resultUrl = null; }
+      resultBlob = result.blob;
+      resultUrl = URL.createObjectURL(resultBlob);
+
+      downloadBtn.href = resultUrl;
+      downloadBtn.download = (currentFile.name.replace(/\.[^.]+$/, '') || 'document') + '-compressed.pdf';
+      downloadBtn.style.display = 'inline-flex';
+
+      var elapsed = Math.max(1, Math.round(performance.now() - t0));
+      var saved = currentFile.size - resultBlob.size;
+      var savedPct = currentFile.size > 0 ? (saved / currentFile.size) * 100 : 0;
+
+      var rows = '';
+      rows += infoRow('Target', targetKb + ' KB');
+      rows += infoRow('Original size', fmtBytes(currentFile.size));
+      rows += infoRow('Compressed size', fmtBytes(resultBlob.size));
+      rows += infoRow('Saved', fmtBytes(Math.max(0, saved)) + ' (' + savedPct.toFixed(1) + '%)', saved > 0 ? 'good' : 'warn');
+      rows += infoRow('Mode', mode === 'preserve' ? 'Keep text selectable' : 'Rasterized');
+      rows += infoRow('Pages', includedPages.length + ' of ' + pageStates.length);
+      if (result.dpi) rows += infoRow('Rendered at', result.dpi + ' DPI');
+      if (result.quality) rows += infoRow('JPEG quality', result.quality.toFixed(2));
+      rows += infoRow('Attempts', String(result.attempts ? result.attempts.length : 1));
+      rows += infoRow('Time', elapsed + ' ms');
+      infoBody.innerHTML = rows;
+
+      emptyEl.style.display = 'none';
+      resultContent.classList.remove('pc-hidden');
+      resultSubEl.textContent = 'Compressed to ' + fmtBytes(resultBlob.size) + '.';
+
+      if (resultBlob.size <= targetBytes){
+        setStatus('Done. ' + fmtBytes(resultBlob.size) + ' — under your ' + targetKb + ' KB target.', 'ok');
+        if (mode === 'max'){
+          showResultWarn('Compressed. Text is now part of the page images — you can\'t select or search it anymore, but the file will upload.', 'info');
+        } else {
+          showResultWarn('Optimised without rasterizing. Text remains selectable.', 'good');
+        }
+      } else {
+        setStatus('Target not reached. Smallest result: ' + fmtBytes(resultBlob.size) + '.', 'warn');
+        showResultWarn(
+          '<strong>Could not reach ' + targetKb + ' KB.</strong> The smallest result was ' +
+          fmtBytes(resultBlob.size) + ' at ' + (result.dpi || 'the default') + ' DPI. ' +
+          'Try dropping pages you do not need, splitting the PDF, or checking whether the ' +
+          'portal actually accepts a larger file.', 'error');
+      }
+
+    } catch (e){
+      setStatus('Compression failed: ' + (e && e.message ? e.message : 'unknown error'), 'error');
+      showResultWarn('Compression failed: ' + (e && e.message ? escapeHtml(e.message) : 'unknown error'), 'error');
+    } finally {
+      processing = false;
+      processBtn.disabled = false;
+      setProgress(0, '');
+    }
+  }
+
+  function infoRow(label, value, tone){
+    return '<tr><th>' + escapeHtml(label) + '</th><td' + (tone ? ' class="is-' + tone + '"' : '') + '>' + escapeHtml(value) + '</td></tr>';
+  }
+
+  // ---------- reset ----------
+  function reset(){
+    if (resultUrl){ URL.revokeObjectURL(resultUrl); resultUrl = null; }
+    currentFile = null;
+    pdfDoc = null;
+    pageStates = [];
+    selectedPage = 0;
+    resultBlob = null;
+    fileInput.value = '';
+    fileinfoWrap.classList.add('pc-hidden');
+    thumbsCard.classList.add('pc-hidden');
+    previewCard.classList.add('pc-hidden');
+    thumbGrid.innerHTML = '';
+    previewEl.innerHTML = '<div class="pc-preview-empty"><strong>No page selected</strong>Click a thumbnail above to preview the rendered page here.</div>';
+    pageLabel.textContent = '— / —';
+    processBtn.disabled = true;
+    downloadBtn.style.display = 'none';
+    downloadBtn.removeAttribute('href');
+    emptyEl.style.display = '';
+    resultContent.classList.add('pc-hidden');
+    infoBody.innerHTML = '';
+    estimateEl.classList.add('pc-hidden');
+    clearUploadWarn();
+    clearResultWarn();
+    setStatus('', '');
+    setProgress(0, '');
+  }
+
+  // ---------- presets ----------
+  var PRESETS = { gov: 1024, visa: 500, exam: 200, email: 5120 };
+  function applyPreset(name){
+    var kb = PRESETS[name];
+    if (!kb) return;
+    targetKbEl.value = kb;
+    document.querySelectorAll('.pc-preset').forEach(function(b){
+      b.classList.toggle('is-primary', b.getAttribute('data-preset') === name);
+    });
+    document.querySelectorAll('.pc-chip').forEach(function(c){
+      c.classList.toggle('is-primary', parseInt(c.getAttribute('data-kb'), 10) === kb);
+    });
+    estimate();
+  }
+
+  // ---------- events ----------
+  dropEl.addEventListener('click', function(){ fileInput.click(); });
+  ['dragenter', 'dragover'].forEach(function(ev){
+    dropEl.addEventListener(ev, function(e){ e.preventDefault(); dropEl.classList.add('is-dragover'); });
+  });
+  ['dragleave', 'drop'].forEach(function(ev){
+    dropEl.addEventListener(ev, function(e){ e.preventDefault(); dropEl.classList.remove('is-dragover'); });
+  });
+  dropEl.addEventListener('drop', function(e){
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', function(e){
+    if (e.target.files && e.target.files.length) handleFile(e.target.files[0]);
+  });
+  fileRemove.addEventListener('click', reset);
+
+  document.querySelectorAll('.pc-preset').forEach(function(b){
+    b.addEventListener('click', function(){ applyPreset(b.getAttribute('data-preset')); });
+  });
+  document.querySelectorAll('.pc-chip').forEach(function(c){
+    c.addEventListener('click', function(){
+      targetKbEl.value = c.getAttribute('data-kb');
+      document.querySelectorAll('.pc-chip').forEach(function(x){ x.classList.toggle('is-primary', x === c); });
+      document.querySelectorAll('.pc-preset').forEach(function(x){ x.classList.remove('is-primary'); });
+      estimate();
+    });
+  });
+  targetKbEl.addEventListener('input', estimate);
+  dpiEl.addEventListener('change', function(){
+    estimate();
+    if (selectedPage && pdfDoc) selectPage(selectedPage);
+  });
+  document.querySelectorAll('input[name="pc-mode"]').forEach(function(r){
+    r.addEventListener('change', function(){ estimate(); });
+  });
+
+  thumbGrid.addEventListener('click', function(e){
+    var thumb = e.target.closest('.pc-thumb');
+    if (!thumb) return;
+    var pageNum = parseInt(thumb.getAttribute('data-page'), 10);
+    if (!pageNum) return;
+    var st = pageStates.find(function(p){ return p.index === pageNum; });
+    // Alt / long-press style: if clicking the check, toggle include
+    var isCheck = e.target.classList && (e.target.classList.contains('pc-thumb-check'));
+    if (isCheck){
+      st.included = !st.included;
+      thumb.classList.toggle('is-excluded', !st.included);
+      updateThumbSummary();
+      estimate();
+      return;
+    }
+    selectPage(pageNum);
+  });
+  thumbGrid.addEventListener('keydown', function(e){
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var thumb = e.target.closest('.pc-thumb');
+    if (!thumb) return;
+    e.preventDefault();
+    var pageNum = parseInt(thumb.getAttribute('data-page'), 10);
+    if (pageNum) selectPage(pageNum);
+  });
+
+  document.querySelectorAll('[data-thumb-action]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var a = b.getAttribute('data-thumb-action');
+      if (a === 'all') pageStates.forEach(function(p){ p.included = true; });
+      else if (a === 'none') pageStates.forEach(function(p){ p.included = false; });
+      else if (a === 'invert') pageStates.forEach(function(p){ p.included = !p.included; });
+      renderThumbGrid();
+      updateThumbSummary();
+      estimate();
+    });
+  });
+
+  prevPageBtn.addEventListener('click', function(){ if (selectedPage > 1) selectPage(selectedPage - 1); });
+  nextPageBtn.addEventListener('click', function(){ if (pdfDoc && selectedPage < pdfDoc.numPages) selectPage(selectedPage + 1); });
+
+  processBtn.addEventListener('click', process);
+  resetBtn.addEventListener('click', reset);
+
+  // ---------- init ----------
+  setStatus('Waiting for a PDF…', 'busy');
+  processBtn.disabled = true;
+})();
+</script>
+</body>
+</html>

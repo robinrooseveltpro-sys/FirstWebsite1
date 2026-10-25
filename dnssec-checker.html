@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNSSEC Checker - Check DNSKEY, DS, and RRSIG for Any Domain</title>
+<meta name="description" content="Free DNSSEC checker. Looks up DNSKEY, DS, and RRSIG records for any domain and checks whether the DS at the parent matches a DNSKEY at the zone. Runs in your browser using DNS-over-HTTPS.">
+<link rel="canonical" href="https://converttotoolsonline.com/dnssec-checker.html">
+<link rel="stylesheet" href="/style.css">
+<style>
+/* Fallback tokens - replace with exact values from index.html if /style.css does not define them */
+:root {
+  --ct-ink: #0f172a;
+  --ct-muted: #64748b;
+  --ct-blue: #2563eb;
+  --ct-line: #e2e8f0;
+  --ct-bg: #ffffff;
+  --ct-radius: 8px;
+  --ct-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --ct-brand-mark: #2563eb;
+  --ct-nav: #f8fafc;
+  --ct-hero: #eff6ff;
+  --ct-footer: #1e293b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ct-ink);
+  background: var(--ct-bg);
+  line-height: 1.55;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--ct-line);
+  background: var(--ct-nav);
+  padding: 12px 20px;
+}
+.site-header .inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ct-ink);
+  text-decoration: none;
+}
+.brand span { color: var(--ct-brand-mark); }
+.site-nav { display: flex; gap: 16px; font-size: 0.95rem; }
+.site-nav a { color: var(--ct-muted); text-decoration: none; }
+.site-nav a:hover { color: var(--ct-blue); }
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  padding: 6px 10px;
+  cursor: pointer;
+  font: inherit;
+}
+@media (max-width: 640px) {
+  .site-nav { display: none; flex-direction: column; position: absolute; right: 20px; top: 56px; background: var(--ct-bg); border: 1px solid var(--ct-line); border-radius: var(--ct-radius); padding: 12px; box-shadow: var(--ct-shadow); z-index: 10; }
+  .site-nav.open { display: flex; }
+  .menu-toggle { display: inline-block; }
+}
+
+main { max-width: 960px; margin: 0 auto; padding: 24px 20px 64px; }
+
+.hero { padding: 8px 0 20px; }
+.hero h1 { font-size: 1.9rem; margin: 0 0 8px; line-height: 1.2; }
+.hero p { color: var(--ct-muted); margin: 0; max-width: 680px; }
+
+.tool-card {
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  padding: 20px;
+  box-shadow: var(--ct-shadow);
+  background: var(--ct-bg);
+  margin-bottom: 24px;
+}
+
+.form-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+.form-row label { display: block; font-size: 0.85rem; color: var(--ct-muted); margin-bottom: 4px; font-weight: 600; }
+.form-row input[type="text"], .form-row select {
+  font: inherit;
+  padding: 9px 12px;
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  background: var(--ct-bg);
+  color: var(--ct-ink);
+  min-width: 0;
+}
+.form-row .grow { flex: 1 1 280px; }
+.form-row .grow input { width: 100%; }
+
+.buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+button.btn {
+  font: inherit;
+  padding: 9px 16px;
+  border-radius: var(--ct-radius);
+  border: 1px solid var(--ct-line);
+  background: var(--ct-bg);
+  color: var(--ct-ink);
+  cursor: pointer;
+}
+button.btn.primary { background: var(--ct-blue); color: #fff; border-color: var(--ct-blue); }
+button.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.status {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-radius: var(--ct-radius);
+  font-size: 0.95rem;
+}
+.status.info { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+.status.success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.status.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.status.warn { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+.status.loading { background: var(--ct-nav); color: var(--ct-muted); border: 1px solid var(--ct-line); }
+
+.verdict-card {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: var(--ct-radius);
+  border: 1px solid var(--ct-line);
+  background: var(--ct-nav);
+}
+.verdict-card.signed { background: #ecfdf5; border-color: #a7f3d0; }
+.verdict-card.unsigned { background: #fef2f2; border-color: #fecaca; }
+.verdict-card.partial { background: #fffbeb; border-color: #fde68a; }
+.verdict-card h2 { margin: 0 0 6px; font-size: 1.15rem; }
+.verdict-card p { margin: 0; font-size: 0.95rem; }
+.verdict-card .explain { margin-top: 8px; color: var(--ct-muted); font-size: 0.9rem; }
+
+.results { margin-top: 22px; }
+.results h2 { font-size: 1.15rem; margin: 0 0 10px; }
+.results h3 { font-size: 1rem; margin: 20px 0 6px; }
+.results .meta { font-size: 0.85rem; color: var(--ct-muted); margin: 0 0 10px; }
+table.records { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+table.records th, table.records td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--ct-line);
+  vertical-align: top;
+  word-break: break-word;
+}
+table.records th { font-weight: 600; color: var(--ct-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; }
+table.records td.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.82rem; }
+table.records td.match { color: #065f46; font-weight: 600; }
+table.records td.nomatch { color: #991b1b; font-weight: 600; }
+table.records td.expired { color: #991b1b; font-weight: 600; }
+table.records td.valid { color: #065f46; font-weight: 600; }
+
+.limits {
+  border-left: 3px solid var(--ct-blue);
+  padding: 4px 0 4px 14px;
+  margin: 24px 0;
+  color: var(--ct-muted);
+  font-size: 0.95rem;
+}
+.limits h2 { font-size: 1rem; color: var(--ct-ink); margin: 0 0 6px; }
+.limits ul { margin: 6px 0 0; padding-left: 18px; }
+.limits li { margin-bottom: 6px; }
+
+.faq-nav { margin: 28px 0 12px; padding: 12px 14px; border: 1px solid var(--ct-line); border-radius: var(--ct-radius); background: var(--ct-nav); }
+.faq-nav strong { display: block; font-size: 0.85rem; color: var(--ct-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
+.faq-nav ul { margin: 0; padding-left: 18px; font-size: 0.92rem; }
+.faq-nav li { margin-bottom: 2px; }
+.faq-nav a { color: var(--ct-blue); text-decoration: none; }
+.faq-nav a:hover { text-decoration: underline; }
+
+.faq details {
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  background: var(--ct-bg);
+}
+.faq summary { cursor: pointer; font-weight: 600; }
+.faq details p { margin: 8px 0 0; color: var(--ct-muted); }
+
+.site-footer {
+  background: var(--ct-footer);
+  color: #cbd5e1;
+  padding: 20px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.site-footer a { color: #cbd5e1; text-decoration: underline; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+@media print {
+  .site-header, .site-footer, .menu-toggle, .buttons, .form-row, .faq-nav, .faq, .limits, .tool-card form { display: none !important; }
+  body { color: #000; background: #fff; }
+  table.records { border: 1px solid #000; }
+  table.records th, table.records td { border: 1px solid #000; }
+  .status, .verdict-card { border: 1px solid #000; background: #fff; color: #000; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a href="/index.html" class="brand">ConvertTo<span>Tools</span>Online</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" onclick="var n=document.getElementById('site-nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="/index.html">Home</a>
+      <a href="/Contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>DNSSEC Checker</h1>
+    <p>Check whether a domain's DNSSEC chain is correctly configured. Looks up DNSKEY records for the zone, DS records at the parent, and RRSIG records at the apex, then verifies that the DS digest matches a DNSKEY. Runs entirely in your browser.</p>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">DNSSEC checker form</h2>
+    <form id="dnssec-form">
+      <div class="form-row">
+        <div class="grow">
+          <label for="domain">Domain</label>
+          <input type="text" id="domain" name="domain" placeholder="example.com" autocomplete="off" autocapitalize="none" spellcheck="false" required>
+        </div>
+        <div>
+          <label for="resolver">Resolver</label>
+          <select id="resolver" name="resolver">
+            <option value="cloudflare" selected>Cloudflare (1.1.1.1)</option>
+            <option value="google">Google (8.8.8.8)</option>
+          </select>
+        </div>
+      </div>
+      <div class="buttons">
+        <button type="submit" class="btn primary" id="check-btn">Check DNSSEC</button>
+      </div>
+    </form>
+    <div id="status" class="status" aria-live="polite" hidden></div>
+
+    <div id="verdict" class="verdict-card" hidden>
+      <h2 id="verdict-title"></h2>
+      <p id="verdict-text"></p>
+      <p class="explain" id="verdict-explain"></p>
+    </div>
+
+    <div id="results" class="results" hidden>
+      <h2>Records</h2>
+      <p class="meta" id="results-meta"></p>
+
+      <h3>DNSKEY at zone apex</h3>
+      <div id="dnskey-block"></div>
+
+      <h3>DS at parent</h3>
+      <div id="ds-block"></div>
+
+      <h3>DS-to-DNSKEY match</h3>
+      <div id="match-block"></div>
+
+      <h3>RRSIG at zone apex</h3>
+      <div id="rrsig-block"></div>
+    </div>
+  </section>
+
+  <section class="limits">
+    <h2>What this tool checks and what it does not</h2>
+    <ul>
+      <li><strong>Checks:</strong> that DNSKEY records exist at the zone apex, that DS records exist at the parent, and that at least one DS digest cryptographically matches a DNSKEY in the zone. That last check is real SHA-1, SHA-256, or SHA-384 verification done in your browser.</li>
+      <li><strong>Checks:</strong> that RRSIG records are present at the apex, which signer names they come from, and whether their validity window has expired.</li>
+      <li><strong>Does not check:</strong> cryptographic validity of the RRSIG signatures themselves. Verifying a signature requires canonical wire-format ordering of every RRset and per-algorithm signature verification. If you need that, use the ICANN DNSSEC Debugger (dnsviz.net) or the bondit.dk validator.</li>
+      <li><strong>Does not check:</strong> the chain of trust from the root. A zone can have a matching DS-to-DNSKEY pair and still fail to chain if the parent zone is itself unsigned or misconfigured. This tool shows you the DS at the immediate parent, not the full path to the root.</li>
+      <li><strong>Does not check:</strong> subdomains. It checks the zone apex only. If you entered www.example.com, the tool walks up to the apex (example.com) and checks that zone.</li>
+      <li>Public DNS-over-HTTPS endpoints rate-limit. If checks start failing, wait a minute and retry, or switch resolvers.</li>
+    </ul>
+  </section>
+
+  <nav class="faq-nav" aria-label="FAQ jump navigation">
+    <strong>Jump to a question</strong>
+    <ul>
+      <li><a href="#faq-what">What is DNSSEC?</a></li>
+      <li><a href="#faq-how">How does this tool check a domain?</a></li>
+      <li><a href="#faq-chain">What is the chain of trust?</a></li>
+      <li><a href="#faq-ds">What is a DS record and why does it matter?</a></li>
+      <li><a href="#faq-rrsig">What is an RRSIG and why doesn't this tool verify it?</a></li>
+      <li><a href="#faq-match">What does "DS matches DNSKEY" mean?</a></li>
+      <li><a href="#faq-island">What is an island of trust?</a></li>
+      <li><a href="#faq-fix">How do I fix a DNSSEC configuration error?</a></li>
+      <li><a href="#faq-algo">What algorithm numbers do I see in the results?</a></li>
+    </ul>
+  </nav>
+
+  <section class="faq">
+    <details id="faq-what">
+      <summary>What is DNSSEC?</summary>
+      <p>DNSSEC adds cryptographic signatures to DNS records so that a resolver can prove the answer it received came from the real owner of the zone and was not tampered with in transit. Without DNSSEC, DNS is trust-on-first-response: anyone on the network path can forge an answer. With DNSSEC, each zone signs its records and each parent zone vouches for the child zone's signing keys.</p>
+    </details>
+    <details id="faq-how">
+      <summary>How does this tool check a domain?</summary>
+      <p>It queries three record types: DNSKEY at the zone apex, DS at the zone apex (which is actually served by the parent zone), and RRSIG at the apex. It then computes the DS digest from each DNSKEY using the digest type listed in the DS record, and compares that digest to the DS digest. If they match, the DNSKEY at the zone is provably the one the parent said should be there. If they do not match, the zone is signed but chained to the wrong key, which is a misconfiguration.</p>
+    </details>
+    <details id="faq-chain">
+      <summary>What is the chain of trust?</summary>
+      <p>DNSSEC works by delegation. The root zone signs the DS records for each TLD. Each TLD signs the DS records for each registered domain. Each registered domain signs its own DNSKEY and other records. When a resolver looks up a domain, it follows this chain from the root down, verifying each link. If any link is broken, DNSSEC validation fails, and depending on the resolver's policy, the answer is either refused or accepted but flagged as insecure.</p>
+    </details>
+    <details id="faq-ds">
+      <summary>What is a DS record and why does it matter?</summary>
+      <p>A DS record is published by the parent zone. It contains a hash of the child zone's DNSKEY, plus the algorithm and key tag of the key it corresponds to. When the child zone rotates its keys, it must coordinate the DS update with the parent, or validation breaks. A DS record at the parent that does not match any DNSKEY at the child is the most common cause of sudden DNSSEC outages, usually after a key rollover that was not coordinated with the registrar.</p>
+    </details>
+    <details id="faq-rrsig">
+      <summary>What is an RRSIG and why doesn't this tool verify it?</summary>
+      <p>An RRSIG is a cryptographic signature over a DNS record set. Verifying it correctly requires reconstructing the RRset in canonical wire format, which means exact byte ordering, exact TTL, and per-algorithm signature verification. Doing this correctly in a browser is a substantial amount of cryptographic code, and getting it wrong in a security context is worse than not doing it. This tool shows RRSIG records, their signer, key tag, and validity window, and flags expired signatures, but it does not cryptographically verify the signature. For that, use dnsviz.net or dnssec-validator.bondit.dk.</p>
+    </details>
+    <details id="faq-match">
+      <summary>What does "DS matches DNSKEY" mean?</summary>
+      <p>It means the cryptographic hash of the DNSKEY record, computed with the digest type declared in the DS record, equals the digest value in the DS record. That is the exact check a resolver performs when following the chain of trust from parent to child. If it matches, the parent's DS is vouching for that DNSKEY and the child zone is correctly chained. If it does not match, either the DNSKEY has been rotated without updating the DS, or the DS has been updated without rotating the DNSKEY to match.</p>
+    </details>
+    <details id="faq-island">
+      <summary>What is an island of trust?</summary>
+      <p>An island of trust is a zone that is signed with DNSSEC and whose own DS-to-DNSKEY chain is internally consistent, but whose parent zone does not publish a DS record for it. That means the zone is signed, but the chain from the root stops at the parent. Resolvers will treat the zone as insecure, which means DNSSEC validation is not enforced. The fix is to publish the DS record at the registrar, which propagates it to the parent zone.</p>
+    </details>
+    <details id="faq-fix">
+      <summary>How do I fix a DNSSEC configuration error?</summary>
+      <p>For a mismatch between DS and DNSKEY, the fix depends on which side is wrong. If you recently rotated keys at your DNS host, you need to update the DS at your registrar to match the new DNSKEY. If you recently updated the DS at the registrar without rotating keys, you need to either roll the DNSKEY back or complete the rollover. Check your DNS provider's documentation first, because some providers manage the DS update automatically and some do not. For a missing DS on a signed zone, publish the DS at your registrar. For a DS on an unsigned zone, remove it, because a DS pointing to a nonexistent DNSKEY is worse than no DNSSEC at all.</p>
+    </details>
+    <details id="faq-algo">
+      <summary>What algorithm numbers do I see in the results?</summary>
+      <p>Common values: 8 is RSASHA256, 13 is ECDSAP256SHA256, 14 is ECDSAP384SHA384, 15 is ED25519, 5 is RSASHA1 (deprecated), 7 is RSASHA1-NSEC3-SHA1 (deprecated), 1 is RSAMD5 (obsolete, do not use). Algorithm 13 is the current default for new deployments. Digest types you may see in DS records: 1 is SHA-1 (deprecated but still in use), 2 is SHA-256 (current default), 4 is SHA-384.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>ConvertToToolsOnline.com - tools that run in your browser. <a href="/Contact.html">Contact</a></p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "DNSSEC Checker",
+  "url": "https://converttotoolsonline.com/dnssec-checker.html",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript and a browser that supports Web Crypto and DNS-over-HTTPS endpoints",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Check DNSSEC configuration for any domain. Looks up DNSKEY, DS, and RRSIG records and verifies that the DS digest at the parent cryptographically matches a DNSKEY at the zone. Runs entirely in the browser using DNS-over-HTTPS."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is DNSSEC?","acceptedAnswer":{"@type":"Answer","text":"DNSSEC adds cryptographic signatures to DNS records so a resolver can prove the answer came from the zone owner and was not tampered with. Each zone signs its records and each parent zone vouches for the child zone's signing keys."}},
+    {"@type":"Question","name":"How does this tool check a domain?","acceptedAnswer":{"@type":"Answer","text":"It queries DNSKEY at the zone apex, DS at the zone apex (served by the parent), and RRSIG at the apex. It computes the DS digest from each DNSKEY using the digest type in the DS record and compares. A match proves the DNSKEY is the one the parent vouched for."}},
+    {"@type":"Question","name":"What is the chain of trust?","acceptedAnswer":{"@type":"Answer","text":"DNSSEC delegates trust from root to TLD to registered domain. Each level signs the DS records for the next. A resolver follows the chain from root down and verifies each link. If any link is broken, validation fails."}},
+    {"@type":"Question","name":"What is a DS record and why does it matter?","acceptedAnswer":{"@type":"Answer","text":"A DS record is published by the parent zone and contains a hash of the child zone's DNSKEY. If the DS does not match any DNSKEY at the child, DNSSEC validation fails. The most common cause is a key rollover that was not coordinated with the registrar."}},
+    {"@type":"Question","name":"What is an RRSIG and why doesn't this tool verify it?","acceptedAnswer":{"@type":"Answer","text":"An RRSIG is a cryptographic signature over a DNS record set. Verifying it requires canonical wire-format ordering and per-algorithm signature verification. This tool shows RRSIG presence, signer, key tag, and expiry, but does not cryptographically verify the signature. Use dnsviz.net for that."}},
+    {"@type":"Question","name":"What does DS matches DNSKEY mean?","acceptedAnswer":{"@type":"Answer","text":"It means the cryptographic hash of the DNSKEY computed with the digest type in the DS record equals the digest value in the DS record. That is the exact check a resolver performs when following the chain of trust."}},
+    {"@type":"Question","name":"What is an island of trust?","acceptedAnswer":{"@type":"Answer","text":"A zone that is signed and internally consistent but whose parent has no DS record for it. The chain from the root stops at the parent, so resolvers treat the zone as insecure. Fix is to publish the DS at the registrar."}},
+    {"@type":"Question","name":"How do I fix a DNSSEC configuration error?","acceptedAnswer":{"@type":"Answer","text":"For a DS-DNSKEY mismatch, update the DS at the registrar to match the current DNSKEY, or complete the key rollover. For a missing DS on a signed zone, publish the DS at the registrar. For a DS on an unsigned zone, remove it."}},
+    {"@type":"Question","name":"What algorithm numbers do I see in the results?","acceptedAnswer":{"@type":"Answer","text":"Common values: 8 is RSASHA256, 13 is ECDSAP256SHA256, 14 is ECDSAP384SHA384, 15 is ED25519, 5 is RSASHA1, 7 is RSASHA1-NSEC3-SHA1, 1 is RSAMD5. Algorithm 13 is the current default for new deployments. DS digest types: 1 is SHA-1, 2 is SHA-256, 4 is SHA-384."}}
+  ]
+}
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  var CLOUDFLARE_URL = 'https://cloudflare-dns.com/dns-query';
+  var GOOGLE_URL = 'https://dns.google/resolve';
+
+  var ALGO_NAMES = {
+    1: 'RSAMD5 (obsolete)', 3: 'DSA', 5: 'RSASHA1 (deprecated)',
+    6: 'DSA-NSEC3-SHA1', 7: 'RSASHA1-NSEC3-SHA1 (deprecated)',
+    8: 'RSASHA256', 10: 'RSASHA512', 12: 'ECC-GOST',
+    13: 'ECDSAP256SHA256', 14: 'ECDSAP384SHA384', 15: 'ED25519', 16: 'ED448'
+  };
+
+  var DIGEST_NAMES = { 1: 'SHA-1', 2: 'SHA-256', 3: 'GOST R 34.11-94', 4: 'SHA-384' };
+
+  var form = document.getElementById('dnssec-form');
+  var domainInput = document.getElementById('domain');
+  var resolverSelect = document.getElementById('resolver');
+  var checkBtn = document.getElementById('check-btn');
+  var statusEl = document.getElementById('status');
+  var verdictEl = document.getElementById('verdict');
+  var verdictTitle = document.getElementById('verdict-title');
+  var verdictText = document.getElementById('verdict-text');
+  var verdictExplain = document.getElementById('verdict-explain');
+  var resultsEl = document.getElementById('results');
+  var resultsMeta = document.getElementById('results-meta');
+  var dnskeyBlock = document.getElementById('dnskey-block');
+  var dsBlock = document.getElementById('ds-block');
+  var matchBlock = document.getElementById('match-block');
+  var rrsigBlock = document.getElementById('rrsig-block');
+
+  function isValidDomain(d) {
+    if (!d || d.length > 253) return false;
+    var re = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.?$/i;
+    return re.test(d);
+  }
+
+  function normalizeDomain(d) {
+    return d.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/\.$/, '');
+  }
+
+  function dohQuery(name, type, resolver) {
+    var base = resolver === 'google' ? GOOGLE_URL : CLOUDFLARE_URL;
+    var params = '?name=' + encodeURIComponent(name) + '&type=' + encodeURIComponent(type);
+    var opts = { method: 'GET' };
+    if (resolver !== 'google') {
+      opts.headers = { 'Accept': 'application/dns-json' };
+    }
+    return fetch(base + params, opts).then(function (res) {
+      if (!res.ok) throw new Error('resolver returned HTTP ' + res.status);
+      return res.json();
+    });
+  }
+
+  function base64ToBytes(b64) {
+    var bin = atob(b64);
+    var out = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+    return out;
+  }
+
+  function concatBytes(a, b) {
+    var out = new Uint8Array(a.length + b.length);
+    out.set(a, 0);
+    out.set(b, a.length);
+    return out;
+  }
+
+  function nameToWire(name) {
+    name = name.replace(/\.$/, '');
+    if (!name) return new Uint8Array([0]);
+    var labels = name.split('.');
+    var len = 1;
+    for (var i = 0; i < labels.length; i++) len += 1 + labels[i].length;
+    var buf = new Uint8Array(len);
+    var pos = 0;
+    for (var i = 0; i < labels.length; i++) {
+      buf[pos++] = labels[i].length;
+      for (var j = 0; j < labels[i].length; j++) buf[pos++] = labels[i].charCodeAt(j);
+    }
+    buf[pos] = 0;
+    return buf;
+  }
+
+  function parseDNSKEY(data) {
+    var parts = data.trim().split(/\s+/);
+    return {
+      flags: parseInt(parts[0], 10),
+      protocol: parseInt(parts[1], 10),
+      algorithm: parseInt(parts[2], 10),
+      pubkey: parts.slice(3).join('')
+    };
+  }
+
+  function dnskeyRdata(dnskey) {
+    var key;
+    try { key = base64ToBytes(dnskey.pubkey); }
+    catch (e) { return null; }
+    var out = new Uint8Array(4 + key.length);
+    out[0] = (dnskey.flags >> 8) & 0xff;
+    out[1] = dnskey.flags & 0xff;
+    out[2] = dnskey.protocol;
+    out[3] = dnskey.algorithm;
+    out.set(key, 4);
+    return out;
+  }
+
+  function computeKeyTag(rdata) {
+    var ac = 0;
+    for (var i = 0; i < rdata.length; i++) {
+      ac += (i & 1) ? rdata[i] : (rdata[i] << 8);
+    }
+    ac += (ac >> 16) & 0xFFFF;
+    return ac & 0xFFFF;
+  }
+
+  function parseDS(data) {
+    var parts = data.trim().split(/\s+/);
+    return {
+      keytag: parseInt(parts[0], 10),
+      algorithm: parseInt(parts[1], 10),
+      digesttype: parseInt(parts[2], 10),
+      digest: parts.slice(3).join('').replace(/\s/g, '').toLowerCase()
+    };
+  }
+
+  function parseRRSIG(data) {
+    var parts = data.trim().split(/\s+/);
+    return {
+      typeCovered: parts[0],
+      algorithm: parseInt(parts[1], 10),
+      labels: parseInt(parts[2], 10),
+      originalTtl: parseInt(parts[3], 10),
+      expiration: parts[4],
+      inception: parts[5],
+      keytag: parseInt(parts[6], 10),
+      signer: parts[7]
+    };
+  }
+
+  function rrsigDate(s) {
+    return new Date(Date.UTC(
+      parseInt(s.slice(0, 4), 10),
+      parseInt(s.slice(4, 6), 10) - 1,
+      parseInt(s.slice(6, 8), 10),
+      parseInt(s.slice(8, 10), 10),
+      parseInt(s.slice(10, 12), 10),
+      parseInt(s.slice(12, 14), 10)
+    ));
+  }
+
+  function toHex(buf) {
+    var s = '';
+    for (var i = 0; i < buf.length; i++) s += buf[i].toString(16).padStart(2, '0');
+    return s;
+  }
+
+  function computeDSDigest(dnskeyData, zoneName, digestType) {
+    var dnskey = parseDNSKEY(dnskeyData);
+    var rdata = dnskeyRdata(dnskey);
+    if (!rdata) return Promise.resolve(null);
+    var wire = concatBytes(nameToWire(zoneName), rdata);
+    var hashName;
+    if (digestType === 1) hashName = 'SHA-1';
+    else if (digestType === 2) hashName = 'SHA-256';
+    else if (digestType === 4) hashName = 'SHA-384';
+    else return Promise.resolve(null);
+    return crypto.subtle.digest(hashName, wire).then(function (hash) {
+      return toHex(new Uint8Array(hash));
+    });
+  }
+
+  function setStatus(msg, kind) {
+    statusEl.textContent = msg;
+    statusEl.className = 'status ' + (kind || '');
+    statusEl.hidden = !msg;
+  }
+
+  function clearAll() {
+    verdictEl.hidden = true;
+    resultsEl.hidden = true;
+    dnskeyBlock.innerHTML = '';
+    dsBlock.innerHTML = '';
+    matchBlock.innerHTML = '';
+    rrsigBlock.innerHTML = '';
+  }
+
+  function showVerdict(kind, title, text, explain) {
+    verdictEl.className = 'verdict-card ' + kind;
+    verdictTitle.textContent = title;
+    verdictText.textContent = text;
+    verdictExplain.textContent = explain || '';
+    verdictEl.hidden = false;
+  }
+
+  function renderDNSKEYTable(records) {
+    if (!records.length) {
+      dnskeyBlock.innerHTML = '<p style="color:#64748b;">No DNSKEY records returned.</p>';
+      return;
+    }
+    var html = '<table class="records"><thead><tr><th>Key tag</th><th>Flags</th><th>Algorithm</th><th>Protocol</th></tr></thead><tbody>';
+    records.forEach(function (r) {
+      var parsed = parseDNSKEY(r.data);
+      var rdata = dnskeyRdata(parsed);
+      var keytag = rdata ? computeKeyTag(rdata) : '?';
+      var algo = ALGO_NAMES[parsed.algorithm] || ('algorithm ' + parsed.algorithm);
+      html += '<tr><td class="mono">' + keytag + '</td><td class="mono">' + parsed.flags + '</td><td>' + algo + '</td><td class="mono">' + parsed.protocol + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    dnskeyBlock.innerHTML = html;
+  }
+
+  function renderDSTable(records) {
+    if (!records.length) {
+      dsBlock.innerHTML = '<p style="color:#64748b;">No DS records returned at the parent.</p>';
+      return;
+    }
+    var html = '<table class="records"><thead><tr><th>Key tag</th><th>Algorithm</th><th>Digest type</th><th>Digest</th></tr></thead><tbody>';
+    records.forEach(function (r) {
+      var parsed = parseDS(r.data);
+      var algo = ALGO_NAMES[parsed.algorithm] || ('algorithm ' + parsed.algorithm);
+      var dt = DIGEST_NAMES[parsed.digesttype] || ('type ' + parsed.digesttype);
+      var shortDigest = parsed.digest.length > 24 ? parsed.digest.slice(0, 24) + '...' : parsed.digest;
+      html += '<tr><td class="mono">' + parsed.keytag + '</td><td>' + algo + '</td><td>' + dt + '</td><td class="mono" title="' + parsed.digest + '">' + shortDigest + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    dsBlock.innerHTML = html;
+  }
+
+  function renderMatchTable(dnskeys, dsRecords, zoneName) {
+    if (!dsRecords.length) {
+      matchBlock.innerHTML = '<p style="color:#64748b;">No DS records to compare.</p>';
+      return Promise.resolve({ matched: 0, total: 0 });
+    }
+    if (!dnskeys.length) {
+      matchBlock.innerHTML = '<p style="color:#64748b;">No DNSKEY records to compare.</p>';
+      return Promise.resolve({ matched: 0, total: dsRecords.length });
+    }
+    var rows = [];
+    var chain = Promise.resolve();
+    dsRecords.forEach(function (dsRec) {
+      var ds = parseDS(dsRec.data);
+      chain = chain.then(function () {
+        var matchedKeytag = null;
+        var subChain = Promise.resolve();
+        dnskeys.forEach(function (dkRec) {
+          subChain = subChain.then(function () {
+            return computeDSDigest(dkRec.data, zoneName, ds.digesttype).then(function (computed) {
+              if (computed && computed === ds.digest) {
+                var dkParsed = parseDNSKEY(dkRec.data);
+                var rd = dnskeyRdata(dkParsed);
+                matchedKeytag = rd ? computeKeyTag(rd) : null;
+              }
+            });
+          });
+        });
+        return subChain.then(function () {
+          rows.push({ ds: ds, matched: matchedKeytag !== null, matchedKeytag: matchedKeytag });
+        });
+      });
+    });
+    return chain.then(function () {
+      var matched = rows.filter(function (r) { return r.matched; }).length;
+      var html = '<table class="records"><thead><tr><th>DS key tag</th><th>Digest type</th><th>Result</th></tr></thead><tbody>';
+      rows.forEach(function (r) {
+        var dt = DIGEST_NAMES[r.ds.digesttype] || ('type ' + r.ds.digesttype);
+        if (r.matched) {
+          html += '<tr><td class="mono">' + r.ds.keytag + '</td><td>' + dt + '</td><td class="match">matches DNSKEY with tag ' + r.matchedKeytag + '</td></tr>';
+        } else {
+          html += '<tr><td class="mono">' + r.ds.keytag + '</td><td>' + dt + '</td><td class="nomatch">does not match any DNSKEY</td></tr>';
+        }
+      });
+      html += '</tbody></table>';
+      matchBlock.innerHTML = html;
+      return { matched: matched, total: rows.length };
+    });
+  }
+
+  function renderRRSIGTable(records) {
+    if (!records.length) {
+      rrsigBlock.innerHTML = '<p style="color:#64748b;">No RRSIG records returned at the apex. Some resolvers do not return RRSIGs unless the DNSSEC OK bit is set.</p>';
+      return;
+    }
+    var now = new Date();
+    var html = '<table class="records"><thead><tr><th>Type covered</th><th>Signer</th><th>Key tag</th><th>Valid from</th><th>Valid until</th><th>Status</th></tr></thead><tbody>';
+    records.forEach(function (r) {
+      var sig = parseRRSIG(r.data);
+      var exp = rrsigDate(sig.expiration);
+      var inc = rrsigDate(sig.inception);
+      var expired = exp < now;
+      var notYet = inc > now;
+      var statusText = expired ? 'EXPIRED' : (notYet ? 'NOT YET VALID' : 'in validity window');
+      var statusClass = expired || notYet ? 'expired' : 'valid';
+      html += '<tr><td class="mono">' + sig.typeCovered + '</td><td class="mono">' + sig.signer + '</td><td class="mono">' + sig.keytag + '</td><td>' + inc.toISOString().slice(0, 10) + '</td><td>' + exp.toISOString().slice(0, 10) + '</td><td class="' + statusClass + '">' + statusText + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    rrsigBlock.innerHTML = html;
+  }
+
+  function findZoneApex(domain, resolver) {
+    return dohQuery(domain, 'SOA', resolver).then(function (json) {
+      var answers = (json.Answer || []).filter(function (r) { return r.type === 6; });
+      if (answers.length > 0) {
+        return answers[0].name.replace(/\.$/, '');
+      }
+      var labels = domain.split('.');
+      if (labels.length > 2) return labels.slice(1).join('.');
+      return domain;
+    }).catch(function () {
+      return domain;
+    });
+  }
+
+  function runCheck(domain, resolver) {
+    setStatus('Finding the zone apex for ' + domain + '...', 'loading');
+    return findZoneApex(domain, resolver).then(function (zone) {
+      setStatus('Querying DNSKEY, DS, and RRSIG for ' + zone + '...', 'loading');
+      return Promise.all([
+        dohQuery(zone, 'DNSKEY', resolver),
+        dohQuery(zone, 'DS', resolver),
+        dohQuery(zone, 'RRSIG', resolver)
+      ]).then(function (results) {
+        var dnskeyJson = results[0];
+        var dsJson = results[1];
+        var rrsigJson = results[2];
+        var dnskeys = (dnskeyJson.Answer || []).filter(function (r) { return r.type === 48; });
+        var dsRecords = (dsJson.Answer || []).filter(function (r) { return r.type === 43; });
+        var rrsigs = (rrsigJson.Answer || []).filter(function (r) { return r.type === 46; });
+        return { zone: zone, dnskeys: dnskeys, dsRecords: dsRecords, rrsigs: rrsigs };
+      });
+    });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var domain = normalizeDomain(domainInput.value);
+    if (!domain) { setStatus('Enter a domain to check.', 'error'); domainInput.focus(); return; }
+    if (!isValidDomain(domain)) { setStatus('That does not look like a valid domain. Enter something like example.com.', 'error'); domainInput.focus(); return; }
+    var resolver = resolverSelect.value;
+
+    clearAll();
+    checkBtn.disabled = true;
+
+    runCheck(domain, resolver).then(function (data) {
+      var zone = data.zone;
+      var dnskeys = data.dnskeys;
+      var dsRecords = data.dsRecords;
+
+      resultsMeta.textContent = 'Checked ' + zone + ' via ' + (resolver === 'google' ? 'Google 8.8.8.8' : 'Cloudflare 1.1.1.1') + '. ' + dnskeys.length + ' DNSKEY, ' + dsRecords.length + ' DS, ' + data.rrsigs.length + ' RRSIG.';
+
+      renderDNSKEYTable(dnskeys);
+      renderDSTable(dsRecords);
+      renderRRSIGTable(data.rrsigs);
+
+      return renderMatchTable(dnskeys, dsRecords, zone).then(function (matchResult) {
+        if (dnskeys.length === 0 && dsRecords.length === 0) {
+          showVerdict('unsigned', 'Not signed with DNSSEC', 'No DNSKEY records were returned at ' + zone + ' and no DS records were returned at the parent. This domain does not use DNSSEC.', 'Without DNSSEC, DNS responses for this domain can be spoofed on the network path. If you want to enable DNSSEC, check whether your DNS provider supports it and whether your registrar accepts DS records.');
+          setStatus('Domain is not signed with DNSSEC.', 'info');
+        } else if (dnskeys.length === 0 && dsRecords.length > 0) {
+          showVerdict('unsigned', 'DS exists but no DNSKEY', 'DS records exist at the parent for ' + zone + ', but no DNSKEY records were returned at the zone. That is a misconfiguration.', 'The parent thinks the zone is signed, but the zone is not publishing its keys. DNSSEC validation will fail for every resolver that tries to validate this domain. Either restore the DNSKEY records at the provider or remove the DS at the registrar.');
+          setStatus('DS exists but no DNSKEY. Misconfiguration.', 'error');
+        } else if (dnskeys.length > 0 && dsRecords.length === 0) {
+          showVerdict('partial', 'Signed but not chained (island of trust)', 'DNSKEY records exist at ' + zone + ', but no DS records were returned at the parent. The zone is signed but not chained to the root.', 'Resolvers will treat this zone as insecure, so DNSSEC validation is not enforced for it. The fix is to publish the DS record at the registrar. Some DNS providers publish the DS automatically; others do not.');
+          setStatus('Zone is signed but not chained to the parent.', 'warn');
+        } else if (matchResult.matched > 0) {
+          showVerdict('signed', 'DNSKEY and DS match - chain established', 'At least one DS record at the parent matches a DNSKEY at ' + zone + '. The zone is correctly signed and chained to the parent.', 'This tool confirms the DS-to-DNSKEY link. It does not verify individual RRSIG signatures, so full validation still depends on the parent and root chain being intact. If you want end-to-end validation, run the domain through dnsviz.net as well.');
+          setStatus('DNSKEY and DS match.', 'success');
+        } else {
+          showVerdict('unsigned', 'DS does not match any DNSKEY', 'DS records exist at the parent for ' + zone + ', but none of them match any of the DNSKEY records at the zone. That is a DNSSEC outage waiting to happen.', 'Either the DNS provider rotated keys without updating the DS at the registrar, or the DS was updated without rotating the DNSKEY. Fix by aligning the DS at the registrar with the current DNSKEY, or by completing the key rollover at the provider.');
+          setStatus('DS does not match any DNSKEY. Misconfiguration.', 'error');
+        }
+        resultsEl.hidden = false;
+      });
+    }).catch(function (err) {
+      setStatus('Check failed: ' + err.message + '. The resolver may be unreachable, rate-limited, or blocked by your network. Try the other resolver or wait a minute.', 'error');
+    }).finally(function () {
+      checkBtn.disabled = false;
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

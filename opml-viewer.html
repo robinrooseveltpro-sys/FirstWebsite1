@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPML Viewer — View &amp; Inspect OPML Files Online (Free)</title>
+<meta name="description" content="View any OPML file instantly in your browser. See RSS feeds, podcast subscriptions, and nested folders as a collapsible tree. Search, copy URLs, export JSON. No upload.">
+<link rel="canonical" href="https://converttotoolsonline.com/opml-viewer.html">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="OPML Viewer — View &amp; Inspect OPML Files">
+<meta property="og:description" content="Open any OPML file, browse feeds and folders, search by title or URL, and export as JSON or plain text. Runs entirely in your browser.">
+<meta property="og:url" content="https://converttotoolsonline.com/opml-viewer.html">
+<link rel="stylesheet" href="/style.css">
+<style>
+/* Tool-scoped styles. Prefixed op- to avoid conflicts. */
+.op-wrap { max-width: 1120px; margin: 0 auto; padding: 24px 16px 64px; }
+.op-wrap h1 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.25; margin: 0 0 8px; }
+.op-lede { color: #444; margin: 0 0 16px; max-width: 780px; line-height: 1.6; }
+.op-privacy { display:inline-block; font-size:.85rem; background:#eef6ff; color:#0b4a8b; border-radius:6px; padding:4px 10px; margin-bottom:20px; }
+
+.op-grid { display:grid; grid-template-columns: 1fr; gap: 20px; }
+.op-panel { border:1px solid #ddd; border-radius:10px; padding:18px; background:#fff; }
+.op-panel h2 { font-size:1rem; margin:0 0 14px; }
+
+.op-drop { display:block; width:100%; border:2px dashed #bbb; border-radius:10px; padding:34px 16px; text-align:center; cursor:pointer; background:#fafafa; font:inherit; color:inherit; transition: border-color .15s, background .15s; }
+.op-drop:hover, .op-drop:focus-visible, .op-drop.dragover { border-color:#0b6efd; background:#f0f6ff; outline:none; }
+.op-drop strong { display:block; margin-bottom:6px; font-size:1.02rem; }
+.op-drop small { color:#666; display:block; line-height:1.5; }
+.op-file { display:none; }
+
+.op-toolbar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:14px; }
+.op-btn { padding:9px 14px; border:1px solid #0b6efd; background:#0b6efd; color:#fff; border-radius:8px; font:inherit; font-weight:600; cursor:pointer; font-size:.88rem; }
+.op-btn:hover { background:#0957c9; }
+.op-btn:disabled { opacity:.5; cursor:not-allowed; }
+.op-btn.secondary { background:#fff; color:#0b6efd; }
+.op-btn.secondary:hover { background:#f0f6ff; }
+.op-btn.small { padding:6px 11px; font-size:.8rem; }
+.op-btn:focus-visible, .op-search input:focus-visible, .op-toggle:focus-visible { outline:2px solid #0b6efd; outline-offset:2px; }
+
+.op-stats { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+.op-stat { background:#f6f8fb; border:1px solid #e3e8ef; border-radius:8px; padding:8px 14px; font-size:.82rem; color:#444; }
+.op-stat strong { display:block; font-size:1.05rem; color:#111; }
+.op-stat span { font-size:.78rem; color:#666; }
+
+.op-search { display:flex; gap:8px; margin-top:14px; }
+.op-search input { flex:1; padding:9px 12px; border:1px solid #ccc; border-radius:7px; font:inherit; }
+.op-search input:focus { border-color:#0b6efd; }
+
+.op-tree-wrap { margin-top:14px; max-height: 62vh; overflow:auto; border:1px solid #eee; border-radius:8px; padding:10px 12px; background:#fcfcfd; }
+.op-tree { list-style:none; margin:0; padding-left:0; font-size:.9rem; }
+.op-tree ul { list-style:none; margin:0; padding-left:18px; border-left:1px dashed #d0d7e2; }
+.op-node { margin:1px 0; }
+.op-node-row { display:flex; align-items:center; gap:6px; padding:5px 6px; border-radius:5px; }
+.op-node-row:hover { background:#eef3ff; }
+.op-toggle { border:0; background:none; cursor:pointer; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; font-size:.75rem; color:#555; border-radius:4px; flex:0 0 auto; }
+.op-toggle:hover { background:#dde7ff; }
+.op-toggle.leaf { visibility:hidden; }
+.op-icon { flex:0 0 auto; font-size:.95rem; }
+.op-label { flex:1; word-break:break-word; }
+.op-feed-title { font-weight:600; }
+.op-feed-url { display:block; font-size:.76rem; color:#666; font-family:ui-monospace,monospace; word-break:break-all; margin-top:1px; }
+.op-badge { font-size:.65rem; padding:1px 6px; border-radius:999px; background:#e8edf5; color:#445; flex:0 0 auto; }
+.op-badge.pod { background:#fff2d6; color:#7a5200; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f8ff">
+<title>OPML Viewer — View &amp; Inspect OPML Files Online (Free)</title>
+<meta name="description" content="View any OPML file instantly in your browser. See RSS feeds, podcast subscriptions, and nested folders as a collapsible tree. Search, copy URLs, export JSON. No upload.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://converttotoolsonline.com/opml-viewer.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ConvertToToolsOnline">
+<meta property="og:title" content="OPML Viewer — View &amp; Inspect OPML Files">
+<meta property="og:description" content="Open any OPML file, browse feeds and folders, search by title or URL, and export as JSON or plain text. Runs entirely in your browser.">
+<meta property="og:url" content="https://converttotoolsonline.com/opml-viewer.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OPML Viewer">
+<meta name="twitter:description" content="Open any OPML file in your browser as a collapsible tree.">
+<link rel="stylesheet" href="/style.css">
+
+<style>
+/* ============================================================
+   Site design tokens — matching index.html exactly
+   ============================================================ */
+:root {
+  color-scheme: light;
+  --ct-ink: #172033;
+  --ct-muted: #607087;
+  --ct-blue: #245bcc;
+  --ct-blue-dark: #194aa8;
+  --ct-line: #dfe6ef;
+  --ct-bg: #f5f8ff;
+  --ct-white: #fff;
+  --ct-radius: 16px;
+  --ct-shadow: 0 6px 24px rgba(20, 35, 60, .055);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+
+body {
+  margin: 0;
+  background: var(--ct-bg);
+  color: var(--ct-ink);
+  font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a { color: var(--ct-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #9dbbff;
+  outline-offset: 3px;
+}
+
+.ct-container {
+  width: min(1200px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.ct-skip {
+  position: absolute; top: 8px; left: -9999px; z-index: 100;
+  padding: 10px 14px; border-radius: 8px;
+  background: white; color: var(--ct-ink);
+}
+.ct-skip:focus { left: 10px; }
+
+/* ============================================================
+   Header — same structure as index.html
+   ============================================================ */
+.ct-header {
+  position: relative; z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid var(--ct-line);
+}
+.ct-header-inner {
+  min-height: 72px;
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+}
+.ct-brand {
+  display: inline-flex; align-items: center; gap: 11px;
+  color: var(--ct-ink); font-weight: 850; letter-spacing: -.4px;
+}
+.ct-brand:hover { text-decoration: none; }
+.ct-brand-mark {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; flex: 0 0 auto;
+  border-radius: 12px; background: var(--ct-blue); color: #fff;
+  font-size: .95rem; font-weight: 900;
+}
+.ct-brand-name span { color: var(--ct-blue); }
+.ct-nav { display: flex; align-items: center; gap: 22px; }
+.ct-nav a { color: #475569; font-size: .93rem; font-weight: 700; }
+.ct-nav a:hover { color: var(--ct-blue); }
+.ct-menu-button {
+  display: none; min-height: 40px; padding: 8px 12px;
+  border: 1px solid var(--ct-line); border-radius: 9px;
+  background: white; color: var(--ct-ink); font-weight: 750;
+}
+
+/* ============================================================
+   Hero — compact for tool pages, gradient matching index.html
+   ============================================================ */
+.ct-hero {
+  padding: 52px 0 42px;
+  border-bottom: 1px solid var(--ct-line);
+  background: linear-gradient(130deg, #f8fbff 0%, #eaf1ff 56%, #f6f2ff 100%);
+}
+.ct-eyebrow {
+  margin: 0 0 10px; color: var(--ct-blue);
+  font-size: .76rem; font-weight: 850;
+  letter-spacing: .13em; text-transform: uppercase;
+}
+.ct-hero h1 {
+  max-width: 900px; margin: 0 0 15px;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+  line-height: 1.08; letter-spacing: -.05em;
+}
+.ct-hero h1 span { display: block; color: var(--ct-blue); }
+.ct-lead {
+  max-width: 800px; margin: 0;
+  color: #475569; font-size: clamp(1rem, 1.7vw, 1.12rem); line-height: 1.8;
+}
+.ct-privacy-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 18px; padding: 6px 12px;
+  background: #fff; border: 1px solid #cfe0ff;
+  border-radius: 999px; color: #194aa8;
+  font-size: .84rem; font-weight: 700;
+}
+
+/* ============================================================
+   Section + card foundations
+   ============================================================ */
+.ct-section { padding: 40px 0; }
+.ct-section-heading { margin-bottom: 21px; }
+.ct-section-heading h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -.035em; line-height: 1.25;
+}
+.ct-section-heading p:last-child {
+  max-width: 820px; margin: 0; color: var(--ct-muted);
+}
+
+.ct-button {
+  display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+  min-height: 43px; padding: 10px 15px;
+  border: 1px solid #cbd5e1; border-radius: 10px;
+  background: #fff; color: var(--ct-ink);
+  font-weight: 750; text-align: center;
+  transition: border-color .15s ease, background .15s ease;
+}
+.ct-button:hover { border-color: #a9bce4; text-decoration: none; }
+.ct-button-primary {
+  border-color: var(--ct-blue);
+  background: var(--ct-blue); color: #fff;
+}
+.ct-button-primary:hover {
+  border-color: var(--ct-blue-dark);
+  background: var(--ct-blue-dark);
+  color: #fff;
+}
+.ct-button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ============================================================
+   Tool layout — two-column card grid
+   ============================================================ */
+.op-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 24px;
+}
+.op-panel {
+  padding: 22px;
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  background: var(--ct-white);
+  box-shadow: var(--ct-shadow);
+}
+.op-panel-heading {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 16px;
+}
+.op-panel-heading .op-step {
+  display: inline-grid; place-items: center;
+  width: 26px; height: 26px; flex: 0 0 auto;
+  border-radius: 50%; background: #eaf1ff; color: var(--ct-blue);
+  font-size: .8rem; font-weight: 850;
+}
+.op-panel-heading h2 {
+  margin: 0; font-size: 1.02rem; letter-spacing: -.01em;
+}
+
+/* Drop zone */
+.op-drop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 100%;
+  min-height: 220px;
+  padding: 32px 20px;
+  border: 2px dashed #c3d0e4;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fafcff 0%, #f2f6ff 100%);
+  color: var(--ct-ink);
+  text-align: center;
+  transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+.op-drop:hover,
+.op-drop:focus-visible,
+.op-drop.is-dragover {
+  border-color: var(--ct-blue);
+  background: linear-gradient(180deg, #f2f7ff 0%, #e6efff 100%);
+  outline: none;
+}
+.op-drop.is-dragover { transform: scale(1.01); }
+.op-drop-icon {
+  display: grid; place-items: center;
+  width: 54px; height: 54px; margin-bottom: 12px;
+  border-radius: 14px;
+  background: #fff; border: 1px solid #dbe7ff;
+  color: var(--ct-blue); font-size: 1.6rem;
+}
+.op-drop strong { font-size: 1.02rem; margin-bottom: 6px; }
+.op-drop small { color: var(--ct-muted); line-height: 1.55; max-width: 340px; }
+
+.op-file { display: none; }
+
+.op-toolbar {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  margin-top: 14px;
+}
+.op-toolbar .ct-button { min-height: 38px; padding: 8px 13px; font-size: .88rem; }
+
+/* Stats */
+.op-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+.op-stat {
+  padding: 12px 14px;
+  border: 1px solid var(--ct-line);
+  border-radius: 11px;
+  background: #f8faff;
+}
+.op-stat strong {
+  display: block; font-size: 1.25rem; color: var(--ct-ink);
+  letter-spacing: -.02em; line-height: 1.2;
+}
+.op-stat span {
+  display: block; font-size: .76rem; color: var(--ct-muted);
+  text-transform: uppercase; letter-spacing: .05em; font-weight: 700;
+  margin-top: 3px;
+}
+
+/* Search */
+.op-search { margin-top: 16px; }
+.op-search label {
+  display: block; margin-bottom: 6px;
+  font-size: .85rem; font-weight: 700; color: var(--ct-ink);
+}
+.op-search input {
+  width: 100%; min-height: 46px; padding: 11px 13px;
+  border: 1px solid #cbd5e1; border-radius: 10px;
+  background: #fff; color: var(--ct-ink);
+}
+.op-search input:focus { border-color: var(--ct-blue); }
+
+/* Tree */
+.op-tree-wrap {
+  margin-top: 16px;
+  max-height: 58vh; overflow: auto;
+  border: 1px solid var(--ct-line);
+  border-radius: 12px;
+  background: #fcfdff;
+  padding: 10px 12px;
+}
+.op-tree {
+  list-style: none; margin: 0; padding-left: 0;
+  font-size: .9rem;
+}
+.op-tree ul {
+  list-style: none; margin: 0; padding-left: 18px;
+  border-left: 1px dashed #d0d7e2;
+}
+.op-node { margin: 1px 0; }
+.op-node-row {
+  display: flex; align-items: center; gap: 7px;
+  padding: 6px 7px;
+  border-radius: 7px;
+  transition: background .12s ease;
+}
+.op-node-row:hover { background: #eef3ff; }
+.op-toggle {
+  border: 0; background: none; cursor: pointer;
+  width: 22px; height: 22px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: .78rem; color: #475569;
+  border-radius: 5px; flex: 0 0 auto;
+}
+.op-toggle:hover { background: #dde7ff; color: var(--ct-blue); }
+.op-toggle.is-leaf { visibility: hidden; }
+.op-icon {
+  flex: 0 0 auto; font-size: 1rem; line-height: 1;
+}
+.op-label { flex: 1; word-break: break-word; min-width: 0; }
+.op-feed-title { font-weight: 650; display: block; }
+.op-feed-url {
+  display: block; font-size: .75rem; color: var(--ct-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  word-break: break-all; margin-top: 1px;
+}
+.op-badge {
+  display: inline-block;
+  font-size: .68rem; padding: 2px 8px;
+  border-radius: 999px;
+  background: #eef3ff; color: #194aa8;
+  font-weight: 750; flex: 0 0 auto;
+  letter-spacing: .02em;
+}
+.op-badge.is-pod {
+  background: #fff2d6; color: #7a5200;
+}
+.op-copy {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 6px;
+  padding: 3px 9px;
+  cursor: pointer;
+  font-size: .72rem;
+  color: #475569;
+  font-weight: 650;
+  flex: 0 0 auto;
+  transition: border-color .12s ease, color .12s ease, background .12s ease;
+}
+.op-copy:hover {
+  border-color: var(--ct-blue);
+  color: var(--ct-blue);
+  background: #f5f9ff;
+}
+
+/* Empty states and status */
+.op-empty {
+  padding: 34px 16px;
+  text-align: center;
+  color: var(--ct-muted);
+  font-size: .92rem;
+}
+.op-empty strong { color: var(--ct-ink); display: block; margin-bottom: 4px; }
+
+.op-status {
+  min-height: 1.3em; font-size: .88rem; margin-top: 10px;
+}
+.op-status[data-tone="error"] { color: #b00020; }
+.op-status[data-tone="ok"] { color: #0b6b2e; }
+
+.op-warn {
+  margin-top: 10px; padding: 9px 12px;
+  font-size: .85rem; color: #7a5200;
+  background: #fff7e0; border: 1px solid #f0d78a; border-radius: 8px;
+}
+
+/* Hidden helper */
+.op-hidden { display: none !important; }
+
+/* ============================================================
+   Guide + FAQ (uses ct-section styling from homepage)
+   ============================================================ */
+.ct-guide {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 48px 0 16px;
+}
+.ct-guide h2 {
+  margin-top: 32px; font-size: 1.25rem; letter-spacing: -.02em;
+}
+.ct-guide h3 {
+  margin-top: 22px; font-size: 1.03rem;
+}
+.ct-guide p, .ct-guide li { line-height: 1.7; color: #34405a; }
+.ct-guide code {
+  background: #eef2f8; padding: 1px 6px; border-radius: 5px;
+  font-size: .88em; color: #172033;
+}
+.ct-faq details {
+  border-bottom: 1px solid var(--ct-line); padding: 12px 0;
+}
+.ct-faq summary {
+  cursor: pointer; font-weight: 700; color: var(--ct-ink);
+}
+.ct-faq summary::marker { color: var(--ct-blue); }
+.ct-faq p { margin: 9px 0 0; color: #34405a; }
+
+.ct-related-links {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin: 12px 0 0; padding: 0; list-style: none;
+}
+.ct-related-links a {
+  display: inline-block;
+  padding: 7px 13px;
+  border: 1px solid var(--ct-line);
+  border-radius: 999px;
+  background: #fff;
+  color: #34405a;
+  font-size: .88rem; font-weight: 650;
+}
+.ct-related-links a:hover {
+  border-color: #a9bce4; color: var(--ct-blue); text-decoration: none;
+}
+
+/* ============================================================
+   Footer — same structure as index.html
+   ============================================================ */
+.ct-footer {
+  margin-top: 40px; padding: 35px 0 17px;
+  background: #111c32; color: #d5deed;
+}
+.ct-footer-grid {
+  display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 28px;
+}
+.ct-footer-brand {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; color: #fff; font-weight: 850;
+}
+.ct-footer-brand:hover { text-decoration: none; }
+.ct-footer-grid p {
+  max-width: 390px; color: #bdc8db; font-size: .91rem;
+}
+.ct-footer-links {
+  display: grid; align-content: start; gap: 7px;
+}
+.ct-footer-links strong { margin-bottom: 4px; color: #fff; }
+.ct-footer-links a { color: #cbd5e1; font-size: .92rem; }
+.ct-footer-links a:hover { color: #fff; }
+.ct-footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+  margin-top: 25px; padding-top: 15px;
+  border-top: 1px solid #32405a; color: #aebbd0; font-size: .84rem;
+}
+.ct-footer-bottom p { margin: 0; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 860px) {
+  .op-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .ct-header-inner { min-height: 65px; }
+  .ct-menu-button { display: inline-flex; }
+  .ct-nav {
+    display: none; position: absolute;
+    top: 65px; left: 0; right: 0;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ct-line);
+    background: #fff;
+  }
+  .ct-nav.is-open { display: block; }
+  .ct-nav-inner {
+    display: grid; gap: 0;
+    width: min(1200px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+  .ct-nav-inner a { padding: 10px 0; }
+  .ct-hero { padding: 40px 0 32px; }
+  .ct-footer-grid { grid-template-columns: 1fr 1fr; }
+  .op-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+  .ct-container { width: calc(100% - 22px); }
+  .ct-footer-grid { grid-template-columns: 1fr; }
+  .op-panel { padding: 16px; }
+  .op-drop { min-height: 180px; padding: 24px 14px; }
+  .op-tree-wrap { max-height: 50vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<a class="ct-skip" href="#main-content">Skip to content</a>
+
+<!-- ===== Header (matching index.html, links adapted for tool page) ===== -->
+<header class="ct-header">
+  <div class="ct-container ct-header-inner">
+    <a class="ct-brand" href="/" aria-label="ConvertToToolsOnline home">
+      <span class="ct-brand-mark" aria-hidden="true">CT</span>
+      <span class="ct-brand-name">Convert<span>ToToolsOnline</span></span>
+    </a>
+
+    <button
+      class="ct-menu-button"
+      id="ct-menu-button"
+      type="button"
+      aria-controls="ct-main-nav"
+      aria-expanded="false"
+    >Menu</button>
+
+    <nav class="ct-nav" id="ct-main-nav" aria-label="Main navigation">
+      <div class="ct-nav-inner">
+        <a href="/">Home</a>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/Contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <!-- ===== Hero ===== -->
+  <section class="ct-hero">
+    <div class="ct-container">
+      <p class="ct-eyebrow">Free online utility</p>
+      <h1>OPML Viewer <span>for RSS feeds, podcasts &amp; folders</span></h1>
+      <p class="ct-lead">
+        Open any OPML file exported from Feedly, Inoreader, NewsBlur, Miniflux,
+        Pocket Casts, Overcast, or any RSS reader. Browse every feed and folder
+        as a collapsible tree, search by title or URL, copy feed links, and
+        export the list as JSON or plain text — all without uploading your file.
+      </p>
+      <span class="ct-privacy-badge">
+        <span aria-hidden="true">🔒</span>
+        100% in your browser — your OPML file never leaves your device
+      </span>
+    </div>
+  </section>
+
+  <!-- ===== Tool ===== -->
+  <section class="ct-section">
+    <div class="ct-container">
+      <div class="ct-section-heading">
+        <p class="ct-eyebrow">Step by step</p>
+        <h2>Load, inspect, and export</h2>
+        <p>Everything happens locally. There is no upload, no signup, and no tracking.</p>
+      </div>
+
+      <div class="op-grid">
+
+        <!-- LEFT: input + stats + search -->
+        <section class="op-panel" aria-labelledby="op-input-heading">
+          <div class="op-panel-heading">
+            <span class="op-step" aria-hidden="true">1</span>
+            <h2 id="op-input-heading">Load an OPML file</h2>
+          </div>
+
+          <button type="button" id="op-drop" class="op-drop" aria-describedby="op-drop-help">
+            <span class="op-drop-icon" aria-hidden="true">📂</span>
+            <strong>Drop an OPML file here or click to browse</strong>
+            <small id="op-drop-help">
+              Supports .opml and .xml files exported by any RSS reader or podcast app.
+            </small>
+          </button>
+          <input id="op-file" type="file" accept=".opml,.xml,text/xml,application/xml" class="op-file">
+
+          <div class="op-toolbar">
+            <button type="button" id="op-sample" class="ct-button ct-button-primary">Load sample OPML</button>
+            <button type="button" id="op-reset" class="ct-button" disabled>Reset</button>
+          </div>
+
+          <div id="op-warn" class="op-warn op-hidden" role="status"></div>
+          <div id="op-status" class="op-status" role="status" aria-live="polite"></div>
+
+          <div id="op-stats" class="op-stats op-hidden" aria-label="OPML statistics">
+            <div class="op-stat">
+              <strong id="op-stat-feeds">0</strong>
+              <span>Feeds</span>
+            </div>
+            <div class="op-stat">
+              <strong id="op-stat-folders">0</strong>
+              <span>Folders</span>
+            </div>
+            <div class="op-stat">
+              <strong id="op-stat-podcasts">0</strong>
+              <span>Podcasts</span>
+            </div>
+            <div class="op-stat">
+              <strong id="op-stat-version">—</strong>
+              <span>Version</span>
+            </div>
+          </div>
+
+          <div id="op-search-wrap" class="op-search op-hidden">
+            <label for="op-search">Search feeds</label>
+            <input id="op-search" type="search" placeholder="Filter by title or URL…" autocomplete="off">
+          </div>
+        </section>
+
+        <!-- RIGHT: tree + export -->
+        <section class="op-panel" aria-labelledby="op-output-heading">
+          <div class="op-panel-heading">
+            <span class="op-step" aria-hidden="true">2</span>
+            <h2 id="op-output-heading">Outline &amp; feeds</h2>
+          </div>
+
+          <div class="op-toolbar" style="margin-top:0;">
+            <button type="button" id="op-expand" class="ct-button" disabled>Expand all</button>
+            <button type="button" id="op-collapse" class="ct-button" disabled>Collapse all</button>
+            <button type="button" id="op-export-json" class="ct-button ct-button-primary" disabled>Export JSON</button>
+            <button type="button" id="op-export-txt" class="ct-button" disabled>Export TXT</button>
+          </div>
+
+          <div id="op-tree-wrap" class="op-tree-wrap">
+            <div id="op-empty" class="op-empty">
+              <strong>No file loaded yet.</strong>
+              Load an OPML file to see its outline and feed list here.
+            </div>
+            <ul id="op-tree" class="op-tree op-hidden" aria-live="polite"></ul>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEO content ===== -->
+  <section class="ct-section">
+    <div class="ct-container">
+      <div class="ct-guide">
+
+        <h2>What is an OPML file?</h2>
+        <p>
+          OPML stands for <strong>Outline Processor Markup Language</strong>. It is an
+          XML-based format used to store hierarchical outlines. In everyday use, it is
+          most commonly the file you get when you export your subscriptions from an RSS
+          reader or podcast app — a single file containing every feed URL and folder in
+          your account.
+        </p>
+        <p>
+          The OPML specification defines a simple tree structure: an
+          <code>&lt;opml&gt;</code> root containing a <code>&lt;head&gt;</code> and a
+          <code>&lt;body&gt;</code>. The <code>&lt;body&gt;</code> contains one or more
+          <code>&lt;outline&gt;</code> elements, and each outline may contain nested
+          outlines. Every outline has a <code>text</code> attribute; feed outlines
+          typically also have <code>type="rss"</code> and an <code>xmlUrl</code>
+          attribute pointing to the feed.
+        </p>
+
+        <h2>OPML vs. RSS: what is the difference?</h2>
+        <p>
+          An <strong>RSS feed</strong> is a live stream of articles or episodes from one
+          website. An <strong>OPML file</strong> is a bookmark list — it does not contain
+          articles. It contains the <em>addresses</em> of many RSS feeds so you can move
+          your whole subscription list from one app to another. That is why an OPML
+          viewer shows titles and URLs, not articles.
+        </p>
+
+        <h2>How to use this OPML viewer</h2>
+        <ol>
+          <li>Drag an <code>.opml</code> or <code>.xml</code> file onto the drop area, or click it to browse.</li>
+          <li>The file is parsed locally. You will see a tree that mirrors the folder structure in your reader.</li>
+          <li>Use the search box to filter feeds by title or URL. Matching feeds remain visible even inside collapsed folders.</li>
+          <li>Click a feed’s <strong>Copy</strong> button to copy its URL, or use <strong>Export JSON</strong> / <strong>Export TXT</strong> for the full list.</li>
+        </ol>
+
+        <h2>What you can learn from an OPML file</h2>
+        <ul>
+          <li>How many feeds and folders you actually have — exports often contain more than users expect.</li>
+          <li>Which subscriptions are podcasts (feeds with audio or video enclosures).</li>
+          <li>Whether a reader exported duplicate feeds or empty folders.</li>
+          <li>Which OPML version the exporter used (1.0 or 2.0).</li>
+        </ul>
+
+        <h2>Privacy and limitations</h2>
+        <ul>
+          <li>Your OPML file is read with the browser’s <code>DOMParser</code> and rendered locally. It is never uploaded, logged, or sent anywhere.</li>
+          <li>Only well-formed XML is accepted. If the file is corrupted or is not OPML, the viewer explains the problem instead of showing a broken tree.</li>
+          <li>Very large OPML files (thousands of feeds) are supported, but rendering may take a moment on low-end devices.</li>
+          <li>This is a <strong>viewer</strong>, not an editor. It does not modify, merge, deduplicate, or re-export OPML. Use a dedicated OPML editor for those workflows.</li>
+          <li>Podcast detection is heuristic: feeds with <code>type="rss"</code> and podcast-like attributes are marked as podcasts. Some apps use non-standard attributes, so the count may differ slightly from your podcast app.</li>
+        </ul>
+
+        <h2 id="faq">Frequently asked questions</h2>
+        <div class="ct-faq">
+          <details>
+            <summary>Is my OPML file uploaded to a server?</summary>
+            <p>No. The file is parsed and rendered entirely in your browser using JavaScript. Nothing is transmitted anywhere.</p>
+          </details>
+          <details>
+            <summary>What is the difference between an OPML file and an RSS feed?</summary>
+            <p>An RSS feed is a live stream from one site. An OPML file is a list of feed URLs and folders — a subscription list, not article content.</p>
+          </details>
+          <details>
+            <summary>Which apps export OPML files?</summary>
+            <p>Feedly, Inoreader, NewsBlur, Miniflux, The Old Reader, NetNewsWire, Reeder, Pocket Casts, Overcast, and most other RSS readers and podcast managers.</p>
+          </details>
+          <details>
+            <summary>Can I view a podcast OPML file?</summary>
+            <p>Yes. Podcast OPML files use the same structure as RSS OPML files. The viewer shows each podcast’s title and feed URL, and flags likely podcast feeds.</p>
+          </details>
+          <details>
+            <summary>Why does my OPML file show as XML?</summary>
+            <p>OPML is a subset of XML, so many apps save OPML files with a <code>.xml</code> extension. This viewer accepts both <code>.opml</code> and <code>.xml</code> as long as the content is valid OPML.</p>
+          </details>
+          <details>
+            <summary>Does this tool edit or merge OPML files?</summary>
+            <p>No. This is a viewer only. Editing, merging, and deduplication require a dedicated OPML editor.</p>
+          </details>
+          <details>
+            <summary>Is there a file size limit?</summary>
+            <p>There is no imposed limit, but very large files may be slow to render on low-end devices. Typical exports from major readers are small and load instantly.</p>
+          </details>
+        </div>
+
+        <h2>Related tools</h2>
+        <!-- Verify filenames before enabling the commented links below. -->
+        <ul class="ct-related-links">
+          <li><a href="/">All ConvertToToolsOnline tools</a></li>
+          <!--
+          <li><a href="/word-counter.html">Word Counter</a></li>
+          <li><a href="/json-formatter.html">JSON Formatter</a></li>
+          <li><a href="/UTM-builder-free.html">UTM Builder</a></li>
+          -->
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer (matching index.html, links adapted) ===== -->
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-grid">
+      <div>
+        <a class="ct-footer-brand" href="/">
+          <span class="ct-brand-mark" aria-hidden="true">CT</span>
+          <span>ConvertToToolsOnline</span>
+        </a>
+        <p>
+          Practical online tools for documents, images, data, development and everyday work.
+        </p>
+      </div>
+
+      <nav class="ct-footer-links" aria-label="Tool navigation">
+        <strong>Explore</strong>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/sitemap.xml">XML sitemap</a>
+      </nav>
+
+      <nav class="ct-footer-links" aria-label="Site information">
+        <strong>Contact &amp; information</strong>
+        <a href="/Contact.html">Contact</a>
+        <a href="/#about">About the toolbox</a>
+        <a href="#main-content">Back to top ↑</a>
+      </nav>
+    </div>
+
+    <div class="ct-footer-bottom">
+      <p>© <span id="op-year">2026</span> ConvertToToolsOnline. All rights reserved.</p>
+      <p>Free utilities for practical tasks.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Structured data ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "OPML Viewer",
+      "url": "https://converttotoolsonline.com/opml-viewer.html",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any modern browser",
+      "browserRequirements": "Requires JavaScript and the DOMParser API",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "View any OPML file in the browser as a collapsible tree. Shows RSS feeds, podcast subscriptions, and nested folders. Search, copy feed URLs, and export as JSON or plain text. No upload.",
+      "featureList": [
+        "Drag-and-drop OPML loading",
+        "Collapsible outline tree",
+        "Live search by title or URL",
+        "Feed, folder, and podcast counts",
+        "OPML version detection",
+        "Copy individual feed URLs",
+        "JSON and plain-text export",
+        "100% client-side"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Is my OPML file uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. The file is parsed and rendered entirely in your browser using JavaScript. Nothing is transmitted anywhere."}},
+        {"@type":"Question","name":"What is the difference between an OPML file and an RSS feed?","acceptedAnswer":{"@type":"Answer","text":"An RSS feed is a live stream from one site. An OPML file is a list of feed URLs and folders — a subscription list, not article content."}},
+        {"@type":"Question","name":"Which apps export OPML files?","acceptedAnswer":{"@type":"Answer","text":"Feedly, Inoreader, NewsBlur, Miniflux, The Old Reader, NetNewsWire, Reeder, Pocket Casts, Overcast, and most other RSS readers and podcast managers."}},
+        {"@type":"Question","name":"Can I view a podcast OPML file?","acceptedAnswer":{"@type":"Answer","text":"Yes. Podcast OPML files use the same structure as RSS OPML files. The viewer shows each podcast title and feed URL, and flags likely podcast feeds."}},
+        {"@type":"Question","name":"Why does my OPML file show as XML?","acceptedAnswer":{"@type":"Answer","text":"OPML is a subset of XML, so many apps save OPML files with a .xml extension. This viewer accepts both .opml and .xml as long as the content is valid OPML."}},
+        {"@type":"Question","name":"Does this tool edit or merge OPML files?","acceptedAnswer":{"@type":"Answer","text":"No. This is a viewer only. Editing, merging, and deduplication require a dedicated OPML editor."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- ===== Inline menu toggle (replaces /script.js, which is not loaded here) ===== -->
+<script>
+(function () {
+  'use strict';
+  var menuBtn = document.getElementById('ct-menu-button');
+  var nav = document.getElementById('ct-main-nav');
+  if (!menuBtn || !nav) return;
+
+  menuBtn.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      nav.classList.remove('is-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      nav.classList.remove('is-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.focus();
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 700) {
+      nav.classList.remove('is-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>
+
+<!-- ===== Tool logic ===== -->
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  var dropEl = $('op-drop');
+  var fileInput = $('op-file');
+  var sampleBtn = $('op-sample');
+  var resetBtn = $('op-reset');
+  var warnEl = $('op-warn');
+  var statusEl = $('op-status');
+  var statsEl = $('op-stats');
+  var statFeeds = $('op-stat-feeds');
+  var statFolders = $('op-stat-folders');
+  var statPodcasts = $('op-stat-podcasts');
+  var statVersion = $('op-stat-version');
+  var searchWrap = $('op-search-wrap');
+  var searchInput = $('op-search');
+  var treeEl = $('op-tree');
+  var emptyEl = $('op-empty');
+  var expandBtn = $('op-expand');
+  var collapseBtn = $('op-collapse');
+  var exportJsonBtn = $('op-export-json');
+  var exportTxtBtn = $('op-export-txt');
+  var yearEl = $('op-year');
+
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  var lastData = null;
+  var lastTree = null;
+
+  function setStatus(msg, tone) {
+    statusEl.textContent = msg || '';
+    if (tone) statusEl.setAttribute('data-tone', tone);
+    else statusEl.removeAttribute('data-tone');
+  }
+  function showWarn(msg) {
+    if (!msg) { warnEl.classList.add('op-hidden'); warnEl.textContent = ''; return; }
+    warnEl.classList.remove('op-hidden'); warnEl.textContent = msg;
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c];
+    });
+  }
+
+  function parseOpml(text) {
+    var doc;
+    try { doc = new DOMParser().parseFromString(text, 'text/xml'); }
+    catch (e) { throw new Error('The file could not be parsed as XML.'); }
+    if (doc.querySelector('parsererror')) {
+      throw new Error('This file is not well-formed XML. It may be corrupted or not an OPML file.');
+    }
+    var opml = doc.documentElement;
+    if (!opml || opml.nodeName.toLowerCase() !== 'opml') {
+      throw new Error('The root element is not <opml>. This does not appear to be an OPML file.');
+    }
+    var version = opml.getAttribute('version') || '—';
+    var body = opml.querySelector('body');
+    if (!body) throw new Error('The OPML file has no <body> element.');
+
+    var feeds = [];
+    var folderCount = 0;
+    var podcastCount = 0;
+
+    function walk(parent, depth) {
+      var children = parent.children;
+      for (var i = 0; i < children.length; i++) {
+        var el = children[i];
+        if (el.nodeName.toLowerCase() !== 'outline') continue;
+        var title = el.getAttribute('text') || el.getAttribute('title') || '(untitled)';
+        var xmlUrl = el.getAttribute('xmlUrl') || el.getAttribute('xmlurl') || '';
+        var type = (el.getAttribute('type') || '').toLowerCase();
+        var htmlUrl = el.getAttribute('htmlUrl') || '';
+        var hasChildren = el.querySelector(':scope > outline') !== null;
+
+        if (xmlUrl) {
+          var isPodcast = type === 'rss' && (
+            /podcast/i.test(title) || /podcast/i.test(xmlUrl) ||
+            el.hasAttribute('enclosure') || el.hasAttribute('podcast')
+          );
+          if (isPodcast) podcastCount++;
+          feeds.push({ title: title, url: xmlUrl, htmlUrl: htmlUrl, isPodcast: isPodcast, depth: depth });
+        } else {
+          folderCount++;
+        }
+        if (hasChildren) walk(el, depth + 1);
+      }
+    }
+    walk(body, 0);
+    return { feeds: feeds, folders: folderCount, podcasts: podcastCount, version: version };
+  }
+
+  function buildTree(text) {
+    var doc = new DOMParser().parseFromString(text, 'text/xml');
+    var body = doc.querySelector('body');
+    if (!body) return [];
+    function node(el) {
+      var title = el.getAttribute('text') || el.getAttribute('title') || '(untitled)';
+      var xmlUrl = el.getAttribute('xmlUrl') || '';
+      var type = (el.getAttribute('type') || '').toLowerCase();
+      var children = [];
+      var childEls = el.children;
+      for (var i = 0; i < childEls.length; i++) {
+        if (childEls[i].nodeName.toLowerCase() === 'outline') children.push(node(childEls[i]));
+      }
+      var isPodcast = type === 'rss' && (/podcast/i.test(title) || /podcast/i.test(xmlUrl));
+      return { title: title, url: xmlUrl, isPodcast: isPodcast, children: children };
+    }
+    var roots = [];
+    var kids = body.children;
+    for (var i = 0; i < kids.length; i++) {
+      if (kids[i].nodeName.toLowerCase() === 'outline') roots.push(node(kids[i]));
+    }
+    return roots;
+  }
+
+  function renderTree(tree, filter) {
+    treeEl.innerHTML = '';
+    var shown = 0;
+    var f = filter ? filter.toLowerCase() : '';
+
+    function matches(n) {
+      if (!f) return true;
+      if (n.title.toLowerCase().indexOf(f) !== -1) return true;
+      if (n.url && n.url.toLowerCase().indexOf(f) !== -1) return true;
+      return false;
+    }
+    function hasVisibleDesc(n) {
+      if (matches(n)) return true;
+      return n.children.some(hasVisibleDesc);
+    }
+    function build(n) {
+      var selfMatch = matches(n);
+      var hasVis = n.children.some(hasVisibleDesc);
+      if (!selfMatch && !hasVis) return null;
+
+      shown++;
+      var li = document.createElement('li');
+      li.className = 'op-node';
+
+      var row = document.createElement('div');
+      row.className = 'op-node-row';
+
+      var toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'op-toggle' + (n.children.length ? '' : ' is-leaf');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', (n.children.length ? 'Collapse ' : '') + n.title);
+      toggle.textContent = '▾';
+
+      var icon = document.createElement('span');
+      icon.className = 'op-icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = n.url ? (n.isPodcast ? '🎧' : '📡') : '📁';
+
+      var label = document.createElement('span');
+      label.className = 'op-label';
+      if (n.url) {
+        label.innerHTML = '<span class="op-feed-title">' + escapeHtml(n.title) + '</span>' +
+                          '<span class="op-feed-url">' + escapeHtml(n.url) + '</span>';
+      } else {
+        label.textContent = n.title;
+      }
+
+      row.appendChild(toggle);
+      row.appendChild(icon);
+      row.appendChild(label);
+
+      if (n.url) {
+        if (n.isPodcast) {
+          var badge = document.createElement('span');
+          badge.className = 'op-badge is-pod';
+          badge.textContent = 'Podcast';
+          row.appendChild(badge);
+        }
+        var copy = document.createElement('button');
+        copy.type = 'button';
+        copy.className = 'op-copy';
+        copy.textContent = 'Copy URL';
+        copy.setAttribute('aria-label', 'Copy feed URL for ' + n.title);
+        copy.addEventListener('click', function () { copyText(n.url, copy); });
+        row.appendChild(copy);
+      }
+
+      li.appendChild(row);
+
+      var childUl = null;
+      if (n.children.length) {
+        childUl = document.createElement('ul');
+        n.children.forEach(function (c) {
+          var built = build(c);
+          if (built) childUl.appendChild(built);
+        });
+        if (childUl.children.length) li.appendChild(childUl);
+      }
+
+      toggle.addEventListener('click', function () {
+        if (!childUl) return;
+        var expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        toggle.textContent = expanded ? '▸' : '▾';
+        childUl.style.display = expanded ? 'none' : '';
+      });
+
+      return li;
+    }
+
+    tree.forEach(function (root) {
+      var built = build(root);
+      if (built) treeEl.appendChild(built);
+    });
+
+    if (!shown) {
+      emptyEl.classList.remove('op-hidden');
+      emptyEl.innerHTML = filter
+        ? '<strong>No matches.</strong> No feeds match “' + escapeHtml(filter) + '”.'
+        : '<strong>Empty outline.</strong> This OPML file contains no outline elements.';
+      treeEl.classList.add('op-hidden');
+    } else {
+      emptyEl.classList.add('op-hidden');
+      treeEl.classList.remove('op-hidden');
+    }
+  }
+
+  function setTreeExpanded(expanded) {
+    treeEl.querySelectorAll('.op-toggle').forEach(function (b) {
+      if (b.classList.contains('is-leaf')) return;
+      b.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      b.textContent = expanded ? '▾' : '▸';
+      var li = b.closest('.op-node');
+      var ul = li ? li.querySelector(':scope > ul') : null;
+      if (ul) ul.style.display = expanded ? '' : 'none';
+    });
+  }
+
+  function copyText(text, btn) {
+    var orig = btn.textContent;
+    function done() {
+      btn.textContent = 'Copied ✓';
+      setTimeout(function () { btn.textContent = orig; }, 1300);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else { fallback(text, done); }
+  }
+  function fallback(text, cb) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    if (cb) cb();
+  }
+
+  function processText(text) {
+    setStatus(''); showWarn('');
+    var data, tree;
+    try {
+      data = parseOpml(text);
+      tree = buildTree(text);
+    } catch (e) {
+      showWarn(e.message || 'Could not read this OPML file.');
+      resetUI();
+      return;
+    }
+    lastData = data; lastTree = tree;
+
+    statFeeds.textContent = data.feeds.length;
+    statFolders.textContent = data.folders;
+    statPodcasts.textContent = data.podcasts;
+    statVersion.textContent = data.version;
+    statsEl.classList.remove('op-hidden');
+    searchWrap.classList.remove('op-hidden');
+    searchInput.value = '';
+
+    expandBtn.disabled = false;
+    collapseBtn.disabled = false;
+    exportJsonBtn.disabled = false;
+    exportTxtBtn.disabled = false;
+    resetBtn.disabled = false;
+
+    renderTree(tree, '');
+    setStatus('Loaded ' + data.feeds.length + ' feed' +
+      (data.feeds.length === 1 ? '' : 's') + '.', 'ok');
+  }
+
+  function loadFile(file) {
+    if (!file) return;
+    if (!/\.(opml|xml)$/i.test(file.name) &&
+        file.type !== 'text/xml' &&
+        file.type !== 'application/xml') {
+      showWarn('Please choose a .opml or .xml file.');
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function () { processText(String(reader.result)); };
+    reader.onerror = function () { showWarn('Could not read this file.'); };
+    reader.readAsText(file);
+  }
+
+  function resetUI() {
+    lastData = null; lastTree = null;
+    treeEl.innerHTML = '';
+    treeEl.classList.add('op-hidden');
+    emptyEl.classList.remove('op-hidden');
+    emptyEl.innerHTML =
+      '<strong>No file loaded yet.</strong>Load an OPML file to see its outline and feed list here.';
+    statsEl.classList.add('op-hidden');
+    searchWrap.classList.add('op-hidden');
+    expandBtn.disabled = true;
+    collapseBtn.disabled = true;
+    exportJsonBtn.disabled = true;
+    exportTxtBtn.disabled = true;
+    resetBtn.disabled = true;
+    fileInput.value = '';
+    setStatus(''); showWarn('');
+  }
+
+  function download(filename, content, mime) {
+    var blob = new Blob([content], { type: mime || 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  exportJsonBtn.addEventListener('click', function () {
+    if (!lastTree) return;
+    download('opml-export.json', JSON.stringify({
+      generatedAt: new Date().toISOString(),
+      version: lastData.version,
+      feedCount: lastData.feeds.length,
+      folderCount: lastData.folders,
+      podcastCount: lastData.podcasts,
+      tree: lastTree
+    }, null, 2), 'application/json');
+    setStatus('JSON exported.', 'ok');
+  });
+
+  exportTxtBtn.addEventListener('click', function () {
+    if (!lastData) return;
+    download('feed-urls.txt',
+      lastData.feeds.map(function (f) { return f.url; }).join('\n') + '\n',
+      'text/plain;charset=utf-8');
+    setStatus('Plain-text feed list exported.', 'ok');
+  });
+
+  var SAMPLE_OPML =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<opml version="2.0">\n' +
+    '  <head><title>Sample subscriptions</title></head>\n' +
+    '  <body>\n' +
+    '    <outline text="Technology">\n' +
+    '      <outline type="rss" text="Hacker News" xmlUrl="https://news.ycombinator.com/rss" htmlUrl="https://news.ycombinator.com/"/>\n' +
+    '      <outline type="rss" text="CSS-Tricks" xmlUrl="https://css-tricks.com/feed/" htmlUrl="https://css-tricks.com/"/>\n' +
+    '    </outline>\n' +
+    '    <outline text="Podcasts">\n' +
+    '      <outline type="rss" text="Syntax Podcast" xmlUrl="https://feed.syntax.fm/rss"/>\n' +
+    '      <outline type="rss" text="Changelog" xmlUrl="https://changelog.com/podcast/feed"/>\n' +
+    '    </outline>\n' +
+    '    <outline type="rss" text="Daring Fireball" xmlUrl="https://daringfireball.net/feeds/main" htmlUrl="https://daringfireball.net/"/>\n' +
+    '  </body>\n' +
+    '</opml>';
+
+  dropEl.addEventListener('click', function () { fileInput.click(); });
+  ['dragenter','dragover'].forEach(function (ev) {
+    dropEl.addEventListener(ev, function (e) {
+      e.preventDefault(); dropEl.classList.add('is-dragover');
+    });
+  });
+  ['dragleave','drop'].forEach(function (ev) {
+    dropEl.addEventListener(ev, function (e) {
+      e.preventDefault(); dropEl.classList.remove('is-dragover');
+    });
+  });
+  dropEl.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+      loadFile(e.dataTransfer.files[0]);
+    }
+  });
+  fileInput.addEventListener('change', function (e) {
+    if (e.target.files && e.target.files.length) loadFile(e.target.files[0]);
+  });
+
+  sampleBtn.addEventListener('click', function () { processText(SAMPLE_OPML); });
+  resetBtn.addEventListener('click', resetUI);
+
+  searchInput.addEventListener('input', function () {
+    if (!lastTree) return;
+    renderTree(lastTree, searchInput.value.trim());
+  });
+
+  expandBtn.addEventListener('click', function () { setTreeExpanded(true); });
+  collapseBtn.addEventListener('click', function () { setTreeExpanded(false); });
+
+  resetUI();
+})();
+</script>
+</body>
+</html>

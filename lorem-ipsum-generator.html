@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lorem Ipsum Generator — Exact Count & HTML Export</title>
+<meta name="description" content="Generate lorem ipsum by exact word, character or paragraph count. Pick a theme, set a seed for repeatable text, and copy as plain text, HTML, Markdown or JSX.">
+<link rel="canonical" href="https://converttotoolsonline.com/lorem-ipsum-generator.html">
+<meta property="og:title" content="Lorem Ipsum Generator — Exact Count & HTML Export">
+<meta property="og:description" content="Exact word, character or paragraph counts. Repeatable seeds. Six themes. Copy as text, HTML, Markdown or JSX — all in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://converttotoolsonline.com/lorem-ipsum-generator.html">
+<meta name="robots" content="index, follow">
+<style>
+:root{
+  --ct-ink:#0f172a;
+  --ct-muted:#475569;
+  --ct-blue:#2563eb;
+  --ct-blue-dark:#1d4ed8;
+  --ct-line:#e2e8f0;
+  --ct-bg:#f8fafc;
+  --ct-radius:12px;
+  --ct-shadow:0 1px 3px rgba(0,0,0,.08);
+  --ct-brand-mark:#2563eb;
+  --ct-nav:#ffffff;
+  --ct-hero:linear-gradient(135deg,#eff6ff 0%,#f8fafc 100%);
+  --ct-footer:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color:var(--ct-ink);background:var(--ct-bg);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--ct-blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.ct-wrap{max-width:1160px;margin:0 auto;padding:0 1.25rem}
+
+/* ---------- header ---------- */
+.ct-header{background:var(--ct-nav);border-bottom:1px solid var(--ct-line);padding:.9rem 0;position:sticky;top:0;z-index:40}
+.ct-nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.ct-logo{font-weight:800;font-size:1.15rem;letter-spacing:-.02em;color:var(--ct-ink)}
+.ct-logo span{color:var(--ct-brand-mark)}
+.ct-nav-links{display:flex;align-items:center;gap:1.25rem}
+.ct-nav-links a{font-size:.875rem;color:var(--ct-muted);font-weight:500}
+.ct-nav-links a:hover{color:var(--ct-blue);text-decoration:none}
+
+/* ---------- hero ---------- */
+.ct-hero{background:var(--ct-hero);padding:2.75rem 0 4rem;text-align:center;border-bottom:1px solid var(--ct-line)}
+.ct-hero h1{font-size:clamp(1.75rem,4vw,2.25rem);letter-spacing:-.025em;margin-bottom:.6rem;line-height:1.2}
+.ct-hero p{color:var(--ct-muted);max-width:660px;margin:0 auto;font-size:1rem}
+
+/* ---------- tool shell ---------- */
+.ct-tool{max-width:1160px;margin:-2.5rem auto 0;padding:0 1.25rem;position:relative;z-index:2}
+.ct-tool-card{
+  background:#fff;border:1px solid var(--ct-line);border-radius:16px;
+  box-shadow:0 10px 30px -12px rgba(15,23,42,.15);padding:1.5rem;
+}
+.ct-tool-grid{display:grid;grid-template-columns:340px minmax(0,1fr);gap:1.5rem;align-items:start}
+@media(max-width:900px){.ct-tool-grid{grid-template-columns:1fr}}
+
+/* ---------- controls ---------- */
+.ct-controls{display:flex;flex-direction:column;gap:1.1rem}
+.ct-group{display:flex;flex-direction:column;gap:.4rem}
+.ct-label{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ct-muted)}
+.ct-seg{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem}
+.ct-seg input{position:absolute;opacity:0;pointer-events:none}
+.ct-seg label{
+  display:block;text-align:center;padding:.5rem .4rem;border:1px solid var(--ct-line);
+  border-radius:8px;font-size:.8rem;font-weight:600;color:var(--ct-muted);cursor:pointer;
+  transition:border-color .15s,color .15s,background .15s;
+}
+.ct-seg input:checked+label{background:#eff6ff;border-color:var(--ct-blue);color:var(--ct-blue-dark)}
+.ct-seg input:focus-visible+label{outline:2px solid var(--ct-blue);outline-offset:2px}
+
+.ct-themes{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem}
+.ct-themes input{position:absolute;opacity:0;pointer-events:none}
+.ct-themes label{
+  display:block;text-align:center;padding:.45rem .25rem;border:1px solid var(--ct-line);
+  border-radius:8px;font-size:.75rem;font-weight:600;color:var(--ct-muted);cursor:pointer;
+}
+.ct-themes input:checked+label{background:#eff6ff;border-color:var(--ct-blue);color:var(--ct-blue-dark)}
+.ct-themes input:focus-visible+label{outline:2px solid var(--ct-blue);outline-offset:2px}
+
+.ct-row{display:flex;align-items:center;gap:.6rem}
+.ct-row input[type="range"]{flex:1;accent-color:var(--ct-blue);height:4px}
+.ct-row input[type="number"]{
+  width:78px;padding:.4rem .5rem;border:1px solid var(--ct-line);border-radius:8px;
+  font-size:.875rem;font-family:inherit;text-align:center;background:#fff;color:var(--ct-ink);
+}
+.ct-row input[type="number"]:focus{outline:2px solid var(--ct-blue);border-color:transparent}
+
+.ct-text-input{
+  width:100%;padding:.55rem .65rem;border:1px solid var(--ct-line);border-radius:8px;
+  font-size:.875rem;font-family:inherit;background:#fff;color:var(--ct-ink);
+}
+.ct-text-input:focus{outline:2px solid var(--ct-blue);border-color:transparent}
+
+.ct-check{display:flex;align-items:flex-start;gap:.5rem;font-size:.85rem;color:var(--ct-muted);cursor:pointer}
+.ct-check input{margin-top:.25rem;accent-color:var(--ct-blue);width:16px;height:16px;flex-shrink:0}
+
+.ct-hint{font-size:.75rem;color:var(--ct-muted);line-height:1.45}
+
+.ct-actions{display:flex;gap:.5rem;margin-top:.25rem}
+.ct-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+  background:var(--ct-blue);color:#fff;border:none;border-radius:9px;
+  padding:.7rem 1.1rem;font-size:.9rem;font-weight:600;font-family:inherit;cursor:pointer;
+  transition:background .15s,transform .1s;flex:1;
+}
+.ct-btn:hover{background:var(--ct-blue-dark)}
+.ct-btn:active{transform:translateY(1px)}
+.ct-btn:focus-visible{outline:2px solid var(--ct-blue);outline-offset:2px}
+.ct-btn.ghost{background:#fff;color:var(--ct-muted);border:1px solid var(--ct-line)}
+.ct-btn.ghost:hover{background:var(--ct-bg);color:var(--ct-ink)}
+
+/* ---------- output ---------- */
+.ct-output{display:flex;flex-direction:column;min-width:0}
+.ct-output-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;margin-bottom:.6rem}
+.ct-tabs{display:flex;gap:.25rem;background:var(--ct-bg);padding:.2rem;border-radius:9px;border:1px solid var(--ct-line)}
+.ct-tab{
+  border:none;background:transparent;font-family:inherit;font-size:.8rem;font-weight:600;
+  color:var(--ct-muted);padding:.35rem .8rem;border-radius:7px;cursor:pointer;
+}
+.ct-tab.active{background:#fff;color:var(--ct-ink);box-shadow:var(--ct-shadow)}
+.ct-tab:focus-visible{outline:2px solid var(--ct-blue);outline-offset:1px}
+
+.ct-stats{display:flex;gap:.75rem;flex-wrap:wrap;font-size:.75rem;color:var(--ct-muted)}
+.ct-stats b{color:var(--ct-ink);font-weight:700}
+
+.ct-panel{
+  border:1px solid var(--ct-line);border-radius:10px;background:var(--ct-bg);
+  padding:1.1rem 1.25rem;min-height:340px;max-height:440px;overflow:auto;
+}
+.ct-panel p{margin-bottom:.9rem;font-size:.9rem;color:#1e293b}
+.ct-panel p:last-child{margin-bottom:0}
+.ct-panel pre{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.78rem;line-height:1.7;white-space:pre-wrap;word-break:break-word;color:#1e293b;
+}
+.ct-empty{display:flex;align-items:center;justify-content:center;height:300px;color:var(--ct-muted);font-size:.875rem}
+
+.ct-output-foot{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.ct-output-foot .ct-btn{flex:0 0 auto;padding:.55rem .9rem;font-size:.8rem}
+.ct-format-note{font-size:.72rem;color:var(--ct-muted);margin-left:auto;align-self:center}
+
+.ct-toast{
+  position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--ct-ink);color:#fff;padding:.6rem 1.1rem;border-radius:999px;
+  font-size:.8rem;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:100;
+}
+.ct-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- content sections ---------- */
+.ct-section{max-width:820px;margin:0 auto;padding:2.75rem 1.25rem 0}
+.ct-section h2{font-size:1.45rem;letter-spacing:-.015em;margin-bottom:.75rem;line-height:1.3}
+.ct-section h3{font-size:1.05rem;margin:1.6rem 0 .4rem;color:var(--ct-ink)}
+.ct-section p{color:var(--ct-muted);font-size:.95rem;margin-bottom:.85rem}
+.ct-section ul,.ct-section ol{padding-left:1.2rem;margin-bottom:.9rem}
+.ct-section li{color:var(--ct-muted);font-size:.95rem;margin-bottom:.4rem}
+.ct-section code{background:#eef2f7;padding:.1rem .35rem;border-radius:4px;font-size:.85em;color:#334155}
+
+.ct-callout{
+  border-left:3px solid var(--ct-blue);background:#f0f7ff;padding:.9rem 1.1rem;
+  border-radius:0 8px 8px 0;margin:1.25rem 0;font-size:.9rem;color:#1e3a5f;
+}
+
+.ct-faq-nav{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+.ct-faq-nav a{
+  background:#fff;border:1px solid var(--ct-line);border-radius:999px;
+  padding:.35rem .85rem;font-size:.78rem;font-weight:600;color:var(--ct-muted);
+}
+.ct-faq-nav a:hover{border-color:var(--ct-blue);color:var(--ct-blue);text-decoration:none}
+
+.ct-faq-group{margin-bottom:2rem;scroll-margin-top:80px}
+.ct-faq-group h3{font-size:1.05rem;margin-bottom:.75rem;color:var(--ct-ink);letter-spacing:-.01em}
+.ct-faq-item{border-bottom:1px solid var(--ct-line);padding:.9rem 0}
+.ct-faq-item:last-child{border-bottom:none}
+.ct-faq-item h4{font-size:.925rem;font-weight:700;margin-bottom:.35rem;color:var(--ct-ink);line-height:1.4}
+.ct-faq-item p{font-size:.9rem;margin-bottom:0}
+
+/* ---------- footer ---------- */
+.ct-footer{background:var(--ct-footer);color:#cbd5e1;padding:2.25rem 0;font-size:.85rem;margin-top:3rem}
+.ct-footer .ct-wrap{display:flex;flex-direction:column;gap:.5rem;align-items:center;text-align:center}
+.ct-footer a{color:#93c5fd}
+.ct-footer .fine{font-size:.75rem;color:#94a3b8;max-width:640px}
+
+@media(max-width:560px){
+  .ct-tool-card{padding:1.15rem}
+  .ct-panel{padding:.9rem;min-height:260px;max-height:340px}
+  .ct-output-foot .ct-btn{flex:1 1 100%}
+  .ct-format-note{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+@media print{
+  .ct-header,.ct-footer,.ct-controls,.ct-output-head,.ct-output-foot,.ct-faq-nav,.ct-toast{display:none!important}
+  body{background:#fff}
+  .ct-hero{padding:0 0 1rem;border:none}
+  .ct-tool{margin:0;padding:0}
+  .ct-tool-card{box-shadow:none;border:none;padding:0}
+  .ct-panel{border:none;background:#fff;max-height:none;overflow:visible;padding:0}
+  .ct-section{padding-top:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<header class="ct-header">
+  <div class="ct-wrap ct-nav-inner">
+    <div class="ct-logo">Convert<span>ToTools</span>Online</div>
+    <nav class="ct-nav-links">
+      <a href="/index.html">All tools</a>
+      <a href="/Contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="ct-hero">
+  <div class="ct-wrap">
+    <h1>Lorem Ipsum Generator</h1>
+    <p>Set an exact word, character or paragraph count. Choose a theme. Lock a seed so the text comes back identical every time. Then copy it as plain text, HTML, Markdown or JSX.</p>
+  </div>
+</section>
+
+<main>
+
+<div class="ct-tool">
+  <div class="ct-tool-card">
+    <div class="ct-tool-grid">
+
+      <!-- ============ CONTROLS ============ -->
+      <div class="ct-controls">
+
+        <div class="ct-group">
+          <span class="ct-label">Count by</span>
+          <div class="ct-seg" role="radiogroup" aria-label="Count mode">
+            <input type="radio" name="mode" id="mode-words" value="words" checked>
+            <label for="mode-words">Words</label>
+            <input type="radio" name="mode" id="mode-chars" value="chars">
+            <label for="mode-chars">Characters</label>
+            <input type="radio" name="mode" id="mode-sentences" value="sentences">
+            <label for="mode-sentences">Sentences</label>
+            <input type="radio" name="mode" id="mode-paragraphs" value="paragraphs">
+            <label for="mode-paragraphs">Paragraphs</label>
+          </div>
+        </div>
+
+        <div class="ct-group">
+          <label class="ct-label" for="amount">Amount</label>
+          <div class="ct-row">
+            <input type="range" id="amountRange" min="1" max="200" value="100" aria-label="Amount slider">
+            <input type="number" id="amount" min="1" max="200" value="100" aria-label="Amount value">
+          </div>
+          <div class="ct-hint" id="amountHint">Between 1 and 2,000 words.</div>
+        </div>
+
+        <div class="ct-group">
+          <span class="ct-label">Theme</span>
+          <div class="ct-themes" role="radiogroup" aria-label="Text theme">
+            <input type="radio" name="theme" id="t-classic" value="classic" checked>
+            <label for="t-classic">Classic</label>
+            <input type="radio" name="theme" id="t-cicero" value="cicero">
+            <label for="t-cicero">Cicero</label>
+            <input type="radio" name="theme" id="t-hipster" value="hipster">
+            <label for="t-hipster">Hipster</label>
+            <input type="radio" name="theme" id="t-tech" value="tech">
+            <label for="t-tech">Tech</label>
+            <input type="radio" name="theme" id="t-pirate" value="pirate">
+            <label for="t-pirate">Pirate</label>
+            <input type="radio" name="theme" id="t-legal" value="legal">
+            <label for="t-legal">Legal</label>
+          </div>
+        </div>
+
+        <div class="ct-group">
+          <label class="ct-label" for="seed">Seed</label>
+          <div class="ct-row">
+            <input type="text" id="seed" class="ct-text-input" value="layout-test-01"
+                   spellcheck="false" autocomplete="off" aria-describedby="seedHint">
+            <button type="button" class="ct-btn ghost" id="shuffleBtn"
+                    style="flex:0 0 auto;padding:.55rem .8rem;font-size:.8rem;"
+                    title="Random seed">Shuffle</button>
+          </div>
+          <div class="ct-hint" id="seedHint">Same seed + same settings = same text, every time.</div>
+        </div>
+
+        <div class="ct-group">
+          <label class="ct-check">
+            <input type="checkbox" id="classicOpening" checked>
+            <span>Start with the classic <em>Lorem ipsum dolor sit amet</em> opening</span>
+          </label>
+        </div>
+
+        <div class="ct-group">
+          <span class="ct-label">Export format</span>
+          <div class="ct-seg" role="radiogroup" aria-label="Export format">
+            <input type="radio" name="format" id="f-text" value="text" checked>
+            <label for="f-text">Plain text</label>
+            <input type="radio" name="format" id="f-html" value="html">
+            <label for="f-html">HTML</label>
+            <input type="radio" name="format" id="f-md" value="markdown">
+            <label for="f-md">Markdown</label>
+            <input type="radio" name="format" id="f-jsx" value="jsx">
+            <label for="f-jsx">JSX</label>
+            <input type="radio" name="format" id="f-json" value="json">
+            <label for="f-json">JSON</label>
+          </div>
+        </div>
+
+        <div class="ct-group">
+          <label class="ct-label" for="tag">HTML tag</label>
+          <select id="tag" class="ct-text-input">
+            <option value="p" selected>&lt;p&gt; paragraph</option>
+            <option value="div">&lt;div&gt; block</option>
+            <option value="span">&lt;span&gt; inline</option>
+            <option value="li">&lt;li&gt; list item</option>
+          </select>
+          <div class="ct-hint">Used for HTML and JSX output only.</div>
+        </div>
+
+        <div class="ct-actions">
+          <button type="button" class="ct-btn" id="generateBtn">Generate</button>
+        </div>
+      </div>
+
+      <!-- ============ OUTPUT ============ -->
+      <div class="ct-output">
+        <div class="ct-output-head">
+          <div class="ct-tabs" role="tablist" aria-label="Output view">
+            <button type="button" class="ct-tab active" id="tabPreview"
+                    role="tab" aria-selected="true" aria-controls="panelPreview">Preview</button>
+            <button type="button" class="ct-tab" id="tabCode"
+                    role="tab" aria-selected="false" aria-controls="panelCode">Code</button>
+          </div>
+          <div class="ct-stats" aria-live="polite" id="stats">
+            <span><b id="statWords">0</b> words</span>
+            <span><b id="statChars">0</b> characters</span>
+            <span><b id="statParas">0</b> paragraphs</span>
+          </div>
+        </div>
+
+        <div class="ct-panel" id="panelPreview" role="tabpanel" aria-labelledby="tabPreview"></div>
+
+        <div class="ct-panel" id="panelCode" role="tabpanel" aria-labelledby="tabCode"
+             style="display:none;"><pre id="codeOut"></pre></div>
+
+        <div class="ct-output-foot">
+          <button type="button" class="ct-btn" id="copyBtn">Copy to clipboard</button>
+          <button type="button" class="ct-btn ghost" id="downloadBtn">Download</button>
+          <button type="button" class="ct-btn ghost" id="printBtn">Print</button>
+          <span class="ct-format-note" id="formatNote">Copying as plain text</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="ct-toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ============ EXPLAINER ============ -->
+<section class="ct-section">
+  <h2>Why bother with a count field</h2>
+  <p>Most lorem ipsum generators hand you a paragraph and let you deal with the leftovers. That works fine when you are filling a blog body. It falls apart the moment a real container has a real limit.</p>
+  <p>A product card title has about 60 characters before it wraps. A meta description gets truncated around 155. A testimonial slot in a pricing table holds 28 words at best. If you paste three paragraphs into any of those and start deleting word by word, you have turned a two-second task into a five-minute one. Picking the count first is faster and it keeps the sentence structure intact, so the mockup actually shows what the real content will look like.</p>
+  <p>Character mode trims at a word boundary rather than cutting mid-word, which matters if you are testing truncation behaviour. Word mode gives you a clean token count with proper punctuation. Paragraph mode is the one you want for a CMS body field. Sentence mode is for captions, tooltips and alt text.</p>
+
+  <h2>What the seed actually does</h2>
+  <p>The generator runs a small seeded pseudo-random function — mulberry32 — rather than <code>Math.random()</code>. Your seed string is hashed into a 32-bit integer, and that integer drives every word choice. The practical effect: <code>layout-test-01</code> plus 120 words plus the Tech theme will produce byte-identical output today, tomorrow, and on a colleague's machine.</p>
+  <p>This sounds like a small thing until you have three people reviewing the same Figma file. Without a seed, every refresh reshuffles the text and the line breaks move, so a comment like "the third line wraps awkwardly" stops making sense an hour later. With a seed, the text is fixed and the conversation stays anchored to what everyone is actually looking at.</p>
+  <p>Change the seed and you get a completely different document. Hit Shuffle for a random one, or type something memorable like <code>client-review-v3</code> so you can find it again.</p>
+
+  <h2>The six themes, and when each one is useful</h2>
+  <ul>
+    <li><strong>Classic</strong> — the standard Latin word pool that starts with <em>Lorem ipsum dolor sit amet</em>. Neutral, familiar, and the right default for client-facing mockups because nobody reads it as content.</li>
+    <li><strong>Cicero</strong> — drawn from the fuller passages of <em>De Finibus Bonorum et Malorum</em>, which is where the classic text originates. Longer clause structures, so it is better for testing long-form reading rhythm.</li>
+    <li><strong>Hipster</strong> — art-party vocabulary. Useful when you want the layout to look energetic in a screenshot, and for testing whether your typography holds up with unusual word lengths.</li>
+    <li><strong>Tech</strong> — infrastructure and API terms. Good for developer documentation templates, because the word shapes resemble real technical writing.</li>
+    <li><strong>Pirate</strong> and <strong>Legal</strong> — deliberately silly and deliberately verbose respectively. Legal is handy for stress-testing a clause box or a terms-and-conditions panel where real text runs long.</li>
+  </ul>
+
+  <div class="ct-callout">
+    <strong>On privacy:</strong> nothing you type or generate leaves the page. There is no fetch, no upload, no analytics call in the tool. The seed and text exist only in your browser's memory until you close the tab.
+  </div>
+
+  <h2>Export formats</h2>
+  <p>Plain text is the one you paste into a design tool. HTML wraps each paragraph in the tag you picked, so it drops straight into a CMS rich-text field or a static template. Markdown gives you blank-line separated blocks that render correctly in GitHub, Notion and most editors. JSX wraps the paragraphs in a fragment with keys, which is the form you want when you are building a component skeleton in React. JSON gives you an array of strings, ready for a fixture file or a mock API response.</p>
+  <p>The Code tab always shows exactly the string that Copy will put on your clipboard, so you are never guessing what you are pasting.</p>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="ct-section" id="faq">
+  <h2>Lorem ipsum questions, answered properly</h2>
+
+  <div class="ct-faq-nav">
+    <a href="#faq-basics">Basics</a>
+    <a href="#faq-counts">Counts &amp; limits</a>
+    <a href="#faq-seeds">Seeds</a>
+    <a href="#faq-export">Export</a>
+    <a href="#faq-themes">Themes</a>
+    <a href="#faq-practical">Practical use</a>
+  </div>
+
+  <div class="ct-faq-group" id="faq-basics">
+    <h3>Basics</h3>
+
+    <div class="ct-faq-item">
+      <h4>What is lorem ipsum, exactly?</h4>
+      <p>It is scrambled Latin. The text descends from Cicero's <em>De Finibus Bonorum et Malorum</em>, written around 45 BC, but the words have been shuffled and truncated so the result reads as Latin without forming coherent sentences. That is the point — it looks like language at a glance, so you judge the layout instead of reading the words.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Why not just type "text text text"?</h4>
+      <p>Because repeated short words produce an unrealistic line rhythm. Real English has a mix of two-letter and twelve-letter words, and that mix is what determines how a column of text actually breaks. Lorem ipsum preserves a natural distribution of word lengths, so your line counts and widow/orphan behaviour match what real copy will do.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Is any of this real Latin?</h4>
+      <p>Individual words are real. The sentences are not. The classic pool draws from genuine Latin vocabulary, but the grammar is deliberately broken so no reader mistakes it for meaningful text. The Hipster, Tech, Pirate and Legal themes are English word pools styled to match their subject, not Latin at all.</p>
+    </div>
+  </div>
+
+  <div class="ct-faq-group" id="faq-counts">
+    <h3>Counts &amp; limits</h3>
+
+    <div class="ct-faq-item">
+      <h4>How do I get exactly 150 characters?</h4>
+      <p>Switch Count by to Characters and enter 150. The generator builds words until it passes the target, then trims back to the last word boundary at or under 150. You get a clean ending rather than a chopped word, and the character count in the stats bar confirms the result.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>What's a sensible word count for a product card?</h4>
+      <p>Usually 20 to 30 words for a description block, and 6 to 10 for a card title. If the card has a fixed height, generate at the upper end — a card that survives 30 words will survive 18, but not the reverse.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Why does my meta description get cut off at 155 characters?</h4>
+      <p>Google truncates around that point on desktop. Generate at 150 characters to test it safely. The character count in this tool includes spaces and punctuation, which matches how search engines and most CMS fields count.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Does the character count include spaces?</h4>
+      <p>Yes. The stat reflects the full string length, spaces and punctuation included, because that is how HTML fields, database columns and search snippets measure it.</p>
+    </div>
+  </div>
+
+  <div class="ct-faq-group" id="faq-seeds">
+    <h3>Seeds</h3>
+
+    <div class="ct-faq-item">
+      <h4>How does the seed make the output repeatable?</h4>
+      <p>Your seed string is hashed into a number, and that number initialises a deterministic random function. Every word pick draws from that function in the same order, so the same seed with the same mode, amount and theme always produces the same text. Nothing about it depends on the clock or the machine.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>If I change the amount, does the text change?</h4>
+      <p>The beginning stays the same and the text extends or truncates. That is intentional — you can bump a mockup from 80 words to 120 words and the first 80 remain identical, so line breaks early in the block do not shift.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Can two different seeds produce the same text?</h4>
+      <p>In theory a hash collision is possible. In practice, with a 32-bit space and short documents, you would need to try millions of seeds to find one. It is not a concern for design work.</p>
+    </div>
+  </div>
+
+  <div class="ct-faq-group" id="faq-export">
+    <h3>Export</h3>
+
+    <div class="ct-faq-item">
+      <h4>Which tag should I pick for HTML output?</h4>
+      <p><code>p</code> for body copy, <code>div</code> when the container has its own class and you do not want default margins, <code>span</code> for inline placeholders inside a heading or button, and <code>li</code> when you are filling a list skeleton.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>What does the JSX output look like?</h4>
+      <p>Each paragraph becomes a self-contained element with a numeric key, wrapped in a fragment. It is meant to be pasted directly into a component file while you are building out a page, then replaced with a data source later.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Why is the JSON an array of strings?</h4>
+      <p>Because that is the most common shape for fixture data. You can drop it into a mock server response, a Storybook story, or a test file without reshaping it. Each element is one paragraph.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Does Copy match what I see in the Code tab?</h4>
+      <p>Yes, exactly. The Code tab renders the same string the clipboard receives, including the tag wrapping and line breaks.</p>
+    </div>
+  </div>
+
+  <div class="ct-faq-group" id="faq-themes">
+    <h3>Themes</h3>
+
+    <div class="ct-faq-item">
+      <h4>When should I use something other than Classic?</h4>
+      <p>Use Cicero when you need longer clauses to test reading rhythm. Use Tech for developer documentation. Use Hipster when a screenshot needs visual energy. Legal is the one to reach for when testing a long clause box or terms panel. Classic remains the safest choice for anything a client will see.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Can I mix themes?</h4>
+      <p>Not in one run. Generate separately and combine if you need it — though mixed-language placeholder text usually makes a mockup harder to review, not easier.</p>
+    </div>
+  </div>
+
+  <div class="ct-faq-group" id="faq-practical">
+    <h3>Practical use</h3>
+
+    <div class="ct-faq-item">
+      <h4>Does this work for Figma and Sketch?</h4>
+      <p>Copy as plain text and paste directly into a text layer. Both tools preserve the line breaks between paragraphs. If your design system uses auto-layout with a fixed height, generate at the longest count you expect so the frame does not overflow in review.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Is placeholder text bad for accessibility?</h4>
+      <p>Only if it ships. Screen readers will attempt to pronounce Latin, and the result is confusing. Keep lorem ipsum in mockups and staging environments, and make sure your build pipeline or content checklist replaces it before anything goes to production.</p>
+    </div>
+
+    <div class="ct-faq-item">
+      <h4>Does anything get sent to a server?</h4>
+      <p>No. The generator, the seed hashing and the formatting all run in the page. There is no network request involved in producing or copying the text.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ct-section">
+  <h2>Related tools</h2>
+  <p>If you are building out a layout, the <a href="/word-counter.html">word counter</a> is useful for checking real copy against the limits you tested here. The <a href="/markdown-to-html.html">Markdown to HTML</a> converter handles the reverse direction, and the <a href="/index.html">full tool library</a> has the rest.</p>
+</section>
+
+</main>
+
+<footer class="ct-footer">
+  <div class="ct-wrap">
+    <p><strong>ConvertToToolsOnline</strong> — free tools that run in your browser.</p>
+    <p><a href="/index.html">All tools</a> · <a href="/Contact.html">Contact</a></p>
+    <p class="fine">Everything on this page runs client-side. No text, seed or setting is transmitted anywhere.</p>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Lorem Ipsum Generator",
+  "url": "https://converttotoolsonline.com/lorem-ipsum-generator.html",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "Exact word, character, sentence and paragraph counts",
+    "Seeded repeatable output",
+    "Six text themes",
+    "Plain text, HTML, Markdown, JSX and JSON export",
+    "Fully client-side with no uploads"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is lorem ipsum, exactly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is scrambled Latin descended from Cicero's De Finibus Bonorum et Malorum, written around 45 BC. The words have been shuffled and truncated so the text reads as Latin without forming coherent sentences, which lets you judge layout instead of reading the words."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get exactly 150 characters of lorem ipsum?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Switch the count mode to Characters and enter 150. The generator builds words until it passes the target, then trims back to the last word boundary at or under 150, so the text ends cleanly instead of mid-word."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the seed make the output repeatable?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The seed string is hashed into a number that initialises a deterministic random function. Every word choice draws from that function in the same order, so the same seed with the same mode, amount and theme always produces identical text on any machine."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which HTML tag should I pick for the export?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use p for body copy, div when the container has its own class and you do not want default margins, span for inline placeholders inside a heading or button, and li when filling a list skeleton."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does anything get sent to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The generator, seed hashing and formatting all run inside the page. There is no network request involved in producing, copying or downloading the text."
+      }
+    }
+  ]
+}
+</script>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- element refs ---------- */
+  var el = function (id) { return document.getElementById(id); };
+
+  var amountRange   = el("amountRange");
+  var amountInput   = el("amount");
+  var amountHint    = el("amountHint");
+  var seedInput     = el("seed");
+  var shuffleBtn    = el("shuffleBtn");
+  var classicCheck  = el("classicOpening");
+  var tagSelect     = el("tag");
+  var generateBtn   = el("generateBtn");
+  var copyBtn       = el("copyBtn");
+  var downloadBtn   = el("downloadBtn");
+  var printBtn      = el("printBtn");
+  var toast         = el("toast");
+  var panelPreview  = el("panelPreview");
+  var panelCode     = el("panelCode");
+  var codeOut       = el("codeOut");
+  var tabPreview    = el("tabPreview");
+  var tabCode       = el("tabCode");
+  var statWords     = el("statWords");
+  var statChars     = el("statChars");
+  var statParas     = el("statParas");
+  var formatNote    = el("formatNote");
+
+  /* ---------- word banks ---------- */
+  var BANKS = {
+    classic: {
+      words: ("lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor "
+        + "incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud "
+        + "exercitation ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure "
+        + "in reprehenderit voluptate velit esse cillum eu fugiat nulla pariatur excepteur sint "
+        + "occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est "
+        + "laborum perspiciatis unde omnis iste natus error voluptatem accusantium doloremque "
+        + "laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis quasi "
+        + "architecto beatae vitae dicta explicabo nemo ipsam quia voluptas aspernatur aut odit "
+        + "fugit consequuntur magni dolores eos ratione sequi nesciunt neque porro quisquam "
+        + "dolorem adipisci numquam eius modi tempora incidunt magnam aliquam quaerat "
+        + "voluptatem minima nostrum exercitationem ullam corporis suscipit laboriosam nisi "
+        + "aliquid commodi consequatur quis autem vel eum iure reprehenderit qui in ea voluptate "
+        + "velit molestiae recusandae itaque earum rerum hic tenetur sapiente delectus reiciendis "
+        + "voluptatibus maiores alias consequatur perferendis doloribus asperiores repellat").split(" "),
+      fillers: ("et ut in ad cum non sed qui quae est sit sunt atque enim autem vel vero").split(" ")
+    },
+    cicero: {
+      words: ("perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque "
+        + "laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis quasi "
+        + "architecto beatae vitae dicta sunt explicabo nemo enim ipsam voluptatem quia voluptas "
+        + "aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione "
+        + "voluptatem sequi nesciunt neque porro quisquam est dolorem ipsum quia dolor "
+        + "consectetur adipisci velit numquam eius modi tempora incidunt labore dolore magnam "
+        + "aliquam quaerat voluptatem ut enim ad minima veniam quis nostrum exercitationem ullam "
+        + "corporis suscipit laboriosam nisi aliquid ex ea commodi consequatur quis autem vel eum "
+        + "iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel "
+        + "illum qui dolorem eum fugiat quo voluptas nulla pariatur at vero eos accusamus iusto "
+        + "odio dignissimos ducimus blanditiis praesentium voluptatum deleniti atque corrupti "
+        + "quos dolores quas molestias excepturi sint occaecati cupiditate non provident").split(" "),
+      fillers: ("et ut in ad cum non sed qui quae est sit sunt autem enim vero atque").split(" ")
+    },
+    hipster: {
+      words: ("artisan kale chips cold-pressed gluten-free microdosing retro beard kombucha tofu "
+        + "brunch chia tattooed kickstarter vinyl flannel pour-over sriracha enamel-pin taxidermy "
+        + "bicycle-rights mustache twee messenger-bag keytar bespoke locavore seitan meggings "
+        + "cronut heirloom pickled letterpress gentrify hoodie fixie asymmetrical small-batch "
+        + "farm-to-table shabby-chic normcore banjo typewriter cardigan polaroid mixtape "
+        + "single-origin cold-brew kimchi matcha adaptogen tincture macrame terrazzo "
+        + "raw-denim selvage woke bespoke lumbersexual aesthetic moodboard").split(" "),
+      fillers: ("the a an and with for of to in on your our their this that from into over").split(" ")
+    },
+    tech: {
+      words: ("distributed latency kubernetes docker async webhook endpoint throughput cache shard "
+        + "payload schema migration deploy pipeline compiler telemetry idempotent rate-limit "
+        + "backoff mutex replica partition serializer middleware container orchestration "
+        + "observability tracing benchmark concurrency garbage-collector runtime interpreter "
+        + "transpiler bundler hot-reload deadlock race-condition failover load-balancer proxy "
+        + "gateway namespace cluster-node checksum handshake protocol socket buffer-queue "
+        + "regression rollout canary feature-flag circuit-breaker backpressure").split(" "),
+      fillers: ("the a an and with for of to in on your our their this that from into across").split(" ")
+    },
+    pirate: {
+      words: ("arr matey bilge-rat hornswaggle keelhaul scallywag jolly-roger doubloons cutlass "
+        + "crow-nest starboard port ahoy grog plunder booty parley capstan gunwale gangway "
+        + "mizzen halyard topsail jib brigantine galleon privateer buccaneer marooned "
+        + "landlubber sextant compass quadrant anchor cannonball powder-keg swab deckhand "
+        + "quartermaster first-mate schooner cuttlefish kraken dead-mans-chest").split(" "),
+      fillers: ("the a an and with for of to in on yer me we their this that from over").split(" ")
+    },
+    legal: {
+      words: ("hereinafter whereas pursuant notwithstanding indemnify herein thereof "
+        + "force-majeure covenant warranty tort statute jurisdiction plaintiff defendant "
+        + "affidavit deposition waiver provision stipulation hereinafter aforementioned "
+        + "hereunder forthwith remittance assignee assignor lessee lessor subrogation "
+        + "adjudication arbitration discovery pleading injunction estoppel fiduciary "
+        + "consideration representation warranty disclaimer severability").split(" "),
+      fillers: ("the a an and with for of to in on such any all this that from under").split(" ")
+    }
+  };
+
+  var CLASSIC_OPENING = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
+  /* ---------- deterministic RNG ---------- */
+  function hashSeed(str) {
+    var h = 2166136261;
+    for (var i = 0; i < str.length; i++) {
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
+
+  function mulberry32(a) {
+    return function () {
+      a |= 0;
+      a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function randInt(rng, min, max) {
+    return Math.floor(rng() * (max - min + 1)) + min;
+  }
+
+  function pick(rng, arr) {
+    return arr[Math.floor(rng() * arr.length)];
+  }
+
+  /* ---------- generation ---------- */
+  function buildSentence(rng, bank) {
+    var length = randInt(rng, 6, 17);
+    var tokens = [];
+    for (var i = 0; i < length; i++) {
+      // roughly one in three tokens is a connective filler
+      tokens.push(rng() < 0.32 ? pick(rng, bank.fillers) : pick(rng, bank.words));
+    }
+
+    // sprinkle one comma in longer sentences
+    if (length > 9 && rng() < 0.55) {
+      var idx = randInt(rng, 3, length - 2);
+      tokens[idx] = tokens[idx] + ",";
+    }
+
+    var text = tokens.join(" ");
+    text = text.charAt(0).toUpperCase() + text.slice(1);
+
+    var roll = rng();
+    if (roll < 0.9) text += ".";
+    else if (roll < 0.96) text += ";";
+    else text += "?";
+
+    return text;
+  }
+
+  function buildParagraph(rng, bank) {
+    var sentenceCount = randInt(rng, 3, 6);
+    var sentences = [];
+    for (var i = 0; i < sentenceCount; i++) {
+      sentences.push(buildSentence(rng, bank));
+    }
+    return sentences.join(" ");
+  }
+
+  function generateParagraphs(rng, bank, count, useClassicOpening) {
+    var out = [];
+    for (var i = 0; i < count; i++) {
+      out.push(buildParagraph(rng, bank));
+    }
+    if (useClassicOpening && out.length) {
+      out[0] = CLASSIC_OPENING + " " + out[0];
+    }
+    return out;
+  }
+
+  function generateSentences(rng, bank, count, useClassicOpening) {
+    var sentences = [];
+    for (var i = 0; i < count; i++) {
+      sentences.push(buildSentence(rng, bank));
+    }
+    if (useClassicOpening && sentences.length) {
+      sentences[0] = CLASSIC_OPENING + " " + sentences[0];
+    }
+    // group into a single readable block
+    return [sentences.join(" ")];
+  }
+
+  function generateWords(rng, bank, count, useClassicOpening) {
+    var tokens = [];
+    while (tokens.length < count) {
+      tokens.push(rng() < 0.3 ? pick(rng, bank.fillers) : pick(rng, bank.words));
+    }
+    tokens = tokens.slice(0, count);
+
+    var text = tokens.join(" ");
+    text = text.charAt(0).toUpperCase() + text.slice(1) + ".";
+    if (useClassicOpening) {
+      text = CLASSIC_OPENING + " " + text;
+    }
+    return [text];
+  }
+
+  function generateChars(rng, bank, count, useClassicOpening) {
+    var prefix = useClassicOpening ? CLASSIC_OPENING + " " : "";
+    var remaining = Math.max(0, count - prefix.length);
+    var tokens = [];
+
+    while (true) {
+      var candidate = tokens.concat([pick(rng, bank.words)]).join(" ");
+      if (candidate.length > remaining) break;
+      tokens.push(candidate.slice(candidate.lastIndexOf(" ") + 1));
+      if (tokens.join(" ").length >= remaining) break;
+    }
+
+    var body = tokens.join(" ");
+    if (body && !/[.!?]$/.test(body)) {
+      // add terminal punctuation if it still fits
+      if ((prefix + body + ".").length <= count) body += ".";
+    }
+
+    var result = (prefix + body).trim();
+    if (result.length > count) {
+      result = result.slice(0, count);
+      var lastSpace = result.lastIndexOf(" ");
+      if (lastSpace > count * 0.6) result = result.slice(0, lastSpace);
+    }
+    return [result];
+  }
+
+  /* ---------- formatting ---------- */
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function formatOutput(paragraphs, format, tag) {
+    if (format === "html") {
+      return paragraphs.map(function (p) {
+        return "<" + tag + ">" + escapeHtml(p) + "</" + tag + ">";
+      }).join("\n");
+    }
+    if (format === "markdown") {
+      return paragraphs.join("\n\n");
+    }
+    if (format === "jsx") {
+      var inner = paragraphs.map(function (p, i) {
+        return "  <" + tag + " key={" + i + "}>" + escapeHtml(p) + "</" + tag + ">";
+      }).join("\n");
+      return "<>\n" + inner + "\n</>";
+    }
+    if (format === "json") {
+      return JSON.stringify(paragraphs, null, 2);
+    }
+    return paragraphs.join("\n\n");
+  }
+
+  var FORMAT_LABEL = {
+    text: "plain text",
+    html: "HTML with " + "tags",
+    markdown: "Markdown",
+    jsx: "JSX",
+    json: "JSON"
+  };
+
+  var FORMAT_EXT = {
+    text: "txt",
+    html: "html",
+    markdown: "md",
+    jsx: "jsx",
+    json: "json"
+  };
+
+  var FORMAT_MIME = {
+    text: "text/plain",
+    html: "text/html",
+    markdown: "text/markdown",
+    jsx: "text/plain",
+    json: "application/json"
+  };
+
+  /* ---------- state ---------- */
+  var state = {
+    paragraphs: [""],
+    plain: "",
+    formatted: "",
+    format: "text",
+    tab: "preview"
+  };
+
+  /* ---------- read controls ---------- */
+  function readMode() {
+    var checked = document.querySelector('input[name="mode"]:checked');
+    return checked ? checked.value : "words";
+  }
+
+  function readTheme() {
+    var checked = document.querySelector('input[name="theme"]:checked');
+    return checked ? checked.value : "classic";
+  }
+
+  function readFormat() {
+    var checked = document.querySelector('input[name="format"]:checked');
+    return checked ? checked.value : "text";
+  }
+
+  var MODE_LIMITS = {
+    words:      { min: 1, max: 2000,  def: 100, hint: "Between 1 and 2,000 words." },
+    chars:      { min: 10, max: 20000, def: 500, hint: "Between 10 and 20,000 characters." },
+    sentences:  { min: 1, max: 200,  def: 8,   hint: "Between 1 and 200 sentences." },
+    paragraphs: { min: 1, max: 30,   def: 4,   hint: "Between 1 and 30 paragraphs." }
+  };
+
+  function syncLimits(mode, resetValue) {
+    var lim = MODE_LIMITS[mode];
+    amountRange.min = lim.min;
+    amountRange.max = Math.min(lim.max, mode === "chars" ? 5000 : lim.max);
+    amountInput.min = lim.min;
+    amountInput.max = lim.max;
+    amountHint.textContent = lim.hint;
+    if (resetValue) {
+      var v = lim.def;
+      amountRange.value = Math.min(v, amountRange.max);
+      amountInput.value = v;
+    }
+  }
+
+  function clampAmount() {
+    var mode = readMode();
+    var lim = MODE_LIMITS[mode];
+    var v = parseInt(amountInput.value, 10);
+    if (isNaN(v)) v = lim.def;
+    v = Math.max(lim.min, Math.min(lim.max, v));
+    amountInput.value = v;
+    amountRange.value = Math.min(v, parseInt(amountRange.max, 10));
+    return v;
+  }
+
+  /* ---------- render ---------- */
+  function renderPreview() {
+    panelPreview.innerHTML = "";
+    if (!state.paragraphs.length || !state.paragraphs[0]) {
+      panelPreview.innerHTML = '<div class="ct-empty">Nothing generated yet.</div>';
+      return;
+    }
+    var frag = document.createDocumentFragment();
+    state.paragraphs.forEach(function (p) {
+      if (!p) return;
+      var node = document.createElement("p");
+      node.textContent = p;
+      frag.appendChild(node);
+    });
+    panelPreview.appendChild(frag);
+  }
+
+  function renderCode() {
+    codeOut.textContent = state.formatted;
+  }
+
+  function updateStats() {
+    var text = state.plain;
+    var words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    statWords.textContent = words.toLocaleString();
+    statChars.textContent = text.length.toLocaleString();
+    statParas.textContent = state.paragraphs.filter(Boolean).length.toLocaleString();
+  }
+
+  function updateFormatNote() {
+    var format = readFormat();
+    var label = FORMAT_LABEL[format];
+    if (format === "html" || format === "jsx") {
+      label = format === "html"
+        ? "HTML with <" + tagSelect.value + "> tags"
+        : "JSX with <" + tagSelect.value + "> elements";
+    }
+    formatNote.textContent = "Copying as " + label;
+  }
+
+  function setTab(tab) {
+    state.tab = tab;
+    var isPreview = tab === "preview";
+    panelPreview.style.display = isPreview ? "" : "none";
+    panelCode.style.display = isPreview ? "none" : "";
+    tabPreview.classList.toggle("active", isPreview);
+    tabCode.classList.toggle("active", !isPreview);
+    tabPreview.setAttribute("aria-selected", isPreview ? "true" : "false");
+    tabCode.setAttribute("aria-selected", isPreview ? "false" : "true");
+  }
+
+  /* ---------- main generate ---------- */
+  function generate() {
+    var mode = readMode();
+    var theme = readTheme();
+    var bank = BANKS[theme] || BANKS.classic;
+    var amount = clampAmount();
+    var useClassic = classicCheck.checked;
+    var rng = mulberry32(hashSeed(seedInput.value || "default"));
+
+    var paragraphs;
+    if (mode === "paragraphs") {
+      paragraphs = generateParagraphs(rng, bank, amount, useClassic);
+    } else if (mode === "sentences") {
+      paragraphs = generateSentences(rng, bank, amount, useClassic);
+    } else if (mode === "chars") {
+      paragraphs = generateChars(rng, bank, amount, useClassic);
+    } else {
+      paragraphs = generateWords(rng, bank, amount, useClassic);
+    }
+
+    state.paragraphs = paragraphs;
+    state.plain = paragraphs.join("\n\n");
+    state.format = readFormat();
+    state.formatted = formatOutput(paragraphs, state.format, tagSelect.value);
+
+    renderPreview();
+    renderCode();
+    updateStats();
+    updateFormatNote();
+  }
+
+  /* ---------- toast ---------- */
+  var toastTimer = null;
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      toast.classList.remove("show");
+    }, 1800);
+  }
+
+  /* ---------- copy ---------- */
+  function copyOutput() {
+    var text = state.formatted;
+    if (!text) { showToast("Nothing to copy yet"); return; }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        showToast("Copied " + text.length.toLocaleString() + " characters");
+      }).catch(function () {
+        fallbackCopy(text);
+      });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+      showToast("Copied to clipboard");
+    } catch (e) {
+      showToast("Copy failed — select the text manually");
+    }
+    document.body.removeChild(ta);
+  }
+
+  /* ---------- download ---------- */
+  function downloadOutput() {
+    if (!state.formatted) { showToast("Nothing to download yet"); return; }
+    var format = readFormat();
+    var blob = new Blob([state.formatted], { type: FORMAT_MIME[format] + ";charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "lorem-ipsum." + FORMAT_EXT[format];
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    showToast("Downloaded lorem-ipsum." + FORMAT_EXT[format]);
+  }
+
+  /* ---------- events ---------- */
+  amountRange.addEventListener("input", function () {
+    amountInput.value = amountRange.value;
+    generate();
+  });
+
+  amountInput.addEventListener("change", function () {
+    amountRange.value = Math.min(parseInt(amountInput.value, 10) || 1, parseInt(amountRange.max, 10));
+    generate();
+  });
+
+  amountInput.addEventListener("input", debounce(generate, 220));
+
+  seedInput.addEventListener("input", debounce(generate, 220));
+
+  shuffleBtn.addEventListener("click", function () {
+    var chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+    var out = "";
+    for (var i = 0; i < 8; i++) {
+      out += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    seedInput.value = out;
+    generate();
+  });
+
+  classicCheck.addEventListener("change", generate);
+  tagSelect.addEventListener("change", function () { updateFormatNote(); generate(); });
+
+  document.querySelectorAll('input[name="mode"]').forEach(function (input) {
+    input.addEventListener("change", function () {
+      syncLimits(readMode(), true);
+      generate();
+    });
+  });
+
+  document.querySelectorAll('input[name="theme"]').forEach(function (input) {
+    input.addEventListener("change", generate);
+  });
+
+  document.querySelectorAll('input[name="format"]').forEach(function (input) {
+    input.addEventListener("change", function () {
+      state.format = readFormat();
+      state.formatted = formatOutput(state.paragraphs, state.format, tagSelect.value);
+      renderCode();
+      updateFormatNote();
+    });
+  });
+
+  generateBtn.addEventListener("click", function () {
+    generate();
+    showToast("Regenerated");
+  });
+
+  copyBtn.addEventListener("click", copyOutput);
+  downloadBtn.addEventListener("click", downloadOutput);
+  printBtn.addEventListener("click", function () { window.print(); });
+
+  tabPreview.addEventListener("click", function () { setTab("preview"); });
+  tabCode.addEventListener("click", function () { setTab("code"); });
+
+  tabPreview.addEventListener("keydown", handleTabKeys);
+  tabCode.addEventListener("keydown", handleTabKeys);
+
+  function handleTabKeys(e) {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      var next = state.tab === "preview" ? "code" : "preview";
+      setTab(next);
+      (next === "preview" ? tabPreview : tabCode).focus();
+    }
+  }
+
+  function debounce(fn, delay) {
+    var timer = null;
+    return function () {
+      clearTimeout(timer);
+      timer = setTimeout(fn, delay);
+    };
+  }
+
+  /* ---------- init ---------- */
+  syncLimits("words", false);
+  generate();
+  setTab("preview");
+})();
+</script>
+</body>
+</html>

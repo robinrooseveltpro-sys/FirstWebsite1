@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNS Lookup Tool - Query A, AAAA, MX, TXT, NS, CNAME Records</title>
+<meta name="description" content="Free DNS lookup tool. Query A, AAAA, CNAME, MX, TXT, NS, SOA, and CAA records for any domain. Runs in your browser using DNS-over-HTTPS. No signup, no ads.">
+<link rel="canonical" href="https://converttotoolsonline.com/dns-lookup.html">
+<link rel="stylesheet" href="/style.css">
+<style>
+/* Fallback tokens - replace with exact values from index.html if /style.css does not define them */
+:root {
+  --ct-ink: #0f172a;
+  --ct-muted: #64748b;
+  --ct-blue: #2563eb;
+  --ct-line: #e2e8f0;
+  --ct-bg: #ffffff;
+  --ct-radius: 8px;
+  --ct-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --ct-brand-mark: #2563eb;
+  --ct-nav: #f8fafc;
+  --ct-hero: #eff6ff;
+  --ct-footer: #1e293b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ct-ink);
+  background: var(--ct-bg);
+  line-height: 1.55;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--ct-line);
+  background: var(--ct-nav);
+  padding: 12px 20px;
+}
+.site-header .inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ct-ink);
+  text-decoration: none;
+}
+.brand span { color: var(--ct-brand-mark); }
+.site-nav { display: flex; gap: 16px; font-size: 0.95rem; }
+.site-nav a { color: var(--ct-muted); text-decoration: none; }
+.site-nav a:hover { color: var(--ct-blue); }
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  padding: 6px 10px;
+  cursor: pointer;
+  font: inherit;
+}
+@media (max-width: 640px) {
+  .site-nav { display: none; flex-direction: column; position: absolute; right: 20px; top: 56px; background: var(--ct-bg); border: 1px solid var(--ct-line); border-radius: var(--ct-radius); padding: 12px; box-shadow: var(--ct-shadow); }
+  .site-nav.open { display: flex; }
+  .menu-toggle { display: inline-block; }
+}
+
+main { max-width: 960px; margin: 0 auto; padding: 24px 20px 64px; }
+
+.hero { padding: 8px 0 20px; }
+.hero h1 { font-size: 1.9rem; margin: 0 0 8px; line-height: 1.2; }
+.hero p { color: var(--ct-muted); margin: 0; max-width: 640px; }
+
+.tool-card {
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  padding: 20px;
+  box-shadow: var(--ct-shadow);
+  background: var(--ct-bg);
+  margin-bottom: 24px;
+}
+
+.form-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+.form-row label { display: block; font-size: 0.85rem; color: var(--ct-muted); margin-bottom: 4px; font-weight: 600; }
+.form-row input[type="text"], .form-row select {
+  font: inherit;
+  padding: 9px 12px;
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  background: var(--ct-bg);
+  color: var(--ct-ink);
+  min-width: 0;
+}
+.form-row .grow { flex: 1 1 260px; }
+.form-row .grow input { width: 100%; }
+
+.buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+button.btn {
+  font: inherit;
+  padding: 9px 16px;
+  border-radius: var(--ct-radius);
+  border: 1px solid var(--ct-line);
+  background: var(--ct-bg);
+  color: var(--ct-ink);
+  cursor: pointer;
+}
+button.btn.primary { background: var(--ct-blue); color: #fff; border-color: var(--ct-blue); }
+button.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.status {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-radius: var(--ct-radius);
+  font-size: 0.95rem;
+}
+.status.info { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+.status.success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.status.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.status.loading { background: var(--ct-nav); color: var(--ct-muted); border: 1px solid var(--ct-line); }
+
+.results { margin-top: 18px; }
+.results h2 { font-size: 1.05rem; margin: 0 0 4px; }
+.results .meta { font-size: 0.85rem; color: var(--ct-muted); margin: 0 0 10px; }
+table.records { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+table.records th, table.records td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--ct-line);
+  vertical-align: top;
+  word-break: break-word;
+}
+table.records th { font-weight: 600; color: var(--ct-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; }
+table.records td.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88rem; }
+
+.limits {
+  border-left: 3px solid var(--ct-blue);
+  padding: 4px 0 4px 14px;
+  margin: 24px 0;
+  color: var(--ct-muted);
+  font-size: 0.95rem;
+}
+.limits h2 { font-size: 1rem; color: var(--ct-ink); margin: 0 0 6px; }
+.limits ul { margin: 6px 0 0; padding-left: 18px; }
+.limits li { margin-bottom: 4px; }
+
+.faq-nav { margin: 28px 0 12px; padding: 12px 14px; border: 1px solid var(--ct-line); border-radius: var(--ct-radius); background: var(--ct-nav); }
+.faq-nav strong { display: block; font-size: 0.85rem; color: var(--ct-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
+.faq-nav ul { margin: 0; padding-left: 18px; font-size: 0.92rem; }
+.faq-nav li { margin-bottom: 2px; }
+.faq-nav a { color: var(--ct-blue); text-decoration: none; }
+.faq-nav a:hover { text-decoration: underline; }
+
+.faq details {
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  background: var(--ct-bg);
+}
+.faq summary { cursor: pointer; font-weight: 600; }
+.faq details p { margin: 8px 0 0; color: var(--ct-muted); }
+
+.site-footer {
+  background: var(--ct-footer);
+  color: #cbd5e1;
+  padding: 20px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.site-footer a { color: #cbd5e1; text-decoration: underline; }
+
+@media print {
+  .site-header, .site-footer, .menu-toggle, .buttons, .form-row, .faq-nav, .faq, .limits, .tool-card form { display: none !important; }
+  body { color: #000; background: #fff; }
+  table.records { border: 1px solid #000; }
+  table.records th, table.records td { border: 1px solid #000; }
+  .status { border: 1px solid #000; background: #fff; color: #000; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a href="/index.html" class="brand">ConvertTo<span>Tools</span>Online</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" onclick="var n=document.getElementById('site-nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="/index.html">Home</a>
+      <a href="/Contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>DNS Lookup</h1>
+    <p>Query DNS records for any domain directly in your browser. Runs entirely client-side using DNS-over-HTTPS. No signup, no ads, no server in the middle.</p>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">DNS lookup form</h2>
+    <form id="dns-form">
+      <div class="form-row">
+        <div class="grow">
+          <label for="domain">Domain</label>
+          <input type="text" id="domain" name="domain" placeholder="example.com" autocomplete="off" autocapitalize="none" spellcheck="false" required>
+        </div>
+        <div>
+          <label for="type">Record type</label>
+          <select id="type" name="type">
+            <option value="A" selected>A</option>
+            <option value="AAAA">AAAA</option>
+            <option value="CNAME">CNAME</option>
+            <option value="MX">MX</option>
+            <option value="TXT">TXT</option>
+            <option value="NS">NS</option>
+            <option value="SOA">SOA</option>
+            <option value="CAA">CAA</option>
+          </select>
+        </div>
+        <div>
+          <label for="resolver">Resolver</label>
+          <select id="resolver" name="resolver">
+            <option value="cloudflare" selected>Cloudflare (1.1.1.1)</option>
+            <option value="google">Google (8.8.8.8)</option>
+          </select>
+        </div>
+      </div>
+      <div class="buttons">
+        <button type="submit" class="btn primary" id="lookup-btn">Look up</button>
+        <button type="button" class="btn" id="all-btn">Look up all common records</button>
+        <button type="button" class="btn" id="copy-btn" hidden>Copy results</button>
+      </div>
+    </form>
+    <div id="status" class="status" aria-live="polite" hidden></div>
+
+    <div id="results" class="results" hidden>
+      <h2>Results</h2>
+      <p class="meta" id="results-meta"></p>
+      <table class="records">
+        <thead>
+          <tr><th>Name</th><th>Type</th><th>TTL</th><th>Data</th></tr>
+        </thead>
+        <tbody id="results-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="limits">
+    <h2>What this tool does and does not do</h2>
+    <ul>
+      <li>It queries a single resolver at a time. Cloudflare is the default, Google is the alternative. Results reflect that resolver's cache and location, not every nameserver worldwide.</li>
+      <li>It does not check DNS propagation across multiple regions. For that, use a propagation checker, which is a different tool.</li>
+      <li>It runs entirely in your browser. The domain you type is sent to Cloudflare or Google, not to this site. Nothing is logged by this page.</li>
+      <li>Public DNS-over-HTTPS endpoints have rate limits. The "look up all common records" button adds a small delay between queries to be gentle, but heavy repeated use can be blocked by the resolver.</li>
+      <li>Records are cached by the resolver for their TTL. If you just changed a DNS record and this tool still shows the old value, that is the cache, not a bug.</li>
+    </ul>
+  </section>
+
+  <nav class="faq-nav" aria-label="FAQ jump navigation">
+    <strong>Jump to a question</strong>
+    <ul>
+      <li><a href="#faq-what">What is a DNS lookup?</a></li>
+      <li><a href="#faq-types">What record types can this tool query?</a></li>
+      <li><a href="#faq-doh">What is DNS-over-HTTPS?</a></li>
+      <li><a href="#faq-privacy">Does this tool store or log my queries?</a></li>
+      <li><a href="#faq-diff">Why do I get different results than from my terminal?</a></li>
+      <li><a href="#faq-prop">Can this tool check DNS propagation?</a></li>
+      <li><a href="#faq-limit">Why does a lookup sometimes fail?</a></li>
+    </ul>
+  </nav>
+
+  <section class="faq">
+    <details id="faq-what">
+      <summary>What is a DNS lookup?</summary>
+      <p>A DNS lookup asks a domain name system resolver what records exist for a domain. You give it a name like example.com and a record type, and it returns the records of that type. The most common is A, which maps a name to an IPv4 address. AAAA does the same for IPv6. MX lists mail servers. TXT holds text data used for verification, SPF, DKIM, and other purposes. NS lists the nameservers for the domain.</p>
+    </details>
+    <details id="faq-types">
+      <summary>What record types can this tool query?</summary>
+      <p>A, AAAA, CNAME, MX, TXT, NS, SOA, and CAA. If you need SRV, PTR, DS, DNSKEY, or a type not on this list, use the command line tool dig or drill, or a resolver that supports arbitrary types.</p>
+    </details>
+    <details id="faq-doh">
+      <summary>What is DNS-over-HTTPS?</summary>
+      <p>DNS-over-HTTPS, or DoH, is a way to send DNS queries over an encrypted HTTPS connection instead of plain UDP port 53. Cloudflare and Google both run public DoH endpoints that return JSON. This tool uses those JSON endpoints so the lookup can happen directly in your browser without any server of ours involved.</p>
+    </details>
+    <details id="faq-privacy">
+      <summary>Does this tool store or log my queries?</summary>
+      <p>This page has no backend and no analytics on the query itself. The domain you enter is sent by your browser directly to Cloudflare or Google. Those providers have their own logging policies. If the domain is sensitive, use a resolver you control.</p>
+    </details>
+    <details id="faq-diff">
+      <summary>Why do I get different results than from my terminal?</summary>
+      <p>Your terminal uses whatever resolver your system is configured to use, often your ISP or a local caching resolver. This tool uses Cloudflare or Google directly. Caches differ, and some resolvers apply filtering. Different answers usually mean one of the caches has a fresher or older copy of the record.</p>
+    </details>
+    <details id="faq-prop">
+      <summary>Can this tool check DNS propagation?</summary>
+      <p>No. Propagation checking means querying many resolvers in many regions and comparing answers. This tool queries one resolver at a time. If you need propagation, use a dedicated propagation checker.</p>
+    </details>
+    <details id="faq-limit">
+      <summary>Why does a lookup sometimes fail?</summary>
+      <p>The most common causes are: the domain does not exist, so the resolver returns NXDOMAIN; the public DoH endpoint rate-limited or blocked your network; or the browser blocked the request. The tool shows an error message for each of these cases. Try the other resolver or wait a minute before retrying.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>ConvertToToolsOnline.com - tools that run in your browser. <a href="/Contact.html">Contact</a></p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "DNS Lookup Tool",
+  "url": "https://converttotoolsonline.com/dns-lookup.html",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript and a browser that supports fetch and DNS-over-HTTPS endpoints",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Query A, AAAA, CNAME, MX, TXT, NS, SOA, and CAA records for any domain directly in your browser using DNS-over-HTTPS. No signup, no server."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is a DNS lookup?","acceptedAnswer":{"@type":"Answer","text":"A DNS lookup asks a resolver what records exist for a domain. You give it a name like example.com and a record type such as A, and it returns the records of that type. A maps a name to an IPv4 address, AAAA to IPv6, MX lists mail servers, TXT holds text data used for verification and email authentication, and NS lists the nameservers."}},
+    {"@type":"Question","name":"What record types can this tool query?","acceptedAnswer":{"@type":"Answer","text":"A, AAAA, CNAME, MX, TXT, NS, SOA, and CAA. For SRV, PTR, DS, DNSKEY, or arbitrary types, use dig or another resolver."}},
+    {"@type":"Question","name":"What is DNS-over-HTTPS?","acceptedAnswer":{"@type":"Answer","text":"DNS-over-HTTPS, or DoH, sends DNS queries over an encrypted HTTPS connection instead of plain UDP port 53. Cloudflare and Google both run public DoH endpoints that return JSON, which this tool uses so the lookup runs entirely in the browser."}},
+    {"@type":"Question","name":"Does this tool store or log my queries?","acceptedAnswer":{"@type":"Answer","text":"This page has no backend and no analytics on the query itself. The domain you enter is sent by your browser directly to Cloudflare or Google, which have their own logging policies."}},
+    {"@type":"Question","name":"Why do I get different results than from my terminal?","acceptedAnswer":{"@type":"Answer","text":"Your terminal uses your system or ISP resolver. This tool uses Cloudflare or Google directly. Caches differ and some resolvers apply filtering. Different answers usually mean one cache has a fresher or older copy."}},
+    {"@type":"Question","name":"Can this tool check DNS propagation?","acceptedAnswer":{"@type":"Answer","text":"No. Propagation checking queries many resolvers in many regions and compares. This tool queries one resolver at a time."}},
+    {"@type":"Question","name":"Why does a lookup sometimes fail?","acceptedAnswer":{"@type":"Answer","text":"Common causes are a domain that does not exist, a rate-limited or blocked DoH endpoint, or a browser blocking the request. The tool shows a specific error for each case."}}
+  ]
+}
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  var CLOUDFLARE_URL = 'https://cloudflare-dns.com/dns-query';
+  var GOOGLE_URL = 'https://dns.google/resolve';
+
+  var TYPE_NAMES = { 1: 'A', 2: 'NS', 5: 'CNAME', 6: 'SOA', 15: 'MX', 16: 'TXT', 28: 'AAAA', 257: 'CAA' };
+  var STATUS_NAMES = { 0: 'NOERROR', 1: 'FORMERR', 2: 'SERVFAIL', 3: 'NXDOMAIN', 4: 'NOTIMP', 5: 'REFUSED' };
+
+  var form = document.getElementById('dns-form');
+  var domainInput = document.getElementById('domain');
+  var typeSelect = document.getElementById('type');
+  var resolverSelect = document.getElementById('resolver');
+  var lookupBtn = document.getElementById('lookup-btn');
+  var allBtn = document.getElementById('all-btn');
+  var copyBtn = document.getElementById('copy-btn');
+  var statusEl = document.getElementById('status');
+  var resultsEl = document.getElementById('results');
+  var resultsBody = document.getElementById('results-body');
+  var resultsMeta = document.getElementById('results-meta');
+  var lastQuery = null;
+
+  function isValidDomain(d) {
+    if (!d || d.length > 253) return false;
+    var re = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.?$/i;
+    return re.test(d);
+  }
+
+  function normalizeDomain(d) {
+    return d.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/\.$/, '');
+  }
+
+  function doLookup(domain, type, resolver) {
+    var base = resolver === 'google' ? GOOGLE_URL : CLOUDFLARE_URL;
+    var params = '?name=' + encodeURIComponent(domain) + '&type=' + encodeURIComponent(type);
+    var opts = { method: 'GET' };
+    if (resolver !== 'google') {
+      opts.headers = { 'Accept': 'application/dns-json' };
+    }
+    return fetch(base + params, opts).then(function (res) {
+      if (!res.ok) throw new Error('resolver returned HTTP ' + res.status);
+      return res.json();
+    });
+  }
+
+  function formatData(rec) {
+    var type = TYPE_NAMES[rec.type] || String(rec.type);
+    var data = rec.data;
+    if (type === 'MX') {
+      var parts = data.split(/\s+/);
+      if (parts.length >= 2) return 'priority ' + parts[0] + ', host ' + parts.slice(1).join(' ');
+    }
+    if (type === 'TXT') {
+      return data.replace(/^"(.*)"$/, '$1');
+    }
+    return data;
+  }
+
+  function renderRecords(domain, type, json) {
+    var status = json.Status;
+    var answers = json.Answer || [];
+    if (status === 3) return { error: 'NXDOMAIN - the domain ' + domain + ' does not exist or has no records.' };
+    if (status !== 0) return { error: 'resolver returned status ' + (STATUS_NAMES[status] || status) + '.' };
+    if (answers.length === 0) return { empty: true, type: type };
+    return {
+      records: answers.map(function (rec) {
+        return {
+          name: rec.name,
+          type: TYPE_NAMES[rec.type] || String(rec.type),
+          ttl: rec.TTL,
+          data: formatData(rec)
+        };
+      })
+    };
+  }
+
+  function setStatus(msg, kind) {
+    statusEl.textContent = msg;
+    statusEl.className = 'status ' + (kind || '');
+    statusEl.hidden = !msg;
+  }
+
+  function clearResults() {
+    resultsBody.innerHTML = '';
+    resultsMeta.textContent = '';
+    resultsEl.hidden = true;
+    copyBtn.hidden = true;
+    lastQuery = null;
+  }
+
+  function appendRows(records) {
+    var frag = document.createDocumentFragment();
+    records.forEach(function (rec) {
+      var tr = document.createElement('tr');
+      [rec.name, rec.type, String(rec.ttl)].forEach(function (val) {
+        var td = document.createElement('td');
+        td.textContent = val;
+        tr.appendChild(td);
+      });
+      var td4 = document.createElement('td');
+      td4.textContent = rec.data;
+      td4.className = 'mono';
+      tr.appendChild(td4);
+      frag.appendChild(tr);
+    });
+    resultsBody.appendChild(frag);
+  }
+
+  function showResults(domain, type, json, resolver) {
+    var r = renderRecords(domain, type, json);
+    clearResults();
+    if (r.error) { setStatus(r.error, 'error'); return; }
+    if (r.empty) {
+      setStatus('No ' + type + ' records found for ' + domain + '. The domain exists but has no records of this type.', 'info');
+      return;
+    }
+    setStatus('Found ' + r.records.length + ' ' + (r.records.length === 1 ? 'record' : 'records') + '.', 'success');
+    appendRows(r.records);
+    resultsMeta.textContent = 'Query: ' + domain + ' (' + type + ') via ' + (resolver === 'google' ? 'Google 8.8.8.8' : 'Cloudflare 1.1.1.1');
+    resultsEl.hidden = false;
+    copyBtn.hidden = false;
+    lastQuery = { domain: domain, records: r.records };
+  }
+
+  function precheck() {
+    var domain = normalizeDomain(domainInput.value);
+    if (!domain) {
+      setStatus('Enter a domain to look up.', 'error');
+      domainInput.focus();
+      return null;
+    }
+    if (!isValidDomain(domain)) {
+      setStatus('That does not look like a valid domain. Enter something like example.com.', 'error');
+      domainInput.focus();
+      return null;
+    }
+    return domain;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var domain = precheck();
+    if (!domain) return;
+    var type = typeSelect.value;
+    var resolver = resolverSelect.value;
+    setStatus('Looking up ' + domain + ' (' + type + ')...', 'loading');
+    lookupBtn.disabled = true;
+    doLookup(domain, type, resolver).then(function (json) {
+      showResults(domain, type, json, resolver);
+    }).catch(function (err) {
+      setStatus('Lookup failed: ' + err.message + '. The resolver may be unreachable, rate-limited, or blocked by your network. Try the other resolver or wait a moment.', 'error');
+    }).finally(function () {
+      lookupBtn.disabled = false;
+    });
+  });
+
+  allBtn.addEventListener('click', function () {
+    var domain = precheck();
+    if (!domain) return;
+    var resolver = resolverSelect.value;
+    var types = ['A', 'AAAA', 'CNAME', 'MX', 'TXT', 'NS', 'SOA'];
+    allBtn.disabled = true;
+    lookupBtn.disabled = true;
+    clearResults();
+    setStatus('Querying ' + types.length + ' record types for ' + domain + '...', 'loading');
+
+    var allRecords = [];
+    var errors = [];
+
+    function next(i) {
+      if (i >= types.length) return Promise.resolve();
+      var type = types[i];
+      return doLookup(domain, type, resolver).then(function (json) {
+        var r = renderRecords(domain, type, json);
+        if (r.records) {
+          r.records.forEach(function (rec) { allRecords.push(rec); });
+        } else if (r.error && json.Status === 3) {
+          throw new Error('NXDOMAIN');
+        } else if (r.error) {
+          errors.push(type + ': ' + r.error);
+        }
+        return new Promise(function (res) { setTimeout(res, 150); }).then(function () { return next(i + 1); });
+      }, function (err) {
+        errors.push(type + ': ' + err.message);
+        return new Promise(function (res) { setTimeout(res, 150); }).then(function () { return next(i + 1); });
+      });
+    }
+
+    next(0).then(function () {
+      if (allRecords.length === 0) {
+        var msg = 'No records found for ' + domain + '.';
+        if (errors.length) msg += ' Errors: ' + errors.join('; ');
+        setStatus(msg, 'info');
+        return;
+      }
+      appendRows(allRecords);
+      resultsMeta.textContent = 'All records for ' + domain + ' via ' + (resolver === 'google' ? 'Google 8.8.8.8' : 'Cloudflare 1.1.1.1') + '. ' + allRecords.length + ' records total.';
+      resultsEl.hidden = false;
+      copyBtn.hidden = false;
+      lastQuery = { domain: domain, records: allRecords };
+      var ok = 'Found ' + allRecords.length + ' records across ' + types.length + ' types.';
+      if (errors.length) ok += ' Some types errored: ' + errors.join('; ');
+      setStatus(ok, 'success');
+    }).catch(function (err) {
+      if (err.message === 'NXDOMAIN') {
+        setStatus('NXDOMAIN - the domain ' + domain + ' does not exist.', 'error');
+      } else {
+        setStatus('Lookup failed: ' + err.message, 'error');
+      }
+    }).finally(function () {
+      allBtn.disabled = false;
+      lookupBtn.disabled = false;
+    });
+  });
+
+  copyBtn.addEventListener('click', function () {
+    if (!lastQuery) return;
+    var lines = ['DNS lookup for ' + lastQuery.domain, 'Name\tType\tTTL\tData'];
+    lastQuery.records.forEach(function (rec) {
+      lines.push(rec.name + '\t' + rec.type + '\t' + rec.ttl + '\t' + rec.data);
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(function () {
+      var orig = copyBtn.textContent;
+      copyBtn.textContent = 'Copied';
+      setTimeout(function () { copyBtn.textContent = orig; }, 1500);
+    }).catch(function () {
+      setStatus('Could not copy to clipboard. Your browser may have blocked clipboard access.', 'error');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f8ff">
+<title>Photo to Coloring Page Generator — Free &amp; Private</title>
+<meta name="description" content="Turn any photo into a printable coloring page or color-by-number sheet in your browser. Adjustable lines, no upload, no signup.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://converttotoolsonline.com/photo-to-coloring-page.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ConvertToToolsOnline">
+<meta property="og:title" content="Photo to Coloring Page Generator">
+<meta property="og:description" content="Turn any photo into a printable coloring page or color-by-number sheet. Runs in your browser.">
+<meta property="og:url" content="https://converttotoolsonline.com/photo-to-coloring-page.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Photo to Coloring Page Generator">
+<meta name="twitter:description" content="Line art or color-by-number from any photo. No upload.">
+<link rel="stylesheet" href="/style.css">
+
+<style>
+:root {
+  color-scheme: light;
+  --ct-ink: #172033;
+  --ct-muted: #607087;
+  --ct-blue: #245bcc;
+  --ct-blue-dark: #194aa8;
+  --ct-line: #dfe6ef;
+  --ct-bg: #f5f8ff;
+  --ct-white: #fff;
+  --ct-radius: 16px;
+  --ct-shadow: 0 6px 24px rgba(20, 35, 60, .055);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+
+body {
+  margin: 0;
+  background: var(--ct-bg);
+  color: var(--ct-ink);
+  font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a { color: var(--ct-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible { outline: 3px solid #9dbbff; outline-offset: 3px; }
+
+.ct-container { width: min(1200px, calc(100% - 32px)); margin-inline: auto; }
+
+.ct-skip {
+  position: absolute; top: 8px; left: -9999px; z-index: 100;
+  padding: 10px 14px; border-radius: 8px;
+  background: white; color: var(--ct-ink);
+}
+.ct-skip:focus { left: 10px; }
+
+.ct-header {
+  position: relative; z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid var(--ct-line);
+}
+.ct-header-inner {
+  min-height: 72px;
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+}
+.ct-brand {
+  display: inline-flex; align-items: center; gap: 11px;
+  color: var(--ct-ink); font-weight: 850; letter-spacing: -.4px;
+}
+.ct-brand:hover { text-decoration: none; }
+.ct-brand-mark {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; flex: 0 0 auto;
+  border-radius: 12px; background: var(--ct-blue); color: #fff;
+  font-size: .95rem; font-weight: 900;
+}
+.ct-brand-name span { color: var(--ct-blue); }
+.ct-nav { display: flex; align-items: center; gap: 22px; }
+.ct-nav a { color: #475569; font-size: .93rem; font-weight: 700; }
+.ct-nav a:hover { color: var(--ct-blue); }
+.ct-menu-button {
+  display: none; min-height: 40px; padding: 8px 12px;
+  border: 1px solid var(--ct-line); border-radius: 9px;
+  background: white; color: var(--ct-ink); font-weight: 750;
+}
+
+.ct-hero {
+  padding: 52px 0 42px;
+  border-bottom: 1px solid var(--ct-line);
+  background: linear-gradient(130deg, #f8fbff 0%, #eaf1ff 56%, #f6f2ff 100%);
+}
+.ct-eyebrow {
+  margin: 0 0 10px; color: var(--ct-blue);
+  font-size: .76rem; font-weight: 850;
+  letter-spacing: .13em; text-transform: uppercase;
+}
+.ct-hero h1 {
+  max-width: 920px; margin: 0 0 15px;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+  line-height: 1.08; letter-spacing: -.05em;
+}
+.ct-hero h1 span { display: block; color: var(--ct-blue); }
+.ct-lead {
+  max-width: 840px; margin: 0;
+  color: #475569; font-size: clamp(1rem, 1.7vw, 1.12rem); line-height: 1.8;
+}
+.ct-privacy-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 18px; padding: 6px 12px;
+  background: #fff; border: 1px solid #cfe0ff;
+  border-radius: 999px; color: #194aa8;
+  font-size: .84rem; font-weight: 700;
+}
+
+.ct-section { padding: 40px 0; }
+.ct-section-heading { margin-bottom: 21px; }
+.ct-section-heading h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -.035em; line-height: 1.25;
+}
+.ct-section-heading p:last-child { max-width: 820px; margin: 0; color: var(--ct-muted); }
+
+.ct-button {
+  display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+  min-height: 43px; padding: 10px 15px;
+  border: 1px solid #cbd5e1; border-radius: 10px;
+  background: #fff; color: var(--ct-ink);
+  font-weight: 750; text-align: center;
+  transition: border-color .15s ease, background .15s ease;
+}
+.ct-button:hover { border-color: #a9bce4; text-decoration: none; }
+.ct-button-primary {
+  border-color: var(--ct-blue);
+  background: var(--ct-blue); color: #fff;
+}
+.ct-button-primary:hover {
+  border-color: var(--ct-blue-dark);
+  background: var(--ct-blue-dark);
+  color: #fff;
+}
+.ct-button.small { min-height: 36px; padding: 7px 12px; font-size: .85rem; }
+.ct-button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ============ Tool ============ */
+.cl-panel {
+  padding: 22px;
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  background: var(--ct-white);
+  box-shadow: var(--ct-shadow);
+}
+.cl-panel + .cl-panel { margin-top: 20px; }
+
+.cl-panel-heading {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.cl-panel-heading h2 {
+  margin: 0; font-size: 1.02rem; letter-spacing: -.01em;
+}
+.cl-panel-heading p { margin: 0; color: var(--ct-muted); font-size: .85rem; }
+
+.cl-drop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 100%; min-height: 160px;
+  padding: 28px 20px;
+  border: 2px dashed #c3d0e4;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fafcff 0%, #f2f6ff 100%);
+  color: var(--ct-ink);
+  text-align: center;
+  transition: border-color .18s ease, background .18s ease;
+}
+.cl-drop:hover, .cl-drop:focus-visible, .cl-drop.is-dragover {
+  border-color: var(--ct-blue);
+  background: linear-gradient(180deg, #f2f7ff 0%, #e6efff 100%);
+  outline: none;
+}
+.cl-drop-icon {
+  display: grid; place-items: center;
+  width: 52px; height: 52px; margin-bottom: 10px;
+  border-radius: 14px;
+  background: #fff; border: 1px solid #dbe7ff;
+  color: var(--ct-blue); font-size: 1.5rem;
+}
+.cl-drop strong { font-size: 1rem; margin-bottom: 5px; }
+.cl-drop small { color: var(--ct-muted); line-height: 1.5; max-width: 320px; }
+
+.cl-file-input { display: none; }
+
+.cl-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+@media (max-width: 900px) {
+  .cl-grid { grid-template-columns: 1fr; }
+}
+
+.cl-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cl-mode-tabs {
+  display: flex;
+  gap: 4px;
+  border: 1px solid var(--ct-line);
+  border-radius: 9px;
+  overflow: hidden;
+}
+.cl-mode-tab {
+  flex: 1;
+  padding: 9px 12px;
+  border: 0;
+  background: #fff;
+  color: var(--ct-muted);
+  font-weight: 700;
+  font-size: .85rem;
+  cursor: pointer;
+  text-align: center;
+}
+.cl-mode-tab[aria-selected="true"] {
+  background: var(--ct-blue);
+  color: #fff;
+}
+
+.cl-field { display: flex; flex-direction: column; gap: 5px; }
+.cl-field label {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: .84rem; font-weight: 650; color: #34405a;
+}
+.cl-field label .cl-value {
+  font-family: ui-monospace, monospace;
+  font-weight: 750;
+  color: var(--ct-blue);
+  font-size: .82rem;
+}
+.cl-field input[type="range"] {
+  width: 100%;
+  padding: 0;
+  accent-color: var(--ct-blue);
+}
+.cl-field .cl-hint {
+  font-size: .75rem; color: var(--ct-muted); line-height: 1.4;
+}
+
+.cl-check {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: .84rem; color: #34405a;
+  cursor: pointer;
+}
+.cl-check input[type="checkbox"] {
+  width: 16px; height: 16px; margin-top: 2px; flex: 0 0 auto;
+  accent-color: var(--ct-blue);
+}
+
+.cl-actions {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 4px;
+}
+.cl-actions .ct-button { flex: 1; min-width: 120px; }
+
+.cl-status {
+  min-height: 1.3em;
+  font-size: .82rem;
+  margin-top: 6px;
+}
+.cl-status[data-tone="ok"] { color: #166534; }
+.cl-status[data-tone="error"] { color: #b00020; }
+.cl-status[data-tone="busy"] { color: var(--ct-muted); }
+
+/* Preview */
+.cl-preview {
+  display: flex; flex-direction: column;
+  border: 1px solid var(--ct-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f8faff;
+  min-height: 400px;
+}
+.cl-preview-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--ct-line);
+  background: #fff;
+}
+.cl-ptab {
+  padding: 9px 16px;
+  border: 0;
+  background: transparent;
+  color: var(--ct-muted);
+  font-weight: 700;
+  font-size: .85rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+.cl-ptab[aria-pressed="true"] {
+  color: var(--ct-blue);
+  border-bottom-color: var(--ct-blue);
+}
+.cl-preview-body {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  min-height: 340px;
+  position: relative;
+}
+.cl-canvas {
+  max-width: 100%;
+  max-height: 70vh;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(20, 35, 60, .08);
+  background: #fff;
+}
+.cl-hidden { display: none !important; }
+
+.cl-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--ct-muted);
+  font-size: .92rem;
+}
+.cl-empty strong { color: var(--ct-ink); display: block; margin-bottom: 4px; }
+
+.cl-warn {
+  margin-top: 12px;
+  padding: 10px 13px;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  background: #fffbeb;
+  font-size: .84rem;
+  color: #7a5200;
+  line-height: 1.55;
+}
+.cl-warn strong { color: #6b4500; }
+
+/* Guide */
+.ct-guide { max-width: 900px; margin: 0 auto; padding: 48px 0 16px; }
+.ct-guide h2 { margin-top: 32px; font-size: 1.25rem; letter-spacing: -.02em; }
+.ct-guide h3 { margin-top: 22px; font-size: 1.03rem; }
+.ct-guide p, .ct-guide li { line-height: 1.7; color: #34405a; }
+.ct-guide code {
+  background: #eef2f8; padding: 1px 6px; border-radius: 5px;
+  font-size: .88em; color: #172033;
+}
+.ct-guide ul { padding-left: 20px; }
+.ct-guide table {
+  width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .86rem;
+}
+.ct-guide th, .ct-guide td {
+  padding: 8px 12px; border: 1px solid var(--ct-line); text-align: left;
+}
+.ct-guide th { background: #f8faff; font-weight: 750; }
+
+.ct-faq details { border-bottom: 1px solid var(--ct-line); padding: 12px 0; }
+.ct-faq summary { cursor: pointer; font-weight: 700; color: var(--ct-ink); }
+.ct-faq summary::marker { color: var(--ct-blue); }
+.ct-faq p { margin: 9px 0 0; color: #34405a; }
+
+.ct-related-links {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin: 12px 0 0; padding: 0; list-style: none;
+}
+.ct-related-links a {
+  display: inline-block; padding: 7px 13px;
+  border: 1px solid var(--ct-line); border-radius: 999px;
+  background: #fff; color: #34405a;
+  font-size: .88rem; font-weight: 650;
+}
+.ct-related-links a:hover {
+  border-color: #a9bce4; color: var(--ct-blue); text-decoration: none;
+}
+
+.ct-footer {
+  margin-top: 40px; padding: 35px 0 17px;
+  background: #111c32; color: #d5deed;
+}
+.ct-footer-grid {
+  display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 28px;
+}
+.ct-footer-brand {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; color: #fff; font-weight: 850;
+}
+.ct-footer-brand:hover { text-decoration: none; }
+.ct-footer-grid p { max-width: 390px; color: #bdc8db; font-size: .91rem; }
+.ct-footer-links { display: grid; align-content: start; gap: 7px; }
+.ct-footer-links strong { margin-bottom: 4px; color: #fff; }
+.ct-footer-links a { color: #cbd5e1; font-size: .92rem; }
+.ct-footer-links a:hover { color: #fff; }
+.ct-footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+  margin-top: 25px; padding-top: 15px;
+  border-top: 1px solid #32405a; color: #aebbd0; font-size: .84rem;
+}
+.ct-footer-bottom p { margin: 0; }
+
+@media (max-width: 700px) {
+  .ct-header-inner { min-height: 65px; }
+  .ct-menu-button { display: inline-flex; }
+  .ct-nav {
+    display: none; position: absolute;
+    top: 65px; left: 0; right: 0;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ct-line);
+    background: #fff;
+  }
+  .ct-nav.is-open { display: block; }
+  .ct-nav-inner {
+    display: grid; gap: 0;
+    width: min(1200px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+  .ct-nav-inner a { padding: 10px 0; }
+  .ct-hero { padding: 40px 0 32px; }
+  .ct-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .ct-container { width: calc(100% - 22px); }
+  .ct-footer-grid { grid-template-columns: 1fr; }
+  .cl-panel { padding: 16px; }
+  .cl-drop { min-height: 130px; padding: 22px 14px; }
+  .cl-canvas { max-height: 55vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+@media print {
+  .ct-header, .ct-footer, .ct-hero, .ct-nav, .cl-settings, .cl-actions,
+  .cl-preview-tabs, .ct-related-links, .cl-drop, .cl-panel-heading p {
+    display: none !important;
+  }
+  body { background: #fff; }
+  .cl-panel, .cl-preview { box-shadow: none; border: 0; background: #fff; }
+  .cl-preview-body { padding: 0; }
+}
+</style>
+</head>
+
+<body>
+<a class="ct-skip" href="#main-content">Skip to content</a>
+
+<header class="ct-header">
+  <div class="ct-container ct-header-inner">
+    <a class="ct-brand" href="/" aria-label="ConvertToToolsOnline home">
+      <span class="ct-brand-mark" aria-hidden="true">CT</span>
+      <span class="ct-brand-name">Convert<span>ToToolsOnline</span></span>
+    </a>
+    <button class="ct-menu-button" id="ct-menu-button" type="button"
+            aria-controls="ct-main-nav" aria-expanded="false">Menu</button>
+    <nav class="ct-nav" id="ct-main-nav" aria-label="Main navigation">
+      <div class="ct-nav-inner">
+        <a href="/">Home</a>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/Contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="ct-hero">
+    <div class="ct-container">
+      <p class="ct-eyebrow">Free online creative tool</p>
+      <h1>Photo to Coloring Page Generator <span>line art and color-by-number, in your browser</span></h1>
+      <p class="ct-lead">
+        Turn any photo into a printable coloring page or a color-by-number sheet. Adjust
+        the line thickness, detail level, and blur to get clean, printable line art.
+        Choose the color-by-number mode to get a quantified palette, numbered regions,
+        and a printable legend. Everything runs in your browser — no upload, no account,
+        no daily limit.
+      </p>
+      <span class="ct-privacy-badge">
+        <span aria-hidden="true">🔒</span>
+        100% in your browser — your photo never leaves your device
+      </span>
+    </div>
+  </section>
+
+  <section class="ct-section">
+    <div class="ct-container">
+
+      <section class="cl-panel" aria-labelledby="cl-upload-heading">
+        <div class="cl-panel-heading">
+          <h2 id="cl-upload-heading">1. Add a photo</h2>
+          <p>JPEG, PNG, or WebP · up to 20 MB</p>
+        </div>
+
+        <button type="button" id="cl-drop" class="cl-drop" aria-describedby="cl-drop-help">
+          <span class="cl-drop-icon" aria-hidden="true">📷</span>
+          <strong>Drop a photo here or click to browse</strong>
+          <small id="cl-drop-help">Any photo works — portraits, pets, landscapes. Clear subjects produce the cleanest line art.</small>
+        </button>
+        <input id="cl-file" type="file" accept="image/jpeg,image/png,image/webp" class="cl-file-input">
+
+        <div id="cl-warn" class="cl-warn cl-hidden" role="status"></div>
+      </section>
+
+      <section class="cl-panel" aria-labelledby="cl-tool-heading">
+        <div class="cl-panel-heading">
+          <h2 id="cl-tool-heading">2. Adjust &amp; generate</h2>
+          <p>Results update as you change the sliders.</p>
+        </div>
+
+        <div class="cl-grid">
+          <div class="cl-settings">
+            <div class="cl-mode-tabs" role="tablist" aria-label="Output mode">
+              <button class="cl-mode-tab" type="button" role="tab" data-mode="coloring" aria-selected="true">
+                Coloring page
+              </button>
+              <button class="cl-mode-tab" type="button" role="tab" data-mode="byNumber" aria-selected="false">
+                Color by number
+              </button>
+            </div>
+
+            <div class="cl-field">
+              <label for="cl-thickness">
+                Line thickness
+                <span class="cl-value" id="cl-thickness-val">2</span>
+              </label>
+              <input type="range" id="cl-thickness" min="0" max="4" step="1" value="2">
+              <span class="cl-hint">0 = hairline edges · 4 = bold outlines, easier for young children.</span>
+            </div>
+
+            <div class="cl-field">
+              <label for="cl-detail">
+                Detail level
+                <span class="cl-value" id="cl-detail-val">5</span>
+              </label>
+              <input type="range" id="cl-detail" min="1" max="10" step="1" value="5">
+              <span class="cl-hint">Lower detail = fewer lines, cleaner page. Higher = captures more edge texture.</span>
+            </div>
+
+            <div class="cl-field">
+              <label for="cl-blur">
+                Noise reduction
+                <span class="cl-value" id="cl-blur-val">1</span>
+              </label>
+              <input type="range" id="cl-blur" min="0" max="3" step="1" value="1">
+              <span class="cl-hint">Blurs the source before edge detection, so film grain and JPEG noise do not become speckles.</span>
+            </div>
+
+            <div class="cl-field" id="cl-colors-field" style="display:none;">
+              <label for="cl-colors">
+                Number of colors
+                <span class="cl-value" id="cl-colors-val">8</span>
+              </label>
+              <input type="range" id="cl-colors" min="4" max="16" step="1" value="8">
+              <span class="cl-hint">More colors = more detail but a busier page. 6–10 works well for most photos.</span>
+            </div>
+
+            <label class="cl-check">
+              <input type="checkbox" id="cl-invert">
+              <span>Invert (white lines on black) — useful for dark source photos</span>
+            </label>
+
+            <div class="cl-actions">
+              <button id="cl-process" class="ct-button ct-button-primary" type="button" disabled>Generate</button>
+              <button id="cl-download" class="ct-button" type="button" disabled>Download PNG</button>
+            </div>
+            <button id="cl-reset" class="ct-button small" type="button" style="align-self:flex-start;">Reset</button>
+
+            <div id="cl-status" class="cl-status" role="status" aria-live="polite"></div>
+          </div>
+
+          <div class="cl-preview">
+            <div class="cl-preview-tabs" role="tablist" aria-label="Preview mode">
+              <button class="cl-ptab" id="cl-ptab-original" type="button" data-view="original" aria-pressed="false">Original</button>
+              <button class="cl-ptab" id="cl-ptab-result" type="button" data-view="result" aria-pressed="true">Result</button>
+            </div>
+            <div class="cl-preview-body">
+              <div id="cl-empty" class="cl-empty">
+                <strong>No photo yet.</strong>
+                Drop a photo above to get started.
+              </div>
+              <canvas id="cl-canvas-original" class="cl-canvas cl-hidden" aria-label="Original photo preview"></canvas>
+              <canvas id="cl-canvas-result" class="cl-canvas cl-hidden" aria-label="Coloring page preview"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <section class="ct-section">
+    <div class="ct-container">
+      <div class="ct-guide">
+
+        <h2>How this tool turns a photo into a coloring page</h2>
+        <p>
+          The pipeline is a classical computer-vision technique, not an AI model. Every
+          step runs in your browser using the Canvas API:
+        </p>
+        <ol>
+          <li><strong>Flatten and cap resolution.</strong> The photo is scaled to at most 2000 pixels on the long edge (so it stays fast) and any transparency is flattened to white.</li>
+          <li><strong>Grayscale.</strong> Colour is discarded by weighting channels — <code>0.299 R + 0.587 G + 0.114 B</code> — which matches how the human eye perceives brightness.</li>
+          <li><strong>Gaussian blur.</strong> A small separable blur smooths JPEG noise and film grain before edge detection, so speckles do not become lines.</li>
+          <li><strong>Sobel edge detection.</strong> For each pixel, a 3×3 Sobel operator estimates the gradient magnitude. Pixels above a threshold become <strong>black</strong> (lines); the rest become <strong>white</strong> (paper).</li>
+          <li><strong>Dilation.</strong> The binary mask is grown by 0–4 iterations to produce thicker lines. This is the &ldquo;line thickness&rdquo; slider.</li>
+        </ol>
+        <p>
+          The <strong>detail slider</strong> controls the Sobel threshold. A lower detail
+          setting raises the threshold (only the strongest edges survive); a higher detail
+          setting lowers it (more edges survive).
+        </p>
+
+        <h2>How color-by-number mode works</h2>
+        <p>
+          On top of the same edge pipeline, color-by-number adds a quantization step:
+        </p>
+        <ol>
+          <li><strong>K-means colour quantization.</strong> The photo's colours are reduced to N representative colours (the slider). K-means iteratively clusters pixel colours into K groups and returns the centroid of each group as the palette.</li>
+          <li><strong>Region detection.</strong> Each pixel gets assigned to its nearest palette colour, then a scanline flood fill finds connected regions of the same colour.</li>
+          <li><strong>Numbering.</strong> Regions larger than a minimum area get a number placed at their centroid, indicating which palette colour they should be filled with.</li>
+          <li><strong>Legend.</strong> A palette legend at the bottom of the canvas maps each number to its colour and hex value.</li>
+        </ol>
+        <p>
+          The output is a proper printable color-by-number sheet, not just a colorized
+          version of the photo.
+        </p>
+
+        <h2>Getting the best results</h2>
+        <ul>
+          <li><strong>Choose photos with clear subjects.</strong> A single face, pet, or object against a simple background produces the cleanest line art. Busy scenes become noisy.</li>
+          <li><strong>Use the noise reduction slider for phone photos.</strong> Grain from low light or heavy compression will otherwise become speckled noise in the edges.</li>
+          <li><strong>Increase line thickness for kids.</strong> Thicker lines (3–4) are easier to colour between.</li>
+          <li><strong>Lower detail for a cleaner page.</strong> If the output looks cluttered, drop the detail slider from 5 to 3 or 2.</li>
+          <li><strong>Use invert for dark photos.</strong> If the source is mostly dark, the default output will be mostly white noise. Invert gives white lines on black.</li>
+        </ul>
+
+        <h2>Resolution and print quality</h2>
+        <p>
+          The tool processes images at up to <strong>2000 pixels on the longest side</strong>.
+          At 300 dpi that prints at about 6.7 inches on the long edge, which is fine for a
+          kids&rsquo; colouring page. At 200 dpi it prints at 10 inches, closer to A4
+          proportions. If your original photo is larger, it will be downscaled to 2000 px
+          before processing, so the download will match that resolution.
+        </p>
+
+        <h2>Limitations — read before relying on the output</h2>
+        <ul>
+          <li>This is a <strong>classical edge-detection tool</strong>, not an AI model. It produces technical line art from the edges it finds. It does not stylise, colour, or reconstruct like a generative model would.</li>
+          <li><strong>Busy photos produce noisy line art.</strong> A crowded scene with lots of texture will have many small edges. Use the detail slider to filter them out.</li>
+          <li><strong>Very small faces or objects</strong> may produce too few edges to form a recognizable outline.</li>
+          <li>The <strong>color-by-number region numbering</strong> only labels regions above a minimum area (currently 80 pixels). Tiny fragments are left unlabelled, which is intentional — otherwise the page becomes unreadable.</li>
+          <li>The colour palette is quantized, so gradients and subtle shading will flatten into a small set of solid colours. This is the point of color-by-number, but it means the result looks nothing like a photograph.</li>
+          <li><strong>No vector output.</strong> The result is a raster PNG. If you need SVG line art, trace it in a vector tool after download.</li>
+        </ul>
+
+        <h2>Privacy — why this runs in the browser</h2>
+        <p>
+          Every step — grayscale, blur, edge detection, dilation, quantization, flood fill,
+          and PNG generation — happens locally using JavaScript. The photo is never sent to
+          a server, and the tool keeps working offline after the page loads. You can verify
+          this in your browser&rsquo;s network tab: there is no request carrying the image.
+        </p>
+
+        <h2 id="faq">Frequently asked questions</h2>
+        <div class="ct-faq">
+          <details>
+            <summary>How do I turn a photo into a coloring page?</summary>
+            <p>Upload a photo, choose the coloring page mode, and adjust the line thickness and detail sliders. The tool runs edge detection in your browser and produces a printable black-and-white line drawing. Click Download PNG when it looks right.</p>
+          </details>
+          <details>
+            <summary>Does this tool upload my photo?</summary>
+            <p>No. The photo is processed entirely in your browser. Nothing is sent to a server, and the tool works offline after the page loads.</p>
+          </details>
+          <details>
+            <summary>How is color-by-number different from coloring page mode?</summary>
+            <p>Coloring page mode produces only the line art. Color-by-number mode also quantizes the photo into a small palette of solid colors, labels each color region with a number, and adds a printable legend so you can color it in.</p>
+          </details>
+          <details>
+            <summary>Why does the result look noisy?</summary>
+            <p>Edge detection finds every edge, including texture and film grain. Use the noise reduction slider (higher values) and lower the detail slider to filter out weak edges. Clear photos with simple backgrounds produce the cleanest results.</p>
+          </details>
+          <details>
+            <summary>What size will the download be?</summary>
+            <p>The result is downloaded as a PNG at up to 2000 pixels on the long edge. At 300 dpi that prints at roughly 6.7 inches; at 200 dpi it prints at roughly 10 inches.</p>
+          </details>
+          <details>
+            <summary>Can I use this for commercial purposes?</summary>
+            <p>The tool itself imposes no restriction on the output. However, you are responsible for ensuring you have the rights to any photo you process. Do not upload photos you do not own or have permission to use.</p>
+          </details>
+          <details>
+            <summary>Does this work on my phone?</summary>
+            <p>Yes. The tool is responsive and works on phones and tablets. Very large photos may take a few seconds to process on older devices.</p>
+          </details>
+          <details>
+            <summary>What if my photo is very dark?</summary>
+            <p>Enable the Invert option to get white lines on a black background. Or brighten the original photo in an image editor first — the tool processes whatever brightness you give it.</p>
+          </details>
+          <details>
+            <summary>Is my photo stored anywhere?</summary>
+            <p>No. The photo exists only in the page&rsquo;s memory for the current session. Nothing is written to localStorage, cookies, or a server.</p>
+          </details>
+        </div>
+
+        <h2>Related tools</h2>
+        <ul class="ct-related-links">
+          <li><a href="/">All ConvertToToolsOnline tools</a></li>
+          <li><a href="/image-compressor.html">Image Compressor</a></li>
+          <li><a href="/image-resizer.html">Image Resizer</a></li>
+          <li><a href="/WEBP-to-jpg-converter.html">WebP to JPG Converter</a></li>
+          <li><a href="/exif-metadata-remover.html">EXIF Metadata Remover</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-grid">
+      <div>
+        <a class="ct-footer-brand" href="/">
+          <span class="ct-brand-mark" aria-hidden="true">CT</span>
+          <span>ConvertToToolsOnline</span>
+        </a>
+        <p>Practical online tools for documents, images, data, development and everyday work.</p>
+      </div>
+      <nav class="ct-footer-links" aria-label="Tool navigation">
+        <strong>Explore</strong>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/sitemap.xml">XML sitemap</a>
+      </nav>
+      <nav class="ct-footer-links" aria-label="Site information">
+        <strong>Contact &amp; information</strong>
+        <a href="/Contact.html">Contact</a>
+        <a href="/#about">About the toolbox</a>
+        <a href="#main-content">Back to top ↑</a>
+      </nav>
+    </div>
+    <div class="ct-footer-bottom">
+      <p>© <span id="cl-year">2026</span> ConvertToToolsOnline. All rights reserved.</p>
+      <p>Free utilities for practical tasks.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Photo to Coloring Page Generator",
+      "url": "https://converttotoolsonline.com/photo-to-coloring-page.html",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Any modern browser",
+      "browserRequirements": "Requires JavaScript and the Canvas API",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Turn any photo into a printable coloring page or color-by-number sheet. Sobel edge detection, adjustable line thickness and detail, and k-means color quantization. Runs entirely in the browser with no upload.",
+      "featureList": [
+        "Photo to line art (coloring page)",
+        "Color-by-number with region numbering and legend",
+        "Adjustable line thickness and detail level",
+        "Noise reduction (Gaussian blur)",
+        "Invert for dark photos",
+        "PNG download",
+        "100% client-side, no upload"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"How do I turn a photo into a coloring page?","acceptedAnswer":{"@type":"Answer","text":"Upload a photo, choose the coloring page mode, and adjust the line thickness and detail sliders. The tool runs edge detection in your browser and produces a printable black-and-white line drawing. Click Download PNG when it looks right."}},
+        {"@type":"Question","name":"Does this tool upload my photo?","acceptedAnswer":{"@type":"Answer","text":"No. The photo is processed entirely in your browser. Nothing is sent to a server, and the tool works offline after the page loads."}},
+        {"@type":"Question","name":"How is color-by-number different from coloring page mode?","acceptedAnswer":{"@type":"Answer","text":"Coloring page mode produces only the line art. Color-by-number mode also quantizes the photo into a small palette of solid colors, labels each color region with a number, and adds a printable legend so you can color it in."}},
+        {"@type":"Question","name":"Why does the result look noisy?","acceptedAnswer":{"@type":"Answer","text":"Edge detection finds every edge, including texture and film grain. Use the noise reduction slider and lower the detail slider to filter out weak edges. Clear photos with simple backgrounds produce the cleanest results."}},
+        {"@type":"Question","name":"What size will the download be?","acceptedAnswer":{"@type":"Answer","text":"The result is downloaded as a PNG at up to 2000 pixels on the long edge. At 300 dpi that prints at roughly 6.7 inches; at 200 dpi it prints at roughly 10 inches."}},
+        {"@type":"Question","name":"Can I use this for commercial purposes?","acceptedAnswer":{"@type":"Answer","text":"The tool itself imposes no restriction on the output. However, you are responsible for ensuring you have the rights to any photo you process."}},
+        {"@type":"Question","name":"Does this work on my phone?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool is responsive and works on phones and tablets. Very large photos may take a few seconds to process on older devices."}},
+        {"@type":"Question","name":"What if my photo is very dark?","acceptedAnswer":{"@type":"Answer","text":"Enable the Invert option to get white lines on a black background, or brighten the original photo in an image editor first."}},
+        {"@type":"Question","name":"Is my photo stored anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The photo exists only in the page's memory for the current session. Nothing is written to localStorage, cookies, or a server."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var btn = document.getElementById('ct-menu-button');
+  var nav = document.getElementById('ct-main-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 700) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var yearEl = $('cl-year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  // ============================================================
+  // Constants
+  // ============================================================
+  var MAX_DIM = 2000;
+  var MAX_FILE_SIZE = 20 * 1024 * 1024;
+  var MIN_REGION_AREA = 80;
+  var LEGEND_HEIGHT = 100;
+
+  // ============================================================
+  // State
+  // ============================================================
+  var currentImage = null;       // loaded HTMLImageElement
+  var sourceData = null;         // cached ImageData at capped resolution
+  var mode = 'coloring';
+  var processing = false;
+  var pendingReprocess = false;
+  var lastResultCanvas = null;
+
+  // ============================================================
+  // Elements
+  // ============================================================
+  var dropEl = $('cl-drop');
+  var fileInput = $('cl-file');
+  var warnEl = $('cl-warn');
+  var statusEl = $('cl-status');
+  var processBtn = $('cl-process');
+  var downloadBtn = $('cl-download');
+  var resetBtn = $('cl-reset');
+
+  var thicknessEl = $('cl-thickness');
+  var detailEl = $('cl-detail');
+  var blurEl = $('cl-blur');
+  var colorsEl = $('cl-colors');
+  var invertEl = $('cl-invert');
+  var colorsField = $('cl-colors-field');
+
+  var thicknessVal = $('cl-thickness-val');
+  var detailVal = $('cl-detail-val');
+  var blurVal = $('cl-blur-val');
+  var colorsVal = $('cl-colors-val');
+
+  var emptyEl = $('cl-empty');
+  var originalCanvas = $('cl-canvas-original');
+  var resultCanvas = $('cl-canvas-result');
+  var ptabOriginal = $('cl-ptab-original');
+  var ptabResult = $('cl-ptab-result');
+
+  // ============================================================
+  // Helpers
+  // ============================================================
+  function setStatus(text, tone) {
+    statusEl.textContent = text || '';
+    if (tone) statusEl.setAttribute('data-tone', tone);
+    else statusEl.removeAttribute('data-tone');
+  }
+
+  function showWarn(msg) {
+    warnEl.classList.remove('cl-hidden');
+    warnEl.innerHTML = '<strong>' + escapeHtml(msg) + '</strong>';
+  }
+  function hideWarn() {
+    warnEl.classList.add('cl-hidden');
+    warnEl.textContent = '';
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c];
+    });
+  }
+
+  function clampByte(v) { return v < 0 ? 0 : v > 255 ? 255 : v | 0; }
+
+  // ============================================================
+  // Image loading
+  // ============================================================
+  function handleFile(file) {
+    if (!file) return;
+    hideWarn();
+
+    var type = (file.type || '').toLowerCase();
+    var name = (file.name || '').toLowerCase();
+    var ok = type === 'image/jpeg' || type === 'image/png' || type === 'image/webp' ||
+             /\.(jpe?g|png|webp)$/i.test(name);
+
+    if (!ok) {
+      showWarn('Please choose a JPEG, PNG, or WebP image.');
+      return;
+    }
+    if (file.size > MAX_FILE_SIZE) {
+      showWarn('That file is over 20 MB. Try a smaller photo.');
+      return;
+    }
+
+    setStatus('Loading image…', 'busy');
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function () {
+      currentImage = img;
+      sourceData = null;
+      resetResultState();
+      showOriginal(img);
+      processBtn.disabled = false;
+      setStatus('Ready. Adjust the sliders to generate.', 'ok');
+      // Auto-process on first load
+      processImage();
+      URL.revokeObjectURL(url);
+    };
+    img.onerror = function () {
+      URL.revokeObjectURL(url);
+      showWarn('Could not load that image. Try a different file.');
+      setStatus('', '');
+    };
+    img.src = url;
+  }
+
+  function showOriginal(img) {
+    var w = img.naturalWidth;
+    var h = img.naturalHeight;
+    var displayW = originalCanvas.parentNode.clientWidth - 32;
+    if (displayW > 0) {
+      var scale = Math.min(1, displayW / w);
+      originalCanvas.width = Math.round(w * scale);
+      originalCanvas.height = Math.round(h * scale);
+    } else {
+      originalCanvas.width = w;
+      originalCanvas.height = h;
+    }
+    var ctx = originalCanvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, originalCanvas.width, originalCanvas.height);
+    originalCanvas.classList.remove('cl-hidden');
+    emptyEl.classList.add('cl-hidden');
+  }
+
+  function resetResultState() {
+    resultCanvas.classList.add('cl-hidden');
+    resultCanvas.width = 1;
+    resultCanvas.height = 1;
+    downloadBtn.disabled = true;
+    lastResultCanvas = null;
+    // Show result tab by default
+    ptabResult.setAttribute('aria-pressed', 'true');
+    ptabOriginal.setAttribute('aria-pressed', 'false');
+    resultCanvas.classList.remove('cl-hidden');
+    originalCanvas.classList.add('cl-hidden');
+  }
+
+  // ============================================================
+  // Source data
+  // ============================================================
+  function getSourceData() {
+    if (sourceData) return sourceData;
+    var img = currentImage;
+    var w = img.naturalWidth;
+    var h = img.naturalHeight;
+    var scale = 1;
+    if (w > MAX_DIM || h > MAX_DIM) {
+      scale = Math.min(MAX_DIM / w, MAX_DIM / h);
+      w = Math.round(w * scale);
+      h = Math.round(h * scale);
+    }
+    var c = document.createElement('canvas');
+    c.width = w;
+    c.height = h;
+    var ctx = c.getContext('2d');
+    // Fill with white first (flattens transparent areas)
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, w, h);
+    ctx.drawImage(img, 0, 0, w, h);
+    sourceData = ctx.getImageData(0, 0, w, h);
+    return sourceData;
+  }
+
+  function cloneImageData(src) {
+    return new ImageData(new Uint8ClampedArray(src.data), src.width, src.height);
+  }
+
+  // ============================================================
+  // Grayscale
+  // ============================================================
+  function toGrayscale(src) {
+    var w = src.width, h = src.height;
+    var data = src.data;
+    var out = new ImageData(w, h);
+    var dst = out.data;
+    for (var i = 0; i < data.length; i += 4) {
+      var g = 0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2];
+      dst[i] = dst[i+1] = dst[i+2] = g;
+      dst[i+3] = 255;
+    }
+    return out;
+  }
+
+  // ============================================================
+  // Gaussian blur (separable)
+  // ============================================================
+  function buildGaussianKernel(radius) {
+    var size = radius * 2 + 1;
+    var kernel = new Float32Array(size);
+    var sigma = radius / 3;
+    var sum = 0;
+    for (var i = 0; i < size; i++) {
+      var x = i - radius;
+      kernel[i] = Math.exp(-(x * x) / (2 * sigma * sigma));
+      sum += kernel[i];
+    }
+    for (var j = 0; j < size; j++) kernel[j] /= sum;
+    return kernel;
+  }
+
+  function gaussianBlur(imageData, radius) {
+    if (radius <= 0) return imageData;
+    var w = imageData.width, h = imageData.height;
+    var data = imageData.data;
+    var kernel = buildGaussianKernel(radius);
+    var size = kernel.length;
+    var half = Math.floor(size / 2);
+
+    var tmp = new Uint8ClampedArray(data.length);
+    for (var y = 0; y < h; y++) {
+      for (var x = 0; x < w; x++) {
+        var r = 0, g = 0, b = 0, a = 0;
+        for (var k = 0; k < size; k++) {
+          var sx = x + k - half;
+          if (sx < 0) sx = 0;
+          if (sx >= w) sx = w - 1;
+          var idx = (y * w + sx) * 4;
+          var wgt = kernel[k];
+          r += data[idx] * wgt;
+          g += data[idx+1] * wgt;
+          b += data[idx+2] * wgt;
+          a += data[idx+3] * wgt;
+        }
+        var o = (y * w + x) * 4;
+        tmp[o] = r; tmp[o+1] = g; tmp[o+2] = b; tmp[o+3] = a;
+      }
+    }
+
+    for (var y2 = 0; y2 < h; y2++) {
+      for (var x2 = 0; x2 < w; x2++) {
+        var r2 = 0, g2 = 0, b2 = 0, a2 = 0;
+        for (var k2 = 0; k2 < size; k2++) {
+          var sy = y2 + k2 - half;
+          if (sy < 0) sy = 0;
+          if (sy >= h) sy = h - 1;
+          var idx2 = (sy * w + x2) * 4;
+          var wgt2 = kernel[k2];
+          r2 += tmp[idx2] * wgt2;
+          g2 += tmp[idx2+1] * wgt2;
+          b2 += tmp[idx2+2] * wgt2;
+          a2 += tmp[idx2+3] * wgt2;
+        }
+        var o2 = (y2 * w + x2) * 4;
+        data[o2] = r2; data[o2+1] = g2; data[o2+2] = b2; data[o2+3] = a2;
+      }
+    }
+    return imageData;
+  }
+
+  // ============================================================
+  // Sobel edge detection
+  // ============================================================
+  function sobelEdges(gray, threshold) {
+    var w = gray.width, h = gray.height;
+    var data = gray.data;
+    var out = new ImageData(w, h);
+    var dst = out.data;
+
+    var kx = [-1, 0, 1, -2, 0, 2, -1, 0, 1];
+    var ky = [-1, -2, -1, 0, 0, 0, 1, 2, 1];
+
+    for (var y = 0; y < h; y++) {
+      for (var x = 0; x < w; x++) {
+        var gx = 0, gy = 0;
+        for (var dy = -1; dy <= 1; dy++) {
+          for (var dx = -1; dx <= 1; dx++) {
+            var px = x + dx, py = y + dy;
+            if (px < 0) px = 0; if (px >= w) px = w - 1;
+            if (py < 0) py = 0; if (py >= h) py = h - 1;
+            var gv = data[(py * w + px) * 4];
+            var ki = (dy + 1) * 3 + (dx + 1);
+            gx += gv * kx[ki];
+            gy += gv * ky[ki];
+          }
+        }
+        var mag = Math.sqrt(gx * gx + gy * gy);
+        var o = (y * w + x) * 4;
+        if (mag > threshold) {
+          dst[o] = 0; dst[o+1] = 0; dst[o+2] = 0;
+        } else {
+          dst[o] = 255; dst[o+1] = 255; dst[o+2] = 255;
+        }
+        dst[o+3] = 255;
+      }
+    }
+    return out;
+  }
+
+  // ============================================================
+  // Dilation (expands black regions)
+  // ============================================================
+  function dilate(edges, iterations) {
+    if (iterations <= 0) return edges;
+    var w = edges.width, h = edges.height;
+    var data = edges.data;
+    var tmp = new Uint8ClampedArray(data.length);
+
+    for (var iter = 0; iter < iterations; iter++) {
+      for (var y = 0; y < h; y++) {
+        for (var x = 0; x < w; x++) {
+          var isEdge = false;
+          for (var dy = -1; dy <= 1 && !isEdge; dy++) {
+            for (var dx = -1; dx <= 1 && !isEdge; dx++) {
+              var nx = x + dx, ny = y + dy;
+              if (nx < 0 || nx >= w || ny < 0 || ny >= h) continue;
+              if (data[(ny * w + nx) * 4] === 0) isEdge = true;
+            }
+          }
+          var o = (y * w + x) * 4;
+          if (isEdge) {
+            tmp[o] = 0; tmp[o+1] = 0; tmp[o+2] = 0;
+          } else {
+            tmp[o] = 255; tmp[o+1] = 255; tmp[o+2] = 255;
+          }
+          tmp[o+3] = 255;
+        }
+      }
+      data = new Uint8ClampedArray(tmp);
+    }
+
+    for (var i = 0; i < data.length; i++) edges.data[i] = data[i];
+    return edges;
+  }
+
+  // ============================================================
+  // Invert
+  // ============================================================
+  function invertEdges(edges) {
+    var data = edges.data;
+    for (var i = 0; i < data.length; i += 4) {
+      data[i] = 255 - data[i];
+      data[i+1] = 255 - data[i+1];
+      data[i+2] = 255 - data[i+2];
+    }
+    return edges;
+  }
+
+  // ============================================================
+  // K-means color quantization
+  // ============================================================
+  function kMeansQuantize(src, k, iterations) {
+    var w = src.width, h = src.height;
+    var data = src.data;
+    var pixelCount = w * h;
+
+    // Sample for speed
+    var step = Math.max(1, Math.floor(pixelCount / 20000));
+    var samples = [];
+    for (var i = 0; i < pixelCount; i += step) {
+      var idx = i * 4;
+      samples.push([data[idx], data[idx+1], data[idx+2]]);
+    }
+
+    // Init centroids
+    var centroids = [];
+    for (var c = 0; c < k; c++) {
+      var s = samples[Math.floor(Math.random() * samples.length)];
+      centroids.push([s[0], s[1], s[2]]);
+    }
+
+    // Iterate
+    for (var iter = 0; iter < iterations; iter++) {
+      var sums = [];
+      for (var s2 = 0; s2 < k; s2++) sums.push([0, 0, 0, 0]);
+      for (var si = 0; si < samples.length; si++) {
+        var s3 = samples[si];
+        var best = 0, bestD = Infinity;
+        for (var c2 = 0; c2 < k; c2++) {
+          var dr = s3[0] - centroids[c2][0];
+          var dg = s3[1] - centroids[c2][1];
+          var db = s3[2] - centroids[c2][2];
+          var d = dr*dr + dg*dg + db*db;
+          if (d < bestD) { bestD = d; best = c2; }
+        }
+        sums[best][0] += s3[0];
+        sums[best][1] += s3[1];
+        sums[best][2] += s3[2];
+        sums[best][3] += 1;
+      }
+      for (var c3 = 0; c3 < k; c3++) {
+        if (sums[c3][3] > 0) {
+          centroids[c3][0] = Math.round(sums[c3][0] / sums[c3][3]);
+          centroids[c3][1] = Math.round(sums[c3][1] / sums[c3][3]);
+          centroids[c3][2] = Math.round(sums[c3][2] / sums[c3][3]);
+        }
+      }
+    }
+
+    // Assign every pixel
+    var indices = new Uint8Array(pixelCount);
+    for (var p = 0; p < pixelCount; p++) {
+      var pi = p * 4;
+      var best2 = 0, bestD2 = Infinity;
+      for (var c4 = 0; c4 < k; c4++) {
+        var dr2 = data[pi] - centroids[c4][0];
+        var dg2 = data[pi+1] - centroids[c4][1];
+        var db2 = data[pi+2] - centroids[c4][2];
+        var d2 = dr2*dr2 + dg2*dg2 + db2*db2;
+        if (d2 < bestD2) { bestD2 = d2; best2 = c4; }
+      }
+      indices[p] = best2;
+    }
+
+    return { palette: centroids, indices: indices, k: k };
+  }
+
+  // ============================================================
+  // Apply colors + edges
+  // ============================================================
+  function applyColors(src, quant, edges) {
+    var w = src.width, h = src.height;
+    var out = new ImageData(w, h);
+    var dst = out.data;
+    var sd = src.data;
+    var ed = edges.data;
+    var pal = quant.palette;
+    var idx = quant.indices;
+
+    for (var i = 0; i < w * h; i++) {
+      var o = i * 4;
+      if (ed[o] === 0) {
+        // Edge pixel → black line
+        dst[o] = 0; dst[o+1] = 0; dst[o+2] = 0;
+      } else {
+        var c = pal[idx[i]];
+        dst[o] = c[0]; dst[o+1] = c[1]; dst[o+2] = c[2];
+      }
+      dst[o+3] = 255;
+    }
+    return out;
+  }
+
+  // ============================================================
+  // Connected component labeling (flood fill)
+  // ============================================================
+  function findRegions(indices, width, height, minArea) {
+    var visited = new Uint8Array(width * height);
+    var regions = [];
+    var dx = [1, -1, 0, 0];
+    var dy = [0, 0, 1, -1];
+
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
+        var startIdx = y * width + x;
+        if (visited[startIdx]) continue;
+
+        var colorIdx = indices[startIdx];
+        var stack = [[x, y]];
+        var count = 0;
+        var sumX = 0, sumY = 0;
+
+        while (stack.length > 0) {
+          var pt = stack.pop();
+          var cx = pt[0], cy = pt[1];
+          if (cx < 0 || cx >= width || cy < 0 || cy >= height) continue;
+          var cidx = cy * width + cx;
+          if (visited[cidx]) continue;
+          if (indices[cidx] !== colorIdx) continue;
+
+          visited[cidx] = 1;
+          count++;
+          sumX += cx;
+          sumY += cy;
+
+          for (var d = 0; d < 4; d++) {
+            stack.push([cx + dx[d], cy + dy[d]]);
+          }
+        }
+
+        if (count >= minArea) {
+          regions.push({
+            colorIdx: colorIdx,
+            cx: Math.round(sumX / count),
+            cy: Math.round(sumY / count),
+            area: count
+          });
+        }
+      }
+    }
+    return regions;
+  }
+
+  // ============================================================
+  // Draw numbers and legend
+  // ============================================================
+  function composeByNumber(colorized, regions, palette, hasInvert) {
+    var w = colorized.width, h = colorized.height;
+
+    // Build a canvas to draw on (so we can add text)
+    var c = document.createElement('canvas');
+    c.width = w;
+    c.height = h + LEGEND_HEIGHT;
+    var ctx = c.getContext('2d');
+
+    // Fill legend area with white
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, w, h + LEGEND_HEIGHT);
+
+    // Put the colorized image
+    ctx.putImageData(colorized, 0, 0);
+
+    // Overlay numbers on larger regions
+    ctx.font = 'bold 18px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    regions.forEach(function (r) {
+      // Only number regions above a generous threshold
+      if (r.area < 200) return;
+      // Determine text color based on luminance
+      var col = palette[r.colorIdx];
+      var lum = 0.299 * col[0] + 0.587 * col[1] + 0.114 * col[2];
+      ctx.fillStyle = lum > 140 ? '#000000' : '#ffffff';
+      ctx.strokeStyle = lum > 140 ? '#ffffff' : '#000000';
+      ctx.lineWidth = 3;
+      var num = r.colorIdx + 1;
+      ctx.strokeText(num, r.cx, r.cy);
+      ctx.fillText(num, r.cx, r.cy);
+    });
+
+    // Draw separator line
+    ctx.strokeStyle = '#dfe6ef';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, h + 0.5);
+    ctx.lineTo(w, h + 0.5);
+    ctx.stroke();
+
+    // Draw legend
+    var legendY = h + LEGEND_HEIGHT / 2;
+    var cellWidth = w / palette.length;
+    var swatchSize = 32;
+
+    palette.forEach(function (col, i) {
+      var cx = cellWidth * i + cellWidth / 2;
+
+      // Swatch
+      ctx.fillStyle = 'rgb(' + col[0] + ',' + col[1] + ',' + col[2] + ')';
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.rect(cx - swatchSize / 2, legendY - swatchSize, swatchSize, swatchSize);
+      ctx.fill();
+      ctx.stroke();
+
+      // Number below swatch
+      ctx.fillStyle = '#172033';
+      ctx.font = 'bold 14px system-ui, -apple-system, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText(String(i + 1), cx, legendY + 4);
+
+      // Hex code
+      var hex = '#' + [col[0], col[1], col[2]].map(function (v) {
+        var s = clampByte(v).toString(16);
+        return s.length === 1 ? '0' + s : s;
+      }).join('').toUpperCase();
+      ctx.font = '11px ui-monospace, monospace';
+      ctx.fillStyle = '#607087';
+      ctx.fillText(hex, cx, legendY + 22);
+    });
+
+    return c;
+  }
+
+  // ============================================================
+  // Display result
+  // ============================================================
+  function displayResult(canvas) {
+    lastResultCanvas = canvas;
+    resultCanvas.width = canvas.width;
+    resultCanvas.height = canvas.height;
+    var ctx = resultCanvas.getContext('2d');
+    ctx.drawImage(canvas, 0, 0);
+    resultCanvas.classList.remove('cl-hidden');
+    originalCanvas.classList.add('cl-hidden');
+    emptyEl.classList.add('cl-hidden');
+    ptabResult.setAttribute('aria-pressed', 'true');
+    ptabOriginal.setAttribute('aria-pressed', 'false');
+    downloadBtn.disabled = false;
+  }
+
+  // ============================================================
+  // Main process
+  // ============================================================
+  function processImage() {
+    if (!currentImage) return;
+    if (processing) { pendingReprocess = true; return; }
+
+    processing = true;
+    processBtn.disabled = true;
+    downloadBtn.disabled = true;
+    setStatus('Processing…', 'busy');
+
+    // Yield to let the UI update
+    setTimeout(function () {
+      try {
+        var t0 = performance.now();
+        var thickness = parseInt(thicknessEl.value, 10) || 0;
+        var detail = parseInt(detailEl.value, 10) || 5;
+        var blurRadius = parseInt(blurEl.value, 10) || 0;
+        var numColors = parseInt(colorsEl.value, 10) || 8;
+        var invert = invertEl.checked;
+
+        var src = cloneImageData(getSourceData());
+        var w = src.width, h = src.height;
+
+        // 1. Grayscale
+        var gray = toGrayscale(src);
+
+        // 2. Blur
+        if (blurRadius > 0) {
+          // small radius; 1 blur slider step = radius 1-3
+          var radius = blurRadius === 1 ? 1 : blurRadius === 2 ? 2 : 3;
+          gaussianBlur(gray, radius);
+        }
+
+        // 3. Sobel — detail 1 = high threshold (few lines), 10 = low threshold (many lines)
+        //    threshold range from ~200 (detail 1) down to ~30 (detail 10)
+        var threshold = 210 - detail * 18;
+        var edges = sobelEdges(gray, threshold);
+
+        // 4. Dilate
+        if (thickness > 0) dilate(edges, thickness);
+
+        // 5. Invert
+        if (invert) invertEdges(edges);
+
+        // 6. Output
+        if (mode === 'coloring') {
+          var c = document.createElement('canvas');
+          c.width = w;
+          c.height = h;
+          c.getContext('2d').putImageData(edges, 0, 0);
+          displayResult(c);
+        } else {
+          var quant = kMeansQuantize(src, numColors, 6);
+          var colorized = applyColors(src, quant, edges);
+          var regions = findRegions(quant.indices, w, h, MIN_REGION_AREA);
+          var finalCanvas = composeByNumber(colorized, regions, quant.palette, invert);
+          displayResult(finalCanvas);
+        }
+
+        var elapsed = Math.max(1, Math.round(performance.now() - t0));
+        var resultW = mode === 'coloring' ? w : w;
+        var resultH = mode === 'coloring' ? h : h + LEGEND_HEIGHT;
+        setStatus('Done in ' + elapsed + ' ms · ' + resultW + ' × ' + resultH + ' px', 'ok');
+      } catch (e) {
+        setStatus('Processing failed: ' + (e && e.message ? e.message : 'unknown error'), 'error');
+      } finally {
+        processing = false;
+        processBtn.disabled = false;
+        if (pendingReprocess) {
+          pendingReprocess = false;
+          processImage();
+        }
+      }
+    }, 40);
+  }
+
+  // ============================================================
+  // Download
+  // ============================================================
+  function download() {
+    if (!lastResultCanvas) return;
+    lastResultCanvas.toBlob(function (blob) {
+      if (!blob) { setStatus('Could not generate PNG.', 'error'); return; }
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      var ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+      a.href = url;
+      a.download = 'coloring-page-' + ts + '.png';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    }, 'image/png');
+  }
+
+  // ============================================================
+  // Mode switching
+  // ============================================================
+  document.querySelectorAll('.cl-mode-tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      mode = tab.getAttribute('data-mode');
+      document.querySelectorAll('.cl-mode-tab').forEach(function (t) {
+        t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+      });
+      colorsField.style.display = mode === 'byNumber' ? '' : 'none';
+      if (currentImage) processImage();
+    });
+  });
+
+  // Preview toggle
+  function switchView(view) {
+    if (view === 'original') {
+      ptabOriginal.setAttribute('aria-pressed', 'true');
+      ptabResult.setAttribute('aria-pressed', 'false');
+      if (currentImage) {
+        originalCanvas.classList.remove('cl-hidden');
+        resultCanvas.classList.add('cl-hidden');
+      }
+    } else {
+      ptabResult.setAttribute('aria-pressed', 'true');
+      ptabOriginal.setAttribute('aria-pressed', 'false');
+      if (currentImage && lastResultCanvas) {
+        resultCanvas.classList.remove('cl-hidden');
+        originalCanvas.classList.add('cl-hidden');
+      }
+    }
+  }
+  ptabOriginal.addEventListener('click', function () { switchView('original'); });
+  ptabResult.addEventListener('click', function () { switchView('result'); });
+
+  // ============================================================
+  // Events
+  // ============================================================
+  dropEl.addEventListener('click', function () { fileInput.click(); });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropEl.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropEl.classList.add('is-dragover');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropEl.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropEl.classList.remove('is-dragover');
+    });
+  });
+  dropEl.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+      handleFile(e.dataTransfer.files[0]);
+    }
+  });
+
+  fileInput.addEventListener('change', function (e) {
+    if (e.target.files && e.target.files.length) {
+      handleFile(e.target.files[0]);
+    }
+  });
+
+  thicknessEl.addEventListener('input', function () {
+    thicknessVal.textContent = thicknessEl.value;
+    if (currentImage) {
+      clearTimeout(window.__clDebounce);
+      window.__clDebounce = setTimeout(processImage, 150);
+    }
+  });
+  detailEl.addEventListener('input', function () {
+    detailVal.textContent = detailEl.value;
+    if (currentImage) {
+      clearTimeout(window.__clDebounce);
+      window.__clDebounce = setTimeout(processImage, 150);
+    }
+  });
+  blurEl.addEventListener('input', function () {
+    blurVal.textContent = blurEl.value;
+    if (currentImage) {
+      clearTimeout(window.__clDebounce);
+      window.__clDebounce = setTimeout(processImage, 150);
+    }
+  });
+  colorsEl.addEventListener('input', function () {
+    colorsVal.textContent = colorsEl.value;
+    if (currentImage && mode === 'byNumber') {
+      clearTimeout(window.__clDebounce);
+      window.__clDebounce = setTimeout(processImage, 150);
+    }
+  });
+  invertEl.addEventListener('change', function () {
+    if (currentImage) processImage();
+  });
+
+  processBtn.addEventListener('click', processImage);
+  downloadBtn.addEventListener('click', download);
+
+  resetBtn.addEventListener('click', function () {
+    currentImage = null;
+    sourceData = null;
+    lastResultCanvas = null;
+    fileInput.value = '';
+    originalCanvas.classList.add('cl-hidden');
+    resultCanvas.classList.add('cl-hidden');
+    emptyEl.classList.remove('cl-hidden');
+    processBtn.disabled = true;
+    downloadBtn.disabled = true;
+    hideWarn();
+    setStatus('', '');
+    originalCanvas.width = 1; originalCanvas.height = 1;
+    resultCanvas.width = 1; resultCanvas.height = 1;
+  });
+
+  // ============================================================
+  // Init
+  // ============================================================
+  colorsField.style.display = 'none';
+  setStatus('Waiting for a photo…', 'busy');
+})();
+</script>
+</body>
+</html>

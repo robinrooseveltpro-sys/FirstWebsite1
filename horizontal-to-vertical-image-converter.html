@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horizontal to Vertical Image Converter — Rotate, Crop, or Fill (Free, Private)</title>
+<meta name="description" content="Convert a landscape image to portrait for Instagram, TikTok, Stories, Pinterest, or Reels. Rotate, center-crop, pad with a solid color, or fill with a blurred background — all in your browser, no upload.">
+<link rel="canonical" href="https://converttotoolsonline.com/horizontal-to-vertical-image-converter.html">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Horizontal to Vertical Image Converter">
+<meta property="og:description" content="Convert landscape to portrait with rotation, crop, solid fill, or blur fill. Runs in your browser.">
+<meta property="og:url" content="https://converttotoolsonline.com/horizontal-to-vertical-image-converter.html">
+<link rel="stylesheet" href="/style.css">
+<style>
+/* Tool-scoped styles. Prefixed htv- to avoid clashing with site-wide CSS. */
+.htv-wrap { max-width: 1080px; margin: 0 auto; padding: 24px 16px 64px; }
+.htv-wrap h1 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.25; margin: 0 0 8px; }
+.htv-lede { color: #444; margin: 0 0 16px; max-width: 720px; }
+.htv-privacy { display:inline-block; font-size:.85rem; background:#eef6ff; color:#0b4a8b; border-radius:6px; padding:4px 10px; margin-bottom:20px; }
+.htv-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 820px){ .htv-grid { grid-template-columns: 1fr; } }
+.htv-panel { border:1px solid #ddd; border-radius:10px; padding:16px; background:#fff; }
+.htv-panel h2 { font-size:1rem; margin:0 0 12px; }
+.htv-drop { display:block; width:100%; border:2px dashed #bbb; border-radius:10px; padding:28px 16px; text-align:center; cursor:pointer; background:#fafafa; font:inherit; color:inherit; }
+.htv-drop:hover, .htv-drop:focus-visible, .htv-drop.dragover { border-color:#0b6efd; background:#f0f6ff; outline:none; }
+.htv-drop strong { display:block; margin-bottom:4px; }
+.htv-drop small { color:#666; }
+.htv-preview { max-width:100%; height:auto; display:block; border-radius:6px; background:#f0f0f0; }
+.htv-preview-wrap { margin-top:12px; }
+.htv-meta { font-size:.85rem; color:#555; margin-top:6px; }
+.htv-row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+.htv-field { display:flex; flex-direction:column; gap:4px; margin-bottom:12px; }
+.htv-field label { font-size:.9rem; font-weight:600; }
+.htv-field input, .htv-field select { padding:8px 10px; border:1px solid #ccc; border-radius:6px; font:inherit; background:#fff; }
+.htv-field input:focus-visible, .htv-field select:focus-visible, .htv-btn:focus-visible, .htv-chip:focus-visible { outline:2px solid #0b6efd; outline-offset:2px; }
+.htv-chip { padding:6px 10px; border:1px solid #ccc; border-radius:999px; background:#fff; font-size:.85rem; cursor:pointer; font:inherit; }
+.htv-chip[aria-pressed="true"] { background:#0b6efd; color:#fff; border-color:#0b6efd; }
+.htv-btn { padding:10px 16px; border:1px solid #0b6efd; background:#0b6efd; color:#fff; border-radius:8px; font:inherit; font-weight:600; cursor:pointer; }
+.htv-btn:hover { background:#0957c9; }
+.htv-btn:disabled { opacity:.55; cursor:not-allowed; }
+.htv-btn.secondary { background:#fff; color:#0b6efd; }
+.htv-btn.secondary:hover { background:#f0f6ff; }
+.htv-status { min-height:1.4em; font-size:.9rem; margin-top:8px; }
+.htv-status[data-tone="error"]{ color:#b00020; }
+.htv-status[data-tone="ok"]{ color:#0b6b2e; }
+.htv-warn { font-size:.85rem; color:#8a5a00; background:#fff7e0; border:1px solid #f0d78a; border-radius:6px; padding:8px 10px; margin-top:8px; }
+.htv-canvas-holder { background:#f0f0f0; border-radius:8px; display:flex; align-items:center; justify-content:center; min-height:240px; padding:8px; }
+.htv-canvas-holder canvas { max-width:100%; height:auto; border-radius:4px; display:block; }
+.htv-hidden { display:none !important; }
+.htv-guide { max-width:760px; margin-top:40px; }
+.htv-guide h2 { margin-top:28px; font-size:1.2rem; }
+.htv-guide p, .htv-guide li { line-height:1.6; }
+.htv-faq details { border-bottom:1px solid #eee; padding:10px 0; }
+.htv-faq summary { cursor:pointer; font-weight:600; }
+.htv-faq p { margin:8px 0 0; }
+@media (prefers-reduced-motion: reduce) { .htv-drop { transition: none; } }
+</style>
+</head>
+<body>
+<main class="htv-wrap">
+  <h1>Horizontal to Vertical Image Converter</h1>
+  <p class="htv-lede">Turn a landscape photo into a portrait image for Instagram, TikTok, Stories, Reels, Pinterest, or Etsy. Choose rotation, center-crop, solid-color padding, or a blurred background fill — then download the result.</p>
+  <span class="htv-privacy">🔒 100% in your browser — your image is never uploaded.</span>
+
+  <div class="htv-grid">
+    <!-- LEFT: input + settings -->
+    <section class="htv-panel" aria-labelledby="htv-input-heading">
+      <h2 id="htv-input-heading">1. Choose an image</h2>
+      <button type="button" id="htv-drop" class="htv-drop" aria-describedby="htv-drop-help">
+        <strong>Drop an image here or click to browse</strong>
+        <small id="htv-drop-help">PNG, JPG, WebP, GIF (first frame), or BMP</small>
+      </button>
+      <input id="htv-file" type="file" accept="image/*" class="htv-hidden">
+      <div id="htv-warn" class="htv-warn htv-hidden" role="status"></div>
+
+      <div id="htv-original-wrap" class="htv-preview-wrap htv-hidden">
+        <h3 style="font-size:.95rem;margin:16px 0 6px;">Original</h3>
+        <img id="htv-original" class="htv-preview" alt="Preview of the selected image">
+        <div id="htv-original-meta" class="htv-meta"></div>
+      </div>
+
+      <div id="htv-settings" class="htv-hidden">
+        <h2 style="margin-top:24px;">2. Settings</h2>
+
+        <div class="htv-field">
+          <label for="htv-aspect-select">Target aspect ratio</label>
+          <select id="htv-aspect-select">
+            <option value="9:16">9:16 — Stories, Reels, TikTok, Shorts</option>
+            <option value="4:5" selected>4:5 — Instagram portrait</option>
+            <option value="3:4">3:4 — Portrait</option>
+            <option value="2:3">2:3 — Print portrait</option>
+            <option value="1:1">1:1 — Square</option>
+            <option value="custom">Custom…</option>
+          </select>
+        </div>
+
+        <div id="htv-custom-aspect" class="htv-row htv-hidden">
+          <div class="htv-field" style="flex:1;min-width:120px;">
+            <label for="htv-custom-w">Width (px)</label>
+            <input id="htv-custom-w" type="number" min="1" max="4000" step="1" value="1080" inputmode="numeric">
+          </div>
+          <div class="htv-field" style="flex:1;min-width:120px;">
+            <label for="htv-custom-h">Height (px)</label>
+            <input id="htv-custom-h" type="number" min="1" max="4000" step="1" value="1350" inputmode="numeric">
+          </div>
+        </div>
+
+        <fieldset class="htv-field" style="border:0;padding:0;margin:0 0 12px;">
+          <legend style="font-weight:600;font-size:.9rem;margin-bottom:6px;">Conversion mode</legend>
+          <div class="htv-row" role="group" aria-label="Conversion mode">
+            <button type="button" class="htv-chip" data-mode="auto" aria-pressed="true">Auto (recommended)</button>
+            <button type="button" class="htv-chip" data-mode="blur" aria-pressed="false">Blur background</button>
+            <button type="button" class="htv-chip" data-mode="solid" aria-pressed="false">Solid color</button>
+            <button type="button" class="htv-chip" data-mode="crop" aria-pressed="false">Center crop</button>
+            <button type="button" class="htv-chip" data-mode="rotate" aria-pressed="false">Rotate 90° (sideways)</button>
+          </div>
+          <p id="htv-mode-help" class="htv-meta" aria-live="polite"></p>
+        </fieldset>
+
+        <div id="htv-solid-color-row" class="htv-field htv-hidden">
+          <label for="htv-solid-color">Fill color</label>
+          <div class="htv-row">
+            <input id="htv-solid-color" type="color" value="#000000" aria-label="Fill color">
+            <input id="htv-solid-hex" type="text" value="#000000" maxlength="7" aria-label="Fill color hex value" style="max-width:110px;">
+          </div>
+        </div>
+
+        <div class="htv-field">
+          <label for="htv-format">Output format</label>
+          <select id="htv-format">
+            <option value="image/png">PNG (lossless)</option>
+            <option value="image/jpeg" selected>JPEG (smaller file)</option>
+            <option value="image/webp">WebP (modern browsers)</option>
+          </select>
+        </div>
+
+        <div id="htv-quality-row" class="htv-field">
+          <label for="htv-quality">JPEG / WebP quality: <span id="htv-quality-val">0.92</span></label>
+          <input id="htv-quality" type="range" min="0.5" max="1" step="0.01" value="0.92">
+        </div>
+
+        <div class="htv-row">
+          <button id="htv-convert" type="button" class="htv-btn">Convert</button>
+          <button id="htv-reset" type="button" class="htv-btn secondary">Reset</button>
+        </div>
+        <div id="htv-status" class="htv-status" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- RIGHT: output -->
+    <section class="htv-panel" aria-labelledby="htv-output-heading">
+      <h2 id="htv-output-heading">Result</h2>
+      <div id="htv-canvas-holder" class="htv-canvas-holder">
+        <p class="htv-meta" id="htv-empty-msg">Your converted image will appear here.</p>
+        <canvas id="htv-output" class="htv-hidden" aria-label="Converted image preview"></canvas>
+      </div>
+      <div id="htv-output-meta" class="htv-meta"></div>
+      <div class="htv-row" style="margin-top:12px;">
+        <button id="htv-download" type="button" class="htv-btn" disabled>Download</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- SEO content -->
+  <section class="htv-guide">
+    <h2>What this tool actually does</h2>
+    <p>“Horizontal to vertical” can mean two very different things, and mixing them up is the most common mistake:</p>
+    <ul>
+      <li><strong>Rotation</strong> swaps the width and height of the image. The result is portrait-shaped, but the subject ends up lying on its side. This is what a “rotate 90°” tool produces.</li>
+      <li><strong>Canvas conversion</strong> keeps the subject upright and changes the frame around it — by cropping to a portrait shape, padding with a solid color, or filling the empty area with a blurred copy of the image.</li>
+    </ul>
+    <p>This converter supports both. By default it uses <strong>Auto</strong>, which inspects your image and picks the mode that usually looks best: a blurred background fill for busy photos, or a solid-color pad when the top and bottom edges of the image are already uniform (a sky, a wall, a studio backdrop).</p>
+
+    <h2>How to use it</h2>
+    <ol>
+      <li>Drop or select a landscape image (PNG, JPG, WebP, GIF, or BMP).</li>
+      <li>Pick a target aspect ratio — 9:16 for Stories/Reels/TikTok, 4:5 for Instagram portrait, or a custom size.</li>
+      <li>Leave the mode on <em>Auto</em>, or force Blur / Solid / Crop / Rotate.</li>
+      <li>Choose PNG for lossless quality or JPEG/WebP for smaller files, then click <strong>Convert</strong>.</li>
+      <li>Check the preview, then download.</li>
+    </ol>
+
+    <h2>Which mode should I choose?</h2>
+    <ul>
+      <li><strong>Blur background</strong> — best when the image is busy edge to edge and you do not want to lose any part of the frame. The subject stays upright, and the empty top/bottom area is filled with a blurred, enlarged copy of the original.</li>
+      <li><strong>Solid color</strong> — best when the image has uniform edges (sky, wall, studio backdrop) or when you want a clean, on-brand color block above and below.</li>
+      <li><strong>Center crop</strong> — best when the subject is centered and you are comfortable losing the left and right sides. No added pixels, no letterboxing.</li>
+      <li><strong>Rotate 90°</strong> — the literal “horizontal to vertical” operation. The shape changes, but the subject turns sideways. Use it only when that is what you actually want.</li>
+    </ul>
+
+    <h2>Privacy</h2>
+    <p>Everything happens in your browser using the HTML Canvas API. Your image is never uploaded, never sent to a server, and never logged. You can disconnect from the internet after the page loads and the tool will still work.</p>
+
+    <h2>Limitations</h2>
+    <ul>
+      <li>GIF and animated WebP output is not supported — only the first frame is processed. Use a dedicated animated converter if you need to preserve motion.</li>
+      <li>Very large images (above roughly 8 megapixels) may be slow to preview on low-end phones. The download still uses the full resolution.</li>
+      <li>EXIF orientation is applied by the browser when the image is decoded. If your source file has an incorrect orientation flag, the result will inherit that.</li>
+      <li>WebP export depends on browser support; if unavailable, the tool falls back to PNG and tells you.</li>
+      <li>When the source image is smaller than the target preset, the output is upscaled. This is normal for social platform presets but adds no real detail.</li>
+    </ul>
+
+    <h2 id="faq">Frequently asked questions</h2>
+    <div class="htv-faq">
+      <details><summary>Does this upload my image to a server?</summary>
+        <p>No. All processing runs locally in your browser using the Canvas API. Nothing is transmitted anywhere.</p></details>
+      <details><summary>What is the difference between “Blur background” and “Rotate 90°”?</summary>
+        <p>Blur background keeps the subject upright and fills the empty top and bottom area with a blurred, zoomed copy of the image. Rotate 90° physically turns the whole picture sideways.</p></details>
+      <details><summary>Will the output be exactly 9:16?</summary>
+        <p>Yes. The output canvas is sized to the exact ratio you choose (for example 1080×1920 for 9:16). The original is fit inside it according to the mode you selected.</p></details>
+      <details><summary>Can I use it for Instagram Reels, TikTok, or YouTube Shorts?</summary>
+        <p>Yes. Choose 9:16 and either Blur background or Solid color, then download the result.</p></details>
+      <details><summary>Why does my file size get bigger after converting to PNG?</summary>
+        <p>PNG is lossless and typically produces larger files than JPEG. For social uploads, JPEG or WebP at quality 0.9 usually looks indistinguishable and stays smaller.</p></details>
+      <details><summary>Does it work offline?</summary>
+        <p>Yes, once the page has loaded. All conversion is client-side.</p></details>
+    </div>
+
+    <h2>Related tools</h2>
+    <!-- Verify these filenames before enabling any commented-out links. -->
+    <ul>
+      <li><a href="/">ConvertToToolsOnline home</a></li>
+      <!--
+      <li><a href="/image-compressor.html">Image Compressor</a></li>
+      <li><a href="/image-resizer.html">Image Resizer</a></li>
+      <li><a href="/png-to-jpg-converter.html">PNG to JPG Converter</a></li>
+      <li><a href="/webp-to-jpg-converter.html">WebP to JPG Converter</a></li>
+      -->
+    </ul>
+  </section>
+</main>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Horizontal to Vertical Image Converter",
+      "url": "https://converttotoolsonline.com/horizontal-to-vertical-image-converter.html",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern browser",
+      "browserRequirements": "Requires JavaScript and the HTML Canvas API",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Convert a landscape image to portrait using rotation, center-crop, solid-color padding, or a blurred background fill. Runs entirely in the browser.",
+      "featureList": [
+        "Blur background fill",
+        "Solid color padding",
+        "Center crop",
+        "Rotate 90 degrees",
+        "9:16, 4:5, 3:4, 2:3, 1:1 presets",
+        "PNG, JPEG, WebP output",
+        "100% client-side"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Does this upload my image to a server?","acceptedAnswer":{"@type":"Answer","text":"No. All processing runs locally in your browser using the Canvas API."}},
+        {"@type":"Question","name":"What is the difference between Blur background and Rotate 90°?","acceptedAnswer":{"@type":"Answer","text":"Blur background keeps the subject upright and fills the empty area with a blurred copy. Rotate 90° turns the whole picture sideways."}},
+        {"@type":"Question","name":"Will the output be exactly 9:16?","acceptedAnswer":{"@type":"Answer","text":"Yes. The output canvas uses the exact ratio you choose, for example 1080×1920 for 9:16."}},
+        {"@type":"Question","name":"Can I use it for Instagram Reels, TikTok, or YouTube Shorts?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose 9:16 and either Blur background or Solid color, then download."}},
+        {"@type":"Question","name":"Does it work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes, after the page loads. All conversion is client-side."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- Site-wide script (kept as-is; tool logic is self-contained below) -->
+<script src="/script.js" defer></script>
+
+<!-- Tool logic -->
+<script>
+(function () {
+  'use strict';
+
+  const $ = (id) => document.getElementById(id);
+
+  const dropEl = $('htv-drop');
+  const fileInput = $('htv-file');
+  const warnEl = $('htv-warn');
+  const originalWrap = $('htv-original-wrap');
+  const originalImg = $('htv-original');
+  const originalMeta = $('htv-original-meta');
+  const settingsEl = $('htv-settings');
+  const aspectSelect = $('htv-aspect-select');
+  const customAspect = $('htv-custom-aspect');
+  const customW = $('htv-custom-w');
+  const customH = $('htv-custom-h');
+  const modeButtons = Array.from(document.querySelectorAll('[data-mode]'));
+  const modeHelp = $('htv-mode-help');
+  const solidColorRow = $('htv-solid-color-row');
+  const solidColor = $('htv-solid-color');
+  const solidHex = $('htv-solid-hex');
+  const formatSelect = $('htv-format');
+  const qualityRow = $('htv-quality-row');
+  const qualityInput = $('htv-quality');
+  const qualityVal = $('htv-quality-val');
+  const convertBtn = $('htv-convert');
+  const resetBtn = $('htv-reset');
+  const statusEl = $('htv-status');
+  const outputCanvas = $('htv-output');
+  const emptyMsg = $('htv-empty-msg');
+  const outputMeta = $('htv-output-meta');
+  const downloadBtn = $('htv-download');
+
+  const MODE_HELP = {
+    auto: 'Auto inspects the image and chooses Blur background or Solid color. Override it below.',
+    blur: 'The subject stays upright; the empty top/bottom area is filled with a blurred, enlarged copy of the image.',
+    solid: 'The subject stays upright; the empty top/bottom area is filled with a single color you pick.',
+    crop: 'The image is scaled to cover the target frame and the overflow is cropped. The subject stays upright but the sides are trimmed.',
+    rotate: 'The image is rotated 90°. The shape becomes portrait, but the subject lies on its side.'
+  };
+
+  let currentImage = null;
+  let currentObjectUrl = null;
+  let currentMode = 'auto';
+  let lastBlob = null;
+  let lastBlobUrl = null;
+  let lastEdgeInfo = { uniform: false, color: '#000000' };
+
+  // ---------- helpers ----------
+  function setStatus(msg, tone) {
+    statusEl.textContent = msg || '';
+    if (tone) statusEl.setAttribute('data-tone', tone);
+    else statusEl.removeAttribute('data-tone');
+  }
+
+  function showWarn(msg) {
+    if (!msg) { warnEl.classList.add('htv-hidden'); warnEl.textContent = ''; return; }
+    warnEl.classList.remove('htv-hidden');
+    warnEl.textContent = msg;
+  }
+
+  function formatBytes(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+    return (n / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function parseAspect() {
+    const v = aspectSelect.value;
+    if (v === 'custom') {
+      return {
+        w: Math.max(1, Math.min(4000, parseInt(customW.value, 10) || 1080)),
+        h: Math.max(1, Math.min(4000, parseInt(customH.value, 10) || 1350)),
+        custom: true
+      };
+    }
+    const [a, b] = v.split(':').map(Number);
+    return { w: a, h: b, custom: false };
+  }
+
+  function targetPixelSize(aspect, sourceDim) {
+    if (aspect.custom) {
+      return { w: aspect.w, h: aspect.h };
+    }
+    const sourceMax = Math.max(sourceDim.width, sourceDim.height);
+    const base = Math.max(1080, Math.min(2400, sourceMax));
+    const ratio = aspect.w / aspect.h;
+    if (ratio >= 1) {
+      return { w: base, h: Math.max(1, Math.round(base / ratio)) };
+    }
+    return { h: base, w: Math.max(1, Math.round(base * ratio)) };
+  }
+
+  // Detect whether the top and bottom edges are uniform enough for a solid pad.
+  function analyzeEdges(img) {
+    try {
+      const w = 64, h = 8;
+      const c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      const ctx = c.getContext('2d', { willReadFrequently: true });
+      const band = Math.max(1, Math.round(img.naturalHeight * 0.08));
+      ctx.drawImage(img, 0, 0, img.naturalWidth, band, 0, 0, w, 4);
+      ctx.drawImage(img, 0, img.naturalHeight - band, img.naturalWidth, band, 0, 4, w, 4);
+      const data = ctx.getImageData(0, 0, w, h).data;
+
+      let r = 0, g = 0, b = 0, n = 0;
+      for (let i = 0; i < data.length; i += 4) { r += data[i]; g += data[i+1]; b += data[i+2]; n++; }
+      const mean = { r: r/n, g: g/n, b: b/n };
+
+      let v = 0;
+      for (let i = 0; i < data.length; i += 4) {
+        const dr = data[i] - mean.r, dg = data[i+1] - mean.g, db = data[i+2] - mean.b;
+        v += dr*dr + dg*dg + db*db;
+      }
+      v /= n;
+
+      const toHex = (x) => Math.round(Math.max(0, Math.min(255, x))).toString(16).padStart(2, '0');
+      return {
+        uniform: v < 900,
+        color: '#' + toHex(mean.r) + toHex(mean.g) + toHex(mean.b)
+      };
+    } catch (e) {
+      return { uniform: false, color: '#000000' };
+    }
+  }
+
+  function resolvedMode() {
+    if (currentMode !== 'auto') return currentMode;
+    return lastEdgeInfo.uniform ? 'solid' : 'blur';
+  }
+
+  // ---------- core drawing ----------
+  function drawConverted(img, mode, outW, outH, fillColor) {
+    const canvas = document.createElement('canvas');
+    canvas.width = outW;
+    canvas.height = outH;
+    const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    const sw = img.naturalWidth;
+    const sh = img.naturalHeight;
+
+    if (mode === 'rotate') {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, outW, outH);
+      ctx.save();
+      ctx.translate(outW / 2, outH / 2);
+      ctx.rotate(Math.PI / 2);
+      // After rotation, the image's width becomes sh, height becomes sw.
+      const scale = Math.min(outW / sh, outH / sw);
+      ctx.drawImage(img, -(sw * scale) / 2, -(sh * scale) / 2, sw * scale, sh * scale);
+      ctx.restore();
+      return canvas;
+    }
+
+    if (mode === 'crop') {
+      const scale = Math.max(outW / sw, outH / sh);
+      const dw = sw * scale;
+      const dh = sh * scale;
+      ctx.drawImage(img, (outW - dw) / 2, (outH - dh) / 2, dw, dh);
+      return canvas;
+    }
+
+    // blur or solid: "contain" the image, fill the rest
+    const scale = Math.min(outW / sw, outH / sh);
+    const dw = sw * scale;
+    const dh = sh * scale;
+    const dx = (outW - dw) / 2;
+    const dy = (outH - dh) / 2;
+
+    if (mode === 'solid') {
+      ctx.fillStyle = fillColor || '#000000';
+      ctx.fillRect(0, 0, outW, outH);
+    } else {
+      const blurPx = Math.max(8, Math.round(Math.min(outW, outH) * 0.04));
+      ctx.save();
+      if ('filter' in ctx) {
+        ctx.filter = 'blur(' + blurPx + 'px)';
+      }
+      const coverScale = Math.max(outW / sw, outH / sh) * 1.1;
+      const cw = sw * coverScale;
+      const ch = sh * coverScale;
+      ctx.drawImage(img, (outW - cw) / 2, (outH - ch) / 2, cw, ch);
+      ctx.restore();
+      // Slight darkening for contrast behind the subject
+      ctx.fillStyle = 'rgba(0,0,0,0.12)';
+      ctx.fillRect(0, 0, outW, outH);
+    }
+
+    ctx.drawImage(img, dx, dy, dw, dh);
+    return canvas;
+  }
+
+  // ---------- UI state ----------
+  function updateModeUI() {
+    modeButtons.forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === currentMode ? 'true' : 'false'));
+    modeHelp.textContent = MODE_HELP[currentMode] || '';
+    if (currentMode === 'solid' || (currentMode === 'auto' && lastEdgeInfo.uniform)) {
+      solidColorRow.classList.remove('htv-hidden');
+    } else {
+      solidColorRow.classList.add('htv-hidden');
+    }
+    convertBtn.disabled = !currentImage;
+  }
+
+  function updateFormatUI() {
+    if (formatSelect.value === 'image/png') qualityRow.classList.add('htv-hidden');
+    else qualityRow.classList.remove('htv-hidden');
+  }
+
+  function updateAspectUI() {
+    if (aspectSelect.value === 'custom') customAspect.classList.remove('htv-hidden');
+    else customAspect.classList.add('htv-hidden');
+  }
+
+  function resetAll() {
+    if (lastBlobUrl) { URL.revokeObjectURL(lastBlobUrl); lastBlobUrl = null; }
+    if (currentObjectUrl) { URL.revokeObjectURL(currentObjectUrl); currentObjectUrl = null; }
+    lastBlob = null;
+    downloadBtn.disabled = true;
+    outputCanvas.classList.add('htv-hidden');
+    emptyMsg.classList.remove('htv-hidden');
+    outputMeta.textContent = '';
+    setStatus('');
+    currentImage = null;
+    lastEdgeInfo = { uniform: false, color: '#000000' };
+    originalImg.removeAttribute('src');
+    originalWrap.classList.add('htv-hidden');
+    settingsEl.classList.add('htv-hidden');
+    fileInput.value = '';
+    showWarn('');
+    updateModeUI();
+  }
+
+  // ---------- file handling ----------
+  function handleFile(file) {
+    if (!file) return;
+    showWarn('');
+    setStatus('');
+    if (!file.type || !file.type.startsWith('image/')) {
+      showWarn('That file does not look like an image. Please choose a PNG, JPG, WebP, GIF, or BMP file.');
+      return;
+    }
+    if (file.size > 50 * 1024 * 1024) {
+      showWarn('This file is larger than 50 MB. Large images may be slow to process on low-end devices.');
+    }
+    if (currentObjectUrl) { URL.revokeObjectURL(currentObjectUrl); currentObjectUrl = null; }
+
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      currentObjectUrl = url;
+      currentImage = img;
+      originalImg.src = url;
+      originalWrap.classList.remove('htv-hidden');
+      settingsEl.classList.remove('htv-hidden');
+      originalMeta.textContent = img.naturalWidth + ' × ' + img.naturalHeight + ' px · ' +
+        (file.type || 'image') + ' · ' + formatBytes(file.size);
+
+      lastEdgeInfo = analyzeEdges(img);
+      if (lastEdgeInfo.uniform) {
+        solidColor.value = lastEdgeInfo.color;
+        solidHex.value = lastEdgeInfo.color;
+      }
+
+      const mp = (img.naturalWidth * img.naturalHeight) / 1e6;
+      if (mp > 8) {
+        showWarn('This image is about ' + mp.toFixed(1) + ' megapixels. Preview may be slow; the download still uses full resolution.');
+      }
+
+      updateModeUI();
+      doConvert();
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      showWarn('Could not load that image. The file may be corrupted or in an unsupported format.');
+    };
+    img.src = url;
+  }
+
+  // ---------- convert ----------
+  function doConvert() {
+    if (!currentImage) { setStatus('Choose an image first.', 'error'); return; }
+
+    const aspect = parseAspect();
+    const target = targetPixelSize(aspect, {
+      width: currentImage.naturalWidth,
+      height: currentImage.naturalHeight
+    });
+    const mode = resolvedMode();
+    const fill = solidColor.value || '#000000';
+
+    setStatus('Converting…');
+    const t0 = performance.now();
+
+    let canvas;
+    try {
+      canvas = drawConverted(currentImage, mode, target.w, target.h, fill);
+    } catch (err) {
+      setStatus('Conversion failed: ' + (err && err.message ? err.message : 'unknown error'), 'error');
+      return;
+    }
+
+    outputCanvas.width = canvas.width;
+    outputCanvas.height = canvas.height;
+    const pctx = outputCanvas.getContext('2d');
+    pctx.clearRect(0, 0, canvas.width, canvas.height);
+    pctx.drawImage(canvas, 0, 0);
+    outputCanvas.classList.remove('htv-hidden');
+    emptyMsg.classList.add('htv-hidden');
+
+    const fmt = formatSelect.value;
+    const quality = parseFloat(qualityInput.value);
+    let finalFmt = fmt;
+    if (fmt === 'image/webp') {
+      try {
+        const test = document.createElement('canvas');
+        test.width = 1; test.height = 1;
+        if (!test.toDataURL('image/webp').startsWith('data:image/webp')) {
+          finalFmt = 'image/png';
+          showWarn('This browser cannot export WebP. The download will be PNG instead.');
+        }
+      } catch (e) {
+        finalFmt = 'image/png';
+      }
+    }
+
+    const onBlob = (blob) => {
+      if (!blob) {
+        setStatus('Conversion failed: the browser could not encode the image.', 'error');
+        return;
+      }
+      if (lastBlobUrl) URL.revokeObjectURL(lastBlobUrl);
+      lastBlob = blob;
+      lastBlobUrl = URL.createObjectURL(blob);
+      downloadBtn.disabled = false;
+      const elapsed = Math.max(1, Math.round(performance.now() - t0));
+      const ext = finalFmt === 'image/png' ? 'png' : finalFmt === 'image/jpeg' ? 'jpg' : 'webp';
+      downloadBtn.dataset.ext = ext;
+      outputMeta.textContent = 'Output: ' + canvas.width + ' × ' + canvas.height + ' px · ' +
+        ext.toUpperCase() + ' · ' + formatBytes(blob.size) + ' · ' + elapsed + ' ms';
+      setStatus('Done. Mode: ' + mode + '.', 'ok');
+    };
+
+    if (finalFmt === 'image/png') {
+      canvas.toBlob(onBlob, 'image/png');
+    } else {
+      canvas.toBlob(onBlob, finalFmt, quality);
+    }
+  }
+
+  // ---------- download ----------
+  function doDownload() {
+    if (!lastBlob || !lastBlobUrl) return;
+    const ext = downloadBtn.dataset.ext || 'png';
+    const a = document.createElement('a');
+    const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    a.href = lastBlobUrl;
+    a.download = 'vertical-' + ts + '.' + ext;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  // ---------- events ----------
+  dropEl.addEventListener('click', () => fileInput.click());
+  ['dragenter','dragover'].forEach(ev => dropEl.addEventListener(ev, (e) => {
+    e.preventDefault(); dropEl.classList.add('dragover');
+  }));
+  ['dragleave','drop'].forEach(ev => dropEl.addEventListener(ev, (e) => {
+    e.preventDefault(); dropEl.classList.remove('dragover');
+  }));
+  dropEl.addEventListener('drop', (e) => {
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+      handleFile(e.dataTransfer.files[0]);
+    }
+  });
+  fileInput.addEventListener('change', (e) => {
+    if (e.target.files && e.target.files.length) handleFile(e.target.files[0]);
+  });
+
+  aspectSelect.addEventListener('change', () => {
+    updateAspectUI();
+    if (currentImage) doConvert();
+  });
+  customW.addEventListener('change', () => { if (currentImage) doConvert(); });
+  customH.addEventListener('change', () => { if (currentImage) doConvert(); });
+
+  modeButtons.forEach(b => b.addEventListener('click', () => {
+    currentMode = b.dataset.mode;
+    updateModeUI();
+    if (currentImage) doConvert();
+  }));
+
+  solidColor.addEventListener('input', () => {
+    solidHex.value = solidColor.value;
+    if (currentImage && (currentMode === 'solid' || currentMode === 'auto')) doConvert();
+  });
+  solidHex.addEventListener('change', () => {
+    const v = solidHex.value.trim();
+    if (/^#[0-9a-fA-F]{6}$/.test(v)) {
+      solidColor.value = v;
+      if (currentImage) doConvert();
+    } else {
+      solidHex.value = solidColor.value;
+    }
+  });
+
+  formatSelect.addEventListener('change', () => { updateFormatUI(); });
+  qualityInput.addEventListener('input', () => { qualityVal.textContent = parseFloat(qualityInput.value).toFixed(2); });
+
+  convertBtn.addEventListener('click', doConvert);
+  resetBtn.addEventListener('click', resetAll);
+  downloadBtn.addEventListener('click', doDownload);
+
+  // Initial state
+  updateAspectUI();
+  updateModeUI();
+  updateFormatUI();
+  qualityVal.textContent = parseFloat(qualityInput.value).toFixed(2);
+})();
+</script>
+</body>
+</html>

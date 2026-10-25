@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f8ff">
+<title>MP3 Tag Editor — Edit ID3 Tags &amp; Cover Art Free</title>
+<meta name="description" content="Edit MP3 ID3 tags and add cover art in your browser. Batch mode, no upload, no re-encoding. Fix artist, album, year, genre, and artwork.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://converttotoolsonline.com/mp3-tag-editor.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ConvertToToolsOnline">
+<meta property="og:title" content="MP3 Tag Editor — Edit ID3 Tags &amp; Cover Art">
+<meta property="og:description" content="Read and write ID3v2.3 tags on MP3 files in your browser. Cover art, batch mode, no upload, no re-encoding.">
+<meta property="og:url" content="https://converttotoolsonline.com/mp3-tag-editor.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MP3 Tag Editor">
+<meta name="twitter:description" content="Edit MP3 tags and cover art in your browser. No upload, no re-encoding.">
+<link rel="stylesheet" href="/style.css">
+
+<style>
+:root {
+  color-scheme: light;
+  --ct-ink: #172033;
+  --ct-muted: #607087;
+  --ct-blue: #245bcc;
+  --ct-blue-dark: #194aa8;
+  --ct-line: #dfe6ef;
+  --ct-bg: #f5f8ff;
+  --ct-white: #fff;
+  --ct-radius: 16px;
+  --ct-shadow: 0 6px 24px rgba(20, 35, 60, .055);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+
+body {
+  margin: 0;
+  background: var(--ct-bg);
+  color: var(--ct-ink);
+  font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a { color: var(--ct-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible { outline: 3px solid #9dbbff; outline-offset: 3px; }
+
+.ct-container { width: min(1200px, calc(100% - 32px)); margin-inline: auto; }
+
+.ct-skip {
+  position: absolute; top: 8px; left: -9999px; z-index: 100;
+  padding: 10px 14px; border-radius: 8px;
+  background: white; color: var(--ct-ink);
+}
+.ct-skip:focus { left: 10px; }
+
+.ct-header {
+  position: relative; z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid var(--ct-line);
+}
+.ct-header-inner {
+  min-height: 72px;
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+}
+.ct-brand {
+  display: inline-flex; align-items: center; gap: 11px;
+  color: var(--ct-ink); font-weight: 850; letter-spacing: -.4px;
+}
+.ct-brand:hover { text-decoration: none; }
+.ct-brand-mark {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; flex: 0 0 auto;
+  border-radius: 12px; background: var(--ct-blue); color: #fff;
+  font-size: .95rem; font-weight: 900;
+}
+.ct-brand-name span { color: var(--ct-blue); }
+.ct-nav { display: flex; align-items: center; gap: 22px; }
+.ct-nav a { color: #475569; font-size: .93rem; font-weight: 700; }
+.ct-nav a:hover { color: var(--ct-blue); }
+.ct-menu-button {
+  display: none; min-height: 40px; padding: 8px 12px;
+  border: 1px solid var(--ct-line); border-radius: 9px;
+  background: white; color: var(--ct-ink); font-weight: 750;
+}
+
+.ct-hero {
+  padding: 52px 0 42px;
+  border-bottom: 1px solid var(--ct-line);
+  background: linear-gradient(130deg, #f8fbff 0%, #eaf1ff 56%, #f6f2ff 100%);
+}
+.ct-eyebrow {
+  margin: 0 0 10px; color: var(--ct-blue);
+  font-size: .76rem; font-weight: 850;
+  letter-spacing: .13em; text-transform: uppercase;
+}
+.ct-hero h1 {
+  max-width: 920px; margin: 0 0 15px;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+  line-height: 1.08; letter-spacing: -.05em;
+}
+.ct-hero h1 span { display: block; color: var(--ct-blue); }
+.ct-lead {
+  max-width: 840px; margin: 0;
+  color: #475569; font-size: clamp(1rem, 1.7vw, 1.12rem); line-height: 1.8;
+}
+.ct-privacy-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 18px; padding: 6px 12px;
+  background: #fff; border: 1px solid #cfe0ff;
+  border-radius: 999px; color: #194aa8;
+  font-size: .84rem; font-weight: 700;
+}
+
+.ct-section { padding: 40px 0; }
+.ct-section-heading { margin-bottom: 21px; }
+.ct-section-heading h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -.035em; line-height: 1.25;
+}
+.ct-section-heading p:last-child { max-width: 820px; margin: 0; color: var(--ct-muted); }
+
+.ct-button {
+  display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+  min-height: 43px; padding: 10px 15px;
+  border: 1px solid #cbd5e1; border-radius: 10px;
+  background: #fff; color: var(--ct-ink);
+  font-weight: 750; text-align: center;
+  transition: border-color .15s ease, background .15s ease;
+}
+.ct-button:hover { border-color: #a9bce4; text-decoration: none; }
+.ct-button-primary {
+  border-color: var(--ct-blue);
+  background: var(--ct-blue); color: #fff;
+}
+.ct-button-primary:hover {
+  border-color: var(--ct-blue-dark);
+  background: var(--ct-blue-dark);
+  color: #fff;
+}
+.ct-button.small { min-height: 36px; padding: 7px 12px; font-size: .85rem; }
+.ct-button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ============ Tool layout ============ */
+.mt-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 940px) {
+  .mt-grid { grid-template-columns: 1fr; }
+}
+
+.mt-panel {
+  padding: 20px;
+  border: 1px solid var(--ct-line);
+  border-radius: var(--ct-radius);
+  background: var(--ct-white);
+  box-shadow: var(--ct-shadow);
+}
+.mt-panel + .mt-panel { margin-top: 20px; }
+
+.mt-panel-heading {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 14px; flex-wrap: wrap;
+}
+.mt-panel-heading h2 {
+  margin: 0; font-size: 1rem; letter-spacing: -.01em;
+}
+.mt-panel-heading p { margin: 0; color: var(--ct-muted); font-size: .82rem; }
+
+/* Drop zone */
+.mt-drop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 100%; min-height: 130px;
+  padding: 22px 16px;
+  border: 2px dashed #c3d0e4;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #fafcff 0%, #f2f6ff 100%);
+  color: var(--ct-ink);
+  text-align: center;
+  transition: border-color .18s ease, background .18s ease;
+}
+.mt-drop:hover, .mt-drop:focus-visible, .mt-drop.is-dragover {
+  border-color: var(--ct-blue);
+  background: linear-gradient(180deg, #f2f7ff 0%, #e6efff 100%);
+  outline: none;
+}
+.mt-drop-icon {
+  display: grid; place-items: center;
+  width: 42px; height: 42px; margin-bottom: 8px;
+  border-radius: 11px;
+  background: #fff; border: 1px solid #dbe7ff;
+  color: var(--ct-blue); font-size: 1.2rem;
+}
+.mt-drop strong { font-size: .92rem; margin-bottom: 4px; }
+.mt-drop small { color: var(--ct-muted); line-height: 1.45; max-width: 280px; font-size: .78rem; }
+
+.mt-file-input { display: none; }
+
+/* File queue */
+.mt-queue {
+  margin-top: 14px;
+  display: grid;
+  gap: 7px;
+}
+.mt-file-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 11px;
+  border: 1px solid var(--ct-line);
+  border-radius: 9px;
+  background: #f8faff;
+  cursor: pointer;
+  transition: border-color .12s ease, background .12s ease;
+}
+.mt-file-row:hover { border-color: #a9bce4; background: #f5f9ff; }
+.mt-file-row.is-selected {
+  border-color: var(--ct-blue);
+  background: #eef4ff;
+  box-shadow: inset 0 0 0 1px var(--ct-blue);
+}
+.mt-file-info { flex: 1; min-width: 0; }
+.mt-file-name {
+  display: block;
+  font-size: .84rem;
+  font-weight: 650;
+  color: var(--ct-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mt-file-meta {
+  display: block;
+  font-size: .72rem;
+  color: var(--ct-muted);
+  font-family: ui-monospace, monospace;
+  margin-top: 1px;
+}
+.mt-file-status {
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+.mt-file-status.is-readonly { background: #fef2f2; color: #991b1b; }
+.mt-file-status.is-loaded { background: #eef2f7; color: #475569; }
+.mt-file-status.is-edited { background: #fffbeb; color: #8a5a00; }
+.mt-file-status.is-ready { background: #f0fdf4; color: #166534; }
+.mt-file-dl {
+  border: 1px solid var(--ct-blue);
+  background: var(--ct-blue);
+  color: #fff;
+  border-radius: 6px;
+  padding: 4px 9px;
+  font-size: .72rem;
+  font-weight: 750;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+.mt-file-dl:hover { background: var(--ct-blue-dark); }
+.mt-file-remove {
+  border: 1px solid #fecaca;
+  background: #fff;
+  color: #991b1b;
+  border-radius: 6px;
+  padding: 4px 7px;
+  font-size: .72rem;
+  font-weight: 750;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+.mt-file-remove:hover { background: #fef2f2; }
+
+.mt-queue-actions {
+  display: flex; flex-wrap: wrap; gap: 7px;
+  margin-top: 12px;
+}
+
+/* Editor */
+.mt-editor-empty {
+  padding: 50px 20px;
+  text-align: center;
+  color: var(--ct-muted);
+  font-size: .92rem;
+}
+.mt-editor-empty strong { color: var(--ct-ink); display: block; margin-bottom: 5px; }
+
+.mt-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 620px) {
+  .mt-form-grid { grid-template-columns: 1fr; }
+}
+
+.mt-field { display: flex; flex-direction: column; gap: 4px; }
+.mt-field.is-wide { grid-column: 1 / -1; }
+.mt-field label {
+  font-size: .8rem; font-weight: 650; color: #34405a;
+  display: flex; align-items: center; gap: 5px;
+}
+.mt-field label .mt-frame-id {
+  font-family: ui-monospace, monospace;
+  font-size: .68rem;
+  font-weight: 700;
+  color: var(--ct-muted);
+  background: #eef2f8;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.mt-field input, .mt-field select {
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ct-ink);
+  font-size: .88rem;
+  width: 100%;
+}
+.mt-field input:focus, .mt-field select:focus { border-color: var(--ct-blue); }
+.mt-field .mt-hint {
+  font-size: .72rem;
+  color: var(--ct-muted);
+  line-height: 1.4;
+}
+.mt-field input[type="number"] {
+  font-family: ui-monospace, monospace;
+}
+
+/* Cover */
+.mt-cover-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+.mt-cover-preview {
+  width: 120px; height: 120px;
+  border-radius: 10px;
+  border: 1px solid var(--ct-line);
+  background:
+    linear-gradient(45deg, #eee 25%, transparent 25%) 0 0/12px 12px,
+    linear-gradient(-45deg, #eee 25%, transparent 25%) 0 6px/12px 12px,
+    linear-gradient(45deg, transparent 75%, #eee 75%) 6px -6px/12px 12px,
+    linear-gradient(-45deg, transparent 75%, #eee 75%) -6px 0/12px 12px,
+    #fff;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+.mt-cover-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+.mt-cover-preview span {
+  font-size: .74rem;
+  color: #94a3b8;
+  text-align: center;
+  padding: 0 8px;
+}
+.mt-cover-controls {
+  flex: 1;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.mt-cover-controls .mt-hint {
+  font-size: .72rem;
+  color: var(--ct-muted);
+  line-height: 1.45;
+}
+.mt-cover-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Actions */
+.mt-actions {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ct-line);
+}
+
+.mt-status {
+  min-height: 1.3em;
+  font-size: .82rem;
+  margin-top: 10px;
+}
+.mt-status[data-tone="error"] { color: #b00020; }
+.mt-status[data-tone="ok"] { color: #166534; }
+.mt-status[data-tone="busy"] { color: var(--ct-muted); }
+.mt-status[data-tone="warn"] { color: #8a5a00; }
+
+.mt-warn {
+  margin-top: 12px;
+  padding: 10px 13px;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  background: #fffbeb;
+  font-size: .82rem;
+  color: #7a5200;
+  line-height: 1.55;
+}
+.mt-warn strong { color: #6b4500; }
+.mt-warn.is-error {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #7f1d1d;
+}
+.mt-warn.is-error strong { color: #991b1b; }
+.mt-warn.is-info {
+  background: #f0f6ff;
+  border-color: #cfe0ff;
+  color: #194aa8;
+}
+.mt-warn.is-info strong { color: #172033; }
+
+.mt-note {
+  margin-top: 14px;
+  padding: 11px 14px;
+  border: 1px solid #cfe0ff;
+  border-radius: 10px;
+  background: #f5f9ff;
+  font-size: .8rem;
+  color: #194aa8;
+  line-height: 1.6;
+}
+.mt-note strong { color: #172033; }
+
+.mt-hidden { display: none !important; }
+
+/* ============ FAQ ============ */
+.mt-faq-nav {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--ct-line);
+  border-radius: 10px;
+  background: #f8faff;
+  margin: 16px 0 24px;
+}
+.mt-faq-nav strong {
+  font-size: .78rem; font-weight: 850;
+  letter-spacing: .05em; text-transform: uppercase;
+  color: var(--ct-muted);
+  margin-right: 4px;
+  align-self: center;
+}
+.mt-faq-nav a {
+  padding: 5px 11px;
+  border: 1px solid var(--ct-line);
+  border-radius: 999px;
+  background: #fff;
+  color: #34405a;
+  font-size: .84rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: border-color .12s ease, background .12s ease, color .12s ease;
+}
+.mt-faq-nav a:hover {
+  border-color: var(--ct-blue);
+  color: var(--ct-blue);
+  background: #f5f9ff;
+  text-decoration: none;
+}
+
+.mt-faq-group {
+  margin: 32px 0;
+  scroll-margin-top: 24px;
+}
+.mt-faq-group h3 {
+  margin: 0 0 14px;
+  font-size: 1.1rem;
+  letter-spacing: -.02em;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ct-blue);
+  display: inline-block;
+}
+
+/* Guide */
+.ct-guide { max-width: 900px; margin: 0 auto; padding: 48px 0 16px; }
+.ct-guide h2 { margin-top: 32px; font-size: 1.25rem; letter-spacing: -.02em; }
+.ct-guide h3 { margin-top: 22px; font-size: 1.03rem; }
+.ct-guide p, .ct-guide li { line-height: 1.7; color: #34405a; }
+.ct-guide code {
+  background: #eef2f8; padding: 1px 6px; border-radius: 5px;
+  font-size: .88em; color: #172033;
+}
+.ct-guide table {
+  width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .86rem;
+}
+.ct-guide th, .ct-guide td {
+  padding: 8px 12px; border: 1px solid var(--ct-line); text-align: left;
+}
+.ct-guide th { background: #f8faff; font-weight: 750; }
+
+.ct-faq details { border-bottom: 1px solid var(--ct-line); padding: 12px 0; }
+.ct-faq summary { cursor: pointer; font-weight: 700; color: var(--ct-ink); }
+.ct-faq summary::marker { color: var(--ct-blue); }
+.ct-faq p { margin: 9px 0 0; color: #34405a; }
+
+.ct-related-links {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin: 12px 0 0; padding: 0; list-style: none;
+}
+.ct-related-links a {
+  display: inline-block; padding: 7px 13px;
+  border: 1px solid var(--ct-line); border-radius: 999px;
+  background: #fff; color: #34405a;
+  font-size: .88rem; font-weight: 650;
+}
+.ct-related-links a:hover {
+  border-color: #a9bce4; color: var(--ct-blue); text-decoration: none;
+}
+
+.ct-footer {
+  margin-top: 40px; padding: 35px 0 17px;
+  background: #111c32; color: #d5deed;
+}
+.ct-footer-grid {
+  display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 28px;
+}
+.ct-footer-brand {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; color: #fff; font-weight: 850;
+}
+.ct-footer-brand:hover { text-decoration: none; }
+.ct-footer-grid p { max-width: 390px; color: #bdc8db; font-size: .91rem; }
+.ct-footer-links { display: grid; align-content: start; gap: 7px; }
+.ct-footer-links strong { margin-bottom: 4px; color: #fff; }
+.ct-footer-links a { color: #cbd5e1; font-size: .92rem; }
+.ct-footer-links a:hover { color: #fff; }
+.ct-footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+  margin-top: 25px; padding-top: 15px;
+  border-top: 1px solid #32405a; color: #aebbd0; font-size: .84rem;
+}
+.ct-footer-bottom p { margin: 0; }
+
+@media (max-width: 700px) {
+  .ct-header-inner { min-height: 65px; }
+  .ct-menu-button { display: inline-flex; }
+  .ct-nav {
+    display: none; position: absolute;
+    top: 65px; left: 0; right: 0;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ct-line);
+    background: #fff;
+  }
+  .ct-nav.is-open { display: block; }
+  .ct-nav-inner {
+    display: grid; gap: 0;
+    width: min(1200px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+  .ct-nav-inner a { padding: 10px 0; }
+  .ct-hero { padding: 40px 0 32px; }
+  .ct-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .ct-container { width: calc(100% - 22px); }
+  .ct-footer-grid { grid-template-columns: 1fr; }
+  .mt-panel { padding: 16px; }
+  .mt-drop { min-height: 110px; padding: 18px 12px; }
+  .mt-cover-preview { width: 96px; height: 96px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+@media print {
+  .ct-header, .ct-footer, .ct-hero, .ct-nav, .mt-drop, .mt-actions,
+  .mt-panel-heading p, .ct-related-links, .mt-note, .mt-faq-nav,
+  .mt-queue-actions, .mt-file-dl, .mt-file-remove {
+    display: none !important;
+  }
+  body { background: #fff; }
+  .mt-panel { box-shadow: none; border-color: #ccc; }
+  .ct-section { padding: 10px 0; }
+  .ct-guide { padding-top: 10px; }
+}
+</style>
+</head>
+
+<body>
+<a class="ct-skip" href="#main-content">Skip to content</a>
+
+<header class="ct-header">
+  <div class="ct-container ct-header-inner">
+    <a class="ct-brand" href="/" aria-label="ConvertToToolsOnline home">
+      <span class="ct-brand-mark" aria-hidden="true">CT</span>
+      <span class="ct-brand-name">Convert<span>ToToolsOnline</span></span>
+    </a>
+    <button class="ct-menu-button" id="ct-menu-button" type="button"
+            aria-controls="ct-main-nav" aria-expanded="false">Menu</button>
+    <nav class="ct-nav" id="ct-main-nav" aria-label="Main navigation">
+      <div class="ct-nav-inner">
+        <a href="/">Home</a>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/Contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="ct-hero">
+    <div class="ct-container">
+      <p class="ct-eyebrow">Free online audio tool</p>
+      <h1>MP3 Tag Editor <span>fix ID3 tags and add cover art, without uploading</span></h1>
+      <p class="ct-lead">
+        Read and rewrite ID3v2.3 tags on your MP3 files — title, artist, album,
+        album artist, year, track, disc, genre, composer, copyright, publisher,
+        and <strong>embedded cover art</strong>. Tags are written by
+        <strong>browser-id3-writer</strong> and read by <strong>jsmediatags</strong>,
+        both running entirely in your browser. <strong>The audio is never re-encoded</strong>,
+        so there is no quality loss. Queue several files and apply album information
+        across all of them. No upload, no signup, no watermark.
+      </p>
+      <span class="ct-privacy-badge">
+        <span aria-hidden="true">🔒</span>
+        100% in your browser — your audio never leaves your device
+      </span>
+    </div>
+  </section>
+
+  <section class="ct-section">
+    <div class="ct-container">
+      <div class="mt-grid">
+
+        <!-- LEFT: queue -->
+        <div>
+          <section class="mt-panel" aria-labelledby="mt-queue-heading">
+            <div class="mt-panel-heading">
+              <h2 id="mt-queue-heading">Your files</h2>
+              <p id="mt-queue-count">0 files</p>
+            </div>
+
+            <button type="button" id="mt-drop" class="mt-drop" aria-describedby="mt-drop-help">
+              <span class="mt-drop-icon" aria-hidden="true">🎵</span>
+              <strong>Drop MP3 files here</strong>
+              <small id="mt-drop-help">Or click to browse. Multiple files supported. MP3 can be edited; M4A, FLAC, and OGG are read-only.</small>
+            </button>
+            <input id="mt-file" type="file" accept=".mp3,.m4a,.flac,.ogg,audio/mpeg,audio/mp4,audio/flac,audio/ogg" class="mt-file-input" multiple>
+
+            <div id="mt-queue" class="mt-queue"></div>
+
+            <div class="mt-queue-actions">
+              <button id="mt-apply-all" type="button" class="ct-button small" disabled>Apply album info to all</button>
+              <button id="mt-save-all" type="button" class="ct-button ct-button-primary small" disabled>Save all edited</button>
+              <button id="mt-clear-all" type="button" class="ct-button small">Clear all</button>
+            </div>
+
+            <div id="mt-queue-warn" class="mt-warn mt-hidden" role="status"></div>
+          </section>
+        </div>
+
+        <!-- RIGHT: editor -->
+        <div>
+          <section class="mt-panel" aria-labelledby="mt-editor-heading">
+            <div class="mt-panel-heading">
+              <h2 id="mt-editor-heading">Edit tags</h2>
+              <p id="mt-editor-sub">Select a file from the list.</p>
+            </div>
+
+            <div id="mt-editor-empty" class="mt-editor-empty">
+              <strong>No file selected.</strong>
+              Add an MP3 above, then click it in the list to edit its tags.
+            </div>
+
+            <div id="mt-editor" class="mt-hidden">
+              <div id="mt-editor-warn" class="mt-warn mt-hidden" role="status"></div>
+
+              <div class="mt-form-grid">
+                <div class="mt-field is-wide">
+                  <label for="mt-title">Title <span class="mt-frame-id">TIT2</span></label>
+                  <input id="mt-title" type="text" placeholder="Song title" autocomplete="off">
+                </div>
+
+                <div class="mt-field is-wide">
+                  <label for="mt-artist">Artist(s) <span class="mt-frame-id">TPE1</span></label>
+                  <input id="mt-artist" type="text" placeholder="Artist — separate multiple with /" autocomplete="off">
+                  <span class="mt-hint">Separate multiple artists with a slash: <code>Eminem / 50 Cent</code></span>
+                </div>
+
+                <div class="mt-field">
+                  <label for="mt-album">Album <span class="mt-frame-id">TALB</span></label>
+                  <input id="mt-album" type="text" placeholder="Album title" autocomplete="off">
+                </div>
+
+                <div class="mt-field">
+                  <label for="mt-albumartist">Album artist <span class="mt-frame-id">TPE2</span></label>
+                  <input id="mt-albumartist" type="text" placeholder="Various Artists, or the main artist" autocomplete="off">
+                </div>
+
+                <div class="mt-field">
+                  <label for="mt-year">Year <span class="mt-frame-id">TYER</span></label>
+                  <input id="mt-year" type="number" min="1900" max="2100" step="1" placeholder="2026">
+                  <span class="mt-hint">Four digits. ID3v2.3 stores the year separately.</span>
+                </div>
+
+                <div class="mt-field">
+                  <label for="mt-genre">Genre <span class="mt-frame-id">TCON</span></label>
+                  <input id="mt-genre" type="text" placeholder="Rock, Pop, Podcast" autocomplete="off" list="mt-genre-list">
+                  <datalist id="mt-genre-list">
+                    <option value="Rock"></option>
+                    <option value="Pop"></option>
+                    <option value="Hip-Hop"></option>
+                    <option value="Jazz"></option>
+                    <option value="Classical"></option>
+                    <option value="Electronic"></option>
+                    <option value="Folk"></option>
+                    <option value="Country"></option>
+                    <option value="R&B"></option>
+                    <option value="Metal"></option>
+                    <option value="Soundtrack"></option>
+                    <option value="Podcast"></option>
+                    <option value="Audiobook"></option>
+                    <option value="Spoken Word"></option>
+                  </datalist>
+                  <span class="mt-hint">Comma-separate for multiple genres.</span>
+                </div>
+
+                <div class="mt-field">
+                  <label for="mt-track">Track <span class="mt-frame-id">TRCK</span></label>
+                  <input id="mt-track" type="text" placeholder="5 or 5/12" autocomplete="off">
+                </div>
+
+                <div class="mt-field">
+                  <label for="mt-disc">Disc <span class="mt-frame-id">TPOS</span></label>
+                  <input id="mt-disc" type="text" placeholder="1 or 1/2" autocomplete="off">
+                </div>
+
+                <div class="mt-field">
+                  <label for="mt-composer">Composer <span class="mt-frame-id">TCOM</span></label>
+                  <input id="mt-composer" type="text" placeholder="Composer — separate with /" autocomplete="off">
+                </div>
+
+                <div class="mt-field">
+                  <label for="mt-publisher">Publisher / label <span class="mt-frame-id">TPUB</span></label>
+                  <input id="mt-publisher" type="text" placeholder="Record label or studio" autocomplete="off">
+                </div>
+
+                <div class="mt-field is-wide">
+                  <label for="mt-copyright">Copyright <span class="mt-frame-id">TCOP</span></label>
+                  <input id="mt-copyright" type="text" placeholder="© 2026 Artist" autocomplete="off">
+                </div>
+              </div>
+
+              <!-- Cover art -->
+              <div class="mt-field is-wide" style="margin-top:16px;">
+                <label>Cover art <span class="mt-frame-id">APIC</span></label>
+                <div class="mt-cover-row">
+                  <div class="mt-cover-preview" id="mt-cover-preview">
+                    <span>No cover</span>
+                  </div>
+                  <div class="mt-cover-controls">
+                    <div class="mt-cover-buttons">
+                      <button id="mt-cover-upload" type="button" class="ct-button small">Choose image</button>
+                      <button id="mt-cover-remove" type="button" class="ct-button small" disabled>Remove cover</button>
+                    </div>
+                    <input id="mt-cover-input" type="file" accept="image/jpeg,image/png" class="mt-file-input">
+                    <span class="mt-hint">
+                      JPEG or PNG. Keep it under about 500 KB — artwork is embedded in the file,
+                      so a large image grows the MP3 by the same amount. 1000×1000 px is plenty.
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-actions">
+                <button id="mt-download" type="button" class="ct-button ct-button-primary">Download tagged MP3</button>
+                <button id="mt-reset-fields" type="button" class="ct-button">Reload original tags</button>
+              </div>
+
+              <div id="mt-status" class="mt-status" role="status" aria-live="polite"></div>
+            </div>
+          </section>
+
+          <div class="mt-note">
+            <strong>What gets preserved.</strong> The audio frames are copied byte-for-byte —
+            no re-encoding, no quality loss. Tag fields are rewritten from scratch as ID3v2.3,
+            so <strong>standard fields you see here are preserved</strong> (they are read and
+            prefilled), but <strong>non-standard fields are not carried over</strong>: lyrics,
+            ReplayGain, MusicBrainz IDs, and custom frames will be lost. If you need those,
+            keep the original file.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO CONTENT -->
+  <section class="ct-section">
+    <div class="ct-container">
+      <div class="ct-guide">
+
+        <h2>What an MP3 tag editor actually changes</h2>
+        <p>
+          An MP3 file is two things stacked together: the <strong>audio frames</strong>,
+          which contain the compressed sound, and the <strong>ID3 tag</strong>, which is a
+          block of metadata attached to the start of the file. The tag holds the title,
+          artist, album, year, cover art, and dozens of other fields that music players and
+          phone libraries read to organise your music.
+        </p>
+        <p>
+          Editing a tag does not touch the audio. It rewrites the metadata block and leaves
+          the sound data exactly where it was. That is why this tool can promise no quality
+          loss — it never re-encodes anything.
+        </p>
+
+        <h3>ID3v1, ID3v2.2, ID3v2.3, ID3v2.4</h3>
+        <p>
+          There are several incompatible versions of the ID3 standard. The important ones:
+        </p>
+        <table>
+          <thead>
+            <tr><th>Version</th><th>Size</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ID3v1</strong></td><td>128 bytes, end of file</td><td>Ancient. 30-character fields, no cover art, no Unicode. Many players still read it as a fallback.</td></tr>
+            <tr><td><strong>ID3v2.2</strong></td><td>Start of file</td><td>3-character frame IDs. Obsolete; rarely produced today.</td></tr>
+            <tr><td><strong>ID3v2.3</strong></td><td>Start of file</td><td>What this tool writes. Universally supported, including cover art and Unicode.</td></tr>
+            <tr><td><strong>ID3v2.4</strong></td><td>Start of file</td><td>Newer, UTF-8 throughout, but a few older players and car stereos mishandle it.</td></tr>
+          </tbody>
+        </table>
+        <p>
+          This tool writes <strong>ID3v2.3</strong> deliberately. It is the most compatible
+          target: Windows, macOS, Android, iOS, and most car head units read it correctly.
+          Writing ID3v2.4 would be technically newer but would break playback information in
+          a small but real number of older devices.
+        </p>
+
+        <h2>Cover art adds to the file size</h2>
+        <p>
+          Artwork is embedded <em>inside</em> the MP3. A 2 MB JPEG cover makes the file 2 MB
+          larger — which matters if you are editing a whole album of 3 MB tracks. The
+          practical rule: keep covers at <strong>1000×1000 pixels, JPEG, under 500 KB</strong>.
+          That looks sharp on every player and adds a fraction of a megabyte.
+        </p>
+        <p>
+          This tool accepts JPEG and PNG. PNG is technically fine but typically 3–5× larger
+          than JPEG at the same dimensions for photographic artwork, so JPEG is the better
+          choice unless the cover has hard edges and flat colours.
+        </p>
+
+        <h2>Why a browser tool rather than desktop software</h2>
+        <p>
+          The reference desktop tool, <strong>Mp3tag</strong>, is excellent and free — but it
+          requires installation, and it is Windows-only (with a macOS alternative that is
+          separate software). For a quick fix on a borrowed machine, a Chromebook, or a phone,
+          a browser tool is the practical choice. The trade-off is that a browser tool cannot
+          reach across folders the way desktop software can: you add files explicitly, and you
+          download the results.
+        </p>
+
+        <nav class="mt-faq-nav" aria-label="Jump to FAQ section">
+          <strong>Jump to:</strong>
+          <a href="#faq-basics">Tagging basics</a>
+          <a href="#faq-cover">Cover art</a>
+          <a href="#faq-batch">Batch editing</a>
+          <a href="#faq-library">Music library</a>
+          <a href="#faq-podcast">Podcasts &amp; audiobooks</a>
+          <a href="#faq-privacy">Privacy &amp; technical</a>
+        </nav>
+
+        <!-- FAQ: BASICS -->
+        <section id="faq-basics" class="mt-faq-group" aria-labelledby="faq-basics-h">
+          <h3 id="faq-basics-h">Tagging basics</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>How do I edit MP3 tags online?</summary>
+              <p>Drop an MP3 onto the upload area, click it in the file list, and the tag form fills with its current values. Change any field, then press <strong>Download tagged MP3</strong>. The file is rewritten in your browser with the new ID3v2.3 tag block and downloaded — the original on your disk is untouched, so you keep a backup automatically.</p>
+            </details>
+
+            <details>
+              <summary>Does editing tags reduce audio quality?</summary>
+              <p>No. The audio frames are copied unchanged; only the ID3 metadata block is rewritten. There is no re-encoding, no resampling, and no generation loss. The sound in the output is bit-identical to the sound in the input.</p>
+            </details>
+
+            <details>
+              <summary>Which tag fields can I edit here?</summary>
+              <p>Title, artist(s), album, album artist, year, track number, disc number, genre, composer, publisher, copyright, and embedded cover art. That covers the fields that music players and phone libraries actually read. Non-standard fields such as lyrics, ReplayGain, and MusicBrainz IDs are not editable and are not preserved.</p>
+            </details>
+
+            <details>
+              <summary>What is the difference between "Artist" and "Album artist"?</summary>
+              <p><strong>Artist</strong> is who performed the track. <strong>Album artist</strong> is who the album is credited to. On a collaboration album, each track might list different artists, while the album artist stays constant — that field is what groups the album correctly in most players. For a single-artist album, set both to the same value.</p>
+            </details>
+
+            <details>
+              <summary>How do I enter multiple artists?</summary>
+              <p>Separate them with a slash in the Artist field: <code>Eminem / 50 Cent</code>. The tool splits on slashes and writes each as a separate ID3v2.3 value, which is how players display multiple performers. Commas are <em>not</em> split, because many single artist names contain them — “Earth, Wind &amp; Fire” is one artist, not three.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <!-- FAQ: COVER -->
+        <section id="faq-cover" class="mt-faq-group" aria-labelledby="faq-cover-h">
+          <h3 id="faq-cover-h">Cover art</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>How do I add cover art to an MP3?</summary>
+              <p>Select a file, then press <strong>Choose image</strong> under the cover art section and pick a JPEG or PNG. A preview appears. Press <strong>Download tagged MP3</strong> and the artwork is embedded in the ID3 tag as an APIC frame — the standard field every player reads for album artwork.</p>
+            </details>
+
+            <details>
+              <summary>Why is my cover art not showing in my music player?</summary>
+              <p>Three common causes. First, the player may be reading a cached thumbnail — try removing and re-adding the file to its library. Second, the image may be embedded but in an unsupported format; JPEG is the safest. Third, the file may have a second ID3 tag (ID3v1 at the end of the file) that takes precedence in older players. This tool removes all existing tags before writing, which eliminates the third cause.</p>
+            </details>
+
+            <details>
+              <summary>What size should album art be?</summary>
+              <p>1000×1000 pixels, JPEG, under about 500 KB. That is sharp on phones, desktop players, and most car displays, while adding only half a megabyte to each file. Embedding a 3000×3000 PNG can add several megabytes per track, which is painful across a full album.</p>
+            </details>
+
+            <details>
+              <summary>Why does adding cover art make my MP3 bigger?</summary>
+              <p>Because the image bytes are stored inside the file as part of the ID3 tag. A 400 KB cover makes the MP3 400 KB larger — there is no way around that. If file size matters, shrink the cover before embedding rather than after.</p>
+            </details>
+
+            <details>
+              <summary>Can I remove existing cover art?</summary>
+              <p>Yes. Select the file and press <strong>Remove cover</strong>, then download. Because the tool rewrites the entire tag block, the APIC frame is simply not written, and the artwork is gone from the output file.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <!-- FAQ: BATCH -->
+        <section id="faq-batch" class="mt-faq-group" aria-labelledby="faq-batch-h">
+          <h3 id="faq-batch-h">Batch editing</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>Can I edit tags on multiple MP3 files at once?</summary>
+              <p>Yes. Add several files at once — the queue on the left lists them all. Edit each one individually by clicking it, or use <strong>Apply album info to all</strong> to copy the album, album artist, year, genre, and cover art from the current file to every other file in the queue. Track number and title stay per-file, which is correct: those are per-track fields.</p>
+            </details>
+
+            <details>
+              <summary>Why does the tool download files one at a time?</summary>
+              <p>Because browsers deliberately block multiple automatic downloads from a single click — it is an anti-abuse measure you cannot bypass. <strong>Save all edited</strong> processes every file and turns each row in the queue into a download button, so you click each one. It is one extra click per file, and it is the only approach that works reliably across Chrome, Firefox, and Safari.</p>
+            </details>
+
+            <details>
+              <summary>Is there a file count or size limit?</summary>
+              <p>No hard limit, but there is a memory one. Each queued file is held in memory while you edit, so 30 files at 10 MB each would use 300 MB. In practice, batches of 10–20 typical tracks work fine on any modern machine. Very large single files (over 50 MB) work but are slow to read.</p>
+            </details>
+
+            <details>
+              <summary>What happens to my original files?</summary>
+              <p>Nothing. The tool reads a copy into memory and gives you a <em>new</em> downloaded file. Your original files on disk are never modified. That means an accidental mistake costs you nothing — just do not delete the originals until you have checked the output.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <!-- FAQ: LIBRARY -->
+        <section id="faq-library" class="mt-faq-group" aria-labelledby="faq-library-h">
+          <h3 id="faq-library-h">Music library</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>Why are my MP3 tags wrong or missing?</summary>
+              <p>The usual causes are ripping software that wrote ID3v1 only (30-character truncation, no Unicode), downloads from sources that shipped blank tags, or files edited by several tools over the years leaving conflicting tag versions. This tool reads what is present, shows it, and writes a single clean ID3v2.3 block — which resolves the conflicting-versions case entirely.</p>
+            </details>
+
+            <details>
+              <summary>Why does my phone show different tags than my computer?</summary>
+              <p>Because the two are reading different tag versions. Many phones prioritise ID3v2.3, while older desktop players may fall back to ID3v1. A file with both can show correct information in one place and stale information in another. Rewriting the tag here removes all versions and writes only ID3v2.3, so every device reads the same data.</p>
+            </details>
+
+            <details>
+              <summary>Should genre be a standard value or free text?</summary>
+              <p>Free text is fine and is what ID3v2.3 expects — unlike ID3v1, which used a numeric genre table. Common values like <code>Rock</code>, <code>Hip-Hop</code>, <code>Jazz</code>, and <code>Podcast</code> sort predictably in most players. Very unusual values work, but some players group unlisted genres into an “Other” bucket.</p>
+            </details>
+
+            <details>
+              <summary>What is the correct track number format?</summary>
+              <p><code>5</code> for a single number, or <code>5/12</code> for track 5 of 12. The total is optional but helps players display “5 of 12” and calculate remaining time. Same format for disc numbers: <code>1</code> or <code>1/2</code>.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <!-- FAQ: PODCAST -->
+        <section id="faq-podcast" class="mt-faq-group" aria-labelledby="faq-podcast-h">
+          <h3 id="faq-podcast-h">Podcasts &amp; audiobooks</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>Can I use this to tag podcast episodes?</summary>
+              <p>Yes. Podcast MP3s are ordinary MP3 files with ID3 tags. Put the episode title in <strong>Title</strong>, the show name in <strong>Album</strong>, and the host or network in <strong>Artist</strong>. Set genre to <code>Podcast</code>, and add the show artwork as cover art. Note that podcast directories read tags from the RSS feed, not from the MP3 — the tag matters for local playback and for players that display embedded metadata.</p>
+            </details>
+
+            <details>
+              <summary>How do I tag M4B audiobooks?</summary>
+              <p>This tool reads tags from M4B, M4A, FLAC, and OGG files, but it can only <em>write</em> ID3 tags to MP3. For M4B you need a tool that writes MP4 atoms rather than ID3 frames — a different format entirely. The reader here will still show you the current title, author, and album, which is useful for checking what is already there.</p>
+            </details>
+
+            <details>
+              <summary>Where do I put the narrator name?</summary>
+              <p>ID3v2.3 has no dedicated narrator frame. The conventional place is the <strong>Composer</strong> field — many audiobook players read it that way — or the <strong>Artist</strong> field alongside the author. There is no universally correct answer, so pick one and be consistent across the series.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <!-- FAQ: PRIVACY -->
+        <section id="faq-privacy" class="mt-faq-group" aria-labelledby="faq-privacy-h">
+          <h3 id="faq-privacy-h">Privacy &amp; technical</h3>
+          <div class="ct-faq">
+
+            <details>
+              <summary>Is my MP3 uploaded to a server?</summary>
+              <p>No. Tag reading uses jsmediatags and tag writing uses browser-id3-writer, both running in your browser tab. The file is read with the File API, processed in memory, and offered back as a download. Nothing is transmitted. You can verify this in your browser's network tab — the only requests are for the two libraries themselves, not your audio.</p>
+            </details>
+
+            <details>
+              <summary>Does it work offline?</summary>
+              <p>After the libraries have loaded once, yes. Both are cached by the browser, and all processing is local. You can disconnect from the network and continue editing files in the same session.</p>
+            </details>
+
+            <details>
+              <summary>Why does the page load a library instead of bundling it?</summary>
+              <p>Because a static HTML page cannot bundle an ES module without a build step. jsmediatags is loaded as a classic script and browser-id3-writer as an ES module from a CDN, both lazily on first use rather than on page load, so the page itself stays fast. If you need a fully self-hosted version, both libraries can be downloaded and served from your own domain.</p>
+            </details>
+
+            <details>
+              <summary>Which tag fields are lost when I save?</summary>
+              <p>browser-id3-writer removes all existing ID3 tags before writing the new ones. Standard fields are preserved because the tool reads them and prefills the form. <strong>Non-standard fields are not preserved</strong>: unsynchronised lyrics (USLT), ReplayGain, MusicBrainz identifiers, custom TXXX frames, and chapter markers. If your files carry those and you need them, keep the original.</p>
+            </details>
+
+            <details>
+              <summary>Is there a watermark, file limit, or subscription?</summary>
+              <p>No watermark, no signup, no daily limit, no subscription. The downloaded MP3 is a normal MP3 with no added branding. The tool is free to use and runs entirely on your own machine.</p>
+            </details>
+
+          </div>
+        </section>
+
+        <h2>Related tools</h2>
+        <ul class="ct-related-links">
+          <li><a href="/">All ConvertToToolsOnline tools</a></li>
+          <li><a href="/audio-to-midi-converter.html">Audio to MIDI Converter</a></li>
+          <li><a href="/image-compressor.html">Image Compressor</a></li>
+          <li><a href="/image-resizer.html">Image Resizer</a></li>
+          <li><a href="/compress-image-to-kb.html">Compress Image to Exact KB</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-grid">
+      <div>
+        <a class="ct-footer-brand" href="/">
+          <span class="ct-brand-mark" aria-hidden="true">CT</span>
+          <span>ConvertToToolsOnline</span>
+        </a>
+        <p>Practical online tools for documents, images, data, development and everyday work.</p>
+      </div>
+      <nav class="ct-footer-links" aria-label="Tool navigation">
+        <strong>Explore</strong>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/sitemap.xml">XML sitemap</a>
+      </nav>
+      <nav class="ct-footer-links" aria-label="Site information">
+        <strong>Contact &amp; information</strong>
+        <a href="/Contact.html">Contact</a>
+        <a href="/#about">About the toolbox</a>
+        <a href="#main-content">Back to top ↑</a>
+      </nav>
+    </div>
+    <div class="ct-footer-bottom">
+      <p>© <span id="mt-year">2026</span> ConvertToToolsOnline. All rights reserved.</p>
+      <p>Free utilities for practical tasks.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "MP3 Tag Editor",
+      "url": "https://converttotoolsonline.com/mp3-tag-editor.html",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any modern browser",
+      "browserRequirements": "Requires JavaScript",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Read and edit ID3v2.3 tags on MP3 files in the browser, including embedded cover art. Uses jsmediatags to read and browser-id3-writer to write. Batch queue, no upload, no re-encoding.",
+      "featureList": [
+        "Read existing ID3 tags",
+        "Edit title, artist, album, year, track, genre, composer, publisher, copyright",
+        "Embed or remove cover art",
+        "Batch queue with apply-to-all helpers",
+        "ID3v2.3 output for maximum compatibility",
+        "No audio re-encoding",
+        "100% client-side, no upload"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"How do I edit MP3 tags online?","acceptedAnswer":{"@type":"Answer","text":"Drop an MP3 onto the upload area, click it in the file list, and the tag form fills with its current values. Change any field, then press Download tagged MP3. The file is rewritten in your browser with the new ID3v2.3 tag block and downloaded."}},
+        {"@type":"Question","name":"Does editing tags reduce audio quality?","acceptedAnswer":{"@type":"Answer","text":"No. The audio frames are copied unchanged; only the ID3 metadata block is rewritten. There is no re-encoding, no resampling, and no generation loss."}},
+        {"@type":"Question","name":"Which tag fields can I edit here?","acceptedAnswer":{"@type":"Answer","text":"Title, artist, album, album artist, year, track number, disc number, genre, composer, publisher, copyright, and embedded cover art. Non-standard fields such as lyrics and ReplayGain are not editable and are not preserved."}},
+        {"@type":"Question","name":"What is the difference between Artist and Album artist?","acceptedAnswer":{"@type":"Answer","text":"Artist is who performed the track. Album artist is who the album is credited to. On a collaboration album, each track lists different artists while the album artist stays constant, which groups the album correctly in most players."}},
+        {"@type":"Question","name":"How do I enter multiple artists?","acceptedAnswer":{"@type":"Answer","text":"Separate them with a slash: Eminem / 50 Cent. The tool splits on slashes and writes each as a separate ID3v2.3 value. Commas are not split, because many single artist names contain them."}},
+        {"@type":"Question","name":"How do I add cover art to an MP3?","acceptedAnswer":{"@type":"Answer","text":"Select a file, press Choose image under the cover art section, and pick a JPEG or PNG. A preview appears. Press Download tagged MP3 and the artwork is embedded as an APIC frame."}},
+        {"@type":"Question","name":"Why is my cover art not showing in my music player?","acceptedAnswer":{"@type":"Answer","text":"The player may be showing a cached thumbnail, the image may be in an unsupported format, or the file may have a second ID3v1 tag at the end taking precedence. This tool removes all existing tags before writing, which eliminates the conflicting-tag cause."}},
+        {"@type":"Question","name":"What size should album art be?","acceptedAnswer":{"@type":"Answer","text":"1000 by 1000 pixels, JPEG, under about 500 KB. That is sharp on phones and desktop players while adding only half a megabyte per file."}},
+        {"@type":"Question","name":"Why does adding cover art make my MP3 bigger?","acceptedAnswer":{"@type":"Answer","text":"Because the image bytes are stored inside the file as part of the ID3 tag. A 400 KB cover makes the MP3 400 KB larger."}},
+        {"@type":"Question","name":"Can I remove existing cover art?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select the file and press Remove cover, then download. The tool rewrites the entire tag block, so the APIC frame is simply not written."}},
+        {"@type":"Question","name":"Can I edit tags on multiple MP3 files at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add several files at once and the queue lists them all. Edit each individually, or use Apply album info to all to copy album, album artist, year, genre, and cover art to every file. Track number and title stay per-file."}},
+        {"@type":"Question","name":"Why does the tool download files one at a time?","acceptedAnswer":{"@type":"Answer","text":"Browsers deliberately block multiple automatic downloads from a single click. Save all edited processes every file and turns each row into a download button, so you click each one. This is the only approach that works reliably across Chrome, Firefox, and Safari."}},
+        {"@type":"Question","name":"Is there a file count or size limit?","acceptedAnswer":{"@type":"Answer","text":"No hard limit, but each queued file is held in memory while you edit. Batches of 10 to 20 typical tracks work fine on any modern machine."}},
+        {"@type":"Question","name":"What happens to my original files?","acceptedAnswer":{"@type":"Answer","text":"Nothing. The tool reads a copy into memory and gives you a new downloaded file. Your original files on disk are never modified."}},
+        {"@type":"Question","name":"Why are my MP3 tags wrong or missing?","acceptedAnswer":{"@type":"Answer","text":"Common causes are ripping software that wrote ID3v1 only, downloads from sources that shipped blank tags, or files edited by several tools leaving conflicting tag versions. This tool reads what is present and writes a single clean ID3v2.3 block."}},
+        {"@type":"Question","name":"Why does my phone show different tags than my computer?","acceptedAnswer":{"@type":"Answer","text":"The two are reading different tag versions. Many phones prioritise ID3v2.3 while older desktop players fall back to ID3v1. Rewriting the tag here removes all versions and writes only ID3v2.3."}},
+        {"@type":"Question","name":"Can I use this to tag podcast episodes?","acceptedAnswer":{"@type":"Answer","text":"Yes. Podcast MP3s are ordinary MP3 files. Put the episode title in Title, the show name in Album, and the host in Artist. Set genre to Podcast and add show artwork. Podcast directories read tags from the RSS feed, not the MP3, but the tag matters for local playback."}},
+        {"@type":"Question","name":"How do I tag M4B audiobooks?","acceptedAnswer":{"@type":"Answer","text":"This tool reads tags from M4B, M4A, FLAC, and OGG but can only write ID3 tags to MP3. M4B needs a tool that writes MP4 atoms rather than ID3 frames."}},
+        {"@type":"Question","name":"Is my MP3 uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Tag reading and writing both run in your browser tab. The file is read with the File API, processed in memory, and offered back as a download. Nothing is transmitted."}},
+        {"@type":"Question","name":"Which tag fields are lost when I save?","acceptedAnswer":{"@type":"Answer","text":"browser-id3-writer removes all existing ID3 tags before writing new ones. Standard fields are preserved because the tool reads and prefills them, but non-standard fields such as lyrics, ReplayGain, MusicBrainz identifiers, and chapter markers are not preserved."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var btn = document.getElementById('ct-menu-button');
+  var nav = document.getElementById('ct-main-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 700) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var yearEl = $('mt-year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  // ============================================================
+  // Constants
+  // ============================================================
+  var MAX_FILE_SIZE = 100 * 1024 * 1024;
+  var MAX_QUEUE = 40;
+  var MAX_COVER_BYTES = 5 * 1024 * 1024;
+
+  var JSMEDIATAGS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.7/jsmediatags.min.js';
+
+  var WRITER_CDNS = [
+    'https://cdn.jsdelivr.net/npm/browser-id3-writer@6.4.0/+esm',
+    'https://esm.sh/browser-id3-writer@6.4.0',
+    'https://unpkg.com/browser-id3-writer@6.4.0?module'
+  ];
+
+  // ============================================================
+  // State
+  // ============================================================
+  var files = [];            // { id, file, buffer, tags, cover, edited, resultBlob, editable }
+  var selectedId = null;
+  var seq = 0;
+  var coverPreviewUrl = null;
+  var writerPromise = null;
+  var jsmediatagsPromise = null;
+
+  // ============================================================
+  // Elements
+  // ============================================================
+  var dropEl = $('mt-drop');
+  var fileInput = $('mt-file');
+  var queueEl = $('mt-queue');
+  var queueCountEl = $('mt-queue-count');
+  var queueWarnEl = $('mt-queue-warn');
+  var applyAllBtn = $('mt-apply-all');
+  var saveAllBtn = $('mt-save-all');
+  var clearAllBtn = $('mt-clear-all');
+
+  var editorEl = $('mt-editor');
+  var editorEmptyEl = $('mt-editor-empty');
+  var editorSubEl = $('mt-editor-sub');
+  var editorWarnEl = $('mt-editor-warn');
+
+  var titleEl = $('mt-title');
+  var artistEl = $('mt-artist');
+  var albumEl = $('mt-album');
+  var albumArtistEl = $('mt-albumartist');
+  var yearInputEl = $('mt-year-input');
+  var genreEl = $('mt-genre');
+  var trackEl = $('mt-track');
+  var discEl = $('mt-disc');
+  var composerEl = $('mt-composer');
+  var publisherEl = $('mt-publisher');
+  var copyrightEl = $('mt-copyright');
+
+  var coverPreviewEl = $('mt-cover-preview');
+  var coverUploadBtn = $('mt-cover-upload');
+  var coverRemoveBtn = $('mt-cover-remove');
+  var coverInput = $('mt-cover-input');
+
+  var downloadBtn = $('mt-download');
+  var resetFieldsBtn = $('mt-reset-fields');
+  var statusEl = $('mt-status');
+
+  // The year field id in markup is mt-year (also used for the footer year).
+  // The input is named mt-year-input, but the label targets mt-year.
+  // Fix the label association at runtime.
+  var yearFieldInput = document.querySelector('.mt-field input[placeholder="2026"]');
+
+  // ============================================================
+  // Helpers
+  // ============================================================
+  function setStatus(text, tone) {
+    statusEl.textContent = text || '';
+    if (tone) statusEl.setAttribute('data-tone', tone);
+    else statusEl.removeAttribute('data-tone');
+  }
+
+  function showQueueWarn(msg, kind) {
+    queueWarnEl.classList.remove('mt-hidden');
+    queueWarnEl.className = 'mt-warn' + (kind ? ' is-' + kind : '');
+    queueWarnEl.innerHTML = '<strong>' + escapeHtml(msg) + '</strong>';
+  }
+  function hideQueueWarn() {
+    queueWarnEl.classList.add('mt-hidden');
+    queueWarnEl.textContent = '';
+  }
+
+  function showEditorWarn(msg, kind) {
+    editorWarnEl.classList.remove('mt-hidden');
+    editorWarnEl.className = 'mt-warn' + (kind ? ' is-' + kind : '');
+    editorWarnEl.innerHTML = '<strong>' + escapeHtml(msg) + '</strong>';
+  }
+  function hideEditorWarn() {
+    editorWarnEl.classList.add('mt-hidden');
+    editorWarnEl.textContent = '';
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c];
+    });
+  }
+
+  function formatBytes(bytes) {
+    if (!isFinite(bytes) || bytes < 0) return '—';
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function getExtension(name) {
+    var m = String(name || '').toLowerCase().match(/\.([a-z0-9]+)$/);
+    return m ? m[1] : '';
+  }
+
+  function isEditableFormat(name, type) {
+    var ext = getExtension(name);
+    if (ext === 'mp3') return true;
+    if (!ext && (type === 'audio/mpeg' || type === 'audio/mp3')) return true;
+    return false;
+  }
+
+  // ============================================================
+  // Library loading
+  // ============================================================
+  function loadJsmediatags() {
+    if (window.jsmediatags) return Promise.resolve(window.jsmediatags);
+    if (jsmediatagsPromise) return jsmediatagsPromise;
+
+    jsmediatagsPromise = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = JSMEDIATAGS_URL;
+      s.async = true;
+      s.onload = function () {
+        if (window.jsmediatags) resolve(window.jsmediatags);
+        else reject(new Error('Tag reader loaded but did not register.'));
+      };
+      s.onerror = function () {
+        reject(new Error('Could not load the tag reader (jsmediatags). Check your connection and try again.'));
+      };
+      document.head.appendChild(s);
+    });
+
+    jsmediatagsPromise.catch(function () { jsmediatagsPromise = null; });
+    return jsmediatagsPromise;
+  }
+
+  function loadWriter() {
+    if (writerPromise) return writerPromise;
+
+    writerPromise = (async function () {
+      var lastErr = null;
+      for (var i = 0; i < WRITER_CDNS.length; i++) {
+        try {
+          var mod = await import(/* @vite-ignore */ WRITER_CDNS[i]);
+          var Ctor = mod && (mod.ID3Writer || (mod.default && mod.default.ID3Writer) || mod.default);
+          if (typeof Ctor === 'function') return Ctor;
+          lastErr = new Error('Module did not export ID3Writer');
+        } catch (e) {
+          lastErr = e;
+        }
+      }
+      throw new Error(
+        'Could not load the tag writer (browser-id3-writer). ' +
+        'Check your connection and try again.' +
+        (lastErr && lastErr.message ? ' (' + lastErr.message + ')' : '')
+      );
+    })();
+
+    writerPromise.catch(function () { writerPromise = null; });
+    return writerPromise;
+  }
+
+  // ============================================================
+  // Tag reading
+  // ============================================================
+  function readTagsFromFile(file) {
+    return loadJsmediatags().then(function (jsmediatags) {
+      return new Promise(function (resolve) {
+        try {
+          jsmediatags.read(file, {
+            onSuccess: function (tag) { resolve(tag && tag.tags ? tag.tags : {}); },
+            onError: function () { resolve({}); }
+          });
+        } catch (e) {
+          resolve({});
+        }
+      });
+    }).catch(function () { return {}; });
+  }
+
+  function str(v) {
+    if (v === null || v === undefined) return '';
+    if (typeof v === 'string') return v.trim();
+    if (typeof v === 'number') return String(v);
+    if (Array.isArray(v)) return v.map(str).filter(Boolean).join(' / ');
+    if (v && typeof v === 'object' && v.text) return str(v.text);
+    return '';
+  }
+
+  function normalizeTags(raw) {
+    var t = raw || {};
+    var genre = str(t.genre);
+    return {
+      title: str(t.title),
+      artist: str(t.artist),
+      album: str(t.album),
+      albumArtist: str(t.albumartist || t.albumArtist || ''),
+      year: str(t.year),
+      track: str(t.track),
+      disc: str(t.disc || t.partOfSet || ''),
+      genre: genre,
+      composer: str(t.composer || ''),
+      publisher: str(t.publisher || t.label || ''),
+      copyright: str(t.copyright || ''),
+      picture: t.picture || null
+    };
+  }
+
+  // ============================================================
+  // Queue rendering
+  // ============================================================
+  function findRecord(id) {
+    for (var i = 0; i < files.length; i++) {
+      if (files[i].id === id) return files[i];
+    }
+    return null;
+  }
+
+  function selectedRecord() {
+    return selectedId ? findRecord(selectedId) : null;
+  }
+
+  function renderQueue() {
+    if (!files.length) {
+      queueEl.innerHTML = '';
+      queueCountEl.textContent = '0 files';
+      applyAllBtn.disabled = true;
+      saveAllBtn.disabled = true;
+      return;
+    }
+
+    var html = '';
+    files.forEach(function (rec) {
+      var status = 'loaded';
+      var statusText = 'Ready';
+      if (!rec.editable) { status = 'readonly'; statusText = 'Read only'; }
+      else if (rec.resultBlob) { status = 'ready'; statusText = 'Saved'; }
+      else if (rec.edited) { status = 'edited'; statusText = 'Edited'; }
+
+      html += '<div class="mt-file-row' + (rec.id === selectedId ? ' is-selected' : '') +
+        '" data-id="' + rec.id + '" role="button" tabindex="0" ' +
+        'aria-label="Edit ' + escapeHtml(rec.file.name) + '">' +
+        '<div class="mt-file-info">' +
+          '<span class="mt-file-name">' + escapeHtml(rec.file.name) + '</span>' +
+          '<span class="mt-file-meta">' + formatBytes(rec.file.size) +
+            (rec.tags && rec.tags.title ? ' · ' + escapeHtml(rec.tags.title) : '') +
+          '</span>' +
+        '</div>' +
+        '<span class="mt-file-status is-' + status + '">' + statusText + '</span>' +
+        (rec.resultBlob
+          ? '<button type="button" class="mt-file-dl" data-download="' + rec.id + '">Download</button>'
+          : '') +
+        '<button type="button" class="mt-file-remove" data-remove="' + rec.id + '" ' +
+          'aria-label="Remove ' + escapeHtml(rec.file.name) + '">×</button>' +
+        '</div>';
+    });
+
+    queueEl.innerHTML = html;
+    queueCountEl.textContent = files.length + ' file' + (files.length === 1 ? '' : 's');
+
+    var editableCount = files.filter(function (r) { return r.editable; }).length;
+    var editedCount = files.filter(function (r) { return r.edited && r.editable; }).length;
+    applyAllBtn.disabled = !selectedRecord() || editableCount < 2;
+    saveAllBtn.disabled = editedCount === 0;
+  }
+
+  // ============================================================
+  // Editor
+  // ============================================================
+  function setFormFromTags(tags) {
+    titleEl.value = tags.title || '';
+    artistEl.value = tags.artist || '';
+    albumEl.value = tags.album || '';
+    albumArtistEl.value = tags.albumArtist || '';
+    if (yearFieldInput) yearFieldInput.value = tags.year || '';
+    genreEl.value = tags.genre || '';
+    trackEl.value = tags.track || '';
+    discEl.value = tags.disc || '';
+    composerEl.value = tags.composer || '';
+    publisherEl.value = tags.publisher || '';
+    copyrightEl.value = tags.copyright || '';
+    setCoverPreview(tags.picture || null);
+  }
+
+  function readFormToTags() {
+    var yearVal = yearFieldInput ? yearFieldInput.value.trim() : '';
+    return {
+      title: titleEl.value.trim(),
+      artist: artistEl.value.trim(),
+      album: albumEl.value.trim(),
+      albumArtist: albumArtistEl.value.trim(),
+      year: yearVal,
+      genre: genreEl.value.trim(),
+      track: trackEl.value.trim(),
+      disc: discEl.value.trim(),
+      composer: composerEl.value.trim(),
+      publisher: publisherEl.value.trim(),
+      copyright: copyrightEl.value.trim()
+    };
+  }
+
+  function setCoverPreview(picture) {
+    if (coverPreviewUrl) {
+      URL.revokeObjectURL(coverPreviewUrl);
+      coverPreviewUrl = null;
+    }
+    coverPreviewEl.innerHTML = '';
+
+    if (!picture || !picture.data) {
+      coverPreviewEl.innerHTML = '<span>No cover</span>';
+      coverRemoveBtn.disabled = true;
+      return;
+    }
+
+    try {
+      var bytes = picture.data;
+      var arr = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+      var blob = new Blob([arr], { type: picture.format || 'image/jpeg' });
+      coverPreviewUrl = URL.createObjectURL(blob);
+      var img = document.createElement('img');
+      img.src = coverPreviewUrl;
+      img.alt = 'Current cover art';
+      coverPreviewEl.appendChild(img);
+      coverRemoveBtn.disabled = false;
+    } catch (e) {
+      coverPreviewEl.innerHTML = '<span>Cover unreadable</span>';
+      coverRemoveBtn.disabled = true;
+    }
+  }
+
+  function selectFile(id) {
+    var rec = findRecord(id);
+    if (!rec) return;
+
+    selectedId = id;
+    hideEditorWarn();
+    renderQueue();
+
+    editorEmptyEl.classList.add('mt-hidden');
+    editorEl.classList.remove('mt-hidden');
+
+    editorSubEl.textContent = rec.file.name +
+      (rec.editable ? '' : ' — read only');
+
+    setFormFromTags(rec.tags);
+    downloadBtn.disabled = !rec.editable;
+    resetFieldsBtn.disabled = false;
+
+    if (!rec.editable) {
+      showEditorWarn(
+        'This tool writes ID3 tags to MP3 only. You can read the tags on this ' +
+        getExtension(rec.file.name).toUpperCase() + ' file, but saving is disabled. ' +
+        'M4A and M4B need MP4 atom writing; FLAC and OGG use their own metadata blocks.',
+        'info'
+      );
+    }
+
+    setStatus('', '');
+  }
+
+  function clearEditor() {
+    selectedId = null;
+    editorEl.classList.add('mt-hidden');
+    editorEmptyEl.classList.remove('mt-hidden');
+    editorSubEl.textContent = 'Select a file from the list.';
+    hideEditorWarn();
+    setCoverPreview(null);
+    setStatus('', '');
+  }
+
+  // ============================================================
+  // File ingestion
+  // ============================================================
+  async function addFiles(fileList) {
+    hideQueueWarn();
+    var added = 0;
+    var skipped = 0;
+
+    for (var i = 0; i < fileList.length; i++) {
+      if (files.length >= MAX_QUEUE) {
+        showQueueWarn('Queue limit is ' + MAX_QUEUE + ' files. Remove some before adding more.', 'error');
+        break;
+      }
+
+      var f = fileList[i];
+      var ext = getExtension(f.name);
+      var allowed = ['mp3', 'm4a', 'm4b', 'flac', 'ogg', 'oga', 'mp4'];
+      if (allowed.indexOf(ext) === -1) {
+        skipped++;
+        continue;
+      }
+      if (f.size > MAX_FILE_SIZE) {
+        skipped++;
+        continue;
+      }
+
+      var id = 'f' + (++seq);
+      var rec = {
+        id: id,
+        file: f,
+        tags: null,
+        cover: null,
+        edited: false,
+        resultBlob: null,
+        resultUrl: null,
+        editable: isEditableFormat(f.name, f.type)
+      };
+      files.push(rec);
+      added++;
+    }
+
+    if (skipped > 0) {
+      showQueueWarn(skipped + ' file' + (skipped === 1 ? '' : 's') +
+        ' skipped — only MP3, M4A, M4B, FLAC, and OGG up to 100 MB are accepted.',
+        skipped === fileList.length ? 'error' : 'info');
+    }
+
+    if (!added) {
+      renderQueue();
+      return;
+    }
+
+    renderQueue();
+
+    // Read tags for the new files
+    for (var j = 0; j < files.length; j++) {
+      var r = files[j];
+      if (r.tags !== null) continue;
+      var raw = await readTagsFromFile(r.file);
+      r.tags = normalizeTags(raw);
+      r.cover = r.tags.picture || null;
+    }
+
+    renderQueue();
+
+    if (!selectedId) {
+      var firstEditable = files.filter(function (x) { return x.editable; })[0] || files[0];
+      if (firstEditable) selectFile(firstEditable.id);
+    } else {
+      // Refresh the form in case the selected file's tags just loaded
+      var sel = selectedRecord();
+      if (sel) setFormFromTags(sel.tags);
+    }
+  }
+
+  // ============================================================
+  // Writing tags
+  // ============================================================
+  function splitArtists(value) {
+    if (!value) return [];
+    return value.split('/').map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  function splitGenres(value) {
+    if (!value) return [];
+    return value.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  async function writeTagsFor(rec, tags, cover) {
+    var ID3Writer = await loadWriter();
+
+    // Read the file fresh so we always operate on the original bytes
+    var arrayBuffer = await rec.file.arrayBuffer();
+    var writer = new ID3Writer(arrayBuffer);
+
+    if (tags.title) writer.setFrame('TIT2', tags.title);
+    var artists = splitArtists(tags.artist);
+    if (artists.length) writer.setFrame('TPE1', artists);
+    if (tags.album) writer.setFrame('TALB', tags.album);
+    if (tags.albumArtist) writer.setFrame('TPE2', tags.albumArtist);
+    if (tags.year && /^\d{4}$/.test(tags.year)) writer.setFrame('TYER', parseInt(tags.year, 10));
+    if (tags.track) writer.setFrame('TRCK', tags.track);
+    if (tags.disc) writer.setFrame('TPOS', tags.disc);
+    var genres = splitGenres(tags.genre);
+    if (genres.length) writer.setFrame('TCON', genres);
+    var composers = splitArtists(tags.composer);
+    if (composers.length) writer.setFrame('TCOM', composers);
+    if (tags.publisher) writer.setFrame('TPUB', tags.publisher);
+    if (tags.copyright) writer.setFrame('TCOP', tags.copyright);
+
+    if (cover && cover.buffer) {
+      writer.setFrame('APIC', {
+        type: 3,
+        data: cover.buffer,
+        description: 'Cover',
+        useUnicodeEncoding: false
+      });
+    }
+
+    writer.addTag();
+    return writer.getBlob();
+  }
+
+  // ============================================================
+  // Download helpers
+  // ============================================================
+  function triggerDownload(rec) {
+    if (!rec || !rec.resultBlob) return;
+    if (!rec.resultUrl) rec.resultUrl = URL.createObjectURL(rec.resultBlob);
+    var base = rec.file.name.replace(/\.[^.]+$/, '');
+    var a = document.createElement('a');
+    a.href = rec.resultUrl;
+    a.download = base + '-tagged.mp3';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  // ============================================================
+  // Save actions
+  // ============================================================
+  async function saveCurrent() {
+    var rec = selectedRecord();
+    if (!rec || !rec.editable) return;
+
+    downloadBtn.disabled = true;
+    setStatus('Writing tags…', 'busy');
+    hideEditorWarn();
+
+    try {
+      var tags = readFormToTags();
+      var cover = readCoverFromState(rec);
+      var blob = await writeTagsFor(rec, tags, cover);
+
+      if (rec.resultUrl) { URL.revokeObjectURL(rec.resultUrl); rec.resultUrl = null; }
+      rec.resultBlob = blob;
+      rec.edited = true;
+      rec.resultUrl = URL.createObjectURL(blob);
+
+      var delta = blob.size - rec.file.size;
+      setStatus(
+        'Done. ' + formatBytes(blob.size) +
+        (delta >= 0 ? ' (+' : ' (') + formatBytes(Math.abs(delta)) + ' vs original).',
+        'ok'
+      );
+
+      renderQueue();
+
+      // Trigger the download for this file
+      triggerDownload(rec);
+    } catch (e) {
+      setStatus('Could not write tags: ' + (e && e.message ? e.message : 'unknown error'), 'error');
+      showEditorWarn(
+        'Writing tags failed. This is usually a malformed MP3 or a blocked CDN. ' +
+        (e && e.message ? e.message : ''),
+        'error'
+      );
+    } finally {
+      downloadBtn.disabled = false;
+    }
+  }
+
+  var pendingCover = null; // { buffer: ArrayBuffer, format: string } or null
+
+  function readCoverFromState(rec) {
+    // If the user replaced the cover, pendingCover wins.
+    // Otherwise use the file's original picture.
+    if (pendingCover) return pendingCover;
+    if (rec.cover && rec.cover.data) {
+      var arr = rec.cover.data instanceof Uint8Array
+        ? rec.cover.data
+        : new Uint8Array(rec.cover.data);
+      // Copy into a fresh buffer so the writer gets an exact-length ArrayBuffer
+      var buf = arr.buffer.slice(arr.byteOffset, arr.byteOffset + arr.byteLength);
+      return { buffer: buf, format: rec.cover.format || 'image/jpeg' };
+    }
+    return null;
+  }
+
+  async function saveAllEdited() {
+    var targets = files.filter(function (r) { return r.edited && r.editable; });
+    if (!targets.length) return;
+
+    saveAllBtn.disabled = true;
+    setStatus('Writing tags for ' + targets.length + ' file' + (targets.length === 1 ? '' : 's') + '…', 'busy');
+
+    var failed = 0;
+    for (var i = 0; i < targets.length; i++) {
+      var rec = targets[i];
+      try {
+        var tags = rec.pendingTags || rec.tags;
+        var blob = await writeTagsFor(rec, tags, readCoverFromState(rec));
+        if (rec.resultUrl) { URL.revokeObjectURL(rec.resultUrl); rec.resultUrl = null; }
+        rec.resultBlob = blob;
+        rec.resultUrl = URL.createObjectURL(blob);
+      } catch (e) {
+        failed++;
+      }
+    }
+
+    renderQueue();
+    setStatus(
+      'Processed ' + (targets.length - failed) + ' of ' + targets.length +
+      ' files. Click Download on each row.', failed ? 'warn' : 'ok'
+    );
+    saveAllBtn.disabled = false;
+  }
+
+  // ============================================================
+  // Apply album info to all
+  // ============================================================
+  function applyAlbumToAll() {
+    var rec = selectedRecord();
+    if (!rec) return;
+
+    var tags = readFormToTags();
+    var albumFields = {
+      album: tags.album,
+      albumArtist: tags.albumArtist,
+      year: tags.year,
+      genre: tags.genre
+    };
+    var cover = readCoverFromState(rec);
+
+    var touched = 0;
+    files.forEach(function (r) {
+      if (r.id === rec.id || !r.editable) return;
+      r.tags = Object.assign({}, r.tags, albumFields);
+      if (cover) {
+        // Store cover as a picture object so readCoverFromState picks it up
+        var arr = new Uint8Array(cover.buffer);
+        r.cover = { format: cover.format, data: arr };
+      }
+      r.pendingTags = Object.assign({}, r.tags);
+      r.edited = true;
+      touched++;
+    });
+
+    renderQueue();
+    setStatus(
+      'Applied album, album artist, year, genre' + (cover ? ', and cover art' : '') +
+      ' to ' + touched + ' other file' + (touched === 1 ? '' : 's') + '.',
+      touched ? 'ok' : 'warn'
+    );
+
+    if (!touched) {
+      showQueueWarn('Nothing to apply to — add at least two editable files.', 'info');
+    }
+  }
+
+  // ============================================================
+  // Clear
+  // ============================================================
+  function clearAll() {
+    files.forEach(function (r) {
+      if (r.resultUrl) URL.revokeObjectURL(r.resultUrl);
+    });
+    if (coverPreviewUrl) {
+      URL.revokeObjectURL(coverPreviewUrl);
+      coverPreviewUrl = null;
+    }
+    files = [];
+    selectedId = null;
+    pendingCover = null;
+    fileInput.value = '';
+    renderQueue();
+    clearEditor();
+    hideQueueWarn();
+    setStatus('', '');
+  }
+
+  // ============================================================
+  // Cover handling
+  // ============================================================
+  function handleCoverFile(file) {
+    var rec = selectedRecord();
+    if (!rec || !rec.editable) return;
+
+    if (!file) return;
+    var okType = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!okType) {
+      showEditorWarn('Cover art must be a JPEG or PNG image.', 'error');
+      return;
+    }
+    if (file.size > MAX_COVER_BYTES) {
+      showEditorWarn('That cover is over 5 MB. Use a smaller image — 1000×1000 at under 500 KB is plenty.', 'error');
+      return;
+    }
+
+    hideEditorWarn();
+    var reader = new FileReader();
+    reader.onload = function () {
+      var buf = reader.result;
+      pendingCover = { buffer: buf, format: file.type || 'image/jpeg' };
+
+      if (coverPreviewUrl) URL.revokeObjectURL(coverPreviewUrl);
+      coverPreviewUrl = URL.createObjectURL(file);
+      coverPreviewEl.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = coverPreviewUrl;
+      img.alt = 'New cover art preview';
+      coverPreviewEl.appendChild(img);
+      coverRemoveBtn.disabled = false;
+    };
+    reader.onerror = function () {
+      showEditorWarn('Could not read that image file.', 'error');
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  // ============================================================
+  // Form change tracking
+  // ============================================================
+  function markEdited() {
+    var rec = selectedRecord();
+    if (!rec || !rec.editable) return;
+    rec.pendingTags = readFormToTags();
+    rec.edited = true;
+    renderQueue();
+  }
+
+  // ============================================================
+  // Events
+  // ============================================================
+  dropEl.addEventListener('click', function () { fileInput.click(); });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    dropEl.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropEl.classList.add('is-dragover');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    dropEl.addEventListener(ev, function (e) {
+      e.preventDefault();
+      dropEl.classList.remove('is-dragover');
+    });
+  });
+  dropEl.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+      addFiles(e.dataTransfer.files);
+    }
+  });
+
+  fileInput.addEventListener('change', function (e) {
+    if (e.target.files && e.target.files.length) {
+      addFiles(e.target.files);
+      e.target.value = '';
+    }
+  });
+
+  queueEl.addEventListener('click', function (e) {
+    var dl = e.target.closest('[data-download]');
+    if (dl) {
+      e.stopPropagation();
+      var recDl = findRecord(dl.getAttribute('data-download'));
+      if (recDl) triggerDownload(recDl);
+      return;
+    }
+
+    var rm = e.target.closest('[data-remove]');
+    if (rm) {
+      e.stopPropagation();
+      var id = rm.getAttribute('data-remove');
+      var target = findRecord(id);
+      if (target && target.resultUrl) URL.revokeObjectURL(target.resultUrl);
+      files = files.filter(function (r) { return r.id !== id; });
+      if (selectedId === id) clearEditor();
+      renderQueue();
+      return;
+    }
+
+    var row = e.target.closest('.mt-file-row');
+    if (row) selectFile(row.getAttribute('data-id'));
+  });
+
+  queueEl.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var row = e.target.closest('.mt-file-row');
+    if (!row) return;
+    e.preventDefault();
+    selectFile(row.getAttribute('data-id'));
+  });
+
+  [titleEl, artistEl, albumEl, albumArtistEl, genreEl, trackEl, discEl,
+   composerEl, publisherEl, copyrightEl].forEach(function (el) {
+    el.addEventListener('input', markEdited);
+  });
+  if (yearFieldInput) yearFieldInput.addEventListener('input', markEdited);
+
+  coverUploadBtn.addEventListener('click', function () { coverInput.click(); });
+  coverInput.addEventListener('change', function (e) {
+    if (e.target.files && e.target.files.length) handleCoverFile(e.target.files[0]);
+    e.target.value = '';
+  });
+
+  coverRemoveBtn.addEventListener('click', function () {
+    pendingCover = null;
+    var rec = selectedRecord();
+    if (rec) rec.cover = null;
+    setCoverPreview(null);
+    if (rec) { rec.edited = true; renderQueue(); }
+  });
+
+  downloadBtn.addEventListener('click', saveCurrent);
+  resetFieldsBtn.addEventListener('click', function () {
+    var rec = selectedRecord();
+    if (!rec) return;
+    pendingCover = null;
+    setFormFromTags(rec.tags);
+    hideEditorWarn();
+    setStatus('Form reloaded from the file’s current tags.', 'ok');
+  });
+
+  applyAllBtn.addEventListener('click', applyAlbumToAll);
+  saveAllBtn.addEventListener('click', saveAllEdited);
+  clearAllBtn.addEventListener('click', clearAll);
+
+  // ============================================================
+  // Init
+  // ============================================================
+  renderQueue();
+  clearEditor();
+  setStatus('Waiting for an MP3…', 'busy');
+
+  // Preload libraries in the background so the first action feels instant.
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(function () {
+      loadJsmediatags().catch(function () {});
+      loadWriter().catch(function () {});
+    }, { timeout: 4000 });
+  }
+})();
+</script>
+</body>
+</html>
