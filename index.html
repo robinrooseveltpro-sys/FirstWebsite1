@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f5f8ff">
 
   <title>ConvertToToolsOnline – Free Online Tools & Converters</title>
-  <meta name="description" content="Free browser tools for images, PDF documents, text, JSON, CSV, SEO, DNS and email troubleshooting, plus everyday calculators. Pick a tool and get the job done.">
+  <meta name="description" content="Free browser tools for images, PDFs, code, SEO and daily tasks. Built by one developer. No sign-up, no accounts, no hidden charges.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://converttotoolsonline.com/">
 
@@ -35,9 +35,9 @@
         "inLanguage": "en"
       },
       {
-        "@type": "Organization",
-        "@id": "https://converttotoolsonline.com/#organization",
-        "name": "ConvertToToolsOnline",
+        "@type": "Person",
+        "@id": "https://converttotoolsonline.com/#person",
+        "name": "The developer behind ConvertToToolsOnline",
         "url": "https://converttotoolsonline.com/"
       },
       {
@@ -46,7 +46,7 @@
         "url": "https://converttotoolsonline.com/",
         "name": "Free Online Tools and Converters",
         "isPartOf": { "@id": "https://converttotoolsonline.com/#website" },
-        "about": { "@id": "https://converttotoolsonline.com/#organization" },
+        "author": { "@id": "https://converttotoolsonline.com/#person" },
         "inLanguage": "en"
       }
     ]
@@ -275,10 +275,7 @@
       color: var(--ct-muted);
     }
 
-    /* Popular tools (quick access) */
-    .ct-popular {
-      padding: 22px 0 8px;
-    }
+    .ct-popular { padding: 22px 0 8px; }
 
     .ct-popular-box {
       padding: 18px;
@@ -552,7 +549,6 @@
     .ct-empty.is-visible { display: block; }
     .ct-empty p { margin: 6px 0 12px; }
 
-    /* Good to know */
     .ct-info-section {
       border-top: 1px solid var(--ct-line);
       background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
@@ -582,7 +578,6 @@
       line-height: 1.65;
     }
 
-    /* About */
     .ct-about-section {
       border-top: 1px solid var(--ct-line);
       background: #fff;
@@ -607,7 +602,6 @@
     }
     .ct-about-copy p:last-child { margin-bottom: 0; }
 
-    /* FAQ */
     .ct-faq-section {
       border-top: 1px solid var(--ct-line);
       background: #fff;
@@ -655,7 +649,6 @@
       line-height: 1.7;
     }
 
-    /* Footer */
     .ct-footer {
       padding: 35px 0 17px;
       background: #111c32;
@@ -832,7 +825,8 @@
       <p class="ct-lead">
         Compress an image, merge a PDF, format JSON, check a DNS record, or just
         count the words in a paragraph. Each tool has one job and a page of its
-        own — open it and get on with your task.
+        own. No sign-up, no accounts, no extra steps. Open the page and get on
+        with your task.
       </p>
 
       <div class="ct-hero-actions">
@@ -848,18 +842,21 @@
     </div>
   </section>
 
-  <!-- Popular tools: shown immediately after the hero so tools are front and center -->
   <section class="ct-popular" aria-labelledby="ct-popular-title">
     <div class="ct-container">
       <div class="ct-popular-box">
         <div class="ct-popular-head">
           <h2 id="ct-popular-title">Popular tools</h2>
-          <span class="ct-popular-note">The pages people open most often</span>
+          <span class="ct-popular-note">Pages people open most often</span>
         </div>
         <div class="ct-popular-grid">
           <a class="ct-popular-item" href="/image-compressor.html">
             <span class="ct-popular-icon" aria-hidden="true">IMG</span>
             <span class="ct-popular-name">Image Compressor</span>
+          </a>
+          <a class="ct-popular-item" href="/compress-pdf.html">
+            <span class="ct-popular-icon" aria-hidden="true">PDF−</span>
+            <span class="ct-popular-name">Compress PDF</span>
           </a>
           <a class="ct-popular-item" href="/jpg-to-pdf.html">
             <span class="ct-popular-icon" aria-hidden="true">PDF</span>
@@ -881,13 +878,25 @@
             <span class="ct-popular-icon" aria-hidden="true">QR</span>
             <span class="ct-popular-name">QR Code Generator</span>
           </a>
+          <a class="ct-popular-item" href="/lorem-ipsum-generator.html">
+            <span class="ct-popular-icon" aria-hidden="true">LOREM</span>
+            <span class="ct-popular-name">Lorem Ipsum Generator</span>
+          </a>
           <a class="ct-popular-item" href="/csv-to-json.html">
             <span class="ct-popular-icon" aria-hidden="true">CSV</span>
             <span class="ct-popular-name">CSV to JSON</span>
           </a>
-          <a class="ct-popular-item" href="/dns-record-propagation-checker.html">
+          <a class="ct-popular-item" href="/dns-lookup.html">
             <span class="ct-popular-icon" aria-hidden="true">DNS</span>
-            <span class="ct-popular-name">DNS Checker</span>
+            <span class="ct-popular-name">DNS Lookup</span>
+          </a>
+          <a class="ct-popular-item" href="/compress-image-to-kb.html">
+            <span class="ct-popular-icon" aria-hidden="true">KB</span>
+            <span class="ct-popular-name">Compress Image to KB</span>
+          </a>
+          <a class="ct-popular-item" href="/resume-builder.html">
+            <span class="ct-popular-icon" aria-hidden="true">CV</span>
+            <span class="ct-popular-name">Resume Builder</span>
           </a>
         </div>
       </div>
@@ -899,18 +908,18 @@
       <div class="ct-section-heading">
         <p class="ct-eyebrow">Browse by task</p>
         <h2>What kind of tool do you need?</h2>
-        <p>Pick a category to filter the directory. You can also search by tool name or the job you're trying to do.</p>
+        <p>Pick a category to narrow the list. You can also search by tool name or by the task itself.</p>
       </div>
 
       <div class="ct-category-grid">
         <button class="ct-category" type="button" data-filter="images" aria-pressed="false">
           <strong>Images &amp; media</strong>
-          <span>Compress, resize, compare and convert images or subtitles.</span>
+          <span>Compress, resize, compare or convert images, audio and subtitles.</span>
         </button>
 
         <button class="ct-category" type="button" data-filter="documents" aria-pressed="false">
           <strong>PDF &amp; documents</strong>
-          <span>Extract, merge, convert and prepare documents.</span>
+          <span>Split, join, compress or convert PDF pages and documents.</span>
         </button>
 
         <button class="ct-category" type="button" data-filter="data" aria-pressed="false">
@@ -920,17 +929,17 @@
 
         <button class="ct-category" type="button" data-filter="developer" aria-pressed="false">
           <strong>Developer &amp; SEO</strong>
-          <span>Inspect DNS, HAR, metadata, robots files and code.</span>
+          <span>Inspect DNS, HAR files, robots.txt, sitemaps and code.</span>
         </button>
 
         <button class="ct-category" type="button" data-filter="calculators" aria-pressed="false">
           <strong>Calculators</strong>
-          <span>Electricity cost, percentage error, working days and more.</span>
+          <span>Electricity cost, percentage error, working days.</span>
         </button>
 
         <button class="ct-category" type="button" data-filter="business" aria-pressed="false">
           <strong>Business &amp; email</strong>
-          <span>Create invoices, signatures and campaign links.</span>
+          <span>Invoices, resumes, email signatures, QR codes.</span>
         </button>
       </div>
     </div>
@@ -941,7 +950,7 @@
       <div class="ct-section-heading">
         <p class="ct-eyebrow">The full directory</p>
         <h2>All online tools and converters</h2>
-        <p>Type a tool name, format or task — for example "PDF", "JSON", "DNS" or "email" — or filter by category.</p>
+        <p>Search by tool name, file format or what you are trying to do. Every tool here has a working page on this site.</p>
       </div>
 
       <div class="ct-directory-bar">
@@ -970,293 +979,405 @@
       <div class="ct-tool-grid" id="ct-tool-grid">
 
         <!-- IMAGES AND MEDIA -->
-        <article class="ct-tool-card" data-category="images" data-search="image compressor compress reduce file size optimize jpeg webp png">
+        <article class="ct-tool-card" data-category="images">
           <span class="ct-tool-icon" aria-hidden="true">IMG</span>
           <span class="ct-tool-category">Images &amp; media</span>
           <h3><a href="/image-compressor.html">Image Compressor</a></h3>
-          <p>Reduce image file sizes for websites, sharing and uploads.</p>
+          <p>Shrink JPEG, PNG and WebP files before uploading them to a website or sending by email.</p>
           <a class="ct-open-tool" href="/image-compressor.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="images" data-search="image resizer resize dimensions width height image">
+        <article class="ct-tool-card" data-category="images">
+          <span class="ct-tool-icon" aria-hidden="true">GIF</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/compress-gif.html">GIF Compressor</a></h3>
+          <p>Reduce the size of animated GIFs so they load faster in messages and on web pages.</p>
+          <a class="ct-open-tool" href="/compress-gif.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images">
+          <span class="ct-tool-icon" aria-hidden="true">KB</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/compress-image-to-kb.html">Compress Image to KB</a></h3>
+          <p>Get a photo under a target size such as 100 KB or 200 KB for forms that enforce an upload limit.</p>
+          <a class="ct-open-tool" href="/compress-image-to-kb.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images">
           <span class="ct-tool-icon" aria-hidden="true">↔</span>
           <span class="ct-tool-category">Images &amp; media</span>
           <h3><a href="/image-resizer.html">Image Resizer</a></h3>
-          <p>Resize pictures to dimensions required by an app, website or form.</p>
+          <p>Set an image to exact pixel dimensions, like 1200 by 628 for a social card or 600 by 600 for a profile picture.</p>
           <a class="ct-open-tool" href="/image-resizer.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="images" data-search="webp to jpg converter convert image webp jpeg">
+        <article class="ct-tool-card" data-category="images">
+          <span class="ct-tool-icon" aria-hidden="true">H→V</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/horizontal-to-vertical-image-converter.html">Horizontal to Vertical Image Converter</a></h3>
+          <p>Rotate a landscape photo into portrait orientation, or the reverse, when a layout or form asks for the other shape.</p>
+          <a class="ct-open-tool" href="/horizontal-to-vertical-image-converter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images">
           <span class="ct-tool-icon" aria-hidden="true">WEBP</span>
           <span class="ct-tool-category">Images &amp; media</span>
           <h3><a href="/WEBP-to-jpg-converter.html">WebP to JPG Converter</a></h3>
-          <p>Convert WebP images into JPG files for broader compatibility.</p>
+          <p>Open or share a WebP image in apps that only accept JPEG.</p>
           <a class="ct-open-tool" href="/WEBP-to-jpg-converter.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="images" data-search="heic to jpg iphone photo converter">
+        <article class="ct-tool-card" data-category="images">
           <span class="ct-tool-icon" aria-hidden="true">HEIC</span>
           <span class="ct-tool-category">Images &amp; media</span>
           <h3><a href="/heic-to-jpg.html">HEIC to JPG Converter</a></h3>
-          <p>Convert compatible HEIC photos into JPG images.</p>
+          <p>Turn iPhone photos saved as HEIC into JPG so they open on Windows and in older apps.</p>
           <a class="ct-open-tool" href="/heic-to-jpg.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="images" data-search="image color picker hex rgb color palette pixel">
+        <article class="ct-tool-card" data-category="images">
           <span class="ct-tool-icon" aria-hidden="true">HEX</span>
           <span class="ct-tool-category">Images &amp; media</span>
           <h3><a href="/image-color-picker.html">Image Color Picker</a></h3>
-          <p>Pick colors from an image and inspect their color values.</p>
+          <p>Hover over a photo to read its hex, RGB or HSL value, then copy the code into a stylesheet or design file.</p>
           <a class="ct-open-tool" href="/image-color-picker.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="images" data-search="image comparison before after pixel difference visual screenshot compare">
+        <article class="ct-tool-card" data-category="images">
+          <span class="ct-tool-icon" aria-hidden="true">CMYK</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/cmyk-to-hsl.html">CMYK to HSL Converter</a></h3>
+          <p>Translate print colors given in CMYK into HSL values for web and screen work.</p>
+          <a class="ct-open-tool" href="/cmyk-to-hsl.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images">
           <span class="ct-tool-icon" aria-hidden="true">A/B</span>
           <span class="ct-tool-category">Images &amp; media</span>
           <h3><a href="/image-comparison-tool.html">Image Comparison Tool</a></h3>
-          <p>Compare original and edited images with a slider and pixel difference map.</p>
+          <p>Slide between two versions of a screenshot or edited image to see exactly what changed.</p>
           <a class="ct-open-tool" href="/image-comparison-tool.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="images" data-search="image metadata viewer exif camera data photo information">
+        <article class="ct-tool-card" data-category="images">
           <span class="ct-tool-icon" aria-hidden="true">EXIF</span>
           <span class="ct-tool-category">Images &amp; media</span>
           <h3><a href="/image-metadata-viewer.html">Image Metadata Viewer</a></h3>
-          <p>Inspect image metadata and learn what information a file contains.</p>
+          <p>See the camera model, capture date, GPS location and other details stored inside a photo.</p>
           <a class="ct-open-tool" href="/image-metadata-viewer.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="images" data-search="favicon generator website icon browser tab">
+        <article class="ct-tool-card" data-category="images">
+          <span class="ct-tool-icon" aria-hidden="true">EXIF−</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/exif-metadata-remover.html">EXIF Metadata Remover</a></h3>
+          <p>Wipe GPS coordinates, camera model and timestamps from a photo before you post it publicly.</p>
+          <a class="ct-open-tool" href="/exif-metadata-remover.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images">
+          <span class="ct-tool-icon" aria-hidden="true">LINE</span>
+          <span class="ct-tool-category">Images &amp; media</span>
+          <h3><a href="/photo-to-coloring-page.html">Photo to Coloring Page</a></h3>
+          <p>Convert a photo into a line drawing you can print and color in.</p>
+          <a class="ct-open-tool" href="/photo-to-coloring-page.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images">
           <span class="ct-tool-icon" aria-hidden="true">ICO</span>
           <span class="ct-tool-category">Images &amp; design</span>
           <h3><a href="/Favicon-generator.html">Favicon Generator</a></h3>
-          <p>Prepare favicon assets for a website or browser tab.</p>
+          <p>Create the small square icon that shows in browser tabs, bookmarks and phone home screens.</p>
           <a class="ct-open-tool" href="/Favicon-generator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="images" data-search="css gradient generator background colors visual css">
+        <article class="ct-tool-card" data-category="images">
           <span class="ct-tool-icon" aria-hidden="true">CSS</span>
           <span class="ct-tool-category">Images &amp; design</span>
           <h3><a href="/css-gradient-generator.html">CSS Gradient Generator</a></h3>
-          <p>Create gradient settings for website backgrounds and interface elements.</p>
+          <p>Adjust colors and direction to build a CSS gradient, then copy the code into a stylesheet.</p>
           <a class="ct-open-tool" href="/css-gradient-generator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="images" data-search="srt vtt subtitle converter time shift synchronization subtitles">
+        <article class="ct-tool-card" data-category="images">
+          <span class="ct-tool-icon" aria-hidden="true">MIDI</span>
+          <span class="ct-tool-category">Audio &amp; video</span>
+          <h3><a href="/audio-to-midi-converter.html">Audio to MIDI Converter</a></h3>
+          <p>Turn a recorded melody into MIDI note data you can edit in a music app.</p>
+          <a class="ct-open-tool" href="/audio-to-midi-converter.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images">
+          <span class="ct-tool-icon" aria-hidden="true">ID3</span>
+          <span class="ct-tool-category">Audio &amp; video</span>
+          <h3><a href="/mp3-tag-editor.html">MP3 Tag Editor</a></h3>
+          <p>Set the title, artist, album and artwork on MP3 files so players show the correct info.</p>
+          <a class="ct-open-tool" href="/mp3-tag-editor.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="images">
           <span class="ct-tool-icon" aria-hidden="true">SRT</span>
           <span class="ct-tool-category">Video &amp; subtitles</span>
           <h3><a href="/srt-vtt-subtitle-converter.html">SRT / VTT Subtitle Converter</a></h3>
-          <p>Convert subtitle formats and shift caption timing forward or backward.</p>
+          <p>Switch subtitles between SRT and VTT, or nudge all caption timings by a set number of seconds.</p>
           <a class="ct-open-tool" href="/srt-vtt-subtitle-converter.html">Open tool →</a>
         </article>
 
         <!-- PDF AND DOCUMENTS -->
-        <article class="ct-tool-card" data-category="documents" data-search="jpg to pdf convert image photos to PDF">
+        <article class="ct-tool-card" data-category="documents">
           <span class="ct-tool-icon" aria-hidden="true">JPG</span>
           <span class="ct-tool-category">PDF &amp; documents</span>
           <h3><a href="/jpg-to-pdf.html">JPG to PDF Converter</a></h3>
-          <p>Turn JPG images into a PDF document.</p>
+          <p>Combine one or more JPG photos into a single PDF document.</p>
           <a class="ct-open-tool" href="/jpg-to-pdf.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="documents" data-search="merge pdf combine join multiple pdf documents">
+        <article class="ct-tool-card" data-category="documents">
+          <span class="ct-tool-icon" aria-hidden="true">PDF−</span>
+          <span class="ct-tool-category">PDF &amp; documents</span>
+          <h3><a href="/compress-pdf.html">Compress PDF</a></h3>
+          <p>Shrink a PDF so it fits under an email or upload size limit without wrecking the text.</p>
+          <a class="ct-open-tool" href="/compress-pdf.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="documents">
           <span class="ct-tool-icon" aria-hidden="true">PDF+</span>
           <span class="ct-tool-category">PDF &amp; documents</span>
           <h3><a href="/merge-pdf.html">Merge PDF Files</a></h3>
-          <p>Combine multiple PDF documents into one file.</p>
+          <p>Join several PDF files end to end into one document, in the order you choose.</p>
           <a class="ct-open-tool" href="/merge-pdf.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="documents" data-search="pdf page extractor extract selected pages split pdf">
+        <article class="ct-tool-card" data-category="documents">
           <span class="ct-tool-icon" aria-hidden="true">PAGES</span>
           <span class="ct-tool-category">PDF &amp; documents</span>
           <h3><a href="/pdf-page-extractor.html">PDF Page Extractor</a></h3>
-          <p>Extract selected pages from a PDF into a separate document.</p>
+          <p>Pull specific pages out of a PDF and save them as a new file, leaving the original untouched.</p>
           <a class="ct-open-tool" href="/pdf-page-extractor.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="documents" data-search="add page numbers pdf pagination headers footers">
+        <article class="ct-tool-card" data-category="documents">
           <span class="ct-tool-icon" aria-hidden="true">#</span>
           <span class="ct-tool-category">PDF &amp; documents</span>
           <h3><a href="/add-page-numbers-to-pdf.html">Add Page Numbers to PDF</a></h3>
-          <p>Number selected PDF pages with a custom starting number and position.</p>
+          <p>Stamp page numbers on every page with a custom start number, font size and position.</p>
           <a class="ct-open-tool" href="/add-page-numbers-to-pdf.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="documents" data-search="pdf to jpg png converter render pages images">
+        <article class="ct-tool-card" data-category="documents">
           <span class="ct-tool-icon" aria-hidden="true">PDF→IMG</span>
           <span class="ct-tool-category">PDF &amp; documents</span>
           <h3><a href="/pdf-to-jpg-png-converter.html">PDF to JPG / PNG Converter</a></h3>
-          <p>Convert selected PDF pages to image files with adjustable resolution.</p>
+          <p>Render PDF pages as JPG or PNG image files at a resolution you choose.</p>
           <a class="ct-open-tool" href="/pdf-to-jpg-png-converter.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="business" data-search="invoice generator free create invoice billing">
+        <article class="ct-tool-card" data-category="business">
           <span class="ct-tool-icon" aria-hidden="true">INV</span>
           <span class="ct-tool-category">Business</span>
           <h3><a href="/Invoice-generator-free">Free Invoice Generator</a></h3>
-          <p>Create an invoice document for a customer or project.</p>
+          <p>Fill in line items, tax and totals to produce a printable invoice you can hand to a client.</p>
           <a class="ct-open-tool" href="/Invoice-generator-free">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="business" data-search="online invoice generator invoice creation business billing">
+        <article class="ct-tool-card" data-category="business">
           <span class="ct-tool-icon" aria-hidden="true">INV+</span>
           <span class="ct-tool-category">Business</span>
           <h3><a href="/invoice-generator-online.html">Online Invoice Generator</a></h3>
-          <p>Prepare an invoice using the online invoice builder.</p>
+          <p>Build an invoice in the browser with your details and a numbered list of charges.</p>
           <a class="ct-open-tool" href="/invoice-generator-online.html">Open tool →</a>
         </article>
 
+        <article class="ct-tool-card" data-category="business">
+          <span class="ct-tool-icon" aria-hidden="true">CV</span>
+          <span class="ct-tool-category">Business</span>
+          <h3><a href="/resume-builder.html">Resume Builder</a></h3>
+          <p>Enter your work history and generate a plain, printable CV.</p>
+          <a class="ct-open-tool" href="/resume-builder.html">Open tool →</a>
+        </article>
+
         <!-- TEXT AND DATA -->
-        <article class="ct-tool-card" data-category="data" data-search="word counter words characters sentences reading time text">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">TXT</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/word-counter.html">Word Counter</a></h3>
-          <p>Count words and characters and inspect basic text statistics.</p>
+          <p>Count words, characters and sentences as you type. Useful for essays, meta descriptions and tweet drafts.</p>
           <a class="ct-open-tool" href="/word-counter.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="text diff checker compare text differences changes">
+        <article class="ct-tool-card" data-category="data">
+          <span class="ct-tool-icon" aria-hidden="true">ABC</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/anagram-solver.html">Anagram Solver</a></h3>
+          <p>Enter scrambled letters and see what words they can make. Handy for word games.</p>
+          <a class="ct-open-tool" href="/anagram-solver.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data">
+          <span class="ct-tool-icon" aria-hidden="true">B64</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/base64-to-decimal.html">Base64 to Decimal Converter</a></h3>
+          <p>Decode a Base64 string into its decimal number representation.</p>
+          <a class="ct-open-tool" href="/base64-to-decimal.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">DIFF</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/text-diff-checker.html">Text Diff Checker</a></h3>
-          <p>Compare two text versions and identify changes.</p>
+          <p>Compare two versions of a paragraph or code file and highlight what was added, removed or changed.</p>
           <a class="ct-open-tool" href="/text-diff-checker.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="markdown to html converter markdown preview HTML">
+        <article class="ct-tool-card" data-category="data">
+          <span class="ct-tool-icon" aria-hidden="true">@</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/extract-emails-from-text.html">Extract Emails from Text</a></h3>
+          <p>Pull every email address out of a copied block of text into a clean list.</p>
+          <a class="ct-open-tool" href="/extract-emails-from-text.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data">
+          <span class="ct-tool-icon" aria-hidden="true">LOREM</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/lorem-ipsum-generator.html">Lorem Ipsum Generator</a></h3>
+          <p>Get placeholder paragraphs and sentences for layouts and design mockups.</p>
+          <a class="ct-open-tool" href="/lorem-ipsum-generator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">MD</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/markdown-to-html-converter.html">Markdown to HTML Converter</a></h3>
-          <p>Convert Markdown text into HTML markup with a preview.</p>
+          <p>Paste Markdown and see the equivalent HTML, with a live preview of the rendered result.</p>
           <a class="ct-open-tool" href="/markdown-to-html-converter.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="html entity encoder decoder special characters escaping">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">HTML</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/html-entity-encoder-decoder.html">HTML Entity Encoder / Decoder</a></h3>
-          <p>Encode special characters into HTML entities or decode them back.</p>
+          <p>Escape special characters into HTML entities, or turn entities back into ordinary characters.</p>
           <a class="ct-open-tool" href="/html-entity-encoder-decoder.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="json formatter validator pretty print inspect JSON">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">JSON</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/json-formatter.html">JSON Formatter</a></h3>
-          <p>Format and validate JSON data for easier inspection.</p>
+          <p>Pretty-print minified JSON and see errors highlighted in context.</p>
           <a class="ct-open-tool" href="/json-formatter.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="json schema validator schema validation structure">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">JSC</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/Json-schema-validator.html">JSON Schema Validator</a></h3>
-          <p>Check JSON data against a supplied schema.</p>
+          <p>Check that a JSON document matches a schema you paste in.</p>
           <a class="ct-open-tool" href="/Json-schema-validator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="json to csv converter export rows spreadsheet">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">CSV</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/Json-to-CSV-converter.html">JSON to CSV Converter</a></h3>
-          <p>Convert supported JSON data into a CSV file.</p>
+          <p>Convert an array of JSON objects into a spreadsheet-ready CSV file.</p>
           <a class="ct-open-tool" href="/Json-to-CSV-converter.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="csv to json converter tabular data JSON">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">CSV→</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/csv-to-json.html">CSV to JSON Converter</a></h3>
-          <p>Convert CSV rows into JSON records.</p>
+          <p>Turn a CSV file into an array of JSON records, ready to use in code.</p>
           <a class="ct-open-tool" href="/csv-to-json.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="csv cleaner validator clean rows duplicate blanks whitespace">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">CLEAN</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/csv-cleaner-validator.html">CSV Cleaner &amp; Validator</a></h3>
-          <p>Inspect CSV files and clean common row and formatting problems.</p>
+          <p>Trim whitespace, remove blank rows and catch formatting mistakes in a CSV before importing it.</p>
           <a class="ct-open-tool" href="/csv-cleaner-validator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="csv to sql converter INSERT SQL database">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">SQL</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/csv-to-sql-converter.html">CSV to SQL Converter</a></h3>
-          <p>Generate SQL insert statements from CSV data.</p>
+          <p>Generate INSERT statements from each row of a CSV file.</p>
           <a class="ct-open-tool" href="/csv-to-sql-converter.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="merge json files objects arrays combine JSON">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">MERGE</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/Merge-JSON-merger.html">JSON Merger</a></h3>
-          <p>Combine supported JSON objects or arrays.</p>
+          <p>Combine two or more JSON files into one array or a merged object.</p>
           <a class="ct-open-tool" href="/Merge-JSON-merger.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="json to excel xlsx spreadsheet converter">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">XLSX</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/json-to-excel-converter.html">JSON to Excel Converter</a></h3>
-          <p>Convert compatible JSON records into a spreadsheet file.</p>
+          <p>Save JSON records as an XLSX spreadsheet you can open in Excel or Google Sheets.</p>
           <a class="ct-open-tool" href="/json-to-excel-converter.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="json to typescript types interfaces code generation">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">TS</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/json-to-typescript.html">JSON to TypeScript</a></h3>
-          <p>Generate TypeScript type declarations from JSON examples.</p>
+          <p>Generate TypeScript interfaces from an example JSON object.</p>
           <a class="ct-open-tool" href="/json-to-typescript.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="developer" data-search="jsonpath tester query JSONPath expression">
-          <span class="ct-tool-icon" aria-hidden="true">PATH</span>
-          <span class="ct-tool-category">Developer</span>
-          <h3><a href="/jsonpath-tester.html">JSONPath Tester</a></h3>
-          <p>Test JSONPath expressions against JSON input.</p>
-          <a class="ct-open-tool" href="/jsonpath-tester.html">Open tool →</a>
+        <article class="ct-tool-card" data-category="data">
+          <span class="ct-tool-icon" aria-hidden="true">OPML</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/opml-viewer.html">OPML Viewer</a></h3>
+          <p>Open an OPML file and see its outline structure, useful for RSS reader exports.</p>
+          <a class="ct-open-tool" href="/opml-viewer.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="developer" data-search="jwt decoder JSON web token decode header payload claims">
-          <span class="ct-tool-icon" aria-hidden="true">JWT</span>
-          <span class="ct-tool-category">Developer</span>
-          <h3><a href="/jwt-decoder.html">JWT Decoder</a></h3>
-          <p>Inspect JWT headers and payloads without treating decoding as signature verification.</p>
-          <a class="ct-open-tool" href="/jwt-decoder.html">Open tool →</a>
+        <article class="ct-tool-card" data-category="data">
+          <span class="ct-tool-icon" aria-hidden="true">CONTACT</span>
+          <span class="ct-tool-category">Text &amp; data</span>
+          <h3><a href="/text-contact-extractor.html">Text Contact Extractor</a></h3>
+          <p>Pull phone numbers, email addresses and other contact details out of pasted text.</p>
+          <a class="ct-open-tool" href="/text-contact-extractor.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="yaml to json converter transform configuration">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">YAML</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/yaml-to-json-converter.html">YAML to JSON Converter</a></h3>
-          <p>Convert supported YAML data into JSON.</p>
+          <p>Convert YAML configuration into JSON so you can inspect it or pass it to another tool.</p>
           <a class="ct-open-tool" href="/yaml-to-json-converter.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="developer" data-search="SQL formatter SQL query format indent">
+        <article class="ct-tool-card" data-category="developer">
           <span class="ct-tool-icon" aria-hidden="true">SQL</span>
           <span class="ct-tool-category">Developer</span>
           <h3><a href="/sql-formatter.html">SQL Formatter</a></h3>
-          <p>Format SQL statements for more readable queries.</p>
+          <p>Reindent a long SQL query so it is readable when you share it or review it later.</p>
           <a class="ct-open-tool" href="/sql-formatter.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="UUID generator unique identifiers UUID v4 v7">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">UUID</span>
           <span class="ct-tool-category">Text &amp; data</span>
           <h3><a href="/uuid-generator.html">UUID Generator</a></h3>
-          <p>Generate UUID identifiers for development and test data.</p>
+          <p>Generate random UUIDs (v4) or time-ordered ones (v7) for records and test data.</p>
           <a class="ct-open-tool" href="/uuid-generator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="data" data-search="unix timestamp converter epoch time date conversion unix">
+        <article class="ct-tool-card" data-category="data">
           <span class="ct-tool-icon" aria-hidden="true">TIME</span>
           <span class="ct-tool-category">Date &amp; developer</span>
           <h3><a href="/unix-timestamp-converter-online.html">Unix Timestamp Converter</a></h3>
-          <p>Convert between Unix epoch timestamps and human-readable dates.</p>
+          <p>Convert between Unix epoch seconds and human-readable dates in both directions.</p>
           <a class="ct-open-tool" href="/unix-timestamp-converter-online.html">Open tool →</a>
           <p class="ct-legacy-links">
             Also available:
@@ -1266,124 +1387,164 @@
         </article>
 
         <!-- DEVELOPER, SEO AND DOMAIN TROUBLESHOOTING -->
-        <article class="ct-tool-card" data-category="developer" data-search="cron expression generator schedule cron syntax">
+        <article class="ct-tool-card" data-category="developer">
           <span class="ct-tool-icon" aria-hidden="true">CRON</span>
           <span class="ct-tool-category">Developer</span>
           <h3><a href="/cron-expression-generator.html">Cron Expression Generator</a></h3>
-          <p>Build cron expressions for scheduled tasks.</p>
+          <p>Build a cron schedule by clicking, or decode an existing expression to see when it runs.</p>
           <a class="ct-open-tool" href="/cron-expression-generator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="developer" data-search="robots txt generator validator robots crawler instructions">
+        <article class="ct-tool-card" data-category="developer">
+          <span class="ct-tool-icon" aria-hidden="true">PATH</span>
+          <span class="ct-tool-category">Developer</span>
+          <h3><a href="/jsonpath-tester.html">JSONPath Tester</a></h3>
+          <p>Test a JSONPath expression against sample JSON to see exactly what it matches.</p>
+          <a class="ct-open-tool" href="/jsonpath-tester.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer">
+          <span class="ct-tool-icon" aria-hidden="true">JWT</span>
+          <span class="ct-tool-category">Developer</span>
+          <h3><a href="/jwt-decoder.html">JWT Decoder</a></h3>
+          <p>Read the header and payload of a JSON Web Token. This does not verify the signature.</p>
+          <a class="ct-open-tool" href="/jwt-decoder.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer">
+          <span class="ct-tool-icon" aria-hidden="true">PY</span>
+          <span class="ct-tool-category">Developer</span>
+          <h3><a href="/python-syntax-validator.html">Python Syntax Validator</a></h3>
+          <p>Check a Python file for syntax errors before you run it.</p>
+          <a class="ct-open-tool" href="/python-syntax-validator.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer">
           <span class="ct-tool-icon" aria-hidden="true">ROBOTS</span>
           <span class="ct-tool-category">SEO</span>
           <h3><a href="/robots-txt-generator.html">Robots.txt Generator &amp; Validator</a></h3>
-          <p>Build or inspect robots.txt rules for crawlers.</p>
+          <p>Write or inspect a robots.txt file that tells search crawlers what to fetch and what to skip.</p>
           <a class="ct-open-tool" href="/robots-txt-generator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="developer" data-search="sitemap XML validator SEO sitemap errors">
+        <article class="ct-tool-card" data-category="developer">
           <span class="ct-tool-icon" aria-hidden="true">MAP</span>
           <span class="ct-tool-category">SEO</span>
           <h3><a href="/sitemap-xml-validator.html">Sitemap XML Validator</a></h3>
-          <p>Check sitemap XML structure and identify common formatting errors.</p>
+          <p>Check a sitemap for missing tags or common XML errors before submitting it to Google.</p>
           <a class="ct-open-tool" href="/sitemap-xml-validator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="developer" data-search="SEO meta tag generator title description social preview">
+        <article class="ct-tool-card" data-category="developer">
           <span class="ct-tool-icon" aria-hidden="true">SEO</span>
           <span class="ct-tool-category">SEO</span>
           <h3><a href="/seo-meta-tag-generator.html">SEO Meta Tag Generator</a></h3>
-          <p>Create title, description and social metadata for a webpage.</p>
+          <p>Draft the title, description and social tags for a page, with character counters.</p>
           <a class="ct-open-tool" href="/seo-meta-tag-generator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="business" data-search="UTM builder campaign URL analytics tracking marketing">
+        <article class="ct-tool-card" data-category="business">
           <span class="ct-tool-icon" aria-hidden="true">UTM</span>
           <span class="ct-tool-category">Marketing</span>
           <h3><a href="/UTM-builder-free.html">UTM Builder</a></h3>
-          <p>Add campaign-tracking parameters to a URL for analytics.</p>
+          <p>Add utm_source, utm_medium and utm_campaign parameters to a link for analytics.</p>
           <a class="ct-open-tool" href="/UTM-builder-free.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="developer" data-search="HAR file viewer network requests failed slow request redact credentials">
+        <article class="ct-tool-card" data-category="developer">
           <span class="ct-tool-icon" aria-hidden="true">HAR</span>
           <span class="ct-tool-category">Troubleshooting</span>
           <h3><a href="/har-file-viewer-redactor.html">HAR File Viewer &amp; Redactor</a></h3>
-          <p>Inspect browser network logs, find failed requests and prepare a redacted export.</p>
+          <p>Open a HAR file, find slow or failed requests, and export a copy with credentials redacted.</p>
           <a class="ct-open-tool" href="/har-file-viewer-redactor.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="developer" data-search="DNS record checker propagation A AAAA CNAME MX TXT NS">
+        <article class="ct-tool-card" data-category="developer">
+          <span class="ct-tool-icon" aria-hidden="true">DNS</span>
+          <span class="ct-tool-category">Troubleshooting</span>
+          <h3><a href="/dns-lookup.html">DNS Lookup</a></h3>
+          <p>Query A, AAAA, MX, TXT and NS records for a domain and see what a public resolver returns.</p>
+          <a class="ct-open-tool" href="/dns-lookup.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="developer">
           <span class="ct-tool-icon" aria-hidden="true">DNS</span>
           <span class="ct-tool-category">Troubleshooting</span>
           <h3><a href="/dns-record-propagation-checker.html">DNS Record &amp; Propagation Checker</a></h3>
-          <p>Compare public DNS responses and check whether an expected record value appears.</p>
+          <p>Compare how different resolvers answer for a domain after you change a record.</p>
           <a class="ct-open-tool" href="/dns-record-propagation-checker.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="business" data-search="email authentication checker SPF DKIM DMARC MX email spam">
+        <article class="ct-tool-card" data-category="developer">
+          <span class="ct-tool-icon" aria-hidden="true">DNSSEC</span>
+          <span class="ct-tool-category">Troubleshooting</span>
+          <h3><a href="/dnssec-checker.html">DNSSEC Checker</a></h3>
+          <p>Check whether a domain has valid DNSSEC signatures and where the chain breaks if not.</p>
+          <a class="ct-open-tool" href="/dnssec-checker.html">Open tool →</a>
+        </article>
+
+        <article class="ct-tool-card" data-category="business">
           <span class="ct-tool-icon" aria-hidden="true">MAIL</span>
           <span class="ct-tool-category">Email troubleshooting</span>
           <h3><a href="/email-authentication-troubleshooter.html">Email Authentication Troubleshooter</a></h3>
-          <p>Check public SPF, DKIM, DMARC and MX records for common configuration issues.</p>
+          <p>Inspect SPF, DKIM, DMARC and MX records for a domain to see why mail is being filtered.</p>
           <a class="ct-open-tool" href="/email-authentication-troubleshooter.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="developer" data-search="XML formatter validator pretty print minify XML">
+        <article class="ct-tool-card" data-category="developer">
           <span class="ct-tool-icon" aria-hidden="true">XML</span>
           <span class="ct-tool-category">Developer</span>
           <h3><a href="/xml-formatter-validator.html">XML Formatter &amp; Validator</a></h3>
-          <p>Format XML, minify it and check whether the document is well formed.</p>
+          <p>Format, minify or check XML for well-formedness before feeding it to another system.</p>
           <a class="ct-open-tool" href="/xml-formatter-validator.html">Open tool →</a>
         </article>
 
-        <!-- CALCULATORS -->
-        <article class="ct-tool-card" data-category="calculators" data-search="percentage error calculator experimental theoretical measurement error">
+        <!-- CALCULATORS AND BUSINESS -->
+        <article class="ct-tool-card" data-category="calculators">
           <span class="ct-tool-icon" aria-hidden="true">%</span>
           <span class="ct-tool-category">Calculator</span>
           <h3><a href="/percentage-error-calculator.html">Percentage Error Calculator</a></h3>
-          <p>Calculate percentage error between measured and reference values.</p>
+          <p>Compute the percentage difference between a measured value and a true or expected value.</p>
           <a class="ct-open-tool" href="/percentage-error-calculator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="calculators" data-search="working days calculator weekdays business days dates">
+        <article class="ct-tool-card" data-category="calculators">
           <span class="ct-tool-icon" aria-hidden="true">DAYS</span>
           <span class="ct-tool-category">Calculator</span>
           <h3><a href="/working-days-calculator.html">Working Days Calculator</a></h3>
-          <p>Calculate working days between two dates using the tool's available options.</p>
+          <p>Count weekdays between two dates, useful for project timelines and leave planning.</p>
           <a class="ct-open-tool" href="/working-days-calculator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="calculators" data-search="electricity cost calculator power watts kwh price usage">
+        <article class="ct-tool-card" data-category="calculators">
           <span class="ct-tool-icon" aria-hidden="true">kWh</span>
           <span class="ct-tool-category">Calculator</span>
           <h3><a href="/electricity-cost-calculator.html">Electricity Cost Calculator</a></h3>
-          <p>Estimate electricity usage costs from appliance power, operating time and rate.</p>
+          <p>Estimate what an appliance costs to run from its wattage, hours of use and your unit rate.</p>
           <a class="ct-open-tool" href="/electricity-cost-calculator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="business" data-search="freelance project profit calculator fees costs income">
+        <article class="ct-tool-card" data-category="business">
           <span class="ct-tool-icon" aria-hidden="true">ROI</span>
           <span class="ct-tool-category">Business</span>
           <h3><a href="/freelance-project-profit-calculator.html">Freelance Project Profit Calculator</a></h3>
-          <p>Estimate project profit after costs, time and other expenses.</p>
+          <p>Take a project quote and subtract costs and time to see the real profit.</p>
           <a class="ct-open-tool" href="/freelance-project-profit-calculator.html">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="business" data-search="email signature generator professional signature contact">
+        <article class="ct-tool-card" data-category="business">
           <span class="ct-tool-icon" aria-hidden="true">SIG</span>
           <span class="ct-tool-category">Business</span>
           <h3><a href="/Free-Email-Signature-Generator">Free Email Signature Generator</a></h3>
-          <p>Prepare a formatted email signature for professional communication.</p>
+          <p>Build a signature block with your name, title and contact details that works in most mail apps.</p>
           <a class="ct-open-tool" href="/Free-Email-Signature-Generator">Open tool →</a>
         </article>
 
-        <article class="ct-tool-card" data-category="business" data-search="QR code generator website link text QR">
+        <article class="ct-tool-card" data-category="business">
           <span class="ct-tool-icon" aria-hidden="true">QR</span>
           <span class="ct-tool-category">Business &amp; marketing</span>
           <h3><a href="/qr-code-generator.html">QR Code Generator</a></h3>
-          <p>Create a QR code from a supported link or text input.</p>
+          <p>Turn a URL or short piece of text into a scannable QR code you can print or save.</p>
           <a class="ct-open-tool" href="/qr-code-generator.html">Open tool →</a>
         </article>
       </div>
@@ -1400,22 +1561,22 @@
     <div class="ct-container">
       <div class="ct-section-heading">
         <p class="ct-eyebrow">Before you start</p>
-        <h2>A few things worth knowing</h2>
-        <p>These are small tools meant for quick jobs. Here's what to expect.</p>
+        <h2>How these tools work in practice</h2>
+        <p>Most of these are small single-purpose pages. A few things are worth knowing before you upload a file.</p>
       </div>
 
       <div class="ct-info-grid">
         <div class="ct-info-card">
-          <h3>How processing works</h3>
-          <p>Some tools run entirely in your browser. Others may send data to a server. Check the notes on each tool's page if you plan to use sensitive files or credentials.</p>
+          <h3>Where your files go</h3>
+          <p>Some tools run entirely in your browser. Your file never leaves your device. Others might send the file to a server to do the work. Each tool page tells you which one it is. If you are working with a contract, an ID scan, or anything private, read the note on the page first.</p>
         </div>
         <div class="ct-info-card">
-          <h3>File size and format limits</h3>
-          <p>Large files may fail, especially on mobile. Stick to formats the tool explicitly mentions — if it says PDF, a DOCX won't work.</p>
+          <h3>Why big files fail</h3>
+          <p>A 40 MB PDF will usually choke on a phone. The browser runs out of memory and the tab crashes. This is a browser limit, not a bug in the tool. Try the same file on a desktop, or split it first. Compressing an image is the same story. RAW files and multi-page scans often need something more powerful than a browser tool.</p>
         </div>
         <div class="ct-info-card">
-          <h3>Something not working?</h3>
-          <p>If a tool misbehaves or a link is broken, use the <a href="/Contact.html">Contact page</a> and describe what you tried. It helps if you mention the browser and the file type.</p>
+          <h3>When a link or tool breaks</h3>
+          <p>If a page does not load or a button does nothing, the best thing you can do is send a short note through the <a href="/Contact.html">contact page</a>. Mention the tool name, the browser you are using, and what happened. That is enough to start looking into it. Reports get read and fixed in batches.</p>
         </div>
       </div>
     </div>
@@ -1424,20 +1585,27 @@
   <section class="ct-section ct-about-section" id="about">
     <div class="ct-container ct-about-grid">
       <div>
-        <p class="ct-eyebrow">About the site</p>
-        <h2>Why these tools exist</h2>
+        <p class="ct-eyebrow">Who runs this site</p>
+        <h2>A person, not a company</h2>
       </div>
       <div class="ct-about-copy">
         <p>
-          ConvertToToolsOnline is a small collection of converters and utilities built
-          around tasks that come up again and again — shrinking a photo, joining a few
-          PDFs, checking that a DNS change has gone through, and so on.
+          This site is built and maintained by one person. I make tools that solve
+          problems I run into myself. Things like stripping location data from a photo
+          before posting it, checking if a DNS change has propagated, or turning a
+          quick note into a PDF without opening a heavy word processor.
         </p>
         <p>
-          Each tool has its own page because a tool with its own page is easier to
-          bookmark, share, and revisit. There is no account, no dashboard and no
-          subscription. If a page isn't useful to you, close the tab — that's the whole
-          model.
+          Because it is just me, there is no support team and no subscription. If a
+          tool does not do what you need, the most honest thing I can say is that it
+          might not be the right tool for that job. But if it is broken, I want to know.
+          That is the whole point of the contact page.
+        </p>
+        <p>
+          There is no blog here yet. I am working on adding proper explanations and
+          guides around the tools, especially the ones that are not obvious to use.
+          Until then, the homepage and the individual tool pages are the main source of
+          information.
         </p>
       </div>
     </div>
@@ -1452,38 +1620,38 @@
 
       <div class="ct-faq-list">
         <details class="ct-faq-item">
-          <summary>Do I need to install anything or create an account?</summary>
-          <p>No. Every tool works from the browser. There are no accounts, no extensions and nothing to install. Some tools will let you download a result file — that's a normal browser download.</p>
+          <summary>Do I need an account or a login?</summary>
+          <p>No. There is no sign-up, no email capture and no dashboard. The tools work as soon as the page loads. If a tool lets you download a result, that is a normal browser download.</p>
         </details>
 
         <details class="ct-faq-item">
-          <summary>Are my files uploaded to a server?</summary>
-          <p>It depends on the tool. Some tools process data entirely on your device using browser APIs. Others may send input to a server. If you're working with confidential material, read the description on the specific tool page before uploading.</p>
+          <summary>Is my data uploaded to a server?</summary>
+          <p>It depends on the tool. Some run entirely in your browser. Others may send the file or text to a server to process. I try to state this clearly on each tool page. If you cannot find the note and the file is sensitive, assume it may be uploaded and act accordingly.</p>
         </details>
 
         <details class="ct-faq-item">
-          <summary>Why does a conversion or upload fail?</summary>
-          <p>The most common reasons are: the file is larger than the tool supports, the format isn't recognized, or the browser doesn't have enough memory (especially on mobile). Try a smaller file or a desktop browser to isolate the cause.</p>
+          <summary>Why did my PDF or image fail to process?</summary>
+          <p>The most common reasons are file size, memory and format. Large PDFs and high-resolution images often exceed what a browser can handle. Mobile devices hit this limit sooner than desktops. Try a smaller file or a desktop computer to see if that is the cause.</p>
         </details>
 
         <details class="ct-faq-item">
-          <summary>Do these tools work on a phone?</summary>
-          <p>Yes — the whole site is responsive. Heavy file operations (large PDFs, video-sized images) still work better on a desktop because phones have less memory and slower processors.</p>
+          <summary>Can I use the output in commercial work?</summary>
+          <p>The output is yours to use. A compressed image, a merged PDF, a formatted JSON file. That part is straightforward. The only thing to keep in mind is the license of the original material. If you did not create the source file, check its license before using the result commercially.</p>
         </details>
 
         <details class="ct-faq-item">
-          <summary>Can I use these tools for commercial work?</summary>
-          <p>The tools themselves are free to use. The output you generate — a PDF, a compressed image, a formatted JSON file — is yours, subject to whatever license the source material carries. If you need licensing details for the tool code itself, contact me.</p>
+          <summary>How do I report a problem?</summary>
+          <p>Use the <a href="/Contact.html">contact page</a>. Include the tool name, what you tried, and what happened. A screenshot helps if you can take one. I read every report, though fixes sometimes take a while to ship.</p>
         </details>
 
         <details class="ct-faq-item">
-          <summary>How do I report a broken tool or a wrong result?</summary>
-          <p>Use the <a href="/Contact.html">contact page</a> and include the tool name, what you tried, and what happened. Screenshots help. I fix issues in batches, so it may take a little while — but reports do get read.</p>
+          <summary>I found two pages that seem to do the same thing.</summary>
+          <p>A few tools have older versions still online. For example, there are alternate Unix Timestamp pages. They are kept up so old bookmarks keep working. The version linked from this homepage is the one to use.</p>
         </details>
 
         <details class="ct-faq-item">
-          <summary>I found two pages that do the same thing. Which one should I use?</summary>
-          <p>Use the one whose description matches your task. A couple of pages have older versions still online (for example, alternate Unix Timestamp pages). These are left up so bookmarks keep working, but the version linked from this homepage is the one to prefer.</p>
+          <summary>Is there a limit on how many times I can use a tool?</summary>
+          <p>No. There is no counter and no daily limit. Use a tool as many times as you need. If a page starts failing after many uses in a row, that is usually a memory issue in the browser, not a deliberate cap.</p>
         </details>
       </div>
     </div>
@@ -1500,7 +1668,7 @@
         </a>
         <p>
           A small collection of browser tools for documents, images, data,
-          developers and everyday tasks.
+          developers and everyday tasks. Built by one person.
         </p>
       </div>
 
@@ -1545,7 +1713,6 @@
 
   document.getElementById("ct-year").textContent = String(new Date().getFullYear());
 
-  // Support search links such as /?q=pdf or /?q=json.
   const initialParams = new URLSearchParams(window.location.search);
   const initialQuery = initialParams.get("q");
   if (initialQuery) {
@@ -1568,12 +1735,13 @@
 
     cards.forEach(card => {
       const category = card.dataset.category || "";
-      const searchableText = (
-        card.textContent + " " + (card.dataset.search || "")
-      ).toLowerCase();
+
+      // Search matches only the visible text in each card (tool name,
+      // category label and description). No hidden keyword attributes.
+      const visibleText = card.textContent.toLowerCase();
 
       const categoryMatch = activeCategory === "all" || category === activeCategory;
-      const textMatch = !query || searchableText.includes(query);
+      const textMatch = !query || visibleText.includes(query);
       const visible = categoryMatch && textMatch;
 
       card.hidden = !visible;
