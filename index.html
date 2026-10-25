@@ -1157,14 +1157,6 @@
         </article>
 
         <article class="ct-tool-card" data-category="documents">
-          <span class="ct-tool-icon" aria-hidden="true">#</span>
-          <span class="ct-tool-category">PDF &amp; documents</span>
-          <h3><a href="/add-page-numbers-to-pdf.html">Add Page Numbers to PDF</a></h3>
-          <p>Stamp page numbers on every page with a custom start number, font size and position.</p>
-          <a class="ct-open-tool" href="/add-page-numbers-to-pdf.html">Open tool →</a>
-        </article>
-
-        <article class="ct-tool-card" data-category="documents">
           <span class="ct-tool-icon" aria-hidden="true">PDF→IMG</span>
           <span class="ct-tool-category">PDF &amp; documents</span>
           <h3><a href="/pdf-to-jpg-png-converter.html">PDF to JPG / PNG Converter</a></h3>
@@ -1468,14 +1460,6 @@
         </article>
 
         <article class="ct-tool-card" data-category="developer">
-          <span class="ct-tool-icon" aria-hidden="true">DNS</span>
-          <span class="ct-tool-category">Troubleshooting</span>
-          <h3><a href="/dns-record-propagation-checker.html">DNS Record &amp; Propagation Checker</a></h3>
-          <p>Compare how different resolvers answer for a domain after you change a record.</p>
-          <a class="ct-open-tool" href="/dns-record-propagation-checker.html">Open tool →</a>
-        </article>
-
-        <article class="ct-tool-card" data-category="developer">
           <span class="ct-tool-icon" aria-hidden="true">DNSSEC</span>
           <span class="ct-tool-category">Troubleshooting</span>
           <h3><a href="/dnssec-checker.html">DNSSEC Checker</a></h3>
@@ -1592,8 +1576,8 @@
         <p>
           This site is built and maintained by one person. I make tools that solve
           problems I run into myself. Things like stripping location data from a photo
-          before posting it, checking if a DNS change has propagated, or turning a
-          quick note into a PDF without opening a heavy word processor.
+          before posting it, seeing what a domain's DNS records actually resolve to,
+          or turning a quick note into a PDF without opening a heavy word processor.
         </p>
         <p>
           Because it is just me, there is no support team and no subscription. If a
@@ -1735,9 +1719,6 @@
 
     cards.forEach(card => {
       const category = card.dataset.category || "";
-
-      // Search matches only the visible text in each card (tool name,
-      // category label and description). No hidden keyword attributes.
       const visibleText = card.textContent.toLowerCase();
 
       const categoryMatch = activeCategory === "all" || category === activeCategory;
