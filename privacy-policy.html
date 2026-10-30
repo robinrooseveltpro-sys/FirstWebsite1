@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f8ff">
+
+  <title>Privacy Policy – ConvertToToolsOnline</title>
+  <meta name="description" content="A plain English privacy policy for ConvertToToolsOnline. What is collected, what is not, where files go, and how to get in touch if you have questions.">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Rabin Pandey">
+  <link rel="canonical" href="https://converttotoolsonline.com/privacy.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+  <meta property="og:title" content="Privacy Policy – ConvertToToolsOnline">
+  <meta property="og:description" content="Plain English. No accounts, no tracking scripts, no newsletter. Here is exactly what happens with your data.">
+  <meta property="og:url" content="https://converttotoolsonline.com/privacy.html">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://converttotoolsonline.com/privacy.html#page",
+        "url": "https://converttotoolsonline.com/privacy.html",
+        "name": "Privacy Policy",
+        "isPartOf": { "@id": "https://converttotoolsonline.com/#website" },
+        "author": { "@id": "https://converttotoolsonline.com/#person" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://converttotoolsonline.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Privacy", "item": "https://converttotoolsonline.com/privacy.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --ct-ink: #172033;
+      --ct-muted: #607087;
+      --ct-blue: #245bcc;
+      --ct-blue-dark: #194aa8;
+      --ct-line: #dfe6ef;
+      --ct-bg: #f5f8ff;
+      --ct-white: #fff;
+      --ct-radius: 16px;
+      --ct-shadow: 0 6px 24px rgba(20, 35, 60, .055);
+      --ct-note: #eef4ff;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+
+    body {
+      margin: 0;
+      background: var(--ct-bg);
+      color: var(--ct-ink);
+      font: 16px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a { color: var(--ct-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; cursor: pointer; }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #9dbbff;
+      outline-offset: 3px;
+    }
+
+    .ct-container {
+      width: min(1100px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    .ct-skip {
+      position: absolute; top: 8px; left: -9999px; z-index: 100;
+      padding: 10px 14px; border-radius: 8px; background: white; color: var(--ct-ink);
+    }
+    .ct-skip:focus { left: 10px; }
+
+    .ct-header {
+      position: relative; z-index: 10; background: #fff;
+      border-bottom: 1px solid var(--ct-line);
+    }
+    .ct-header-inner {
+      min-height: 72px; display: flex; align-items: center;
+      justify-content: space-between; gap: 18px;
+      width: min(1200px, calc(100% - 32px)); margin-inline: auto;
+    }
+    .ct-brand {
+      display: inline-flex; align-items: center; gap: 11px;
+      color: var(--ct-ink); font-weight: 850; letter-spacing: -.4px;
+    }
+    .ct-brand:hover { text-decoration: none; }
+    .ct-brand-mark {
+      display: grid; place-items: center; width: 40px; height: 40px;
+      flex: 0 0 auto; border-radius: 12px; background: var(--ct-blue);
+      color: #fff; font-size: .95rem; font-weight: 900;
+    }
+    .ct-brand-name span { color: var(--ct-blue); }
+
+    .ct-nav { display: flex; align-items: center; gap: 22px; }
+    .ct-nav a { color: #475569; font-size: .93rem; font-weight: 700; }
+    .ct-nav a:hover { color: var(--ct-blue); }
+    .ct-nav a[aria-current="page"] { color: var(--ct-blue); }
+
+    .ct-menu-button {
+      display: none; min-height: 40px; padding: 8px 12px;
+      border: 1px solid var(--ct-line); border-radius: 9px;
+      background: white; color: var(--ct-ink); font-weight: 750;
+    }
+
+    .ct-crumbs {
+      padding: 18px 0 0;
+      color: var(--ct-muted);
+      font-size: .82rem;
+    }
+    .ct-crumbs a { color: var(--ct-muted); }
+    .ct-crumbs a:hover { color: var(--ct-blue); }
+    .ct-crumbs span[aria-current] { color: var(--ct-ink); font-weight: 700; }
+
+    .ct-hero {
+      padding: 24px 0 36px;
+      border-bottom: 1px solid var(--ct-line);
+      background: linear-gradient(130deg, #f8fbff 0%, #eaf1ff 56%, #f6f2ff 100%);
+    }
+    .ct-eyebrow {
+      margin: 0 0 10px; color: var(--ct-blue); font-size: .76rem;
+      font-weight: 850; letter-spacing: .13em; text-transform: uppercase;
+    }
+    .ct-hero h1 {
+      max-width: 820px; margin: 0 0 14px;
+      font-size: clamp(1.9rem, 4.4vw, 2.8rem);
+      line-height: 1.1; letter-spacing: -.045em;
+    }
+    .ct-hero .ct-meta {
+      margin: 0; color: var(--ct-muted); font-size: .9rem;
+    }
+    .ct-lead {
+      max-width: 720px; margin: 14px 0 0; color: #475569;
+      font-size: clamp(1rem, 1.6vw, 1.06rem); line-height: 1.7;
+    }
+
+    .ct-body {
+      padding: 40px 0 60px;
+    }
+    .ct-body-inner {
+      max-width: 760px;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .ct-short {
+      padding: 20px 22px;
+      margin: 0 0 30px;
+      border: 1px solid #dbe5f7;
+      border-radius: 14px;
+      background: var(--ct-note);
+    }
+    .ct-short h2 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      letter-spacing: -.01em;
+    }
+    .ct-short ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #33405b;
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+    .ct-short li + li { margin-top: 6px; }
+
+    .ct-body h2 {
+      margin: 34px 0 12px;
+      font-size: 1.28rem;
+      letter-spacing: -.025em;
+      line-height: 1.3;
+      scroll-margin-top: 20px;
+    }
+    .ct-body h3 {
+      margin: 22px 0 8px;
+      font-size: 1.02rem;
+      letter-spacing: -.01em;
+    }
+    .ct-body p { margin: 0 0 12px; color: #33405b; }
+    .ct-body p + p { margin-top: 0; }
+    .ct-body ul, .ct-body ol {
+      margin: 0 0 14px;
+      padding-left: 22px;
+      color: #33405b;
+    }
+    .ct-body li + li { margin-top: 6px; }
+    .ct-body a {
+      text-decoration: underline;
+      text-decoration-color: #c8d5f0;
+      text-underline-offset: 3px;
+    }
+
+    .ct-toc {
+      padding: 18px 22px;
+      margin: 0 0 30px;
+      border: 1px solid var(--ct-line);
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: var(--ct-shadow);
+    }
+    .ct-toc h2 {
+      margin: 0 0 10px;
+      font-size: .82rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ct-muted);
+      font-weight: 850;
+    }
+    .ct-toc ol {
+      margin: 0;
+      padding-left: 20px;
+      font-size: .93rem;
+      columns: 2;
+      column-gap: 32px;
+    }
+    .ct-toc li { margin: 0 0 6px; break-inside: avoid; }
+    .ct-toc a { color: var(--ct-ink); text-decoration: none; }
+    .ct-toc a:hover { color: var(--ct-blue); text-decoration: underline; }
+
+    .ct-callout {
+      padding: 14px 16px;
+      margin: 18px 0;
+      border: 1px solid #dbe5f7;
+      border-left: 3px solid var(--ct-blue);
+      border-radius: 8px;
+      background: #f8fbff;
+      font-size: .93rem;
+      color: #33405b;
+    }
+
+    .ct-footer { padding: 35px 0 17px; background: #111c32; color: #d5deed; }
+    .ct-footer .ct-container { width: min(1200px, calc(100% - 32px)); }
+    .ct-footer-grid {
+      display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 28px;
+    }
+    .ct-footer-brand {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+      color: #fff; font-weight: 850;
+    }
+    .ct-footer-brand:hover { text-decoration: none; }
+    .ct-footer-grid p { max-width: 390px; color: #bdc8db; font-size: .91rem; }
+    .ct-footer-links { display: grid; align-content: start; gap: 7px; }
+    .ct-footer-links strong { margin-bottom: 4px; color: #fff; }
+    .ct-footer-links a { color: #cbd5e1; font-size: .92rem; }
+    .ct-footer-links a:hover { color: #fff; }
+    .ct-footer-bottom {
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+      margin-top: 25px; padding-top: 15px;
+      border-top: 1px solid #32405a; color: #aebbd0; font-size: .84rem;
+    }
+    .ct-footer-bottom p { margin: 0; }
+
+    @media (max-width: 700px) {
+      .ct-header-inner { min-height: 65px; width: calc(100% - 32px); }
+      .ct-menu-button { display: inline-flex; }
+      .ct-nav {
+        display: none; position: absolute; top: 65px; left: 0; right: 0;
+        padding: 12px 16px; border-bottom: 1px solid var(--ct-line); background: #fff;
+      }
+      .ct-nav.is-open { display: block; }
+      .ct-nav-inner {
+        display: grid; gap: 0;
+        width: min(1200px, calc(100% - 32px)); margin: 0 auto;
+      }
+      .ct-nav-inner a { padding: 10px 0; }
+      .ct-toc ol { columns: 1; }
+      .ct-footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 500px) {
+      .ct-footer-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important; transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<a class="ct-skip" href="#main-content">Skip to content</a>
+
+<header class="ct-header">
+  <div class="ct-header-inner">
+    <a class="ct-brand" href="/" aria-label="ConvertToToolsOnline home">
+      <span class="ct-brand-mark" aria-hidden="true">CT</span>
+      <span class="ct-brand-name">Convert<span>ToToolsOnline</span></span>
+    </a>
+
+    <button
+      class="ct-menu-button"
+      id="ct-menu-button"
+      type="button"
+      aria-controls="ct-main-nav"
+      aria-expanded="false"
+    >Menu</button>
+
+    <nav class="ct-nav" id="ct-main-nav" aria-label="Main navigation">
+      <div class="ct-nav-inner">
+        <a href="/">Home</a>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/about.html">About</a>
+        <a href="/Contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <div class="ct-container ct-crumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Privacy Policy</span>
+  </div>
+
+  <section class="ct-hero">
+    <div class="ct-container">
+      <p class="ct-eyebrow">Legal</p>
+      <h1>Privacy Policy</h1>
+      <p class="ct-meta">Last updated: 2026</p>
+      <p class="ct-lead">
+        This is not a template copied from a legal generator. It is a short
+        description of what actually happens when you use this site, written
+        by the person who runs it. If something here is unclear, email me and
+        I will explain it in plain terms.
+      </p>
+    </div>
+  </section>
+
+  <section class="ct-body">
+    <div class="ct-container">
+      <div class="ct-body-inner">
+
+        <div class="ct-short">
+          <h2>The short version</h2>
+          <ul>
+            <li>There are no accounts, no logins, and no newsletters.</li>
+            <li>Some tools run entirely in your browser. Your file never leaves your device on those.</li>
+            <li>Other tools send your file to a server to be processed. Each tool page says which one it is.</li>
+            <li>Server-side files are deleted after processing. They are not logged or shared.</li>
+            <li>This site sets no cookies of its own and runs no tracking scripts.</li>
+            <li>No third-party advertising runs on this site today. If that changes, this page will say so first.</li>
+          </ul>
+        </div>
+
+        <div class="ct-toc">
+          <h2>On this page</h2>
+          <ol>
+            <li><a href="#who">Who is responsible for your data</a></li>
+            <li><a href="#collect">What information is collected</a></li>
+            <li><a href="#files">What happens to files you upload</a></li>
+            <li><a href="#cookies">Cookies and tracking</a></li>
+            <li><a href="#third-parties">Third parties involved</a></li>
+            <li><a href="#ads">Advertising (current and future)</a></li>
+            <li><a href="#rights">Your rights</a></li>
+            <li><a href="#retention">How long data is kept</a></li>
+            <li><a href="#children">Children</a></li>
+            <li><a href="#changes">Changes to this policy</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ol>
+        </div>
+
+        <h2 id="who">1. Who is responsible for your data</h2>
+        <p>
+          ConvertToToolsOnline is run by Rabin Pandey, an individual based in
+          Kathmandu, Nepal. There is no company, no legal entity, and no team.
+          I am the only person who has access to anything described on this
+          page. You can reach me at
+          <a href="mailto:rabinpandey787@gmail.com">rabinpandey787@gmail.com</a>
+          or through the <a href="/Contact.html">contact page</a>.
+        </p>
+
+        <h2 id="collect">2. What information is collected</h2>
+        <p>
+          Here is the complete list of information this site receives about
+          you, and under what conditions.
+        </p>
+
+        <h3>Information you send deliberately</h3>
+        <ul>
+          <li>
+            <strong>Contact form.</strong> If you use the contact form, I
+            receive whatever you type into it, along with the email address
+            you provide so I can reply. It is stored in a normal email inbox
+            and nowhere else.
+          </li>
+          <li>
+            <strong>Direct email.</strong> If you email me directly, I receive
+            your email address and the message. Same as above.
+          </li>
+        </ul>
+
+        <h3>Information collected automatically</h3>
+        <ul>
+          <li>
+            <strong>Server logs.</strong> The web server that runs this site
+            keeps standard access logs, the same as almost every web server on
+            the internet. That includes IP address, the page requested, the
+            time of the request, the browser's user-agent string, and the
+            referring URL. These logs exist to catch abuse and to diagnose
+            problems. They are not analysed for marketing and are not sold.
+          </li>
+        </ul>
+
+        <h3>Information this site does not collect</h3>
+        <ul>
+          <li>No account names or passwords, because there are no accounts.</li>
+          <li>No newsletter subscription data, because there is no newsletter.</li>
+          <li>No payment information, because nothing on this site costs money.</li>
+          <li>No cross-site tracking, no behavioural profiles, no advertising IDs.</li>
+        </ul>
+
+        <h2 id="files">3. What happens to files you upload</h2>
+        <p>
+          This depends entirely on which tool you use. There are two patterns,
+          and each tool page states which one applies to it.
+        </p>
+
+        <h3>Browser-only tools</h3>
+        <p>
+          Some tools process your file entirely inside your browser using
+          JavaScript. The file is read into memory, transformed, and offered
+          back to you as a download. Nothing is transmitted to a server. If you
+          turn off your internet connection after the page loads, the tool
+          still works. You can verify this yourself with your browser's
+          developer tools.
+        </p>
+
+        <h3>Server-side tools</h3>
+        <p>
+          Other tools are not possible to run in a browser alone, usually
+          because they need libraries or resources that are too large. On these
+          tools, your file is uploaded to the server, processed there, and the
+          result is returned to you. The upload is deleted as soon as
+          processing finishes, or within a short automatic cleanup window if
+          the process crashes. Files are not inspected, not retained, and not
+          shared with anyone.
+        </p>
+
+        <div class="ct-callout">
+          If a tool page does not clearly state which pattern it uses, assume it
+          is server-side and act accordingly. If a file is sensitive (an ID
+          scan, a contract, a medical document), check the note on the tool's
+          page before uploading, and prefer a browser-only tool when one
+          exists.
+        </div>
+
+        <h2 id="cookies">4. Cookies and tracking</h2>
+        <p>
+          This site sets no cookies of its own. There is no login session to
+          remember, no preference to store, and no analytics cookie to identify
+          you across visits.
+        </p>
+        <p>
+          The web server may set technically necessary cookies for load
+          balancing or to protect against abuse. Those are session cookies,
+          they expire when you close the browser, and they contain no personal
+          information.
+        </p>
+        <p>
+          There are no tracking pixels, no fingerprinting scripts, and no
+          third-party analytics running on this site. If that ever changes,
+          this section will be updated before the change goes live.
+        </p>
+
+        <h2 id="third-parties">5. Third parties involved</h2>
+        <p>
+          Running a website unavoidably involves a few service providers. Each
+          one sees only what it needs to do its job.
+        </p>
+        <ul>
+          <li>
+            <strong>Hosting provider.</strong> A VPS hosted in the European
+            Union. It runs the web server and stores the server logs described
+            above. Its own privacy policy applies to that infrastructure.
+          </li>
+          <li>
+            <strong>Email provider.</strong> Google, through Gmail, handles the
+            inbox that contact form messages and direct emails arrive in.
+            Google's own privacy terms apply to that email traffic.
+          </li>
+          <li>
+            <strong>DNS and email lookup APIs.</strong> The DNS Lookup,
+            DNSSEC Checker, and Email Authentication Troubleshooter tools send
+            a domain name (and only a domain name) to a public DNS resolver to
+            get answers. They do not send your IP address or anything about
+            you, only the domain you typed in.
+          </li>
+        </ul>
+        <p>
+          There are no other third-party services. No CDN, no fonts hosted
+          elsewhere, no icon library loaded from a third-party domain, no
+          session recording, no error tracker.
+        </p>
+
+        <h2 id="ads">6. Advertising (current and future)</h2>
+        <p>
+          <strong>Right now, no advertising runs on this site.</strong> There
+          are no ad slots, no ad scripts, and no advertising cookies.
+        </p>
+        <p>
+          At some point in the future, this may change. If small display ads
+          are added (most likely through Google AdSense), the following
+          applies:
+        </p>
+        <ul>
+          <li>
+            Third-party vendors, including Google, would use cookies to serve
+            ads based on prior visits to this site or to other sites on the
+            internet.
+          </li>
+          <li>
+            Google's use of advertising cookies would enable it and its
+            partners to serve ads to you based on your visit to this site
+            and/or other sites on the internet.
+          </li>
+          <li>
+            You would be able to opt out of personalised advertising by
+            visiting Google's
+            <a href="https://www.google.com/settings/ads" rel="noopener" target="_blank">Ads Settings</a>.
+          </li>
+          <li>
+            You would also be able to opt out of a third-party vendor's use of
+            cookies for personalised advertising by visiting
+            <a href="https://www.aboutads.info/choices/" rel="noopener" target="_blank">aboutads.info</a>.
+          </li>
+        </ul>
+        <p>
+          This section exists in advance so that this policy is accurate the
+          moment ads are introduced, without needing a rewrite. If ads are ever
+          added, this section will be updated to say "does" instead of "would"
+          on the day they go live, before anything else changes on the site.
+        </p>
+
+        <h2 id="rights">7. Your rights</h2>
+        <p>
+          Because this site collects very little, most privacy rights are moot
+          in practice. But they still apply, and you can exercise any of them
+          by emailing me.
+        </p>
+        <ul>
+          <li>
+            <strong>Access.</strong> You can ask what information I have about
+            you. In almost every case this will be "your email address and the
+            message you sent," and nothing more.
+          </li>
+          <li>
+            <strong>Deletion.</strong> You can ask me to delete any email or
+            contact form submission you sent. I will delete it, and confirm
+            when it is done.
+          </li>
+          <li>
+            <strong>Correction.</strong> If you sent a message with a typo or
+            outdated information, I will update my copy.
+          </li>
+          <li>
+            <strong>Objection.</strong> You can object to any processing of
+            your data. Since so little is done, the practical answer is usually
+            "I will stop replying to you and delete the correspondence," which
+            I will do on request.
+          </li>
+          <li>
+            <strong>Complaint.</strong> If you believe I am mishandling your
+            data, you can complain to me first, and if that does not resolve
+            it, to the data protection authority in your country. Nepal does
+            not have a dedicated DPA yet, so if you are in the EU or UK, the
+            relevant authority is usually the one in your own member state.
+          </li>
+        </ul>
+
+        <h2 id="retention">8. How long data is kept</h2>
+        <ul>
+          <li>
+            <strong>Contact form messages and emails.</strong> Kept until they
+            are no longer needed. For a resolved bug report, that might be
+            months. For a request with no follow-up, it might be deleted within
+            a few weeks. Nothing is kept indefinitely without reason.
+          </li>
+          <li>
+            <strong>Server logs.</strong> Rotated on a rolling basis, typically
+            every 14 to 30 days. After rotation, older logs are deleted.
+          </li>
+          <li>
+            <strong>Uploaded files.</strong> Deleted as soon as processing
+            finishes, or within the automatic cleanup window if processing
+            fails. Nothing is retained.
+          </li>
+        </ul>
+
+        <h2 id="children">9. Children</h2>
+        <p>
+          This site is not directed at children under 13. There are no accounts,
+          no chat features, no user profiles, and no way for a child to submit
+          personal information beyond the contact form. If you are a parent and
+          believe your child has sent a message through the contact form,
+          email me and I will delete it.
+        </p>
+
+        <h2 id="changes">10. Changes to this policy</h2>
+        <p>
+          This policy will be updated when something material changes. For
+          example, if advertising is added, or if a third-party service is
+          introduced, or if the way files are processed changes. The date at
+          the top of the page is the date of the most recent revision.
+        </p>
+        <p>
+          Substantive changes will be announced on the
+          <a href="/#faq">homepage FAQ</a> for at least a couple of weeks
+          before they take effect, so you are not caught off guard.
+        </p>
+
+        <h2 id="contact">11. Contact</h2>
+        <p>
+          Any question about this policy, or any request under Section 7, goes
+          to the same place:
+        </p>
+        <ul>
+          <li>Email: <a href="mailto:rabinpandey787@gmail.com">rabinpandey787@gmail.com</a></li>
+          <li>Contact form: <a href="/Contact.html">converttotoolsonline.com/Contact.html</a></li>
+        </ul>
+        <p>
+          Replies can take a week. But they do come.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-grid">
+      <div>
+        <a class="ct-footer-brand" href="/">
+          <span class="ct-brand-mark" aria-hidden="true">CT</span>
+          <span>ConvertToToolsOnline</span>
+        </a>
+        <p>
+          A small collection of browser tools for documents, images, data,
+          developers and everyday tasks. Built and run by Rabin Pandey in Nepal.
+        </p>
+      </div>
+
+      <nav class="ct-footer-links" aria-label="Tool navigation">
+        <strong>Explore</strong>
+        <a href="/#tools">All tools</a>
+        <a href="/#categories">Categories</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/sitemap.xml">XML sitemap</a>
+      </nav>
+
+      <nav class="ct-footer-links" aria-label="Site information">
+        <strong>Site</strong>
+        <a href="/about.html">About</a>
+        <a href="/Contact.html">Contact</a>
+        <a href="/support.html">Support</a>
+      </nav>
+
+      <nav class="ct-footer-links" aria-label="Legal">
+        <strong>Legal</strong>
+        <a href="/privacy.html" aria-current="page">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="#main-content">Back to top ↑</a>
+      </nav>
+    </div>
+
+    <div class="ct-footer-bottom">
+      <p>© <span id="ct-year">2026</span> ConvertToToolsOnline. All rights reserved.</p>
+      <p>Free utilities for practical tasks.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  document.getElementById("ct-year").textContent = String(new Date().getFullYear());
+
+  const menuButton = document.getElementById("ct-menu-button");
+  const navigation = document.getElementById("ct-main-nav");
+
+  if (menuButton && navigation) {
+    menuButton.addEventListener("click", () => {
+      const isOpen = navigation.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navigation.addEventListener("click", event => {
+      if (event.target.closest("a")) {
+        navigation.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && navigation.classList.contains("is-open")) {
+        navigation.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.focus();
+      }
+    });
+  }
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 700 && navigation && menuButton) {
+      navigation.classList.remove("is-open");
+      menuButton.setAttribute("aria-expanded", "false");
+    }
+  });
+})();
+</script>
+</body>
+</html>
