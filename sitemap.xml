@@ -1,90 +1,89 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Main pages -->
   <url><loc>https://converttotoolsonline.com/</loc></url>
-  <url><loc>https://converttotoolsonline.com/about</loc></url>
-  <url><loc>https://converttotoolsonline.com/Contact</loc></url>
-  <url><loc>https://converttotoolsonline.com/privacy-policy</loc></url>
-  <url><loc>https://converttotoolsonline.com/terms</loc></url>
+  <url><loc>https://converttotoolsonline.com/about.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/contact.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/privacy-policy.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/terms.html</loc></url>
 
   <!-- Images and media -->
-  <url><loc>https://converttotoolsonline.com/image-compressor</loc></url>
-  <url><loc>https://converttotoolsonline.com/compress-gif</loc></url>
-  <url><loc>https://converttotoolsonline.com/compress-image-to-kb</loc></url>
-  <url><loc>https://converttotoolsonline.com/image-resizer</loc></url>
-  <url><loc>https://converttotoolsonline.com/horizontal-to-vertical-image-converter</loc></url>
-  <url><loc>https://converttotoolsonline.com/WEBP-to-jpg-converter</loc></url>
-  <url><loc>https://converttotoolsonline.com/heic-to-jpg</loc></url>
-  <url><loc>https://converttotoolsonline.com/image-color-picker</loc></url>
-  <url><loc>https://converttotoolsonline.com/cmyk-to-hsl</loc></url>
-  <url><loc>https://converttotoolsonline.com/image-comparison-tool</loc></url>
-  <url><loc>https://converttotoolsonline.com/image-metadata-viewer</loc></url>
-  <url><loc>https://converttotoolsonline.com/exif-metadata-remover</loc></url>
-  <url><loc>https://converttotoolsonline.com/photo-to-coloring-page</loc></url>
-  <url><loc>https://converttotoolsonline.com/Favicon-generator</loc></url>
-  <url><loc>https://converttotoolsonline.com/css-gradient-generator</loc></url>
-  <url><loc>https://converttotoolsonline.com/audio-to-midi-converter</loc></url>
-  <url><loc>https://converttotoolsonline.com/mp3-tag-editor</loc></url>
-  <url><loc>https://converttotoolsonline.com/srt-vtt-subtitle-converter</loc></url>
+  <url><loc>https://converttotoolsonline.com/image-compressor.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/compress-gif.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/compress-image-to-kb.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/image-resizer.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/horizontal-to-vertical-image-converter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/webp-to-jpg-converter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/heic-to-jpg.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/image-color-picker.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/cmyk-to-hsl.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/image-comparison-tool.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/image-metadata-viewer.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/exif-metadata-remover.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/photo-to-coloring-page.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/favicon-generator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/css-gradient-generator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/audio-to-midi-converter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/mp3-tag-editor.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/srt-vtt-subtitle-converter.html</loc></url>
 
   <!-- PDF and documents -->
-  <url><loc>https://converttotoolsonline.com/jpg-to-pdf</loc></url>
-  <url><loc>https://converttotoolsonline.com/compress-pdf</loc></url>
-  <url><loc>https://converttotoolsonline.com/merge-pdf</loc></url>
-  <url><loc>https://converttotoolsonline.com/pdf-page-extractor</loc></url>
-  <url><loc>https://converttotoolsonline.com/pdf-to-jpg-png-converter</loc></url>
-  <url><loc>https://converttotoolsonline.com/Invoice-generator-free</loc></url>
-  <url><loc>https://converttotoolsonline.com/invoice-generator-online</loc></url>
-  <url><loc>https://converttotoolsonline.com/resume-builder</loc></url>
+  <url><loc>https://converttotoolsonline.com/jpg-to-pdf.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/compress-pdf.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/merge-pdf.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/pdf-page-extractor.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/pdf-to-jpg-png-converter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/invoice-generator-free.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/invoice-generator-online.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/resume-builder.html</loc></url>
 
   <!-- Text and data -->
-  <url><loc>https://converttotoolsonline.com/word-counter</loc></url>
-  <url><loc>https://converttotoolsonline.com/anagram-solver</loc></url>
-  <url><loc>https://converttotoolsonline.com/base64-to-decimal</loc></url>
-  <url><loc>https://converttotoolsonline.com/text-diff-checker</loc></url>
-  <url><loc>https://converttotoolsonline.com/extract-emails-from-text</loc></url>
-  <url><loc>https://converttotoolsonline.com/lorem-ipsum-generator</loc></url>
-  <url><loc>https://converttotoolsonline.com/markdown-to-html-converter</loc></url>
-  <url><loc>https://converttotoolsonline.com/html-entity-encoder-decoder</loc></url>
-  <url><loc>https://converttotoolsonline.com/json-formatter</loc></url>
-  <url><loc>https://converttotoolsonline.com/Json-schema-validator</loc></url>
-  <url><loc>https://converttotoolsonline.com/Json-to-CSV-converter</loc></url>
-  <url><loc>https://converttotoolsonline.com/csv-to-json</loc></url>
-  <url><loc>https://converttotoolsonline.com/csv-cleaner-validator</loc></url>
-  <url><loc>https://converttotoolsonline.com/csv-to-sql-converter</loc></url>
-  <url><loc>https://converttotoolsonline.com/Merge-JSON-merger</loc></url>
-  <url><loc>https://converttotoolsonline.com/json-to-excel-converter</loc></url>
-  <url><loc>https://converttotoolsonline.com/json-to-typescript</loc></url>
-  <url><loc>https://converttotoolsonline.com/opml-viewer</loc></url>
-  <url><loc>https://converttotoolsonline.com/text-contact-extractor</loc></url>
-  <url><loc>https://converttotoolsonline.com/yaml-to-json-converter</loc></url>
-  <url><loc>https://converttotoolsonline.com/sql-formatter</loc></url>
-  <url><loc>https://converttotoolsonline.com/uuid-generator</loc></url>
-  <url><loc>https://converttotoolsonline.com/unix-timestamp-converter</loc></url>
+  <url><loc>https://converttotoolsonline.com/word-counter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/anagram-solver.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/base64-to-decimal.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/text-diff-checker.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/extract-emails-from-text.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/lorem-ipsum-generator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/markdown-to-html-converter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/html-entity-encoder-decoder.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/json-formatter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/json-schema-validator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/json-to-csv-converter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/csv-to-json.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/csv-cleaner-validator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/csv-to-sql-converter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/merge-json-merger.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/json-to-excel-converter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/json-to-typescript.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/opml-viewer.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/text-contact-extractor.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/yaml-to-json-converter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/sql-formatter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/uuid-generator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/unix-timestamp-converter.html</loc></url>
 
   <!-- Developer, SEO and troubleshooting -->
-  <url><loc>https://converttotoolsonline.com/cron-expression-generator</loc></url>
-  <url><loc>https://converttotoolsonline.com/jsonpath-tester</loc></url>
-  <url><loc>https://converttotoolsonline.com/jwt-decoder</loc></url>
-  <url><loc>https://converttotoolsonline.com/python-syntax-validator</loc></url>
-  <url><loc>https://converttotoolsonline.com/robots-txt-generator</loc></url>
-  <url><loc>https://converttotoolsonline.com/sitemap-xml-validator</loc></url>
-  <url><loc>https://converttotoolsonline.com/seo-meta-tag-generator</loc></url>
-  <url><loc>https://converttotoolsonline.com/UTM-builder-free</loc></url>
-  <url><loc>https://converttotoolsonline.com/har-file-viewer-redactor</loc></url>
-  <url><loc>https://converttotoolsonline.com/dns-lookup</loc></url>
-  <url><loc>https://converttotoolsonline.com/dnssec-checker</loc></url>
-  <url><loc>https://converttotoolsonline.com/email-authentication-troubleshooter</loc></url>
-  <url><loc>https://converttotoolsonline.com/xml-formatter-validator</loc></url>
+  <url><loc>https://converttotoolsonline.com/cron-expression-generator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/jsonpath-tester.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/jwt-decoder.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/python-syntax-validator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/robots-txt-generator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/sitemap-xml-validator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/seo-meta-tag-generator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/utm-builder-free.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/har-file-viewer-redactor.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/dns-lookup.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/dnssec-checker.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/email-authentication-troubleshooter.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/xml-formatter-validator.html</loc></url>
 
   <!-- Calculators and business -->
-  <url><loc>https://converttotoolsonline.com/percentage-error-calculator</loc></url>
-  <url><loc>https://converttotoolsonline.com/working-days-calculator</loc></url>
-  <url><loc>https://converttotoolsonline.com/electricity-cost-calculator</loc></url>
-  <url><loc>https://converttotoolsonline.com/freelance-project-profit-calculator</loc></url>
-  <url><loc>https://converttotoolsonline.com/Free-Email-Signature-Generator</loc></url>
-  <url><loc>https://converttotoolsonline.com/qr-code-generator</loc></url>
+  <url><loc>https://converttotoolsonline.com/percentage-error-calculator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/working-days-calculator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/electricity-cost-calculator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/freelance-project-profit-calculator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/free-email-signature-generator.html</loc></url>
+  <url><loc>https://converttotoolsonline.com/qr-code-generator.html</loc></url>
 
 </urlset>
